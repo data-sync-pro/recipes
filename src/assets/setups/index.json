@@ -1,0 +1,5 @@
+[
+  { "slug": "permissions", "title": "Permissions", "active": true },
+  { "slug": "connection", "title": "Connection", "active": true },
+  { "slug": "trigger", "title": "Trigger", "active": true }
+]

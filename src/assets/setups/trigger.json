@@ -1,0 +1,26 @@
+{
+  "title": "Trigger",
+  "order": 3,
+  "blocks": [
+    {
+      "type": "h2",
+      "content": "Example - Hook the Account Trigger",
+      "children": [
+        {
+          "type": "p",
+          "content": "Add the following code to the Account Trigger, and make sure all Trigger events are included."
+        },
+        {
+          "type": "code",
+          "content": "pushtopics.TriggerServices.execute();",
+          "language": "apex"
+        },
+        {
+          "type": "image",
+          "content": "resource/img/trigger_hook.png",
+          "alt": "Hook the Account trigger example"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+<ng-container [ngSwitch]="block.type">
+  <!-- Heading 2 -->
+  <section *ngSwitchCase="'h2'" class="block-section" [id]="getBlockId(block.content || '')">
+    <h2 class="block-h2">{{ block.content }}</h2>
+    <ng-container *ngIf="block.children">
+      <app-setup-block
+        *ngFor="let child of block.children; trackBy: trackByIndex"
+        [block]="child"
+        [basePath]="basePath">
+      </app-setup-block>
+    </ng-container>
+  </section>
+
+  <!-- Heading 3 -->
+  <section *ngSwitchCase="'h3'" class="block-section">
+    <h3 class="block-h3">{{ block.content }}</h3>
+    <ng-container *ngIf="block.children">
+      <app-setup-block
+        *ngFor="let child of block.children; trackBy: trackByIndex"
+        [block]="child"
+        [basePath]="basePath">
+      </app-setup-block>
+    </ng-container>
+  </section>
+
+  <!-- Paragraph -->
+  <p *ngSwitchCase="'p'" class="block-p" [innerHTML]="block.content"></p>
+
+  <!-- List -->
+  <ul *ngSwitchCase="'list'" class="block-list">
+    <li *ngFor="let child of block.children; trackBy: trackByIndex">
+      <app-setup-block [block]="child" [basePath]="basePath"></app-setup-block>
+    </li>
+  </ul>
+
+  <!-- Image -->
+  <figure *ngSwitchCase="'image'" class="block-figure">
+    <img [src]="getImagePath(block.content || '')" [alt]="block.alt || ''" class="block-image" />
+    <figcaption *ngIf="block.alt">{{ block.alt }}</figcaption>
+  </figure>
+
+  <!-- Video -->
+  <div *ngSwitchCase="'video'" class="block-video-container">
+    <video *ngIf="block.src" [src]="block.src" controls class="block-video"></video>
+  </div>
+
+  <!-- Code -->
+  <pre *ngSwitchCase="'code'" class="block-code"><code [attr.data-language]="block.language">{{ block.content }}</code></pre>
+
+  <!-- Callout -->
+  <div *ngSwitchCase="'callout'" class="block-callout" [attr.data-variant]="block.variant || 'info'">
+    <span class="callout-icon">
+      <ng-container [ngSwitch]="block.variant">
+        <mat-icon *ngSwitchCase="'warning'">warning</mat-icon>
+        <mat-icon *ngSwitchCase="'error'">error</mat-icon>
+        <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
+        <mat-icon *ngSwitchDefault>info</mat-icon>
+      </ng-container>
+    </span>
+    <span class="callout-content">{{ block.content }}</span>
+  </div>
+</ng-container>
