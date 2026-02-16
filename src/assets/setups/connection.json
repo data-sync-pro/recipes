@@ -4,20 +4,27 @@
   "blocks": [
     {
       "type": "p",
-      "content": "A Connection (pushtopics__Connection__c) specifies the authentication settings utilized to establish a connection with a Salesforce instance, serving either as a data Source for retrieving information or as a Target for performing actions."
+      "content": "A Connection (pushtopics__Connection__c) defines the authentication configuration used to connect to a Salesforce org. A Connection can act as:"
+    },
+    {
+      "type": "list",
+      "children": [
+        { "type": "p", "content": "A Source for retrieving data" },
+        { "type": "p", "content": "A Target for performing actions" }
+      ]
     },
     {
       "type": "p",
-      "content": "Below is a flow diagram illustrating how DSP handles authentication. Explore each section for detailed information on each type of authentication settings."
+      "content": "The diagram below illustrates how DSP manages authentication. Refer to the sections that follow for detailed information about each supported connection configuration."
     },
     {
       "type": "image",
-      "content": "resource/img/auth.jpeg",
+      "content": "image/connection/connection.png",
       "alt": "Authentication Flow Diagram"
     },
     {
       "type": "h2",
-      "content": "Is Current Org",
+      "content": "Current Org",
       "children": [
         {
           "type": "p",
@@ -29,7 +36,7 @@
         },
         {
           "type": "p",
-          "content": "For a more detailed walkthrough, refer to the instructional video below:"
+          "content": "For a more detailed walkthrough, refer to the video below:"
         },
         {
           "type": "video",
@@ -39,116 +46,181 @@
     },
     {
       "type": "h2",
-      "content": "Username & Password Flow",
+      "content": "Username & Password",
       "children": [
         {
           "type": "p",
-          "content": "Data Sync enables the use of the (username) and (password + security token) flow, leveraging Salesforce's secure feature - Named Credential. Follow the steps outlined below to configure:"
+          "content": "DSP supports authentication using Username and Password (with Security Token) via Salesforce Named Credentials."
         },
         {
-          "type": "list",
+          "type": "p",
+          "content": "The steps below outline the setup process."
+        },
+        {
+          "type": "ol",
           "children": [
             {
               "type": "p",
               "content": "Establish a Named Credential:",
               "children": [
                 {
-                  "type": "list",
+                  "type": "ul",
                   "children": [
-                    { "type": "p", "content": "URL: Use `https://test.salesforce.com` for sandbox or `https://login.salesforce.com` for production." },
-                    { "type": "p", "content": "Identity Type: Select `Named Principal`." },
-                    { "type": "p", "content": "Authentication Protocol: Choose `Password Authentication`." },
-                    { "type": "p", "content": "Username: Enter the main username of the connected organization." },
-                    { "type": "p", "content": "Password: Input the user's password combined with the security token. If not applicable, omit it." }
+                    {
+                      "type": "p",
+                      "content": "URL: Use `https://test.salesforce.com` for sandbox or `https://login.salesforce.com` for production."
+                    },
+                    {
+                      "type": "p",
+                      "content": "Identity Type: Select `Named Principal`."
+                    },
+                    {
+                      "type": "p",
+                      "content": "Authentication Protocol: Choose `Password Authentication`."
+                    },
+                    {
+                      "type": "p",
+                      "content": "Username: Enter the main username of the connected organization."
+                    },
+                    {
+                      "type": "p",
+                      "content": "Password: Input the user's password combined with the security token. If not applicable, omit it."
+                    }
                   ]
                 }
               ]
             },
-            { "type": "p", "content": "Create a DSP Connection Record: Name it after the Named Credential you've just set up." },
-            { "type": "p", "content": "Test Connection: Verify that the setup works as expected." }
+            {
+              "type": "p",
+              "content": "Create a DSP Connection Record: Name it after the Named Credential you've just set up."
+            },
+            {
+              "type": "p",
+              "content": "Test Connection: Verify that the setup works as expected."
+            }
           ]
-        },
-        {
-          "type": "p",
-          "content": "For a more detailed walkthrough, refer to the instructional video below:"
-        },
-        {
-          "type": "video",
-          "src": "VIDEO_URL_HERE"
         }
       ]
     },
     {
       "type": "h2",
-      "content": "OAuth2 Flow",
+      "content": "OAuth 2.0",
       "children": [
         {
           "type": "p",
-          "content": "Data Sync facilitates the OAuth2 flow through Salesforce's robust security features, including Connected App, Auth. Provider, and Named Credential."
+          "content": "DSP supports OAuth 2.0 authentication using Salesforce security features, including:"
         },
         {
-          "type": "p",
-          "content": "To configure this, let's go through the setup process, assuming our goal is to set up a connection in the DSP Installation Org with a Connection to the org named \"Org B\":"
-        },
-        {
-          "type": "list",
+          "type": "ul",
           "children": [
             {
               "type": "p",
-              "content": "Create a Connected App in Org B:",
-              "children": [
-                { "type": "p", "content": "Navigate to the App Manager within Org B to create a new Connected App. Ensure you activate the OAuth Flow. Initially, use a temporary URL for the Callback URL. In the \"scope\" section, select \"refresh_token\" and include any additional scopes required for the integration user's data access." }
-              ]
+              "content": "Connected App"
             },
             {
               "type": "p",
-              "content": "Create an Auth. Provider in DSP Installation Org:",
-              "children": [
-                {
-                  "type": "list",
-                  "children": [
-                    { "type": "p", "content": "Copy and paste the Consumer Key and Consumer Secret from Org B's Connected App to the Auth. Provider." },
-                    { "type": "p", "content": "Authorize Endpoint URL: Use `https://test.salesforce.com/services/oauth2/authorize` for sandbox or `https://login.salesforce.com/services/oauth2/authorize` for production." },
-                    { "type": "p", "content": "Token Endpoint URL: Use `https://test.salesforce.com/services/oauth2/token` for sandbox or `https://login.salesforce.com/services/oauth2/token` for production." },
-                    { "type": "p", "content": "Default Scopes: Set `refresh_token` and any additional scopes. Use space to separate." }
-                  ]
-                }
-              ]
+              "content": "Auth. Provider"
             },
             {
               "type": "p",
-              "content": "Update Callback URL in Org B's Connected App:",
-              "children": [
-                { "type": "p", "content": "Upon save of the Auth. Provider, a Callback URL will be generated. Update the Connected App's Callback URL to match the value." }
-              ]
-            },
-            {
-              "type": "p",
-              "content": "Create Named Credential in DSP Installation Org:",
-              "children": [
-                {
-                  "type": "list",
-                  "children": [
-                    { "type": "p", "content": "URL: the domain URL of Org B. This can be found in \"My Domain Settings\"." },
-                    { "type": "p", "content": "Identity Type: Select `Named Principal`." },
-                    { "type": "p", "content": "Authentication Protocol: Choose `OAuth 2.0`." },
-                    { "type": "p", "content": "Auth. Provider: Pick the one you just set up." },
-                    { "type": "p", "content": "Scope: Use `refresh_token full` or any scopes you need." },
-                    { "type": "p", "content": "Enable \"Generate Authorization Header\", \"Allow Merge Fields in HTTP Header\", and \"Allow Merge Fields in HTTP Body\"." }
-                  ]
-                }
-              ]
-            },
-            { "type": "p", "content": "Test Connection: Verify that the setup works as expected." }
+              "content": "Named Credential"
+            }
           ]
         },
         {
           "type": "p",
-          "content": "For a more detailed walkthrough, refer to the instructional video below:"
+          "content": "The steps below outline the setup process."
         },
         {
-          "type": "video",
-          "src": "VIDEO_URL_HERE"
+          "type": "ol",
+          "children": [
+            {
+              "type": "p",
+              "content": "Create a Connected App in the target org",
+              "children": [
+                {
+                  "type": "p",
+                  "content": "Navigate to the App Manager within Org B to create a new Connected App. Ensure you activate the OAuth Flow. Initially, use a temporary URL for the Callback URL. In the \"scope\" section, select \"refresh_token\" and include any additional scopes required for the integration user's data access."
+                }
+              ]
+            },
+            {
+              "type": "p",
+              "content": "Create an Auth. Provider in the org where DSP is installed",
+              "children": [
+                {
+                  "type": "ul",
+                  "children": [
+                    {
+                      "type": "p",
+                      "content": "Copy and paste the Consumer Key and Consumer Secret from Org B's Connected App to the Auth. Provider."
+                    },
+                    {
+                      "type": "p",
+                      "content": "Authorize Endpoint URL: Use `https://test.salesforce.com/services/oauth2/authorize` for sandbox or `https://login.salesforce.com/services/oauth2/authorize` for production."
+                    },
+                    {
+                      "type": "p",
+                      "content": "Token Endpoint URL: Use `https://test.salesforce.com/services/oauth2/token` for sandbox or `https://login.salesforce.com/services/oauth2/token` for production."
+                    },
+                    {
+                      "type": "p",
+                      "content": "Default Scopes: Set `refresh_token` and any additional scopes. Use space to separate."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "p",
+              "content": "Update the Callback URL in the target org",
+              "children": [
+                {
+                  "type": "p",
+                  "content": "Upon save of the Auth. Provider, a Callback URL will be generated. Update the Connected App's Callback URL to match the value."
+                }
+              ]
+            },
+            {
+              "type": "p",
+              "content": "Create a Named Credential in the org where DSP is installed",
+              "children": [
+                {
+                  "type": "ul",
+                  "children": [
+                    {
+                      "type": "p",
+                      "content": "URL: the domain URL of Org B. This can be found in \"My Domain Settings\"."
+                    },
+                    {
+                      "type": "p",
+                      "content": "Identity Type: Select `Named Principal`."
+                    },
+                    {
+                      "type": "p",
+                      "content": "Authentication Protocol: Choose `OAuth 2.0`."
+                    },
+                    {
+                      "type": "p",
+                      "content": "Auth. Provider: Pick the one you just set up."
+                    },
+                    {
+                      "type": "p",
+                      "content": "Scope: Use `refresh_token full` or any scopes you need."
+                    },
+                    {
+                      "type": "p",
+                      "content": "Enable \"Generate Authorization Header\", \"Allow Merge Fields in HTTP Header\", and \"Allow Merge Fields in HTTP Body\"."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "p",
+              "content": "Test the connection"
+            }
+          ]
         }
       ]
     }

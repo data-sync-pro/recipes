@@ -4,7 +4,7 @@
   "blocks": [
     {
       "type": "p",
-      "content": "Data Sync Pro primarily utilizes Permission Sets as a fundamental mechanism for security control. This approach is supplemented with Custom Permissions and Sharing Rules, allowing for granular and flexible management of access rights within the system."
+      "content": "Data Sync Pro primarily utilizes Permission Sets as a fundamental mechanism for security control. This approach is supplemented with Custom Permissions, allowing for granular and flexible management of access rights within the system."
     },
     {
       "type": "h2",
@@ -15,18 +15,17 @@
           "content": "Here is the list of Permission Sets included in the Data Sync Pro package."
         },
         {
-          "type": "list",
+          "type": "ul",
           "children": [
-            { "type": "p", "content": "DSP: Data Sync Pro Administrator: grants \"Modify All\" access to all DSP objects, and includes all custom permissions within the DSP package. This is the master permission for Data Sync Pro." },
-            { "type": "p", "content": "DSP: Data Sync Pro App User: Provides users with access to the Data Sync Pro app, along with the ability to execute batch jobs and perform data uploads, provided they have at least Read access to Executable records through sharing." },
-            { "type": "p", "content": "DSP: Data Sync Pro Starter: Provides users with essential access to DSP package objects. When Executable(private) records are shared, users can access features such as Triggers, Record Actions, and Data Lists, but not Batch Jobs, Data Uploads, and the Data Sync Pro app." },
-            { "type": "p", "content": "DSP: Create Executables: Apply this permission set in conjunction with the \"DSP: Data Sync Pro App User\" to enable users to create Executables." },
-            { "type": "p", "content": "DSP: Download Data in Q: grants users the permission to download data from the Q component." }
+            { "type": "p", "content": "DSP: Data Sync Pro Administrator: Grants full administrative control, including access to all configuration records. Typically assigned to developers in sandboxes, and to system admins or architects in the production." },
+            { "type": "p", "content": "DSP: Data Sync Pro App User: Allows execution of asynchronous rules such as Batch jobs and Data Loaders, provided the user has at least read access to the relevant Executables. Intended for super users who need to run jobs or upload CSVs with explicit Executable access grants." },
+            { "type": "p", "content": "DSP: Data Sync Pro Starter: Provides minimal access to packaged components and objects. With additional read access to Executable records, users can run rules (except batch jobs and data loads). This serves as the default profile for most internal users." },
+            { "type": "p", "content": "DSP: Download Data in Query: Grants users the permission to download data from the Query component." }
           ]
         },
         {
           "type": "image",
-          "content": "resource/img/permission_sets.png",
+          "content": "image/permissions/permission_sets.png",
           "alt": "Permission Sets"
         }
       ]
@@ -40,44 +39,16 @@
           "content": "Here is the list of Custom Permission included in the Data Sync Pro package. Add them to permission sets to grant users the appropriate accesses."
         },
         {
-          "type": "list",
+          "type": "ul",
           "children": [
-            { "type": "p", "content": "DSP: Access Q on Remote Connections: If a Connection is remote, the Q component operates under the context of the integration user. DSP users need this permission to run queries using the Q component from the Connection record page." },
-            { "type": "p", "content": "DSP: Download Data in Q: grants users the permission to download data from the Q component." }
+            { "type": "p", "content": "DSP: Access Query on Remote Connections: If a Connection is remote, the Query component operates under the context of the integration user. DSP users need this permission to run queries using the Query component from the Connection record page." },
+            { "type": "p", "content": "DSP: Download Data in Query: Enables download functionality within the Query component." }
           ]
         },
         {
           "type": "image",
-          "content": "resource/img/custom_permissions.png",
+          "content": "image/permissions/custom_permissions.png",
           "alt": "Custom Permissions"
-        }
-      ]
-    },
-    {
-      "type": "h2",
-      "content": "Post-Installation Sharing Rule",
-      "children": [
-        {
-          "type": "p",
-          "content": "The Executable object in Data Sync Pro features a checkbox field titled \"All Internal Users Have Read Access?\". This field is integral for setting up sharing rules post-package installation (manual setup). When this field is activated, Executables are made accessible to all internal users."
-        },
-        {
-          "type": "p",
-          "content": "Given that Data Sync Pro Executables function as a rules engine in automations, record actions, and executable Q components, it is crucial for users to have read access to these Executables in order to utilize their features."
-        },
-        {
-          "type": "p",
-          "content": "After installing DSP, ensure to create the sharing rule as the below screenshot, and check the field for any Executables that need to be accessible to all internal users."
-        },
-        {
-          "type": "callout",
-          "content": "If an Executable is enabled with automation, the \"All Internal Users Have Read Access?\" field is automatically set to true.",
-          "variant": "info"
-        },
-        {
-          "type": "image",
-          "content": "resource/img/executable_sharing_rule.png",
-          "alt": "Post-Installation Sharing Rule"
         }
       ]
     }

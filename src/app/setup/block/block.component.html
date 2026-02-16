@@ -26,12 +26,19 @@
   <!-- Paragraph -->
   <p *ngSwitchCase="'p'" class="block-p" [innerHTML]="block.content"></p>
 
-  <!-- List -->
-  <ul *ngSwitchCase="'list'" class="block-list">
+  <!-- Unordered List -->
+  <ul *ngSwitchCase="'ul'" class="block-list">
     <li *ngFor="let child of block.children; trackBy: trackByIndex">
       <app-setup-block [block]="child" [basePath]="basePath"></app-setup-block>
     </li>
   </ul>
+
+  <!-- Ordered List -->
+  <ol *ngSwitchCase="'ol'" class="block-list block-list-ordered">
+    <li *ngFor="let child of block.children; trackBy: trackByIndex">
+      <app-setup-block [block]="child" [basePath]="basePath"></app-setup-block>
+    </li>
+  </ol>
 
   <!-- Image -->
   <figure *ngSwitchCase="'image'" class="block-figure">
