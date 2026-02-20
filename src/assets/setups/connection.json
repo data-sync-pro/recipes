@@ -7,15 +7,11 @@
       "content": "A Connection (pushtopics__Connection__c) defines the authentication configuration used to connect to a Salesforce org. A Connection can act as:"
     },
     {
-      "type": "list",
+      "type": "ul",
       "children": [
         { "type": "p", "content": "A Source for retrieving data" },
         { "type": "p", "content": "A Target for performing actions" }
       ]
-    },
-    {
-      "type": "p",
-      "content": "The diagram below illustrates how DSP manages authentication. Refer to the sections that follow for detailed information about each supported connection configuration."
     },
     {
       "type": "image",
@@ -23,16 +19,37 @@
       "alt": "Authentication Flow Diagram"
     },
     {
+      "type": "p",
+      "content": "As shown in the diagram, Data Sync Pro handles authentication through three main paths:"
+    },
+    {
+      "type": "ul",
+      "children": [
+        {
+          "type": "p",
+          "content": "<strong>Current Org:</strong> If \"Is Current Org\" is selected, DSP runs as the Currently Logged-in User, requiring no additional credentials."
+        },
+        {
+          "type": "p",
+          "content": "<strong>OAuth 2.0 Flow:</strong> For remote connections, DSP utilizes a Named Credential to authenticate via an OAuth Token."
+        },
+        {
+          "type": "p",
+          "content": "<strong>Username & Password Flow:</strong> DSP authenticates using a specified Username and Password via the SFDC Login API. This path automatically manages the creation of a Remote Site Setting for the authenticated Salesforce Org."
+        }
+      ]
+    },
+    {
       "type": "h2",
       "content": "Current Org",
       "children": [
         {
           "type": "p",
-          "content": "The \"Is Current Org?\" checkbox is a straightforward field on the Connection object. Once checked, DSP operates without requiring credentials."
+          "content": "The \"Is Current Org?\" checkbox is a field on the Connection object. Once checked, DSP operates without requiring credentials."
         },
         {
           "type": "p",
-          "content": "It conducts queries and DML operations based on the currently logged-in user's context, indicating that the connection pertains to the current org where Data Sync Pro is installed. All security settings applicable to that user are enforced during executions."
+          "content": "It conducts queries and DML operations based on the currently logged-in user's context, indicating that the connection pertains to the current org where DSP is installed. All security settings applicable to that user are enforced during executions."
         },
         {
           "type": "p",
@@ -40,7 +57,7 @@
         },
         {
           "type": "video",
-          "src": "VIDEO_URL_HERE"
+          "src": "https://youtu.be/70GDxXd_ju8"
         }
       ]
     },
@@ -50,7 +67,28 @@
       "children": [
         {
           "type": "p",
-          "content": "DSP supports authentication using Username and Password (with Security Token) via Salesforce Named Credentials."
+          "content": "DSP supports the Username & Password authentication flow."
+        },
+        {
+          "type": "p",
+          "content": "This method uses:"
+        },
+        {
+          "type": "ul",
+          "children": [
+            {
+              "type": "p",
+              "content": "Username"
+            },
+            {
+              "type": "p",
+              "content": "Password + Security Token"
+            }
+          ]
+        },
+        {
+          "type": "p",
+          "content": "Authentication is handled securely through Salesforce’s Named Credential feature, which stores and manages the credentials safely within the platform."
         },
         {
           "type": "p",
@@ -61,42 +99,45 @@
           "children": [
             {
               "type": "p",
-              "content": "Establish a Named Credential:",
+              "content": "Create a Named Credential in the org where DSP is installed:",
               "children": [
                 {
-                  "type": "ul",
-                  "children": [
-                    {
-                      "type": "p",
-                      "content": "URL: Use `https://test.salesforce.com` for sandbox or `https://login.salesforce.com` for production."
-                    },
-                    {
-                      "type": "p",
-                      "content": "Identity Type: Select `Named Principal`."
-                    },
-                    {
-                      "type": "p",
-                      "content": "Authentication Protocol: Choose `Password Authentication`."
-                    },
-                    {
-                      "type": "p",
-                      "content": "Username: Enter the main username of the connected organization."
-                    },
-                    {
-                      "type": "p",
-                      "content": "Password: Input the user's password combined with the security token. If not applicable, omit it."
-                    }
+                  "type": "image",
+                  "content": "image/connection/username-password/named-credential-new-legacy.png",
+                  "alt": "Create Named Credential"
+                },
+                {
+                  "type": "image",
+                  "content": "image/connection/username-password/named-credential-setup.png",
+                  "alt": "Named Credential Configurations",
+                  "caption":[
+                    "Username: Enter the main username of the connected organization.",
+                    "Enter the user's password combined with the security token. If a security token is not applicable, omit it."
                   ]
                 }
               ]
             },
             {
               "type": "p",
-              "content": "Create a DSP Connection Record: Name it after the Named Credential you've just set up."
+              "content": "Create a DSP Connection Record in the org where DSP is installed:",
+              "children": [
+                {
+                  "type": "image",
+                  "content": "image/connection/username-password/create-connection.png",
+                  "alt": "Create Connection"
+                }
+              ]
             },
             {
               "type": "p",
-              "content": "Test Connection: Verify that the setup works as expected."
+              "content": "Test the Connection:",
+              "children": [
+                {
+                  "type": "image",
+                  "content": "image/connection/username-password/test-connection.png",
+                  "alt": "Test Connection"
+                }
+              ]
             }
           ]
         }
@@ -115,7 +156,7 @@
           "children": [
             {
               "type": "p",
-              "content": "Connected App"
+              "content": "External Client App"
             },
             {
               "type": "p",
@@ -136,11 +177,33 @@
           "children": [
             {
               "type": "p",
-              "content": "Create a Connected App in the target org",
+              "content": "Create a External Client App in the remote org",
               "children": [
                 {
-                  "type": "p",
-                  "content": "Navigate to the App Manager within Org B to create a new Connected App. Ensure you activate the OAuth Flow. Initially, use a temporary URL for the Callback URL. In the \"scope\" section, select \"refresh_token\" and include any additional scopes required for the integration user's data access."
+                  "type": "image",
+                  "content": "image/connection/OAuth-2/create-external-client-app/00.png",
+                  "alt": "Create a External Client App"
+                },
+                {
+                  "type": "image",
+                  "content": "image/connection/OAuth-2/create-external-client-app/1.png",
+                  "alt": "Create a External Client App",
+                  "caption": [
+                    "Replace Contact Email with your email."
+                  ]
+                },
+                {
+                  "type": "image",
+                  "content": "image/connection/OAuth-2/create-external-client-app/2.png",
+                  "alt": "Create a External Client App",
+                  "caption": [
+                    "Use a temporary URL for the Callback URL."
+                  ]
+                },
+                {
+                  "type": "image",
+                  "content": "image/connection/OAuth-2/create-external-client-app/3.png",
+                  "alt": "Create a External Client App"
                 }
               ]
             },
@@ -148,37 +211,41 @@
               "type": "p",
               "content": "Create an Auth. Provider in the org where DSP is installed",
               "children": [
-                {
-                  "type": "ul",
-                  "children": [
-                    {
-                      "type": "p",
-                      "content": "Copy and paste the Consumer Key and Consumer Secret from Org B's Connected App to the Auth. Provider."
-                    },
-                    {
-                      "type": "p",
-                      "content": "Authorize Endpoint URL: Use `https://test.salesforce.com/services/oauth2/authorize` for sandbox or `https://login.salesforce.com/services/oauth2/authorize` for production."
-                    },
-                    {
-                      "type": "p",
-                      "content": "Token Endpoint URL: Use `https://test.salesforce.com/services/oauth2/token` for sandbox or `https://login.salesforce.com/services/oauth2/token` for production."
-                    },
-                    {
-                      "type": "p",
-                      "content": "Default Scopes: Set `refresh_token` and any additional scopes. Use space to separate."
-                    }
-                  ]
-                }
+                  {
+                    "type": "image",
+                    "content": "image/connection/OAuth-2/create-auth-provider/0.png",
+                    "alt": "Create a External Client App"
+                  },
+                  {
+                    "type": "image",
+                    "content": "image/connection/OAuth-2/create-auth-provider/1.png",
+                    "alt": "Create a External Client App",
+                    "caption":[
+                      "Copy and paste the Consumer Key and Consumer Scret from the remote org: Setup -> External Client App Manager -> The External App created previously -> Settings -> OAuth Settings -> Consumer Key and Secret.",
+                      "Scope: Use \"refresh_token full\" or any scopes you need."
+                    ]
+                  },
+                  {
+                    "type": "image",
+                    "content": "image/connection/OAuth-2/create-auth-provider/2.png",
+                    "alt": "Create a External Client App",
+                    "caption":[
+                      "Copy the Callback URL."
+                    ]
+                  }
               ]
             },
             {
               "type": "p",
-              "content": "Update the Callback URL in the target org",
+              "content": "Update the Callback URL in the remote org",
               "children": [
                 {
-                  "type": "p",
-                  "content": "Upon save of the Auth. Provider, a Callback URL will be generated. Update the Connected App's Callback URL to match the value."
-                }
+                    "type": "image",
+                    "content": "image/connection/OAuth-2/update-callback-url/0.png",
+                    "alt": "Create a External Client App"
+                    
+                    
+                  }
               ]
             },
             {
@@ -186,39 +253,45 @@
               "content": "Create a Named Credential in the org where DSP is installed",
               "children": [
                 {
-                  "type": "ul",
-                  "children": [
-                    {
-                      "type": "p",
-                      "content": "URL: the domain URL of Org B. This can be found in \"My Domain Settings\"."
-                    },
-                    {
-                      "type": "p",
-                      "content": "Identity Type: Select `Named Principal`."
-                    },
-                    {
-                      "type": "p",
-                      "content": "Authentication Protocol: Choose `OAuth 2.0`."
-                    },
-                    {
-                      "type": "p",
-                      "content": "Auth. Provider: Pick the one you just set up."
-                    },
-                    {
-                      "type": "p",
-                      "content": "Scope: Use `refresh_token full` or any scopes you need."
-                    },
-                    {
-                      "type": "p",
-                      "content": "Enable \"Generate Authorization Header\", \"Allow Merge Fields in HTTP Header\", and \"Allow Merge Fields in HTTP Body\"."
-                    }
-                  ]
+                    "type": "image",
+                    "content": "image/connection/OAuth-2/create-named-credential/0.png",
+                    "alt": "Create a External Client App"
+                    
+                    
+                  },
+                  {
+                    "type": "image",
+                    "content": "image/connection/OAuth-2/create-named-credential/1.png",
+                    "alt": "Create a External Client App",
+                    "caption":[
+                      "URL: the domain URL of the remote org. This can be found in the \"My Domain Settings\".",
+                      "Scope: Use \"refresh_token full\" or any scopes you need."
+                    ]
+                    
+                  }
+              ]
+            },
+            {
+              "type": "p",
+              "content": "Create a DSP Connection Record in the org where DSP is installed:",
+              "children": [
+                {
+                  "type": "image",
+                  "content": "image/connection/OAuth-2/create-connection/0.png",
+                  "alt": "Create Connection"
                 }
               ]
             },
             {
               "type": "p",
-              "content": "Test the connection"
+              "content": "Test the connection",
+              "children": [
+                {
+                  "type": "image",
+                  "content": "image/connection/OAuth-2/test-connection/0.png",
+                  "alt": "Create Connection"
+                }
+              ]
             }
           ]
         }

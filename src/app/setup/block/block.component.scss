@@ -45,12 +45,23 @@
 .block-figure {
   margin: 1.5rem 0;
   text-align: center;
+}
 
-  figcaption {
-    margin-top: 0.5rem;
-    font-size: 0.875rem;
-    color: #666;
-    font-style: italic;
+.block-caption {
+  margin-top: 0.75rem;
+  text-align: left;
+
+  ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    list-style-type: disc;
+
+    li {
+      font-size: 0.875rem;
+      color: #666;
+      line-height: 1.5;
+      margin: 0.25rem 0;
+    }
   }
 }
 
@@ -66,7 +77,8 @@
 }
 
 .block-video {
-  max-width: 100%;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   border-radius: 8px;
 }
 

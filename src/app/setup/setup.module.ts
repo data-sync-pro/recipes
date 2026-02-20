@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SetupRoutingModule } from './setup-routing.module';
 import { SetupComponent } from './setup.component';
 import { SetupBlockComponent } from './block/block.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SetupBlockComponent } from './block/block.component';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    SetupRoutingModule
+    SetupRoutingModule,
+    SharedModule
   ]
 })
 export class SetupModule { }

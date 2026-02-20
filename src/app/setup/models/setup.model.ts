@@ -13,7 +13,8 @@ export interface Block {
   content?: string;
   children?: Block[];
   alt?: string;        // image
-  src?: string;        // video 
+  caption?: string[];  // image
+  src?: string;        // video
   language?: string;   // code
   variant?: CalloutVariant; // callout
 }

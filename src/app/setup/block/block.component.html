@@ -24,7 +24,16 @@
   </section>
 
   <!-- Paragraph -->
-  <p *ngSwitchCase="'p'" class="block-p" [innerHTML]="block.content"></p>
+  <ng-container *ngSwitchCase="'p'">
+    <p class="block-p" [innerHTML]="block.content"></p>
+    <ng-container *ngIf="block.children">
+      <app-setup-block
+        *ngFor="let child of block.children; trackBy: trackByIndex"
+        [block]="child"
+        [basePath]="basePath">
+      </app-setup-block>
+    </ng-container>
+  </ng-container>
 
   <!-- Unordered List -->
   <ul *ngSwitchCase="'ul'" class="block-list">
@@ -41,14 +50,26 @@
   </ol>
 
   <!-- Image -->
-  <figure *ngSwitchCase="'image'" class="block-figure">
+  <figure *ngSwitchCase="'image'" class="block-figure" appSimpleZoomable [enableHoverZoom]="false">
     <img [src]="getImagePath(block.content || '')" [alt]="block.alt || ''" class="block-image" />
-    <figcaption *ngIf="block.alt">{{ block.alt }}</figcaption>
+    <figcaption *ngIf="block.caption?.length" class="block-caption">
+      <ul>
+        <li *ngFor="let item of block.caption; trackBy: trackByIndex">{{ item }}</li>
+      </ul>
+    </figcaption>
   </figure>
 
   <!-- Video -->
   <div *ngSwitchCase="'video'" class="block-video-container">
-    <video *ngIf="block.src" [src]="block.src" controls class="block-video"></video>
+    <iframe
+      *ngIf="isYouTubeUrl(block.src)"
+      [src]="getYouTubeEmbedUrl(block.src || '')"
+      class="block-video"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+    <video *ngIf="block.src && !isYouTubeUrl(block.src)" [src]="block.src" controls class="block-video"></video>
   </div>
 
   <!-- Code -->
