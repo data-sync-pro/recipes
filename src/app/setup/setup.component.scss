@@ -86,6 +86,25 @@
           background-color: #F1F6FB;
         }
 
+        &.parent-active:not(.active) {
+          color: #2253B2;
+        }
+
+        &.child-item {
+          padding-left: 24px;
+          font-size: 0.875rem;
+          color: #5c5c5c;
+
+          &:hover {
+            color: #2253B2;
+          }
+
+          &.active {
+            color: #2253B2;
+            font-weight: 500;
+          }
+        }
+
         .category-count {
           background-color: #e0e7ff;
           color: #2253B2;
@@ -107,8 +126,11 @@
   .page-title {
     font-size: 2rem;
     font-weight: 500;
-    color: #2253B2;
+    //color: #2253B2;
+    color: #333;
     margin: 0 0 1.5rem;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #e9ecef;
   }
 }
 
@@ -118,7 +140,7 @@
   align-items: center;
   justify-content: center;
   padding: 80px 0;
-  color: #64748b;
+  color: #5c5c5c;
 
   p {
     margin-top: 16px;

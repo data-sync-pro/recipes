@@ -73,7 +73,7 @@
   </div>
 
   <!-- Code -->
-  <pre *ngSwitchCase="'code'" class="block-code"><code [attr.data-language]="block.language">{{ block.content }}</code></pre>
+  <pre *ngSwitchCase="'code'" class="block-code"><code #codeBlock [class]="'language-' + getPrismLanguage(block.language)">{{ block.content }}</code></pre>
 
   <!-- Callout -->
   <div *ngSwitchCase="'callout'" class="block-callout" [attr.data-variant]="block.variant || 'info'">

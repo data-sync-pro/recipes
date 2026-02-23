@@ -6,8 +6,7 @@
   font-size: 1.5rem;
   font-weight: 600;
   margin: 2rem 0 1rem;
-  color: #1a1a1a;
-  border-bottom: 1px solid #e0e0e0;
+  color: #2253B2;
   padding-bottom: 0.5rem;
 }
 
@@ -15,13 +14,14 @@
   font-size: 1.25rem;
   font-weight: 600;
   margin: 1.5rem 0 0.75rem;
-  color: #333;
+  color: #242424;
 }
 
 .block-p {
+  font-size: 1rem;
   margin: 0.75rem 0;
   line-height: 1.7;
-  color: #444;
+  color: #333333;
 }
 
 .block-list {
@@ -57,8 +57,8 @@
     list-style-type: disc;
 
     li {
-      font-size: 0.875rem;
-      color: #666;
+      font-size: 1rem;
+      color: #333333;
       line-height: 1.5;
       margin: 0.25rem 0;
     }
@@ -70,6 +70,10 @@
   height: auto;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
 }
 
 .block-video-container {
@@ -85,16 +89,16 @@
 .block-code {
   margin: 1rem 0;
   padding: 1rem;
-  background: #1e1e1e;
+  background: #2d2d2d;
   border-radius: 8px;
   overflow-x: auto;
 
   code {
     font-family: 'Fira Code', 'Consolas', monospace;
     font-size: 0.875rem;
-    color: #d4d4d4;
     white-space: pre-wrap;
     word-break: break-word;
+    background: transparent;
   }
 }
 

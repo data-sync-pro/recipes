@@ -1,6 +1,8 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Block } from '../models/setup.model';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-java';
 
 @Component({
   selector: 'app-setup-block',
@@ -8,11 +10,21 @@ import { Block } from '../models/setup.model';
   styleUrls: ['./block.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SetupBlockComponent {
+export class SetupBlockComponent implements AfterViewChecked {
   @Input() block!: Block;
   @Input() basePath = 'assets/setups';
+  @ViewChild('codeBlock') codeBlock?: ElementRef<HTMLElement>;
+
+  private highlighted = false;
 
   constructor(private sanitizer: DomSanitizer) {}
+
+  ngAfterViewChecked(): void {
+    if (this.block.type === 'code' && this.codeBlock && !this.highlighted) {
+      Prism.highlightElement(this.codeBlock.nativeElement);
+      this.highlighted = true;
+    }
+  }
 
   trackByIndex(index: number): number {
     return index;
@@ -44,5 +56,13 @@ export class SetupBlockComponent {
       videoId = url.split('/embed/')[1]?.split(/[?#]/)[0] || '';
     }
     return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}`);
+  }
+
+  getPrismLanguage(language: string | undefined): string {
+    const languageMap: Record<string, string> = {
+      'apex': 'java',
+      'soql': 'sql',
+    };
+    return languageMap[language || ''] || language || 'plaintext';
   }
 }

@@ -12,6 +12,11 @@ const routes: Routes = [
     path: ':setupSlug',
     component: SetupComponent,
     data: { title: 'Setup - Data Sync Pro' }
+  },
+  {
+    path: ':parentSlug/:childSlug',
+    component: SetupComponent,
+    data: { title: 'Setup - Data Sync Pro' }
   }
 ];
 

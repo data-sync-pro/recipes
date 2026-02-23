@@ -2,6 +2,7 @@ export interface SetupIndexItem {
   slug: string;
   title: string;
   active: boolean;
+  parent?: string;  // parent slug for nested pages
 }
 
 export type BlockType = "h2" | "h3" | "p" | "ul" | "ol" | "image" | "video" | "code" | "callout";

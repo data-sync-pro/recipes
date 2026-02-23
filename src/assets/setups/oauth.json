@@ -1,0 +1,129 @@
+{
+  "title": "OAuth 2.0",
+  "order": 3,
+  "blocks": [
+    {
+      "type": "p",
+      "content": "DSP supports OAuth 2.0 authentication using Salesforce security features, including:"
+    },
+    {
+      "type": "ul",
+      "children": [
+        { "type": "p", "content": "<strong>External Client App</strong>" },
+        { "type": "p", "content": "<strong>Auth. Provider</strong>" },
+        { "type": "p", "content": "<strong>Named Credential</strong>" }
+      ]
+    },
+    {
+      "type": "p",
+      "content": "Follow the steps below to configure OAuth 2.0 authentication."
+    },
+    {
+      "type": "h2",
+      "content": "1. Create External Client App (Remote Org)",
+      "children": [
+        {
+          "type": "image",
+          "content": "image/connection/OAuth-2/create-external-client-app/00.png",
+          "alt": "Create External Client App"
+        },
+        {
+          "type": "image",
+          "content": "image/connection/OAuth-2/create-external-client-app/1.png",
+          "alt": "External Client App Details",
+          "caption": ["Replace Contact Email with your email."]
+        },
+        {
+          "type": "image",
+          "content": "image/connection/OAuth-2/create-external-client-app/2.png",
+          "alt": "External Client App OAuth Settings",
+          "caption": ["Use a temporary URL for the Callback URL."]
+        },
+        {
+          "type": "image",
+          "content": "image/connection/OAuth-2/create-external-client-app/3.png",
+          "alt": "External Client App Created"
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "content": "2. Create Auth. Provider (DSP Installed Org)",
+      "children": [
+        {
+          "type": "image",
+          "content": "image/connection/OAuth-2/create-auth-provider/0.png",
+          "alt": "Create Auth Provider"
+        },
+        {
+          "type": "image",
+          "content": "image/connection/OAuth-2/create-auth-provider/1.png",
+          "alt": "Auth Provider Configuration",
+          "caption": [
+            "Copy and paste the Consumer Key and Consumer Secret from the remote org: Setup -> External Client App Manager -> The External App created previously -> Settings -> OAuth Settings -> Consumer Key and Secret.",
+            "Scope: Use \"refresh_token full\" or any scopes you need."
+          ]
+        },
+        {
+          "type": "image",
+          "content": "image/connection/OAuth-2/create-auth-provider/2.png",
+          "alt": "Auth Provider Callback URL",
+          "caption": ["Copy the Callback URL."]
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "content": "3. Update Callback URL (Remote Org)",
+      "children": [
+        {
+          "type": "image",
+          "content": "image/connection/OAuth-2/update-callback-url/0.png",
+          "alt": "Update Callback URL"
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "content": "4. Create Named Credential (DSP Installed Org)",
+      "children": [
+        {
+          "type": "image",
+          "content": "image/connection/OAuth-2/create-named-credential/0.png",
+          "alt": "Create Named Credential"
+        },
+        {
+          "type": "image",
+          "content": "image/connection/OAuth-2/create-named-credential/1.png",
+          "alt": "Named Credential Configuration",
+          "caption": [
+            "URL: the domain URL of the remote org. This can be found in \"My Domain Settings\".",
+            "Scope: Use \"refresh_token full\" or any scopes you need."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "content": "5. Create DSP Connection (DSP Installed Org)",
+      "children": [
+        {
+          "type": "image",
+          "content": "image/connection/OAuth-2/create-connection/0.png",
+          "alt": "Create Connection"
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "content": "6. Test Connection",
+      "children": [
+        {
+          "type": "image",
+          "content": "image/connection/OAuth-2/test-connection/0.png",
+          "alt": "Test Connection"
+        }
+      ]
+    }
+  ]
+}

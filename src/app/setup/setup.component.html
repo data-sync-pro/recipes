@@ -11,12 +11,23 @@
     <aside class="left-sidebar">
       <div class="sidebar-sticky">
         <div class="category-list">
-          <a *ngFor="let item of setupIndex; trackBy: trackBySlug"
-             class="category-item"
-             [class.active]="item.slug === currentSlug"
-             (click)="selectSetup(item.slug)">
-            {{ item.title }}
-          </a>
+          <ng-container *ngFor="let item of parentItems; trackBy: trackBySlug">
+            <a class="category-item"
+               [class.active]="item.slug === currentSlug"
+               [class.parent-active]="isParentActive(item.slug)"
+               (click)="selectSetup(item.slug)">
+              {{ item.title }}
+            </a>
+            <!-- Child items -->
+            <ng-container *ngIf="hasChildren(item.slug)">
+              <a *ngFor="let child of getChildren(item.slug); trackBy: trackBySlug"
+                 class="category-item child-item"
+                 [class.active]="child.slug === currentSlug"
+                 (click)="selectSetup(child.slug)">
+                {{ child.title }}
+              </a>
+            </ng-container>
+          </ng-container>
         </div>
       </div>
     </aside>

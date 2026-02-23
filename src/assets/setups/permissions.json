@@ -17,10 +17,10 @@
         {
           "type": "ul",
           "children": [
-            { "type": "p", "content": "DSP: Data Sync Pro Administrator: Grants full administrative control, including access to all configuration records. Typically assigned to developers in sandboxes, and to system admins or architects in the production." },
-            { "type": "p", "content": "DSP: Data Sync Pro App User: Allows execution of asynchronous rules such as Batch jobs and Data Loaders, provided the user has at least read access to the relevant Executables. Intended for super users who need to run jobs or upload CSVs with explicit Executable access grants." },
-            { "type": "p", "content": "DSP: Data Sync Pro Starter: Provides minimal access to packaged components and objects. With additional read access to Executable records, users can run rules (except batch jobs and data loads). This serves as the default profile for most internal users." },
-            { "type": "p", "content": "DSP: Download Data in Query: Grants users the permission to download data from the Query component." }
+            { "type": "p", "content": "<strong>DSP: Data Sync Pro Administrator</strong>: Grants full administrative control, including access to all configuration records. Typically assigned to developers in sandboxes, and to system admins or architects in the production." },
+            { "type": "p", "content": "<strong>DSP: Data Sync Pro App User</strong>: Allows execution of asynchronous rules such as Batch jobs and Data Loaders, provided the user has at least read access to the relevant Executables. Intended for super users who need to run jobs or upload CSVs with explicit Executable access grants." },
+            { "type": "p", "content": "<strong>DSP: Data Sync Pro Starter</strong>: Provides minimal access to packaged components and objects. With additional read access to Executable records, users can run rules (except batch jobs and data loads). This serves as the default profile for most internal users." },
+            { "type": "p", "content": "<strong>DSP: Download Data in Query</strong>: Grants users the permission to download data from the Query component." }
           ]
         },
         {
@@ -41,8 +41,8 @@
         {
           "type": "ul",
           "children": [
-            { "type": "p", "content": "DSP: Access Query on Remote Connections: If a Connection is remote, the Query component operates under the context of the integration user. DSP users need this permission to run queries using the Query component from the Connection record page." },
-            { "type": "p", "content": "DSP: Download Data in Query: Enables download functionality within the Query component." }
+            { "type": "p", "content": "<strong>DSP: Access Query on Remote Connections</strong>: If a Connection is remote, the Query component operates under the context of the integration user. DSP users need this permission to run queries using the Query component from the Connection record page." },
+            { "type": "p", "content": "<strong>DSP: Download Data in Query</strong>: Enables download functionality within the Query component." }
           ]
         },
         {

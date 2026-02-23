@@ -94,11 +94,26 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
     this.route.paramMap
       .pipe(takeUntil(this.destroy$))
       .subscribe(params => {
-        const slug = params.get('setupSlug');
+        const parentSlug = params.get('parentSlug');
+        const childSlug = params.get('childSlug');
+        const setupSlug = params.get('setupSlug');
+
+        // Find the matching item from index
+        let slug: string | null = null;
+        if (parentSlug && childSlug) {
+          // Nested route: find item with this slug and matching parent
+          const item = this.setupIndex.find(
+            i => i.slug === childSlug && i.parent === parentSlug
+          );
+          slug = item?.slug || null;
+        } else if (setupSlug) {
+          slug = setupSlug;
+        }
+
         if (slug) {
           this.loadSetup(slug);
         } else if (this.setupIndex.length > 0) {
-          this.router.navigate(['/setup', this.setupIndex[0].slug]);
+          this.selectSetup(this.parentItems[0].slug);
         } else {
           this.isLoading = false;
           this.cdr.markForCheck();
@@ -135,7 +150,15 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   selectSetup(slug: string): void {
-    this.router.navigate(['/setup', slug]);
+    // Find the item to get its parent
+    const item = this.setupIndex.find(i => i.slug === slug);
+    if (item?.parent) {
+      // Nested route: /setup/parent/child
+      this.router.navigate(['/setup', item.parent, slug]);
+    } else {
+      // Top-level route: /setup/slug
+      this.router.navigate(['/setup', slug]);
+    }
   }
 
   scrollToBlock(content: string): void {
@@ -158,5 +181,28 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
 
   trackByIndex(index: number): number {
     return index;
+  }
+
+  // Get only parent items (items without a parent field)
+  get parentItems(): SetupIndexItem[] {
+    return this.setupIndex.filter(item => !item.parent);
+  }
+
+  // Get children of a specific parent
+  getChildren(parentSlug: string): SetupIndexItem[] {
+    return this.setupIndex.filter(item => item.parent === parentSlug);
+  }
+
+  // Check if a parent has children
+  hasChildren(parentSlug: string): boolean {
+    return this.setupIndex.some(item => item.parent === parentSlug);
+  }
+
+  // Check if the current page is within a parent's hierarchy
+  isParentActive(parentSlug: string): boolean {
+    if (this.currentSlug === parentSlug) return true;
+    return this.setupIndex.some(
+      item => item.parent === parentSlug && item.slug === this.currentSlug
+    );
   }
 }
