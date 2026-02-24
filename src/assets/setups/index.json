@@ -1,0 +1,8 @@
+[
+  { "slug": "permissions", "title": "Permissions", "active": true },
+  { "slug": "connection", "title": "Connection", "active": true },
+  { "slug": "current-org", "title": "Current Org", "active": true, "parent": "connection" },
+  { "slug": "oauth", "title": "OAuth 2.0", "active": true, "parent": "connection" },
+  { "slug": "username-password", "title": "Username & Password", "active": true, "parent": "connection" },
+  { "slug": "trigger", "title": "Trigger", "active": true }
+]

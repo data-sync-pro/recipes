@@ -1,0 +1,22 @@
+{
+  "title": "Current Org",
+  "order": 1,
+  "blocks": [
+    {
+      "type": "p",
+      "content": "The \"Is Current Org?\" checkbox is a field on the Connection object. Once checked, DSP operates without requiring credentials."
+    },
+    {
+      "type": "p",
+      "content": "It conducts queries and DML operations based on the <strong>currently logged-in user's context</strong>, indicating that the connection pertains to the current org where DSP is installed. All security settings applicable to that user are enforced during executions."
+    },
+    {
+      "type": "p",
+      "content": "For a more detailed walkthrough, refer to the video below:"
+    },
+    {
+      "type": "video",
+      "src": "https://youtu.be/70GDxXd_ju8"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+<div class="setup-page">
+  <div class="setup-banner">
+    <div class="setup-banner-content">
+      <h1 class="setup-banner-title">Setup</h1>
+      <p class="setup-banner-description">Manage secure access, configure authenticated connections, and enable trigger-based automation in Data Sync Pro.</p>
+    </div>
+  </div>
+
+  <div class="setup-main-layout">
+    <!-- Left Sidebar - Setup Titles -->
+    <aside class="left-sidebar">
+      <div class="sidebar-sticky">
+        <div class="category-list">
+          <ng-container *ngFor="let item of parentItems; trackBy: trackBySlug">
+            <a class="category-item"
+               [class.active]="item.slug === currentSlug"
+               [class.parent-active]="isParentActive(item.slug)"
+               (click)="selectSetup(item.slug)">
+              {{ item.title }}
+            </a>
+            <!-- Child items -->
+            <div class="child-items-wrapper" *ngIf="hasChildren(item.slug)">
+              <a *ngFor="let child of getChildren(item.slug); trackBy: trackBySlug"
+                 class="category-item child-item"
+                 [class.active]="child.slug === currentSlug"
+                 (click)="selectSetup(child.slug)">
+                {{ child.title }}
+              </a>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="setup-content">
+      <div *ngIf="isLoading" class="setup-loading">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+
+      <ng-container *ngIf="!isLoading && currentSetup">
+        <h1 class="page-title">{{ currentSetup.title }}</h1>
+        <app-setup-block
+          *ngFor="let block of currentSetup.blocks; trackBy: trackByIndex"
+          [block]="block">
+        </app-setup-block>
+      </ng-container>
+
+      <div *ngIf="!isLoading && !currentSetup" class="setup-empty">
+        <mat-icon>info_outline</mat-icon>
+        <p>Select a setup guide from the sidebar.</p>
+      </div>
+    </main>
+
+    <!-- Right TOC - H2 blocks -->
+    <aside class="right-toc">
+      <div class="toc-sticky">
+        <nav class="toc-nav" *ngIf="h2Blocks.length > 0">
+          <a *ngFor="let block of h2Blocks"
+             class="toc-link"
+             [class.active]="activeBlockId === getBlockId(block.content || '')"
+             (click)="scrollToBlock(block.content || '')">
+            {{ block.content }}
+          </a>
+        </nav>
+      </div>
+    </aside>
+  </div>
+</div>
