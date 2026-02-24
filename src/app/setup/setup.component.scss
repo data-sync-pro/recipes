@@ -62,11 +62,16 @@
     }
 
     .category-list {
+      .child-items-wrapper {
+        margin-left: 32px;
+        border-left: 1px solid #d1d5db;
+      }
+
       .category-item {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 4px 12px;
+        padding: 8px 12px;
         margin-bottom: 4px;
         cursor: pointer;
         font-size: 0.875rem;
@@ -76,7 +81,7 @@
 
         &:hover {
           color: #2253B2;
-          background-color: #F1F6FB;
+          border-left-color: #2253B2CC;
         }
 
         &.active {
@@ -88,20 +93,26 @@
 
         &.parent-active:not(.active) {
           color: #2253B2;
+          font-weight: 500;
         }
 
         &.child-item {
-          padding-left: 24px;
+          margin-bottom: 4px;
+          margin-top: 4px;
+          padding: 8px 12px;
           font-size: 0.875rem;
           color: #5c5c5c;
+          border-left: 3px solid transparent;
 
           &:hover {
             color: #2253B2;
+            border-left-color: #2253B2CC;
           }
 
           &.active {
             color: #2253B2;
             font-weight: 500;
+            border-left-color: #2253B2CC;
           }
         }
 

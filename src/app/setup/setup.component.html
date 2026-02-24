@@ -2,7 +2,7 @@
   <div class="setup-banner">
     <div class="setup-banner-content">
       <h1 class="setup-banner-title">Setup</h1>
-      <p class="setup-banner-description">Step-by-step setup guides to help you configure Data Sync Pro</p>
+      <p class="setup-banner-description">Manage secure access, configure authenticated connections, and enable trigger-based automation in Data Sync Pro.</p>
     </div>
   </div>
 
@@ -19,14 +19,14 @@
               {{ item.title }}
             </a>
             <!-- Child items -->
-            <ng-container *ngIf="hasChildren(item.slug)">
+            <div class="child-items-wrapper" *ngIf="hasChildren(item.slug)">
               <a *ngFor="let child of getChildren(item.slug); trackBy: trackBySlug"
                  class="category-item child-item"
                  [class.active]="child.slug === currentSlug"
                  (click)="selectSetup(child.slug)">
                 {{ child.title }}
               </a>
-            </ng-container>
+            </div>
           </ng-container>
         </div>
       </div>
