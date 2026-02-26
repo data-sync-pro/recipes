@@ -16,6 +16,11 @@ export class SetupBlockComponent implements AfterViewChecked {
   @ViewChild('codeBlock') codeBlock?: ElementRef<HTMLElement>;
 
   private highlighted = false;
+  isCollapsed = true;
+
+  toggleCollapse(): void {
+    this.isCollapsed = !this.isCollapsed;
+  }
 
   constructor(private sanitizer: DomSanitizer) {}
 

@@ -11,16 +11,19 @@
     </ng-container>
   </section>
 
-  <!-- Heading 3 -->
-  <section *ngSwitchCase="'h3'" class="block-section">
-    <h3 class="block-h3">{{ block.content }}</h3>
-    <ng-container *ngIf="block.children">
+  <!-- Heading 3 (Collapsible Step) -->
+  <section *ngSwitchCase="'h3'" class="block-section block-step" [class.collapsed]="isCollapsed" [id]="getBlockId(block.content || '')">
+    <div class="step-header" (click)="toggleCollapse()">
+      <h3 class="block-h3">{{ block.content }}</h3>
+      <mat-icon class="step-toggle-icon">{{ isCollapsed ? 'expand_more' : 'expand_less' }}</mat-icon>
+    </div>
+    <div class="step-content" *ngIf="!isCollapsed && block.children">
       <app-setup-block
         *ngFor="let child of block.children; trackBy: trackByIndex"
         [block]="child"
         [basePath]="basePath">
       </app-setup-block>
-    </ng-container>
+    </div>
   </section>
 
   <!-- Paragraph -->
@@ -86,5 +89,20 @@
       </ng-container>
     </span>
     <span class="callout-content">{{ block.content }}</span>
+  </div>
+
+  <!-- Instruction (steps + image) -->
+  <div *ngSwitchCase="'instruction'" class="block-instruction">
+    <ul *ngIf="block.steps?.length" class="instruction-steps">
+      <li *ngFor="let step of block.steps; trackBy: trackByIndex" [innerHTML]="step"></li>
+    </ul>
+    <figure *ngIf="block.content" class="instruction-figure" appSimpleZoomable [enableHoverZoom]="false">
+      <img [src]="getImagePath(block.content)" [alt]="block.alt || ''" class="block-image" />
+      <figcaption *ngIf="block.caption?.length" class="block-caption">
+        <ul>
+          <li *ngFor="let item of block.caption; trackBy: trackByIndex">{{ item }}</li>
+        </ul>
+      </figcaption>
+    </figure>
   </div>
 </ng-container>

@@ -63,9 +63,9 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     );
 
-    // Observe all H2 block elements after content loads
+    // Observe all H2 and H3 block elements after content loads
     setTimeout(() => {
-      this.h2Blocks.forEach(block => {
+      [...this.h2Blocks, ...this.h3Blocks].forEach(block => {
         const id = this.getBlockId(block.content || '');
         const element = document.getElementById(id);
         if (element) {
@@ -149,6 +149,48 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.currentSetup.blocks.filter(b => b.type === 'h2');
   }
 
+  // Get h3 blocks (children of h2 or top-level steps)
+  get h3Blocks(): Block[] {
+    if (!this.currentSetup?.blocks) return [];
+    const h3s: Block[] = [];
+    for (const block of this.currentSetup.blocks) {
+      if (block.type === 'h3') {
+        h3s.push(block);
+      } else if (block.type === 'h2' && block.children) {
+        h3s.push(...block.children.filter(c => c.type === 'h3'));
+      }
+    }
+    return h3s;
+  }
+
+  // Get TOC items: h2 with their h3 children
+  get tocItems(): { block: Block; children: Block[] }[] {
+    if (!this.currentSetup?.blocks) return [];
+    const items: { block: Block; children: Block[] }[] = [];
+
+    for (const block of this.currentSetup.blocks) {
+      if (block.type === 'h2') {
+        const h3Children = block.children?.filter(c => c.type === 'h3') || [];
+        items.push({ block, children: h3Children });
+      } else if (block.type === 'h3') {
+        // Top-level h3 (not under h2)
+        items.push({ block, children: [] });
+      }
+    }
+    return items;
+  }
+
+  get shouldShowToc(): boolean {
+    const items = this.tocItems;
+    const h2Items = items.filter(item => item.block.type === 'h2');
+    const topLevelH3Items = items.filter(item => item.block.type === 'h3');
+
+    // Show TOC when: multiple H2, or H2 has H3 children, or multiple top-level H3
+    return h2Items.length > 1
+      || h2Items.some(item => item.children.length > 0)
+      || topLevelH3Items.length > 1;
+  }
+
   selectSetup(slug: string): void {
     // Find the item to get its parent
     const item = this.setupIndex.find(i => i.slug === slug);
@@ -188,14 +230,14 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.setupIndex.filter(item => !item.parent);
   }
 
-  // Get children of a specific parent
+  // Get children of a specific parent (excluding hidden items)
   getChildren(parentSlug: string): SetupIndexItem[] {
-    return this.setupIndex.filter(item => item.parent === parentSlug);
+    return this.setupIndex.filter(item => item.parent === parentSlug && !item.hidden);
   }
 
-  // Check if a parent has children
+  // Check if a parent has visible children
   hasChildren(parentSlug: string): boolean {
-    return this.setupIndex.some(item => item.parent === parentSlug);
+    return this.setupIndex.some(item => item.parent === parentSlug && !item.hidden);
   }
 
   // Check if the current page is within a parent's hierarchy
