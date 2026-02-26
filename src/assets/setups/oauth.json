@@ -15,13 +15,21 @@
       ]
     },
     {
+      "type": "h2",
+      "content": "Configure OAuth 2.0 Authentication"
+    },
+     {
       "type": "p",
-      "content": "Follow the steps below to configure OAuth 2.0 authentication."
+      "content": "Complete the steps below to configure OAuth 2.0 authentication between the Connect Org and the DSP App Org."
     },
     {
-      "type": "h2",
-      "content": "1. Create External Client App (Remote Org)",
+      "type": "h3",
+      "content": "1. Create an External Client App in the Connect Org",
       "children": [
+        {
+          "type": "p",
+          "content": "Create an External Client App to generate the Consumer Key and Consumer Secret required for OAuth authentication."
+        },
         {
           "type": "image",
           "content": "image/connection/OAuth-2/create-external-client-app/00.png",
@@ -30,52 +38,64 @@
         {
           "type": "image",
           "content": "image/connection/OAuth-2/create-external-client-app/1.png",
-          "alt": "External Client App Details",
-          "caption": ["Replace Contact Email with your email."]
+          "alt": "External Client App Details"
         },
         {
-          "type": "image",
+          "type": "instruction",
+          "steps": [
+            "Enable <strong>OAuth Settings</strong>.",
+            "Enter a temporary URL for the Callback URL.",
+            "Add the required OAuth scopes.",
+            "Click <strong>Create</strong>.",
+            "Copy the <strong>Consumer Key</strong> and <strong>Consumer Secret</strong>."
+          ],
           "content": "image/connection/OAuth-2/create-external-client-app/2.png",
-          "alt": "External Client App OAuth Settings",
-          "caption": ["Use a temporary URL for the Callback URL."]
-        },
-        {
-          "type": "image",
-          "content": "image/connection/OAuth-2/create-external-client-app/3.png",
-          "alt": "External Client App Created"
+          "alt": "External Client App OAuth Settings"
         }
       ]
     },
     {
-      "type": "h2",
-      "content": "2. Create Auth. Provider (DSP Installed Org)",
+      "type": "h3",
+      "content": "2. Create an Auth. Provider in the DSP App Org",
       "children": [
+        {
+          "type": "p",
+          "content": "Create an Auth. Provider to connect the DSP App Org to the External Client App created in the Connect Org."
+        },
         {
           "type": "image",
           "content": "image/connection/OAuth-2/create-auth-provider/0.png",
           "alt": "Create Auth Provider"
         },
         {
-          "type": "image",
+          "type": "instruction",
+          "steps": [
+            "<strong>Consumer Key, Consumer Secret</strong>: Copy from the External Client App in the Connect Org.",
+            "<strong>Authorize Endpoint URL</strong>: Use \"https://test.salesforce.com/services/oauth2/authorize\" for sandbox environment or \"https://login.salesforce.com/services/oauth2/authorize\" for production.",
+            "<strong>Token Endpoint URL</strong>: Use \"https://test.salesforce.com/services/oauth2/token\" for sandbox environment or \"https://login.salesforce.com/services/oauth2/token\" for production.",
+            "<strong>Default Scopes</strong>: Enter required scopes (for example: refresh_token api). Separate multiple scopes with spaces."
+          ],
           "content": "image/connection/OAuth-2/create-auth-provider/1.png",
-          "alt": "Auth Provider Configuration",
-          "caption": [
-            "Copy and paste the Consumer Key and Consumer Secret from the remote org: Setup -> External Client App Manager -> The External App created previously -> Settings -> OAuth Settings -> Consumer Key and Secret.",
-            "Scope: Use \"refresh_token full\" or any scopes you need."
-          ]
+          "alt": "Auth Provider Configuration"
         },
         {
-          "type": "image",
+          "type": "instruction",
+          "steps":[
+            "Copy the Callback URL."
+          ],
           "content": "image/connection/OAuth-2/create-auth-provider/2.png",
-          "alt": "Auth Provider Callback URL",
-          "caption": ["Copy the Callback URL."]
+          "alt": "Auth Provider Callback URL"
         }
       ]
     },
     {
-      "type": "h2",
-      "content": "3. Update Callback URL (Remote Org)",
+      "type": "h3",
+      "content": "3. Update Callback URL in the Connect Org",
       "children": [
+        {
+          "type": "p",
+          "content": "Update the External Client App to use the Callback URL generated in the DSP App Org."
+        },
         {
           "type": "image",
           "content": "image/connection/OAuth-2/update-callback-url/0.png",
@@ -84,8 +104,8 @@
       ]
     },
     {
-      "type": "h2",
-      "content": "4. Create Named Credential (DSP Installed Org)",
+      "type": "h3",
+      "content": "4. Create a Named Credential in the DSP App Org",
       "children": [
         {
           "type": "image",
@@ -93,19 +113,23 @@
           "alt": "Create Named Credential"
         },
         {
-          "type": "image",
+          "type": "instruction",
+          "steps": [
+            "<strong>URL</strong>: Enter the Connect Org domain URL (found in My Domain Settings).",
+            "<strong>Identity Type</strong>: Select Named Principal",
+            "<strong>Authentication Protocol</strong>: Select OAuth 2.0.",
+            "<strong>Auth Provider</strong>: Select the Auth Provider created earlier.",
+            "<strong>Scope</strong>: Enter the OAuth scopes enabled in the Connect Org’s External Client App. Separate multiple scopes with spaces.",
+            "Enable Start Authentication Flow on Save."
+          ],
           "content": "image/connection/OAuth-2/create-named-credential/1.png",
-          "alt": "Named Credential Configuration",
-          "caption": [
-            "URL: the domain URL of the remote org. This can be found in \"My Domain Settings\".",
-            "Scope: Use \"refresh_token full\" or any scopes you need."
-          ]
+          "alt": "Named Credential Configuration"
         }
       ]
     },
     {
-      "type": "h2",
-      "content": "5. Create DSP Connection (DSP Installed Org)",
+      "type": "h3",
+      "content": "5. Create a DSP Connection in the DSP App Org",
       "children": [
         {
           "type": "image",
@@ -115,7 +139,7 @@
       ]
     },
     {
-      "type": "h2",
+      "type": "h3",
       "content": "6. Test Connection",
       "children": [
         {
@@ -124,6 +148,14 @@
           "alt": "Test Connection"
         }
       ]
+    },
+    {
+      "type": "callout",
+      "content": "Prefer a walkthrough? Watch the complete OAuth 2.0 setup demonstration below."
+    },
+    {
+      "type": "video",
+      "src": "https://youtu.be/OdYyrjrVKRo"
     }
   ]
 }

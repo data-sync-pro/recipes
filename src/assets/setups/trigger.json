@@ -27,6 +27,28 @@
           "content": "<strong>Grant Record Access:</strong> Ensure that <strong>All Internal Users Have Read Access</strong> is checked (auto-checked when #Trigger, #Data List, or #Action Button is enabled), or manually share this Executable with users to provide <strong>Read</strong> access."
         }
       ]
+    },
+    {
+      "type": "h2",
+      "content": "Example: Hook the Account Trigger with Data Sync Pro"
+    },
+    {
+      "type":"ul",
+      "children": [
+        {
+          "type": "p",
+          "content": "Add pushtopics.TriggerServices.execute(); to the Account trigger." 
+        },
+        {
+          "type": "p",
+          "content": "Include all trigger events (before/after insert, update, delete, undelete)." 
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "content": "image/trigger/trigger-example.png",
+      "alt": "Trigger Example"
     }
   ]
 }

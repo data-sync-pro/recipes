@@ -71,7 +71,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 8px 12px;
+        padding: 4px 12px;
         margin-bottom: 4px;
         cursor: pointer;
         font-size: 0.875rem;
@@ -99,7 +99,7 @@
         &.child-item {
           margin-bottom: 4px;
           margin-top: 4px;
-          padding: 8px 12px;
+          padding: 4px 12px;
           font-size: 0.875rem;
           color: #5c5c5c;
           border-left: 3px solid transparent;
@@ -112,7 +112,7 @@
           &.active {
             color: #2253B2;
             font-weight: 500;
-            border-left-color: #2253B2CC;
+            border-left-color: #2253B2;
           }
         }
 
@@ -197,10 +197,10 @@
     .toc-nav {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 4px;
 
       .toc-title {
-        font-size: 0.75rem;
+        font-size: 0.875rem;
         font-weight: 600;
         color: #94a3b8;
         text-transform: uppercase;
@@ -215,7 +215,7 @@
         text-decoration: none;
         transition: all 0.2s ease;
         border-left: 3px solid transparent;
-        padding: 0px 20px;
+        padding: 4px 20px;
         display: block;
         white-space: nowrap;
         overflow: hidden;
@@ -230,7 +230,17 @@
         &.active {
           color: #2253B2;
           font-weight: 500;
-          border-left-color: #2253B2CC;
+          border-left-color: #2253B2;
+        }
+
+        &.toc-h2 {
+          font-weight: 500;
+        }
+
+        &.toc-h3 {
+          padding-left: 32px;
+          font-size: 0.875rem;
+          color: #64748b;
         }
       }
     }

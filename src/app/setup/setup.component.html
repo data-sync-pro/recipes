@@ -52,16 +52,27 @@
       </div>
     </main>
 
-    <!-- Right TOC - H2 blocks -->
+    <!-- Right TOC - H2 and H3 blocks -->
     <aside class="right-toc">
       <div class="toc-sticky">
-        <nav class="toc-nav" *ngIf="h2Blocks.length > 0">
-          <a *ngFor="let block of h2Blocks"
-             class="toc-link"
-             [class.active]="activeBlockId === getBlockId(block.content || '')"
-             (click)="scrollToBlock(block.content || '')">
-            {{ block.content }}
-          </a>
+        <nav class="toc-nav" *ngIf="shouldShowToc">
+          <ng-container *ngFor="let item of tocItems">
+            <!-- H2 or top-level H3 -->
+            <a class="toc-link"
+               [class.active]="activeBlockId === getBlockId(item.block.content || '')"
+               [class.toc-h2]="item.block.type === 'h2'"
+               [class.toc-h3]="item.block.type === 'h3'"
+               (click)="scrollToBlock(item.block.content || '')">
+              {{ item.block.content }}
+            </a>
+            <!-- H3 children under H2 -->
+            <a *ngFor="let child of item.children"
+               class="toc-link toc-h3"
+               [class.active]="activeBlockId === getBlockId(child.content || '')"
+               (click)="scrollToBlock(child.content || '')">
+              {{ child.content }}
+            </a>
+          </ng-container>
         </nav>
       </div>
     </aside>

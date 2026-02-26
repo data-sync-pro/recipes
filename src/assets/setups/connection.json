@@ -20,7 +20,7 @@
     },
     {
       "type": "p",
-      "content": "As shown in the diagram, Data Sync Pro handles authentication through three paths:"
+      "content": "As shown in the diagram, Data Sync Pro handles authentication through two paths:"
     },
     {
       "type": "ul",
@@ -32,10 +32,6 @@
         {
           "type": "p",
           "content": "<strong>OAuth 2.0 Flow:</strong> For remote connections, DSP utilizes a Named Credential to authenticate via an OAuth Token."
-        },
-        {
-          "type": "p",
-          "content": "<strong>Username & Password Flow:</strong> DSP authenticates using a specified Username and Password via the SFDC Login API. This path automatically manages the creation of a Remote Site Setting for the authenticated Salesforce Org."
         }
       ]
     },
