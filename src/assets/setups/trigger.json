@@ -37,7 +37,7 @@
       "children": [
         {
           "type": "p",
-          "content": "Add pushtopics.TriggerServices.execute(); to the Account trigger." 
+          "content": "Add <code>pushtopics.TriggerServices.execute();</code> to the Account trigger." 
         },
         {
           "type": "p",
