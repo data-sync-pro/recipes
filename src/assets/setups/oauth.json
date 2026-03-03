@@ -9,9 +9,9 @@
     {
       "type": "ul",
       "children": [
-        { "type": "p", "content": "<strong>External Client App</strong>" },
-        { "type": "p", "content": "<strong>Auth. Provider</strong>" },
-        { "type": "p", "content": "<strong>Named Credential</strong>" }
+        { "type": "p", "content": "External Client App" },
+        { "type": "p", "content": "Auth. Provider" },
+        { "type": "p", "content": "Named Credential" }
       ]
     },
     {
@@ -31,26 +31,8 @@
           "content": "Create an External Client App to generate the Consumer Key and Consumer Secret required for OAuth authentication."
         },
         {
-          "type": "image",
-          "content": "image/connection/OAuth-2/create-external-client-app/00.png",
-          "alt": "Create External Client App"
-        },
-        {
-          "type": "image",
-          "content": "image/connection/OAuth-2/create-external-client-app/1.png",
-          "alt": "External Client App Details"
-        },
-        {
-          "type": "instruction",
-          "steps": [
-            "Enable <strong>OAuth Settings</strong>.",
-            "Enter a temporary URL for the Callback URL.",
-            "Add the required OAuth scopes.",
-            "Click <strong>Create</strong>.",
-            "Copy the <strong>Consumer Key</strong> and <strong>Consumer Secret</strong>."
-          ],
-          "content": "image/connection/OAuth-2/create-external-client-app/2.png",
-          "alt": "External Client App OAuth Settings"
+          "type": "video",
+          "src": "https://youtu.be/OdYyrjrVKRo"
         }
       ]
     },

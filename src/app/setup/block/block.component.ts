@@ -60,7 +60,7 @@ export class SetupBlockComponent implements AfterViewChecked {
     } else if (url.includes('/embed/')) {
       videoId = url.split('/embed/')[1]?.split(/[?#]/)[0] || '';
     }
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}`);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}?rel=0`);
   }
 
   getPrismLanguage(language: string | undefined): string {
