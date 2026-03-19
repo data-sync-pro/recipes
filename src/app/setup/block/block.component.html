@@ -72,7 +72,7 @@
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen>
     </iframe>
-    <video *ngIf="block.src && !isYouTubeUrl(block.src)" [src]="block.src" controls class="block-video"></video>
+    <video *ngIf="block.src && !isYouTubeUrl(block.src)" [src]="getVideoPath(block.src)" controls class="block-video"></video>
   </div>
 
   <!-- Code -->

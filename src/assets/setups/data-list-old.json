@@ -1,0 +1,25 @@
+{
+  "title": "Add a Data List to a Lightning Page",
+  "order": 2,
+  "blocks": [
+    {
+      "type": "p",
+      "content": "An Executable Data List can be added to a Lightning page to display the results of a configured Data List."
+    },
+    {
+      "type": "p",
+      "content": "For example, a Data List configured to return open Opportunities for the current Account can be placed on the Account record page."
+    },
+    {
+      "type": "ol",
+      "children": [
+        { "type": "p", "content": "Open the record page where you want to add the component." },
+        { "type": "p", "content": "Click <strong>Setup</strong> and select <strong>Edit Page</strong>." },
+        { "type": "p", "content": "In the Lightning Components panel, locate <strong>Executable Data List</strong> under <strong>Custom – Managed</strong>." },
+        { "type": "p", "content": "Drag the component onto the page." },
+        { "type": "p", "content": "Configure the component in the component properties panel." },
+        { "type": "p", "content": "Click <strong>Save</strong>, then <strong>Activate</strong> if required." }
+      ]
+    }
+  ]
+}

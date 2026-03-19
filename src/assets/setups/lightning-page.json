@@ -1,0 +1,20 @@
+{
+    "title": "Lightning Page",
+    "order": 4,
+    "blocks": [
+        {
+            "type": "p",
+            "content": "This section explains how to add the following Data Sync Pro managed Lightning Components to a Salesforce Lightning Record Page:"
+        },
+        {
+            "type": "ul",
+            "children": [
+                { "type": "p", "content": "Executable Action Button" },
+                { "type": "p", "content": "Pipeline Action Buttons" },
+                { "type": "p", "content": "Executable Data List" },
+                { "type": "p", "content": "Pipeline Data Lists" },
+                { "type": "p", "content": "Pipeline Data List Quick Links" }
+            ]
+        }
+    ]
+}

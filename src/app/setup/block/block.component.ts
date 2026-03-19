@@ -42,6 +42,13 @@ export class SetupBlockComponent implements AfterViewChecked {
     return `${this.basePath}/${content}`;
   }
 
+  getVideoPath(src: string): string {
+    if (src.startsWith('https') || src.startsWith('/')) {
+      return src;
+    }
+    return `${this.basePath}/${src}`;
+  }
+
   getBlockId(content: string): string {
     return 'block-' + (content || '').toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
   }
