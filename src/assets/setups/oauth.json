@@ -1,6 +1,6 @@
 {
   "title": "OAuth 2.0",
-  "order": 3,
+  "order": 2,
   "blocks": [
     {
       "type": "p",
@@ -9,9 +9,9 @@
     {
       "type": "ul",
       "children": [
-        { "type": "p", "content": "<strong>External Client App</strong>" },
-        { "type": "p", "content": "<strong>Auth. Provider</strong>" },
-        { "type": "p", "content": "<strong>Named Credential</strong>" }
+        { "type": "p", "content": "External Client App" },
+        { "type": "p", "content": "Auth. Provider" },
+        { "type": "p", "content": "Named Credential" }
       ]
     },
     {
@@ -31,26 +31,8 @@
           "content": "Create an External Client App to generate the Consumer Key and Consumer Secret required for OAuth authentication."
         },
         {
-          "type": "image",
-          "content": "image/connection/OAuth-2/create-external-client-app/00.png",
-          "alt": "Create External Client App"
-        },
-        {
-          "type": "image",
-          "content": "image/connection/OAuth-2/create-external-client-app/1.png",
-          "alt": "External Client App Details"
-        },
-        {
-          "type": "instruction",
-          "steps": [
-            "Enable <strong>OAuth Settings</strong>.",
-            "Enter a temporary URL for the Callback URL.",
-            "Add the required OAuth scopes.",
-            "Click <strong>Create</strong>.",
-            "Copy the <strong>Consumer Key</strong> and <strong>Consumer Secret</strong>."
-          ],
-          "content": "image/connection/OAuth-2/create-external-client-app/2.png",
-          "alt": "External Client App OAuth Settings"
+          "type": "video",
+          "src": "video/connection/OAuth-2/1.mp4"
         }
       ]
     },
@@ -63,28 +45,29 @@
           "content": "Create an Auth. Provider to connect the DSP App Org to the External Client App created in the Connect Org."
         },
         {
-          "type": "image",
-          "content": "image/connection/OAuth-2/create-auth-provider/0.png",
-          "alt": "Create Auth Provider"
+          "type": "ul",
+          "children": [
+            {
+              "type": "p",
+              "content": "<strong>Consumer Key, Consumer Secret</strong>: Copy from the External Client App in the Connect Org."
+            },
+            {
+              "type": "p",
+              "content": "<strong>Authorize Endpoint URL</strong>: Use \"https://test.salesforce.com/services/oauth2/authorize\" for sandbox environment or \"https://login.salesforce.com/services/oauth2/authorize\" for production."
+            },
+            {
+              "type": "p",
+              "content": "<strong>Token Endpoint URL</strong>: Use \"https://test.salesforce.com/services/oauth2/token\" for sandbox environment or \"https://login.salesforce.com/services/oauth2/token\" for production."
+            },
+            {
+              "type": "p",
+              "content": "<strong>Default Scopes</strong>: Enter required scopes. Separate multiple scopes with spaces."
+            }
+          ]
         },
         {
-          "type": "instruction",
-          "steps": [
-            "<strong>Consumer Key, Consumer Secret</strong>: Copy from the External Client App in the Connect Org.",
-            "<strong>Authorize Endpoint URL</strong>: Use \"https://test.salesforce.com/services/oauth2/authorize\" for sandbox environment or \"https://login.salesforce.com/services/oauth2/authorize\" for production.",
-            "<strong>Token Endpoint URL</strong>: Use \"https://test.salesforce.com/services/oauth2/token\" for sandbox environment or \"https://login.salesforce.com/services/oauth2/token\" for production.",
-            "<strong>Default Scopes</strong>: Enter required scopes (for example: refresh_token api). Separate multiple scopes with spaces."
-          ],
-          "content": "image/connection/OAuth-2/create-auth-provider/1.png",
-          "alt": "Auth Provider Configuration"
-        },
-        {
-          "type": "instruction",
-          "steps":[
-            "Copy the Callback URL."
-          ],
-          "content": "image/connection/OAuth-2/create-auth-provider/2.png",
-          "alt": "Auth Provider Callback URL"
+          "type": "video",
+          "src": "video/connection/OAuth-2/2.mp4"
         }
       ]
     },
@@ -97,9 +80,8 @@
           "content": "Update the External Client App to use the Callback URL generated in the DSP App Org."
         },
         {
-          "type": "image",
-          "content": "image/connection/OAuth-2/update-callback-url/0.png",
-          "alt": "Update Callback URL"
+          "type": "video",
+          "src": "video/connection/OAuth-2/3.mp4"
         }
       ]
     },
@@ -108,22 +90,16 @@
       "content": "4. Create a Named Credential in the DSP App Org",
       "children": [
         {
-          "type": "image",
-          "content": "image/connection/OAuth-2/create-named-credential/0.png",
-          "alt": "Create Named Credential"
+          "type": "ul",
+          "children": [
+            { "type": "p", "content": "<strong>URL</strong>: Enter the Connect Org domain URL (found in My Domain Settings)." },
+            { "type": "p", "content": "<strong>Auth Provider</strong>: Select the Auth Provider created earlier." },
+            { "type": "p", "content": "<strong>Scope</strong>: Enter the OAuth scopes enabled in the Connect Org's External Client App. Separate multiple scopes with spaces." }
+          ]
         },
         {
-          "type": "instruction",
-          "steps": [
-            "<strong>URL</strong>: Enter the Connect Org domain URL (found in My Domain Settings).",
-            "<strong>Identity Type</strong>: Select Named Principal",
-            "<strong>Authentication Protocol</strong>: Select OAuth 2.0.",
-            "<strong>Auth Provider</strong>: Select the Auth Provider created earlier.",
-            "<strong>Scope</strong>: Enter the OAuth scopes enabled in the Connect Org’s External Client App. Separate multiple scopes with spaces.",
-            "Enable Start Authentication Flow on Save."
-          ],
-          "content": "image/connection/OAuth-2/create-named-credential/1.png",
-          "alt": "Named Credential Configuration"
+          "type": "video",
+          "src": "video/connection/OAuth-2/4.mp4"
         }
       ]
     },
@@ -148,14 +124,8 @@
           "alt": "Test Connection"
         }
       ]
-    },
-    {
-      "type": "callout",
-      "content": "Prefer a walkthrough? Watch the complete OAuth 2.0 setup demonstration below."
-    },
-    {
-      "type": "video",
-      "src": "https://youtu.be/OdYyrjrVKRo"
     }
   ]
 }
+
+

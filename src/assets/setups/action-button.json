@@ -1,0 +1,83 @@
+{
+    "title": "Executable Action Button",
+    "order": 1,
+    "blocks": [
+        {
+            "type": "p",
+            "content": "Use this component to place a single Executable Action Button on the Lightning Record Page."
+        },
+        {
+            "type": "p",
+            "content": "Assume you want to add an Action Button named \"Smart Merge\" on the Contact record page. To add the Action Button to the record page:"
+        },
+        {
+            "type": "h3",
+            "content": "1. Launch App Builder",
+            "children": [
+                {
+                    "type": "p",
+                    "content": "From Setup, enter Lightning App Builder in the Quick Find box, then select Lightning App Builder."
+                }
+            ]
+        },
+        {
+            "type": "h3",
+            "content": "2. Edit the Lightning Page",
+            "children": [
+                {
+                    "type": "p",
+                    "content": "Locate the record page you want to add the Action Button, then click Edit."
+                },
+                {
+                    "type": "image",
+                    "content": "image/action-button/2.png",
+                    "alt": "Lightning App Builder"
+                }
+            ]
+        },
+        {
+            "type": "h3",
+            "content": "3. Drag the Component onto the Page",
+            "children": [
+                {
+                    "type": "p",
+                    "content": "Search for Executable Action Button in the component search box, then drag Executable Action Button onto the page."
+                },
+                {
+                    "type": "video",
+                    "src": "video/action-button/3.mp4"
+                }
+            ]
+        },
+        {
+            "type": "h3",
+            "content": "4. Specify the API Name",
+            "children": [
+                {
+                    "type": "p",
+                    "content": "Enter the API name of the Executable Action Button."
+                },
+                {
+                    "type": "image",
+                    "content": "image/action-button/4.png",
+                    "alt": "Enter API Name"
+                }
+            ]
+        },
+        {
+            "type": "h3",
+            "content": "5. Save Your Changes",
+            "children": [
+                {
+                    "type": "p",
+                    "content": "Click Save."
+                },
+                {
+                    "type": "image",
+                    "content": "image/action-button/4.png",
+                    "alt": "Save"
+                }
+            ]
+        }
+    ]
+}

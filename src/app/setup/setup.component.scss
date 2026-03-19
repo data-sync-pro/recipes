@@ -44,7 +44,7 @@
 
 // Left Sidebar - Categories
 .left-sidebar {
-  flex: 0 0 22%;
+  flex: 0 0 20%;
   min-width: 0;
 
   .sidebar-sticky {
@@ -112,7 +112,7 @@
           &.active {
             color: #2253B2;
             font-weight: 500;
-            border-left-color: #2253B2;
+            border-left-color: #2253B2CC;
           }
         }
 
@@ -132,7 +132,7 @@
 .setup-content {
   flex: 1;
   min-width: 0;
-  margin-bottom: 15%;
+  margin-bottom: 20%;
 
   .page-title {
     font-size: 2rem;
@@ -215,7 +215,7 @@
         text-decoration: none;
         transition: all 0.2s ease;
         border-left: 3px solid transparent;
-        padding: 4px 20px;
+        padding: 4px 20px 4px 0;
         display: block;
         white-space: nowrap;
         overflow: hidden;
@@ -223,20 +223,32 @@
 
         &:hover {
           color: #2253B2;
-          border-left-color: #2253B2CC;
+          //border-left-color: #2253B2CC;
           cursor: pointer;
         }
 
         &.active {
           color: #2253B2;
           font-weight: 500;
-          border-left-color: #2253B2;
+          //border-left-color: #2253B2;
         }
 
         &.toc-h3 {
-          padding-left: 32px;
+          padding-left: 8px;
           font-size: 0.875rem;
           color: #5c5c5c;
+
+          &:hover {
+            color: #2253B2;
+            //border-left-color: #2253B2CC;
+            cursor: pointer;
+          }
+
+          &.active {
+            color: #2253B2;
+            font-weight: 500;
+            //border-left-color: #2253B2;
+          }
         }
       }
     }
@@ -251,7 +263,7 @@
   }
 
   .left-sidebar {
-    flex: 0 0 22%;
+    flex: 0 0 20%;
   }
 
   .right-toc {

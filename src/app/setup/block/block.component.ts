@@ -42,6 +42,13 @@ export class SetupBlockComponent implements AfterViewChecked {
     return `${this.basePath}/${content}`;
   }
 
+  getVideoPath(src: string): string {
+    if (src.startsWith('https') || src.startsWith('/')) {
+      return src;
+    }
+    return `${this.basePath}/${src}`;
+  }
+
   getBlockId(content: string): string {
     return 'block-' + (content || '').toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
   }
@@ -60,7 +67,7 @@ export class SetupBlockComponent implements AfterViewChecked {
     } else if (url.includes('/embed/')) {
       videoId = url.split('/embed/')[1]?.split(/[?#]/)[0] || '';
     }
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}`);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}?rel=0`);
   }
 
   getPrismLanguage(language: string | undefined): string {
