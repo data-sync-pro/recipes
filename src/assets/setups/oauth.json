@@ -20,11 +20,11 @@
     },
      {
       "type": "p",
-      "content": "Complete the steps below to configure OAuth 2.0 authentication between the Connect Org and the DSP App Org."
+      "content": "Complete the steps below to configure OAuth 2.0 authentication between the Connected Org and the DSP App Org."
     },
     {
       "type": "h3",
-      "content": "1. Create an External Client App in the Connect Org",
+      "content": "1. Create an External Client App in the Connected Org",
       "children": [
         {
           "type": "p",
@@ -42,14 +42,14 @@
       "children": [
         {
           "type": "p",
-          "content": "Create an Auth. Provider to connect the DSP App Org to the External Client App created in the Connect Org."
+          "content": "Create an Auth. Provider to connect the DSP App Org to the External Client App created in the Connected Org."
         },
         {
           "type": "ul",
           "children": [
             {
               "type": "p",
-              "content": "<strong>Consumer Key, Consumer Secret</strong>: Copy from the External Client App in the Connect Org."
+              "content": "<strong>Consumer Key, Consumer Secret</strong>: Copy from the External Client App in the Connected Org."
             },
             {
               "type": "p",
@@ -73,7 +73,7 @@
     },
     {
       "type": "h3",
-      "content": "3. Update Callback URL in the Connect Org",
+      "content": "3. Update Callback URL in the Connected Org",
       "children": [
         {
           "type": "p",
@@ -92,9 +92,9 @@
         {
           "type": "ul",
           "children": [
-            { "type": "p", "content": "<strong>URL</strong>: Enter the Connect Org domain URL (found in My Domain Settings)." },
-            { "type": "p", "content": "<strong>Auth Provider</strong>: Select the Auth Provider created earlier." },
-            { "type": "p", "content": "<strong>Scope</strong>: Enter the OAuth scopes enabled in the Connect Org's External Client App. Separate multiple scopes with spaces." }
+            { "type": "p", "content": "<strong>URL</strong>: Enter the Connected Org domain URL (found in My Domain Settings)." },
+            { "type": "p", "content": "<strong>Auth. Provider</strong>: Select the Auth. Provider created earlier." },
+            { "type": "p", "content": "<strong>Scope</strong>: Enter the OAuth scopes enabled in the Connected Org's External Client App. Separate multiple scopes with spaces." }
           ]
         },
         {
@@ -105,23 +105,11 @@
     },
     {
       "type": "h3",
-      "content": "5. Create a DSP Connection in the DSP App Org",
+      "content": "5. Create and Test a DSP Connection in the DSP App Org",
       "children": [
         {
-          "type": "image",
-          "content": "image/connection/OAuth-2/create-connection/0.png",
-          "alt": "Create Connection"
-        }
-      ]
-    },
-    {
-      "type": "h3",
-      "content": "6. Test Connection",
-      "children": [
-        {
-          "type": "image",
-          "content": "image/connection/OAuth-2/test-connection/0.png",
-          "alt": "Test Connection"
+          "type": "video",
+          "src": "video/connection/OAuth-2/5.mp4"
         }
       ]
     }
