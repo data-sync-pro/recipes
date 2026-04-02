@@ -1,11 +1,19 @@
 {
   "id": "6e0bce42-98a4-4ada-9476-84e2a5c59338",
   "title": "Build and Run a SOQL Query",
-  "category": "Query",
+  "category": [
+    "Query"
+  ],
   "DSPVersions": [],
-  "overview": "Build and run a complex SOQL query against Case using the Query component. Resulting SOQL:\n\n```SQL SELECT CaseNumber, Subject, Type, Priority, Origin, Status, LastModifiedDate,\n       Account.Name, Contact.Name,\n       TYPEOF Owner WHEN User THEN Name ELSE Name END\nFROM Case\nWHERE IsClosed = FALSE\n  AND (Status IN ('Escalated','On Hold') OR Priority = 'High')\n  AND LastModifiedDate < LAST_WEEK\n  AND AccountId != null\nORDER BY Priority ASC NULLS LAST```",
-  "generalUseCase": "Build and run SOQL queries the easiest way with schema-aware suggestions—no syntax required. DSP’s Query runs natively in Salesforce as an LWC, so you can query and preview without leaving Salesforce, maintaining enterprise-grade security. It seamlessly integrates with Lightning Experience—embed on record and app pages to power flexible, high-performance queries wherever you work.",
-  "generalImages": [],
+  "overview": "A complex SOQL query is built in the Query component using schema-aware UI prompts, without requiring users to know SOQL syntax. After running, results display with pagination, mapped labels (instead of API names), column filters, mass edit/delete, inline edit, download, new record, and row-level view/update/clone/delete actions.",
+  "generalUseCase": "Designed for every Salesforce user, DSP’s Query component lets you build SOQL queries with schema-aware suggestions—no syntax required—and work with finely polished, action-ready results directly in Lightning Experience. It runs natively as an LWC, keeping data in Salesforce while meeting enterprise-grade security standards.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/Qch4UQ0kcJ8",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",
@@ -14,5 +22,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "build-and-run-a-soql-query"
 }
