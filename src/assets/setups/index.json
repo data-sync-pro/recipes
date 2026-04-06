@@ -1,0 +1,10 @@
+[
+  { "slug": "permissions", "title": "Permissions", "active": true },
+  { "slug": "connection", "title": "Connection", "active": true },
+  { "slug": "current-org", "title": "Current Org", "active": true, "parent": "connection" },
+  { "slug": "oauth", "title": "OAuth 2.0", "active": true, "parent": "connection" },
+  { "slug": "username-password", "title": "Username & Password", "active": true, "parent": "connection", "hidden": true},
+  { "slug": "trigger", "title": "Trigger", "active": true },
+  { "slug": "add-dsp-components-to-lightning-app-builder", "title": "Add DSP Components to Lightning App Builder", "active": true },
+  { "slug": "action-button", "title": "Executable Action Button", "active": true, "parent": "lightning-page" }
+]

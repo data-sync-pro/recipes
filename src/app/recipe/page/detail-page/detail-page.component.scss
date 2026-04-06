@@ -1,29 +1,29 @@
 .recipe-detail-page {
   min-height: 100vh;
-  max-width: 1696px;
+  max-width: 1752px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 40px;
+  padding: 0 24px;
   box-sizing: border-box;
 }
 
 .detail-main-layout {
   display: flex;
-  gap: 3vw;
+  gap: 2.5vw;
   padding: 36px 0 0 0;
 }
 
 // Left Sidebar - Recipe List
 .left-sidebar {
-  flex: 0 0 23%;
+  flex: 0 0 22%;
   min-width: 0;
   border-radius: 2px;
   background-color: white;
 
   .sidebar-sticky {
     position: sticky;
-    top: 85px;
-    height: calc(100vh - 86px);
+    top: 95px;
+    height: calc(100vh - 95px);
     display: flex;
     flex-direction: column;
 
@@ -172,9 +172,9 @@
 
 // Middle Content Area
 .detail-content {
-  flex: 0 0 50%;
+  flex: 1;
   min-width: 0;
-  margin-bottom: 20%;
+  margin-bottom: 15%;
 
   .content-sections {
     background: #fff;
@@ -199,11 +199,40 @@
         line-height: normal;
       }
 
+      // Overview videos (YouTube embedded below overview text, inside section-content)
+      .videos {
+        margin-top: 16px;
+        margin-left: -12px;  // Offset parent's left margin to align with section edge
+        margin-right: -11px; // Offset parent's right margin to align with section edge
+
+        .video-item {
+          width: 100%;
+
+          &:not(:last-child) {
+            margin-bottom: 16px;
+          }
+
+          .video {
+            width: 100%;
+            height: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+          }
+
+          .youtube-embed {
+            aspect-ratio: 16 / 9;
+            height: auto;
+            min-height: 315px;
+          }
+        }
+      }
+
       .section-content {
         font-size: 1rem;
         color: #2C2C2D;
         line-height: 1.7;
-        margin: 12px 0 20px 15px;
+        margin: 12px 12px 20px 12px;
         white-space: pre-line;
 
         p {
@@ -357,11 +386,12 @@
         display: flex;
         flex-direction: column;
         gap: 24px;
-        margin: 12px 0 20px 15px;
+        padding-left: 12px;
 
         .general-image-item {
           width: 100%;
           padding-bottom: 24px;
+          
 
           .general-image,
           .general-video {
@@ -459,12 +489,12 @@
 
 // Right Sidebar - TOC
 .right-toc {
-  flex: 0 0 23%;
-  min-width: 180px;
+  flex: 0 0 20%;
+  min-width: 150px;
 
   .toc-sticky {
     position: sticky;
-    top: 85px;
+    top: 95px;
     //padding: 25px;
     //border-left: 1px solid #E6E6E6;
     //border-radius: 2px;
@@ -491,7 +521,7 @@
         transition: all 0.2s ease;
         border-left: 3px solid transparent;
         margin-left: 1px;
-        padding: 0px 12px 0px 12px;
+        padding: 0px 20px 0px 20px;
 
         &:hover {
           color: #2253B2;
@@ -502,6 +532,25 @@
           color: #2253B2;
           font-weight: 500;
           border-left: 3px solid #2253B2CC;
+        }
+
+        &.toc-child {
+          font-size: 0.8125rem;
+          padding-left: 32px;
+          color: #777;
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &:hover {
+            color: #2253B2;
+          }
+
+          &.active {
+            color: #2253B2;
+            font-weight: 500;
+          }
         }
       }
     }
@@ -599,18 +648,14 @@
   }
 }
 
-// Enhanced hover effect for images and GIFs only
+// Clickable images - click to open modal preview
 .step-image,
 .verification-image {
-  transform-origin: center center;
-  position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
 
   &:hover {
-    transform: scale(2);
-    z-index: 100; // Above TOC ($z-toc: 80) but below modals
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
+    opacity: 0.85;
   }
 }
 

@@ -1,0 +1,56 @@
+{
+  "title": "Permissions",
+  "order": 1,
+  "blocks": [
+    {
+      "type": "p",
+      "content": "Data Sync Pro primarily utilizes Permission Sets as a fundamental mechanism for security control. This approach is supplemented with Custom Permissions, allowing for granular and flexible management of access rights within the system."
+    },
+    {
+      "type": "h2",
+      "content": "Permission Sets",
+      "children": [
+        {
+          "type": "p",
+          "content": "Here is the list of Permission Sets included in the Data Sync Pro package."
+        },
+        {
+          "type": "ul",
+          "children": [
+            { "type": "p", "content": "<strong>DSP: Data Sync Pro Administrator</strong>: Grants full administrative control, including access to all configuration records. Typically assigned to developers in sandboxes, and to system admins or architects in the production." },
+            { "type": "p", "content": "<strong>DSP: Data Sync Pro App User</strong>: Allows execution of asynchronous rules such as Batch jobs and Data Loaders, provided the user has at least read access to the relevant Executables. Intended for super users who need to run jobs or upload CSVs with explicit Executable access grants." },
+            { "type": "p", "content": "<strong>DSP: Data Sync Pro Starter</strong>: Provides minimal access to packaged components and objects. With additional read access to Executable records, users can run rules (except batch jobs and data loads). This serves as the default profile for most internal users." },
+            { "type": "p", "content": "<strong>DSP: Download Data in Query</strong>: Grants users the permission to download data from the Query component." }
+          ]
+        },
+        {
+          "type": "image",
+          "content": "image/permissions/permission_sets.png",
+          "alt": "Permission Sets"
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "content": "Custom Permissions",
+      "children": [
+        {
+          "type": "p",
+          "content": "Here is the list of Custom Permission included in the Data Sync Pro package. Add them to permission sets to grant users the appropriate accesses."
+        },
+        {
+          "type": "ul",
+          "children": [
+            { "type": "p", "content": "<strong>DSP: Access Query on Remote Connections</strong>: If a Connection is remote, the Query component operates under the context of the integration user. DSP users need this permission to run queries using the Query component from the Connection record page." },
+            { "type": "p", "content": "<strong>DSP: Download Data in Query</strong>: Enables download functionality within the Query component." }
+          ]
+        },
+        {
+          "type": "image",
+          "content": "image/permissions/custom_permissions.png",
+          "alt": "Custom Permissions"
+        }
+      ]
+    }
+  ]
+}

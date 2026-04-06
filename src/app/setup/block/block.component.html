@@ -1,0 +1,108 @@
+<ng-container [ngSwitch]="block.type">
+  <!-- Heading 2 -->
+  <section *ngSwitchCase="'h2'" class="block-section" [id]="getBlockId(block.content || '')">
+    <h2 class="block-h2">{{ block.content }}</h2>
+    <ng-container *ngIf="block.children">
+      <app-setup-block
+        *ngFor="let child of block.children; trackBy: trackByIndex"
+        [block]="child"
+        [basePath]="basePath">
+      </app-setup-block>
+    </ng-container>
+  </section>
+
+  <!-- Heading 3 (Collapsible Step) -->
+  <section *ngSwitchCase="'h3'" class="block-section block-step" [class.collapsed]="isCollapsed" [id]="getBlockId(block.content || '')">
+    <div class="step-header" (click)="toggleCollapse()">
+      <h3 class="block-h3">{{ block.content }}</h3>
+      <mat-icon class="step-toggle-icon">{{ isCollapsed ? 'expand_more' : 'expand_less' }}</mat-icon>
+    </div>
+    <div class="step-content" *ngIf="!isCollapsed && block.children">
+      <app-setup-block
+        *ngFor="let child of block.children; trackBy: trackByIndex"
+        [block]="child"
+        [basePath]="basePath">
+      </app-setup-block>
+    </div>
+  </section>
+
+  <!-- Paragraph -->
+  <ng-container *ngSwitchCase="'p'">
+    <p class="block-p" [innerHTML]="block.content"></p>
+    <ng-container *ngIf="block.children">
+      <app-setup-block
+        *ngFor="let child of block.children; trackBy: trackByIndex"
+        [block]="child"
+        [basePath]="basePath">
+      </app-setup-block>
+    </ng-container>
+  </ng-container>
+
+  <!-- Unordered List -->
+  <ul *ngSwitchCase="'ul'" class="block-list">
+    <li *ngFor="let child of block.children; trackBy: trackByIndex">
+      <app-setup-block [block]="child" [basePath]="basePath"></app-setup-block>
+    </li>
+  </ul>
+
+  <!-- Ordered List -->
+  <ol *ngSwitchCase="'ol'" class="block-list block-list-ordered">
+    <li *ngFor="let child of block.children; trackBy: trackByIndex">
+      <app-setup-block [block]="child" [basePath]="basePath"></app-setup-block>
+    </li>
+  </ol>
+
+  <!-- Image -->
+  <figure *ngSwitchCase="'image'" class="block-figure" appSimpleZoomable [enableHoverZoom]="false">
+    <img [src]="getImagePath(block.content || '')" [alt]="block.alt || ''" class="block-image" />
+    <figcaption *ngIf="block.caption?.length" class="block-caption">
+      <ul>
+        <li *ngFor="let item of block.caption; trackBy: trackByIndex">{{ item }}</li>
+      </ul>
+    </figcaption>
+  </figure>
+
+  <!-- Video -->
+  <div *ngSwitchCase="'video'" class="block-video-container">
+    <iframe
+      *ngIf="isYouTubeUrl(block.src)"
+      [src]="getYouTubeEmbedUrl(block.src || '')"
+      class="block-video"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+    <video *ngIf="block.src && !isYouTubeUrl(block.src)" [src]="getVideoPath(block.src)" controls class="block-video"></video>
+  </div>
+
+  <!-- Code -->
+  <pre *ngSwitchCase="'code'" class="block-code"><code #codeBlock [class]="'language-' + getPrismLanguage(block.language)">{{ block.content }}</code></pre>
+
+  <!-- Callout -->
+  <div *ngSwitchCase="'callout'" class="block-callout" [attr.data-variant]="block.variant || 'info'">
+    <span class="callout-icon">
+      <ng-container [ngSwitch]="block.variant">
+        <mat-icon *ngSwitchCase="'warning'">warning</mat-icon>
+        <mat-icon *ngSwitchCase="'error'">error</mat-icon>
+        <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
+        <mat-icon *ngSwitchDefault>info</mat-icon>
+      </ng-container>
+    </span>
+    <span class="callout-content">{{ block.content }}</span>
+  </div>
+
+  <!-- Instruction (steps + image) -->
+  <div *ngSwitchCase="'instruction'" class="block-instruction">
+    <ul *ngIf="block.steps?.length" class="instruction-steps">
+      <li *ngFor="let step of block.steps; trackBy: trackByIndex" [innerHTML]="step"></li>
+    </ul>
+    <figure *ngIf="block.content" class="instruction-figure" appSimpleZoomable [enableHoverZoom]="false">
+      <img [src]="getImagePath(block.content)" [alt]="block.alt || ''" class="block-image" />
+      <figcaption *ngIf="block.caption?.length" class="block-caption">
+        <ul>
+          <li *ngFor="let item of block.caption; trackBy: trackByIndex">{{ item }}</li>
+        </ul>
+      </figcaption>
+    </figure>
+  </div>
+</ng-container>

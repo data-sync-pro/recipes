@@ -1,0 +1,43 @@
+{
+  "title": "Connection",
+  "order": 2,
+  "blocks": [
+    {
+      "type": "p",
+      "content": "A Connection (pushtopics__Connection__c) defines the authentication configuration used to connect to a Salesforce org. A Connection can act as:"
+    },
+    {
+      "type": "ul",
+      "children": [
+        { "type": "p", "content": "A Source for retrieving data" },
+        { "type": "p", "content": "A Target for performing actions" }
+      ]
+    },
+    {
+      "type": "image",
+      "content": "image/connection/connection.png",
+      "alt": "Authentication Flow Diagram"
+    },
+    {
+      "type": "p",
+      "content": "As shown in the diagram, Data Sync Pro handles authentication through two paths:"
+    },
+    {
+      "type": "ul",
+      "children": [
+        {
+          "type": "p",
+          "content": "<strong>Current Org:</strong> If \"Is Current Org\" is selected, DSP runs as the Currently Logged-in User, requiring no additional credentials."
+        },
+        {
+          "type": "p",
+          "content": "<strong>OAuth 2.0 Flow:</strong> For remote connections, DSP utilizes a Named Credential to authenticate via an OAuth Token."
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "content": "Select a connection type from the sidebar to view detailed setup instructions."
+    }
+  ]
+}

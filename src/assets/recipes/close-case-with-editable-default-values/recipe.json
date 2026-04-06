@@ -1,18 +1,82 @@
 {
   "id": "95feb733-2efc-4b42-b508-28d944ece89f",
   "title": "Close Case with Editable Default Values",
-  "category": "Action Button",
+  "category": [
+    "Action Button"
+  ],
   "DSPVersions": [],
   "overview": "An #Action Button is configured and placed on the Case Lightning Record Page to close the Case, with Pre-Action: Edit Fields specified. When users click the button, a screen opens with transformed target field values, allowing them to review and edit those values before proceeding with the update.",
   "generalUseCase": "Use a Direction-based Executable to define an #Action Button that can be placed on the source object’s Lightning Record Page. When users click the button, the process takes the current record as the source and can either open a validation screen for users to review and modify transformed target field values before execution or proceed directly with the predefined actions.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/YRCuWSlcYeU",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Action Button Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1768938381771.png",
+          "alt": "Screenshot 2026-01-20 at 2.28.50 PM"
+        }
+      ]
+    },
+    {
+      "step": "Scoping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1768938310446.png",
+          "alt": "Screenshot 2026-01-20 at 2.27.58 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1768938345267.png",
+          "alt": "Screenshot 2026-01-20 at 2.28.29 PM"
+        }
+      ]
+    },
+    {
+      "step": "Close a Case",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1768939433723.png",
+          "alt": "Screenshot 2026-01-20 at 2.31.38 PM"
+        },
+        {
+          "type": "image",
+          "url": "images/step-3-image-1768939651541.png",
+          "alt": "Screenshot 2026-01-20 at 3.07.04 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Case.Close.json",
+      "url": "assets/recipes/close-case-with-editable-default-values/downloadExecutables/Case.Close.json"
+    }
+  ],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "close-case-with-editable-default-values"
 }

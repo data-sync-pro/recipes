@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'recipes',loadChildren: () => import('./recipe/page/page.module').then(m => m.RecipePageModule)
   },
+  {
+    path: 'setup',
+    loadChildren: () => import('./setup/setup.module').then(m => m.SetupModule)
+  },
   { path: 'faq-editor', component: FaqEditorComponent },
   {
     path: 'recipe-editor',

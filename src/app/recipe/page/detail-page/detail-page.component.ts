@@ -29,6 +29,7 @@ interface CategoryGroup {
 interface TocItem {
   id: string;
   label: string;
+  children?: TocItem[];
 }
 
 @Component({
@@ -63,6 +64,9 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
   // YouTube URL cache to prevent flickering on scroll
   private youtubeUrlCache = new Map<string, SafeResourceUrl>();
+
+  // Cached YouTube videos from generalImages to prevent re-rendering on scroll
+  private cachedYouTubeVideos: { url: string; alt: string }[] = [];
 
   @ViewChild('sidebarSearchInput') sidebarSearchInput!: ElementRef<HTMLInputElement>;
 
@@ -111,6 +115,9 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
           // Expand the current category
           this.expandCategory(breadcrumbCategory);
+
+          // Cache YouTube videos first (before building TOC which depends on it)
+          this.buildYouTubeVideosCache();
 
           // Build TOC items dynamically
           this.buildTocItems();
@@ -202,7 +209,6 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
     // Set the active section immediately
     this.activeTocSection = sectionId;
-    this.isScrollingToSection = true;
     this.cdr.markForCheck();
 
     const element = document.getElementById(sectionId);
@@ -213,13 +219,8 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: 'auto'
       });
-
-      // Re-enable scroll tracking after smooth scroll completes
-      setTimeout(() => {
-        this.isScrollingToSection = false;
-      }, 1000);
     }
   }
 
@@ -291,13 +292,13 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
       .filter(item => item.length > 0);
   }
 
-  shouldShowRulesEngine(): boolean {
-    if (!this.currentRecipe) {
-      return false;
-    }
-    // Show Rules Engine section if category does not include 'Transformation'
-    return !this.currentRecipe.category.some(c => c.toLowerCase() === 'transformation');
-  }
+  // shouldShowRulesEngine(): boolean {
+  //   if (!this.currentRecipe) {
+  //     return false;
+  //   }
+  //   // Show Rules Engine section if category does not include 'Transformation'
+  //   return !this.currentRecipe.category.some(c => c.toLowerCase() === 'transformation');
+  // }
 
   private buildTocItems(): void {
     if (!this.currentRecipe) {
@@ -310,15 +311,22 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     // Overview is always shown
     items.push({ id: 'overview', label: 'Overview' });
 
+
+    // Downloadable Executables
+    if (this.currentRecipe.downloadableExecutables && this.currentRecipe.downloadableExecutables.length > 0) {
+      items.push({ id: 'download-file', label: 'Downloadable Executables' });
+    }
+
+    // Video Demo
+    if (this.cachedYouTubeVideos.length > 0) {
+      items.push({ id: 'video-demo', label: 'Video Demo' });
+    }
+
     // General Use Case
     if (this.currentRecipe.generalUseCase && this.getGeneralUseCaseItems().length > 0) {
       items.push({ id: 'use-case', label: 'General Use Case' });
     }
 
-    // Rules Engine (if not Transformation category)
-    if (this.shouldShowRulesEngine()) {
-      items.push({ id: 'rules-engine', label: 'Rules Engine' });
-    }
 
     // Direction
     if (this.currentRecipe.direction && this.currentRecipe.direction.trim().length > 0) {
@@ -330,20 +338,25 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
       items.push({ id: 'pipeline', label: 'Pipeline' });
     }
 
-    // Walkthrough
+    // Walkthrough with sub-items
     if (this.currentRecipe.walkthrough && this.currentRecipe.walkthrough.length > 0) {
-      items.push({ id: 'walkthrough', label: 'Walkthrough' });
+      const walkthroughChildren = this.currentRecipe.walkthrough.map((step, index) => {
+        // Only show content before the hyphen
+        const stepLabel = step.step.includes(' - ') ? step.step.split(' - ')[0] : step.step;
+        return {
+          id: `walkthrough-step-${index + 1}`,
+          label: `${index + 1}. ${stepLabel}`
+        };
+      });
+      items.push({ id: 'walkthrough', label: 'Walkthrough', children: walkthroughChildren });
     }
 
-    // Verification GIF
-    if (this.currentRecipe.verificationGIF && this.currentRecipe.verificationGIF.length > 0) {
-      items.push({ id: 'verification-gif', label: 'Verification GIF' });
-    }
+    // Verification (temporarily hidden - videos moved to overview)
+    // if ((this.currentRecipe.verificationGIF && this.currentRecipe.verificationGIF.length > 0) || this.getYouTubeVideosFromGeneralImages().length > 0) {
+    //   items.push({ id: 'verificationGIF', label: 'Verification' });
+    // }
 
-    // Downloadable Executables
-    if (this.currentRecipe.downloadableExecutables && this.currentRecipe.downloadableExecutables.length > 0) {
-      items.push({ id: 'download-file', label: 'Downloadable Executables' });
-    }
+
 
     this.tocItems = items;
   }
@@ -365,16 +378,22 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   private updateActiveTocSection(): void {
     if (!this.currentRecipe || this.isScrollingToSection) return;
 
+    // Build sections list including walkthrough steps
     const sections = [
       'overview',
+      'video-demo',
       'use-case',
-      'rules-engine',
-      'direction',
-      'pipeline',
-      'walkthrough',
-      'verification-gif',
-      'download-file'
+      'walkthrough'
     ];
+
+    // Add walkthrough step IDs
+    if (this.currentRecipe.walkthrough) {
+      this.currentRecipe.walkthrough.forEach((_, index) => {
+        sections.push(`walkthrough-step-${index + 1}`);
+      });
+    }
+
+    sections.push('verification-gif', 'download-file');
 
     // Find which section is currently most visible in the viewport
     const viewportMiddle = window.scrollY + window.innerHeight / 3;
@@ -397,6 +416,15 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
           }
         }
       }
+    }
+
+    // If scrolled to bottom, activate the last TOC item
+    const scrolledToBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 50);
+    if (scrolledToBottom && this.tocItems.length > 0) {
+      const lastItem = this.tocItems[this.tocItems.length - 1];
+      activeSection = lastItem.children?.length
+        ? lastItem.children[lastItem.children.length - 1].id
+        : lastItem.id;
     }
 
     if (this.activeTocSection !== activeSection) {
@@ -430,6 +458,28 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
   isYouTubeUrl(url: string): boolean {
     return url?.includes('youtu.be') || url?.includes('youtube.com');
+  }
+
+  hasNonYouTubeGeneralImages(): boolean {
+    if (!this.currentRecipe?.generalImages?.length) return false;
+    return this.currentRecipe.generalImages.some(
+      media => !(media.type === 'video' && this.isYouTubeUrl(media.url))
+    );
+  }
+
+  getYouTubeVideosFromGeneralImages(): { url: string; alt: string }[] {
+    // Return cached result to prevent iframe re-rendering on scroll
+    return this.cachedYouTubeVideos;
+  }
+
+  private buildYouTubeVideosCache(): void {
+    if (!this.currentRecipe?.generalImages?.length) {
+      this.cachedYouTubeVideos = [];
+      return;
+    }
+    this.cachedYouTubeVideos = this.currentRecipe.generalImages
+      .filter(media => media.type === 'video' && this.isYouTubeUrl(media.url))
+      .map(media => ({ url: media.url, alt: media.alt }));
   }
 
   getYouTubeEmbedUrl(url: string): SafeResourceUrl {

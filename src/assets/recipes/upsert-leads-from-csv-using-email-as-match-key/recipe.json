@@ -18,7 +18,30 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Upload File",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1768934256838.png",
+          "alt": "Screenshot 2026-01-20 at 1.35.26 PM"
+        }
+      ]
+    },
+    {
+      "step": "Execute Lead Upsert",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1768936986316.png",
+          "alt": "Screenshot 2026-01-20 at 1.41.05 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],

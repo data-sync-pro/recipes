@@ -21,11 +21,7 @@
       "active": true
     },
     {
-      "folderId": "auto-create-quote-line-items-from-opportunity-prod",
-      "active": true
-    },
-    {
-      "folderId": "auto-generate-quote-line-items-on-quote-creation",
+      "folderId": "auto-create-renewal-opportunity-products",
       "active": true
     },
     {
@@ -62,10 +58,6 @@
     },
     {
       "folderId": "create-follow-up-task-when-case-closes",
-      "active": true
-    },
-    {
-      "folderId": "create-new-quote-and-clone-opportunity-products",
       "active": true
     },
     {

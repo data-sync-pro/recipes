@@ -7,6 +7,9 @@
 // Import notification styles
 @import './styles/notification.scss';
 
+// Import Prism syntax highlighting theme
+@import 'prismjs/themes/prism-tomorrow';
+
 html, body { min-height: 100%; height: auto; }
 body {
   margin: 0;

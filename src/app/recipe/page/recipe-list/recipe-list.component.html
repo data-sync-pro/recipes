@@ -4,12 +4,13 @@
         <div class="search-wrapper">
             <img class="icon" src="assets/icons/recipe/search.svg" aria-hidden="true">
             <input
-                #searchInput
+                #filterInput
                 type="text"
                 placeholder="Search..."
                 class="search-input"
                 [value]="searchQuery"
                 (input)="onSearchInput($event)"
+                (keydown.escape)="filterInput.blur()"
             >
             <span class="shortcut-hint">/</span>
         </div>
