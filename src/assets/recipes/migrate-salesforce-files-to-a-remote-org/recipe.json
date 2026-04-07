@@ -1,7 +1,9 @@
 {
   "id": "b5561929-3181-4c6e-9e69-380efa143c23",
   "title": "Migrate Salesforce Files to a Remote Org",
-  "category": "Batch",
+  "category": [
+    "Batch"
+  ],
   "DSPVersions": [],
   "overview": "A Pipeline is configured with two #Batch Executables to migrate Salesforce Files and their links to a remote org. In the target org, a unique custom field is added to ContentVersion, and the first #Batch migrates ContentVersion records with this field mapped to the source identifier. The second #Batch migrates ContentDocumentLink records where the linked entity is Account, using VLOOKUP (for ContentDocument) and External ID (for Account) to re-establish relationships. For other parent objects, additional #Batch Executables can be configured in the same way—ensuring files remain correctly associated with all related records after migration.",
   "generalUseCase": "Use #Batch to migrate Salesforce Files and their relationships across orgs—first moving ContentVersion records with a unique identifier, then migrating ContentDocumentLink records that reattach those files to their parent records via VLOOKUP and External IDs—so documents remain correctly related after cross-org migrations.\nUse VLOOKUP in the Match process to handle target objects whose keys are composed of multiple fields—matching on a combination of values instead of a single field so records with multi-field composite keys can be aligned correctly, for example, junction objects like ContentDocumentLink or PermissionSetAssignment.\"",
@@ -14,5 +16,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "migrate-salesforce-files-to-a-remote-org"
 }

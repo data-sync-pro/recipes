@@ -1,7 +1,9 @@
 {
   "id": "10caa347-4bf0-42bc-9a34-b50819777f40",
   "title": "Delete Closed Cases Older Than Two Years",
-  "category": "Batch",
+  "category": [
+    "Batch"
+  ],
   "DSPVersions": [],
   "overview": "A #Batch is scheduled to run every weekend and delete Cases that are closed and more than two years old.",
   "generalUseCase": "Use a scheduled #Batch to regularly clean up old or unnecessary records and free up data storage.\nUse a scheduled #Batch to automatically perform defined actions on filtered records at recurring intervals.",
@@ -14,5 +16,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "delete-closed-cases-older-than-two-years"
 }

@@ -1,7 +1,9 @@
 {
   "id": "65daaf19-1538-4a9f-b618-6dc8e8401232",
   "title": "Send Email Notification on Checkbox Check",
-  "category": "Trigger",
+  "category": [
+    "Trigger"
+  ],
   "DSPVersions": [],
   "overview": "Use a custom checkbox field as a flipper: whenever it is set to true, a before-save trigger resets it back to false. Each time the flipper is toggled—whether manually by a user or automatically by a process—it can initiate the corresponding trigger actions. This pattern allows you to design automations that can be repeatedly invoked on-demand or based on conditions.",
   "generalUseCase": "When the Send Notification to Contact checkbox is selected on Case save (insert or update), the automation sends an email with the latest status to the Case's Contact, then resets the checkbox to false so users can repeat the action on demand as needed.",
@@ -114,10 +116,12 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/Case.SelfAdaptive.Transformation.json"
+      "filePath": "downloadExecutables/Case.SelfAdaptive.Transformation.json",
+      "url": "assets/recipes/send-email-notification-on-checkbox-check/downloadExecutables/Case.SelfAdaptive.Transformation.json"
     },
     {
-      "filePath": "downloadExecutables/Case.Messaging.SendOnCheckboxCheck.json"
+      "filePath": "downloadExecutables/Case.Messaging.SendOnCheckboxCheck.json",
+      "url": "assets/recipes/send-email-notification-on-checkbox-check/downloadExecutables/Case.Messaging.SendOnCheckboxCheck.json"
     }
   ],
   "relatedRecipes": [],

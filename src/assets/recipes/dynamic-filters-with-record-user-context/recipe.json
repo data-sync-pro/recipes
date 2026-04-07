@@ -1,7 +1,9 @@
 {
   "id": "f583a741-c69a-455e-87b0-d364e54f6272",
   "title": "Dynamic Filters with Record & User Context",
-  "category": "General",
+  "category": [
+    "General"
+  ],
   "DSPVersions": [],
   "overview": "Configure context-aware filters in the Query component that resolve at runtime.\n\nRecord context: Provide a sample Context Record ID in the builder. In the SOQL WHERE clause, reference the page record’s fields directly with :fieldName. Supports up to 5 levels of parent relationships.\nExamples: :Id, :AccountId, :Account.Parent.ParentId\n\nUser context: When filtering a User lookup or OwnerId field, use tokens like :$User.Id, :$User.Queues, :$User.DirectReports, :$User.Team, :$UserRole.Team.",
   "generalUseCase": "Create one reusable query that adapts to the current record and the running user—ideal for Lightning record pages and team-scoped views",
@@ -14,5 +16,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "dynamic-filters-with-record-user-context"
 }

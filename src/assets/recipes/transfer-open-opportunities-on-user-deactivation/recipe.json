@@ -1,7 +1,9 @@
 {
   "id": "58c441e3-daec-44a0-a101-b4eab6bd1fc5",
   "title": "Transfer Open Opportunities on User Deactivation",
-  "category": "Trigger",
+  "category": [
+    "Trigger"
+  ],
   "DSPVersions": [],
   "overview": "When Users are deactivated, automatically reassign their open Opportunities to their manager.",
   "generalUseCase": "For scenarios where trigger actions must run asynchronously, enable \"Action in Future Method?\" to execute them in future methods.",
@@ -81,9 +83,11 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/User.OpenOpportunities.TransferOnDeactivation.json"
+      "filePath": "downloadExecutables/User.OpenOpportunities.TransferOnDeactivation.json",
+      "url": "assets/recipes/transfer-open-opportunities-on-user-deactivation/downloadExecutables/User.OpenOpportunities.TransferOnDeactivation.json"
     }
   ],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "transfer-open-opportunities-on-user-deactivation"
 }

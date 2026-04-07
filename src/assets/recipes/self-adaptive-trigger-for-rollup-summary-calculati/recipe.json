@@ -1,0 +1,31 @@
+{
+  "id": "96f990cf-3110-40f5-b4d0-9e532fdb5468",
+  "title": "Self-Adaptive Trigger for Rollup Summary Calculations",
+  "category": [
+    "Trigger"
+  ],
+  "DSPVersions": [],
+  "overview": "A Self-Adaptive #Trigger is configured on Account (before update) to perform in-memory rollup calculations on save using AGG functions. When Accounts are blank-updated, or related child records are inserted, updated, deleted, or undeleted, the rollups recompute and stay current automatically.",
+  "generalUseCase": "Use a Self-Adaptive #Trigger (before insert, before update) to perform in-memory field calculations with DSP’s bulk-safe transformations—including roll-up summaries and other logic such as conditional assignment rules, derived fields, normalization, and defaulting—so values are computed automatically on record save.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/6Jh6NdGf5yw",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Account.SelfAdaptive.Rollups.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "calculate-account-rollup-summary-fields"
+}

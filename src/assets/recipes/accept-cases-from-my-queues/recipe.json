@@ -1,7 +1,9 @@
 {
   "id": "137b415e-5540-4886-9f71-c3ac8b78505a",
   "title": "Accept Cases from My Queues",
-  "category": "Data List",
+  "category": [
+    "Data List"
+  ],
   "DSPVersions": [],
   "overview": "A #Data List shows all open Cases owned by queues the current user belongs to; the user can then select Cases to accept ownership.",
   "generalUseCase": "Use dynamic, user-context filters in data lists via Data Sync Pro’s built-in variables, then run actions on the selected records.",
@@ -14,5 +16,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "accept-cases-from-my-queues"
 }

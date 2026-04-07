@@ -1,7 +1,9 @@
 {
   "id": "41b88a53-b7b5-4c90-acd5-2ebf412a1b87",
   "title": "Create Follow-up Task When Case Closes",
-  "category": "Trigger",
+  "category": [
+    "Trigger"
+  ],
   "DSPVersions": [],
   "overview": "When a Case is closed, automatically create a follow-up task assigned to the Case Owner with a 7 days due date to verify customer satisfaction.",
   "generalUseCase": "When a parent record is saved and meets specific criteria, automatically create related child records.",
@@ -81,7 +83,8 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/Case.NewTask.json"
+      "filePath": "downloadExecutables/Case.NewTask.json",
+      "url": "assets/recipes/create-follow-up-task-when-case-closes/downloadExecutables/Case.NewTask.json"
     }
   ],
   "relatedRecipes": [],

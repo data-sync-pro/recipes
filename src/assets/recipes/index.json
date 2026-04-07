@@ -37,10 +37,6 @@
       "active": true
     },
     {
-      "folderId": "calculate-account-rollup-summary-fields",
-      "active": true
-    },
-    {
       "folderId": "cascade-account-owner-to-open-cases",
       "active": true
     },
@@ -89,7 +85,7 @@
       "active": true
     },
     {
-      "folderId": "inline-mass-edit-query-results",
+      "folderId": "inline-edit",
       "active": true
     },
     {
@@ -114,6 +110,10 @@
     },
     {
       "folderId": "mask-sensitive-contact-data-in-sandboxes",
+      "active": true
+    },
+    {
+      "folderId": "mass-edit",
       "active": true
     },
     {
@@ -146,6 +146,10 @@
     },
     {
       "folderId": "rows-related-lists-on-opportunity-data-list",
+      "active": true
+    },
+    {
+      "folderId": "self-adaptive-trigger-for-rollup-summary-calculati",
       "active": true
     },
     {

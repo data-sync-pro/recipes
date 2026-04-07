@@ -1,7 +1,9 @@
 {
   "id": "20a6b40b-1d25-49a3-9c96-e181b56b86a7",
   "title": "Opportunity Owner Validations",
-  "category": "Trigger",
+  "category": [
+    "Trigger"
+  ],
   "DSPVersions": [],
   "overview": "A self-adaptive #Trigger is used to enforce owner policies on Opportunity:\n- Renewal records must be owned by the Account Owner.\n- High-value opportunities (≥ $500,000) must be owned by a Sales Manager (Owner.Profile).\n```\nERROR(\"Renewal opportunities must be owned by the Account Owner.\", RecordType.DeveloperName == \"Renewal\" && OwnerId != Account.OwnerId, \"Opportunities ≥ $500,000 must be owned by a Sales Manager.\", Owner.Profile.Name != \"Sales Manager\")\n```",
   "generalUseCase": "Use the ERROR() function to define a validation rule for each field within a single self-adaptive #Trigger—centralized, streamlined, and bulk-safe with DSP expressions/formulas.",
@@ -14,5 +16,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "opportunity-owner-validations"
 }

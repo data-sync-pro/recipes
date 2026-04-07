@@ -1,0 +1,24 @@
+{
+  "id": "575ea30c-8e53-4b70-914e-66a0242484b8",
+  "title": "Mass Edit",
+  "category": "General",
+  "DSPVersions": [],
+  "overview": "\"A Self-Adaptive #Trigger is configured on Opportunity to enforce Owner and Stage assignment policies on save. It validates:\n1. Renewal Opportunities are owned by the Account Owner and high-value Opportunities (≥ $500,000) are owned by a Sales Manager (Owner Profile).\n2. Opportunities cannot progress to later stages without an Amount.\"",
+  "generalUseCase": "Use a Self-Adaptive #Trigger to centralize an object’s validation rules, and use ERROR() to conditionally block saves with specific messages.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/F17RRUq7EDY",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": []
+}

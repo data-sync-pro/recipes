@@ -1,7 +1,9 @@
 {
   "id": "68bf7f0d-401a-4532-8b77-64cb11974d2e",
   "title": "Mass Recalculate Account Rollup Summaries",
-  "category": "Batch",
+  "category": [
+    "Batch"
+  ],
   "DSPVersions": [],
   "overview": "A Bulk API–enabled #Batch is used to issue a blank update to Accounts, invoking the self-adaptive #Trigger (before update) to perform in-memory rollup recalculations via DSP AGG_ functions. With a Batch Size = 2000, the job scales to millions of records in minutes(TBD).",
   "generalUseCase": "Use a mass blank update via a #Batch to invoke self-adaptive #Triggers and recalculate fields in memory (e.g., rollups and other transformations) across large record sets.\n\nEnable Bulk API and set a large batch size (e.g., 2000) in #Batches to significantly boost throughput and complete millions of recalculations in minutes.",
@@ -14,5 +16,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "mass-recalculate-account-rollup-summaries"
 }

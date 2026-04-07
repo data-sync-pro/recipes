@@ -1,7 +1,9 @@
 {
   "id": "bb4fc3ee-85ef-478d-8499-d70cc994ee66",
   "title": "Row’s Related Lists on Opportunity Data List",
-  "category": "Data List",
+  "category": [
+    "Data List"
+  ],
   "DSPVersions": [],
   "overview": "Display Opportunities with a row action “Related Lists” that opens a popup showing the selected Opportunity’s Contact Roles, Tasks, and Products.",
   "generalUseCase": "Specify related data lists using dynamic filters, then configure the Pipeline in the parent data list so users can select a row to view and act on its related data.",
@@ -14,5 +16,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "rows-related-lists-on-opportunity-data-list"
 }

@@ -1,7 +1,9 @@
 {
   "id": "b1748443-3b32-41c0-91b1-27559d54780a",
   "title": "Export Record-Based Configuration to JSON for Version Control",
-  "category": "Batch",
+  "category": [
+    "Batch"
+  ],
   "DSPVersions": [],
   "overview": "A Pipeline or #Batch Executable is configured with Record-Based Configuration enabled, allowing developers to use the DSP VS Code plugin to retrieve the source records referenced by each Executable and download them as JSON files. These JSON artifacts serve as a local backup of the configuration and can be committed to the team’s Git repository, bringing record-based configuration into the existing DevOps and review process.",
   "generalUseCase": "Use Record-Based Configuration with the DSP VS Code plugin to export the source records referenced by Executables as JSON, so teams can back up configuration data locally, track it in Git, and fold DSP’s record-based setup into their standard DevOps and code review workflows.",
@@ -14,5 +16,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "export-record-based-configuration-to-json-for-vers"
 }

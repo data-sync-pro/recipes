@@ -1,7 +1,9 @@
 {
   "id": "3022d2d9-5133-4d5c-952c-2c5d56e156c6",
   "title": "Apply Dynamic Case Assignment Rules",
-  "category": "Trigger",
+  "category": [
+    "Trigger"
+  ],
   "DSPVersions": [],
   "overview": "On Case creation, the automation evaluates Case fields and related records (e.g., Account) to assign the correct Owner (user or queue).",
   "generalUseCase": "Use a Self-Adaptive #Trigger to run before save transforms and validations on the triggering record. Reference related fields without explicit queries and Apex bulkification. All DSP built-in functions are bulkified including aggregations and VLOOKUPs.",
@@ -14,5 +16,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "apply-dynamic-case-assignment-rules"
 }

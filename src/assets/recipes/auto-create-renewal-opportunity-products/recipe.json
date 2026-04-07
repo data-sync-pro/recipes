@@ -1,7 +1,9 @@
 {
   "id": "e2594db2-122e-433a-a86c-f94e1eaa2aee",
   "title": "Auto-Create Renewal Opportunity Products",
-  "category": "Trigger",
+  "category": [
+    "Trigger"
+  ],
   "DSPVersions": [],
   "overview": "A #Trigger Executable is configured on Opportunity (after insert). When a new Opportunity is created with an Original Opportunity specified, it automatically clones all Opportunity Line Items from the original Opportunity, copying key fields such as Product, Price, Quantity, Discount, and other required attributes.",
   "generalUseCase": "Use #Trigger with a Joiner to automatically create and initialize child detail records on a downstream object based on an upstream source—for example, copying line items when generating Quotes, Orders, or other transaction records—so users don’t need to recreate line details manually.",
@@ -14,5 +16,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "auto-create-renewal-opportunity-products"
 }

@@ -1,7 +1,9 @@
 {
   "id": "582b210f-52b8-4093-9a28-65699e82722b",
   "title": "Mask Sensitive Contact Data in Sandboxes",
-  "category": "Batch",
+  "category": [
+    "Batch"
+  ],
   "DSPVersions": [],
   "overview": "Mask sensitive Contact fields (e.g., Name, Email) using RANDOMIZE, RANDOM_ITEM, or SCRAMBLE for safe sandbox use.",
   "generalUseCase": "Replace real PII and other sensitive data with realistic, fake values for Dev/QA, demos, and training in sandboxes.",
@@ -14,5 +16,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "mask-sensitive-contact-data-in-sandboxes"
 }

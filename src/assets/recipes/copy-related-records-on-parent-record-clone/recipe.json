@@ -1,7 +1,9 @@
 {
   "id": "51bbbc3c-0839-4028-a035-f8c73c3551c1",
   "title": "Copy Related Records on Parent Record Clone",
-  "category": "Trigger",
+  "category": [
+    "Trigger"
+  ],
   "DSPVersions": [],
   "overview": "When a Quote is cloned, the automation uses Cloned_From_Id__c to identify the source Quote and copy its Quote Line Items to the cloned Quote.",
   "generalUseCase": "On clone, automation uses a specified field to identify the parent record and automatically creates related records by mapping from the parent’s related records.",
@@ -14,5 +16,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "copy-related-records-on-parent-record-clone"
 }
