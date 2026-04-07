@@ -1,0 +1,27 @@
+{
+  "id": "f583a741-c69a-455e-87b0-d364e54f6272",
+  "title": "Dynamic Filters",
+  "category": [
+    "General"
+  ],
+  "DSPVersions": [],
+  "overview": "Configure Dynamic Filters in the Query component to create context-aware WHERE clauses that resolve at runtime. Reference page record fields with :fieldName (supporting up to 5 parent relationship levels), or use user-context tokens—such as :$User.Id, :$User.Queues, :$User.DirectReports, :$User.Team, and :$UserRole.Team—to filter by the current user’s scope.",
+  "generalUseCase": "Use Dynamic Filters to build reusable, context-aware queries that automatically adjust to the current record and user—so the same query surfaces the right data on any page, for any user, without hardcoding IDs.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/N5OWB0c4tfw",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "dynamic-filters-with-record-user-context"
+}
