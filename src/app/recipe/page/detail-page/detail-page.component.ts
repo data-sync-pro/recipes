@@ -32,6 +32,13 @@ interface TocItem {
   children?: TocItem[];
 }
 
+interface SectionConfig {
+  id: string;
+  label: string;
+  templateRef: string;
+  isVisible: (recipe: Recipe, component: RecipeDetailPageComponent) => boolean;
+}
+
 @Component({
   selector: 'app-recipe-detail-page',
   templateUrl: './detail-page.component.html',
@@ -42,6 +49,58 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   currentRecipe: Recipe | null = null;
   breadcrumbs: BreadcrumbItem[] = [];
+
+  // Section configuration - single source of truth for section order
+  readonly SECTION_CONFIG: SectionConfig[] = [
+    {
+      id: 'overview',
+      label: 'Overview',
+      templateRef: 'overview',
+      isVisible: () => true
+    },
+    {
+      id: 'use-case',
+      label: 'General Use Case',
+      templateRef: 'useCase',
+      isVisible: (r) => !!(r.generalUseCase && r.generalUseCase.split('\n').filter(item => item.trim()).length > 0)
+    },
+    {
+      id: 'video-demo',
+      label: 'Video Demo',
+      templateRef: 'videoDemo',
+      isVisible: (_r, c) => c.cachedYouTubeVideos.length > 0
+    },
+    {
+      id: 'download-file',
+      label: 'Downloadable Executables',
+      templateRef: 'downloadFile',
+      isVisible: (r) => !!(r.downloadableExecutables && r.downloadableExecutables.length > 0)
+    },
+    {
+      id: 'direction',
+      label: 'Direction',
+      templateRef: 'direction',
+      isVisible: (r) => !!(r.direction && r.direction.trim().length > 0)
+    },
+    {
+      id: 'pipeline',
+      label: 'Pipeline',
+      templateRef: 'pipeline',
+      isVisible: (r) => !!(r.pipeline && r.pipeline.trim().length > 0)
+    },
+    {
+      id: 'walkthrough',
+      label: 'Walkthrough',
+      templateRef: 'walkthrough',
+      isVisible: (r) => !!(r.walkthrough && r.walkthrough.length > 0)
+    }
+  ];
+
+  // Get visible sections based on current recipe
+  get visibleSections(): SectionConfig[] {
+    if (!this.currentRecipe) return [];
+    return this.SECTION_CONFIG.filter(section => section.isVisible(this.currentRecipe!, this));
+  }
 
   // Sidebar category groups
   categoryGroups: CategoryGroup[] = [];
@@ -66,7 +125,7 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   private youtubeUrlCache = new Map<string, SafeResourceUrl>();
 
   // Cached YouTube videos from generalImages to prevent re-rendering on scroll
-  private cachedYouTubeVideos: { url: string; alt: string }[] = [];
+  cachedYouTubeVideos: { url: string; alt: string }[] = [];
 
   @ViewChild('sidebarSearchInput') sidebarSearchInput!: ElementRef<HTMLInputElement>;
 
@@ -308,53 +367,24 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
     const items: TocItem[] = [];
 
-    // Overview is always shown
-    items.push({ id: 'overview', label: 'Overview' });
+    // Build TOC items from visible sections (using SECTION_CONFIG as single source of truth)
+    for (const section of this.visibleSections) {
+      const tocItem: TocItem = { id: section.id, label: section.label };
 
+      // Special handling for walkthrough - add children for each step
+      if (section.id === 'walkthrough' && this.currentRecipe.walkthrough) {
+        tocItem.children = this.currentRecipe.walkthrough.map((step, index) => {
+          // Only show content before the hyphen
+          const stepLabel = step.step.includes(' - ') ? step.step.split(' - ')[0] : step.step;
+          return {
+            id: `walkthrough-step-${index + 1}`,
+            label: `${index + 1}. ${stepLabel}`
+          };
+        });
+      }
 
-    // Downloadable Executables
-    if (this.currentRecipe.downloadableExecutables && this.currentRecipe.downloadableExecutables.length > 0) {
-      items.push({ id: 'download-file', label: 'Downloadable Executables' });
+      items.push(tocItem);
     }
-
-    // Video Demo
-    if (this.cachedYouTubeVideos.length > 0) {
-      items.push({ id: 'video-demo', label: 'Video Demo' });
-    }
-
-    // General Use Case
-    if (this.currentRecipe.generalUseCase && this.getGeneralUseCaseItems().length > 0) {
-      items.push({ id: 'use-case', label: 'General Use Case' });
-    }
-
-
-    // Direction
-    if (this.currentRecipe.direction && this.currentRecipe.direction.trim().length > 0) {
-      items.push({ id: 'direction', label: 'Direction' });
-    }
-
-    // Pipeline
-    if (this.currentRecipe.pipeline && this.currentRecipe.pipeline.trim().length > 0) {
-      items.push({ id: 'pipeline', label: 'Pipeline' });
-    }
-
-    // Walkthrough with sub-items
-    if (this.currentRecipe.walkthrough && this.currentRecipe.walkthrough.length > 0) {
-      const walkthroughChildren = this.currentRecipe.walkthrough.map((step, index) => {
-        // Only show content before the hyphen
-        const stepLabel = step.step.includes(' - ') ? step.step.split(' - ')[0] : step.step;
-        return {
-          id: `walkthrough-step-${index + 1}`,
-          label: `${index + 1}. ${stepLabel}`
-        };
-      });
-      items.push({ id: 'walkthrough', label: 'Walkthrough', children: walkthroughChildren });
-    }
-
-    // Verification (temporarily hidden - videos moved to overview)
-    // if ((this.currentRecipe.verificationGIF && this.currentRecipe.verificationGIF.length > 0) || this.getYouTubeVideosFromGeneralImages().length > 0) {
-    //   items.push({ id: 'verificationGIF', label: 'Verification' });
-    // }
 
 
 
@@ -378,22 +408,17 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   private updateActiveTocSection(): void {
     if (!this.currentRecipe || this.isScrollingToSection) return;
 
-    // Build sections list including walkthrough steps
-    const sections = [
-      'overview',
-      'video-demo',
-      'use-case',
-      'walkthrough'
-    ];
-
-    // Add walkthrough step IDs
-    if (this.currentRecipe.walkthrough) {
-      this.currentRecipe.walkthrough.forEach((_, index) => {
-        sections.push(`walkthrough-step-${index + 1}`);
-      });
+    // Build sections list from visible sections (using SECTION_CONFIG as single source of truth)
+    const sections: string[] = [];
+    for (const section of this.visibleSections) {
+      sections.push(section.id);
+      // Add walkthrough step IDs
+      if (section.id === 'walkthrough' && this.currentRecipe.walkthrough) {
+        this.currentRecipe.walkthrough.forEach((_, index) => {
+          sections.push(`walkthrough-step-${index + 1}`);
+        });
+      }
     }
-
-    sections.push('verification-gif', 'download-file');
 
     // Find which section is currently most visible in the viewport
     const viewportMiddle = window.scrollY + window.innerHeight / 3;

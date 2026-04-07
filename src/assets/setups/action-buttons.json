@@ -1,0 +1,14 @@
+{
+    "title": "Pipeline Action Buttons",
+    "order": 2,
+    "blocks": [
+        {
+            "type": "p",
+            "content": "Drag the <strong>Pipeline Action buttons</strong> component from the left panel onto the <strong>Lightning Page</strong>, then enter the <strong>Pipeline API Name</strong> in the component properties on the right."
+        },
+        {
+            "type": "image",
+            "content": "image/lightning-page/action_buttons.png"
+        }
+    ]
+}

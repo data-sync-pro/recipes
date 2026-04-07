@@ -44,6 +44,13 @@
           *ngFor="let block of currentSetup.blocks; trackBy: trackByIndex"
           [block]="block">
         </app-setup-block>
+
+        <!-- Lightning Web Components cards -->
+        <app-setup-card
+          *ngIf="showLwcCards"
+          [cards]="lwcCards"
+          (cardClick)="onCardClick($event)">
+        </app-setup-card>
       </ng-container>
 
       <div *ngIf="!isLoading && !currentSetup" class="setup-empty">
@@ -53,11 +60,10 @@
     </main>
 
     <!-- Right TOC - H2 and H3 blocks -->
-    <aside class="right-toc">
+    <!-- <aside class="right-toc">
       <div class="toc-sticky">
         <nav class="toc-nav" *ngIf="shouldShowToc">
           <ng-container *ngFor="let item of tocItems">
-            <!-- H2 or top-level H3 -->
             <a class="toc-link"
                [class.active]="activeBlockId === getBlockId(item.block.content || '')"
                [class.toc-h2]="item.block.type === 'h2'"
@@ -65,7 +71,6 @@
                (click)="scrollToBlock(item.block.content || '')">
               {{ item.block.content }}
             </a>
-            <!-- H3 children under H2 -->
             <a *ngFor="let child of item.children"
                class="toc-link toc-h3"
                [class.active]="activeBlockId === getBlockId(child.content || '')"
@@ -75,6 +80,6 @@
           </ng-container>
         </nav>
       </div>
-    </aside>
+    </aside> -->
   </div>
 </div>

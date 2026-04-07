@@ -1,62 +1,10 @@
 {
-    "title": "Add DSP Components to Lightning App Builder",
+    "title": "Lightning Web Components",
     "order": 4,
     "blocks": [
         {
             "type": "p",
-            "content": "This section shows how to add the following <strong>Data Sync Pro managed Lightning Components</strong> to a <strong>Lightning Page</strong> in Lightning App Builder."
-        },
-        {
-            "type": "h3",
-            "content": "Executable Action Button",
-            "children": [
-                {
-                    "type": "image",
-                    "content": "image/lightning-page/action_button.png"
-                }
-            ]
-        },
-        {
-            "type": "h3",
-            "content": "Pipeline Action Buttons",
-            "children": [
-                {
-                    "type": "image",
-                    "content": "image/lightning-page/action_buttons.png"
-                }
-            ]
-        },
-        {
-            "type": "h3",
-            "content": "Executable Data List",
-            "children": [
-                {
-                    "type": "image",
-                    "content": "image/lightning-page/data_list.png"
-                }
-            ]
-        },
-        {
-            "type": "h3",
-            "content": "Pipeline Data Lists",
-            "children": [
-                {
-                    "type": "image",
-                    "content": "image/lightning-page/data_lists.png"
-                }
-            ]
-        },
-        {
-            "type": "h3",
-            "content": "Pipeline Data List Quick Links",
-            "children": [
-                {
-                    "type": "image",
-                    "content": "image/lightning-page/quick_links.png"
-                }
-            ]
+            "content": "This section shows how to add <strong>Data Sync Pro managed Lightning Components</strong> to a <strong>Lightning Page</strong> in Lightning App Builder."
         }
-        
     ]
-
 }

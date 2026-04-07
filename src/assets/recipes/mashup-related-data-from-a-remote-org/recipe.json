@@ -1,0 +1,53 @@
+{
+  "id": "f3e842a7-e485-4c46-8abd-09ddd018f240",
+  "title": "Mashup Related Data from a Remote Org",
+  "category": [
+    "Data List"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Data List is configured on the Account Lightning record page to display related Opportunities from a remote Salesforce org using a dynamic filter.",
+  "generalUseCase": "Use #Data List with dynamic filters to surface related data from an authorized connected org and let users take action or synchronize records when needed. This mashup pattern avoids migrating data across orgs and accesses remote data as if it were in the current org.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/c6daTLiB1p0",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Initialize a Query Execuable in the Target Connection Record",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1774640311321.png",
+          "alt": "Screenshot 2026-03-27 at 3.38.22 PM"
+        }
+      ]
+    },
+    {
+      "step": "Build the Query",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1774640391127.png",
+          "alt": "Screenshot 2026-03-27 at 3.39.41 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Account.OrgB.OpenOpportunities.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": []
+}
