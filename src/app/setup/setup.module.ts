@@ -9,12 +9,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SetupRoutingModule } from './setup-routing.module';
 import { SetupComponent } from './setup.component';
 import { SetupBlockComponent } from './block/block.component';
+import { SetupCardComponent } from './card/card.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     SetupComponent,
-    SetupBlockComponent
+    SetupBlockComponent,
+    SetupCardComponent
   ],
   imports: [
     CommonModule,

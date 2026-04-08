@@ -1,9 +1,9 @@
 
 Recipe Export Update Instructions
 ================================
-Export Date: 2025-12-19T21:43:39.352Z
-Total Recipes: 1
-Categories: Batch
+Export Date: 2026-03-27T19:42:43.900Z
+Total Recipes: 2
+Categories: Data List, Data List
 
 How to Deploy the Exported Recipes:
 -----------------------------------
@@ -37,7 +37,8 @@ How to Deploy the Exported Recipes:
 
 Exported Recipe List:
 -------------------
-1. Skip No-Op Updates in #Batch — Contact Updates (ffaaee22-657d-4694-b730-a62851a6ad23)
+1. Mashup Related Data from a Remote Org (f3e842a7-e485-4c46-8abd-09ddd018f240)
+2. Add Multiple Actions to Account's Opportunity Data List (c763e140-0623-4d14-ac37-9d731b30123e)
 
 Notes:
 ------

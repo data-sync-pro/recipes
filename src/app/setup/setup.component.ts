@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SetupService } from './services/setup.service';
 import { Page, Block, SetupIndexItem } from './models/setup.model';
+import { CardItem } from './card/card.component';
 
 @Component({
   selector: 'app-setup',
@@ -20,6 +21,15 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   currentSlug: string | null = null;
   isLoading = true;
   activeBlockId: string | null = null;
+
+  // Lightning Web Components cards
+  lwcCards: CardItem[] = [
+    { title: 'Pipeline Data Lists', slug: 'data-lists', image: 'image/lightning-page/data_lists.png' },
+    { title: 'Pipeline Quick Links', slug: 'quick-links', image: 'image/lightning-page/quick_links.png' },
+    { title: 'Pipeline Action Buttons', slug: 'action-buttons', image: 'image/lightning-page/action_buttons.png' },
+    { title: 'Executable Data List', slug: 'data-list', image: 'image/lightning-page/data_list.png' },
+    { title: 'Executable Action Button', slug: 'action-button', image: 'image/lightning-page/action_button.png' }
+  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -246,5 +256,14 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.setupIndex.some(
       item => item.parent === parentSlug && item.slug === this.currentSlug
     );
+  }
+
+  // Check if should show LWC cards
+  get showLwcCards(): boolean {
+    return this.currentSlug === 'add-dsp-components-to-lightning-app-builder';
+  }
+
+  onCardClick(slug: string): void {
+    this.selectSetup(slug);
   }
 }

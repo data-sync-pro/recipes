@@ -1,0 +1,14 @@
+{
+    "title": "Pipeline Data List Quick Links",
+    "order": 5,
+    "blocks": [
+        {
+            "type": "p",
+            "content": "Drag the <strong>Pipeline Data List Quick Links</strong> component from the left panel onto the <strong>Lightning Page</strong>, then enter the <strong>Pipeline API Name</strong> in the component properties on the right."
+        },
+        {
+            "type": "image",
+            "content": "image/lightning-page/quick_links.png"
+        }
+    ]
+}
