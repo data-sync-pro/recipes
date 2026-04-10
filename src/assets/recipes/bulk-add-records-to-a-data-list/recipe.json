@@ -7,7 +7,13 @@
   "DSPVersions": [],
   "overview": "An Action Button is added to the Quote Line Items list to add or update Line Items. When clicked, it opens the Quote Pricebook’s related Pricebook Entry Data List for selection. Users select the entries, then proceed to the Pre-Action Line Editor to review, validate, and adjust values before running the Upsert action.",
   "generalUseCase": "Use Chained Data List(s) in #Action Button to guide users through selecting input records across one or more data lists, review and adjust selections in a pre-action editor when needed, then execute the configured action on the target records.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/T-o9UdE3u5A",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",

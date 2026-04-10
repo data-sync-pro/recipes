@@ -1,7 +1,9 @@
 {
   "id": "f511e093-583e-4d55-8e91-379b283cd82e",
   "title": "Pinned Column Filters",
-  "category": "General",
+  "category": [
+    "General"
+  ],
   "DSPVersions": [],
   "overview": "",
   "generalUseCase": "",
@@ -14,5 +16,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "pinned-column-filters"
 }

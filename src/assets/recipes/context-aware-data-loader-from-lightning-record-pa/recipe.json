@@ -7,7 +7,13 @@
   "DSPVersions": [],
   "overview": "A #Data Loader is added to Account’s related Data List and configured to use $CONTEXT_RECORD_ID to reference the current Account record. After upload, the loaded records are automatically related to that $CONTEXT_RECORD_ID.",
   "generalUseCase": "Use #Data Loader with $CONTEXT_RECORD_ID in field mappings to enable context-aware uploads from a #Data List on any Lightning Record Page, so imported records automatically relate to the current record.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/F9qjWTrW544",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",

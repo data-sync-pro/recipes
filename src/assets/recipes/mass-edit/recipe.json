@@ -1,7 +1,9 @@
 {
   "id": "f893ea8b-2503-4b94-a8e4-6ae8ea67c2f1",
   "title": "Mass Edit",
-  "category": "General",
+  "category": [
+    "General"
+  ],
   "DSPVersions": [],
   "overview": "After running a query, select multiple rows and open Mass Edit to update fields in a layout-style form. Enter values once, apply them to all selected rows, and save—supporting blank updates even when no field values change.",
   "generalUseCase": "Use Mass Edit to make consistent changes across many query results at once—set field values in a single form, apply them to all selected records, and optionally perform a blank update when you need to trigger downstream logic without changing data.",
@@ -14,5 +16,6 @@
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
-  "keywords": []
+  "keywords": [],
+  "__folderId": "mass-edit"
 }

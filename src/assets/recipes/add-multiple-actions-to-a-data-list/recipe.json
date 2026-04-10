@@ -7,7 +7,13 @@
   "DSPVersions": [],
   "overview": "A #Data List is configured to show an Account’s open Opportunities as a related list. A Pipeline with multiple #Action Buttons is attached to the Data List so users can add new records or use selected rows as input to run configured processes.",
   "generalUseCase": "Use a shared #Data List to present a focused set of records and add multiple actions so users can create new records or use selected rows as input to run tailored processes in one place.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/G0RD6Vx_EQ0",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",
