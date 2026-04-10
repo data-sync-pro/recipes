@@ -1,0 +1,21 @@
+{
+  "id": "117aa45e-417a-4bb6-9d06-bcdc2029c62d",
+  "title": "Transformable, Record-Based Data Loader",
+  "category": [
+    "Data Loader"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Data Loader is configured to upsert Leads from a CSV file using the Email field as the match key. Records with an existing Email are updated; otherwise, new Leads are inserted.",
+  "generalUseCase": "Use #Data Loader to ingest CSV data, apply scoping, matching, and field transformations, then action target records—reusable, native in Salesforce, and generating online execution logs for troubleshooting and compliance.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "transformable-record-based-data-loader"
+}

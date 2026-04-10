@@ -1,0 +1,20 @@
+{
+  "id": "0d1f6bd2-2e99-4780-82ef-38c78b4b9b1a",
+  "title": "The Trigger Flipper Pattern",
+  "category": [
+    "Trigger"
+  ],
+  "DSPVersions": [],
+  "overview": "A custom checkbox flipper field is created on the Case object and paired with a before-save Self-Adaptive #Trigger Executable that always resets it to false while tracking an in-memory flag indicating whether it was flipped. Another #Trigger is configured to send an email notification whenever the field is flipped.",
+  "generalUseCase": "Use a flipper field with TRIGGER_FLIPPER and TRIGGER_IS_FLIPPED in #Trigger Executables to run repeatable automations—automatically or on demand—decoupling the automation logic from the condition that triggers it.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": []
+}

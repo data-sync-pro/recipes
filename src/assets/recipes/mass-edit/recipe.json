@@ -1,17 +1,11 @@
 {
-  "id": "575ea30c-8e53-4b70-914e-66a0242484b8",
+  "id": "f893ea8b-2503-4b94-a8e4-6ae8ea67c2f1",
   "title": "Mass Edit",
   "category": "General",
   "DSPVersions": [],
-  "overview": "\"A Self-Adaptive #Trigger is configured on Opportunity to enforce Owner and Stage assignment policies on save. It validates:\n1. Renewal Opportunities are owned by the Account Owner and high-value Opportunities (≥ $500,000) are owned by a Sales Manager (Owner Profile).\n2. Opportunities cannot progress to later stages without an Amount.\"",
-  "generalUseCase": "Use a Self-Adaptive #Trigger to centralize an object’s validation rules, and use ERROR() to conditionally block saves with specific messages.",
-  "generalImages": [
-    {
-      "type": "video",
-      "url": "https://youtu.be/F17RRUq7EDY",
-      "alt": ""
-    }
-  ],
+  "overview": "After running a query, select multiple rows and open Mass Edit to update fields in a layout-style form. Enter values once, apply them to all selected rows, and save—supporting blank updates even when no field values change.",
+  "generalUseCase": "Use Mass Edit to make consistent changes across many query results at once—set field values in a single form, apply them to all selected records, and optionally perform a blank update when you need to trigger downstream logic without changing data.",
+  "generalImages": [],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",

@@ -1,0 +1,21 @@
+{
+  "id": "752d7b76-4c9c-4baa-af35-ffc0986540ad",
+  "title": "Add Multiple Actions to a Data List",
+  "category": [
+    "Data List"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Data List is configured to show an Account’s open Opportunities as a related list. A Pipeline with multiple #Action Buttons is attached to the Data List so users can add new records or use selected rows as input to run configured processes.",
+  "generalUseCase": "Use a shared #Data List to present a focused set of records and add multiple actions so users can create new records or use selected rows as input to run tailored processes in one place.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "add-multiple-actions-to-a-data-list"
+}

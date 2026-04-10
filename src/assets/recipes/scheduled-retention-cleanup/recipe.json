@@ -1,0 +1,21 @@
+{
+  "id": "bbee181a-5b2d-46fc-a26f-b7af29f75ac0",
+  "title": "Scheduled Retention Cleanup",
+  "category": [
+    "Batch"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Batch is scheduled to run every weekend and delete Cases that are closed and more than two years old.",
+  "generalUseCase": "1. Use the Delete action to clean up unnecessary records and free up data storage.\n2. Use a Schedule to run batch jobs on a recurring cadence.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "scheduled-retention-cleanup"
+}

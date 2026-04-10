@@ -1,0 +1,21 @@
+{
+  "id": "ba1c53df-9819-4676-92b1-2e4e1d11bb4e",
+  "title": "Cross Org Data Migration",
+  "category": [
+    "Batch"
+  ],
+  "DSPVersions": [],
+  "overview": "A Pipeline is configured as a sequentially ordered list of #Batch Executables that migrates data from one org to another while preserving all parent–child relationships. The execution order ensures parent records are processed before their dependent child records, with each Executable’s field mappings easily configured to maintain the relationships.",
+  "generalUseCase": "Use a Pipeline to orchestrate multi-step, cross-org data migrations—running sequential #Batch Executables that preserve parent–child relationships by leveraging External IDs, VLOOKUPs, and Record Type developer names in field mappings. For large volume data (e.g., more than 1 million records), enable Bulk API and tune batch size to achieve faster, more efficient execution.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "cross-org-data-migration"
+}

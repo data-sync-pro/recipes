@@ -1,0 +1,20 @@
+{
+  "id": "3a0aba6f-2b44-45f6-acf2-aaa0afe528fe",
+  "title": "Execute an Action with Trigger",
+  "category": [
+    "Trigger"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Trigger Executable is configured on Case update so that when a Case is closed, it automatically creates a follow-up Task assigned to the Case Owner with a due date 7 days out to verify customer satisfaction.",
+  "generalUseCase": "Use #Trigger to configure an automation that runs during save when \na record meets specific criteria, automatically executing actions such \nas creating or updating related child records.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": []
+}

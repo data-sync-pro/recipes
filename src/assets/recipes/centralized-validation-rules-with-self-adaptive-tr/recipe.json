@@ -1,0 +1,20 @@
+{
+  "id": "3e2429e0-7869-4c78-b943-3f66c1d3daf9",
+  "title": "Centralized Validation Rules with Self-Adaptive Trigger",
+  "category": [
+    "Trigger"
+  ],
+  "DSPVersions": [],
+  "overview": "A Self-Adaptive #Trigger is configured on Opportunity to enforce Owner and Stage assignment policies on save. It validates:\n1. Renewal Opportunities are owned by the Account Owner and high-value Opportunities (≥ $500,000) are owned by a Sales Manager (Owner Profile).\n2. Opportunities cannot progress to later stages without an Amount.",
+  "generalUseCase": "Use a Self-Adaptive #Trigger to centralize an object’s validation rules, and use ERROR() to conditionally block saves with specific messages.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": []
+}

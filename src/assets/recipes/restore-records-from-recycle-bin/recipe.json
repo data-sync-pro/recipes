@@ -1,0 +1,21 @@
+{
+  "id": "c85fb657-77ba-4dca-bee1-fb242224a837",
+  "title": "Restore Records from Recycle Bin",
+  "category": [
+    "Batch"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Batch is configured to restore deleted Contacts in bulk from the Salesforce Recycle Bin. The Executable retrieves soft-deleted Contact records (e.g., based on deletion date, owner, or other filters) and runs an Undelete action to bring them back as active records. ",
+  "generalUseCase": "Use the Undelete action in DSP to restore soft-deleted records either in bulk with a #Batch or selectively through an interactive #Data List, so accidental deletions can be safely and easily reversed.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "restore-records-from-recycle-bin"
+}

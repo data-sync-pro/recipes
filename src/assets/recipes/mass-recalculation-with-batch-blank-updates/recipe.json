@@ -1,0 +1,20 @@
+{
+  "id": "583e9ed1-c061-4b79-8132-76d67dd0a00e",
+  "title": "Mass Recalculation with Batch Blank Updates",
+  "category": [
+    "Batch"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Batch Executable is configured to perform blank updates on Account records, which triggers a recalculation of rollup summary fields defined in a Self-Adaptive #Trigger. Bulk API is enabled with a batch size of 2000 to process large volumes efficiently and improve throughput.",
+  "generalUseCase": "Use #Batch to run mass blank updates that force a recalculation of in-memory transformations defined in Self-Adaptive #Triggers.\nEnable Bulk API and set a large batch size (for example, 2000) to significantly boost throughput and complete millions of recalculations quickly.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": []
+}

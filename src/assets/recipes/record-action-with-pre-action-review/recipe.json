@@ -1,0 +1,21 @@
+{
+  "id": "050c8831-90d5-4302-8229-638e62df2135",
+  "title": "Record Action with Pre-Action Review",
+  "category": [
+    "Action Button"
+  ],
+  "DSPVersions": [],
+  "overview": "An #Action Button is configured and placed on the Case record page to close the Case, with the Pre-Action defined. When users click the button, a screen opens with transformed/existing target field values, allowing them to review and edit those values before proceeding with the update.",
+  "generalUseCase": "Use an #Action Button on a record page to run a guided, rules-driven action—optionally showing a pre-action review screen so users can confirm or edit transformed values before execution.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "record-action-with-pre-action-review"
+}
