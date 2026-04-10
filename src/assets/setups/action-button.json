@@ -1,0 +1,14 @@
+{
+    "title": "Executable Action Button",
+    "order": 1,
+    "blocks": [
+        {
+            "type": "p",
+            "content": "Drag the <strong>Executable Action Button</strong> component from the left panel onto the <strong>Lightning Page</strong>, then enter the <strong>Executable API Name</strong> in the component properties on the right."
+        },
+        {
+            "type": "image",
+            "content": "image/lightning-page/action_button.png"
+        }
+    ]
+}
