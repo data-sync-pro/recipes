@@ -1,0 +1,21 @@
+{
+  "id": "d4a064fb-df30-4fec-8a27-0f993443c9f4",
+  "title": "Variables for Named Expressions",
+  "category": [
+    "Transformation"
+  ],
+  "DSPVersions": [],
+  "overview": "A reusable Variable named TaxConfiguration uses VLOOKUP_RECORD to retrieve a single TaxConfiguration__c record based on the source record’s BillingAddress. Field mappings then reference #TaxConfiguration fields (TaxRate, TaxCode, ReportingRegion) without repeating VLOOKUPs, keeping mappings concise and maintainable.",
+  "generalUseCase": "1. Use Variables to define reusable, named expressions that can be referenced across Executables.\n2. Use VLOOKUP_RECORD in a Variable to fetch a single record once and reference multiple target fields from it, avoiding repeated VLOOKUPs and keeping mappings concise and consistent.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "variables-for-named-expressions"
+}

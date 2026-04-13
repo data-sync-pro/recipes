@@ -1,0 +1,21 @@
+{
+  "id": "44ca1288-9429-4e30-9a95-16f7514404fb",
+  "title": "One-File-Per-Record File Management",
+  "category": [
+    "Data List"
+  ],
+  "DSPVersions": [],
+  "overview": "The Source Object ContentDocument ID Field is configured on a Data List to let users upload, preview, and update the related file directly from each row in the list.",
+  "generalUseCase": "Use the Source Object ContentDocument ID Field to let users manage files from #Data List and maintain a single record-level file with full version history.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "one-file-per-record-file-management"
+}

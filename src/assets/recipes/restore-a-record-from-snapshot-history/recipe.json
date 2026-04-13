@@ -1,0 +1,21 @@
+{
+  "id": "0e87a74a-4ea3-4be8-905b-850c3216057f",
+  "title": "Restore a Record From Snapshot History",
+  "category": [
+    "Data List"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Data List on the Quote record page queries Quote history stored in a Big Object using a dynamic filter, and provides an action to restore the Quote from a selected version.",
+  "generalUseCase": "Use a #Data List to surface Big Object–based change history on a record page so users can review prior versions and optionally restore a selected snapshot.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "restore-a-record-from-snapshot-history"
+}

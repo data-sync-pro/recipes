@@ -1,11 +1,159 @@
 {
   "recipes": [
     {
+      "folderId": "add-multiple-actions-to-a-data-list",
+      "active": true
+    },
+    {
       "folderId": "add-multiple-actions-to-accounts-opportunity-data-",
       "active": true
     },
     {
+      "folderId": "auto-copy-child-records-from-a-source-reference",
+      "active": true
+    },
+    {
+      "folderId": "build-and-run-a-query",
+      "active": true
+    },
+    {
+      "folderId": "bulk-add-records-to-a-data-list",
+      "active": true
+    },
+    {
+      "folderId": "bulk-merge-records-from-duplicate-job-results",
+      "active": true
+    },
+    {
+      "folderId": "centralized-validation-rules-with-self-adaptive-tr",
+      "active": true
+    },
+    {
+      "folderId": "column-filter",
+      "active": true
+    },
+    {
+      "folderId": "context-aware-data-loader-from-lightning-record-pa",
+      "active": true
+    },
+    {
+      "folderId": "cross-org-data-migration",
+      "active": true
+    },
+    {
+      "folderId": "dynamic-filters",
+      "active": true
+    },
+    {
+      "folderId": "execute-an-action-with-trigger",
+      "active": true
+    },
+    {
+      "folderId": "incremental-data-backup-to-big-objects",
+      "active": true
+    },
+    {
+      "folderId": "inline-edit",
+      "active": true
+    },
+    {
+      "folderId": "joiner-scope-filter-post-join",
+      "active": true
+    },
+    {
+      "folderId": "list-action-with-line-editor",
+      "active": true
+    },
+    {
+      "folderId": "list-action-with-template-record-editor",
+      "active": true
+    },
+    {
+      "folderId": "maintain-child-records-from-parent-field-changes",
+      "active": true
+    },
+    {
+      "folderId": "manage-saved-queries",
+      "active": true
+    },
+    {
       "folderId": "mashup-related-data-from-a-remote-org",
+      "active": true
+    },
+    {
+      "folderId": "mask-sensitive-data-in-sandboxes",
+      "active": true
+    },
+    {
+      "folderId": "mass-edit",
+      "active": true
+    },
+    {
+      "folderId": "mass-recalculation-with-batch-blank-updates",
+      "active": true
+    },
+    {
+      "folderId": "merge-duplicate-records",
+      "active": true
+    },
+    {
+      "folderId": "migrate-salesforce-files-between-orgs",
+      "active": true
+    },
+    {
+      "folderId": "one-file-per-record-file-management",
+      "active": true
+    },
+    {
+      "folderId": "pinned-column-filters",
+      "active": true
+    },
+    {
+      "folderId": "record-action-with-pre-action-review",
+      "active": true
+    },
+    {
+      "folderId": "record-snapshot-history-with-a-big-object",
+      "active": true
+    },
+    {
+      "folderId": "restore-a-record-from-snapshot-history",
+      "active": true
+    },
+    {
+      "folderId": "restore-records-from-recycle-bin",
+      "active": true
+    },
+    {
+      "folderId": "row-related-lists",
+      "active": true
+    },
+    {
+      "folderId": "schedule-job-management",
+      "active": true
+    },
+    {
+      "folderId": "scheduled-retention-cleanup",
+      "active": true
+    },
+    {
+      "folderId": "self-adaptive-trigger-for-rollup-summary-calculati",
+      "active": true
+    },
+    {
+      "folderId": "skip-no-op-updates",
+      "active": true
+    },
+    {
+      "folderId": "the-trigger-flipper-pattern",
+      "active": true
+    },
+    {
+      "folderId": "transformable-record-based-data-loader",
+      "active": true
+    },
+    {
+      "folderId": "variables-for-named-expressions",
       "active": true
     }
   ]

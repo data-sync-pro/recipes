@@ -1,0 +1,31 @@
+{
+  "id": "e4f8a7e6-8414-4e0a-9054-45453645c154",
+  "title": "Bulk Merge Records from Duplicate Job Results",
+  "category": [
+    "Batch"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Batch is configured to bulk deduplicate Contacts from a Salesforce Duplicate Job run. DSP retrieves Duplicate Record Sets by Duplicate Job Id as input and uses the related Duplicate Record Items as the target. It automatically selects the principal Contact by a specified rule, then merges and fills missing fields on the principal from the merged records.",
+  "generalUseCase": "Use #Batch to bulk deduplicate records from a Salesforce Duplicate Job run by processing the resulting Duplicate Record Sets and merging matched records at scale based on predefined rules.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/GvRVES3_wBQ",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/DuplicateRecordSet.DuplicateRecordItems.Contact.Merge.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "bulk-merge-records-from-duplicate-job-results"
+}

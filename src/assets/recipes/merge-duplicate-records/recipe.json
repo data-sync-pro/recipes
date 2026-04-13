@@ -1,0 +1,21 @@
+{
+  "id": "bb1a4527-cd06-4e37-8057-bc8d4a47b3e2",
+  "title": "Merge Duplicate Records",
+  "category": [
+    "Action Button"
+  ],
+  "DSPVersions": [],
+  "overview": "An #Action Button is configured to let business users trigger automated deduplication with a single click. The Executable uses the Merge action with Apply Duplicate Matching enabled, applies configurable sorting to identify the principal record, and auto-fills missing fields with values from the merged records.",
+  "generalUseCase": "Use the Merge action to simplify deduplication with predefined rules—such as applying duplicate matching defined in Salesforce Duplicate Management, automatically selecting the principal record, and filling in missing fields.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "merge-duplicate-records"
+}

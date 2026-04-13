@@ -1,0 +1,21 @@
+{
+  "id": "73b0bbaa-2b1d-47d8-92f9-d113f0891cb7",
+  "title": "Inline Edit",
+  "category": [
+    "General"
+  ],
+  "DSPVersions": [],
+  "overview": "After running a query, double-click a cell to edit it inline—including picklist and reference fields. If multiple rows are selected, the change can be applied to all selected records in one action, then saved.",
+  "generalUseCase": "Use Inline Edit to quickly update query results right in the grid—including picklist and reference fields—and apply the same change to multiple selected records for fast, in-place bulk edits.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "inline-edit"
+}

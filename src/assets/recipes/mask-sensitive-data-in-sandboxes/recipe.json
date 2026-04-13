@@ -1,0 +1,21 @@
+{
+  "id": "154b9f59-e915-4184-9639-2b84e957d2f6",
+  "title": "Mask Sensitive Data in Sandboxes",
+  "category": [
+    "Batch"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Batch Executable is configured to update Contacts in a sandbox, using DSP masking functions to obfuscate sensitive fields.",
+  "generalUseCase": "Use #Batch and masking functions to bulk obfuscate sensitive data in non-production environments, so realistic data stays protected.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "mask-sensitive-data-in-sandboxes"
+}

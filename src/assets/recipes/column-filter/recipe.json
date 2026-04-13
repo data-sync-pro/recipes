@@ -1,0 +1,27 @@
+{
+  "id": "d594ef03-a3d9-4017-98b8-18dc8beaedae",
+  "title": "Column Filter",
+  "category": [
+    "General"
+  ],
+  "DSPVersions": [],
+  "overview": "",
+  "generalUseCase": "Use Column Filter to quickly narrow down the query results by applying a condition to the selected column.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/dzKkOuKjGTg",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "column-filter"
+}

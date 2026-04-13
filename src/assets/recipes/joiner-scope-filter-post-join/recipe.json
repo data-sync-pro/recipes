@@ -1,0 +1,21 @@
+{
+  "id": "1111fce1-31bc-418e-9b40-82318302afe7",
+  "title": "Joiner + Scope Filter (Post Join)",
+  "category": [
+    "Trigger"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Trigger Executable is configured to run on Account update so that when the Owner changes, it automatically reassigns related open Quotes owned by the previous Account Owner to the new Owner.",
+  "generalUseCase": "Use Joiner + Scope Filter (Post Join) to left-join source records with their child records, then filter the joined dataset for downstream actions.",
+  "generalImages": [],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "joiner-scope-filter-post-join"
+}
