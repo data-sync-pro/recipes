@@ -9,12 +9,9 @@ const routes: Routes = [
     data: { title: 'Setup - Data Sync Pro' }
   },
   {
-    path: ':setupSlug',
-    component: SetupComponent,
-    data: { title: 'Setup - Data Sync Pro' }
-  },
-  {
-    path: ':parentSlug/:childSlug',
+    // Wildcard route to support any depth of nesting
+    // e.g., /setup/permissions, /setup/setup/connection/oauth, etc.
+    path: '**',
     component: SetupComponent,
     data: { title: 'Setup - Data Sync Pro' }
   }

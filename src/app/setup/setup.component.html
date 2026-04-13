@@ -1,8 +1,7 @@
 <div class="setup-page">
   <div class="setup-banner">
     <div class="setup-banner-content">
-      <h1 class="setup-banner-title">Setup</h1>
-      <p class="setup-banner-description">Manage secure access, configure authenticated connections, and enable trigger-based automation in Data Sync Pro.</p>
+      <h1 class="setup-banner-title">Getting Started</h1>
     </div>
   </div>
 
@@ -11,26 +10,37 @@
     <aside class="left-sidebar">
       <div class="sidebar-sticky">
         <div class="category-list">
-          <ng-container *ngFor="let item of parentItems; trackBy: trackBySlug">
-            <a class="category-item"
-               [class.active]="item.slug === currentSlug"
-               [class.parent-active]="isParentActive(item.slug)"
-               (click)="selectSetup(item.slug)">
-              {{ item.title }}
-            </a>
-            <!-- Child items -->
-            <div class="child-items-wrapper" *ngIf="hasChildren(item.slug)">
-              <a *ngFor="let child of getChildren(item.slug); trackBy: trackBySlug"
-                 class="category-item child-item"
-                 [class.active]="child.slug === currentSlug"
-                 (click)="selectSetup(child.slug)">
-                {{ child.title }}
-              </a>
-            </div>
+          <ng-container *ngFor="let node of navTree; trackBy: trackByNodeId">
+            <ng-container *ngTemplateOutlet="navNodeTemplate; context: { $implicit: node, level: 0 }"></ng-container>
           </ng-container>
         </div>
       </div>
     </aside>
+
+    <!-- Recursive template for nav nodes -->
+    <ng-template #navNodeTemplate let-node let-level="level">
+      <div class="nav-node" [class.level-0]="level === 0" [class.level-1]="level === 1" [class.level-2]="level === 2" [class.level-3]="level >= 3">
+        <div class="nav-item"
+             [class.active]="isActive(node)"
+             [class.in-path]="isInActivePath(node)"
+             [class.has-children]="node.children?.length"
+             (click)="selectSetup(node.slug)">
+          <span class="nav-label">{{ node.label }}</span>
+          <!-- <mat-icon *ngIf="node.children?.length"
+                    class="expand-icon"
+                    [class.expanded]="isExpanded(node)"
+                    (click)="toggleExpand(node, $event)">
+            {{ isExpanded(node) ? 'expand_less' : 'expand_more' }}
+          </mat-icon> -->
+        </div>
+        <!-- Children -->
+        <div class="nav-children" *ngIf="node.children?.length && isExpanded(node)">
+          <ng-container *ngFor="let child of node.children; trackBy: trackByNodeId">
+            <ng-container *ngTemplateOutlet="navNodeTemplate; context: { $implicit: child, level: level + 1 }"></ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </ng-template>
 
     <!-- Main Content -->
     <main class="setup-content">

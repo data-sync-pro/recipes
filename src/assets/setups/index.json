@@ -1,14 +1,36 @@
 [
-  { "slug": "permissions", "title": "Permissions", "active": true },
-  { "slug": "connection", "title": "Establish Connections", "active": true },
-  { "slug": "current-org", "title": "Current Org", "active": true, "parent": "connection" },
-  { "slug": "oauth", "title": "OAuth 2.0 (Refresh Token Flow)", "active": true, "parent": "connection" },
-  { "slug": "username-password", "title": "Username & Password", "active": true, "parent": "connection", "hidden": true },
-  { "slug": "trigger", "title": "Apex Trigger Hookup", "active": true },
-  { "slug": "add-dsp-components-to-lightning-app-builder", "title": "Lightning Web Components", "active": true },
-  { "slug": "data-lists", "title": "Pipeline Data Lists", "active": true, "parent": "add-dsp-components-to-lightning-app-builder" },
-  { "slug": "quick-links", "title": "Pipeline Data List Quick Links", "active": true, "parent": "add-dsp-components-to-lightning-app-builder" },
-  { "slug": "action-buttons", "title": "Pipeline Action Buttons", "active": true, "parent": "add-dsp-components-to-lightning-app-builder" },
-  { "slug": "data-list", "title": "Executable Data List", "active": true, "parent": "add-dsp-components-to-lightning-app-builder" },
-  { "slug": "action-button", "title": "Executable Action Button", "active": true, "parent": "add-dsp-components-to-lightning-app-builder" }
+  {
+    "id": "setup",
+    "label": "Setup",
+    "slug": "permissions",
+    "defaultExpanded": true,
+    "children": [
+      { "id": "permissions", "label": "Permissions", "slug": "permissions" },
+      {
+        "id": "connection",
+        "label": "Establish Connections",
+        "slug": "connection",
+        "defaultExpanded": true,
+        "children": [
+          { "id": "current-org", "label": "Current Org", "slug": "current-org" },
+          { "id": "oauth", "label": "OAuth 2.0 (Refresh Token Flow)", "slug": "oauth" },
+          { "id": "username-password", "label": "Username & Password", "slug": "username-password", "visible": false }
+        ]
+      },
+      { "id": "trigger", "label": "Apex Trigger Hookup", "slug": "trigger" },
+      {
+        "id": "lwc",
+        "label": "Lightning Web Components",
+        "slug": "add-dsp-components-to-lightning-app-builder",
+        "defaultExpanded": true,
+        "children": [
+          { "id": "data-lists", "label": "Pipeline Data Lists", "slug": "data-lists" },
+          { "id": "quick-links", "label": "Pipeline Data List Quick Links", "slug": "quick-links" },
+          { "id": "action-buttons", "label": "Pipeline Action Buttons", "slug": "action-buttons" },
+          { "id": "data-list", "label": "Executable Data List", "slug": "data-list" },
+          { "id": "action-button", "label": "Executable Action Button", "slug": "action-button" }
+        ]
+      }
+    ]
+  }
 ]
