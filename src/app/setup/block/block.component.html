@@ -26,6 +26,18 @@
     </div>
   </section>
 
+  <!-- Heading 4 -->
+  <section *ngSwitchCase="'h4'" class="block-section" [id]="getBlockId(block.content || '')">
+    <h4 class="block-h4">{{ block.content }}</h4>
+    <ng-container *ngIf="block.children">
+      <app-setup-block
+        *ngFor="let child of block.children; trackBy: trackByIndex"
+        [block]="child"
+        [basePath]="basePath">
+      </app-setup-block>
+    </ng-container>
+  </section>
+
   <!-- Paragraph -->
   <ng-container *ngSwitchCase="'p'">
     <p class="block-p" [innerHTML]="block.content"></p>
@@ -53,7 +65,7 @@
   </ol>
 
   <!-- Image -->
-  <figure *ngSwitchCase="'image'" class="block-figure" appSimpleZoomable [enableHoverZoom]="false">
+  <figure *ngSwitchCase="'image'" class="block-figure" [attr.data-size]="block.size || 'full'" appSimpleZoomable [enableHoverZoom]="false">
     <img [src]="getImagePath(block.content || '')" [alt]="block.alt || ''" class="block-image" />
     <figcaption *ngIf="block.caption?.length" class="block-caption">
       <ul>
@@ -105,4 +117,25 @@
       </figcaption>
     </figure>
   </div>
+
+  <!-- Table -->
+  <table *ngSwitchCase="'table'" class="block-table">
+    <thead>
+      <tr>
+        <th *ngFor="let col of block.columns"
+            [style.width]="col.width"
+            [style.textAlign]="col.align || 'left'">
+          {{ col.header }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of block.rows">
+        <td *ngFor="let col of block.columns"
+            [style.textAlign]="col.align || 'left'"
+            [innerHTML]="row[col.key]">
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </ng-container>

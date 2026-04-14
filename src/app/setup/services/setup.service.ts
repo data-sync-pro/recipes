@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, catchError, tap, shareReplay } from 'rxjs/operators';
-import { Page, SetupIndexItem } from '../models/setup.model';
+import { Page, SetupIndexItem, NavNode } from '../models/setup.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ export class SetupService {
   private readonly SETUPS_PATH = 'assets/setups';
   private setupsCache$ = new BehaviorSubject<Page[]>([]);
   private indexCache: SetupIndexItem[] | null = null;
+  private navTreeCache: NavNode[] | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -77,5 +78,90 @@ export class SetupService {
   clearCache(): void {
     this.setupsCache$.next([]);
     this.indexCache = null;
+    this.navTreeCache = null;
+  }
+
+  // ==================== New Navigation Tree Methods ====================
+
+  /**
+   * Get the navigation tree structure
+   */
+  getNavTree(): Observable<NavNode[]> {
+    if (this.navTreeCache) {
+      return of(this.navTreeCache);
+    }
+
+    return this.http.get<NavNode[]>(`${this.SETUPS_PATH}/index.json`).pipe(
+      map(tree => this.filterVisibleNodes(tree)),
+      tap(tree => this.navTreeCache = tree),
+      catchError(error => {
+        console.error('Failed to load navigation tree:', error);
+        return of([]);
+      }),
+      shareReplay({ bufferSize: 1, refCount: true })
+    );
+  }
+
+  /**
+   * Filter out nodes with visible: false
+   */
+  private filterVisibleNodes(nodes: NavNode[]): NavNode[] {
+    return nodes
+      .filter(node => node.visible !== false)
+      .map(node => ({
+        ...node,
+        children: node.children ? this.filterVisibleNodes(node.children) : undefined
+      }));
+  }
+
+  /**
+   * Find a node by slug in the tree
+   */
+  findNodeBySlug(nodes: NavNode[], slug: string): NavNode | null {
+    for (const node of nodes) {
+      if (node.slug === slug) {
+        return node;
+      }
+      if (node.children) {
+        const found = this.findNodeBySlug(node.children, slug);
+        if (found) return found;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Get the path (ancestors) to a node by slug
+   */
+  getPathToNode(nodes: NavNode[], slug: string, path: NavNode[] = []): NavNode[] | null {
+    for (const node of nodes) {
+      if (node.slug === slug) {
+        return [...path, node];
+      }
+      if (node.children) {
+        const found = this.getPathToNode(node.children, slug, [...path, node]);
+        if (found) return found;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Flatten the tree to get all slugs
+   */
+  flattenSlugs(nodes: NavNode[]): string[] {
+    const slugs: string[] = [];
+    const traverse = (nodeList: NavNode[]) => {
+      for (const node of nodeList) {
+        if (node.visible !== false) {
+          slugs.push(node.slug);
+          if (node.children) {
+            traverse(node.children);
+          }
+        }
+      }
+    };
+    traverse(nodes);
+    return slugs;
   }
 }
