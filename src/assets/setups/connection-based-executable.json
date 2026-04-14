@@ -1,0 +1,23 @@
+{
+  "title": "Connection-Based Executable",
+  "order": 2,
+  "blocks": [
+    {
+      "type": "p",
+      "content": "A Connection-Based Executable is tailored for operations that involve a singular connection rather than spanning directions. This type of Executable can perform a variety of Data Manipulation Language (DML) operations, including Insert, Update, Upsert, Delete, and Query actions. When configured for DML operations, it leverages a source data profile, transforming it into a highly efficient data loader. This enables advanced functionalities such as filtering, matching, and data transformation, thereby enhancing data handling capabilities beyond basic loading tasks."
+    },
+    {
+      "type": "p",
+      "content": "Additionally, when set to perform Query actions, the Connection-Based Executable serves as a sophisticated tool for generating advanced query data lists via Query Builder. These lists can be seamlessly integrated into Lightning pages, providing users with dynamic and customizable data views. This capability not only simplifies the creation of detailed, actionable data lists but also enriches the user interface with tailored data insights, directly within the Salesforce Lightning Experience."
+    },
+    {
+      "type": "p",
+      "content": "Overall, Connection-Based Executables offer a versatile and powerful toolset for managing data within a single connection context, combining advanced data manipulation with user-friendly interface integration."
+    },
+    {
+        "type": "image",
+        "content":"image/connection-based/connection-based-executable.png",
+        "size": "small"
+    }
+  ]
+}

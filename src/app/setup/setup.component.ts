@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, filter } from 'rxjs/operators';
 import { SetupService } from './services/setup.service';
-import { Page, Block, SetupIndexItem } from './models/setup.model';
+import { Page, Block, SetupIndexItem, NavNode } from './models/setup.model';
 import { CardItem } from './card/card.component';
 
 @Component({
@@ -16,7 +16,13 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   private destroy$ = new Subject<void>();
   private observer: IntersectionObserver | null = null;
 
+  // Legacy - kept for backward compatibility
   setupIndex: SetupIndexItem[] = [];
+
+  // New navigation tree
+  navTree: NavNode[] = [];
+  expandedIds: Set<string> = new Set();
+
   currentSetup: Page | null = null;
   currentSlug: string | null = null;
   isLoading = true;
@@ -32,7 +38,6 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   ];
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private setupService: SetupService,
     private cdr: ChangeDetectorRef
@@ -86,11 +91,12 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private loadIndex(): void {
-    this.setupService.getSetupIndex()
+    this.setupService.getNavTree()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (index) => {
-          this.setupIndex = index.filter(item => item.active);
+        next: (tree) => {
+          this.navTree = tree;
+          this.initializeExpandedState(tree);
           this.watchRoute();
         },
         error: () => {
@@ -100,35 +106,73 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
       });
   }
 
+  private initializeExpandedState(nodes: NavNode[]): void {
+    for (const node of nodes) {
+      // Expand by default if has children (unless explicitly set to false)
+      if (node.children?.length && node.defaultExpanded !== false) {
+        this.expandedIds.add(node.id);
+      }
+      if (node.children) {
+        this.initializeExpandedState(node.children);
+      }
+    }
+  }
+
   private watchRoute(): void {
-    this.route.paramMap
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(params => {
-        const parentSlug = params.get('parentSlug');
-        const childSlug = params.get('childSlug');
-        const setupSlug = params.get('setupSlug');
+    // Handle initial route
+    this.handleRouteChange();
 
-        // Find the matching item from index
-        let slug: string | null = null;
-        if (parentSlug && childSlug) {
-          // Nested route: find item with this slug and matching parent
-          const item = this.setupIndex.find(
-            i => i.slug === childSlug && i.parent === parentSlug
-          );
-          slug = item?.slug || null;
-        } else if (setupSlug) {
-          slug = setupSlug;
-        }
+    // Listen for navigation events (needed for wildcard routes)
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this.handleRouteChange();
+      });
+  }
 
-        if (slug) {
-          this.loadSetup(slug);
-        } else if (this.setupIndex.length > 0) {
-          this.selectSetup(this.parentItems[0].slug);
-        } else {
-          this.isLoading = false;
-          this.cdr.markForCheck();
+  private handleRouteChange(): void {
+    const url = this.router.url;
+    const match = url.match(/\/setup\/(.+)/);
+    const slug = match ? match[1].split('/').pop() : null;
+
+    if (slug && slug !== this.currentSlug) {
+      this.loadSetup(slug);
+      this.expandParentsOfSlug(slug);
+    } else if (!slug && this.navTree.length > 0) {
+      // Navigate to first item
+      const firstSlug = this.getFirstPageSlug(this.navTree);
+      if (firstSlug) {
+        this.selectSetup(firstSlug);
+      }
+    } else if (!slug) {
+      this.isLoading = false;
+      this.cdr.markForCheck();
+    }
+  }
+
+  private getFirstPageSlug(nodes: NavNode[]): string | null {
+    for (const node of nodes) {
+      if (node.visible !== false) {
+        return node.slug;
+      }
+    }
+    return null;
+  }
+
+  private expandParentsOfSlug(slug: string): void {
+    const path = this.setupService.getPathToNode(this.navTree, slug);
+    if (path) {
+      // Expand all ancestors (except the leaf node itself)
+      path.slice(0, -1).forEach(node => {
+        if (node.children?.length) {
+          this.expandedIds.add(node.id);
         }
       });
+      this.cdr.markForCheck();
+    }
   }
 
   private loadSetup(slug: string): void {
@@ -202,15 +246,43 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   selectSetup(slug: string): void {
-    // Find the item to get its parent
-    const item = this.setupIndex.find(i => i.slug === slug);
-    if (item?.parent) {
-      // Nested route: /setup/parent/child
-      this.router.navigate(['/setup', item.parent, slug]);
+    // Build the full path for the URL
+    const path = this.setupService.getPathToNode(this.navTree, slug);
+    if (path && path.length > 0) {
+      const slugPath = path.map(n => n.slug);
+      this.router.navigate(['/setup', ...slugPath]);
     } else {
-      // Top-level route: /setup/slug
       this.router.navigate(['/setup', slug]);
     }
+  }
+
+  // Toggle expand/collapse for a node
+  toggleExpand(node: NavNode, event: Event): void {
+    event.stopPropagation();
+    if (this.expandedIds.has(node.id)) {
+      this.expandedIds.delete(node.id);
+    } else {
+      this.expandedIds.add(node.id);
+    }
+    this.cdr.markForCheck();
+  }
+
+  isExpanded(node: NavNode): boolean {
+    return this.expandedIds.has(node.id);
+  }
+
+  isActive(node: NavNode): boolean {
+    return node.slug === this.currentSlug;
+  }
+
+  isInActivePath(node: NavNode): boolean {
+    if (!this.currentSlug) return false;
+    const path = this.setupService.getPathToNode(this.navTree, this.currentSlug);
+    return path?.some(n => n.id === node.id) || false;
+  }
+
+  trackByNodeId(_: number, node: NavNode): string {
+    return node.id;
   }
 
   scrollToBlock(content: string): void {
