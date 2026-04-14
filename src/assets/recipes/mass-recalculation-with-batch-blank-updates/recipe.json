@@ -20,7 +20,11 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Account.BlankUpdate.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "mass-recalculation-with-batch-blank-updates"

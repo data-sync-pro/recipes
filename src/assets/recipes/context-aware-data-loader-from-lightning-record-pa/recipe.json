@@ -22,10 +22,12 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/Opportunities.DataLoader.From.AccountPage.json"
+      "filePath": "downloadExecutables/Opportunities.DataLoader.From.AccountPage.json",
+      "url": "assets/recipes/context-aware-data-loader-from-lightning-record-pa/downloadExecutables/Opportunities.DataLoader.From.AccountPage.json"
     },
     {
-      "filePath": "downloadExecutables/Account.Opportunities.json"
+      "filePath": "downloadExecutables/Account.Opportunities.json",
+      "url": "assets/recipes/context-aware-data-loader-from-lightning-record-pa/downloadExecutables/Account.Opportunities.json"
     }
   ],
   "relatedRecipes": [],

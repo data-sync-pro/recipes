@@ -20,7 +20,12 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Cases.Backup.json",
+      "url": "assets/recipes/incremental-data-backup-to-big-objects/downloadExecutables/Cases.Backup.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "incremental-data-backup-to-big-objects"

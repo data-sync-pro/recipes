@@ -20,7 +20,12 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Account.Cases.Close.json",
+      "url": "assets/recipes/list-action-with-template-record-editor/downloadExecutables/Account.Cases.Close.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "list-action-with-template-record-editor"

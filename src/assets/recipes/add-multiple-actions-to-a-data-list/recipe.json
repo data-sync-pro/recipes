@@ -22,10 +22,12 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/Account.OpenOpportunities.ActionButtons.json"
+      "filePath": "downloadExecutables/Account.OpenOpportunities.ActionButtons.json",
+      "url": "assets/recipes/add-multiple-actions-to-a-data-list/downloadExecutables/Account.OpenOpportunities.ActionButtons.json"
     },
     {
-      "filePath": "downloadExecutables/Account.OpenOpportunities.json"
+      "filePath": "downloadExecutables/Account.OpenOpportunities.json",
+      "url": "assets/recipes/add-multiple-actions-to-a-data-list/downloadExecutables/Account.OpenOpportunities.json"
     }
   ],
   "relatedRecipes": [],

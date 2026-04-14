@@ -20,7 +20,11 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Contacts.Merge.DuplicateRule.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "merge-duplicate-records"

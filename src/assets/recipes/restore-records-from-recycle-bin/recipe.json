@@ -20,7 +20,11 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Contacts.Restore.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "restore-records-from-recycle-bin"

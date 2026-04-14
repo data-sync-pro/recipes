@@ -43,7 +43,12 @@
     }
   ],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Account.OrgB.OpenOpportunities.json",
+      "url": "assets/recipes/mashup-related-data-from-a-remote-org/downloadExecutables/Account.OrgB.OpenOpportunities.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "mashup-related-data-from-a-remote-org"

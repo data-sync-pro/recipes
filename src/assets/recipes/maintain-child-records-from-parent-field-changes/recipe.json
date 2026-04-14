@@ -20,7 +20,12 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Account.Triggers.json",
+      "url": "assets/recipes/maintain-child-records-from-parent-field-changes/downloadExecutables/Account.Triggers.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "maintain-child-records-from-parent-field-changes"

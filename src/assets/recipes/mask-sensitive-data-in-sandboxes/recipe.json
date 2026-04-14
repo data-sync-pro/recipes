@@ -20,7 +20,12 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Contact.Mask.json",
+      "url": "assets/recipes/mask-sensitive-data-in-sandboxes/downloadExecutables/Contact.Mask.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "mask-sensitive-data-in-sandboxes"

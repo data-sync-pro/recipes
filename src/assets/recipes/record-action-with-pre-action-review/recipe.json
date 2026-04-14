@@ -20,7 +20,11 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Case.Close.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "record-action-with-pre-action-review"

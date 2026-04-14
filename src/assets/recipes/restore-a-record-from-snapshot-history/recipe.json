@@ -20,7 +20,11 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Quote.Snapshot.Restore.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "restore-a-record-from-snapshot-history"

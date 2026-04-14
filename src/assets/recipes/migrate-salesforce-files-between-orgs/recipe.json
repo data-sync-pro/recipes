@@ -20,7 +20,11 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Current.OrgB.Files.Migration.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "migrate-salesforce-files-between-orgs"

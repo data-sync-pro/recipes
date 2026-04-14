@@ -20,7 +20,11 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Opportunity.Quotes.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "one-file-per-record-file-management"

@@ -20,7 +20,12 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Opportunity.OpenQuotes.OwnerSync.json",
+      "url": "assets/recipes/joiner-scope-filter-post-join/downloadExecutables/Opportunity.OpenQuotes.OwnerSync.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "joiner-scope-filter-post-join"
