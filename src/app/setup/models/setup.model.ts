@@ -17,9 +17,18 @@ export interface NavNode {
   defaultExpanded?: boolean;     // for items with children: start expanded?
 }
 
-export type BlockType = "h2" | "h3" | "p" | "ul" | "ol" | "image" | "video" | "code" | "callout" | "instruction";
+export type BlockType = "h2" | "h3" | "h4" | "p" | "ul" | "ol" | "image" | "video" | "code" | "callout" | "instruction" | "table";
 
 export type CalloutVariant = "info" | "warning" | "error" | "success";
+
+export interface TableColumn {
+  key: string;
+  header: string;
+  width?: string;
+  align?: 'left' | 'center' | 'right';
+}
+
+export type ImageSize = "small" | "medium" | "large" | "full";
 
 export interface Block {
   type: BlockType;
@@ -27,10 +36,13 @@ export interface Block {
   children?: Block[];
   alt?: string;        // image
   caption?: string[];  // image
+  size?: ImageSize;    // image - predefined sizes: small (30%), medium (50%), large (70%), full (100%)
   src?: string;        // video
   language?: string;   // code
   variant?: CalloutVariant; // callout
   steps?: string[];    // instruction - list of steps before the image
+  columns?: TableColumn[];  // table
+  rows?: Record<string, string>[];  // table
 }
 
 export interface Page {

@@ -1,5 +1,26 @@
 [
   {
+    "id": "data-model",
+    "label": "Data Model",
+    "slug": "data-model",
+    "defaultExpanded": true,
+    "children": [
+      { "id": "objects-relationships", 
+      "label": "Objects & Relationships", 
+      "slug": "objects-relationships" 
+      },
+      {
+        "id": "direction-based-executable",
+        "label": "Direction Based Executable",
+        "slug": "direction-based-executable"
+      },
+      { "id": "connection-based-executable", 
+      "label": "Connection Based Executable", 
+      "slug": "connection-based-executable" 
+      }
+    ]
+  },
+  {
     "id": "setup",
     "label": "Setup",
     "slug": "permissions",
@@ -33,4 +54,5 @@
       }
     ]
   }
+  
 ]
