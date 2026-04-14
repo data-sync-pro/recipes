@@ -20,7 +20,14 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Quote.Pricebook.Entries.json"
+    },
+    {
+      "filePath": "downloadExecutables/Quote.LineItems.Upsert.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "bulk-add-records-to-a-data-list"

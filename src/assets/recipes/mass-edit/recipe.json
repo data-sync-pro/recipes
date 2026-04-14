@@ -7,7 +7,13 @@
   "DSPVersions": [],
   "overview": "After running a query, select multiple rows and open Mass Edit to update fields in a layout-style form. Enter values once, apply them to all selected rows, and save—supporting blank updates even when no field values change.",
   "generalUseCase": "Use Mass Edit to make consistent changes across many query results at once—set field values in a single form, apply them to all selected records, and optionally perform a blank update when you need to trigger downstream logic without changing data.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/7sVgh-bNf6U",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",

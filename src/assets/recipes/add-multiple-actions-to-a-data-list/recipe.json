@@ -20,7 +20,14 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Account.OpenOpportunities.ActionButtons.json"
+    },
+    {
+      "filePath": "downloadExecutables/Account.OpenOpportunities.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "add-multiple-actions-to-a-data-list"

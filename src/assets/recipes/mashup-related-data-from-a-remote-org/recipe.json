@@ -10,7 +10,7 @@
   "generalImages": [
     {
       "type": "video",
-      "url": "https://youtu.be/c6daTLiB1p0",
+      "url": "https://youtu.be/kX9YXi0AnYs",
       "alt": ""
     }
   ],
@@ -43,12 +43,7 @@
     }
   ],
   "verificationGIF": [],
-  "downloadableExecutables": [
-    {
-      "filePath": "downloadExecutables/Account.OrgB.OpenOpportunities.json",
-      "url": "assets/recipes/mashup-related-data-from-a-remote-org/downloadExecutables/Account.OrgB.OpenOpportunities.json"
-    }
-  ],
+  "downloadableExecutables": [],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "mashup-related-data-from-a-remote-org"

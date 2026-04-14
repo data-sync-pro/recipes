@@ -7,7 +7,13 @@
   "DSPVersions": [],
   "overview": "A #Batch Executable is configured to update Contacts in a sandbox, using DSP masking functions to obfuscate sensitive fields.",
   "generalUseCase": "Use #Batch and masking functions to bulk obfuscate sensitive data in non-production environments, so realistic data stays protected.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/Gcv72zM5Gi8",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",

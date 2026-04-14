@@ -7,7 +7,13 @@
   "DSPVersions": [],
   "overview": "The Source Object ContentDocument ID Field is configured on a Data List to let users upload, preview, and update the related file directly from each row in the list.",
   "generalUseCase": "Use the Source Object ContentDocument ID Field to let users manage files from #Data List and maintain a single record-level file with full version history.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/jEf0U5Kmj7o",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",
