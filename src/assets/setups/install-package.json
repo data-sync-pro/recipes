@@ -1,0 +1,10 @@
+{
+  "title": "Install Package",
+  "order": 1,
+  "blocks": [
+    {
+      "type": "image",
+      "content": "image/install-package/install-package.png"
+    }
+  ]
+}

@@ -26,6 +26,7 @@
     "slug": "permissions",
     "defaultExpanded": true,
     "children": [
+      { "id": "install-package", "label": "Install Package", "slug": "install-package" },
       { "id": "permissions", "label": "Permissions", "slug": "permissions" },
       {
         "id": "connection",
@@ -47,6 +48,7 @@
         "children": [
           { "id": "data-lists", "label": "Pipeline Data Lists", "slug": "data-lists" },
           { "id": "quick-links", "label": "Pipeline Data List Quick Links", "slug": "quick-links" },
+          { "id": "batch-execution-button", "label": "Pipeline Batch Execution Button", "slug": "batch-execution-button"},
           { "id": "action-buttons", "label": "Pipeline Action Buttons", "slug": "action-buttons" },
           { "id": "data-list", "label": "Executable Data List", "slug": "data-list" },
           { "id": "action-button", "label": "Executable Action Button", "slug": "action-button" }
