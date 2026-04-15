@@ -17,10 +17,10 @@
         {
           "type": "ul",
           "children": [
-            { "type": "p", "content": "<strong>DSP: Data Sync Pro Administrator</strong>: Grants full administrative control, including access to all configuration records. Typically assigned to developers in sandboxes, and to system admins or architects in the production." },
-            { "type": "p", "content": "<strong>DSP: Data Sync Pro App User</strong>: Allows execution of asynchronous rules such as Batch jobs and Data Loaders, provided the user has at least read access to the relevant Executables. Intended for super users who need to run jobs or upload CSVs with explicit Executable access grants." },
-            { "type": "p", "content": "<strong>DSP: Data Sync Pro Starter</strong>: Provides minimal access to packaged components and objects. With additional read access to Executable records, users can run rules (except batch jobs and data loads). This serves as the default profile for most internal users." },
-            { "type": "p", "content": "<strong>DSP: Download Data in Query</strong>: Grants users the permission to download data from the Query component." }
+            { "type": "p", "content": "<strong>DSP: Data Sync Pro Administrator</strong>: Grants \"Modify All\" access to all objects and configuration records, along with all custom permissions included in the package." },
+            { "type": "p", "content": "<strong>DSP: Data Sync Pro App User</strong>: Grants access to the Data Sync Pro app and enables users to create, edit, and delete Executables, provided they have the appropriate record-level access. Users can also run #Batch and #Data Loader Executables for which they have read access." },
+            { "type": "p", "content": "<strong>DSP: Data Sync Pro Starter</strong>: Grants essential access to package objects. When private Executable records are shared, users can access #Trigger, #Data List, and #Action Button, but cannot execute #Batch or #Data Loader." },
+            { "type": "p", "content": "<strong>DSP: Download Data in Data Lists</strong>: Grants the ability to download data in Data Lists." }
           ]
         },
         {
