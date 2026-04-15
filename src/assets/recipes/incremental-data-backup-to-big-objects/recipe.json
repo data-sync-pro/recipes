@@ -7,14 +7,25 @@
   "DSPVersions": [],
   "overview": "A big object is created as a backup store for Cases. A scheduled #Batch Executable inserts Case records into the big object on a recurring basis using Incremental Retrieve, so each run only processes Cases changed since the last execution and keeps the backup up to date.",
   "generalUseCase": "Salesforce Big Object provides a cost-effective way to store large volume data with strong performance without moving data off-platform. Use #Batch to load data into Big Objects for structured backup/archive, record-based change history, long-term compliance retention, high-volume transactional storage, and more. ",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/p6eRHuf_H6k",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Cases.Backup.json",
+      "url": "assets/recipes/incremental-data-backup-to-big-objects/downloadExecutables/Cases.Backup.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "incremental-data-backup-to-big-objects"

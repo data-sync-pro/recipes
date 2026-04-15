@@ -22,7 +22,8 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/DuplicateRecordSet.DuplicateRecordItems.Contact.Merge.json"
+      "filePath": "downloadExecutables/DuplicateRecordSet.DuplicateRecordItems.Contact.Merge.json",
+      "url": "assets/recipes/bulk-merge-records-from-duplicate-job-results/downloadExecutables/DuplicateRecordSet.DuplicateRecordItems.Contact.Merge.json"
     }
   ],
   "relatedRecipes": [],

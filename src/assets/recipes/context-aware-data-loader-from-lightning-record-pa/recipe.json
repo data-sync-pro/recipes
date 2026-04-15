@@ -20,7 +20,16 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Opportunities.DataLoader.From.AccountPage.json",
+      "url": "assets/recipes/context-aware-data-loader-from-lightning-record-pa/downloadExecutables/Opportunities.DataLoader.From.AccountPage.json"
+    },
+    {
+      "filePath": "downloadExecutables/Account.Opportunities.json",
+      "url": "assets/recipes/context-aware-data-loader-from-lightning-record-pa/downloadExecutables/Account.Opportunities.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "context-aware-data-loader-from-lightning-record-pa"

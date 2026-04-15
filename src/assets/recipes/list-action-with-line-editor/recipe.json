@@ -2,19 +2,30 @@
   "id": "9065bf9c-985e-42f0-88fe-1a8723d14f0d",
   "title": "List Action with Line Editor",
   "category": [
-    "Data List"
+    "Action Button"
   ],
   "DSPVersions": [],
   "overview": "An #Action Button is added to the Opportunity data list to close selected Opportunities, with a Pre-Action configured (Template Record Editor disabled). When clicked, it opens a line editor for all target records so users can remove unneeded lines, edit rows individually, or mass-edit multiple rows—then proceed to execute the action.",
   "generalUseCase": "Use an #Action Button on a #Data List with a line-editor pre-action to review and make changes—remove rows, edit individually, or mass-edit multiple selections—then run the action.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/PfkeIswMsZ8",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Account.OpenOpportunities.CloseWon.json",
+      "url": "assets/recipes/list-action-with-line-editor/downloadExecutables/Account.OpenOpportunities.CloseWon.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "list-action-with-line-editor"

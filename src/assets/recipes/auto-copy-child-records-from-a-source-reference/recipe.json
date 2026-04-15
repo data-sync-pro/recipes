@@ -22,7 +22,8 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/Opportunity.LineItems.Clone.json"
+      "filePath": "downloadExecutables/Opportunity.LineItems.Clone.json",
+      "url": "assets/recipes/auto-copy-child-records-from-a-source-reference/downloadExecutables/Opportunity.LineItems.Clone.json"
     }
   ],
   "relatedRecipes": [],

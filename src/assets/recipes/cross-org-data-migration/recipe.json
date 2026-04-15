@@ -22,7 +22,8 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/DataMigration.Current.OrgB.json"
+      "filePath": "downloadExecutables/DataMigration.Current.OrgB.json",
+      "url": "assets/recipes/cross-org-data-migration/downloadExecutables/DataMigration.Current.OrgB.json"
     }
   ],
   "relatedRecipes": [],

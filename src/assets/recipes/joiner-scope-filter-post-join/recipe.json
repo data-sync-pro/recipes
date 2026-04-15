@@ -7,14 +7,25 @@
   "DSPVersions": [],
   "overview": "A #Trigger Executable is configured to run on Account update so that when the Owner changes, it automatically reassigns related open Quotes owned by the previous Account Owner to the new Owner.",
   "generalUseCase": "Use Joiner + Scope Filter (Post Join) to left-join source records with their child records, then filter the joined dataset for downstream actions.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/HbyAN5hvbD0",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Opportunity.OpenQuotes.OwnerSync.json",
+      "url": "assets/recipes/joiner-scope-filter-post-join/downloadExecutables/Opportunity.OpenQuotes.OwnerSync.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "joiner-scope-filter-post-join"

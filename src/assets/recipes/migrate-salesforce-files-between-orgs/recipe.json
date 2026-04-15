@@ -7,14 +7,24 @@
   "DSPVersions": [],
   "overview": "A Pipeline runs two #Batch Executables to migrate Salesforce Files and their links to a remote org. The first migrates ContentDocument to ContentVersion and stores the source identifier in a custom field. The second migrates ContentDocumentLink and re-establishes the links. Additional batches extend the same pattern to other linked objects.",
   "generalUseCase": "Use a Pipeline with sequential #Batch Executables to migrate Salesforce Files and rebuild their links in a target org, using VLOOKUP and External IDs to maintain data relationships when re-establishing ContentDocumentLink associations.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/PZI8TP7uyV0",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Current.OrgB.Files.Migration.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "migrate-salesforce-files-between-orgs"

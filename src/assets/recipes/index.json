@@ -49,6 +49,10 @@
       "active": true
     },
     {
+      "folderId": "export-import-pipelines-as-templates",
+      "active": true
+    },
+    {
       "folderId": "incremental-data-backup-to-big-objects",
       "active": true
     },

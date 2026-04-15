@@ -7,14 +7,25 @@
   "DSPVersions": [],
   "overview": "#Triggers are configured to manage territory-based sharing on Account. When the Territory Manager field is set or changes, DSP creates an AccountShare for the current manager and removes the previous AccountShare, keeping access aligned with the latest Territory Manager.",
   "generalUseCase": "Use #Trigger to automatically create, update, or delete child records in response to key parent field changes, keeping related data consistent.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/Cb0UkAFicTg",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Account.Triggers.json",
+      "url": "assets/recipes/maintain-child-records-from-parent-field-changes/downloadExecutables/Account.Triggers.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "maintain-child-records-from-parent-field-changes"
