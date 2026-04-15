@@ -1,0 +1,14 @@
+{
+    "title": "Pipeline Batch Execution Button",
+    "order": 5,
+    "blocks": [
+        {
+            "type": "p",
+            "content": "Drag the <strong>Pipeline Batch Execution Button</strong> component from the left panel onto the <strong>Lightning Page</strong>, then enter the <strong>Pipeline API Name</strong> in the component properties on the right."
+        },
+        {
+            "type": "image",
+            "content": "image/lightning-page/batch_execution_button.png"
+        }
+    ]
+}
