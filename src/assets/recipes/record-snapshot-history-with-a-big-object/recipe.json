@@ -7,7 +7,13 @@
   "DSPVersions": [],
   "overview": "A Big Object is created to store record-level Quote change history, indexed by RecordID__c and LastModifiedDate__c. A #Trigger on Quote (after insert, after update) writes a new history record whenever a Quote is created or modified.",
   "generalUseCase": "Use a #Trigger to automatically capture and store record snapshots in a Big Object each time a record is saved.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/aVtXiMOUsQQ",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",

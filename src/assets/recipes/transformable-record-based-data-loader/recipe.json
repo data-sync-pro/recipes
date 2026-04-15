@@ -7,7 +7,13 @@
   "DSPVersions": [],
   "overview": "A #Data Loader is configured to upsert Leads from a CSV file using the Email field as the match key. Records with an existing Email are updated; otherwise, new Leads are inserted.",
   "generalUseCase": "Use #Data Loader to ingest CSV data, apply scoping, matching, and field transformations, then action target records—reusable, native in Salesforce, and generating online execution logs for troubleshooting and compliance.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/km9Jk9GqoCc",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",

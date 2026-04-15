@@ -7,7 +7,13 @@
   "DSPVersions": [],
   "overview": "A reusable Variable named TaxConfiguration uses VLOOKUP_RECORD to retrieve a single TaxConfiguration__c record based on the source record’s BillingAddress. Field mappings then reference #TaxConfiguration fields (TaxRate, TaxCode, ReportingRegion) without repeating VLOOKUPs, keeping mappings concise and maintainable.",
   "generalUseCase": "1. Use Variables to define reusable, named expressions that can be referenced across Executables.\n2. Use VLOOKUP_RECORD in a Variable to fetch a single record once and reference multiple target fields from it, avoiding repeated VLOOKUPs and keeping mappings concise and consistent.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/tKTStiNGSsQ",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",

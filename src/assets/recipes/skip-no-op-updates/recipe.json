@@ -7,7 +7,13 @@
   "DSPVersions": [],
   "overview": "A Skip Update If No Changes setting is enabled on a #Batch job that updates Contacts. During execution, DSP compares computed mapped values to what’s already in Salesforce and skips the update when nothing changed—reducing downstream automation/validation churn and avoiding unnecessary updates.",
   "generalUseCase": "Use Skip Update If No Changes to prevent no-op updates when computed target values already match what’s stored—so validations, automations, and audit fields aren’t needlessly triggered.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/zuF2ShoO_4o",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",

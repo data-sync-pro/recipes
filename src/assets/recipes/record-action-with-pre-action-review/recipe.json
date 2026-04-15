@@ -22,7 +22,8 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/Case.Close.json"
+      "filePath": "downloadExecutables/Case.Close.json",
+      "url": "assets/recipes/record-action-with-pre-action-review/downloadExecutables/Case.Close.json"
     }
   ],
   "relatedRecipes": [],
