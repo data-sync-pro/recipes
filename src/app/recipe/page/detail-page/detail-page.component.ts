@@ -10,10 +10,8 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { HttpClient } from '@angular/common/http';
-import { Subject, combineLatest, fromEvent, firstValueFrom } from 'rxjs';
+import { Subject, combineLatest, fromEvent } from 'rxjs';
 import { takeUntil, throttleTime } from 'rxjs/operators';
-import JSZip from 'jszip';
 
 import { Recipe, Category } from '../../core/models/recipe.model';
 import { CacheService } from '../../core/services/cache.service';
@@ -132,7 +130,6 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient,
     private cacheService: CacheService,
     private searchService: SearchService,
     private cdr: ChangeDetectorRef,
@@ -306,38 +303,8 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     return fileName.replace('.json', '').replace(/_/g, ' ');
   }
 
-  async downloadAllExecutables(): Promise<void> {
-    if (!this.currentRecipe?.downloadableExecutables || this.currentRecipe.downloadableExecutables.length === 0) {
-      return;
-    }
-
-    const zip = new JSZip();
-    const executables = this.currentRecipe.downloadableExecutables;
-
-    for (const file of executables) {
-      const fileUrl = file.url || file.filePath;
-      if (!fileUrl) continue;
-
-      try {
-        const response = await firstValueFrom(this.http.get(fileUrl, { responseType: 'blob' }));
-        const fileName = this.getDownloadFileName(file);
-        zip.file(fileName, response);
-      } catch (error) {
-        console.warn(`Failed to fetch file: ${fileUrl}`, error);
-      }
-    }
-
-    const zipBlob = await zip.generateAsync({ type: 'blob' });
-    const recipeTitle = this.currentRecipe.title.replace(/\s+/g, '_').replace(/-/g, '_');
-    const zipFileName = `${recipeTitle}_Executables.zip`;
-
-    // Trigger download
-    const url = URL.createObjectURL(zipBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = zipFileName;
-    link.click();
-    URL.revokeObjectURL(url);
+  getDownloadUrl(file: any): string {
+    return file.url || file.filePath || '';
   }
 
   getGeneralUseCaseItems(): string[] {

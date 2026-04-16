@@ -80,11 +80,12 @@
               <!-- Download Executable File Section -->
               <ng-container *ngSwitchCase="'downloadFile'">
                 <a
+                  *ngFor="let file of currentRecipe.downloadableExecutables"
                   class="download-item"
-                  href="#"
-                  (click)="downloadAllExecutables(); $event.preventDefault()">
+                  [href]="getDownloadUrl(file)"
+                  [download]="getDownloadFileName(file)">
                   <img class="download-icon" src="assets/icons/download.svg" alt="Download">
-                  <span class="download-title">{{ currentRecipe.title }}</span>
+                  <span class="download-title">{{ getDownloadDisplayName(file) }}</span>
                 </a>
               </ng-container>
 
