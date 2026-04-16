@@ -374,11 +374,9 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
       // Special handling for walkthrough - add children for each step
       if (section.id === 'walkthrough' && this.currentRecipe.walkthrough) {
         tocItem.children = this.currentRecipe.walkthrough.map((step, index) => {
-          // Only show content before the hyphen
-          const stepLabel = step.step.includes(' - ') ? step.step.split(' - ')[0] : step.step;
           return {
             id: `walkthrough-step-${index + 1}`,
-            label: `${index + 1}. ${stepLabel}`
+            label: `${index + 1}. ${step.step}`
           };
         });
       }
