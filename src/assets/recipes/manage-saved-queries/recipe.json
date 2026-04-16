@@ -7,7 +7,13 @@
   "DSPVersions": [],
   "overview": "Click Save Query to store your SOQL for reuse. Later, use Select Query to pick a saved query (most-recent first); DSP parses it into the visual SOQL Builder so you can review, refine, and run it again. In Saved Queries, you can relabel, update, delete, or download entries anytime.",
   "generalUseCase": "Use the Query component to build and manage your frequently used SOQL queries—so you can quickly reuse, refine, and rerun them.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/RNO11GgP1gU",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",
