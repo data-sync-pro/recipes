@@ -1,0 +1,87 @@
+
+Recipe Export Update Instructions
+================================
+Export Date: 2026-04-16T19:18:21.285Z
+Total Recipes: 40
+Categories: Data List, Data List, Trigger, General, Data List, Batch, Trigger, General, Data Loader, Batch, General, Trigger, General, Batch, General, Trigger, Action Button, Action Button, Trigger, General, Data List, Batch, General, Batch, Action Button, Batch, Data List, General, Action Button, Trigger, Data List, Batch, Data List, General, Batch, Trigger, General, Trigger, Data Loader, Transformation
+
+How to Deploy the Exported Recipes:
+-----------------------------------
+
+1. Recipe Data Structure:
+   - index.json: Contains recipe metadata and configuration
+   - [recipe-id]/recipe.json: Individual recipe definitions
+   - [recipe-id]/images/: Recipe-specific images
+   - [recipe-id]/downloadExecutables/: JSON executable files
+
+2. For Production Deployment:
+   - Copy index.json to src/assets/recipes/
+   - Copy all recipe folders to src/assets/recipes/
+   - Ensure the directory structure matches: src/assets/recipes/[recipe-id]/
+
+3. Recipe System Integration:
+   - The index.json file is automatically loaded by RecipeService
+   - Only recipes marked as "active: true" in index.json will be displayed
+   - Category names are normalized to kebab-case for routing
+
+4. Build Process:
+   - Run: node src/tools/generate-recipe-components.js
+   - This will generate Angular components for each recipe
+   - Run: ng build
+   - Test: ng serve
+
+5. Validation:
+   - All recipes in the index must have corresponding folders
+   - Each recipe folder must contain a recipe.json file
+   - Image references in recipes must match actual image files
+
+Exported Recipe List:
+-------------------
+1. Add Multiple Actions to a Data List (752d7b76-4c9c-4baa-af35-ffc0986540ad)
+2. Add Multiple Actions to Account's Opportunity Data List (c763e140-0623-4d14-ac37-9d731b30123e)
+3. Auto-Copy Child Records from a Source Reference (6cc6c1d9-9b1b-4de6-ba84-cc12b98710f5)
+4. Build and Run a Query (a68e376d-a879-4168-a201-6b0a6dbe9237)
+5. Bulk Add Records to a Data List (fa62e7c9-af15-4049-b4e0-3bdc2c7ee1ae)
+6. Bulk Merge Records from Duplicate Job Results (e4f8a7e6-8414-4e0a-9054-45453645c154)
+7. Centralized Validation Rules with Self-Adaptive Trigger (3e2429e0-7869-4c78-b943-3f66c1d3daf9)
+8. Column Filter (d594ef03-a3d9-4017-98b8-18dc8beaedae)
+9. Context-Aware Data Loader from Lightning Record Page (eb6838f0-c766-45f0-a7eb-330884b7875b)
+10. Cross Org Data Migration (ba1c53df-9819-4676-92b1-2e4e1d11bb4e)
+11. Dynamic Filters (e830eba0-196b-42c3-be3b-e645659a17c7)
+12. Execute an Action with Trigger (3a0aba6f-2b44-45f6-acf2-aaa0afe528fe)
+13. Export & Import Pipelines as Templates (1e4d4c69-5f04-4a81-8d04-0ddc7f80b6df)
+14. Incremental Data Backup to Big Objects (47246d5a-3761-4c3c-9dd1-dfaa594fb1c5)
+15. Inline Edit (73b0bbaa-2b1d-47d8-92f9-d113f0891cb7)
+16. Joiner + Scope Filter (Post Join) (1111fce1-31bc-418e-9b40-82318302afe7)
+17. List Action with Line Editor (9065bf9c-985e-42f0-88fe-1a8723d14f0d)
+18. List Action with Template Record Editor (0e504b2e-1911-434b-8fdd-2f18eab914a4)
+19. Maintain Child Records from Parent Field Changes (9d77de5a-e04d-43b5-ba1b-95441b21fd89)
+20. Manage Saved Queries (66971d38-6e3e-4aaf-a8a1-0518ddeb5ab7)
+21. Mashup Related Data from a Remote Org (f3e842a7-e485-4c46-8abd-09ddd018f240)
+22. Mask Sensitive Data in Sandboxes (154b9f59-e915-4184-9639-2b84e957d2f6)
+23. Mass Edit (f893ea8b-2503-4b94-a8e4-6ae8ea67c2f1)
+24. Mass Recalculation with Batch Blank Updates (583e9ed1-c061-4b79-8132-76d67dd0a00e)
+25. Merge Duplicate Records (bb1a4527-cd06-4e37-8057-bc8d4a47b3e2)
+26. Migrate Salesforce Files Between Orgs (abde4d30-2bf7-4a49-8eea-8f183d29062f)
+27. One-File-Per-Record File Management (44ca1288-9429-4e30-9a95-16f7514404fb)
+28. Pinned Column Filters (f511e093-583e-4d55-8e91-379b283cd82e)
+29. Record Action with Pre-Action Review (050c8831-90d5-4302-8229-638e62df2135)
+30. Record Snapshot History with a Big Object (68fa3cbe-dcd2-4989-9c8d-45b68e91e52f)
+31. Restore a Record From Snapshot History (0e87a74a-4ea3-4be8-905b-850c3216057f)
+32. Restore Records from Recycle Bin (c85fb657-77ba-4dca-bee1-fb242224a837)
+33. Row Related Lists (cc70ecb8-827e-4fe5-a4b6-014c9353a34c)
+34. Schedule Job Management (a24ec2f3-a9a2-411b-8e25-aa9c3441160d)
+35. Scheduled Retention Cleanup (bbee181a-5b2d-46fc-a26f-b7af29f75ac0)
+36. Self-Adaptive Trigger for Rollup Summary Calculations (f50e6e25-63dc-466c-a42f-90568bf93c97)
+37. Skip No-Op Updates (137653b6-8cc1-47ba-81f3-a34527b7b129)
+38. The Trigger Flipper Pattern (0d1f6bd2-2e99-4780-82ef-38c78b4b9b1a)
+39. Transformable, Record-Based Data Loader (117aa45e-417a-4bb6-9d06-bcdc2029c62d)
+40. Variables for Named Expressions (d4a064fb-df30-4fec-8a27-0f993443c9f4)
+
+Notes:
+------
+- The index.json format follows RecipeIndexConfig interface requirements
+- Recipe IDs are used as folder names and component identifiers
+- Image paths use relative references: "images/[filename]"
+- All downloadable executables are stored in downloadExecutables/ subdirectory
+- Recipe categories are automatically converted to URL-friendly format

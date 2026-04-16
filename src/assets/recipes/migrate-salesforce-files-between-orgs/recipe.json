@@ -22,7 +22,8 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/Current.OrgB.Files.Migration.json"
+      "filePath": "downloadExecutables/Current.OrgB.Files.Migration.json",
+      "url": "assets/recipes/migrate-salesforce-files-between-orgs/downloadExecutables/Current.OrgB.Files.Migration.json"
     }
   ],
   "relatedRecipes": [],

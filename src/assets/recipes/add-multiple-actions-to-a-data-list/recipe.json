@@ -18,7 +18,46 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Data List - Account.OpenOpportunities",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776366824383.png",
+          "alt": "Screenshot 2026-04-16 at 3.12.14 PM"
+        }
+      ]
+    },
+    {
+      "step": "Data List Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776366857047.png",
+          "alt": "Screenshot 2026-04-16 at 3.12.31 PM"
+        },
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776366888118.png",
+          "alt": "Screenshot 2026-04-16 at 3.12.48 PM"
+        }
+      ]
+    },
+    {
+      "step": "On Account record page",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776366957632.png",
+          "alt": "Screenshot 2026-04-16 at 3.13.04 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {

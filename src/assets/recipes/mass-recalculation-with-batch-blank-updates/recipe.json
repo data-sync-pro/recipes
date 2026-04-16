@@ -22,7 +22,8 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/Account.BlankUpdate.json"
+      "filePath": "downloadExecutables/Account.BlankUpdate.json",
+      "url": "assets/recipes/mass-recalculation-with-batch-blank-updates/downloadExecutables/Account.BlankUpdate.json"
     }
   ],
   "relatedRecipes": [],

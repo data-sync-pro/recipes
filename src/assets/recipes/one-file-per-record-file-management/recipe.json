@@ -22,7 +22,8 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/Opportunity.Quotes.json"
+      "filePath": "downloadExecutables/Opportunity.Quotes.json",
+      "url": "assets/recipes/one-file-per-record-file-management/downloadExecutables/Opportunity.Quotes.json"
     }
   ],
   "relatedRecipes": [],

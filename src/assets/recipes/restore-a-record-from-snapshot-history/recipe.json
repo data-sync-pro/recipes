@@ -22,7 +22,8 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/Quote.Snapshot.Restore.json"
+      "filePath": "downloadExecutables/Quote.Snapshot.Restore.json",
+      "url": "assets/recipes/restore-a-record-from-snapshot-history/downloadExecutables/Quote.Snapshot.Restore.json"
     }
   ],
   "relatedRecipes": [],

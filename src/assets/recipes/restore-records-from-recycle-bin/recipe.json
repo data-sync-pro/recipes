@@ -22,7 +22,8 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/Contacts.Restore.json"
+      "filePath": "downloadExecutables/Contacts.Restore.json",
+      "url": "assets/recipes/restore-records-from-recycle-bin/downloadExecutables/Contacts.Restore.json"
     }
   ],
   "relatedRecipes": [],
