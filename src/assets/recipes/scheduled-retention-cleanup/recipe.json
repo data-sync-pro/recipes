@@ -7,7 +7,13 @@
   "DSPVersions": [],
   "overview": "A #Batch is scheduled to run every weekend and delete Cases that are closed and more than two years old.",
   "generalUseCase": "1. Use the Delete action to clean up unnecessary records and free up data storage.\n2. Use a Schedule to run batch jobs on a recurring cadence.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/rGOJ9LEB7P8",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",

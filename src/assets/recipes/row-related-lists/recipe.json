@@ -7,7 +7,13 @@
   "DSPVersions": [],
   "overview": "A Pipeline of #Data List Executables is configured to dynamically surface related data for any Opportunity. A #Data List that shows Opportunities is linked to the Pipeline via Q: Row Related Lists. Once configured, each row in the Opportunity data list automatically includes a row action that opens a pop-up with the related Data Lists defined in the Pipeline.",
   "generalUseCase": "Use Q: Row Related Lists to add dynamic, context-aware related lists to any #Data List—so each row can open a pop-up of configured Data Lists (via a Pipeline) for quick drill-in and action without leaving the current list.",
-  "generalImages": [],
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/xXUzgl_mI-k",
+      "alt": ""
+    }
+  ],
   "prerequisites": [],
   "pipeline": "",
   "direction": "",
