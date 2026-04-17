@@ -20,24 +20,40 @@
   "connection": "",
   "walkthrough": [
     {
-      "step": "Initialize a Query Execuable in the Target Connection Record",
+      "step": "Connection - OrgB",
       "config": [],
       "media": [
         {
           "type": "image",
-          "url": "images/step-0-image-1774640311321.png",
-          "alt": "Screenshot 2026-03-27 at 3.38.22 PM"
+          "url": "images/step-0-image-1776371822486.png",
+          "alt": "Screenshot 2026-04-16 at 4.23.42 PM"
         }
       ]
     },
     {
-      "step": "Build the Query",
+      "step": "New Executable - Account.OrgB.OpenOpportunities",
       "config": [],
       "media": [
         {
           "type": "image",
-          "url": "images/step-1-image-1774640391127.png",
-          "alt": "Screenshot 2026-03-27 at 3.39.41 PM"
+          "url": "images/step-1-image-1776371852857.png",
+          "alt": "Screenshot 2026-04-16 at 4.24.00 PM"
+        }
+      ]
+    },
+    {
+      "step": "SOQL Query",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776372006952.png",
+          "alt": "Screenshot 2026-04-16 at 4.24.10 PM"
+        },
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776372010621.png",
+          "alt": "Screenshot 2026-04-16 at 4.24.20 PM"
         }
       ]
     }
