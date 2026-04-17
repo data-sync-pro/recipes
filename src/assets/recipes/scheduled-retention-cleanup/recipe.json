@@ -6,7 +6,7 @@
   ],
   "DSPVersions": [],
   "overview": "A #Batch is scheduled to run every weekend and delete Cases that are closed and more than two years old.",
-  "generalUseCase": "1. Use the Delete action to clean up unnecessary records and free up data storage.\n2. Use a Schedule to run batch jobs on a recurring cadence.",
+  "generalUseCase": "Use the Delete action to clean up unnecessary records and free up data storage.\nUse a Schedule to run batch jobs on a recurring cadence.",
   "generalImages": [
     {
       "type": "video",
@@ -18,7 +18,84 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": " Pipeline - Data.Purge.Batches",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776373116793.png",
+          "alt": "Screenshot 2026-04-16 at 4.51.07 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - ClosedCases.Purge",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776373158512.png",
+          "alt": "Screenshot 2026-04-16 at 4.51.25 PM"
+        }
+      ]
+    },
+    {
+      "step": "Batch Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776373178236.png",
+          "alt": "Screenshot 2026-04-16 at 4.51.38 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776373192851.png",
+          "alt": "Screenshot 2026-04-16 at 4.51.51 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Schedule",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776373241661.png",
+          "alt": "Screenshot 2026-04-16 at 4.53.03 PM"
+        },
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776373282751.png",
+          "alt": "Screenshot 2026-04-16 at 4.53.11 PM"
+        },
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776373288282.png",
+          "alt": "Screenshot 2026-04-16 at 4.53.19 PM"
+        }
+      ]
+    },
+    {
+      "step": "Scheduled Job",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-5-image-1776373395545.png",
+          "alt": "Screenshot 2026-04-16 at 4.53.44 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],

@@ -20,20 +20,7 @@
   "connection": "",
   "walkthrough": [],
   "verificationGIF": [],
-  "downloadableExecutables": [
-    {
-      "filePath": "downloadExecutables/Opportunity.Pricebook.Entries.json"
-    },
-    {
-      "filePath": "downloadExecutables/Opportunity.LineItem.ActionButtons.json"
-    },
-    {
-      "filePath": "downloadExecutables/Opportunity.Related.DataLists.json"
-    },
-    {
-      "filePath": "downloadExecutables/Account.Opportunities.json"
-    }
-  ],
+  "downloadableExecutables": [],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "row-related-lists"
