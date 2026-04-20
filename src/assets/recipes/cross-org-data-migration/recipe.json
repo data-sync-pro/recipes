@@ -18,7 +18,63 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - DataMigration.Current.OrgB",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776723341221.png",
+          "alt": "Screenshot 2026-04-20 at 6.15.17 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Contact.Migration.Current.OrgB",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776723371830.png",
+          "alt": "Screenshot 2026-04-20 at 6.15.51 PM"
+        }
+      ]
+    },
+    {
+      "step": "Batch Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776723416152.png",
+          "alt": "Screenshot 2026-04-20 at 6.16.44 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776723439792.png",
+          "alt": "Screenshot 2026-04-20 at 6.17.09 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776723515401.png",
+          "alt": "Screenshot 2026-04-20 at 6.18.24 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {

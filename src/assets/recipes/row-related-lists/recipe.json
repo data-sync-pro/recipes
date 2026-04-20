@@ -22,16 +22,20 @@
   "verificationGIF": [],
   "downloadableExecutables": [
     {
-      "filePath": "downloadExecutables/Opportunity.Pricebook.Entries.json"
+      "filePath": "downloadExecutables/Opportunity.Pricebook.Entries.json",
+      "url": "assets/recipes/row-related-lists/downloadExecutables/Opportunity.Pricebook.Entries.json"
     },
     {
-      "filePath": "downloadExecutables/Opportunity.LineItem.ActionButtons.json"
+      "filePath": "downloadExecutables/Opportunity.LineItem.ActionButtons.json",
+      "url": "assets/recipes/row-related-lists/downloadExecutables/Opportunity.LineItem.ActionButtons.json"
     },
     {
-      "filePath": "downloadExecutables/Opportunity.Related.DataLists.json"
+      "filePath": "downloadExecutables/Opportunity.Related.DataLists.json",
+      "url": "assets/recipes/row-related-lists/downloadExecutables/Opportunity.Related.DataLists.json"
     },
     {
-      "filePath": "downloadExecutables/Account.Opportunities.json"
+      "filePath": "downloadExecutables/Account.Opportunities.json",
+      "url": "assets/recipes/row-related-lists/downloadExecutables/Account.Opportunities.json"
     }
   ],
   "relatedRecipes": [],

@@ -18,7 +18,74 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Contact.ActionButtons",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776719040444.png",
+          "alt": "Screenshot 2026-04-20 at 5.03.26 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Contacts.Merge.DuplicateRule",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776719436703.png",
+          "alt": "Screenshot 2026-04-20 at 5.10.30 PM"
+        }
+      ]
+    },
+    {
+      "step": "Action Button Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776719563586.png",
+          "alt": "Screenshot 2026-04-20 at 5.10.51 PM"
+        }
+      ]
+    },
+    {
+      "step": "Scoping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776719588109.png",
+          "alt": "Screenshot 2026-04-20 at 5.12.55 PM"
+        }
+      ]
+    },
+    {
+      "step": "Match",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776719633955.png",
+          "alt": "Screenshot 2026-04-20 at 5.13.47 PM"
+        }
+      ]
+    },
+    {
+      "step": "Action",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-5-image-1776719778919.png",
+          "alt": "Screenshot 2026-04-20 at 5.16.06 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {
