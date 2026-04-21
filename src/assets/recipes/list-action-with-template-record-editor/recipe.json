@@ -18,7 +18,52 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Account.Cases.ActionButtons",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776708731932.png",
+          "alt": "Screenshot 2026-04-20 at 2.10.59 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Account.Cases.Close",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776708765268.png",
+          "alt": "Screenshot 2026-04-20 at 2.12.25 PM"
+        }
+      ]
+    },
+    {
+      "step": "Action Button Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776708843694.png",
+          "alt": "Screenshot 2026-04-20 at 2.13.49 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776708894152.png",
+          "alt": "Screenshot 2026-04-20 at 2.14.40 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {

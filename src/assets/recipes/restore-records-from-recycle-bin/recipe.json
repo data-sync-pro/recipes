@@ -18,7 +18,52 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Data.Restore.Batches",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776721964013.png",
+          "alt": "Screenshot 2026-04-20 at 5.52.21 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Contacts.Restore",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776722003767.png",
+          "alt": "Screenshot 2026-04-20 at 5.52.53 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776722030210.png",
+          "alt": "Screenshot 2026-04-20 at 5.53.41 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776722058544.png",
+          "alt": "Screenshot 2026-04-20 at 5.54.08 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {

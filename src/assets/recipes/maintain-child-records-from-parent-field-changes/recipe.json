@@ -18,7 +18,107 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Account.Triggers",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776729525156.png",
+          "alt": "Screenshot 2026-04-20 at 7.58.38 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - AccountShare.Insert",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776729553827.png",
+          "alt": "Screenshot 2026-04-20 at 7.59.09 PM"
+        }
+      ]
+    },
+    {
+      "step": "Trigger Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776729600248.png",
+          "alt": "Screenshot 2026-04-20 at 7.59.36 PM"
+        }
+      ]
+    },
+    {
+      "step": "Scoping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776729625880.png",
+          "alt": "Screenshot 2026-04-20 at 8.00.14 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776729655027.png",
+          "alt": "Screenshot 2026-04-20 at 8.00.41 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - AccountShare.Delete",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-5-image-1776729700369.png",
+          "alt": "Screenshot 2026-04-20 at 8.01.12 PM"
+        }
+      ]
+    },
+    {
+      "step": "Trigger Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-6-image-1776729723747.png",
+          "alt": "Screenshot 2026-04-20 at 8.01.49 PM"
+        }
+      ]
+    },
+    {
+      "step": "Scoping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-7-image-1776729746153.png",
+          "alt": "Screenshot 2026-04-20 at 8.02.13 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-8-image-1776729773004.png",
+          "alt": "Screenshot 2026-04-20 at 8.02.42 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {

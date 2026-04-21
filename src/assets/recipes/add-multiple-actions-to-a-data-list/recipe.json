@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/step-0-image-1776370915481.png",
-          "alt": "Screenshot 2026-04-16 at 4.17.54 PM"
+          "alt": "data-list"
         }
       ]
     },
@@ -36,13 +36,8 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-1-image-1776370932319.png",
-          "alt": "Screenshot 2026-04-16 at 4.18.09 PM"
-        },
-        {
-          "type": "image",
-          "url": "images/step-1-image-1776370935433.png",
-          "alt": "Screenshot 2026-04-16 at 4.18.16 PM"
+          "url": "images/step-1-image-1776714237873.png",
+          "alt": "data-list-settings"
         }
       ]
     },
@@ -53,7 +48,7 @@
         {
           "type": "image",
           "url": "images/step-2-image-1776370952392.png",
-          "alt": "Screenshot 2026-04-16 at 4.18.29 PM"
+          "alt": "account-record-page"
         }
       ]
     }

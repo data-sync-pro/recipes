@@ -10,7 +10,7 @@
   "generalImages": [
     {
       "type": "video",
-      "url": "https://youtu.be/km9Jk9GqoCc",
+      "url": "https://youtu.be/KfvPgAfQLKs",
       "alt": ""
     }
   ],
@@ -18,7 +18,52 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - DataLoaders",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776728956849.png",
+          "alt": "Screenshot 2026-04-20 at 7.49.08 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Lead.Upsert",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776728987842.png",
+          "alt": "Screenshot 2026-04-20 at 7.49.26 PM"
+        }
+      ]
+    },
+    {
+      "step": "Input",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776729015834.png",
+          "alt": "Screenshot 2026-04-20 at 7.50.03 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776729044720.png",
+          "alt": "Screenshot 2026-04-20 at 7.50.34 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
