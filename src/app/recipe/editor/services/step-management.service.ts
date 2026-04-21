@@ -19,8 +19,56 @@ export class StepManagementService {
   private customStepNamesSubject = new BehaviorSubject<{[index: number]: string}>({});
   public readonly customStepNames$ = this.customStepNamesSubject.asObservable();
 
+  // Map to store customStepNames per recipe (isolated state)
+  private customStepNamesMap = new Map<string, {[index: number]: string}>();
+  private currentRecipeId: string | null = null;
 
   constructor(private logger: LoggerService) {}
+
+  /**
+   * Set current recipe and load its customStepNames
+   * Call this when switching recipes/tabs
+   */
+  setCurrentRecipe(recipeId: string): void {
+    // Save current recipe's customStepNames before switching
+    if (this.currentRecipeId && this.currentRecipeId !== recipeId) {
+      this.customStepNamesMap.set(this.currentRecipeId, { ...this.customStepNamesSubject.value });
+    }
+
+    this.currentRecipeId = recipeId;
+
+    // Load the new recipe's customStepNames (or empty object if none)
+    const names = this.customStepNamesMap.get(recipeId) || {};
+    this.customStepNamesSubject.next(names);
+
+    this.logger.debug('Switched to recipe customStepNames', { recipeId, names });
+  }
+
+  /**
+   * Get customStepNames for a specific recipe
+   */
+  getCustomStepNamesForRecipe(recipeId: string): {[index: number]: string} {
+    return this.customStepNamesMap.get(recipeId) || {};
+  }
+
+  /**
+   * Clear customStepNames for a specific recipe
+   */
+  clearCustomStepNamesForRecipe(recipeId: string): void {
+    this.customStepNamesMap.delete(recipeId);
+    if (this.currentRecipeId === recipeId) {
+      this.customStepNamesSubject.next({});
+    }
+  }
+
+  /**
+   * Clear all customStepNames (used when clearing all data)
+   */
+  clearAllCustomStepNames(): void {
+    this.customStepNamesMap.clear();
+    this.currentRecipeId = null;
+    this.customStepNamesSubject.next({});
+  }
 
   addStep(recipe: RecipeData): boolean {
     if (!recipe.walkthrough) {
@@ -199,16 +247,21 @@ export class StepManagementService {
 
 
   onStepSelectionChange(step: WalkthroughStep, stepIndex: number): void {
+    const currentNames = { ...this.customStepNamesSubject.value };
+
     if (step.step === 'Custom') {
-      const currentNames = { ...this.customStepNamesSubject.value };
       if (!currentNames[stepIndex]) {
         currentNames[stepIndex] = 'Custom Step';
       }
-      this.customStepNamesSubject.next(currentNames);
     } else {
-      const currentNames = { ...this.customStepNamesSubject.value };
       delete currentNames[stepIndex];
-      this.customStepNamesSubject.next(currentNames);
+    }
+
+    this.customStepNamesSubject.next(currentNames);
+
+    // Save to map for current recipe
+    if (this.currentRecipeId) {
+      this.customStepNamesMap.set(this.currentRecipeId, currentNames);
     }
   }
 
@@ -216,6 +269,11 @@ export class StepManagementService {
     const currentNames = { ...this.customStepNamesSubject.value };
     currentNames[stepIndex] = customName;
     this.customStepNamesSubject.next(currentNames);
+
+    // Save to map for current recipe
+    if (this.currentRecipeId) {
+      this.customStepNamesMap.set(this.currentRecipeId, currentNames);
+    }
 
     this.logger.debug('Custom step name changed', { stepIndex, customName });
   }
@@ -231,6 +289,11 @@ export class StepManagementService {
     });
 
     this.customStepNamesSubject.next(newNames);
+
+    // Save to map for current recipe
+    if (this.currentRecipeId) {
+      this.customStepNamesMap.set(this.currentRecipeId, newNames);
+    }
   }
 
   getStepTitle(step: WalkthroughStep, stepIndex: number): string {

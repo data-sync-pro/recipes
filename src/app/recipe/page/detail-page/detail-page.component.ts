@@ -54,7 +54,7 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
       id: 'overview',
       label: 'Overview',
       templateRef: 'overview',
-      isVisible: () => true
+      isVisible: (r) => !!(r.overview && r.overview.length > 0)
     },
     {
       id: 'use-case',
