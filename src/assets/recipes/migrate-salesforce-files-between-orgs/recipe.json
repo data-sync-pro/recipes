@@ -10,7 +10,7 @@
   "generalImages": [
     {
       "type": "video",
-      "url": "https://youtu.be/PZI8TP7uyV0",
+      "url": "https://youtu.be/K-OpbCQIJCo",
       "alt": ""
     }
   ],
@@ -18,7 +18,85 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Current.OrgB.Files.Migration",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776730032443.png",
+          "alt": "Screenshot 2026-04-20 at 8.07.05 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Current.ContentDocument.OrgB.ContentVersion.Insert",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776730088437.png",
+          "alt": "Screenshot 2026-04-20 at 8.07.19 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776730120937.png",
+          "alt": "Screenshot 2026-04-20 at 8.08.26 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776730173051.png",
+          "alt": "Screenshot 2026-04-20 at 8.09.19 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Current.OrgB.ContentDocumentLink.Insert.For.Account",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776730318709.png",
+          "alt": "Screenshot 2026-04-20 at 8.10.38 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-5-image-1776730346617.png",
+          "alt": "Screenshot 2026-04-20 at 8.12.13 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-6-image-1776730376407.png",
+          "alt": "Screenshot 2026-04-20 at 8.12.45 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {

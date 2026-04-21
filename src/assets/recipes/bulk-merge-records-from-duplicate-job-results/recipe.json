@@ -18,7 +18,63 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Contact.Batches",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776729213406.png",
+          "alt": "Screenshot 2026-04-20 at 7.53.24 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - DuplicateRecordSet.DuplicateRecorditems.Contact.Merge",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776729268874.png",
+          "alt": "Screenshot 2026-04-20 at 7.53.43 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776729305969.png",
+          "alt": "Screenshot 2026-04-20 at 7.54.53 PM"
+        }
+      ]
+    },
+    {
+      "step": "Match",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776729328983.png",
+          "alt": "Screenshot 2026-04-20 at 7.55.18 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776729353724.png",
+          "alt": "Screenshot 2026-04-20 at 7.55.39 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {
