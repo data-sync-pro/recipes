@@ -18,7 +18,85 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Data.Backup.Batches",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776812649535.png",
+          "alt": "Screenshot 2026-04-21 at 1.28.24 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Cases.Backup",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776812678968.png",
+          "alt": "Screenshot 2026-04-21 at 1.29.03 PM"
+        }
+      ]
+    },
+    {
+      "step": "Batch Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776812696471.png",
+          "alt": "Screenshot 2026-04-21 at 1.29.40 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776812712088.png",
+          "alt": "Screenshot 2026-04-21 at 1.30.05 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776812737755.png",
+          "alt": "Screenshot 2026-04-21 at 1.30.31 PM"
+        }
+      ]
+    },
+    {
+      "step": "Action",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-5-image-1776812753874.png",
+          "alt": "Screenshot 2026-04-21 at 1.30.58 PM"
+        }
+      ]
+    },
+    {
+      "step": "Executable Schedule",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-6-image-1776812808896.png",
+          "alt": "Screenshot 2026-04-21 at 1.32.48 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {

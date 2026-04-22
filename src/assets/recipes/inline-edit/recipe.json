@@ -10,7 +10,7 @@
   "generalImages": [
     {
       "type": "video",
-      "url": "https://youtu.be/kDHFOwwymjU",
+      "url": "https://youtu.be/StRgHElZVhI",
       "alt": ""
     }
   ],
@@ -18,7 +18,19 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Inline Edit Multiple Field Types and Records",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776897150379.png",
+          "alt": "WechatIMG13320"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],

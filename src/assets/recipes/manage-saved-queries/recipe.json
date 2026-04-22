@@ -18,7 +18,30 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Save Query",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776886637598.png",
+          "alt": "Screenshot 2026-04-22 at 3.37.09 PM"
+        }
+      ]
+    },
+    {
+      "step": "Manage Saved Queries",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776888041394.png",
+          "alt": "WechatIMG460"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],

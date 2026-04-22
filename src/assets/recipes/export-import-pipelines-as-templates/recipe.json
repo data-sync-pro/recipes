@@ -18,7 +18,30 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Export Pipeline",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776883166309.png",
+          "alt": "Screenshot 2026-04-22 at 2.39.12 PM"
+        }
+      ]
+    },
+    {
+      "step": "Import Pipeline",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776883171501.png",
+          "alt": "Screenshot 2026-04-22 at 2.38.45 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],

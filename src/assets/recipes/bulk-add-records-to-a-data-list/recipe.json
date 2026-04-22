@@ -18,7 +18,74 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Quote.Related.DataLists",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776878163716.png",
+          "alt": "Screenshot 2026-04-22 at 1.15.57 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Quote.Pricebook.Entries",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776878201131.png",
+          "alt": "Screenshot 2026-04-22 at 1.16.15 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776878228300.png",
+          "alt": "Screenshot 2026-04-22 at 1.16.58 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Quote.LineItems.Upsert",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776878307511.png",
+          "alt": "Screenshot 2026-04-22 at 1.18.20 PM"
+        }
+      ]
+    },
+    {
+      "step": "Action Button Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776886530326.png",
+          "alt": "WechatIMG453"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-5-image-1776878397521.png",
+          "alt": "Screenshot 2026-04-22 at 1.19.49 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {

@@ -18,7 +18,63 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Quote.Related.DataLists",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776813444732.png",
+          "alt": "Screenshot 2026-04-21 at 2.26.22 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Quote.Snapshot.Restore",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776813478254.png",
+          "alt": "Screenshot 2026-04-21 at 2.27.10 PM"
+        }
+      ]
+    },
+    {
+      "step": "Data List Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776813505423.png",
+          "alt": "Screenshot 2026-04-21 at 2.30.45 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776813531884.png",
+          "alt": "Screenshot 2026-04-21 at 2.31.24 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776813555449.png",
+          "alt": "Screenshot 2026-04-21 at 2.32.21 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {
