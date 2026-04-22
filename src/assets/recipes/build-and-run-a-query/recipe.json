@@ -18,7 +18,30 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Configure the Query",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776882933408.png",
+          "alt": "Screenshot 2026-04-22 at 2.31.16 PM"
+        }
+      ]
+    },
+    {
+      "step": "Explore the Results",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776882947615.png",
+          "alt": "Screenshot 2026-04-22 at 2.31.26 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],

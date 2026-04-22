@@ -18,7 +18,63 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Quote.Triggers",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776813209542.png",
+          "alt": "Screenshot 2026-04-21 at 2.05.07 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Quote.Snapshot.Insert",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776813235007.png",
+          "alt": "Screenshot 2026-04-21 at 2.05.56 PM"
+        }
+      ]
+    },
+    {
+      "step": "Trigger Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776813261844.png",
+          "alt": "Screenshot 2026-04-21 at 2.06.12 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776813321086.png",
+          "alt": "WechatIMG443"
+        }
+      ]
+    },
+    {
+      "step": "Action",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776813358652.png",
+          "alt": "Screenshot 2026-04-21 at 2.08.41 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],

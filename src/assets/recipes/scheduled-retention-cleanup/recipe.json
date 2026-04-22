@@ -64,34 +64,24 @@
       ]
     },
     {
-      "step": "New Schedule",
+      "step": "Mapping",
       "config": [],
       "media": [
         {
           "type": "image",
-          "url": "images/step-4-image-1776373241661.png",
-          "alt": "Screenshot 2026-04-16 at 4.53.03 PM"
-        },
-        {
-          "type": "image",
-          "url": "images/step-4-image-1776373282751.png",
-          "alt": "Screenshot 2026-04-16 at 4.53.11 PM"
-        },
-        {
-          "type": "image",
-          "url": "images/step-4-image-1776373288282.png",
-          "alt": "Screenshot 2026-04-16 at 4.53.19 PM"
+          "url": "images/step-4-image-1776804994656.png",
+          "alt": "Screenshot 2026-04-21 at 4.56.22 PM"
         }
       ]
     },
     {
-      "step": "Scheduled Job",
+      "step": "Pipeline Schedule",
       "config": [],
       "media": [
         {
           "type": "image",
-          "url": "images/step-5-image-1776373395545.png",
-          "alt": "Screenshot 2026-04-16 at 4.53.44 PM"
+          "url": "images/step-5-image-1776805741689.png",
+          "alt": "Screenshot 2026-04-21 at 5.03.32 PM"
         }
       ]
     }

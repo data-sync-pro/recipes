@@ -42,18 +42,13 @@
       ]
     },
     {
-      "step": "SOQL Query",
+      "step": "Retrieve",
       "config": [],
       "media": [
         {
           "type": "image",
-          "url": "images/step-2-image-1776372006952.png",
-          "alt": "Screenshot 2026-04-16 at 4.24.10 PM"
-        },
-        {
-          "type": "image",
-          "url": "images/step-2-image-1776372010621.png",
-          "alt": "Screenshot 2026-04-16 at 4.24.20 PM"
+          "url": "images/step-2-image-1776804678800.png",
+          "alt": "4201776716696_.pic_hd"
         }
       ]
     }

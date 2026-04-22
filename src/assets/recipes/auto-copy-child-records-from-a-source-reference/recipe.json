@@ -18,7 +18,63 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Opportunity.Triggers",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776812976788.png",
+          "alt": "Screenshot 2026-04-21 at 2.00.43 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Opportunity.LineItems.Clone",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776813004274.png",
+          "alt": "Screenshot 2026-04-21 at 2.01.09 PM"
+        }
+      ]
+    },
+    {
+      "step": "Trigger Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776813024471.png",
+          "alt": "Screenshot 2026-04-21 at 2.01.47 PM"
+        }
+      ]
+    },
+    {
+      "step": "Scoping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776813096876.png",
+          "alt": "Screenshot 2026-04-21 at 7.11.32 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776813127165.png",
+          "alt": "Screenshot 2026-04-21 at 7.11.57 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {

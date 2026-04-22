@@ -10,7 +10,7 @@
   "generalImages": [
     {
       "type": "video",
-      "url": "https://youtu.be/F9qjWTrW544",
+      "url": "https://youtu.be/GPmdX7UInUU",
       "alt": ""
     }
   ],
@@ -18,7 +18,19 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Opportunity.DataLoaders",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776807703005.png",
+          "alt": "Screenshot 2026-04-21 at 5.41.33 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {

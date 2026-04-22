@@ -18,7 +18,52 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Contact.Batches",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776896728685.png",
+          "alt": "Screenshot 2026-04-22 at 6.25.09 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Contact.DeltaUpdate",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776896760594.png",
+          "alt": "Screenshot 2026-04-22 at 6.25.34 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776896779841.png",
+          "alt": "Screenshot 2026-04-22 at 6.26.11 PM"
+        }
+      ]
+    },
+    {
+      "step": "Action",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776896797310.png",
+          "alt": "Screenshot 2026-04-22 at 6.26.27 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],
