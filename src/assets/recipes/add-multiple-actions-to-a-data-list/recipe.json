@@ -20,29 +20,18 @@
   "connection": "",
   "walkthrough": [
     {
-      "step": "Data List - Account.OpenOpportunities",
+      "step": "Attach Action Buttons to Data List",
       "config": [],
       "media": [
         {
           "type": "image",
-          "url": "images/step-0-image-1776370915481.png",
-          "alt": "data-list"
+          "url": "images/step-0-image-1776982695476.png",
+          "alt": "WechatIMG554"
         }
       ]
     },
     {
-      "step": "Data List Settings",
-      "config": [],
-      "media": [
-        {
-          "type": "image",
-          "url": "images/step-1-image-1776714237873.png",
-          "alt": "data-list-settings"
-        }
-      ]
-    },
-    {
-      "step": "On Account Record Page",
+      "step": "Action Buttons on Account Record Page",
       "config": [],
       "media": [
         {
