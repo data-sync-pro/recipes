@@ -27,7 +27,8 @@ export class RecipeCardComponent {
     'Trigger': 'assets/icons/recipe/trigger.svg',
     'Data List': 'assets/icons/recipe/data-list.svg',
     'Data Loader': 'assets/icons/recipe/data-loader.svg',
-    'Transformation': 'assets/icons/recipe/transformation.svg'
+    'Transformation': 'assets/icons/recipe/transformation.svg',
+    'General': 'assets/icons/recipe/general.svg'
   };
 
   /**
