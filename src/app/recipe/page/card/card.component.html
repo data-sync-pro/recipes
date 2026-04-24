@@ -1,4 +1,4 @@
-<div class="recipe-card" (click)="onRecipeClick()">
+<a class="recipe-card" [routerLink]="recipeLink" (click)="onRecipeClick()">
   <div class="card-content">
     <div class="card-text">
       <h3 class="recipe-title">{{ recipe.title }}</h3>
@@ -14,4 +14,4 @@
         aria-hidden="true">
     </div>
   </div>
-</div>
+</a>
