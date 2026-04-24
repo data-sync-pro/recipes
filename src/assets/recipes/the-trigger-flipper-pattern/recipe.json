@@ -76,7 +76,11 @@
     }
   ],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Case.Triggers.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "the-trigger-flipper-pattern"
