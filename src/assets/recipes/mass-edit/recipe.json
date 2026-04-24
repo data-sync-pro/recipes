@@ -10,7 +10,7 @@
   "generalImages": [
     {
       "type": "video",
-      "url": "https://youtu.be/7sVgh-bNf6U",
+      "url": "https://youtu.be/SEvIVVNhW4k",
       "alt": ""
     }
   ],
@@ -18,7 +18,30 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Mass Edit",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776970322564.png",
+          "alt": "WechatIMG520"
+        }
+      ]
+    },
+    {
+      "step": "Blank Update",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776970588187.png",
+          "alt": "WechatIMG524"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],

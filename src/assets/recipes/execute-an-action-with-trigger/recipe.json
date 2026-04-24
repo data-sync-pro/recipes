@@ -18,7 +18,63 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Case.Triggers",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776971241438.png",
+          "alt": "Screenshot 2026-04-23 at 3.07.13 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Case.Create.FollowUpTask.OnClose",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776971275979.png",
+          "alt": "Screenshot 2026-04-23 at 3.07.28 PM"
+        }
+      ]
+    },
+    {
+      "step": "Trigger Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776971296647.png",
+          "alt": "Screenshot 2026-04-23 at 3.08.06 PM"
+        }
+      ]
+    },
+    {
+      "step": "Scoping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776971320004.png",
+          "alt": "Screenshot 2026-04-23 at 3.08.28 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776971341148.png",
+          "alt": "Screenshot 2026-04-23 at 3.08.52 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {

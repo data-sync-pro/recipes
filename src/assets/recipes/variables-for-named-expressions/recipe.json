@@ -20,7 +20,7 @@
   "connection": "",
   "walkthrough": [
     {
-      "step": "New Variable - TaxConfiguration",
+      "step": "Define Reusable Variable",
       "config": [],
       "media": [
         {
@@ -31,7 +31,7 @@
       ]
     },
     {
-      "step": "Mapping",
+      "step": "Reference Variable Fields in Mappings",
       "config": [],
       "media": [
         {
