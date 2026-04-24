@@ -44,7 +44,13 @@
     {
       "step": "Run Schedule Job as Me",
       "config": [],
-      "media": []
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1777057745870.png",
+          "alt": "WechatIMG595"
+        }
+      ]
     }
   ],
   "verificationGIF": [],
