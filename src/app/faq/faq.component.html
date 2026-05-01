@@ -258,7 +258,21 @@
 
       <div *ngIf="current.faqItem && !search.isActive && !search.query.trim()" class="faq-detail">
         <div class="faq-detail-content">
-          <h2 class="faq-question">{{ current.faqItem.question }}</h2>
+          <div class="faq-title-row">
+            <button class="nav-prev-next"
+                    [disabled]="!previousFAQ"
+                    (click)="previousFAQ && navigateToFAQ(previousFAQ, $event)"
+                    [title]="previousFAQ ? previousFAQ.question : ''">
+              <lightning-icon iconName="utility:chevronleft" size="small" alternativeText="Previous"></lightning-icon>
+            </button>
+            <h2 class="faq-question">{{ current.faqItem.question }}</h2>
+            <button class="nav-prev-next"
+                    [disabled]="!nextFAQ"
+                    (click)="nextFAQ && navigateToFAQ(nextFAQ, $event)"
+                    [title]="nextFAQ ? nextFAQ.question : ''">
+              <lightning-icon iconName="utility:chevronright" size="small" alternativeText="Next"></lightning-icon>
+            </button>
+          </div>
           
           <!-- Loading skeleton for FAQ content -->
           <app-faq-skeleton 
@@ -673,7 +687,7 @@
 
     <cdk-virtual-scroll-viewport 
       *ngIf="faqItems.length > 20 && !ui.isMobile" 
-      itemSize="120" 
+      itemSize="55" 
       class="faq-virtual-viewport"
     >
       <div
@@ -691,10 +705,6 @@
           <div class="faq-title-section">
             <div class="faq-question-row">
               <h3 class="faq-question" [id]="slugify(item.question)">{{ item.question }}</h3>
-              <div class="category-badges">
-                <span class="category-badge">{{ item.category }}</span>
-                <span class="subcategory-badge" *ngIf="item.subCategory">{{ item.subCategory }}</span>
-              </div>
             </div>
           </div>
 
@@ -721,10 +731,6 @@
           <div class="faq-title-section">
             <div class="faq-question-row">
               <h3 class="faq-question" [id]="slugify(item.question)">{{ item.question }}</h3>
-              <div class="category-badges">
-                <span class="category-badge">{{ item.category }}</span>
-                <span class="subcategory-badge" *ngIf="item.subCategory">{{ item.subCategory }}</span>
-              </div>
             </div>
           </div>
 

@@ -143,9 +143,12 @@ $breakpoint-desktop: 768px;
   .faq-detail {
     padding: 24px 0;
 
+    .nav-prev-next {
+      padding: 4px;
+    }
+
     .faq-question {
       font-size: 1.5rem;
-      margin-bottom: 16px;
       line-height: 1.4;
     }
 

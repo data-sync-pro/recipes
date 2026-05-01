@@ -716,6 +716,20 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.filteredFAQ || [];
   }
 
+  get previousFAQ(): FAQItem | null {
+    if (!this.current.faqItem) return null;
+    const list = this.currentFAQList;
+    const index = list.findIndex(item => item.id === this.current.faqItem!.id);
+    return index > 0 ? list[index - 1] : null;
+  }
+
+  get nextFAQ(): FAQItem | null {
+    if (!this.current.faqItem) return null;
+    const list = this.currentFAQList;
+    const index = list.findIndex(item => item.id === this.current.faqItem!.id);
+    return index >= 0 && index < list.length - 1 ? list[index + 1] : null;
+  }
+
   get shouldShowTOC(): boolean {
     if (this.ui.isMobile) {
       return false;
