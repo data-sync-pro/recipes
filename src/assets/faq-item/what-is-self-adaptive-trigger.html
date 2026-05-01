@@ -1,4 +1,9 @@
-<p>A Self-Adaptive #Trigger <b>transforms</b> and <b>validates</b> fields on the triggering records before they are committed to the database. Unlike #Trigger Actions, which operate on related data, a Self-Adaptive #Trigger treats the triggering records as both input and output.</p>
+<p>A Self-Adaptive #Trigger transforms and validates fields on the triggering records before they're committed to the database. Unlike #Trigger Actions, which operate on related data, a Self-Adaptive #Trigger treats the triggering records as both input and output.</p><p><strong>To create a Self-Adaptive #Trigger:</strong></p><ol>
+<li>Create a new Executable enabling #Trigger.</li>
+<li>Set the source and target objects to the same object.</li>
+<li>Choose <strong>Update</strong> as the action.</li>
+<li>Set both the <strong>Target Matching Field</strong> and the <strong>Mapping</strong> to <strong>Id</strong> — telling the engine that the records being evaluated are the same ones that fired the trigger.</li>
+<li>For in-memory field transformations, enable <strong>Before Insert</strong> and/or <strong>Before Update</strong>. For validations, enable any trigger event and use the <code>ERROR</code> function in <strong>Field Mappings</strong> or <strong>Scope Filters</strong> to conditionally fail records with custom messages.</li></ol><div><br></div><div><img src="assets/image/triggers-how-to-create-self-adaptive/triggers-how-to-create-self-adaptive1.jpg"></div><div><br></div>
   
 
   <img src="assets/image/triggers-what-is-self-adaptive-trigger/triggers-what-is-self-adaptive-trigger.jpg">

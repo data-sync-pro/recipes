@@ -1,42 +1,4 @@
-<p>
-  <b>#Trigger</b> is a <strong>bulkified, </strong
-  ><strong>rules-driven, modular </strong>engine that simplifies Salesforce
-  trigger logic. Instead of writing cumbersome bulkification code, you
-  configure #Trigger Executable records <b>declaratively </b>that run on trigger
-  events (like <em>Before Insert</em> or <em>After Update</em>).
-</p>
-<p>It works in two main ways:</p>
-<ul>
-  <li>
-    <p>
-      <strong>Self-Adaptive #Triggers</strong> – apply rules to <strong>transform</strong> or
-      <strong>validate</strong> fields on the same record before it's saved.
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Trigger Actions</strong> – apply rules that use the triggering
-      records to insert, update or delete related records, or send notifications
-      etc.
-    </p>
-  </li>
-</ul>
-<p>
-  When a trigger event occurs, DSP evaluates the
-  <strong>scoping criteria</strong> to determine which records should be
-  processed. It then applies field transformations, validations, or actions in a
-  <strong>bulkified manner</strong> for optimal performance.
-</p>
-<p>
-  To enable it, simply add a single line of static code to your object's Apex
-  Trigger, ensuring all trigger events are included:
-</p>
-<pre><div><div><code>pushtopics.TriggerServices.execute();
-</code></div></div></pre>
-<p>
-  By defining trigger logic as Executables and injecting them dynamically at
-  runtime, the #Trigger rules engine acts like
-  <strong>metadata-driven dependency injection</strong> for Salesforce
-  triggers—making automation simpler, modular, and bulk-safe without custom
-  Apex.
-</p>
+<p>A #Trigger is an Executable that listens for Salesforce DML events on a specific object and runs declaratively defined logic in response. It packages <strong>input, transformation logic, and a target action</strong> into a <b>simple</b>, <b>modular </b>configuration unit — letting you define trigger automation with bulk-safe rules while keeping logic modular and segregated.</p><p>The <strong>input</strong> is the set of records from a triggering DML event (insert, update, delete, undelete), narrowed by configurable scoping criteria so each #Trigger fires only on the records it should. #Triggers take two forms:</p><ul>
+<li><strong>Self-Adaptive #Trigger</strong> — In-memory transform or validate fields on the same triggering record before it's saved.</li>
+<li><strong>#Trigger Action</strong> — Use the triggering records to perform DML on related records (insert, update, delete, merge) or run any supported action (Lead Convert, Notifications, Approvals, and more).</li>
+</ul><p>#Trigger also provides built-in bypass controls and recursion prevention through configuration.</p>

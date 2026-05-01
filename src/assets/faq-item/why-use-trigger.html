@@ -1,60 +1,6 @@
-<p>
-  DSP <b>#Trigger</b> is a <b>bulkified</b>, <b>rules-driven</b>, <b>modular</b> engine
-  that simplifies Salesforce automation and validation. Instead of writing
-  cumbersome bulkification code, you configure #Trigger Executable records
-  <b>declaratively</b>. This makes automation simple to design, implement,
-  maintain and scale.
-</p>
-<p><strong>Key Benefits:</strong></p>
-<ul>
-  <li>
-    <p>
-      <strong>Rules-Driven Trigger Logic</strong><br />
-      Define trigger rules declaratively with formulas and expressions. #Trigger
-      logic is modular, metadata-driven, and injected dynamically at runtime.
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Bulkified by Design</strong><br />DSP automatically manages bulk
-      processing so you can define rules as if working with a single record. You
-      can directly reference fields on parent objects (e.g.,
-      <code>Parent__r.GrandParent__r.Field__c</code>) and use advanced functions
-      like <code>VLOOKUP</code> or <code>AGG</code>, making even complex
-      transformations straightforward—without writing custom SOQL or handling
-      Apex collections.
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Dynamic Scoping and Criteria</strong><br />
-      Triggered records are evaluated against scoping rules so only the relevant
-      subset is processed, improving efficiency and precision.
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Flexible Actions</strong><br />
-      Executables can perform validations, recalculate fields, insert, update,
-      or delete related records, send notifications, publish platform events or
-      more.
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Execution Order and Control</strong><br />
-      DSP gives administrators fine-grained control over execution order,
-      selective bypass options, recursion handling, and user-level permissions,
-      ensuring flexible configurations that address even complex business
-      requirements in enterprise environments.
-    </p>
-  </li>
-</ul>
-<p>
-  By combining a <strong>rules-driven framework</strong>,
-  <strong>bulkified execution</strong>, and
-  <strong>metadata-driven injection</strong>, #Trigger makes Salesforce
-  automation and validation far more scalable, flexible, and maintainable, while
-  reducing complexity and <b>significantly</b>
-  <b>minimizing long-term technical debt</b>.
-</p>
+<p>#Trigger turns Salesforce automation into declarative, bulk-safe, modular, rules-based records — solving the complexity, fragility, and opacity that automation logic typically accumulates as orgs grow.</p><p><strong>Key Benefits:</strong></p><ul>
+<li><strong>Simple</strong> — Define trigger logic declaratively with rules; no code or canvas required.</li>
+<li><strong>Modular</strong> — Each #Trigger is a self-contained unit with its own input, logic, and target action.</li>
+<li><strong>Bulk-Safe</strong> — All rules run bulkified by default — no boilerplate, no governor-limit traps, no scaling surprises.</li>
+<li><strong>Bounded</strong> — Each #Trigger has clear scope and clear edges, defined entirely as record-based configuration.</li>
+</ul><p><strong>In short:</strong> #Trigger makes everyday Salesforce automation simple, modular, bulk-safe, and built to last — slashing tech debt as the org grows.</p>

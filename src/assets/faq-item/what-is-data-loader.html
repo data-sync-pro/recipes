@@ -1,26 +1,10 @@
-<p>A <b>#Data Loader</b> is a record-based rules engine that processes CSV file uploads, applies transformations, and executes
-    actions such as Insert, Update, Upsert, and Delete. Built directly in LWC and APEX, it integrates natively with
-    Salesforce for seamless and secure operation.</p>
-<p><strong>Unlike traditional loaders, DSP #Data Loader:</strong></p>
-<ul>
-    <li>
-        <p>Lets you define the process once and reuse it for future uploads.</p>
-    </li>
-    <li>
-        <p>Supports powerful, rules-driven transformations.</p>
-    </li>
-    <li>
-        <p>Tracks execution logs as Salesforce records for easy troubleshooting and compliance.</p>
-    </li>
-    <li>
-        <p>Runs entirely within your Salesforce org, ensuring the highest security standards.</p>
-    </li>
-    <li>
-        <p>Suits both technical and business users.</p>
-    </li>
-</ul>
-<p>Together, these capabilities deliver <strong>reusable processes, powerful transformations, and secure, compliant
-        execution inside Salesforce.</strong></p>
+<p>A #Data Loader is a rules-driven Executable that packages <strong>input, transformation logic, and a target action</strong> into a reusable configuration unit — turning CSV uploads into repeatable, governed data operations inside Salesforce.</p><p>The <strong>input</strong> is a CSV file uploaded by the user. The <strong>transformation logic</strong> is defined declaratively through field mappings, formulas, and built-in functions. The <strong>target action</strong> can be any supported DML operation — Insert, Update, Upsert, Delete, Merge, Lead Convert, Email/Bell Notification, Approval, and more — applied to the records produced by the transformations.</p><p>Built natively with LWC and Apex, the #Data Loader runs entirely within your Salesforce org. Compared to traditional file-based loaders, it offers:</p><ul>
+<li><strong>Reusable configuration</strong> — Define the load once and reuse it for every future upload, instead of rebuilding mappings each time.</li>
+<li><strong>Rules-driven transformations</strong> — Clean, enrich, lookup, and reshape data declaratively as it loads, without external tools or scripts.</li>
+<li><strong>Auditable execution</strong> — Every run is captured as Salesforce records, making troubleshooting, reporting, and compliance straightforward.</li>
+<li><strong>Native security</strong> — All processing stays inside the org, governed by the standard Salesforce security model.</li>
+<li><strong>Accessible to all users</strong> — Built by the dev team once, then granted to business users for their routine work.</li>
+</ul><p>Together, these capabilities turn ad-hoc file uploads into <b>accessible</b>, <b>repeatable</b>, <b>transformable</b>, <b>governed</b>, and <b>secure </b>data operations — fully integrated into Salesforce.</p>
 
 
 <img src="assets/image/data-loader-what-is-data-loader/data-loader-what-is-data-loader.jpg">

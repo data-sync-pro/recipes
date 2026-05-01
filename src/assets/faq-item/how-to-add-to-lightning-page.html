@@ -1,22 +1,5 @@
-<p>
-      To embed a <strong>#Data List</strong> in the Lightning UI:
-    </p>
-    <ul>
-      <li><p>Open <strong>Lightning App Builder</strong> for a Record Page, Home Page, or App Page.</p>
-</li>
-<li>
-<p>Drag and drop one of the following:</p>
-<ul>
-<li>
-<p><strong>Executable Data List</strong> – to embed a single #Data List.</p>
-</li>
-<li>
-<p><strong>Pipeline Data Lists</strong> – to embed a group of #Data Lists from a Pipeline.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Enter the <strong>API Name</strong> of the corresponding Executable or Pipeline.</p></li></ul>This lets you display interactive, no-code #Data Lists directly in the Lightning experience, tailored to your users’ workflows.<div><br>
+<p>To incorporate Data Lists into the Lightning UI, simply add the "Executable Data List", "Pipeline Data Lists", or "Pipeline Data List Quick Links" LWC component to a Lightning Record Page, Lightning App Builder, or Lightning Home Page. Then, specify the API Name of the Executable or Pipeline you wish to use. For a dynamic Data List rendered in the context of a specific record, input a temporarily representative record ID into the "Context Record ID" field and use related fields in the filters while constructing the SOQL query. This allows you to utilize related fields (up to 5 parent levels) for filtering. When the component is displayed on a Lightning Record Page, the "Context Record ID" will automatically adapt to the ID of the record being loaded.</p><div><br>
   
 
   <img src="assets/image/data-list-how-to-add-to-lightning-page/data-list-how-to-add-to-lightning-page.jpg"></div>
+  <br>

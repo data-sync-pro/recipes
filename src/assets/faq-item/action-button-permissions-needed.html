@@ -1,24 +1,5 @@
-<p>To access and use a <b>#Action Button</b>, users need the following:</p>
-<ol>
-    <li><strong>DSP Permission Set</strong><br>
-        <ul>
-            <li>Minimum required: <strong>DSP: Data Sync Pro Starter</strong></li>
-        </ul>
-    </li>
-    <li><strong>Executable Record Access</strong><br>
-        <ul>
-            <li>Must have at least <b>Read</b> access to the Executable record that defines the #Action Button.</li>
-        </ul>
-    </li>
-    <li><strong>Custom Permission (Action Access)</strong><br>
-        <ul>
-            <li>If “<strong>Execute Access Permissions</strong>” is configured, users must have one of those
-                permission(s) to see and use the action.</li>
-        </ul>
-    </li>
-    <li><strong>Object & Field-Level Access</strong><br>
-        <ul>
-            <li>Users must have necessary access to the source and target data involved in the #Action Button.<br></li>
-        </ul>
-    </li>
-</ol>
+<p>To access and use an #Action Button, users need the following:</p><ol>
+<li><strong>DSP Permission Set</strong> — At minimum, the <strong>DSP: Data Sync Pro Starter</strong> permission set.</li>
+<li><strong>Executable Record Access</strong> — At least Read access to the Executable record that defines the #Action Button. By default, every #Action Button is shared with all internal users through record sharing; this can be revoked by unchecking <strong>All Internal Users Have Read Access?</strong> on the Executable.</li>
+<li><strong>Custom Permission (when applicable)</strong> — If the <strong>Access Permissions</strong> field is set on the Executable, users must have one of the specified custom permission(s) to see and use the action.</li>
+<li><strong>Scope Filter (when applicable)</strong> — When an #Action Button is placed on a Lightning Record, the current record must match the configured <strong>Scope Filter</strong>. If it doesn't, the #Action Button is hidden from the user.</li></ol>
