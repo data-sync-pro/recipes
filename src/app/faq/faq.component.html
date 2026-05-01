@@ -41,69 +41,38 @@
   >
       <div class="sidebar-content">
         <!-- Sidebar Header -->
-        <div class="sidebar-header">
-          <div class="sidebar-title-section" *ngIf="!ui.sidebarCollapsed">
-            <h2 class="sidebar-main-title">FAQs</h2>
-            <span class="sidebar-subtitle">{{ faqList.length }} articles</span>
-          </div>
-          <button
-            class="sidebar-toggle-btn"
-            (click)="toggleSidebar()"
-            title="Toggle sidebar"
-            *ngIf="!ui.isMobile"
-          >
-            <lightning-icon
-              [iconName]="ui.sidebarCollapsed ? 'utility:chevronright' : 'utility:chevronleft'"
-              size="xx-small"
-              [alternativeText]="ui.sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'"
-            ></lightning-icon>
-          </button>
-          <!-- Mobile close button -->
+        <div class="sidebar-header" *ngIf="ui.isMobile && ui.mobileSidebarOpen">
           <button
             class="mobile-sidebar-close"
             (click)="closeMobileSidebar()"
             title="Close sidebar"
-            *ngIf="ui.isMobile && ui.mobileSidebarOpen"
           >
             ✕
           </button>
         </div>
 
         <div class="sidebar-body">
-          <!-- Search in sidebar -->
-          <div class="sidebar-search" *ngIf="!ui.sidebarCollapsed">
-            <button
-              class="sidebar-search-btn"
-              (click)="openSearchOverlay()"
-              title="Search FAQs (Press / or Ctrl+K for quick access)"
-            >
-              <lightning-icon
-                iconName="utility:search"
-                size="x-small"
-                alternativeText="Search"
-              ></lightning-icon>
-              <span class="search-text">Search...</span>
-              <span class="search-shortcut">/</span>
-            </button>
-          </div>
-
           <!-- Navigation Tree -->
           <div class="sidebar-nav">
-            <!-- Home -->
-            <div class="nav-item home-nav" [class.active]="showHome" 
-                 (click)="goHome()"
-                 (touchstart)="handleTouchStart()">
-              <div class="nav-content">
-                <lightning-icon
-                  iconName="utility:home"
-                  size="x-small"
-                  alternativeText="Home"
-                  class="nav-icon"
-                ></lightning-icon>
-                <span class="nav-text" *ngIf="!ui.sidebarCollapsed">All FAQs</span>
-                <span class="nav-count" *ngIf="!ui.sidebarCollapsed">{{ faqList.length }}</span>
-              </div>
+
+          <!-- Search in sidebar -->
+          <div class="sidebar-search" *ngIf="!ui.sidebarCollapsed">
+            <div class="sidebar-search-input-wrapper">
+              <lightning-icon iconName="utility:search" size="x-small" alternativeText="Search"></lightning-icon>
+              <input
+                type="text"
+                class="sidebar-search-input"
+                placeholder="Search..."
+                #searchInput
+                [(ngModel)]="search.query"
+                (input)="onSearchInput($event)"
+                (keydown.escape)="clearSearch()"
+              />
+              <button *ngIf="search.query" class="search-clear-btn" (click)="clearSearch()">
+                <lightning-icon iconName="utility:close" size="xx-small" alternativeText="Clear"></lightning-icon>
+              </button>
             </div>
+          </div>
 
             <!-- Search - Collapsed -->
             <div class="nav-item search-nav" 
@@ -120,11 +89,22 @@
               </div>
             </div>
 
-            <!-- Categories -->
-            <div class="nav-section" *ngIf="!ui.sidebarCollapsed">
-              <div class="section-divider"></div>
-              <div class="section-label">Categories</div>
+            <!-- Home -->
+            <div class="nav-item home-nav" [class.active]="showHome"
+                 (click)="goHome()"
+                 (touchstart)="handleTouchStart()">
+              <div class="nav-content">
+                <lightning-icon
+                  iconName="utility:home"
+                  size="x-small"
+                  alternativeText="Home"
+                  class="nav-icon"
+                ></lightning-icon>
+                <span class="nav-text" *ngIf="!ui.sidebarCollapsed">All FAQs</span>
+              </div>
+              <span class="nav-count" *ngIf="!ui.sidebarCollapsed">{{ faqList.length }}</span>
             </div>
+
 
             <div class="nav-tree">
               <div
@@ -184,6 +164,20 @@
       </div>
     </aside>
 
+  <!-- Sidebar Toggle Button -->
+  <button
+    class="sidebar-toggle-btn"
+    (click)="toggleSidebar()"
+    [title]="ui.sidebarCollapsed ? 'Show Sidebar' : 'Hide Sidebar'"
+    *ngIf="!ui.isMobile"
+  >
+    <lightning-icon
+      [iconName]="ui.sidebarCollapsed ? 'utility:chevronright' : 'utility:chevronleft'"
+      size="x-large"
+      [alternativeText]="ui.sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'"
+    ></lightning-icon>
+  </button>
+
   <!-- Main content area with proper container -->
   <div class="faq-container" [class.toc-hidden]="ui.tocHidden">
   
@@ -222,6 +216,20 @@
       >
         <span>{{ current.subCategory }}</span>
       </button>
+      <div class="breadcrumb-search" *ngIf="!current.faqItem">
+        <lightning-icon iconName="utility:search" size="xx-small" alternativeText="Search"></lightning-icon>
+        <input
+          type="text"
+          class="breadcrumb-search-input"
+          [placeholder]="'Search in ' + (current.subCategory || current.category)"
+          [(ngModel)]="categorySearchQuery"
+          (input)="onCategorySearchInput($event)"
+          (keydown.escape)="clearCategorySearch()"
+        />
+        <button *ngIf="categorySearchQuery" class="search-clear-btn" (click)="clearCategorySearch()">
+          <lightning-icon iconName="utility:close" size="xx-small" alternativeText="Clear"></lightning-icon>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -232,28 +240,28 @@
 
 
       <div *ngIf="showHome && !ui.isLoadingRouteData" class="all-faqs">
-        <h2 class="section-title">All FAQs</h2>
-        
+        <h2 class="section-title" *ngIf="!search.query.trim()">All FAQs</h2>
+        <h2 class="section-title" *ngIf="search.query.trim()">Search: "{{ search.query }}"</h2>
+
         <!-- Loading skeleton for initial load -->
-        <app-faq-skeleton 
-          *ngIf="isLoadingState && !ui.isLoadingRouteData" 
-          type="list" 
+        <app-faq-skeleton
+          *ngIf="isLoadingState && !ui.isLoadingRouteData"
+          type="list"
           [count]="10">
         </app-faq-skeleton>
-        
+
         <!-- FAQ content -->
-        <ng-container 
+        <ng-container
           *ngIf="!isLoadingState && !ui.isLoadingRouteData"
-          [ngTemplateOutlet]="faqListTemplate" 
-          [ngTemplateOutletContext]="{ faqItems: allFaqList }">
+          [ngTemplateOutlet]="faqListTemplate"
+          [ngTemplateOutletContext]="{ faqItems: search.query.trim() ? filteredFAQ : allFaqList }">
         </ng-container>
+
+        <div class="no-results" *ngIf="search.query.trim() && filteredFAQ.length === 0 && !isLoadingState">
+          <h3>No results found</h3>
+        </div>
       </div>
       <div *ngIf="!showHome && !current.faqItem && !search.isActive && !ui.isLoadingRouteData" class="category-intro">
-        <div class="category-header">
-          <h2 class="category-title">
-            {{ current.subCategory || current.category }}
-          </h2>
-        </div>
       </div>
 
       <div *ngIf="current.faqItem && !search.isActive && !search.query.trim()" class="faq-detail">
@@ -263,14 +271,14 @@
                     [disabled]="!previousFAQ"
                     (click)="previousFAQ && navigateToFAQ(previousFAQ, $event)"
                     [title]="previousFAQ ? previousFAQ.question : ''">
-              <lightning-icon iconName="utility:chevronleft" size="small" alternativeText="Previous"></lightning-icon>
+              <lightning-icon iconName="utility:chevronleft" size="x-large" alternativeText="Previous"></lightning-icon>
             </button>
             <h2 class="faq-question">{{ current.faqItem.question }}</h2>
             <button class="nav-prev-next"
                     [disabled]="!nextFAQ"
                     (click)="nextFAQ && navigateToFAQ(nextFAQ, $event)"
                     [title]="nextFAQ ? nextFAQ.question : ''">
-              <lightning-icon iconName="utility:chevronright" size="small" alternativeText="Next"></lightning-icon>
+              <lightning-icon iconName="utility:chevronright" size="x-large" alternativeText="Next"></lightning-icon>
             </button>
           </div>
           
@@ -435,48 +443,8 @@
         </ng-container>
 
         <div class="no-results" *ngIf="filteredFAQ.length === 0">
-          <div *ngIf="search.query.trim(); else noSearchResults" class="search-no-results">
-            <div class="no-results-icon">
-              <lightning-icon
-                iconName="utility:search"
-                size="medium"
-                alternativeText="No search results"
-              ></lightning-icon>
-            </div>
+          <div *ngIf="search.query.trim() || categorySearchQuery.trim(); else noSearchResults" class="search-no-results">
             <h3>No results found</h3>
-            <p>No FAQ found containing "<strong>{{ search.query }}</strong>".</p>
-
-            <div class="search-suggestions">
-              <h4>Suggestions:</h4>
-              <ul>
-                <li>Check your spelling</li>
-                <li>Try simpler keywords</li>
-                <li>Use synonyms or related terms</li>
-                <li>Reduce the number of search terms</li>
-              </ul>
-            </div>
-
-            <div class="popular-faqs">
-              <h4>Popular FAQs:</h4>
-              <div class="popular-faq-list">
-                <button
-                  class="popular-faq-item"
-                  *ngFor="let faq of popularFAQs"
-                  (click)="selectPopularFAQ(faq, $event)"
-                  (touchstart)="handleTouchStart()"
-                >
-                  {{ faq.question }}
-                </button>
-              </div>
-            </div>
-
-            <div class="contact-support">
-              <h4>Still need help?</h4>
-              <p>If you haven't found the information you need, please contact our support team.</p>
-              <button class="contact-button" (click)="contactSupport()">
-                Contact Support
-              </button>
-            </div>
           </div>
 
           <ng-template #noSearchResults>
@@ -593,7 +561,7 @@
   >
     <lightning-icon
       [iconName]="ui.tocHidden ? 'utility:chevronleft' : 'utility:chevronright'"
-      size="xx-small"
+      size="x-large"
       [alternativeText]="ui.tocHidden ? 'Show TOC' : 'Hide TOC'"
     ></lightning-icon>
   </button>
@@ -687,7 +655,7 @@
 
     <cdk-virtual-scroll-viewport 
       *ngIf="faqItems.length > 20 && !ui.isMobile" 
-      itemSize="52" 
+      itemSize="35" 
       class="faq-virtual-viewport"
     >
       <div
@@ -743,12 +711,5 @@
 </ng-template>
 
 <!-- Search overlay -->
-<app-search-overlay
-  *ngIf="search.isOpen"
-  [isOpen]="search.isOpen"
-  [initialQuery]="searchOverlayInitialQuery"
-  (closed)="closeSearchOverlay()"
-  (selectedResult)="handleSearchSelect($event)"
-></app-search-overlay>
 
 

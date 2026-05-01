@@ -8,8 +8,8 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 // Virtual scrolling viewport
 .faq-virtual-viewport {
-  // Optimized calculation: 100vh - (header:60px + layout-margin:60px + title-area:90px + spacing:20px)
-  height: calc(100vh - 285px);
+  // 100vh - (header:60px + breadcrumb:50px + padding:40px + spacing:20px)
+  height: calc(100vh - 170px);
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
@@ -140,7 +140,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 
     .faq-header {
-      padding: 18px 8px 10px 8px;
+      padding: 8px 0 4px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;

@@ -30,23 +30,7 @@ $breakpoint-desktop: 768px;
   grid-area: main;
   padding: 20px 2vw;
   background: #ffffff;
-  // sidebar expanded + toc hidden → 7vw (user's preferred baseline)
-  .faq-layout-container.toc-hidden & {
-    padding-left: 7vw;
-    padding-right: 7vw;
-  }
 
-  // sidebar collapsed + toc visible → more space available
-  .faq-layout-container.sidebar-collapsed & {
-    padding-left: 5vw;
-    padding-right: 5vw;
-  }
-
-  // sidebar collapsed + toc hidden → most space
-  .faq-layout-container.sidebar-collapsed.toc-hidden & {
-    padding-left: 10vw;
-    padding-right: 10vw;
-  }
 
   &.toc-hidden {
 
@@ -68,21 +52,60 @@ $breakpoint-desktop: 768px;
 // Compact breadcrumb navigation - sticky positioning
 .breadcrumb-nav {
   position: sticky;
-  top: $header-height; // Stick below the main header
-  z-index: 90; // Higher than TOC but below main header
+  top: $header-height;
+  z-index: 90;
   padding: 15px 0 10px 0;
   margin: 0;
-  background: rgba(255, 255, 255, 0.95); // Semi-transparent white background
-  backdrop-filter: blur(8px); // Modern blur effect for better visibility
-  -webkit-backdrop-filter: blur(8px); // Safari support
-  
-  // Mobile responsive adjustments - hide breadcrumb on mobile
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   @media (max-width: 768px) {
-    display: none; // Hide breadcrumb completely on mobile devices
+    display: none;
   }
-  
-  // Ensure proper stacking context
+
   isolation: isolate;
+}
+
+.breadcrumb-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  background: #f8f9fa;
+
+  &:focus-within {
+    border-color: #1a73e8;
+    background: #fff;
+  }
+
+  .search-clear-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #5f6368;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      color: #333;
+    }
+  }
+}
+
+.breadcrumb-search-input {
+  border: none;
+  background: transparent;
+  font-size: 1.1rem;
+  color: #333;
+  outline: none;
+  width: 200px;
+
+  &::placeholder {
+    color: #5f6368;
+  }
 }
 
 .breadcrumb {
@@ -102,7 +125,7 @@ $breakpoint-desktop: 768px;
   background: none;
   border: none;
   color: #1a73e8;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 400;
   cursor: pointer;
   padding: 2px 6px 2px 0px;
@@ -144,7 +167,7 @@ $breakpoint-desktop: 768px;
 .faq-main {
   flex: 1;
   min-width: 0;
-  padding: 20px 5vw 0 5vw;
+  padding: 0;
   background: #ffffff;
   min-height: auto;
 
@@ -161,7 +184,7 @@ $breakpoint-desktop: 768px;
   font-weight: 400 !important;
   color: #1a1a1a;
   padding-bottom: 16px;
-  margin: 0 0 24px 0;
+  margin: 0 0 8px 0 !important;
   line-height: 1.2;
   text-align: center;
   border-bottom: 2px solid #e9ecef;
@@ -181,7 +204,7 @@ $breakpoint-desktop: 768px;
 
 .faq-detail {
   max-width:100%;
-  padding: 0;
+  padding-top: 20px;
 
   .faq-title-row {
     display: flex;
@@ -189,6 +212,7 @@ $breakpoint-desktop: 768px;
     gap: 12px;
     margin-bottom: 24px;
     border-bottom: 2px solid #e9ecef;
+    
     padding-bottom: 16px;
   }
 
@@ -199,8 +223,9 @@ $breakpoint-desktop: 768px;
     flex-shrink: 0;
     background: none;
     border: none;
-    padding: 6px;
+    padding: 8px;
     color: #555;
+    font-size: 1.5rem;
     cursor: pointer;
     transition: all 0.2s ease;
 
@@ -211,7 +236,7 @@ $breakpoint-desktop: 768px;
     }
 
     &:disabled {
-      opacity: 0.3;
+      opacity: 0.2;
       cursor: default;
     }
   }
@@ -227,7 +252,7 @@ $breakpoint-desktop: 768px;
   }
 
   .faq-answer {
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.7;
     color: #333;
 
@@ -392,8 +417,8 @@ $breakpoint-desktop: 768px;
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
+  width: 56px;
+  height: 56px;
   background: #ffffff;
   border: 1px solid #e1e5e9;
   cursor: pointer;
@@ -402,45 +427,30 @@ $breakpoint-desktop: 768px;
   justify-content: center;
   z-index: 85; // Higher than TOC but lower than modals
   
-  // Default: hidden by default, only show on hover (when TOC is visible)
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
-  
-  // When TOC is hidden, always show the button
-  .faq-layout-container.toc-hidden & {
-    opacity: 1;
-    visibility: visible;
-  }
-  
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+
   // Default: when TOC is visible, button is at the left edge of TOC
   right: 320px; // TOC width
-  border-radius: 6px 0 0 6px; // Rounded only on the left side
-  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
-  
-  // When TOC is hidden, move button to the right edge of screen and keep it visible
+  border-radius: 6px 0 0 6px;
+
+  // When TOC is hidden, move button to the right edge of screen
   .faq-layout-container.toc-hidden & {
-    right: 0; // Completely flush with right edge
-    border-radius: 6px 0 0 6px; // Rounded only on the left side when at edge
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
-    opacity: 1; // Always visible when TOC is hidden
+    right: 0;
+    opacity: 0.2;
     visibility: visible;
   }
 
-  // Show button when hovering button itself
   &:hover {
     opacity: 1;
     visibility: visible;
     background: #f8f9fa;
     border-color: #1a73e8;
-    
-    // Default hover shadow (TOC visible)
     box-shadow: -4px 0 12px rgba(26, 115, 232, 0.15);
-    
-    // When TOC is hidden, use left shadow since button is at right edge
-    .faq-layout-container.toc-hidden & {
-      box-shadow: -4px 0 12px rgba(26, 115, 232, 0.15);
-    }
   }
 
   &:active {
