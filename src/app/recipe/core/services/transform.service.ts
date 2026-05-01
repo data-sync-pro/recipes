@@ -47,6 +47,7 @@ export class TransformService {
         record.downloadableExecutables || [],
         folderId
       ),
+      downloadFileCallout: record.downloadFileCallout,
       relatedRecipes: record.relatedRecipes || [],
       keywords: record.keywords || [],
 

@@ -18,6 +18,10 @@ export interface RecipeData {
   walkthrough: WalkthroughStep[];
   verificationGIF: VerificationGIF[];
   downloadableExecutables: DownloadableExecutable[];
+  downloadFileCallout?: {
+    variant: 'info' | 'warning' | 'error' | 'success';
+    content: string;
+  };
   relatedRecipes: RelatedRecipe[];
   keywords: string[];
 }
@@ -41,6 +45,10 @@ export interface Recipe {
   walkthrough: WalkthroughStep[];
   verificationGIF: VerificationGIF[];
   downloadableExecutables: DownloadableExecutable[];
+  downloadFileCallout?: {
+    variant: 'info' | 'warning' | 'error' | 'success';
+    content: string;
+  };
   relatedRecipes: RelatedRecipe[];
   keywords: string[];
   isExpanded?: boolean;
