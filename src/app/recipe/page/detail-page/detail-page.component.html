@@ -146,6 +146,8 @@
                         *ngIf="media.type === 'image' || media.type === 'gif'"
                         [src]="media.displayUrl || media.url"
                         [alt]="media.alt"
+                        loading="lazy"
+                        decoding="async"
                         class="step-image"
                         (click)="openMediaPreview(media)">
                       <video
@@ -253,6 +255,7 @@
           *ngIf="previewMedia && (previewMedia.type === 'image' || previewMedia.type === 'gif')"
           [src]="previewMedia.url"
           [alt]="previewMedia.alt"
+          decoding="async"
           class="modal-media">
         <video
           *ngIf="previewMedia && previewMedia.type === 'video'"
