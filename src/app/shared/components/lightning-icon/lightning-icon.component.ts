@@ -8,7 +8,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class LightningIconComponent implements OnInit, OnChanges {
   @Input() iconName!: string;
-  @Input() size: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' = 'medium';
+  @Input() size: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'medium';
   @Input() variant: 'bare' | 'container' | 'border' | 'border-filled' = 'bare';
   @Input() alternativeText: string = '';
   @Input() title: string = '';
