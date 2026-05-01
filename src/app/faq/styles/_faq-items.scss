@@ -116,11 +116,16 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 50;
     pointer-events: auto;
 
+    &:nth-child(even) {
+      background-color: #f9f9fb;
+    }
+
     &:hover {
       background-color: rgba(26, 115, 232, 0.04);
 
       .faq-question {
         color: $primary-color;
+        text-decoration: underline;
       }
 
     }
@@ -150,8 +155,9 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     .faq-question-row {
       display: flex;
       align-items: flex-start;
-      gap: 10px;
+      gap: 8px;
       margin-bottom: 4px;
+
     }
 
     .faq-question {

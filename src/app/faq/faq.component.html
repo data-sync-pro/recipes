@@ -692,7 +692,7 @@
     >
       <div
         class="faq-item"
-        *cdkVirtualFor="let item of faqItems; trackBy: trackByFAQ"
+        *cdkVirtualFor="let item of faqItems; let i = index; trackBy: trackByFAQ"
         (click)="navigateToFAQ(item, $event)"
         (touchstart)="handleTouchStart()"
         [attr.aria-label]="'Navigate to FAQ: ' + item.question"
@@ -718,7 +718,7 @@
     <div *ngIf="faqItems.length <= 20 || ui.isMobile" class="faq-regular-list">
       <div
         class="faq-item"
-        *ngFor="let item of faqItems; trackBy: trackByFAQ"
+        *ngFor="let item of faqItems; let i = index; trackBy: trackByFAQ"
         (click)="navigateToFAQ(item, $event)"
         (touchstart)="handleTouchStart()"
         [attr.aria-label]="'Navigate to FAQ: ' + item.question"

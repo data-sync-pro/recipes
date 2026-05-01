@@ -28,13 +28,30 @@ $breakpoint-desktop: 768px;
 
 .faq-container {
   grid-area: main;
-  padding: 20px 5vw;
+  padding: 20px 2vw;
   background: #ffffff;
+  // sidebar expanded + toc hidden → 7vw (user's preferred baseline)
+  .faq-layout-container.toc-hidden & {
+    padding-left: 7vw;
+    padding-right: 7vw;
+  }
+
+  // sidebar collapsed + toc visible → more space available
+  .faq-layout-container.sidebar-collapsed & {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  // sidebar collapsed + toc hidden → most space
+  .faq-layout-container.sidebar-collapsed.toc-hidden & {
+    padding-left: 10vw;
+    padding-right: 10vw;
+  }
 
   &.toc-hidden {
-    
+
     @media (max-width: $breakpoint-desktop) {
-      margin-right: 0; // Remove margin on smaller screens where TOC is already hidden
+      margin-right: 0;
     }
   }
 
