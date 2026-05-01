@@ -30,7 +30,7 @@ import { UIState } from '../core/store/store.interface';
 import { PreviewSyncService } from './services/preview-sync.service';
 import { RouteHandlerService } from './services/route-handler.service';
 import { SearchStateService } from './services/search.service';
-import { RECIPE_CLASSES, RECIPE_MESSAGES} from '../core/constants/recipe.constants';
+import { RECIPE_CLASSES, RECIPE_MESSAGES } from '../core/constants/recipe.constants';
 import { SelectedSuggestion } from './search-overlay/search-overlay.component';
 import { RecipeLayoutComponent } from './recipe-layout/recipe-layout.component';
 
@@ -84,7 +84,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
     private routeHandlerService: RouteHandlerService,
     private searchService: SearchStateService,
     private logger: LoggerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
@@ -348,7 +348,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
     return category.name;
   }
 
-  trackByBreadcrumbUrl(_: number, crumb: {name: string; url: string}): string {
+  trackByBreadcrumbUrl(_: number, crumb: { name: string; url: string }): string {
     return crumb.url;
   }
 

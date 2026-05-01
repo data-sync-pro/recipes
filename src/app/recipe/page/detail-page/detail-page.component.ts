@@ -160,6 +160,17 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
         );
 
         if (recipe) {
+          // Scroll to top when switching to a different recipe via an
+          // imperative navigation (sidebar click, search, etc.). On
+          // popstate (browser back/forward) we leave the scroll alone
+          // so the browser's native restoration can return the user to
+          // where they were.
+          const isDifferentRecipe = !!this.currentRecipe && this.currentRecipe.id !== recipe.id;
+          const isPopstate = this.router.getCurrentNavigation()?.trigger === 'popstate';
+          if (isDifferentRecipe && !isPopstate) {
+            window.scrollTo({ top: 0, behavior: 'auto' });
+          }
+
           this.currentRecipe = recipe;
 
           // Build breadcrumb path (use first category or matched category)
