@@ -302,7 +302,7 @@ $z-index-mobile-toggle: 1001;
       font-size: 0.875rem;
       transition: $transition;
       cursor: pointer;
-      border-radius: 0 20px 20px 0;
+      border-radius: 0 8px 8px 0;
       margin-right: 8px;
       margin-top: 0px;
       margin-bottom: 4px;
@@ -380,7 +380,7 @@ $z-index-mobile-toggle: 1001;
         padding: 6px 20px 6px 3px;
         font-size: 0.8125rem;
         margin-right: 0;
-        border-radius: 0 20px 20px 0;
+        border-radius: 0 8px 8px 0;
 
         .nav-content {
           display: flex;
