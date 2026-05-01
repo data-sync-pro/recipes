@@ -1,0 +1,21 @@
+<p>This field tells DSP to use Salesforce's native <strong>Upsert API</strong> with an <strong>External ID</strong> for upsert actions.</p><p><strong>Benefits:</strong></p><ul>
+<li>
+<p>Improves performance by avoiding extra match queries.</p>
+</li>
+<li>
+<p>Simplifies matching—Salesforce handles the lookup automatically.</p>
+</li>
+<li>
+<p>Supports enabling Bulk API.</p>
+</li>
+</ul><p><strong>Considerations:</strong></p><ul>
+<li>
+<p><strong>Skip Record Update if No Changes</strong> is not supported, since DSP's Match step is bypassed.</p>
+</li>
+<li>
+<p>The Target Matching Field must be an <strong>External ID</strong> field.</p>
+</li>
+</ul>
+  
+  
+<img src="assets/image/action-purpose-of-upsert-api-field/action-purpose-of-upsert-api-field.jpg">

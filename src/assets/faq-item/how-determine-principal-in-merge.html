@@ -1,0 +1,55 @@
+<p>
+  In Merge operations, DSP applies the
+  <strong>Principal Matched Record Selection Rule</strong> to decide which
+  record becomes the principal (master). This record is retained after the
+  merge, while the others are marked for deletion.
+</p>
+<p><strong>Available selection rules:</strong></p>
+<ul>
+  <li>
+    <p>
+      <strong>Most Complete</strong> – keeps the record with the most populated
+      fields.
+    </p>
+  </li>
+  <li>
+    <p>
+      <strong>Most Child Records</strong> – keeps the record with the most
+      related child records (requires specifying the child relationship name in
+      <em>Principal Selection Child Relationship</em>).
+    </p>
+  </li>
+  <li>
+    <p>
+      <strong>Most Recently Modified</strong> – keeps the record with the latest
+      <code>LastModifiedDate</code>.
+    </p>
+  </li>
+  <li>
+    <p>
+      <strong>First Record</strong> – keeps the first record according to
+      a custom sort defined in
+      <em>Matched Records Sorting Components</em> (using DSP formulas).
+    </p>
+  </li>
+</ul>
+<p><strong>When using DuplicateRecordItem as the matching object,:</strong></p>
+<ul>
+  <li>
+    <p>
+      By default, the principal is chosen at the
+      <strong>DuplicateRecordItem</strong> level.
+    </p>
+  </li>
+  <li>
+    <p>
+      You can instead select the principal on the underlying object (e.g.,
+      Account, Lead) by specifying its API name in
+      <em><b>Duplicate Record Object API Name</b></em
+      >.
+    </p>
+  </li>
+</ul>
+
+<img src="assets/image/match-how-determine-principal-in-merge/match-how-determine-principal-in-merge1.jpg"/>
+<img src="assets/image/match-how-determine-principal-in-merge/match-how-determine-principal-in-merge2.jpg"/>

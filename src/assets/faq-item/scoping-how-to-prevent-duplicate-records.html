@@ -1,0 +1,17 @@
+<p>
+  Use the <code>IS_FIRST_IN_ITERATION(...expressions)</code> function in a Scope
+  Filter. It returns <strong>TRUE</strong> the first time a given combination of
+  evaluated expression values occurs in the current iteration, and
+  <strong>FALSE</strong> for any duplicates after.
+</p>
+<p><strong>Example:</strong></p>
+<pre><div><div><code>IS_FIRST_IN_ITERATION(FirstName, LastName)  
+-- TRUE for the first FirstName + LastName pair, FALSE for subsequent duplicates  
+</code></div></div></pre>
+<p>
+  Since the parameters can be any DSP expressions (not just fields), you can
+  deduplicate on calculated values, formulas, or combined logic evaluated at
+  runtime.
+</p>
+
+<img src="assets/image/scoping-how-to-prevent-duplicate-records/scoping-how-to-prevent-duplicate-records.jpg">

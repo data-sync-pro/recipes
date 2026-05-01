@@ -1,192 +1,22 @@
 [
   {
-    "Id": "a0oEc000005JoiSIAS",
-    "Name": "a0oEc000005JoiSIAS",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Action Button",
-    "SeqNo__c": null,
-    "Question__c": "What permissions are needed to use a #Action Button?",
-    "Answer__c": "action-button-permissions-needed.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JohgIAC",
-    "Name": "a0oEc000005JohgIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Batch",
-    "SeqNo__c": null,
-    "Question__c": "What permissions are required to execute a #Batch?",
-    "Answer__c": "batch-permissions-required-to-execute.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JohvIAC",
-    "Name": "a0oEc000005JohvIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Batch",
-    "SeqNo__c": null,
-    "Question__c": "How should I structure a complex Batch job with multiple actions?",
-    "Answer__c": "best-way-to-implement-complex-job.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JohnIAC",
-    "Name": "a0oEc000005JohnIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Batch",
-    "SeqNo__c": null,
-    "Question__c": "How do I easily create Batch Executables for parent–child data syncs?",
-    "Answer__c": "best-way-to-sync-parent-child-relationships.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JohmIAC",
-    "Name": "a0oEc000005JohmIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Batch",
-    "SeqNo__c": null,
-    "Question__c": "Can I apply a common SOQL filter to all Executables in a Pipeline?",
-    "Answer__c": "can-apply-common-soql-filter-to-pipeline.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoidIAC",
-    "Name": "a0oEc000005JoidIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Data Loader",
-    "SeqNo__c": null,
-    "Question__c": "Can I make a load fail if a column is missing from the source file?",
-    "Answer__c": "can-fail-on-missing-column.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JohcIAC",
-    "Name": "a0oEc000005JohcIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Batch",
-    "SeqNo__c": null,
-    "Question__c": "What are the common use cases for #Batch?",
-    "Answer__c": "common-use-cases.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JojeIAC",
-    "Name": "a0oEc000005JojeIAC",
-    "Category__c": "Processes",
-    "SubCategory__c": "Verify",
-    "SeqNo__c": null,
-    "Question__c": "What should I keep in mind when using Verify with Action to Bulk API enabled?",
-    "Answer__c": "considerations-with-bulk-api.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoiDIAS",
-    "Name": "a0oEc000005JoiDIAS",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Data List",
-    "SeqNo__c": null,
-    "Question__c": "Can I run a #Data Loader from a #Data List?",
-    "Answer__c": "data-list-is-possible-to-run-data-loader-as-action.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005Joi3IAC",
-    "Name": "a0oEc000005Joi3IAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Data List",
-    "SeqNo__c": null,
-    "Question__c": "What permissions are needed to use a #Data List?",
-    "Answer__c": "data-list-permissions-needed-to-use.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoiYIAS",
-    "Name": "a0oEc000005JoiYIAS",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Data Loader",
-    "SeqNo__c": null,
-    "Question__c": "What permissions are needed to use a #Data Loader?",
-    "Answer__c": "data-loader-permissions-needed.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JohXIAS",
-    "Name": "a0oEc000005JohXIAS",
+    "Id": "a0oEc000005JohNIAS",
+    "Name": "a0oEc000005JohNIAS",
     "Category__c": "General",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "Does DSP development adhere to the Software Development Life Cycle (SDLC)?",
-    "Answer__c": "does-dsp-adhere-to-sdlc.html",
+    "Question__c": "What is Data Sync Pro?",
+    "Answer__c": "what-is-data-sync-pro.html",
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JohRIAS",
-    "Name": "a0oEc000005JohRIAS",
+    "Id": "a0oEc000005JohOIAS",
+    "Name": "a0oEc000005JohOIAS",
     "Category__c": "General",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "Does DSP process any data outside the installed org?",
-    "Answer__c": "does-dsp-process-data-outside-salesforce-org.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoiZIAS",
-    "Name": "a0oEc000005JoiZIAS",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Data Loader",
-    "SeqNo__c": null,
-    "Question__c": "Does #Data Loader only support CSV file uploads?",
-    "Answer__c": "does-only-support-csv.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoifIAC",
-    "Name": "a0oEc000005JoifIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Trigger",
-    "SeqNo__c": null,
-    "Question__c": "What is a #Trigger?",
-    "Answer__c": "how-does-trigger-work.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JohSIAS",
-    "Name": "a0oEc000005JohSIAS",
-    "Category__c": "General",
-    "SubCategory__c": "",
-    "SeqNo__c": null,
-    "Question__c": "How does DSP ensure security?",
-    "Answer__c": "how-dsp-ensures-security.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JohVIAS",
-    "Name": "a0oEc000005JohVIAS",
-    "Category__c": "General",
-    "SubCategory__c": "",
-    "SeqNo__c": null,
-    "Question__c": "How do DSP's rules engines compare?",
-    "Answer__c": "how-dsp-rules-engines-compare.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JojyIAC",
-    "Name": "a0oEc000005JojyIAC",
-    "Category__c": "Query Manager",
-    "SubCategory__c": "",
-    "SeqNo__c": null,
-    "Question__c": "How does a dynamic filter work?",
-    "Answer__c": "how-dynamic-filter-works.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JojEIAS",
-    "Name": "a0oEc000005JojEIAS",
-    "Category__c": "Processes",
-    "SubCategory__c": "Match",
-    "SeqNo__c": null,
-    "Question__c": "How does DSP handle multiple source records matching a single target record?",
-    "Answer__c": "how-handle-multiple-sources-single-target.html",
+    "Question__c": "What are the five engines?",
+    "Answer__c": "what-are-five-rules-engines.html",
     "isActive": true
   },
   {
@@ -200,203 +30,193 @@
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JojaIAC",
-    "Name": "a0oEc000005JojaIAC",
-    "Category__c": "Processes",
-    "SubCategory__c": "Action",
-    "SeqNo__c": null,
-    "Question__c": "How does Action support Salesforce Big Objects?",
-    "Answer__c": "how-supports-big-objects.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JojbIAC",
-    "Name": "a0oEc000005JojbIAC",
-    "Category__c": "Processes",
-    "SubCategory__c": "Action",
-    "SeqNo__c": null,
-    "Question__c": "How does Action support Platform Events?",
-    "Answer__c": "how-supports-platform-events.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005Joi4IAC",
-    "Name": "a0oEc000005Joi4IAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Data List",
-    "SeqNo__c": null,
-    "Question__c": "How do I add a #Data List to a Lightning page?",
-    "Answer__c": "how-to-add-to-lightning-page.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JojUIAS",
-    "Name": "a0oEc000005JojUIAS",
-    "Category__c": "Processes",
-    "SubCategory__c": "Action",
-    "SeqNo__c": null,
-    "Question__c": "How can I avoid creating duplicate records if the target already exists?",
-    "Answer__c": "how-to-avoid-duplicate-records.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JojvIAC",
-    "Name": "a0oEc000005JojvIAC",
-    "Category__c": "Query Manager",
+    "Id": "a0oEc000005JohQIAS",
+    "Name": "a0oEc000005JohQIAS",
+    "Category__c": "General",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "How do I build a SOQL query with Query Builder?",
-    "Answer__c": "how-to-build-soql-query.html",
+    "Question__c": "Why Data Sync Pro?",
+    "Answer__c": "why-data-sync-pro.html",
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JoikIAC",
-    "Name": "a0oEc000005JoikIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Trigger",
-    "SeqNo__c": null,
-    "Question__c": "How can I calculate rollup summaries using a Self-Adaptive #Trigger?",
-    "Answer__c": "how-to-calculate-rollup-summaries.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoiBIAS",
-    "Name": "a0oEc000005JoiBIAS",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Data List",
-    "SeqNo__c": null,
-    "Question__c": "How can I configure row's related lists in a #Data List?",
-    "Answer__c": "how-to-configure-row-related-lists.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JohzIAC",
-    "Name": "a0oEc000005JohzIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Data List",
-    "SeqNo__c": null,
-    "Question__c": "How do I create an Actionable #Data List?",
-    "Answer__c": "how-to-create-actionable-data-list.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoiUIAS",
-    "Name": "a0oEc000005JoiUIAS",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Data Loader",
-    "SeqNo__c": null,
-    "Question__c": "How do I create a #Data Loader?",
-    "Answer__c": "how-to-create-data-loader.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JojmIAC",
-    "Name": "a0oEc000005JojmIAC",
-    "Category__c": "Transformation",
+    "Id": "a0oEc000005JohRIAS",
+    "Name": "a0oEc000005JohRIAS",
+    "Category__c": "General",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "How can I create a reusable formula?",
-    "Answer__c": "how-to-create-reusable-formula.html",
+    "Question__c": "Does DSP process any data outside the installed org?",
+    "Answer__c": "does-dsp-process-data-outside-salesforce-org.html",
     "isActive": true
   },
   {
-    "Id": "a0oEc000005Joj2IAC",
-    "Name": "a0oEc000005Joj2IAC",
-    "Category__c": "Processes",
-    "SubCategory__c": "Input",
-    "SeqNo__c": null,
-    "Question__c": "How do I define an input data profile in Data Loader?",
-    "Answer__c": "how-to-define-data-profile.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JojrIAC",
-    "Name": "a0oEc000005JojrIAC",
-    "Category__c": "Transformation",
+    "Id": "a0oEc000005JohSIAS",
+    "Name": "a0oEc000005JohSIAS",
+    "Category__c": "General",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "How do I evaluate DSP expressions from Apex?",
-    "Answer__c": "how-to-evaluate-in-apex.html",
+    "Question__c": "How does DSP ensure security?",
+    "Answer__c": "how-dsp-ensures-security.html",
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JoiRIAS",
-    "Name": "a0oEc000005JoiRIAS",
+    "Id": "a0oEc000005JohUIAS",
+    "Name": "a0oEc000005JohUIAS",
+    "Category__c": "General",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "What are the three core user personas in Data Sync Pro?",
+    "Answer__c": "three-core-user-personas.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohVIAS",
+    "Name": "a0oEc000005JohVIAS",
+    "Category__c": "General",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How do DSP's rules engines compare?",
+    "Answer__c": "how-dsp-rules-engines-compare.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohWIAS",
+    "Name": "a0oEc000005JohWIAS",
+    "Category__c": "General",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How much training is required to start building in Data Sync Pro?",
+    "Answer__c": "training-required-to-start-building.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohXIAS",
+    "Name": "a0oEc000005JohXIAS",
+    "Category__c": "General",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "Does DSP development adhere to the Software Development Life Cycle (SDLC)?",
+    "Answer__c": "does-dsp-adhere-to-sdlc.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohYIAS",
+    "Name": "a0oEc000005JohYIAS",
+    "Category__c": "General",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "Is DSP subject to Salesforce governor limits?",
+    "Answer__c": "is-dsp-subject-to-governor-limits.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohZIAS",
+    "Name": "a0oEc000005JohZIAS",
     "Category__c": "Rules Engines",
-    "SubCategory__c": "Action Button",
+    "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "How can I execute multiple actions from a single #Action Button?",
-    "Answer__c": "how-to-execute-multiple-actions.html",
+    "Question__c": "What is a batch job in general?",
+    "Answer__c": "what-is-batch-job.html",
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JojlIAC",
-    "Name": "a0oEc000005JojlIAC",
-    "Category__c": "Transformation",
-    "SubCategory__c": "",
-    "SeqNo__c": null,
-    "Question__c": "How can I handle complex transformations that aren't natively supported?",
-    "Answer__c": "how-to-handle-complex-unsupported.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoiHIAS",
-    "Name": "a0oEc000005JoiHIAS",
+    "Id": "a0oEc000005JohaIAC",
+    "Name": "a0oEc000005JohaIAC",
     "Category__c": "Rules Engines",
-    "SubCategory__c": "Data List",
+    "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "How do I use the Pipeline Data Lists component inside a custom LWC?",
-    "Answer__c": "how-to-inject-custom-actions.html",
+    "Question__c": "Why #Batch?",
+    "Answer__c": "why-use-batch-engine.html",
     "isActive": true
   },
   {
-    "Id": "a0oEc000005Jok7IAC",
-    "Name": "a0oEc000005Jok7IAC",
-    "Category__c": "Query Manager",
-    "SubCategory__c": "",
-    "SeqNo__c": null,
-    "Question__c": "How do I integrate the Query component into a Lightning page?",
-    "Answer__c": "how-to-integrate-into-lightning.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005Jok6IAC",
-    "Name": "a0oEc000005Jok6IAC",
-    "Category__c": "Query Manager",
-    "SubCategory__c": "",
-    "SeqNo__c": null,
-    "Question__c": "How can I manage my frequently used queries?",
-    "Answer__c": "how-to-manage-frequent-queries.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoirIAC",
-    "Name": "a0oEc000005JoirIAC",
+    "Id": "a0oEc000005JohbIAC",
+    "Name": "a0oEc000005JohbIAC",
     "Category__c": "Rules Engines",
-    "SubCategory__c": "Trigger",
+    "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "How do I manage user access to a #Trigger?",
-    "Answer__c": "how-to-manage-user-access.html",
+    "Question__c": "What technologies are used to build the #Batch engine?",
+    "Answer__c": "technologies-used-to-build-engine.html",
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JojDIAS",
-    "Name": "a0oEc000005JojDIAS",
-    "Category__c": "Processes",
-    "SubCategory__c": "Match",
+    "Id": "a0oEc000005JohcIAC",
+    "Name": "a0oEc000005JohcIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "How do I match target records via multiple fields?",
-    "Answer__c": "how-to-match-multiple-fields.html",
+    "Question__c": "What are the common use cases for #Batch?",
+    "Answer__c": "common-use-cases.html",
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JojoIAC",
-    "Name": "a0oEc000005JojoIAC",
-    "Category__c": "Transformation",
-    "SubCategory__c": "",
+    "Id": "a0oEc000005JohdIAC",
+    "Name": "a0oEc000005JohdIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "How do I mask sensitive data in sandbox environments?",
-    "Answer__c": "how-to-perform-data-masking.html",
+    "Question__c": "How efficiently does #Batch handle large data volumes?",
+    "Answer__c": "how-efficiently-handles-large-volumes.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoheIAC",
+    "Name": "a0oEc000005JoheIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
+    "SeqNo__c": null,
+    "Question__c": "Where do I create a #Batch Executable?",
+    "Answer__c": "where-to-create-executable.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohfIAC",
+    "Name": "a0oEc000005JohfIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
+    "SeqNo__c": null,
+    "Question__c": "Does #Batch only support cross-org data migrations?",
+    "Answer__c": "does-only-support-cross-org-migrations.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohgIAC",
+    "Name": "a0oEc000005JohgIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
+    "SeqNo__c": null,
+    "Question__c": "What permissions are required to execute a #Batch?",
+    "Answer__c": "batch-permissions-required-to-execute.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohhIAC",
+    "Name": "a0oEc000005JohhIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
+    "SeqNo__c": null,
+    "Question__c": "What is the maximum dataset size that a DSP batch job can process?",
+    "Answer__c": "maximum-dataset-size.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohiIAC",
+    "Name": "a0oEc000005JohiIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
+    "SeqNo__c": null,
+    "Question__c": "What is the maximum batch size that can be set?",
+    "Answer__c": "maximum-batch-size-setting.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohjIAC",
+    "Name": "a0oEc000005JohjIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
+    "SeqNo__c": null,
+    "Question__c": "How can I chain multiple batch Executables to run in a specific sequence?",
+    "Answer__c": "how-to-chain-multiple-executables.html",
     "isActive": true
   },
   {
@@ -410,43 +230,73 @@
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JohtIAC",
-    "Name": "a0oEc000005JohtIAC",
+    "Id": "a0oEc000005JohlIAC",
+    "Name": "a0oEc000005JohlIAC",
     "Category__c": "Rules Engines",
     "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "How can I set up notifications for completed batch executions?",
-    "Answer__c": "how-to-setup-completion-notifications.html",
+    "Question__c": "Can a Pipeline execution be stopped if one of its Executables fails?",
+    "Answer__c": "can-pipeline-stop-on-executable-failure.html",
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JoiPIAS",
-    "Name": "a0oEc000005JoiPIAS",
+    "Id": "a0oEc000005JohmIAC",
+    "Name": "a0oEc000005JohmIAC",
     "Category__c": "Rules Engines",
-    "SubCategory__c": "Action Button",
+    "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "How can users review and edit field values before running an action?",
-    "Answer__c": "how-users-review-edit-values.html",
+    "Question__c": "Can I apply a common SOQL filter to all Executables in a Pipeline?",
+    "Answer__c": "can-apply-common-soql-filter-to-pipeline.html",
     "isActive": true
   },
   {
-    "Id": "a0oEc000005Jok4IAC",
-    "Name": "a0oEc000005Jok4IAC",
-    "Category__c": "Query Manager",
-    "SubCategory__c": "",
+    "Id": "a0oEc000005JohnIAC",
+    "Name": "a0oEc000005JohnIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "Is pagination handled server-side or client-side?",
-    "Answer__c": "is-pagination-server-or-client.html",
+    "Question__c": "How do I easily create Batch Executables for parent–child data syncs?",
+    "Answer__c": "best-way-to-sync-parent-child-relationships.html",
     "isActive": true
   },
   {
-    "Id": "a0oEc000005Jok5IAC",
-    "Name": "a0oEc000005Jok5IAC",
-    "Category__c": "Query Manager",
-    "SubCategory__c": "",
+    "Id": "a0oEc000005JohoIAC",
+    "Name": "a0oEc000005JohoIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "Is the Tooling API supported in Query?",
-    "Answer__c": "is-tooling-api-supported.html",
+    "Question__c": "How are logs tracked for running a #Batch Executable?",
+    "Answer__c": "how-logs-are-tracked.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohpIAC",
+    "Name": "a0oEc000005JohpIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
+    "SeqNo__c": null,
+    "Question__c": "Does DSP allow re-execution of failed batches?",
+    "Answer__c": "does-dsp-allow-re-execution-of-failed.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohqIAC",
+    "Name": "a0oEc000005JohqIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
+    "SeqNo__c": null,
+    "Question__c": "Is it possible to revert the changes made a batch execution?",
+    "Answer__c": "is-it-possible-to-revert-changes.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohrIAC",
+    "Name": "a0oEc000005JohrIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
+    "SeqNo__c": null,
+    "Question__c": "How do I implement incremental retrieval?",
+    "Answer__c": "how-to-implement-incremental-retrieval.html",
     "isActive": true
   },
   {
@@ -460,13 +310,713 @@
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JojLIAS",
-    "Name": "a0oEc000005JojLIAS",
-    "Category__c": "Processes",
-    "SubCategory__c": "Mapping",
+    "Id": "a0oEc000005JohtIAC",
+    "Name": "a0oEc000005JohtIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "How can I manage data relationships?",
-    "Answer__c": "mapping-how-to-manage-data-relationships.html",
+    "Question__c": "How can I set up notifications for completed batch executions?",
+    "Answer__c": "how-to-setup-completion-notifications.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohuIAC",
+    "Name": "a0oEc000005JohuIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
+    "SeqNo__c": null,
+    "Question__c": "How can I test a Batch Executable on a small sample before running it on the full dataset?",
+    "Answer__c": "how-to-test-on-small-sample.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohvIAC",
+    "Name": "a0oEc000005JohvIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
+    "SeqNo__c": null,
+    "Question__c": "How should I structure a complex Batch job with multiple actions?",
+    "Answer__c": "best-way-to-implement-complex-job.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohwIAC",
+    "Name": "a0oEc000005JohwIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Batch",
+    "SeqNo__c": null,
+    "Question__c": "What are the advantages of pairing a blank update batch with a self-adaptive trigger?",
+    "Answer__c": "advantages-of-blank-update-with-trigger.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JohxIAC",
+    "Name": "a0oEc000005JohxIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "What is a #Data List?",
+    "Answer__c": "what-is-data-list.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohyIAC",
+    "Name": "a0oEc000005JohyIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "Why #Data List?",
+    "Answer__c": "why-use-data-list.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JohzIAC",
+    "Name": "a0oEc000005JohzIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "How do I create an Actionable #Data List?",
+    "Answer__c": "how-to-create-actionable-data-list.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005Joi0IAC",
+    "Name": "a0oEc000005Joi0IAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "What are the two essential components of a Actionable #Data List?",
+    "Answer__c": "two-essential-components.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005Joi2IAC",
+    "Name": "a0oEc000005Joi2IAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "What is the difference between an actionable and non-actionable Data List?",
+    "Answer__c": "difference-actionable-vs-nonactionable.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005Joi3IAC",
+    "Name": "a0oEc000005Joi3IAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "What permissions are needed to use a #Data List?",
+    "Answer__c": "data-list-permissions-needed-to-use.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005Joi4IAC",
+    "Name": "a0oEc000005Joi4IAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "How do I add a #Data List to a Lightning page?",
+    "Answer__c": "how-to-add-to-lightning-page.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005Joi5IAC",
+    "Name": "a0oEc000005Joi5IAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "How can I customize the appearance of a #Data List action?",
+    "Answer__c": "how-to-customize-action-appearance.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005Joi6IAC",
+    "Name": "a0oEc000005Joi6IAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "Can I prompt users for confirmation before executing an action?",
+    "Answer__c": "data-list-can-prompt-confirmation-before-action.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005Joi7IAC",
+    "Name": "a0oEc000005Joi7IAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "Can I specify whether an action should be a List Action, a Row Action, or both?",
+    "Answer__c": "can-specify-action-scope.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005Joi8IAC",
+    "Name": "a0oEc000005Joi8IAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "Can users review and edit transformed values before executing an action?",
+    "Answer__c": "can-users-review-edit-before-execution.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005Joi9IAC",
+    "Name": "a0oEc000005Joi9IAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "What are the benefits of grouping multiple #Data Lists into a Pipeline?",
+    "Answer__c": "data-list-benefits-of-grouping-into-pipeline.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiAIAS",
+    "Name": "a0oEc000005JoiAIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "How do I merge actions from multiple Executables into one #Data List?",
+    "Answer__c": "how-to-merge-actions-from-executables.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiBIAS",
+    "Name": "a0oEc000005JoiBIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "How can I configure row's related lists in a #Data List?",
+    "Answer__c": "how-to-configure-row-related-lists.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoiCIAS",
+    "Name": "a0oEc000005JoiCIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "What advantages does a custom 'New Record' action have over the default in a #Data List?",
+    "Answer__c": "advantages-of-custom-new-record-action.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiDIAS",
+    "Name": "a0oEc000005JoiDIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "Can I run a #Data Loader from a #Data List?",
+    "Answer__c": "data-list-is-possible-to-run-data-loader-as-action.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoiEIAS",
+    "Name": "a0oEc000005JoiEIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "What permissions can I configure for query results in a #Data List?",
+    "Answer__c": "permissions-for-query-results.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiFIAS",
+    "Name": "a0oEc000005JoiFIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "Can I choose to open records in the Lightning record page instead of raw view?",
+    "Answer__c": "can-open-records-in-lightning-page.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiGIAS",
+    "Name": "a0oEc000005JoiGIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "How do I enable Query Manager in a #Data List for end users?",
+    "Answer__c": "how-to-enable-query-manager-for-users.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiHIAS",
+    "Name": "a0oEc000005JoiHIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "How do I use the Pipeline Data Lists component inside a custom LWC?",
+    "Answer__c": "how-to-inject-custom-actions.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoiIIAS",
+    "Name": "a0oEc000005JoiIIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "How do I make a #Data List scroll horizontally?",
+    "Answer__c": "how-to-enable-horizontal-scrolling.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoiJIAS",
+    "Name": "a0oEc000005JoiJIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data List",
+    "SeqNo__c": null,
+    "Question__c": "How do I set up a #Data List to pull data from a remote Salesforce org?",
+    "Answer__c": "how-to-pull-from-remote-org.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiKIAS",
+    "Name": "a0oEc000005JoiKIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Action Button",
+    "SeqNo__c": null,
+    "Question__c": "What is an #Action Button?",
+    "Answer__c": "what-is-action-button.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoiLIAS",
+    "Name": "a0oEc000005JoiLIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Action Button",
+    "SeqNo__c": null,
+    "Question__c": "Why #Action Button?",
+    "Answer__c": "why-use-action-button.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiMIAS",
+    "Name": "a0oEc000005JoiMIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Action Button",
+    "SeqNo__c": null,
+    "Question__c": "How do I create an #Action Button?",
+    "Answer__c": "how-to-create-action-button.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiNIAS",
+    "Name": "a0oEc000005JoiNIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Action Button",
+    "SeqNo__c": null,
+    "Question__c": "How can I customize the appearance of an #Action Button?",
+    "Answer__c": "how-to-customize-appearance.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiOIAS",
+    "Name": "a0oEc000005JoiOIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Action Button",
+    "SeqNo__c": null,
+    "Question__c": "Can I prompt users for confirmation before executing an action?",
+    "Answer__c": "action-button-can-prompt-confirmation.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiPIAS",
+    "Name": "a0oEc000005JoiPIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Action Button",
+    "SeqNo__c": null,
+    "Question__c": "How can users review and edit field values before running an action?",
+    "Answer__c": "how-users-review-edit-values.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiQIAS",
+    "Name": "a0oEc000005JoiQIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Action Button",
+    "SeqNo__c": null,
+    "Question__c": "What are the benefits of grouping multiple #Action Buttons into a Pipeline?",
+    "Answer__c": "action-button-benefits-of-grouping-into-pipeline.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiRIAS",
+    "Name": "a0oEc000005JoiRIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Action Button",
+    "SeqNo__c": null,
+    "Question__c": "How can I execute multiple actions from a single #Action Button?",
+    "Answer__c": "how-to-execute-multiple-actions.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoiSIAS",
+    "Name": "a0oEc000005JoiSIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Action Button",
+    "SeqNo__c": null,
+    "Question__c": "What permissions are needed to use a #Action Button?",
+    "Answer__c": "action-button-permissions-needed.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoiTIAS",
+    "Name": "a0oEc000005JoiTIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data Loader",
+    "SeqNo__c": null,
+    "Question__c": "What is a #Data Loader?",
+    "Answer__c": "what-is-data-loader.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoiUIAS",
+    "Name": "a0oEc000005JoiUIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data Loader",
+    "SeqNo__c": null,
+    "Question__c": "How do I create a #Data Loader?",
+    "Answer__c": "how-to-create-data-loader.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoiVIAS",
+    "Name": "a0oEc000005JoiVIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data Loader",
+    "SeqNo__c": null,
+    "Question__c": "Can I use #Data Loader to load data into another Salesforce org?",
+    "Answer__c": "can-load-to-another-org.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiWIAS",
+    "Name": "a0oEc000005JoiWIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data Loader",
+    "SeqNo__c": null,
+    "Question__c": "How are execution logs tracked in a #Data Loader process?",
+    "Answer__c": "how-execution-logs-tracked.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiXIAS",
+    "Name": "a0oEc000005JoiXIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data Loader",
+    "SeqNo__c": null,
+    "Question__c": "How does a #Data Loader handle data type conversion for CSV cells stored as strings?",
+    "Answer__c": "how-handles-csv-type-conversion.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiYIAS",
+    "Name": "a0oEc000005JoiYIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data Loader",
+    "SeqNo__c": null,
+    "Question__c": "What permissions are needed to use a #Data Loader?",
+    "Answer__c": "data-loader-permissions-needed.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoiZIAS",
+    "Name": "a0oEc000005JoiZIAS",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data Loader",
+    "SeqNo__c": null,
+    "Question__c": "Does #Data Loader only support CSV file uploads?",
+    "Answer__c": "does-only-support-csv.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoiaIAC",
+    "Name": "a0oEc000005JoiaIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data Loader",
+    "SeqNo__c": null,
+    "Question__c": "When should I enable serial mode?",
+    "Answer__c": "when-to-enable-serial-mode.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoibIAC",
+    "Name": "a0oEc000005JoibIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data Loader",
+    "SeqNo__c": null,
+    "Question__c": "How can I retry only the failed data load batches without reloading the whole dataset?",
+    "Answer__c": "how-to-retry-failed-batches.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoicIAC",
+    "Name": "a0oEc000005JoicIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data Loader",
+    "SeqNo__c": null,
+    "Question__c": "Is it possible to revert the changes made a data load?",
+    "Answer__c": "is-possible-to-revert-changes.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoidIAC",
+    "Name": "a0oEc000005JoidIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data Loader",
+    "SeqNo__c": null,
+    "Question__c": "Can I make a load fail if a column is missing from the source file?",
+    "Answer__c": "can-fail-on-missing-column.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoieIAC",
+    "Name": "a0oEc000005JoieIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Data Loader",
+    "SeqNo__c": null,
+    "Question__c": "Is it possible to run a #Data Loader from a #Data List as a list action?",
+    "Answer__c": "data-loader-is-possible-to-run-from-data-list.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoifIAC",
+    "Name": "a0oEc000005JoifIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "What is a #Trigger?",
+    "Answer__c": "how-does-trigger-work.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoigIAC",
+    "Name": "a0oEc000005JoigIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "Why #Trigger?",
+    "Answer__c": "why-use-trigger.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoihIAC",
+    "Name": "a0oEc000005JoihIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "What events are supported by #Trigger?",
+    "Answer__c": "what-events-are-supported.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiiIAC",
+    "Name": "a0oEc000005JoiiIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "What is a Self-Adaptive #Trigger?",
+    "Answer__c": "what-is-self-adaptive-trigger.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoijIAC",
+    "Name": "a0oEc000005JoijIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "How to create a Self-Adaptive #Trigger?",
+    "Answer__c": "how-to-create-self-adaptive-trigger.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoikIAC",
+    "Name": "a0oEc000005JoikIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "How can I calculate rollup summaries using a Self-Adaptive #Trigger?",
+    "Answer__c": "how-to-calculate-rollup-summaries.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoilIAC",
+    "Name": "a0oEc000005JoilIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "How can I set up validation rules within a Self-Adaptive #Trigger?",
+    "Answer__c": "how-to-setup-validation-rules.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoimIAC",
+    "Name": "a0oEc000005JoimIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "What is a #Trigger Action?",
+    "Answer__c": "what-is-trigger-action.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoinIAC",
+    "Name": "a0oEc000005JoinIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "How to create a #Trigger Action?",
+    "Answer__c": "how-to-create-trigger-action.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoioIAC",
+    "Name": "a0oEc000005JoioIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "What is the execution flow of a #Trigger?",
+    "Answer__c": "what-is-execution-flow.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoipIAC",
+    "Name": "a0oEc000005JoipIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "How can I prevent recursive execution in update triggers?",
+    "Answer__c": "how-to-prevent-recursive-execution.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoiqIAC",
+    "Name": "a0oEc000005JoiqIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "How can I manage the execution order of #Trigger?",
+    "Answer__c": "how-to-manage-execution-order.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoirIAC",
+    "Name": "a0oEc000005JoirIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "How do I manage user access to a #Trigger?",
+    "Answer__c": "how-to-manage-user-access.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoisIAC",
+    "Name": "a0oEc000005JoisIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "Salesforce requires at least one line of test coverage in an Apex Trigger—how can I achieve this?",
+    "Answer__c": "how-to-achieve-test-coverage.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoitIAC",
+    "Name": "a0oEc000005JoitIAC",
+    "Category__c": "Rules Engines",
+    "SubCategory__c": "Trigger",
+    "SeqNo__c": null,
+    "Question__c": "What is the TRIGGER_FLIPPER pattern?",
+    "Answer__c": "what-is-trigger-flipper-pattern.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoiuIAC",
+    "Name": "a0oEc000005JoiuIAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Retrieve",
+    "SeqNo__c": null,
+    "Question__c": "What does Retrieve do?",
+    "Answer__c": "what-does-retrieve-do.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoivIAC",
+    "Name": "a0oEc000005JoivIAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Retrieve",
+    "SeqNo__c": null,
+    "Question__c": "Do I need to include every field for Scoping and Mapping in the Retrieve query?",
+    "Answer__c": "do-need-include-every-field.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JoiwIAC",
+    "Name": "a0oEc000005JoiwIAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Retrieve",
+    "SeqNo__c": null,
+    "Question__c": "How do I preview a source record with its transformed values before execution?",
+    "Answer__c": "retrieve-how-to-preview-source-record.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoixIAC",
+    "Name": "a0oEc000005JoixIAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Retrieve",
+    "SeqNo__c": null,
+    "Question__c": "What is the purpose of the 'Additional Retrieve Criteria' field on a Pipeline?",
+    "Answer__c": "purpose-of-additional-criteria-in-pipeline.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoiyIAC",
+    "Name": "a0oEc000005JoiyIAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Preview",
+    "SeqNo__c": null,
+    "Question__c": "What does Preview do?",
+    "Answer__c": "what-does-preview-do.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JoizIAC",
+    "Name": "a0oEc000005JoizIAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Preview",
+    "SeqNo__c": null,
+    "Question__c": "How do I preview a source record with its transformed values before execution?",
+    "Answer__c": "preview-how-to-preview-source-record.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005Joj0IAC",
+    "Name": "a0oEc000005Joj0IAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Preview",
+    "SeqNo__c": null,
+    "Question__c": "What is the difference between Preview and Retrieve?",
+    "Answer__c": "difference-between-preview-and-retrieve.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005Joj1IAC",
+    "Name": "a0oEc000005Joj1IAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Input",
+    "SeqNo__c": null,
+    "Question__c": "What does Input do?",
+    "Answer__c": "what-does-input-do.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005Joj2IAC",
+    "Name": "a0oEc000005Joj2IAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Input",
+    "SeqNo__c": null,
+    "Question__c": "How do I define an input data profile in Data Loader?",
+    "Answer__c": "how-to-define-data-profile.html",
     "isActive": true
   },
   {
@@ -477,6 +1027,196 @@
     "SeqNo__c": null,
     "Question__c": "What naming requirements apply to #Data Loader columns?",
     "Answer__c": "naming-conventions-for-columns.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005Joj4IAC",
+    "Name": "a0oEc000005Joj4IAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Input",
+    "SeqNo__c": null,
+    "Question__c": "What is the purpose of the 'Input Data Key Field'?",
+    "Answer__c": "purpose-of-data-key-field.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005Joj5IAC",
+    "Name": "a0oEc000005Joj5IAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Scoping",
+    "SeqNo__c": null,
+    "Question__c": "What does Scoping do?",
+    "Answer__c": "what-does-scoping-do.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005Joj6IAC",
+    "Name": "a0oEc000005Joj6IAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Scoping",
+    "SeqNo__c": null,
+    "Question__c": "What is a Scope Filter?",
+    "Answer__c": "what-is-scope-filter.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005Joj7IAC",
+    "Name": "a0oEc000005Joj7IAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Scoping",
+    "SeqNo__c": null,
+    "Question__c": "How do I prevent duplicate source records in iteration?",
+    "Answer__c": "scoping-how-to-prevent-duplicate-records.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005Joj8IAC",
+    "Name": "a0oEc000005Joj8IAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Scoping",
+    "SeqNo__c": null,
+    "Question__c": "How can I join the source data with an additional data set?",
+    "Answer__c": "scoping-how-to-join-source-data.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005Joj9IAC",
+    "Name": "a0oEc000005Joj9IAC",
+    "Category__c": "Processes",
+    "SubCategory__c": "Match",
+    "SeqNo__c": null,
+    "Question__c": "What does Match do?",
+    "Answer__c": "what-does-match-do.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojAIAS",
+    "Name": "a0oEc000005JojAIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Match",
+    "SeqNo__c": null,
+    "Question__c": "What happens if a source record matches multiple target records in an action?",
+    "Answer__c": "what-happens-multiple-targets.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojBIAS",
+    "Name": "a0oEc000005JojBIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Match",
+    "SeqNo__c": null,
+    "Question__c": "What happens if a source record matches existing target records during an Insert?",
+    "Answer__c": "what-happens-insert-duplicate.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojCIAS",
+    "Name": "a0oEc000005JojCIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Match",
+    "SeqNo__c": null,
+    "Question__c": "Does DSP still run the Match step when \"Use Salesforce Upsert API\" is enabled in an Upsert process?",
+    "Answer__c": "does-run-with-upsert-api.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojDIAS",
+    "Name": "a0oEc000005JojDIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Match",
+    "SeqNo__c": null,
+    "Question__c": "How do I match target records via multiple fields?",
+    "Answer__c": "how-to-match-multiple-fields.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojEIAS",
+    "Name": "a0oEc000005JojEIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Match",
+    "SeqNo__c": null,
+    "Question__c": "How does DSP handle multiple source records matching a single target record?",
+    "Answer__c": "how-handle-multiple-sources-single-target.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojFIAS",
+    "Name": "a0oEc000005JojFIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Match",
+    "SeqNo__c": null,
+    "Question__c": "How does Match determine the principal(master) record in a Merge process?",
+    "Answer__c": "how-determine-principal-in-merge.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojGIAS",
+    "Name": "a0oEc000005JojGIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Match",
+    "SeqNo__c": null,
+    "Question__c": "Can I match target records based on a relational field?",
+    "Answer__c": "can-match-on-relational-field.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojHIAS",
+    "Name": "a0oEc000005JojHIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Match",
+    "SeqNo__c": null,
+    "Question__c": "What is the purpose of the 'Additional Target Matching Criteria' field?",
+    "Answer__c": "purpose-of-additional-criteria.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojIIAS",
+    "Name": "a0oEc000005JojIIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Match",
+    "SeqNo__c": null,
+    "Question__c": "What is the purpose of the 'Matched Records Sorting Components' field?",
+    "Answer__c": "purpose-of-sorting-components.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojJIAS",
+    "Name": "a0oEc000005JojJIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Mapping",
+    "SeqNo__c": null,
+    "Question__c": "What does Mapping do?",
+    "Answer__c": "what-does-mapping-do.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojKIAS",
+    "Name": "a0oEc000005JojKIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Mapping",
+    "SeqNo__c": null,
+    "Question__c": "How do I reference a parent field?",
+    "Answer__c": "how-to-reference-parent-field.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JojLIAS",
+    "Name": "a0oEc000005JojLIAS",
+    "Category__c": "Transformation",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How can I manage data relationships?",
+    "Answer__c": "mapping-how-to-manage-data-relationships.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojMIAS",
+    "Name": "a0oEc000005JojMIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Mapping",
+    "SeqNo__c": null,
+    "Question__c": "How do I control the order of field mappings' evaluation?",
+    "Answer__c": "how-to-control-evaluation-order.html",
     "isActive": true
   },
   {
@@ -500,6 +1240,16 @@
     "isActive": true
   },
   {
+    "Id": "a0oEc000005JojPIAS",
+    "Name": "a0oEc000005JojPIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Mapping",
+    "SeqNo__c": null,
+    "Question__c": "What does the Unmapped Source Fields button do?",
+    "Answer__c": "purpose-of-unmapped-fields-button.html",
+    "isActive": true
+  },
+  {
     "Id": "a0oEc000005JojQIAS",
     "Name": "a0oEc000005JojQIAS",
     "Category__c": "Processes",
@@ -520,13 +1270,63 @@
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JojPIAS",
-    "Name": "a0oEc000005JojPIAS",
+    "Id": "a0oEc000005JojSIAS",
+    "Name": "a0oEc000005JojSIAS",
     "Category__c": "Processes",
-    "SubCategory__c": "Mapping",
+    "SubCategory__c": "Action",
     "SeqNo__c": null,
-    "Question__c": "What does the Unmapped Source Fields button do?",
-    "Answer__c": "purpose-of-unmapped-fields-button.html",
+    "Question__c": "What does Action do?",
+    "Answer__c": "what-does-action-do.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojTIAS",
+    "Name": "a0oEc000005JojTIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Action",
+    "SeqNo__c": null,
+    "Question__c": "Which actions are supported?",
+    "Answer__c": "which-actions-are-supported.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojUIAS",
+    "Name": "a0oEc000005JojUIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Action",
+    "SeqNo__c": null,
+    "Question__c": "How can I avoid creating duplicate records if the target already exists?",
+    "Answer__c": "how-to-avoid-duplicate-records.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojVIAS",
+    "Name": "a0oEc000005JojVIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Action",
+    "SeqNo__c": null,
+    "Question__c": "How can I implement delta updates?",
+    "Answer__c": "how-to-implement-delta-updates.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojWIAS",
+    "Name": "a0oEc000005JojWIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Action",
+    "SeqNo__c": null,
+    "Question__c": "Can I skip updating a field if the target already has a value?",
+    "Answer__c": "can-skip-update-if-value-exists.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojXIAS",
+    "Name": "a0oEc000005JojXIAS",
+    "Category__c": "Processes",
+    "SubCategory__c": "Action",
+    "SeqNo__c": null,
+    "Question__c": "Can I skip a field update if the transformed value is blank?",
+    "Answer__c": "can-skip-update-if-blank.html",
     "isActive": true
   },
   {
@@ -540,93 +1340,33 @@
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JohWIAS",
-    "Name": "a0oEc000005JohWIAS",
-    "Category__c": "General",
-    "SubCategory__c": "",
-    "SeqNo__c": null,
-    "Question__c": "How much training is required to start building in Data Sync Pro?",
-    "Answer__c": "training-required-to-start-building.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JohOIAS",
-    "Name": "a0oEc000005JohOIAS",
-    "Category__c": "General",
-    "SubCategory__c": "",
-    "SeqNo__c": null,
-    "Question__c": "What are the five engines?",
-    "Answer__c": "what-are-five-rules-engines.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JojSIAS",
-    "Name": "a0oEc000005JojSIAS",
+    "Id": "a0oEc000005JojZIAS",
+    "Name": "a0oEc000005JojZIAS",
     "Category__c": "Processes",
     "SubCategory__c": "Action",
     "SeqNo__c": null,
-    "Question__c": "What does Action do?",
-    "Answer__c": "what-does-action-do.html",
+    "Question__c": "What is the purpose of the 'Use Salesforce Upsert API' field?",
+    "Answer__c": "purpose-of-upsert-api-field.html",
     "isActive": true
   },
   {
-    "Id": "a0oEc000005Joj1IAC",
-    "Name": "a0oEc000005Joj1IAC",
+    "Id": "a0oEc000005JojaIAC",
+    "Name": "a0oEc000005JojaIAC",
     "Category__c": "Processes",
-    "SubCategory__c": "Input",
+    "SubCategory__c": "Action",
     "SeqNo__c": null,
-    "Question__c": "What does Input do?",
-    "Answer__c": "what-does-input-do.html",
+    "Question__c": "How does Action support Salesforce Big Objects?",
+    "Answer__c": "how-supports-big-objects.html",
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JojJIAS",
-    "Name": "a0oEc000005JojJIAS",
+    "Id": "a0oEc000005JojbIAC",
+    "Name": "a0oEc000005JojbIAC",
     "Category__c": "Processes",
-    "SubCategory__c": "Mapping",
+    "SubCategory__c": "Action",
     "SeqNo__c": null,
-    "Question__c": "What does Mapping do?",
-    "Answer__c": "what-does-mapping-do.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005Joj9IAC",
-    "Name": "a0oEc000005Joj9IAC",
-    "Category__c": "Processes",
-    "SubCategory__c": "Match",
-    "SeqNo__c": null,
-    "Question__c": "What does Match do?",
-    "Answer__c": "what-does-match-do.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoiyIAC",
-    "Name": "a0oEc000005JoiyIAC",
-    "Category__c": "Processes",
-    "SubCategory__c": "Preview",
-    "SeqNo__c": null,
-    "Question__c": "What does Preview do?",
-    "Answer__c": "what-does-preview-do.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoiuIAC",
-    "Name": "a0oEc000005JoiuIAC",
-    "Category__c": "Processes",
-    "SubCategory__c": "Retrieve",
-    "SeqNo__c": null,
-    "Question__c": "What does Retrieve do?",
-    "Answer__c": "what-does-retrieve-do.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005Joj5IAC",
-    "Name": "a0oEc000005Joj5IAC",
-    "Category__c": "Processes",
-    "SubCategory__c": "Scoping",
-    "SeqNo__c": null,
-    "Question__c": "What does Scoping do?",
-    "Answer__c": "what-does-scoping-do.html",
+    "Question__c": "How does Action support Platform Events?",
+    "Answer__c": "how-supports-platform-events.html",
     "isActive": true
   },
   {
@@ -640,133 +1380,23 @@
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JojBIAS",
-    "Name": "a0oEc000005JojBIAS",
+    "Id": "a0oEc000005JojdIAC",
+    "Name": "a0oEc000005JojdIAC",
     "Category__c": "Processes",
-    "SubCategory__c": "Match",
+    "SubCategory__c": "Verify",
     "SeqNo__c": null,
-    "Question__c": "What happens if a source record matches existing target records during an Insert?",
-    "Answer__c": "what-happens-insert-duplicate.html",
-    "isActive": true
+    "Question__c": "Does Verify apply only to #Batch?",
+    "Answer__c": "does-apply-only-to-batch.html",
+    "isActive": false
   },
   {
-    "Id": "a0oEc000005JojAIAS",
-    "Name": "a0oEc000005JojAIAS",
+    "Id": "a0oEc000005JojeIAC",
+    "Name": "a0oEc000005JojeIAC",
     "Category__c": "Processes",
-    "SubCategory__c": "Match",
+    "SubCategory__c": "Verify",
     "SeqNo__c": null,
-    "Question__c": "What happens if a source record matches multiple target records in an action?",
-    "Answer__c": "what-happens-multiple-targets.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JojwIAC",
-    "Name": "a0oEc000005JojwIAC",
-    "Category__c": "Query Manager",
-    "SubCategory__c": "",
-    "SeqNo__c": null,
-    "Question__c": "What happens when you execute a query?",
-    "Answer__c": "what-happens-when-execute.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoiKIAS",
-    "Name": "a0oEc000005JoiKIAS",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Action Button",
-    "SeqNo__c": null,
-    "Question__c": "What is an #Action Button?",
-    "Answer__c": "what-is-action-button.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JohxIAC",
-    "Name": "a0oEc000005JohxIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Data List",
-    "SeqNo__c": null,
-    "Question__c": "What is a #Data List?",
-    "Answer__c": "what-is-data-list.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoiTIAS",
-    "Name": "a0oEc000005JoiTIAS",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Data Loader",
-    "SeqNo__c": null,
-    "Question__c": "What is a #Data Loader?",
-    "Answer__c": "what-is-data-loader.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JohNIAS",
-    "Name": "a0oEc000005JohNIAS",
-    "Category__c": "General",
-    "SubCategory__c": "",
-    "SeqNo__c": null,
-    "Question__c": "What is Data Sync Pro?",
-    "Answer__c": "what-is-data-sync-pro.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JojtIAC",
-    "Name": "a0oEc000005JojtIAC",
-    "Category__c": "Query Manager",
-    "SubCategory__c": "",
-    "SeqNo__c": null,
-    "Question__c": "What is Query Manager?",
-    "Answer__c": "what-is-query-manager.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005Joj6IAC",
-    "Name": "a0oEc000005Joj6IAC",
-    "Category__c": "Processes",
-    "SubCategory__c": "Scoping",
-    "SeqNo__c": null,
-    "Question__c": "What is a Scope Filter?",
-    "Answer__c": "what-is-scope-filter.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoiiIAC",
-    "Name": "a0oEc000005JoiiIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Trigger",
-    "SeqNo__c": null,
-    "Question__c": "What is a Self-Adaptive #Trigger?",
-    "Answer__c": "what-is-self-adaptive-trigger.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoimIAC",
-    "Name": "a0oEc000005JoimIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Trigger",
-    "SeqNo__c": null,
-    "Question__c": "What is a #Trigger Action?",
-    "Answer__c": "what-is-trigger-action.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoheIAC",
-    "Name": "a0oEc000005JoheIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Batch",
-    "SeqNo__c": null,
-    "Question__c": "Where do I create a #Batch Executable?",
-    "Answer__c": "where-to-create-executable.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JojuIAC",
-    "Name": "a0oEc000005JojuIAC",
-    "Category__c": "Query Manager",
-    "SubCategory__c": "",
-    "SeqNo__c": null,
-    "Question__c": "Who can access Query Manager?",
-    "Answer__c": "who-can-access.html",
+    "Question__c": "What should I keep in mind when using Verify with Action to Bulk API enabled?",
+    "Answer__c": "considerations-with-bulk-api.html",
     "isActive": true
   },
   {
@@ -780,43 +1410,283 @@
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JohQIAS",
-    "Name": "a0oEc000005JohQIAS",
-    "Category__c": "General",
+    "Id": "a0oEc000005JojgIAC",
+    "Name": "a0oEc000005JojgIAC",
+    "Category__c": "Transformation",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "Why Data Sync Pro?",
-    "Answer__c": "why-data-sync-pro.html",
+    "Question__c": "What data types does DSP support in its formulas?",
+    "Answer__c": "supported-data-types.html",
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JohaIAC",
-    "Name": "a0oEc000005JohaIAC",
+    "Id": "a0oEc000005JojhIAC",
+    "Name": "a0oEc000005JojhIAC",
+    "Category__c": "Transformation",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "Where can I use formulas?",
+    "Answer__c": "where-to-use-formulas.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JojiIAC",
+    "Name": "a0oEc000005JojiIAC",
+    "Category__c": "Transformation",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "Can formulas be nested?",
+    "Answer__c": "can-formulas-be-nested.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojjIAC",
+    "Name": "a0oEc000005JojjIAC",
+    "Category__c": "Transformation",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How can I manage data relationships?",
+    "Answer__c": "transformation-how-to-manage-relationships.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JojkIAC",
+    "Name": "a0oEc000005JojkIAC",
+    "Category__c": "Transformation",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How does DSP optimize performance when using VLOOKUP or AGG functions?",
+    "Answer__c": "how-dsp-optimizes-vlookup-agg.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JojlIAC",
+    "Name": "a0oEc000005JojlIAC",
+    "Category__c": "Transformation",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How can I handle complex transformations that aren't natively supported?",
+    "Answer__c": "how-to-handle-complex-unsupported.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojmIAC",
+    "Name": "a0oEc000005JojmIAC",
+    "Category__c": "Transformation",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How can I create a reusable formula?",
+    "Answer__c": "how-to-create-reusable-formula.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojnIAC",
+    "Name": "a0oEc000005JojnIAC",
+    "Category__c": "Transformation",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How can I join the source data with an additional data set?",
+    "Answer__c": "transformation-how-to-join-source-data.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JojoIAC",
+    "Name": "a0oEc000005JojoIAC",
+    "Category__c": "Transformation",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How do I mask sensitive data in sandbox environments?",
+    "Answer__c": "how-to-perform-data-masking.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojpIAC",
+    "Name": "a0oEc000005JojpIAC",
+    "Category__c": "Transformation",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How can I skip a target field if the evaluated value is blank?",
+    "Answer__c": "how-to-skip-field-if-blank.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JojqIAC",
+    "Name": "a0oEc000005JojqIAC",
+    "Category__c": "Transformation",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How do I prevent duplicate source records in iteration?",
+    "Answer__c": "transformation-how-to-prevent-duplicate-records.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JojrIAC",
+    "Name": "a0oEc000005JojrIAC",
+    "Category__c": "Transformation",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How do I evaluate DSP expressions from Apex?",
+    "Answer__c": "how-to-evaluate-in-apex.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojsIAC",
+    "Name": "a0oEc000005JojsIAC",
+    "Category__c": "Transformation",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How can I format a string dynamically using DSP expressions?",
+    "Answer__c": "how-to-format-string-dynamically.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JojtIAC",
+    "Name": "a0oEc000005JojtIAC",
+    "Category__c": "Query Manager",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "What is Query Manager?",
+    "Answer__c": "what-is-query-manager.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojuIAC",
+    "Name": "a0oEc000005JojuIAC",
+    "Category__c": "Query Manager",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "Who can access Query Manager?",
+    "Answer__c": "who-can-access.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JojvIAC",
+    "Name": "a0oEc000005JojvIAC",
+    "Category__c": "Query Manager",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How do I build a SOQL query with Query Builder?",
+    "Answer__c": "how-to-build-soql-query.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojwIAC",
+    "Name": "a0oEc000005JojwIAC",
+    "Category__c": "Query Manager",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "What happens when you execute a query?",
+    "Answer__c": "what-happens-when-execute.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005JojxIAC",
+    "Name": "a0oEc000005JojxIAC",
+    "Category__c": "Query Manager",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "What is a Column Filter?",
+    "Answer__c": "what-is-column-filter.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005JojyIAC",
+    "Name": "a0oEc000005JojyIAC",
+    "Category__c": "Query Manager",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How does a dynamic filter work?",
+    "Answer__c": "how-dynamic-filter-works.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005Jok0IAC",
+    "Name": "a0oEc000005Jok0IAC",
+    "Category__c": "Query Manager",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How can I query data from a remote Salesforce org?",
+    "Answer__c": "how-to-query-remote-org.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005Jok1IAC",
+    "Name": "a0oEc000005Jok1IAC",
+    "Category__c": "Query Manager",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "Can I include deleted records from the Recycle Bin in my query?",
+    "Answer__c": "can-include-deleted-records.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005Jok2IAC",
+    "Name": "a0oEc000005Jok2IAC",
+    "Category__c": "Query Manager",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "Can I use the Query component to restore deleted records from the Recycle Bin?",
+    "Answer__c": "can-restore-deleted-records.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005Jok3IAC",
+    "Name": "a0oEc000005Jok3IAC",
+    "Category__c": "Query Manager",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How do hyperlinks work in query results?",
+    "Answer__c": "how-hyperlinks-work.html",
+    "isActive": false
+  },
+  {
+    "Id": "a0oEc000005Jok4IAC",
+    "Name": "a0oEc000005Jok4IAC",
+    "Category__c": "Query Manager",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "Is pagination handled server-side or client-side?",
+    "Answer__c": "is-pagination-server-or-client.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005Jok5IAC",
+    "Name": "a0oEc000005Jok5IAC",
+    "Category__c": "Query Manager",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "Is the Tooling API supported in Query?",
+    "Answer__c": "is-tooling-api-supported.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005Jok6IAC",
+    "Name": "a0oEc000005Jok6IAC",
+    "Category__c": "Query Manager",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How can I manage my frequently used queries?",
+    "Answer__c": "how-to-manage-frequent-queries.html",
+    "isActive": true
+  },
+  {
+    "Id": "a0oEc000005Jok7IAC",
+    "Name": "a0oEc000005Jok7IAC",
+    "Category__c": "Query Manager",
+    "SubCategory__c": "",
+    "SeqNo__c": null,
+    "Question__c": "How do I integrate the Query component into a Lightning page?",
+    "Answer__c": "how-to-integrate-into-lightning.html",
+    "isActive": true
+  },
+  {
+    "Id": "8599ed44-d1a0-43de-b90e-22f64d5c06dc",
+    "Name": "8599ed44-d1a0-43de-b90e-22f64d5c06dc",
     "Category__c": "Rules Engines",
     "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "Why #Batch?",
-    "Answer__c": "why-use-batch-engine.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JohyIAC",
-    "Name": "a0oEc000005JohyIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Data List",
-    "SeqNo__c": null,
-    "Question__c": "Why #Data List?",
-    "Answer__c": "why-use-data-list.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JoigIAC",
-    "Name": "a0oEc000005JoigIAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Trigger",
-    "SeqNo__c": null,
-    "Question__c": "Why #Trigger?",
-    "Answer__c": "why-use-trigger.html",
+    "Question__c": "Does splitting an Apex batch class with multiple actions into multiple batch Executables slow performance a lot?",
+    "Answer__c": "apex-batch-class-splitting-performance-guide.html",
     "isActive": true
   }
 ]

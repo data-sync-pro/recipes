@@ -1,0 +1,18 @@
+<p>
+  In Salesforce, every Apex Trigger must have at least one line of code covered
+  by a test class before it can be deployed to production.
+</p>
+<p>For DSP triggers, each Apex Trigger contains a single line:</p>
+<pre><div><div><code>pushtopics.TriggerServices.execute();
+</code></div></div></pre>
+<p>
+  To meet the coverage requirement, write a test class that performs a
+  <strong>DML operation</strong> (such as an insert, update, or delete) on the
+  object tied to the trigger. This will invoke the trigger and automatically
+  cover the line.
+</p>
+<p>
+  For deployment coverage, a simple DML test is enough. If you also want to
+  validate the business logic defined in Executables, extend your test classes
+  to check the expected outcomes.
+</p>

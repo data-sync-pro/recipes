@@ -1,0 +1,54 @@
+<p>To Create a <strong>Self-Adaptive #Trigger</strong></p>
+<ol>
+  <li>
+    <p>
+      Create a new <strong>Executable</strong> with a
+      <strong>Direction</strong> whose source and target
+      <strong>Connections</strong> are both the current org.
+    </p>
+  </li>
+  <li>
+    <p>
+      Set the <strong>source and target objects</strong> to the same object.
+    </p>
+  </li>
+  <li>
+    <p>
+      Choose <strong>Update</strong> or <strong>Upsert</strong> as the Action.
+    </p>
+  </li>
+  <li>
+    <p>
+      Set both the <strong>Target Matching Field</strong> and the
+      <strong>Mapping</strong> to <strong>Id</strong>
+    </p>
+    <ul>
+      <li>
+        <p>
+          This tells the engine that the records being evaluated are the same
+          ones that fired the trigger.
+        </p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>
+      Enable Before Insert and/or Before Update for field
+      <b>transformations</b>.
+    </p>
+  </li>
+  <li>
+    <p>Enable any type of trigger event for <b>validations</b>.</p>
+  </li>
+</ol>
+<ul>
+  <ul>
+    <li>
+      Use the <strong><code>ERROR</code> function</strong> in Field Mappings or
+      Scope Filters to conditionally fail records with custom messages.
+    </li>
+  </ul>
+</ul>
+
+<img src="assets/image/triggers-how-to-create-self-adaptive/triggers-how-to-create-self-adaptive1.jpg">
+<img src="assets/image/triggers-how-to-create-self-adaptive/triggers-how-to-create-self-adaptive2.jpg">
