@@ -87,7 +87,11 @@
     }
   ],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Data.Purge.Batches.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "scheduled-retention-cleanup"
