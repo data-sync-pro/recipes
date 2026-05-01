@@ -87,6 +87,19 @@
                   <img class="download-icon" src="assets/icons/download.svg" alt="Download">
                   <span class="download-title">{{ getDownloadDisplayName(file) }}</span>
                 </a>
+                  <div *ngIf="currentRecipe.downloadFileCallout"
+                      class="recipe-callout"
+                      [attr.data-variant]="currentRecipe.downloadFileCallout.variant">
+                    <span class="callout-icon">
+                      <ng-container [ngSwitch]="currentRecipe.downloadFileCallout.variant">
+                        <mat-icon *ngSwitchCase="'warning'">warning</mat-icon>
+                        <mat-icon *ngSwitchCase="'error'">error</mat-icon>
+                        <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
+                        <mat-icon *ngSwitchDefault>info</mat-icon>
+                      </ng-container>
+                    </span>
+                    <span class="callout-content">{{ currentRecipe.downloadFileCallout.content }}</span>
+                  </div>
               </ng-container>
 
               <!-- Video Demo Section -->
