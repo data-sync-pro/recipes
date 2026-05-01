@@ -18,7 +18,41 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Create Schedule Job",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1777054077346.png",
+          "alt": "WechatIMG587"
+        }
+      ]
+    },
+    {
+      "step": "Toggle Schedule",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1777054939418.png",
+          "alt": "Screenshot 2026-04-24 at 2.22.07 PM"
+        }
+      ]
+    },
+    {
+      "step": "Run Schedule Job as Me",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1777057745870.png",
+          "alt": "WechatIMG595"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [],
   "relatedRecipes": [],

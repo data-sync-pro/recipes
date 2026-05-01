@@ -76,7 +76,11 @@
     }
   ],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Quote.Snapshot.Insert.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "record-snapshot-history-with-a-big-object"

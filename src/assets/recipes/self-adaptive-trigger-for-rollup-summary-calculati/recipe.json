@@ -65,7 +65,11 @@
     }
   ],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Account.SelfAdaptive.Rollups.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "self-adaptive-trigger-for-rollup-summary-calculati"

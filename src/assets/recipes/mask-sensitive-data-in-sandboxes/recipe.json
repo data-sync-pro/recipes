@@ -18,7 +18,74 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Sandbox.Data.Sanitization",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776979970774.png",
+          "alt": "Screenshot 2026-04-23 at 5.32.47 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Contact.Mask",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776979999317.png",
+          "alt": "Screenshot 2026-04-23 at 5.32.56 PM"
+        }
+      ]
+    },
+    {
+      "step": "Batch Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776980023164.png",
+          "alt": "Screenshot 2026-04-23 at 5.33.35 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776980041060.png",
+          "alt": "Screenshot 2026-04-23 at 5.33.52 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776980064365.png",
+          "alt": "Screenshot 2026-04-23 at 5.34.17 PM"
+        }
+      ]
+    },
+    {
+      "step": "Set Field Mapping Sequence",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-5-image-1776980113726.png",
+          "alt": "Screenshot 2026-04-23 at 5.34.43 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {

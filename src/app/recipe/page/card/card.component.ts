@@ -18,21 +18,22 @@ import { Category } from '../../core/models/recipe.model';
 export class RecipeCardComponent {
   @Input() recipe!: Recipe;
   @Input() categories: Category[] = [];
-  
   @Output() recipeSelect = new EventEmitter<Recipe>();
 
-   categoryIcons: { [key: string]: string } = {
+  categoryIcons: { [key: string]: string } = {
     'Batch': 'assets/icons/recipe/batch.svg',
     'Action Button': 'assets/icons/recipe/action-button.svg',
     'Trigger': 'assets/icons/recipe/trigger.svg',
     'Data List': 'assets/icons/recipe/data-list.svg',
     'Data Loader': 'assets/icons/recipe/data-loader.svg',
-    'Transformation': 'assets/icons/recipe/transformation.svg'
+    'Transformation': 'assets/icons/recipe/transformation.svg',
+    'General': 'assets/icons/recipe/general.svg'
   };
 
-  /**
-   * Handle recipe card click
-   */
+  get recipeLink(): string[] {
+    return ['/recipes', this.recipe.category[0] || '', this.recipe.slug || ''];
+  }
+
   onRecipeClick(): void {
     this.recipeSelect.emit(this.recipe);
   }

@@ -18,7 +18,63 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Pipeline - Opportunity.Triggers",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776971427271.png",
+          "alt": "Screenshot 2026-04-23 at 3.10.08 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Opportunity.OpenQuotes.OwnerSync",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776971464823.png",
+          "alt": "Screenshot 2026-04-23 at 3.10.34 PM"
+        }
+      ]
+    },
+    {
+      "step": "Trigger Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776971494804.png",
+          "alt": "Screenshot 2026-04-23 at 3.11.22 PM"
+        }
+      ]
+    },
+    {
+      "step": "Scoping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776971513465.png",
+          "alt": "Screenshot 2026-04-23 at 3.11.45 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776971589389.png",
+          "alt": "Screenshot 2026-04-23 at 3.12.56 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
   "downloadableExecutables": [
     {

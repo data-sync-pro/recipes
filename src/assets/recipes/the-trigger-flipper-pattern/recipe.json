@@ -18,9 +18,69 @@
   "pipeline": "",
   "direction": "",
   "connection": "",
-  "walkthrough": [],
+  "walkthrough": [
+    {
+      "step": "Reset and Flag",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776974910348.png",
+          "alt": "Screenshot 2026-04-23 at 4.08.24 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Case.NotifyContact.OnDemand",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776975005993.png",
+          "alt": "Screenshot 2026-04-23 at 4.09.58 PM"
+        }
+      ]
+    },
+    {
+      "step": "Trigger Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776976451732.png",
+          "alt": "WechatIMG538"
+        }
+      ]
+    },
+    {
+      "step": "Scoping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776975141110.png",
+          "alt": "Screenshot 2026-04-23 at 4.12.14 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776975171256.png",
+          "alt": "Screenshot 2026-04-23 at 4.12.39 PM"
+        }
+      ]
+    }
+  ],
   "verificationGIF": [],
-  "downloadableExecutables": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Case.Triggers.json"
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "the-trigger-flipper-pattern"
