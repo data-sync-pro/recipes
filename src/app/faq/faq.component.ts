@@ -347,7 +347,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       takeUntil(this.destroy$)
     ).subscribe({
       next: (faqs) => {
-        //console.log('📚 FAQ data loaded, count:', faqs.length);
         this.faqList = faqs;
         this.updateUIState({ isLoading: false });
         
@@ -883,6 +882,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     item.viewCount++;
 
     
+    // Clear search state so the detail view template condition is satisfied
+    this.clearSearch();
+
     this.updateCurrentState({
       faqTitle: item.question,
       faqItem: item
@@ -1332,7 +1334,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   
     this.search.isOpen = false;
-  
+    // Clear search state so the detail view template condition is satisfied
+    this.clearSearch();
+
     setTimeout(() => this.openAndScroll(sel.question, sel.id));
     
     
@@ -1891,14 +1895,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     const problematicFAQs = this.faqList
       .filter(faq => !faq.safeAnswer && !faq.isLoading && faq.answerPath)
       .slice(0, 5);
-    /*
-    if (problematicFAQs.length > 0) {
-      console.log('Problematic FAQs:', problematicFAQs.map(faq => ({
-        id: faq.id,
-        question: faq.question,
-        answerPath: faq.answerPath
-      })));
-    }*/
   }
 
   // ==================== Table of Contents Methods ====================
@@ -2719,13 +2715,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     const handleStorageEvent = (event: StorageEvent) => {
       const sessionKey = `faq-preview-${faqId}`;
       const backupKey = `backup-faq-preview-${faqId}`;
-      /*
-      console.log('📡 Storage event received:', {
-        key: event.key,
-        hasNewValue: !!event.newValue,
-        storageType: event.storageArea === sessionStorage ? 'sessionStorage' : 'localStorage'
-      });
-      */
       // Check both sessionStorage and localStorage keys
       if ((event.key === sessionKey || event.key === backupKey) && event.newValue) {
         try {

@@ -50,7 +50,7 @@ export class AutoLinkService {
           if (data && data.terms) {
             this.autoLinkTerms = data.terms;
             this.autoLinkTermsLoaded = true;
-            //console.log(`✅ Loaded ${Object.keys(this.autoLinkTerms).length} auto-link terms`);
+
           }
         }),
         catchError(error => {
