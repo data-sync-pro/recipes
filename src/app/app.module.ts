@@ -10,13 +10,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { OrchestrationService } from './recipe/core/services/orchestration.service';
 
 import { CookieConsentComponent } from './cookie-consent/cookie-consent.component';
-import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
-import { PricingComponent } from './pricing/pricing.component';
 import { FooterComponent } from './footer/footer.component';
-import { SupportComponent } from './support/support.component';
-import { SolutionsComponent } from './solutions/solutions.component';
-import { RulesEnginesComponent } from './rules-engines/rules-engines.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -38,13 +33,8 @@ export function initializeRecipes(recipeOrchestration: OrchestrationService) {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     HeaderComponent,
-    PricingComponent,
     FooterComponent,
-    SupportComponent,
-    SolutionsComponent,
-    RulesEnginesComponent,
     CookieConsentComponent,
     ScrollToTopComponent,
     FaqEditorComponent

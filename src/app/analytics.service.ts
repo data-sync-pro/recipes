@@ -50,7 +50,6 @@ export class AnalyticsService {
 
   trackClickEvent(data: { element: string; timestamp: string }) {
     if (!this.enabled) {
-      console.log('Analytics disabled: Click tracking skipped');
       return;
     }
     if (!this.userConsented) {
@@ -65,7 +64,7 @@ export class AnalyticsService {
     };
     this.http.post('http://localhost:3000/api/track', payload)
       .subscribe({
-        next: (res) => console.log('Click tracked successfully:', res),
+        next: () => {},
         error: (err) => console.error('Tracking error:', err)
       });
   }
@@ -86,7 +85,7 @@ export class AnalyticsService {
     };
     this.http.post('http://localhost:3000/api/track', payload)
       .subscribe({
-        next: (res) => console.log('Page view tracked:', res),
+        next: () => {},
         error: (err) => console.error('Tracking error:', err)
       });
   }
@@ -104,7 +103,7 @@ export class AnalyticsService {
     };
     this.http.post('http://localhost:3000/api/track', payload)
       .subscribe({
-        next: (res) => console.log('Custom event tracked:', res),
+        next: () => {},
         error: (err) => console.error('Tracking error:', err)
       });
   }

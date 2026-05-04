@@ -1,10 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { PricingComponent } from './pricing/pricing.component';
-import { RulesEnginesComponent } from './rules-engines/rules-engines.component';
-import { SolutionsComponent } from './solutions/solutions.component';
-import { SupportComponent } from './support/support.component';
 import { FaqEditorComponent } from './faq-editor/faq-editor.component';
 
 const routes: Routes = [
@@ -20,16 +15,7 @@ const routes: Routes = [
     path: 'recipe-editor',
     loadChildren: () => import('./recipe/editor/editor.module').then(m => m.RecipeEditorModule)
   },
-  //{ path: 'pricing', component: PricingComponent },
-  //{ path: 'home', component: HomeComponent },
-  //{ path: 'rules-engines', component: RulesEnginesComponent },
-  //{ path: 'solutions', component: SolutionsComponent },
-  //{ path: 'support', component: SupportComponent },
-  //{
-  //  path: 'designer-guide',
-  //  loadChildren: () => import('./designer-guide/designer-guide.module').then(m => m.DesignerGuideModule)
-  //},
-  { 
+  {
     path: '', 
     loadChildren: () => import('./faq/faq.module').then(m => m.FaqModule)
   },
