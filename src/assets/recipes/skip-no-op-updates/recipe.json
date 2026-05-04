@@ -1,0 +1,72 @@
+{
+  "id": "137653b6-8cc1-47ba-81f3-a34527b7b129",
+  "title": "Skip No-Op Updates",
+  "category": [
+    "General"
+  ],
+  "DSPVersions": [],
+  "overview": "A Skip Update If No Changes setting is enabled on a #Batch job that updates Contacts. During execution, DSP compares computed mapped values to what’s already in Salesforce and skips the update when nothing changed—reducing downstream automation/validation churn and avoiding unnecessary updates.",
+  "generalUseCase": "Use Skip Update If No Changes to prevent no-op updates when computed target values already match what’s stored—so validations, automations, and audit fields aren’t needlessly triggered.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/zuF2ShoO_4o",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Contact.Batches",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776896728685.png",
+          "alt": "Screenshot 2026-04-22 at 6.25.09 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Contact.DeltaUpdate",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776896760594.png",
+          "alt": "Screenshot 2026-04-22 at 6.25.34 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776896779841.png",
+          "alt": "Screenshot 2026-04-22 at 6.26.11 PM"
+        }
+      ]
+    },
+    {
+      "step": "Action",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776896797310.png",
+          "alt": "Screenshot 2026-04-22 at 6.26.27 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "skip-no-op-updates"
+}

@@ -1,15 +1,16 @@
 <div class="recipe-list">
-    <!-- Filter Input Section -->
+    <!-- Search Input Section -->
     <div class="search-bar-wrapper">
-        <div class="filter-wrapper">
-            <img class="icon" src="assets/icons/recipe/filter.svg" aria-hidden="true">
+        <div class="search-wrapper">
+            <img class="icon" src="assets/icons/recipe/search.svg" aria-hidden="true">
             <input
                 #filterInput
                 type="text"
-                placeholder="Filter results"
-                class="filter-input"
+                placeholder="Search..."
+                class="search-input"
                 [value]="searchQuery"
                 (input)="onSearchInput($event)"
+                (keydown.escape)="filterInput.blur()"
             >
             <span class="shortcut-hint">/</span>
         </div>

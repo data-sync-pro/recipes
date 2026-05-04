@@ -1,18 +1,9 @@
-<p>Data Sync Pro processes all data entirely within your Salesforce org and enforces Salesforce’s native security model—ensuring complete control and privacy.</p>
-<p><strong>Local Data Processing</strong><br>
-All processing runs natively in Apex within the subscriber’s Salesforce org where DSP is installed, no services are hosted outside your org. </p><p><strong>Remote Actions</strong><br>
-For remote connection actions, DSP relies on Salesforce’s built-in Named Credentials. Credentials remain fully managed by you and are never exposed to third parties.</p>
-<p><strong>User Access to Record-Based Rules</strong><br>
-DSP manages all rules as records within packaged custom objects and fully enforces Salesforce’s object-, field-, and record-level security. The package includes three core permission sets:</p>
-<ul>
-<li>
-<p><strong>DSP: Data Sync Pro Starter</strong> – Minimal access to packaged code and objects. With additional read access to Executable records, users can run those rules except for executing batches.</p>
-</li>
-<li>
-<p><strong>DSP: Data Sync Pro App User</strong> – Can run asynchronous rules (e.g., Batch jobs, Data Loaders) if granted explicit access to the relevant Executable records.</p>
-</li>
-<li>
-<p><strong>DSP: Data Sync Pro Administrator</strong> – Full administrative control, including access to all configuration records.</p>
-</li>
-</ul>
-<p>These safeguards ensure every DSP operation stays within Salesforce’s native security boundaries while remaining entirely under the subscriber’s control.</p>
+<p>Data Sync Pro runs entirely within your Salesforce org and uses Salesforce's native security model.</p><ul>
+<li><strong>Data Processing</strong> — All processing runs in Apex inside the installed org. No external systems or third-party services are involved.</li>
+<li><strong>Remote Actions</strong> — Connections to other Salesforce orgs use Salesforce Named Credentials, fully managed by your admins.</li>
+<li><strong>Record-Based Rule Access</strong> — All DSP rules are stored as Executable records, governed by standard Salesforce object-, field-, and record-level security.</li>
+</ul><p>DSP ships with three permission sets to manage access:</p><ul>
+<li><strong>DSP: Data Sync Pro Starter</strong> — Minimal access. Can run rules (except batches) when given read access to Executable records.</li>
+<li><strong>DSP: Data Sync Pro App User</strong> — Can run asynchronous rules like Batch jobs and Data Loaders when given access to the relevant Executable records.</li>
+<li><strong>DSP: Data Sync Pro Administrator</strong> — Full administrative control over all DSP records.</li>
+</ul><p>Every DSP operation stays inside Salesforce's native security boundaries — fully under your control.</p>

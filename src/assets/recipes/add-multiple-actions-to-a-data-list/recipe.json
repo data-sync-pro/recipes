@@ -1,0 +1,59 @@
+{
+  "id": "752d7b76-4c9c-4baa-af35-ffc0986540ad",
+  "title": "Add Multiple Actions to a Data List",
+  "category": [
+    "Data List"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Data List is configured to show an Account’s open Opportunities as a related list. A Pipeline with multiple #Action Buttons is attached to the Data List so users can add new records or use selected rows as input to run configured processes.",
+  "generalUseCase": "Use a shared #Data List to present a focused set of records and add multiple actions so users can create new records or use selected rows as input to run tailored processes in one place.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/G0RD6Vx_EQ0",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Attach Action Buttons to Data List",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776982695476.png",
+          "alt": "WechatIMG554"
+        }
+      ]
+    },
+    {
+      "step": "Action Buttons on Account Record Page",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776370952392.png",
+          "alt": "account-record-page"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Account.OpenOpportunities.ActionButtons.json",
+      "url": "assets/recipes/add-multiple-actions-to-a-data-list/downloadExecutables/Account.OpenOpportunities.ActionButtons.json"
+    },
+    {
+      "filePath": "downloadExecutables/Account.OpenOpportunities.json",
+      "url": "assets/recipes/add-multiple-actions-to-a-data-list/downloadExecutables/Account.OpenOpportunities.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "add-multiple-actions-to-a-data-list"
+}

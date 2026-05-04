@@ -1,0 +1,83 @@
+{
+  "id": "d594ef03-a3d9-4017-98b8-18dc8beaedae",
+  "title": "Column Filter",
+  "category": [
+    "General"
+  ],
+  "DSPVersions": [],
+  "overview": "",
+  "generalUseCase": "Use Column Filter to quickly narrow down the query results by applying a condition to the selected column.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/dzKkOuKjGTg",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Text Field",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776975265774.png",
+          "alt": "WechatIMG530"
+        }
+      ]
+    },
+    {
+      "step": "Picklist Field",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776973598074.png",
+          "alt": "Screenshot 2026-04-23 at 3.46.28 PM"
+        }
+      ]
+    },
+    {
+      "step": "Currency Field",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776975578682.png",
+          "alt": "WechatIMG535"
+        }
+      ]
+    },
+    {
+      "step": "Date Field",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776973724981.png",
+          "alt": "Screenshot 2026-04-23 at 3.47.58 PM"
+        }
+      ]
+    },
+    {
+      "step": "Reference Field",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776973755775.png",
+          "alt": "Screenshot 2026-04-23 at 3.49.00 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "column-filter"
+}

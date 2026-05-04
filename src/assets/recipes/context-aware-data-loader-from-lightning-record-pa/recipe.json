@@ -1,0 +1,81 @@
+{
+  "id": "eb6838f0-c766-45f0-a7eb-330884b7875b",
+  "title": "Context-Aware Data Loader from Lightning Record Page",
+  "category": [
+    "Data Loader"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Data Loader is added to Account’s related Data List and configured to use $CONTEXT_RECORD_ID to reference the current Account record. After upload, the loaded records are automatically related to that $CONTEXT_RECORD_ID.",
+  "generalUseCase": "Use #Data Loader with $CONTEXT_RECORD_ID in field mappings to enable context-aware uploads from a #Data List on any Lightning Record Page, so imported records automatically relate to the current record.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/GPmdX7UInUU",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Opportunity.DataLoaders",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776807703005.png",
+          "alt": "Screenshot 2026-04-21 at 5.41.33 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Opportunities.DataLoader.From.AccountPage",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776983352060.png",
+          "alt": "Screenshot 2026-04-23 at 6.27.57 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776983394786.png",
+          "alt": "Screenshot 2026-04-23 at 6.29.41 PM"
+        }
+      ]
+    },
+    {
+      "step": "Add Data Loader to Data List",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776986914829.png",
+          "alt": "WechatIMG559"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Opportunities.DataLoader.From.AccountPage.json",
+      "url": "assets/recipes/context-aware-data-loader-from-lightning-record-pa/downloadExecutables/Opportunities.DataLoader.From.AccountPage.json"
+    },
+    {
+      "filePath": "downloadExecutables/Account.Opportunities.json",
+      "url": "assets/recipes/context-aware-data-loader-from-lightning-record-pa/downloadExecutables/Account.Opportunities.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "context-aware-data-loader-from-lightning-record-pa"
+}

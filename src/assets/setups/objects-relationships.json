@@ -1,0 +1,89 @@
+{
+  "title": "Objects & Relationships",
+  "order": 1,
+  "blocks": [
+    {
+      "type": "p",
+      "content": "The table below provides an overview of the core DSP configuration and log objects, including each object’s API name, parent relationships, and a brief description.",
+      "children": [
+        {
+          "type": "table",
+          "columns": [
+            { "key": "object", "header": "Object", "width": "20%" },
+            { "key": "apiName", "header": "API Name", "width": "30%" },
+            { "key": "parent", "header": "Parent", "width": "15%" },
+            { "key": "description", "header": "Description", "width": "35%" }
+          ],
+          "rows": [
+            {
+              "object": "Connection",
+              "apiName": "pushtopics__Connection__c",
+              "parent": "—",
+              "description": "A Connection represents a connected Salesforce org and specifies the authentication required to establish the connection."
+            },
+            {
+              "object": "Direction",
+              "apiName": "pushtopics__Direction__c",
+              "parent": "Connection",
+              "description": "A Direction defines the Source and Target Connections for Executables, providing a reusable configuration for specifying Executables' input and output objects."
+            },
+            {
+              "object": "Pipeline",
+              "apiName": "pushtopics__Pipeline__c",
+              "parent": "Direction",
+              "description": "A Pipeline groups and organizes related Executables—either for contextual organization or for defining a specific execution or display sequence. \n\nIt enables ordered execution of Batch jobs and Triggers, and ordered display of Data Lists and Action Buttons. \n\nA Pipeline also supports shared configurations such as Retrieve Criteria and Scope Filter, and provides access to the Migration Builder for creating structured data migration Executables across Connections, and more."
+            },
+            {
+              "object": "Executable",
+              "apiName": "pushtopics__Executable__c",
+              "parent": "Direction, Connection, Pipeline",
+              "description": "An Executable provides a modular, declarative, rules-driven, simple yet powerful framework for scalable data operations in Salesforce, with clear input, output, and powerful transformation capabilities."
+            },
+            {
+              "object": "Field Mapping",
+              "apiName": "pushtopics__FieldMapping__c",
+              "parent": "Executable",
+              "description": "A Field Mapping associated with an Executable defines the transformation logic for individual target fields. It leverages source fields, expressions, and a list of predefined functions to shape the data transformation."
+            },
+            {
+              "object": "Variable",
+              "apiName": "pushtopics__Variable__c",
+              "parent": "Connection, Executable",
+              "description": "A Variable is a named, reusable formula that can be referenced in mappings, filters, or other expressions across one or more Executables."
+            },
+            {
+              "object": "Schedule",
+              "apiName": "pushtopics__Schedule__c",
+              "parent": "Executable, Pipeline",
+              "description": "A Schedule defines and manages the scheduling of a batch job item for a Pipeline, Executable, or Apex Class, including its frequency, timing, activation, running user, and job status."
+            },
+            {
+              "object": "Pipeline Execution",
+              "apiName": "pushtopics__PipelineExecution__c",
+              "parent": "Pipeline",
+              "description": "A Pipeline Execution is a log record that tracks the batch execution of a Pipeline containing multiple Executables, capturing the overall status and outcome of the associated Executions."
+            },
+            {
+              "object": "Execution",
+              "apiName": "pushtopics__Execution__c",
+              "parent": "Executable, Pipeline Execution",
+              "description": "An Execution is a log record that tracks the execution of a Batch Executable, capturing its status, timing, and key details."
+            },
+            {
+              "object": "Batch Execution",
+              "apiName": "pushtopics__BatchExecution__c",
+              "parent": "Execution",
+              "description": "A Batch Execution is a log record representing the execution of a single batch chunk within an Execution. It captures the status, scope, outcome, resource usage, and other key details related to processing that specific subset of records."
+            },
+            {
+              "object": "Saved Query",
+              "apiName": "pushtopics__SavedQuery__c",
+              "parent": "—",
+              "description": "A Saved Query stores a reusable user-defined query that can be easily accessed, edited, and executed in Query."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

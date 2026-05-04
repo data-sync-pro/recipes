@@ -66,7 +66,7 @@ export class SearchStateService implements OnDestroy {
         let filteredRecipes = allRecipes;
         if (currentFilter.categories && currentFilter.categories.length > 0) {
           filteredRecipes = allRecipes.filter(recipe =>
-            currentFilter.categories.includes(recipe.category)
+            recipe.category.some(cat => currentFilter.categories.includes(cat))
           );
         }
 

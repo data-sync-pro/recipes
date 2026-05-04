@@ -1,0 +1,119 @@
+{
+  "title": "OAuth 2.0 (Refresh Token Flow)",
+  "order": 2,
+  "blocks": [
+    {
+      "type": "p",
+      "content": "DSP supports OAuth 2.0 authentication using Salesforce security features, including:"
+    },
+    {
+      "type": "ul",
+      "children": [
+        { "type": "p", "content": "External Client App" },
+        { "type": "p", "content": "Auth. Provider" },
+        { "type": "p", "content": "Named Credential" }
+      ]
+    },
+    {
+      "type": "h2",
+      "content": "Configure OAuth 2.0 Refresh Token Flow Authentication"
+    },
+     {
+      "type": "p",
+      "content": "Complete the steps below to configure OAuth 2.0 authentication between the Connected Org and the DSP App Org."
+    },
+    {
+      "type": "h3",
+      "content": "1. Create External Client App in Connected Org",
+      "children": [
+        {
+          "type": "p",
+          "content": "Create an External Client App to generate the Consumer Key and Consumer Secret required for OAuth authentication."
+        },
+        {
+          "type": "video",
+          "src": "video/connection/OAuth-2/1.mp4"
+        }
+      ]
+    },
+    {
+      "type": "h3",
+      "content": "2. Create Auth. Provider in DSP App Org",
+      "children": [
+        {
+          "type": "p",
+          "content": "Create an Auth. Provider to connect the DSP App Org to the External Client App created in the Connected Org."
+        },
+        {
+          "type": "ul",
+          "children": [
+            {
+              "type": "p",
+              "content": "<strong>Consumer Key, Consumer Secret</strong>: Copy from the External Client App in the Connected Org."
+            },
+            {
+              "type": "p",
+              "content": "<strong>Authorize Endpoint URL</strong>: Use \"https://test.salesforce.com/services/oauth2/authorize\" for sandbox environment or \"https://login.salesforce.com/services/oauth2/authorize\" for production."
+            },
+            {
+              "type": "p",
+              "content": "<strong>Token Endpoint URL</strong>: Use \"https://test.salesforce.com/services/oauth2/token\" for sandbox environment or \"https://login.salesforce.com/services/oauth2/token\" for production."
+            },
+            {
+              "type": "p",
+              "content": "<strong>Default Scopes</strong>: Enter required scopes. Separate multiple scopes with spaces."
+            }
+          ]
+        },
+        {
+          "type": "video",
+          "src": "video/connection/OAuth-2/2.mp4"
+        }
+      ]
+    },
+    {
+      "type": "h3",
+      "content": "3. Update Callback URL in Connected Org",
+      "children": [
+        {
+          "type": "p",
+          "content": "Update the External Client App to use the Callback URL generated in the DSP App Org."
+        },
+        {
+          "type": "video",
+          "src": "video/connection/OAuth-2/3.mp4"
+        }
+      ]
+    },
+    {
+      "type": "h3",
+      "content": "4. Create Named Credential in DSP App Org",
+      "children": [
+        {
+          "type": "ul",
+          "children": [
+            { "type": "p", "content": "<strong>URL</strong>: Enter the Connected Org domain URL (found in My Domain Settings)." },
+            { "type": "p", "content": "<strong>Auth. Provider</strong>: Select the Auth. Provider created earlier." },
+            { "type": "p", "content": "<strong>Scope</strong>: Enter the OAuth scopes enabled in the Connected Org's External Client App. Separate multiple scopes with spaces." }
+          ]
+        },
+        {
+          "type": "video",
+          "src": "video/connection/OAuth-2/4.mp4"
+        }
+      ]
+    },
+    {
+      "type": "h3",
+      "content": "5. Create and Test DSP Connection in DSP App Org",
+      "children": [
+        {
+          "type": "video",
+          "src": "video/connection/OAuth-2/5.mp4"
+        }
+      ]
+    }
+  ]
+}
+
+

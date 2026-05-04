@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { RecipeData } from '../../core/models/recipe.model';
+import { RecipeData, normalizeCategory } from '../../core/models/recipe.model';
 import { PreviewService } from '../../core/services/preview.service';
 import { LoggerService } from '../../core/services/logger.service';
 import { cleanRecipeForExport } from '../../core/utils';
@@ -84,7 +84,7 @@ export class PreviewCoordinatorService {
       this.previewService.updatePreviewData({
         recipeId: recipe.id,
         title: recipe.title,
-        category: recipe.category,
+        category: normalizeCategory(recipe.category),
         recipeData: cleanedRecipe,
         timestamp: Date.now()
       });
@@ -139,7 +139,7 @@ export class PreviewCoordinatorService {
       this.previewService.updatePreviewData({
         recipeId: recipe.id,
         title: recipe.title,
-        category: recipe.category,
+        category: normalizeCategory(recipe.category),
         recipeData: cleanedRecipe,
         timestamp: Date.now()
       });
@@ -168,7 +168,7 @@ export class PreviewCoordinatorService {
       const previewData = {
         recipeId: recipe.id,
         title: recipe.title,
-        category: recipe.category,
+        category: normalizeCategory(recipe.category),
         recipeData: cleanedRecipe,
         timestamp: Date.now()
       };

@@ -69,6 +69,8 @@
   overflow-y: auto;
   background: #ffffff;
   min-height: calc(100vh - $header-height);
+  position: relative;
+  z-index: 1; // Base level, hovered images will use higher z-index
 
   @include tablet {
     padding: 16px 32px; // Match FAQ's tablet padding

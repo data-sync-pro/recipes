@@ -44,6 +44,31 @@ export class ExportService {
     return null;
   }
 
+  /**
+   * Extract executable info from filePath, handling both formats:
+   * - 'downloadExecutables/xxx.json' (IndexedDB/new uploads)
+   * - 'assets/recipes/folder/downloadExecutables/xxx.json' (transformed asset paths)
+   */
+  private extractExecutableInfo(filePath: string): { fileName: string; relativePath: string } | null {
+    if (!filePath) return null;
+
+    // Handle IndexedDB format: downloadExecutables/xxx.json
+    if (filePath.startsWith('downloadExecutables/')) {
+      const fileName = filePath.replace('downloadExecutables/', '');
+      return { fileName, relativePath: filePath };
+    }
+
+    // Handle transformed asset format: assets/recipes/folder/downloadExecutables/xxx.json
+    const assetMatch = filePath.match(/assets\/recipes\/[^/]+\/(downloadExecutables\/[^/]+)$/);
+    if (assetMatch) {
+      const relativePath = assetMatch[1]; // downloadExecutables/xxx.json
+      const fileName = relativePath.replace('downloadExecutables/', '');
+      return { fileName, relativePath };
+    }
+
+    return null;
+  }
+
   async exportSingleRecipe(recipe: RecipeData): Promise<void> {
     try {
       const cleanedRecipe = cleanRecipeForStorage(recipe);
@@ -177,22 +202,23 @@ export class ExportService {
 
           for (const executable of recipe.downloadableExecutables) {
             if (executable.filePath) {
-              try {
-                const fileName = executable.filePath.replace('downloadExecutables/', '');
+              const execInfo = this.extractExecutableInfo(executable.filePath);
+              if (execInfo) {
+                try {
+                  const jsonFile = await this.fileResolver.getFileWithFallback(
+                    fileStorage,
+                    execInfo.fileName,
+                    recipe,
+                    execInfo.relativePath,
+                    false
+                  );
 
-                const jsonFile = await this.fileResolver.getFileWithFallback(
-                  fileStorage,
-                  fileName,
-                  recipe,
-                  executable.filePath,
-                  false
-                );
-
-                if (jsonFile && executablesFolder) {
-                  executablesFolder.file(fileName, jsonFile);
+                  if (jsonFile && executablesFolder) {
+                    executablesFolder.file(execInfo.fileName, jsonFile);
+                  }
+                } catch (error) {
+                  this.logger.warn(`Failed to add JSON file ${executable.filePath}`, error);
                 }
-              } catch (error) {
-                this.logger.warn(`Failed to add JSON file ${executable.filePath}`, error);
               }
             }
           }

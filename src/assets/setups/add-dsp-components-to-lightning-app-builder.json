@@ -1,0 +1,10 @@
+{
+    "title": "Lightning Web Components",
+    "order": 4,
+    "blocks": [
+        {
+            "type": "p",
+            "content": "This section shows how to add <strong>Data Sync Pro managed Lightning Components</strong> to a <strong>Lightning Page</strong> in Lightning App Builder."
+        }
+    ]
+}

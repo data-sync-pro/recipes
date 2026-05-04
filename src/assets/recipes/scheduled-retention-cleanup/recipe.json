@@ -1,0 +1,98 @@
+{
+  "id": "bbee181a-5b2d-46fc-a26f-b7af29f75ac0",
+  "title": "Scheduled Retention Cleanup",
+  "category": [
+    "Batch"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Batch is scheduled to run every weekend and delete Cases that are closed and more than two years old.",
+  "generalUseCase": "Use the Delete action to clean up unnecessary records and free up data storage.\nUse a Schedule to run batch jobs on a recurring cadence.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/Nxvv2dHSIbw",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": " Pipeline - Data.Purge.Batches",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776373116793.png",
+          "alt": "Screenshot 2026-04-16 at 4.51.07 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - ClosedCases.Purge",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776373158512.png",
+          "alt": "Screenshot 2026-04-16 at 4.51.25 PM"
+        }
+      ]
+    },
+    {
+      "step": "Batch Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776373178236.png",
+          "alt": "Screenshot 2026-04-16 at 4.51.38 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776373192851.png",
+          "alt": "Screenshot 2026-04-16 at 4.51.51 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776804994656.png",
+          "alt": "Screenshot 2026-04-21 at 4.56.22 PM"
+        }
+      ]
+    },
+    {
+      "step": "Pipeline Schedule",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-5-image-1776805741689.png",
+          "alt": "Screenshot 2026-04-21 at 5.03.32 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Data.Purge.Batches.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "scheduled-retention-cleanup"
+}

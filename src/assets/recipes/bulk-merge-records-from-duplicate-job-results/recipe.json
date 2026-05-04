@@ -1,0 +1,88 @@
+{
+  "id": "e4f8a7e6-8414-4e0a-9054-45453645c154",
+  "title": "Bulk Merge Records from Duplicate Job Results",
+  "category": [
+    "Batch"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Batch is configured to bulk deduplicate Contacts from a Salesforce Duplicate Job run. DSP retrieves Duplicate Record Sets by Duplicate Job Id as input and uses the related Duplicate Record Items as the target. It automatically selects the principal Contact by a specified rule, then merges and fills missing fields on the principal from the merged records.",
+  "generalUseCase": "Use #Batch to bulk deduplicate records from a Salesforce Duplicate Job run by processing the resulting Duplicate Record Sets and merging matched records at scale based on predefined rules.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/GvRVES3_wBQ",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Contact.Batches",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776729213406.png",
+          "alt": "Screenshot 2026-04-20 at 7.53.24 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - DuplicateRecordSet.DuplicateRecorditems.Contact.Merge",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776729268874.png",
+          "alt": "Screenshot 2026-04-20 at 7.53.43 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776729305969.png",
+          "alt": "Screenshot 2026-04-20 at 7.54.53 PM"
+        }
+      ]
+    },
+    {
+      "step": "Match",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776729328983.png",
+          "alt": "Screenshot 2026-04-20 at 7.55.18 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776729353724.png",
+          "alt": "Screenshot 2026-04-20 at 7.55.39 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/DuplicateRecordSet.DuplicateRecordItems.Contact.Merge.json",
+      "url": "assets/recipes/bulk-merge-records-from-duplicate-job-results/downloadExecutables/DuplicateRecordSet.DuplicateRecordItems.Contact.Merge.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "bulk-merge-records-from-duplicate-job-results"
+}

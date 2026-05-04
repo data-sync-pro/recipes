@@ -1,0 +1,99 @@
+{
+  "id": "bb1a4527-cd06-4e37-8057-bc8d4a47b3e2",
+  "title": "Merge Duplicate Records",
+  "category": [
+    "Action Button"
+  ],
+  "DSPVersions": [],
+  "overview": "An #Action Button is configured to let business users trigger automated deduplication with a single click. The Executable uses the Merge action with Apply Duplicate Matching enabled, applies configurable sorting to identify the principal record, and auto-fills missing fields with values from the merged records.",
+  "generalUseCase": "Use the Merge action to simplify deduplication with predefined rules—such as applying duplicate matching defined in Salesforce Duplicate Management, automatically selecting the principal record, and filling in missing fields.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/MWHq1vEniTA",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Contact.ActionButtons",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776719040444.png",
+          "alt": "Screenshot 2026-04-20 at 5.03.26 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Contacts.Merge.DuplicateRule",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776719436703.png",
+          "alt": "Screenshot 2026-04-20 at 5.10.30 PM"
+        }
+      ]
+    },
+    {
+      "step": "Action Button Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776719563586.png",
+          "alt": "Screenshot 2026-04-20 at 5.10.51 PM"
+        }
+      ]
+    },
+    {
+      "step": "Scoping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776719588109.png",
+          "alt": "Screenshot 2026-04-20 at 5.12.55 PM"
+        }
+      ]
+    },
+    {
+      "step": "Match",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776719633955.png",
+          "alt": "Screenshot 2026-04-20 at 5.13.47 PM"
+        }
+      ]
+    },
+    {
+      "step": "Action",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-5-image-1776719778919.png",
+          "alt": "Screenshot 2026-04-20 at 5.16.06 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Contacts.Merge.DuplicateRule.json",
+      "url": "assets/recipes/merge-duplicate-records/downloadExecutables/Contacts.Merge.DuplicateRule.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "merge-duplicate-records"
+}

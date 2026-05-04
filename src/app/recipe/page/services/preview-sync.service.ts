@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { PreviewService } from '../../core/services/preview.service';
 import { LoggerService } from '../../core/services/logger.service';
-import { Recipe, RecipePreviewData } from '../../core/models/recipe.model';
+import { Recipe, RecipePreviewData, normalizeCategory } from '../../core/models/recipe.model';
 
 export interface PreviewUpdateEvent {
   type: 'content-updated';
@@ -101,7 +101,7 @@ export class PreviewSyncService {
     return {
       id: sourceRecipe.id,
       title: sourceRecipe.title,
-      category: sourceRecipe.category,
+      category: normalizeCategory(sourceRecipe.category),
       DSPVersions: sourceRecipe.DSPVersions,
       overview: sourceRecipe.overview,
       generalUseCase: sourceRecipe.generalUseCase,

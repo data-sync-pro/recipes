@@ -18,21 +18,22 @@ import { Category } from '../../core/models/recipe.model';
 export class RecipeCardComponent {
   @Input() recipe!: Recipe;
   @Input() categories: Category[] = [];
-  
   @Output() recipeSelect = new EventEmitter<Recipe>();
 
-   categoryIcons: { [key: string]: string } = {
+  categoryIcons: { [key: string]: string } = {
     'Batch': 'assets/icons/recipe/batch.svg',
     'Action Button': 'assets/icons/recipe/action-button.svg',
     'Trigger': 'assets/icons/recipe/trigger.svg',
     'Data List': 'assets/icons/recipe/data-list.svg',
     'Data Loader': 'assets/icons/recipe/data-loader.svg',
-    'Transformation': 'assets/icons/recipe/transformation.svg'
+    'Transformation': 'assets/icons/recipe/transformation.svg',
+    'General': 'assets/icons/recipe/general.svg'
   };
 
-  /**
-   * Handle recipe card click
-   */
+  get recipeLink(): string[] {
+    return ['/recipes', this.recipe.category[0] || '', this.recipe.slug || ''];
+  }
+
   onRecipeClick(): void {
     this.recipeSelect.emit(this.recipe);
   }
@@ -42,17 +43,18 @@ export class RecipeCardComponent {
   }
 
   /**
-   * Get the icon for the current recipe's category
+   * Get all category icons for the current recipe
    */
-  get recipeIcon(): string {
-    return this.categoryIcons[this.recipe?.category] || '';
-  }
+  get recipeIcons(): { icon: string; displayName: string }[] {
+    if (!this.recipe?.category) return [];
 
-  /**
-   * Get the display name for the current recipe's category
-   */
-  get recipeCategoryDisplayName(): string {
-    const category = this.categories.find(cat => cat.name === this.recipe?.category);
-    return category?.displayName || this.recipe?.category || '';
+    return this.recipe.category
+      .map(categoryName => {
+        const icon = this.categoryIcons[categoryName] || '';
+        const category = this.categories.find(cat => cat.name === categoryName);
+        const displayName = category?.displayName || categoryName || '';
+        return { icon, displayName };
+      })
+      .filter(item => item.icon); // Only include categories with icons
   }
 }

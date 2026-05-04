@@ -81,7 +81,7 @@ export class CacheService {
   }
 
   findRecipesByCategory(category: string): Recipe[] {
-    return this.getRecipes().filter(r => r.category === category);
+    return this.getRecipes().filter(r => r.category.includes(category));
   }
 
   clearMemoryCache(): void {

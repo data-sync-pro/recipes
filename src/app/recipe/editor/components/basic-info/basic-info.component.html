@@ -21,16 +21,36 @@
              required>
     </div>
 
-    <div class="form-group">
-      <label for="category">Category *</label>
-      <select id="category"
-              class="dsp-input"
-              [(ngModel)]="recipe.category"
-              (change)="onRecipeChange()"
-              required>
-        <option value="">Select category</option>
-        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
-      </select>
+    <div class="form-group category-field">
+      <label for="category">Categories *</label>
+      <div class="category-multi-select">
+        <div class="selected-categories" (click)="toggleCategoryDropdown()">
+          <span *ngIf="recipeCategories.length === 0" class="placeholder">
+            Select categories
+          </span>
+          <div class="category-tags" *ngIf="recipeCategories.length > 0">
+            <span *ngFor="let cat of recipeCategories; trackBy: trackByIndex"
+                  class="category-tag">
+              {{ cat }}
+              <button type="button"
+                      class="remove-tag"
+                      (click)="toggleCategory(cat); $event.stopPropagation()"
+                      aria-label="Remove category">×</button>
+            </span>
+          </div>
+          <span class="dropdown-arrow">▼</span>
+        </div>
+        <div class="category-options" *ngIf="showCategoryDropdown">
+          <label *ngFor="let cat of categories"
+                 class="category-option"
+                 [class.selected]="isCategorySelected(cat)">
+            <input type="checkbox"
+                   [checked]="isCategorySelected(cat)"
+                   (change)="toggleCategory(cat)">
+            <span>{{ cat }}</span>
+          </label>
+        </div>
+      </div>
     </div>
   </div>
 

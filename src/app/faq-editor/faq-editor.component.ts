@@ -713,7 +713,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
       this.saveFAQ();
     }
 
-    console.log('Selecting FAQ:', faq.id, faq.question);
     this.state.selectedFAQ = faq;
     this.state.isLoading = true; // Show loading indicator
     this.currentQuestion = faq.question;
@@ -747,7 +746,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
           this.htmlSourceEditor.nativeElement.innerHTML = editableContent;
         }
         
-        console.log('✅ Edited HTML content set for WYSIWYG editor (with image URLs):', editableContent);
         this.state.isLoading = false;
         
         // Initialize undo state
@@ -767,18 +765,13 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private loadOriginalContent(faq: FAQItem): void {
-    console.log('Loading original HTML content for editing:', faq.id, 'answerPath:', faq.answerPath);
-    
     // Load raw HTML content for editing (minimal processing)
     this.loadRawHTMLForEditing(faq.answerPath)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (rawHtmlContent) => {
-          console.log('Received raw HTML content for editing');
-          
           // Minimal processing - only decode HTML entities, preserve all HTML structure
           const editableContent = this.prepareContentForEditing(rawHtmlContent);
-          console.log('Prepared content for editing:', editableContent);
           
           this.editorContent = editableContent;
           
@@ -788,8 +781,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
               this.htmlSourceEditor.nativeElement.innerHTML = editableContent;
             }
             
-            console.log('✅ HTML content set in WYSIWYG editor');
-            console.log('📄 Content now in editor:', editableContent);
             this.state.isLoading = false;
             
             // Initialize undo state
@@ -886,12 +877,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
       const htmlContent = this.convertUrlsToImgs(cleanedContent, true);
       
       // Debug logging (only for current saves to avoid spam)
-      if (saveContext === 'current' && !silent) {
-        console.log('💾 Saving content - Raw:', rawContent);
-        console.log('💾 Saving content - Cleaned:', cleanedContent);
-        console.log('💾 Saving content - Converted:', htmlContent);
-      }
-      
       const faqData: Partial<EditedFAQ> = {
         faqId,
         question,
@@ -1061,7 +1046,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
   resetCurrentFAQ(): void {
     if (!this.state.selectedFAQ) return;
 
-    console.log('Resetting current FAQ to original content');
     this.selectFAQ(this.state.selectedFAQ);
     
     // Show notification
@@ -1086,9 +1070,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
     // Update internal state to match DOM for consistency
     this.editorContent = editorContent;
     
-    console.log('🔍 Preview update - Editor content:', editorContent);
-    console.log('🔍 Preview update - Preview content:', previewContent);
-    
     // Update preview with converted content (shows actual images)
     this.previewContent = this.sanitizer.bypassSecurityTrustHtml(previewContent);
   }
@@ -1103,13 +1084,10 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
 
-    console.log('Updating preview with full FAQ service processing for:', faq.answerPath);
-    
     this.faqService.getFAQContent(faq.answerPath)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (processedContent) => {
-          console.log('Received fully processed content for preview');
           this.previewContent = processedContent;
         },
         error: (error) => {
@@ -1245,7 +1223,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
       if (success) {
         this.loadEditedFAQs();
         this.notificationService.success(`${importType} import completed successfully!`);
-        console.log(`${importType} import successful for file:`, file.name);
       } else {
         this.notificationService.error(`${importType} import failed. Please check the file format and content.`);
         console.error(`${importType} import failed for file:`, file.name);
@@ -1326,7 +1303,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
     this.state.showExportDialog = false;
     this.state.showImportDialog = false;
     
-    console.log('📝 Editor state reset to initial state');
   }
 
   /**
@@ -1368,7 +1344,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
     this.currentIsActive = true; // New FAQs are active by default
     this.editorContent = '<p>Enter your FAQ answer here...</p>';
     
-    console.log('📝 Default tab created after clear all');
   }
 
   getEditedCount(): number {
@@ -1394,8 +1369,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
     if (unsavedChanges === 0) return;
 
     // Show progress notification
-    console.log(`Saving ${unsavedChanges} changes...`);
-    
     let savedCount = 0;
     let errorCount = 0;
     
@@ -1579,16 +1552,8 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   private loadRawHTMLForEditing(answerPath: string): Observable<string> {
     const fullPath = `assets/faq-item/${answerPath}`;
-    console.log('📁 Loading raw HTML file for editing from:', fullPath);
-    
     return this.http.get(fullPath, { responseType: 'text' }).pipe(
       map((content: string) => {
-        console.log('📄 Raw HTML file content loaded:');
-        console.log('📄 ===== ORIGINAL FILE CONTENT START =====');
-        console.log(content);
-        console.log('📄 ===== ORIGINAL FILE CONTENT END =====');
-        console.log(`📊 Content length: ${content.length} characters`);
-        
         // Return exactly as-is - NO processing whatsoever
         return content;
       }),
@@ -1605,8 +1570,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
    * Prepare content for editing - convert images to URL format for easier editing
    */
   private prepareContentForEditing(content: string): string {
-    console.log('🔍 Original content received:', content);
-    
     // Decode HTML entities first to show actual characters in the editor
     let prepared = this.decodeHTMLEntities(content);
     
@@ -1623,7 +1586,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
     // Convert images to editable URL format for the editor
     prepared = this.convertImgsToUrls(prepared);
     
-    console.log('✅ Content prepared for editing (with image URLs):', prepared);
     return prepared;
   }
 
@@ -2957,7 +2919,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
     const objectUrl = URL.createObjectURL(file);
     this.tempImageUrls.set(imagePath, objectUrl);
     
-    console.log('Stored temporary image:', imagePath, 'File size:', file.size);
   }
 
   /**

@@ -1,0 +1,67 @@
+{
+  "title": "Data Model",
+  "order": 1,
+  "blocks": [
+    {
+      "type": "p",
+      "content": "Data Sync Pro uses a structured set of custom objects to support its core functionality and track activity throughout the data management process. This design separates configuration metadata from execution logs, making the application easier to manage, monitor, and maintain."
+    },
+    {
+      "type": "p",
+      "content": "The metadata that drives Data Sync Pro's operations includes:"
+    },
+    {
+      "type": "ul",
+      "children": [
+        {
+          "type": "p",
+          "content": "<strong>Connections</strong>, which define links to source and target"
+        },
+        {
+          "type": "p",
+          "content": "<strong>Directions</strong>, which determine the path of data flow"
+        },
+        {
+          "type": "p",
+          "content": "<strong>Pipelines</strong>, which organize multiple Executables into a sequence"
+        },
+        {
+          "type": "p",
+          "content": "<strong>Executables</strong>, which represent individual data operations"
+        },
+        {
+          "type": "p",
+          "content": "<strong>Field Mappings</strong>, which define how source fields map to target fields"
+        },
+        {
+          "type": "p",
+          "content": "<strong>Schedules</strong>, which control when and how often processes run"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "content": "On the logging side, Data Sync Pro records operational activity through objects such as <strong>Pipeline Execution</strong>, <strong>Execution</strong>, and <strong>Batch Execution</strong>. These logs provide visibility into system activity, support troubleshooting, and help assess how data is processed during execution. By organizing configuration and logging data in this way, Data Sync Pro supports strong data integrity, operational visibility, and ongoing performance optimization within Salesforce."
+    },
+    {
+      "type": "p",
+      "content": "Data Sync Pro provides two main types of Executables to support a wide range of data management scenarios in Salesforce: <strong>Direction-Based Executables</strong> and <strong>Connection-Based Executables</strong>."
+    },
+    {
+      "type": "h2",
+      "content": "Direction-Based Executables"
+    },
+    {
+      "type": "p",
+      "content": "Direction-Based Executables are designed for processes that move data between two different connections, typically a source and a target. They are well suited for complex data synchronization scenarios, including retrieving data from the source, applying transformations and field mappings, and performing Data Manipulation Language (DML) operations such as <strong>insert</strong>, <strong>update</strong>, <strong>upsert</strong>, <strong>delete</strong>, <strong>undelete</strong>, and <strong>merge</strong> on the target connection."
+    },
+    {
+      "type": "h2",
+      "content": "Connection-Based Executables"
+    },
+    {
+      "type": "p",
+      "content": "Connection-Based Executables are designed for operations within a single connection. They complement Direction-Based Executables by providing focused control over queries and DML actions such as <strong>insert</strong>, <strong>update</strong>, <strong>upsert</strong>, and <strong>delete</strong> within the same system. These Executables support specific data management tasks within a single connection, including advanced capabilities for filtering, matching, and transforming data. They can also be used to create Query-Based Data Lists, which improve data access and usability directly on Salesforce Lightning pages."
+    }
+  ]
+}

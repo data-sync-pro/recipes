@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { generateSlug } from '../../../shared/utils/slug.utils';
-import { RecipeData, Recipe, WalkthroughStep } from '../models/recipe.model';
+import { RecipeData, Recipe, WalkthroughStep, normalizeCategory } from '../models/recipe.model';
 import { RECIPE_PATHS } from '../constants/recipe.constants';
 
 interface RecipeDataWithMetadata extends RecipeData {
@@ -24,7 +24,7 @@ export class TransformService {
       id: record.id,
       title: record.title,
       slug: generateSlug(record.title),
-      category: record.category,
+      category: normalizeCategory(record.category),  // Normalize to array format
       DSPVersions: record.DSPVersions || [],
 
       overview: record.overview || '',
@@ -47,6 +47,7 @@ export class TransformService {
         record.downloadableExecutables || [],
         folderId
       ),
+      downloadFileCallout: record.downloadFileCallout,
       relatedRecipes: record.relatedRecipes || [],
       keywords: record.keywords || [],
 

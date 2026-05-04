@@ -1,44 +1,8 @@
-<p>
-  A <b>#Trigger</b> Action executes operations on other records when a trigger event
-  occurs. Unlike a <b>Self-Adaptive #Trigger</b>, which modifies the same record, a
-  #Trigger Action uses the triggering records as a <strong>source</strong> to
-  perform actions on related or different records.
-</p>
-<p>
-  When a trigger event fires, DSP evaluates the
-  <strong>Scope Filters</strong> to determine which records qualify. Once
-  matched, a #Trigger Action can perform operations, for example:
-</p>
-<ul>
-  <li>
-    <p>
-      <strong>Update related records</strong> – e.g., modify a parent when a
-      child changes, or cascade updates down to child records.
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Create new records</strong> – e.g., generate tasks, log entries,
-      or follow-ups.
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Send notifications</strong> – e.g., email alerts or in-app bell
-      notifications.
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Publish Platform Events</strong> – enabling integration with
-      external systems.
-    </p>
-  </li>
-</ul>
-<p>
-  This makes #Trigger Actions ideal for handling
-  <strong>cross-record logic</strong> such as synchronizing parent–child data,
-  automating downstream processes, and sending notifications.
-</p>
+<p>A #Trigger Action uses the triggering records as input to perform an action on <strong>other</strong> records — related, parent, child, or entirely different objects. Unlike a Self-Adaptive #Trigger, which transforms the same record, a #Trigger Action reaches outward.</p><p>When a trigger event fires, DSP evaluates the <strong>Scope Filters</strong> to determine which triggering records qualify, then runs the configured action against the target. Common patterns include:</p><ul>
+<li><strong>Update related records</strong> — e.g., update a parent when a child changes, or cascade updates down to child records.</li>
+<li><strong>Create new records</strong> — e.g., generate tasks, log entries, or follow-ups.</li>
+<li><strong>Send notifications</strong> — e.g., email alerts or in-app bell notifications.</li>
+<li><strong>Publish Platform Events</strong> — for integration with external systems.</li>
+</ul><p>This makes #Trigger Actions a natural fit for cross-record logic — keeping parent–child data in sync, automating downstream processes, and orchestrating notifications, all defined declaratively as record-based configuration.</p>
 
-<img src="assets/image/triggers-what-is-trigger-action/triggers-what-is-trigger-action.jpg"/>
+<img src="assets/image/triggers-what-is-trigger-action/triggers-what-is-trigger-action.jpg">

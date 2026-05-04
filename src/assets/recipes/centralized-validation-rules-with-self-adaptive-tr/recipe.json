@@ -1,0 +1,77 @@
+{
+  "id": "3e2429e0-7869-4c78-b943-3f66c1d3daf9",
+  "title": "Centralized Validation Rules with Self-Adaptive Trigger",
+  "category": [
+    "Trigger"
+  ],
+  "DSPVersions": [],
+  "overview": "A Self-Adaptive #Trigger is configured on Opportunity to enforce Owner and Stage assignment policies on save. It validates:\n1. Renewal Opportunities are owned by the Account Owner and high-value Opportunities (≥ $500,000) are owned by a Sales Manager (Owner Profile).\n2. Opportunities cannot progress to later stages without an Amount.",
+  "generalUseCase": "Use a Self-Adaptive #Trigger to centralize an object’s validation rules, and use ERROR() to conditionally block saves with specific messages.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/iV_QnoqRTZk",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Opportunity.Triggers",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776893502486.png",
+          "alt": "Screenshot 2026-04-22 at 5.31.08 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Opportunity.SelfAdaptive.Validations",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776893543625.png",
+          "alt": "Screenshot 2026-04-22 at 5.31.53 PM"
+        }
+      ]
+    },
+    {
+      "step": "Trigger Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776893565959.png",
+          "alt": "Screenshot 2026-04-22 at 5.32.35 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776893597067.png",
+          "alt": "Screenshot 2026-04-22 at 5.33.05 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Opportunity.SelfAdaptive.Validations.json",
+      "url": "assets/recipes/centralized-validation-rules-with-self-adaptive-tr/downloadExecutables/Opportunity.SelfAdaptive.Validations.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "centralized-validation-rules-with-self-adaptive-tr"
+}

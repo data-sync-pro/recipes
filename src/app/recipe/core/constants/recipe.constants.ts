@@ -3,7 +3,9 @@ export const CATEGORY_ORDER: string[] = [
   'Trigger',
   'Data List',
   'Action Button',
-  'Data Loader'
+  'Data Loader',
+  'Transformation',
+  'Query'
 ];
 
 export const RECIPE_PATHS = {

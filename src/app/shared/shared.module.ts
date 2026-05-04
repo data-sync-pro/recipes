@@ -7,6 +7,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { SimpleZoomableDirective } from '../simple-zoomable.directive';
 import { AutoLinkDirective } from './directives/auto-link.directive';
 import { AutoLinkPipe } from './pipes/auto-link.pipe';
+import { CodeBlockPipe } from './pipes/code-block.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AutoLinkPipe } from './pipes/auto-link.pipe';
     LoadingComponent,
     SimpleZoomableDirective,
     AutoLinkDirective,
-    AutoLinkPipe
+    AutoLinkPipe,
+    CodeBlockPipe
   ],
   imports: [
     CommonModule
@@ -28,7 +30,8 @@ import { AutoLinkPipe } from './pipes/auto-link.pipe';
     LoadingComponent,
     SimpleZoomableDirective,
     AutoLinkDirective,
-    AutoLinkPipe
+    AutoLinkPipe,
+    CodeBlockPipe
   ]
 })
 export class SharedModule { }

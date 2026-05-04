@@ -1,0 +1,77 @@
+{
+  "id": "44ca1288-9429-4e30-9a95-16f7514404fb",
+  "title": "One-File-Per-Record File Management",
+  "category": [
+    "Data List"
+  ],
+  "DSPVersions": [],
+  "overview": "The Source Object ContentDocument ID Field is configured on a Data List to let users upload, preview, and update the related file directly from each row in the list.",
+  "generalUseCase": "Use the Source Object ContentDocument ID Field to let users manage files from #Data List and maintain a single record-level file with full version history.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/jEf0U5Kmj7o",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Opportunity.Related.DataLists",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776896936664.png",
+          "alt": "Screenshot 2026-04-22 at 6.28.30 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Opportunity.Quotes",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776896968036.png",
+          "alt": "Screenshot 2026-04-22 at 6.29.03 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776896997064.png",
+          "alt": "Screenshot 2026-04-22 at 6.29.47 PM"
+        }
+      ]
+    },
+    {
+      "step": "Data List Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776897066060.png",
+          "alt": "Screenshot 2026-04-22 at 6.30.52 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Opportunity.Quotes.json",
+      "url": "assets/recipes/one-file-per-record-file-management/downloadExecutables/Opportunity.Quotes.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "one-file-per-record-file-management"
+}

@@ -50,8 +50,10 @@
       >
         <div
           class="suggestion-item"
-          *ngFor="let item of filteredSuggestions"
+          *ngFor="let item of filteredSuggestions; let i = index"
+          [class.active]="i === selectedIndex"
           (click)="onSelectSuggestion(item)"
+          (mouseenter)="selectedIndex = i"
         >
           <div class="suggestion-left">{{ item.question }}</div>
           <div class="suggestion-categories">

@@ -117,6 +117,7 @@ export class FileUploadComponent {
         return;
       }
 
+      // Keep original filename, just sanitize it (replace spaces with underscores)
       const fileName = this.fileStorageService.sanitizeFileName(file.name);
 
       await this.fileStorageService.storeJsonFile(fileName, file);

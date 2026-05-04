@@ -9,6 +9,7 @@ import {
   HostListener
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subject, combineLatest, fromEvent } from 'rxjs';
 import { takeUntil, throttleTime } from 'rxjs/operators';
 
@@ -23,6 +24,19 @@ interface CategoryGroup {
   isExpanded: boolean;
 }
 
+interface TocItem {
+  id: string;
+  label: string;
+  children?: TocItem[];
+}
+
+interface SectionConfig {
+  id: string;
+  label: string;
+  templateRef: string;
+  isVisible: (recipe: Recipe, component: RecipeDetailPageComponent) => boolean;
+}
+
 @Component({
   selector: 'app-recipe-detail-page',
   templateUrl: './detail-page.component.html',
@@ -34,6 +48,58 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   currentRecipe: Recipe | null = null;
   breadcrumbs: BreadcrumbItem[] = [];
 
+  // Section configuration - single source of truth for section order
+  readonly SECTION_CONFIG: SectionConfig[] = [
+    {
+      id: 'overview',
+      label: 'Overview',
+      templateRef: 'overview',
+      isVisible: (r) => !!(r.overview && r.overview.length > 0)
+    },
+    {
+      id: 'use-case',
+      label: 'General Use Case',
+      templateRef: 'useCase',
+      isVisible: (r) => !!(r.generalUseCase && r.generalUseCase.split('\n').filter(item => item.trim()).length > 0)
+    },
+    {
+      id: 'video-demo',
+      label: 'Video Demo',
+      templateRef: 'videoDemo',
+      isVisible: (_r, c) => c.cachedYouTubeVideos.length > 0
+    },
+    {
+      id: 'download-file',
+      label: 'Downloadable Executables',
+      templateRef: 'downloadFile',
+      isVisible: (r) => !!(r.downloadableExecutables && r.downloadableExecutables.length > 0)
+    },
+    {
+      id: 'direction',
+      label: 'Direction',
+      templateRef: 'direction',
+      isVisible: (r) => !!(r.direction && r.direction.trim().length > 0)
+    },
+    {
+      id: 'pipeline',
+      label: 'Pipeline',
+      templateRef: 'pipeline',
+      isVisible: (r) => !!(r.pipeline && r.pipeline.trim().length > 0)
+    },
+    {
+      id: 'walkthrough',
+      label: 'Walkthrough',
+      templateRef: 'walkthrough',
+      isVisible: (r) => !!(r.walkthrough && r.walkthrough.length > 0)
+    }
+  ];
+
+  // Get visible sections based on current recipe
+  get visibleSections(): SectionConfig[] {
+    if (!this.currentRecipe) return [];
+    return this.SECTION_CONFIG.filter(section => section.isVisible(this.currentRecipe!, this));
+  }
+
   // Sidebar category groups
   categoryGroups: CategoryGroup[] = [];
   filteredCategoryGroups: CategoryGroup[] = [];
@@ -44,6 +110,7 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   // Active TOC section
   activeTocSection: string = 'overview';
   private isScrollingToSection: boolean = false;
+  tocItems: TocItem[] = [];
 
   // Media preview modal
   isMediaModalOpen: boolean = false;
@@ -52,6 +119,12 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   // Search overlay
   isSearchOverlayOpen: boolean = false;
 
+  // YouTube URL cache to prevent flickering on scroll
+  private youtubeUrlCache = new Map<string, SafeResourceUrl>();
+
+  // Cached YouTube videos from generalImages to prevent re-rendering on scroll
+  cachedYouTubeVideos: { url: string; alt: string }[] = [];
+
   @ViewChild('sidebarSearchInput') sidebarSearchInput!: ElementRef<HTMLInputElement>;
 
   constructor(
@@ -59,7 +132,8 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private cacheService: CacheService,
     private searchService: SearchService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -82,20 +156,38 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
       if (category && recipeName) {
         // Find the recipe by category and slug
         const recipe = recipes.find(r =>
-          r.category === category && r.slug === recipeName
+          r.category.includes(category) && r.slug === recipeName
         );
 
         if (recipe) {
+          // Scroll to top when switching to a different recipe via an
+          // imperative navigation (sidebar click, search, etc.). On
+          // popstate (browser back/forward) we leave the scroll alone
+          // so the browser's native restoration can return the user to
+          // where they were.
+          const isDifferentRecipe = !!this.currentRecipe && this.currentRecipe.id !== recipe.id;
+          const isPopstate = this.router.getCurrentNavigation()?.trigger === 'popstate';
+          if (isDifferentRecipe && !isPopstate) {
+            window.scrollTo({ top: 0, behavior: 'auto' });
+          }
+
           this.currentRecipe = recipe;
 
-          // Build breadcrumb path
+          // Build breadcrumb path (use first category or matched category)
+          const breadcrumbCategory = recipe.category.includes(category) ? category : recipe.category[0];
           this.breadcrumbs = [
             { name: 'Recipes', url: '/recipes' },
-            { name: recipe.category, url: `/recipes/${recipe.category}` }
+            { name: breadcrumbCategory, url: `/recipes/${breadcrumbCategory}` }
           ];
 
           // Expand the current category
-          this.expandCategory(recipe.category);
+          this.expandCategory(breadcrumbCategory);
+
+          // Cache YouTube videos first (before building TOC which depends on it)
+          this.buildYouTubeVideosCache();
+
+          // Build TOC items dynamically
+          this.buildTocItems();
 
           this.cdr.markForCheck();
 
@@ -112,7 +204,7 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   private buildCategoryGroups(): void {
     this.categoryGroups = this.allCategories.map(category => ({
       category,
-      recipes: this.allRecipes.filter(r => r.category === category.name),
+      recipes: this.allRecipes.filter(r => r.category.includes(category.name)),
       isExpanded: false
     }));
     this.filteredCategoryGroups = [...this.categoryGroups];
@@ -184,7 +276,6 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
     // Set the active section immediately
     this.activeTocSection = sectionId;
-    this.isScrollingToSection = true;
     this.cdr.markForCheck();
 
     const element = document.getElementById(sectionId);
@@ -195,17 +286,21 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: 'auto'
       });
-
-      // Re-enable scroll tracking after smooth scroll completes
-      setTimeout(() => {
-        this.isScrollingToSection = false;
-      }, 1000);
     }
   }
 
   getDownloadFileName(file: any): string {
+    // Extract filename from filePath, keeping underscores for safe file downloads
+    const filePath = file.filePath || file.url || '';
+    const fileName = filePath.split('/').pop() || 'download.json';
+
+    // Ensure .json extension is present
+    return fileName.endsWith('.json') ? fileName : fileName + '.json';
+  }
+
+  getDownloadDisplayName(file: any): string {
     // If title exists, return it
     if (file.title) {
       return file.title;
@@ -215,8 +310,12 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     const filePath = file.filePath || file.url || '';
     const fileName = filePath.split('/').pop() || 'Download File';
 
-    // Remove .json extension and replace underscores with spaces
+    // Remove .json extension and replace underscores with spaces for display
     return fileName.replace('.json', '').replace(/_/g, ' ');
+  }
+
+  getDownloadUrl(file: any): string {
+    return file.url || file.filePath || '';
   }
 
   getGeneralUseCaseItems(): string[] {
@@ -230,12 +329,42 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
       .filter(item => item.length > 0);
   }
 
-  shouldShowRulesEngine(): boolean {
+  // shouldShowRulesEngine(): boolean {
+  //   if (!this.currentRecipe) {
+  //     return false;
+  //   }
+  //   // Show Rules Engine section if category does not include 'Transformation'
+  //   return !this.currentRecipe.category.some(c => c.toLowerCase() === 'transformation');
+  // }
+
+  private buildTocItems(): void {
     if (!this.currentRecipe) {
-      return false;
+      this.tocItems = [];
+      return;
     }
-    // Show Rules Engine section if category is not 'Transformation'
-    return this.currentRecipe.category.toLowerCase() !== 'transformation';
+
+    const items: TocItem[] = [];
+
+    // Build TOC items from visible sections (using SECTION_CONFIG as single source of truth)
+    for (const section of this.visibleSections) {
+      const tocItem: TocItem = { id: section.id, label: section.label };
+
+      // Special handling for walkthrough - add children for each step
+      if (section.id === 'walkthrough' && this.currentRecipe.walkthrough) {
+        tocItem.children = this.currentRecipe.walkthrough.map((step, index) => {
+          return {
+            id: `walkthrough-step-${index + 1}`,
+            label: `${index + 1}. ${step.step}`
+          };
+        });
+      }
+
+      items.push(tocItem);
+    }
+
+
+
+    this.tocItems = items;
   }
 
   private setupScrollListener(): void {
@@ -255,16 +384,17 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   private updateActiveTocSection(): void {
     if (!this.currentRecipe || this.isScrollingToSection) return;
 
-    const sections = [
-      'overview',
-      'use-case',
-      'rules-engine',
-      'direction',
-      'pipeline',
-      'walkthrough',
-      'verification-gif',
-      'download-file'
-    ];
+    // Build sections list from visible sections (using SECTION_CONFIG as single source of truth)
+    const sections: string[] = [];
+    for (const section of this.visibleSections) {
+      sections.push(section.id);
+      // Add walkthrough step IDs
+      if (section.id === 'walkthrough' && this.currentRecipe.walkthrough) {
+        this.currentRecipe.walkthrough.forEach((_, index) => {
+          sections.push(`walkthrough-step-${index + 1}`);
+        });
+      }
+    }
 
     // Find which section is currently most visible in the viewport
     const viewportMiddle = window.scrollY + window.innerHeight / 3;
@@ -287,6 +417,15 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
           }
         }
       }
+    }
+
+    // If scrolled to bottom, activate the last TOC item
+    const scrolledToBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 50);
+    if (scrolledToBottom && this.tocItems.length > 0) {
+      const lastItem = this.tocItems[this.tocItems.length - 1];
+      activeSection = lastItem.children?.length
+        ? lastItem.children[lastItem.children.length - 1].id
+        : lastItem.id;
     }
 
     if (this.activeTocSection !== activeSection) {
@@ -316,6 +455,58 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     if (this.isMediaModalOpen) {
       this.closeMediaPreview();
     }
+  }
+
+  isYouTubeUrl(url: string): boolean {
+    return url?.includes('youtu.be') || url?.includes('youtube.com');
+  }
+
+  hasNonYouTubeGeneralImages(): boolean {
+    if (!this.currentRecipe?.generalImages?.length) return false;
+    return this.currentRecipe.generalImages.some(
+      media => !(media.type === 'video' && this.isYouTubeUrl(media.url))
+    );
+  }
+
+  getYouTubeVideosFromGeneralImages(): { url: string; alt: string }[] {
+    // Return cached result to prevent iframe re-rendering on scroll
+    return this.cachedYouTubeVideos;
+  }
+
+  private buildYouTubeVideosCache(): void {
+    if (!this.currentRecipe?.generalImages?.length) {
+      this.cachedYouTubeVideos = [];
+      return;
+    }
+    this.cachedYouTubeVideos = this.currentRecipe.generalImages
+      .filter(media => media.type === 'video' && this.isYouTubeUrl(media.url))
+      .map(media => ({ url: media.url, alt: media.alt }));
+  }
+
+  getYouTubeEmbedUrl(url: string): SafeResourceUrl {
+    // Return cached URL to prevent iframe flickering on scroll
+    if (this.youtubeUrlCache.has(url)) {
+      return this.youtubeUrlCache.get(url)!;
+    }
+
+    let videoId = '';
+
+    if (url.includes('youtu.be/')) {
+      // Format: https://youtu.be/VIDEO_ID
+      videoId = url.split('youtu.be/')[1]?.split('?')[0] || '';
+    } else if (url.includes('youtube.com/watch')) {
+      // Format: https://www.youtube.com/watch?v=VIDEO_ID
+      const urlParams = new URL(url).searchParams;
+      videoId = urlParams.get('v') || '';
+    } else if (url.includes('youtube.com/embed/')) {
+      // Already embed format
+      videoId = url.split('youtube.com/embed/')[1]?.split('?')[0] || '';
+    }
+
+    const embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0`;
+    const safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+    this.youtubeUrlCache.set(url, safeUrl);
+    return safeUrl;
   }
 
   ngOnDestroy(): void {

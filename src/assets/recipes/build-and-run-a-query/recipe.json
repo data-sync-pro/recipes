@@ -1,0 +1,50 @@
+{
+  "id": "a68e376d-a879-4168-a201-6b0a6dbe9237",
+  "title": "Build and Run a Query",
+  "category": [
+    "General"
+  ],
+  "DSPVersions": [],
+  "overview": "A complex SOQL query is built in the Query component using schema-aware UI prompts, without requiring users to know SOQL syntax. After running, results display with pagination, mapped labels (instead of API names), column filters, mass edit/delete, inline edit, download, new record, and row-level view/update/clone/delete actions.",
+  "generalUseCase": "Designed for every Salesforce user, DSP’s Query component lets you build SOQL queries with schema-aware suggestions—no syntax required—and work with finely polished, action-ready results directly in Lightning Experience. It runs natively as an LWC, keeping data in Salesforce while meeting enterprise-grade security standards.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/9K_Q6mRU-vs",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Build the Query",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776882933408.png",
+          "alt": "Screenshot 2026-04-22 at 2.31.16 PM"
+        }
+      ]
+    },
+    {
+      "step": "Explore the Results",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776882947615.png",
+          "alt": "Screenshot 2026-04-22 at 2.31.26 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "build-and-run-a-query"
+}

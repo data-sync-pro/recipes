@@ -1,0 +1,56 @@
+{
+  "title": "Permissions",
+  "order": 1,
+  "blocks": [
+    {
+      "type": "p",
+      "content": "Data Sync Pro primarily utilizes Permission Sets as a fundamental mechanism for security control. This approach is supplemented with Custom Permissions, allowing for granular and flexible management of access rights within the system."
+    },
+    {
+      "type": "h2",
+      "content": "Permission Sets",
+      "children": [
+        {
+          "type": "p",
+          "content": "Here is the list of Permission Sets included in the Data Sync Pro package."
+        },
+        {
+          "type": "ul",
+          "children": [
+            { "type": "p", "content": "<strong>DSP: Data Sync Pro Administrator</strong>: Grants \"Modify All\" access to all objects and configuration records, along with all custom permissions included in the package." },
+            { "type": "p", "content": "<strong>DSP: Data Sync Pro App User</strong>: Grants access to the Data Sync Pro app and enables users to create, edit, and delete Executables, provided they have the appropriate record-level access. Users can also run #Batch and #Data Loader Executables for which they have read access." },
+            { "type": "p", "content": "<strong>DSP: Data Sync Pro Starter</strong>: Grants essential access to package objects. When private Executable records are shared, users can access #Trigger, #Data List, and #Action Button, but cannot execute #Batch or #Data Loader." },
+            { "type": "p", "content": "<strong>DSP: Download Data in Data Lists</strong>: Grants the ability to download data in Data Lists." }
+          ]
+        },
+        {
+          "type": "image",
+          "content": "image/permissions/permission_sets.png",
+          "alt": "Permission Sets"
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "content": "Custom Permissions",
+      "children": [
+        {
+          "type": "p",
+          "content": "Here is the list of Custom Permission included in the Data Sync Pro package. Add them to permission sets to grant users the appropriate accesses."
+        },
+        {
+          "type": "ul",
+          "children": [
+            { "type": "p", "content": "<strong>DSP: Access Query on Remote Connections</strong>: If a Connection is remote, the Query component operates under the context of the integration user. DSP users need this permission to run queries using the Query component from the Connection record page." },
+            { "type": "p", "content": "<strong>DSP: Download Data in Query</strong>: Enables download functionality within the Query component." }
+          ]
+        },
+        {
+          "type": "image",
+          "content": "image/permissions/custom_permissions.png",
+          "alt": "Custom Permissions"
+        }
+      ]
+    }
+  ]
+}

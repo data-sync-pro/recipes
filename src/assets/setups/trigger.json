@@ -1,0 +1,54 @@
+{
+  "title": "Apex Trigger Hookup",
+  "order": 3,
+  "blocks": [
+    {
+      "type": "p",
+      "content": "Include <code>pushtopics.TriggerServices.execute()</code> in the triggers of both the source object and any objects involved in aggregations when <strong>AGG functions</strong> are used in field mappings."
+    },
+    {
+      "type": "code",
+      "content": "trigger TriggerName on SourceObjectApiName (before insert, after insert, before update, after update, before delete, after delete, after undelete) {\n    pushtopics.TriggerServices.execute();\n}",
+      "language": "apex"
+    },
+    {
+      "type": "p",
+      "content": "For users to access the trigger(s) of this Executable, they must have at least <strong>Read</strong> access to the Executable record:"
+    },
+    {
+      "type": "ul",
+      "children": [
+        {
+          "type": "p",
+          "content": "<strong>Assign Permission Set:</strong> Ensure all internal users are assigned the <strong>DSP: Data Sync Pro Starter</strong> permission set (providing bare-minimum access to the packaged objects and components)."
+        },
+        {
+          "type": "p",
+          "content": "<strong>Grant Record Access:</strong> Ensure that <strong>All Internal Users Have Read Access</strong> is checked (auto-checked when #Trigger, #Data List, or #Action Button is enabled), or manually share this Executable with users to provide <strong>Read</strong> access."
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "content": "Example: Hook the Account Trigger with Data Sync Pro"
+    },
+    {
+      "type":"ul",
+      "children": [
+        {
+          "type": "p",
+          "content": "Add <code>pushtopics.TriggerServices.execute();</code> to the Account trigger." 
+        },
+        {
+          "type": "p",
+          "content": "Include all trigger events (before/after insert, update, delete, undelete)." 
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "content": "image/trigger/trigger-example.png",
+      "alt": "Trigger Example"
+    }
+  ]
+}

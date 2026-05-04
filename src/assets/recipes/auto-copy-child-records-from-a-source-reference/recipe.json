@@ -1,0 +1,88 @@
+{
+  "id": "6cc6c1d9-9b1b-4de6-ba84-cc12b98710f5",
+  "title": "Auto-Copy Child Records from a Source Reference",
+  "category": [
+    "Trigger"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Trigger Executable is configured on Opportunity (after insert). When a new Opportunity is created with an Original Opportunity specified, it automatically clones all Opportunity Line Items from the original Opportunity, copying key fields such as Product, Price, Quantity, Discount, and other required attributes.",
+  "generalUseCase": "Use #Trigger with a Joiner to automatically create and initialize child records based on existing data referenced by a source field—for example, copying line items when generating new Opportunities, Quotes, or Orders from an existing record.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/dgPIATQ8q7s",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Opportunity.Triggers",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776812976788.png",
+          "alt": "Screenshot 2026-04-21 at 2.00.43 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Opportunity.LineItems.Clone",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1777651521127.png",
+          "alt": "Screenshot 2026-05-01 120424"
+        }
+      ]
+    },
+    {
+      "step": "Trigger Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776813024471.png",
+          "alt": "Screenshot 2026-04-21 at 2.01.47 PM"
+        }
+      ]
+    },
+    {
+      "step": "Scoping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776813096876.png",
+          "alt": "Screenshot 2026-04-21 at 7.11.32 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776813127165.png",
+          "alt": "Screenshot 2026-04-21 at 7.11.57 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Opportunity.LineItems.Clone.json",
+      "url": "assets/recipes/auto-copy-child-records-from-a-source-reference/downloadExecutables/Opportunity.LineItems.Clone.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "auto-copy-child-records-from-a-source-reference"
+}

@@ -1,0 +1,99 @@
+{
+  "id": "154b9f59-e915-4184-9639-2b84e957d2f6",
+  "title": "Mask Sensitive Data in Sandboxes",
+  "category": [
+    "Batch"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Batch Executable is configured to update Contacts in a sandbox, using DSP masking functions to obfuscate sensitive fields.",
+  "generalUseCase": "Use #Batch and masking functions to bulk obfuscate sensitive data in non-production environments, so realistic data stays protected.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/Gcv72zM5Gi8",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Sandbox.Data.Sanitization",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776979970774.png",
+          "alt": "Screenshot 2026-04-23 at 5.32.47 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Contact.Mask",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776979999317.png",
+          "alt": "Screenshot 2026-04-23 at 5.32.56 PM"
+        }
+      ]
+    },
+    {
+      "step": "Batch Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776980023164.png",
+          "alt": "Screenshot 2026-04-23 at 5.33.35 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776980041060.png",
+          "alt": "Screenshot 2026-04-23 at 5.33.52 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776980064365.png",
+          "alt": "Screenshot 2026-04-23 at 5.34.17 PM"
+        }
+      ]
+    },
+    {
+      "step": "Set Field Mapping Sequence",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-5-image-1776980113726.png",
+          "alt": "Screenshot 2026-04-23 at 5.34.43 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Contact.Mask.json",
+      "url": "assets/recipes/mask-sensitive-data-in-sandboxes/downloadExecutables/Contact.Mask.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "mask-sensitive-data-in-sandboxes"
+}

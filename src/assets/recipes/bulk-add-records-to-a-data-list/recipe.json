@@ -1,0 +1,103 @@
+{
+  "id": "fa62e7c9-af15-4049-b4e0-3bdc2c7ee1ae",
+  "title": "Bulk Add Records to a Data List",
+  "category": [
+    "Data List"
+  ],
+  "DSPVersions": [],
+  "overview": "An Action Button is added to the Quote Line Items list to add or update Line Items. When clicked, it opens the Quote Pricebook’s related Pricebook Entry Data List for selection. Users select the entries, then proceed to the Pre-Action Line Editor to review, validate, and adjust values before running the Upsert action.",
+  "generalUseCase": "Use Chained Data List(s) in #Action Button to guide users through selecting input records across one or more data lists, review and adjust selections in a pre-action editor when needed, then execute the configured action on the target records.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/T-o9UdE3u5A",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Quote.Related.DataLists",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776878163716.png",
+          "alt": "Screenshot 2026-04-22 at 1.15.57 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Quote.Pricebook.Entries",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776878201131.png",
+          "alt": "Screenshot 2026-04-22 at 1.16.15 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776878228300.png",
+          "alt": "Screenshot 2026-04-22 at 1.16.58 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Quote.LineItems.Upsert",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776878307511.png",
+          "alt": "Screenshot 2026-04-22 at 1.18.20 PM"
+        }
+      ]
+    },
+    {
+      "step": "Action Button Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776886530326.png",
+          "alt": "WechatIMG453"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-5-image-1776878397521.png",
+          "alt": "Screenshot 2026-04-22 at 1.19.49 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Quote.Pricebook.Entries.json",
+      "url": "assets/recipes/bulk-add-records-to-a-data-list/downloadExecutables/Quote.Pricebook.Entries.json"
+    },
+    {
+      "filePath": "downloadExecutables/Quote.LineItems.Upsert.json",
+      "url": "assets/recipes/bulk-add-records-to-a-data-list/downloadExecutables/Quote.LineItems.Upsert.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "bulk-add-records-to-a-data-list"
+}

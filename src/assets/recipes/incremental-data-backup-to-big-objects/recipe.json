@@ -1,0 +1,110 @@
+{
+  "id": "47246d5a-3761-4c3c-9dd1-dfaa594fb1c5",
+  "title": "Incremental Data Backup to Big Objects",
+  "category": [
+    "Batch"
+  ],
+  "DSPVersions": [],
+  "overview": "A big object is created as a backup store for Cases. A scheduled #Batch Executable inserts Case records into the big object on a recurring basis using Incremental Retrieve, so each run only processes Cases changed since the last execution and keeps the backup up to date.",
+  "generalUseCase": "Salesforce Big Object provides a cost-effective way to store large volume data with strong performance without moving data off-platform. Use #Batch to load data into Big Objects for structured backup/archive, record-based change history, long-term compliance retention, high-volume transactional storage, and more. ",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/p6eRHuf_H6k",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Data.Backup.Batches",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776812649535.png",
+          "alt": "Screenshot 2026-04-21 at 1.28.24 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Cases.Backup",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776812678968.png",
+          "alt": "Screenshot 2026-04-21 at 1.29.03 PM"
+        }
+      ]
+    },
+    {
+      "step": "Batch Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776812696471.png",
+          "alt": "Screenshot 2026-04-21 at 1.29.40 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776812712088.png",
+          "alt": "Screenshot 2026-04-21 at 1.30.05 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776812737755.png",
+          "alt": "Screenshot 2026-04-21 at 1.30.31 PM"
+        }
+      ]
+    },
+    {
+      "step": "Action",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-5-image-1776812753874.png",
+          "alt": "Screenshot 2026-04-21 at 1.30.58 PM"
+        }
+      ]
+    },
+    {
+      "step": "Executable Schedule",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-6-image-1776812808896.png",
+          "alt": "Screenshot 2026-04-21 at 1.32.48 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Cases.Backup.json",
+      "url": "assets/recipes/incremental-data-backup-to-big-objects/downloadExecutables/Cases.Backup.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "incremental-data-backup-to-big-objects"
+}

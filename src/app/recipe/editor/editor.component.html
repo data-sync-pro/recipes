@@ -194,7 +194,7 @@
           [generalImages]="currentRecipe.generalImages"
           [stepIndex]="-1"
           [recipeId]="currentRecipe.id || ''"
-          [recipeCategory]="currentRecipe.category || ''"
+          [recipeCategory]="currentRecipeFirstCategory"
           (generalImagesChange)="onRecipeChange()">
         </app-image-manager>
 
@@ -213,7 +213,7 @@
           [expandedSteps]="expandedSteps"
           [customStepNames]="customStepNames"
           [recipeId]="currentRecipe.id || ''"
-          [recipeCategory]="currentRecipe.category || ''"
+          [recipeCategory]="currentRecipeFirstCategory"
           (walkthroughChange)="onRecipeChange()"
           (stepExpansionToggle)="toggleStep($event)">
         </app-walkthrough-editor>

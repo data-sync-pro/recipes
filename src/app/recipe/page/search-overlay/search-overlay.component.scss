@@ -196,11 +196,13 @@
   line-height: 1.2;
 }
 
-.suggestion-item:hover {
+.suggestion-item:hover,
+.suggestion-item.active {
   background-color: #F1F6FB;
 }
 
-.suggestion-item:hover .tag {
+.suggestion-item:hover .tag,
+.suggestion-item.active .tag {
   background-color: #2253B2;
   opacity: 0.9;
   color: white;

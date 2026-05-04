@@ -1,11 +1,4 @@
-<p>You can simplify a complex <b>#Batch</b> job by splitting it into smaller, modular components using these approaches:</p>
-
-  <ul>
-    <li>
-      <strong>Use Multiple Executables within a Pipeline</strong><br>Divide the batch logic across multiple Executables, each handling a specific step, and group them within a Pipeline. Since batching in DSP is fast and most of the performance cost comes from DML operations, this approach ensures efficiency without significant overhead, even when breaking a large job into smaller parts.</li>
-    <li>
-      <strong>Leverage Triggers for Sequential Actions</strong><br>If multiple actions can be initiated by a single DML on a primary object, use <strong>DSP #Triggers</strong> to orchestrate the sequence.<br>
-<em>Example: updating a primary object to kick off a chain of automations sequentially.</em></li>
-  </ul>
-
-  <p>This modular strategy improves clarity, supports reusability, simplifies testing, and makes ongoing maintenance more scalable.</p>
+<p>Simplify a complex #Batch job by breaking it into smaller, modular components — using either approach individually, or both together:</p><ul>
+<li><strong>Multiple Executables in a Pipeline</strong> — Divide the logic across multiple Executables, each handling a specific action, and group them within a Pipeline.</li>
+<li><strong>Defer Logic to #Triggers</strong> — Keep the #Batch focused on retrieving records and performing DML, and let DSP #Triggers (or other automations) handle the downstream logic that fires from those DML events. This shifts complexity out of the batch itself and into reusable, event-driven units.</li>
+</ul><p>Breaking complex logic into modular pieces keeps each step focused and testable, isolates failures so they don't cascade, and makes the system far easier to evolve as needs change.</p>

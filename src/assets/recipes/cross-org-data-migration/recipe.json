@@ -1,0 +1,92 @@
+{
+  "id": "ba1c53df-9819-4676-92b1-2e4e1d11bb4e",
+  "title": "Cross Org Data Migration",
+  "category": [
+    "Batch"
+  ],
+  "DSPVersions": [],
+  "overview": "A Pipeline is configured as a sequentially ordered list of #Batch Executables that migrates data from one org to another while preserving all parent–child relationships. The execution order ensures parent records are processed before their dependent child records, with each Executable’s field mappings easily configured to maintain the relationships.",
+  "generalUseCase": "Use a Pipeline to orchestrate multi-step, cross-org data migrations—running sequential #Batch Executables that preserve parent–child relationships by leveraging External IDs, VLOOKUPs, and Record Type developer names in field mappings. For large volume data (e.g., more than 1 million records), enable Bulk API and tune batch size to achieve faster, more efficient execution.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/UHY8gyTzViU",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - DataMigration.Current.OrgB",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776723341221.png",
+          "alt": "Screenshot 2026-04-20 at 6.15.17 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Contact.Migration.Current.OrgB",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776723371830.png",
+          "alt": "Screenshot 2026-04-20 at 6.15.51 PM"
+        }
+      ]
+    },
+    {
+      "step": "Batch Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776723416152.png",
+          "alt": "Screenshot 2026-04-20 at 6.16.44 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776723439792.png",
+          "alt": "Screenshot 2026-04-20 at 6.17.09 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776723515401.png",
+          "alt": "Screenshot 2026-04-20 at 6.18.24 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/DataMigration.Current.OrgB.json",
+      "url": "assets/recipes/cross-org-data-migration/downloadExecutables/DataMigration.Current.OrgB.json"
+    }
+  ],
+  "downloadFileCallout": {
+    "variant": "info",
+    "content": "Sample TODO: finish up"
+  },
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "cross-org-data-migration"
+}

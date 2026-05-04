@@ -68,11 +68,12 @@ $z-index-mobile-toggle: 1001;
   
 
   &.collapsed {
-    width: $sidebar-collapsed;
+    width: 0;
+    overflow: hidden;
 
     ~ .faq-container {
-      margin-left: 20px;
-      margin-right: 20px;
+      margin-left: 0;
+      margin-right: 0;
     }
 
     .sidebar-title-section {
@@ -225,87 +226,88 @@ $z-index-mobile-toggle: 1001;
   }
 
   .sidebar-search {
-    padding: 12px 16px;
-    border-bottom: 1px solid #f1f3f4;
-    flex-shrink: 0; 
+    padding: 6px 8px;
+    flex-shrink: 0;
 
-    .sidebar-search-btn {
-      width: 100%;
+    .sidebar-search-input-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       padding: 10px 16px;
       border: 1px solid #dadce0;
       border-radius: 8px;
       background: #f8f9fa;
-      color: #5f6368;
-      font-size: 0.875rem;
-      cursor: pointer;
       transition: $transition;
+
+      &:focus-within {
+        border-color: #1a73e8;
+        background: #fff;
+      }
+    }
+
+    .sidebar-search-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 1.1rem;
+      color: #333;
+      outline: none;
+      min-width: 0;
+
+      &::placeholder {
+        color: #5f6368;
+      }
+    }
+
+    .search-clear-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #5f6368;
+      padding: 2px;
       display: flex;
       align-items: center;
-      gap: 8px;
-
-      .search-text {
-        flex: 1; 
-        text-align: left; 
-      }
-
-      .search-shortcut {
-        background: rgba(95, 99, 104, 0.1);
-        border: 1px solid rgba(95, 99, 104, 0.2);
-        border-radius: 4px;
-        padding: 2px 6px;
-        font-size: 0.75rem;
-        font-weight: 500;
-        color: #5f6368;
-        font-family: monospace;
-        line-height: 1;
-      }
 
       &:hover {
-        background: #f1f3f4;
-        border-color: #bdc1c6;
-
-        .search-shortcut {
-          background: rgba(95, 99, 104, 0.15);
-          border-color: rgba(95, 99, 104, 0.3);
-        }
-      }
-
-      &:focus {
-        outline: 2px solid #1a73e8;
-        outline-offset: 2px;
+        color: #333;
       }
     }
   }
 
   .sidebar-nav {
     margin-top: 8px;
+
+    .home-nav {
+      border-bottom: 1px solid #f1f3f4;
+      margin-bottom: 4px;
+    }
     .section-divider {
       height: 1px;
       background: #f1f3f4;
-      margin: 8px 0px;
+      margin: 0 0 8px 0;
     }
 
     .section-label {
-      font-size: 0.75rem;
+      font-size: 1.1rem;
       font-weight: 600;
       color: #5f6368;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      padding: 0 20px 8px;
+      padding: 0 20px 2px;
     }
 
     .nav-item {
       display: flex;
       align-items: center;
-      padding: 8px 20px;
+      padding: 8px 8px 8px 20px;
       color: #5f6368;
-      font-size: 0.875rem;
+      font-size: 1.1rem;
       transition: $transition;
       cursor: pointer;
-      border-radius: 0 20px 20px 0;
-      margin-right: 8px;
+      border-radius: 0 8px 8px 0;
+      margin-right: 2px;
       margin-top: 0px;
-      margin-bottom: 4px;
+      margin-bottom: 0px;
       position: relative;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
@@ -344,7 +346,8 @@ $z-index-mobile-toggle: 1001;
       .nav-content {
         display: flex;
         align-items: center;
-        width: 100%;
+        flex: 1;
+        min-width: 0;
       }
 
       .nav-icon {
@@ -366,21 +369,21 @@ $z-index-mobile-toggle: 1001;
         font-size: 0.75rem;
         padding: 2px 6px;
         border-radius: 10px;
-        margin-left: 8px;
+        margin-left: auto;
         font-weight: 500;
       }
     }
 
     .subcategory-container {
-      margin: 0px 8px 0px 12px;
+      margin: 0px 2px 0px 12px;
       border-left: 1px solid #f1f3f4;
       padding: 0px 0px 0px 8px;
 
       .nav-item {
-        padding: 6px 20px 6px 3px;
-        font-size: 0.8125rem;
+        padding: 8px 8px 8px 3px;
+        font-size: 1.1rem;
         margin-right: 0;
-        border-radius: 0 20px 20px 0;
+        border-radius: 0 8px 8px 0;
 
         .nav-content {
           display: flex;
@@ -459,8 +462,70 @@ $z-index-mobile-toggle: 1001;
 
   &.active {
     opacity: 1;
-    pointer-events: auto; 
-    
+    pointer-events: auto;
+
     touch-action: manipulation;
   }
+}
+
+// Sidebar toggle button - mirrors TOC toggle style
+.faq-layout-container > .sidebar-toggle-btn {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 280px; // $sidebar-width
+  width: 56px;
+  height: 56px;
+  background: #ffffff;
+  border: 1px solid #e1e5e9;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 85;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  box-shadow: none;
+  color: #5f6368;
+  border-color: transparent;
+  background: transparent;
+
+  &:hover {
+    opacity: 1;
+    visibility: visible;
+    background: #f8f9fa;
+    border-color: #1a73e8;
+    box-shadow: 4px 0 12px rgba(26, 115, 232, 0.15);
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  @media (max-width: $breakpoint-desktop) {
+    display: none;
+  }
+}
+
+.faq-layout-container.sidebar-collapsed > .sidebar-toggle-btn {
+  left: 0;
+  opacity: 0.2;
+  visibility: visible;
+  border-color: transparent;
+  box-shadow: none;
+  background: transparent;
+
+  &:hover {
+    opacity: 1;
+    background: #f8f9fa;
+    border-color: #1a73e8;
+    box-shadow: 4px 0 12px rgba(26, 115, 232, 0.15);
+  }
+}
+
+.faq-layout-container:not(.sidebar-collapsed) .faq-sidebar:hover ~ .sidebar-toggle-btn {
+  opacity: 1;
+  visibility: visible;
 }

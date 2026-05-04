@@ -1,0 +1,95 @@
+<div class="setup-page">
+  <div class="setup-banner">
+    <div class="setup-banner-content">
+      <h1 class="setup-banner-title">Getting Started</h1>
+    </div>
+  </div>
+
+  <div class="setup-main-layout">
+    <!-- Left Sidebar - Setup Titles -->
+    <aside class="left-sidebar">
+      <div class="sidebar-sticky">
+        <div class="category-list">
+          <ng-container *ngFor="let node of navTree; trackBy: trackByNodeId">
+            <ng-container *ngTemplateOutlet="navNodeTemplate; context: { $implicit: node, level: 0 }"></ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Recursive template for nav nodes -->
+    <ng-template #navNodeTemplate let-node let-level="level">
+      <div class="nav-node" [class.level-0]="level === 0" [class.level-1]="level === 1" [class.level-2]="level === 2" [class.level-3]="level >= 3">
+        <div class="nav-item"
+             [class.active]="isActive(node)"
+             [class.in-path]="isInActivePath(node)"
+             [class.has-children]="node.children?.length"
+             (click)="selectSetup(node.slug)">
+          <span class="nav-label">{{ node.label }}</span>
+          <!-- <mat-icon *ngIf="node.children?.length"
+                    class="expand-icon"
+                    [class.expanded]="isExpanded(node)"
+                    (click)="toggleExpand(node, $event)">
+            {{ isExpanded(node) ? 'expand_less' : 'expand_more' }}
+          </mat-icon> -->
+        </div>
+        <!-- Children -->
+        <div class="nav-children" *ngIf="node.children?.length && isExpanded(node)">
+          <ng-container *ngFor="let child of node.children; trackBy: trackByNodeId">
+            <ng-container *ngTemplateOutlet="navNodeTemplate; context: { $implicit: child, level: level + 1 }"></ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- Main Content -->
+    <main class="setup-content">
+      <div *ngIf="isLoading" class="setup-loading">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+
+      <ng-container *ngIf="!isLoading && currentSetup">
+        <h1 class="page-title">{{ currentSetup.title }}</h1>
+        <app-setup-block
+          *ngFor="let block of currentSetup.blocks; trackBy: trackByIndex"
+          [block]="block">
+        </app-setup-block>
+
+        <!-- Lightning Web Components cards -->
+        <app-setup-card
+          *ngIf="showLwcCards"
+          [cards]="lwcCards"
+          (cardClick)="onCardClick($event)">
+        </app-setup-card>
+      </ng-container>
+
+      <div *ngIf="!isLoading && !currentSetup" class="setup-empty">
+        <mat-icon>info_outline</mat-icon>
+        <p>Select a setup guide from the sidebar.</p>
+      </div>
+    </main>
+
+    <!-- Right TOC - H2 and H3 blocks -->
+    <!-- <aside class="right-toc">
+      <div class="toc-sticky">
+        <nav class="toc-nav" *ngIf="shouldShowToc">
+          <ng-container *ngFor="let item of tocItems">
+            <a class="toc-link"
+               [class.active]="activeBlockId === getBlockId(item.block.content || '')"
+               [class.toc-h2]="item.block.type === 'h2'"
+               [class.toc-h3]="item.block.type === 'h3'"
+               (click)="scrollToBlock(item.block.content || '')">
+              {{ item.block.content }}
+            </a>
+            <a *ngFor="let child of item.children"
+               class="toc-link toc-h3"
+               [class.active]="activeBlockId === getBlockId(child.content || '')"
+               (click)="scrollToBlock(child.content || '')">
+              {{ child.content }}
+            </a>
+          </ng-container>
+        </nav>
+      </div>
+    </aside> -->
+  </div>
+</div>

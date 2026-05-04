@@ -1,29 +1,29 @@
 .recipe-detail-page {
   min-height: 100vh;
-  max-width: 1696px;
+  max-width: 1752px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 40px;
+  padding: 0 24px;
   box-sizing: border-box;
 }
 
 .detail-main-layout {
   display: flex;
-  gap: 3vw;
+  gap: 2.5vw;
   padding: 36px 0 0 0;
 }
 
 // Left Sidebar - Recipe List
 .left-sidebar {
-  flex: 0 0 23%;
+  flex: 0 0 22%;
   min-width: 0;
   border-radius: 2px;
   background-color: white;
 
   .sidebar-sticky {
     position: sticky;
-    top: 85px;
-    height: calc(100vh - 86px);
+    top: 95px;
+    height: calc(100vh - 95px);
     display: flex;
     flex-direction: column;
 
@@ -113,7 +113,7 @@
             }
 
             &:not(.collapsed) {
-              ~ .category-name {
+              ~.category-name {
                 font-weight: 500;
               }
             }
@@ -143,14 +143,17 @@
         .recipe-list {
           margin-left: 15px;
           border-left: 1px solid #E6E6E6;
+
           .recipe-list-item {
+            text-decoration: none;
             padding: 3px 9px 3px 15px;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             color: #5c5c5c;
             cursor: pointer;
             border-bottom: none;
             line-height: 1.5;
-            margin: 8px 0 8px 0px;
+            margin: 4px 0 4px 0px;
+            display: block;
 
             &:hover {
               color: #2253B2;
@@ -172,9 +175,9 @@
 
 // Middle Content Area
 .detail-content {
-  flex: 0 0 50%;
+  flex: 1;
   min-width: 0;
-  margin-bottom: 20%;
+  margin-bottom: 15%;
 
   .content-sections {
     background: #fff;
@@ -185,10 +188,10 @@
 
       &:last-child {
         margin-bottom: 0;
-        border:none;
+        border: none;
       }
 
-      .section-title {
+      .recipe-section-title {
         font-size: 1.25rem;
         font-weight: 500;
         color: #2253B2;
@@ -199,17 +202,48 @@
         line-height: normal;
       }
 
+      // Overview videos (YouTube embedded below overview text, inside section-content)
+      .videos {
+        margin-top: 16px;
+        margin-left: -12px; // Offset parent's left margin to align with section edge
+        margin-right: -11px; // Offset parent's right margin to align with section edge
+
+        .video-item {
+          width: 100%;
+
+          &:not(:last-child) {
+            margin-bottom: 16px;
+          }
+
+          .video {
+            width: 100%;
+            height: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+          }
+
+          .youtube-embed {
+            aspect-ratio: 16 / 9;
+            height: auto;
+            min-height: 315px;
+          }
+        }
+      }
+
       .section-content {
         font-size: 1rem;
         color: #2C2C2D;
         line-height: 1.7;
-        margin: 12px 0 20px 15px;
+        margin: 12px 12px 20px 12px;
+        white-space: pre-line;
 
         p {
           margin: 12px 0;
         }
 
-        ul, ol {
+        ul,
+        ol {
           margin: 12px 0;
           padding-left: 24px;
         }
@@ -218,12 +252,66 @@
           margin: 8px 0;
         }
 
-        code {
-          background: #f5f5f5;
-          padding: 2px 6px;
-          border-radius: 3px;
-          font-family: 'Courier New', monospace;
-          font-size: 0.875rem;
+        // Use ::ng-deep for dynamically injected HTML from pipes
+        ::ng-deep {
+
+          // Inline code styling
+          code,
+          .inline-code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+            color: #800000;
+            white-space: wrap;
+          }
+
+          // Code block container styling
+          .code-block-container {
+            position: relative;
+            margin: 16px 0;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+
+            .code-block-header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 8px 16px;
+              background: #f5f5f5;
+              border-bottom: 1px solid #e0e0e0;
+
+              .code-block-lang {
+                font-size: 0.75rem;
+                font-weight: 500;
+                color: #666;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+              }
+            }
+
+            pre.code-block {
+              background: #fff;
+              margin: 0;
+              padding: 16px 20px;
+              overflow-x: auto;
+              white-space: pre-wrap;
+              word-wrap: break-word;
+
+              code {
+                background: transparent;
+                padding: 0;
+                color: #800000;
+                font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+                font-size: 0.875rem;
+                line-height: 1.6;
+                white-space: pre-wrap;
+                word-wrap: break-word;
+              }
+            }
+          }
         }
       }
 
@@ -298,6 +386,39 @@
         }
       }
 
+      // General Image styles
+      .general-image-media {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        padding-left: 12px;
+
+        .general-image-item {
+          width: 100%;
+          padding-bottom: 24px;
+
+
+          .general-image,
+          .general-video {
+            width: 100%;
+            height: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+          }
+
+          .general-video {
+            max-height: 600px;
+          }
+
+          .youtube-embed {
+            aspect-ratio: 16 / 9;
+            height: auto;
+            min-height: 315px;
+          }
+        }
+      }
+
       // Verification GIF styles
       .verification-media {
         display: flex;
@@ -320,48 +441,104 @@
           .verification-video {
             max-height: 600px;
           }
+
+          .youtube-embed {
+            aspect-ratio: 16 / 9;
+            height: auto;
+            min-height: 315px;
+          }
         }
       }
 
       // Download File styles
-      .download-list {
+      .download-item {
         display: flex;
-        flex-direction: column;
-        gap: 16px;
+        align-items: center;
+        gap: 12px;
+        border: none;
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 0.875rem;
+        transition: all 0.2s ease;
+        cursor: pointer;
         margin: 0 0 20px 14px;
 
-        .download-item {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          border: none;
-          text-decoration: none;
-          color: #2253B2;
-          font-weight: 400;
-          font-size: 0.875rem;
-          transition: all 0.2s ease;
-          cursor: pointer;
+        .download-icon {
+          flex-shrink: 0;
+          width: 16px;
+          height: 16px;
+        }
 
-         
+        .download-title {
+          font-size: 1rem;
+          line-height: 1.5;
+          color: #2C2C2D;
 
-          .download-icon {
-            flex-shrink: 0;
+          &:hover {
             color: #2253B2;
-            width: 16px;
-            height: 16px;
-          }
-
-          .download-title {
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #2C2C2D;
-
-            &:hover {
-              color: #2253B2;
-            }
           }
         }
       }
+
+      .recipe-callout {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin: 1.5rem 0;
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 4px solid;
+
+        &[data-variant='info'] {
+          background: #e3f2fd;
+          border-color: #2196f3;
+
+          mat-icon {
+            color: #2196f3;
+          }
+        }
+
+        &[data-variant='warning'] {
+          background: #fff3e0;
+          border-color: #ff9800;
+
+          mat-icon {
+            color: #ff9800;
+          }
+        }
+
+        &[data-variant='error'] {
+          background: #ffebee;
+          border-color: #f44336;
+
+          mat-icon {
+            color: #f44336;
+          }
+        }
+
+        &[data-variant='success'] {
+          background: #e8f5e9;
+          border-color: #4caf50;
+
+          mat-icon {
+            color: #4caf50;
+          }
+        }
+
+        .callout-icon {
+          flex-shrink: 0;
+          width: 24px;
+          height: 24px;
+        }
+
+        .callout-content {
+          flex: 1;
+          line-height: 1.6;
+          align-items: center;
+          color: #333333
+        }
+      }
+
     }
   }
 
@@ -377,12 +554,12 @@
 
 // Right Sidebar - TOC
 .right-toc {
-  flex: 0 0 23%;
-  min-width: 180px;
+  flex: 0 0 20%;
+  min-width: 150px;
 
   .toc-sticky {
     position: sticky;
-    top: 85px;
+    top: 95px;
     //padding: 25px;
     //border-left: 1px solid #E6E6E6;
     //border-radius: 2px;
@@ -409,7 +586,7 @@
         transition: all 0.2s ease;
         border-left: 3px solid transparent;
         margin-left: 1px;
-        padding: 0px 12px 0px 12px;
+        padding: 0px 20px 0px 20px;
 
         &:hover {
           color: #2253B2;
@@ -420,6 +597,25 @@
           color: #2253B2;
           font-weight: 500;
           border-left: 3px solid #2253B2CC;
+        }
+
+        &.toc-child {
+          font-size: 0.8125rem;
+          padding-left: 32px;
+          color: #777;
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &:hover {
+            color: #2253B2;
+          }
+
+          &.active {
+            color: #2253B2;
+            font-weight: 500;
+          }
         }
       }
     }
@@ -517,21 +713,14 @@
   }
 }
 
-// Enhanced hover effect for images and GIFs only
-.step-image.clickable,
-.verification-image.clickable {
+// Clickable images - click to open modal preview
+.step-image,
+.verification-image {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
   &:hover {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    max-width: 90vw;
-    max-height: 90vh;
-    width: auto !important;
-    height: auto;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
+    opacity: 0.85;
   }
 }
 
@@ -553,6 +742,7 @@
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }

@@ -390,8 +390,6 @@ export class FAQExportService {
 
   async importFromZip(file: File): Promise<boolean> {
     try {
-      console.log('Starting ZIP import for file:', file.name);
-      
       // Read the ZIP file
       const zip = new JSZip();
       const zipContent = await zip.loadAsync(file);
@@ -432,7 +430,6 @@ export class FAQExportService {
             htmlFileContent = this.normalizeTextContent(htmlFileContent);
             
             htmlContent[fileName] = htmlFileContent;
-            console.log(`Extracted HTML file: ${fileName}`);
           }
         }
       }
@@ -468,14 +465,10 @@ export class FAQExportService {
         return false;
       }
       
-      console.log(`ZIP import: Found ${faqsData.length} FAQs and ${Object.keys(htmlContent).length} HTML files`);
-      
       // Process and import the data
       const success = await this.processImportData(data);
       
-      if (success) {
-        console.log('ZIP import completed successfully');
-      } else {
+      if (!success) {
         console.error('ZIP import failed during data processing');
       }
       

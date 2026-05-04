@@ -17,7 +17,9 @@ export class ImageNamingService {
         return this.fallbackImageName();
       }
 
-      const category = createSafeString(recipe.category || 'uncategorized');
+      // Get first category for naming (supports both string and string[])
+      const categoryValue = Array.isArray(recipe.category) ? (recipe.category[0] || 'uncategorized') : (recipe.category || 'uncategorized');
+      const category = createSafeString(categoryValue);
       const step = recipe.walkthrough?.[stepIndex];
       const stepName = createSafeString(step?.step || 'step');
       const extension = getFileExtension(file);

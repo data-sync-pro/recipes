@@ -1,0 +1,67 @@
+{
+  "id": "cc70ecb8-827e-4fe5-a4b6-014c9353a34c",
+  "title": "Row Related Lists",
+  "category": [
+    "Data List"
+  ],
+  "DSPVersions": [],
+  "overview": "A Pipeline of #Data List Executables is configured to dynamically surface related data for any Opportunity. A #Data List that shows Opportunities is linked to the Pipeline via Q: Row Related Lists. Once configured, each row in the Opportunity data list automatically includes a row action that opens a pop-up with the related Data Lists defined in the Pipeline.",
+  "generalUseCase": "Use Q: Row Related Lists to add dynamic, context-aware related lists to any #Data List—so each row can open a pop-up of configured Data Lists (via a Pipeline) for quick drill-in and action without leaving the current list.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/xXUzgl_mI-k",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Configure Row Related Lists",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776979595308.png",
+          "alt": "WechatIMG549"
+        }
+      ]
+    },
+    {
+      "step": "Data Retrieval in a Related Data List Executable",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776979895930.png",
+          "alt": "Screenshot 2026-04-23 at 5.31.25 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Opportunity.Pricebook.Entries.json",
+      "url": "assets/recipes/row-related-lists/downloadExecutables/Opportunity.Pricebook.Entries.json"
+    },
+    {
+      "filePath": "downloadExecutables/Opportunity.LineItem.ActionButtons.json",
+      "url": "assets/recipes/row-related-lists/downloadExecutables/Opportunity.LineItem.ActionButtons.json"
+    },
+    {
+      "filePath": "downloadExecutables/Opportunity.Related.DataLists.json",
+      "url": "assets/recipes/row-related-lists/downloadExecutables/Opportunity.Related.DataLists.json"
+    },
+    {
+      "filePath": "downloadExecutables/Account.Opportunities.json",
+      "url": "assets/recipes/row-related-lists/downloadExecutables/Account.Opportunities.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "row-related-lists"
+}

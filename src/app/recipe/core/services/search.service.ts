@@ -32,7 +32,7 @@ export class SearchService {
   }
 
   filterByCategory(recipes: Recipe[], category: string): Recipe[] {
-    return recipes.filter(recipe => recipe.category === category);
+    return recipes.filter(recipe => recipe.category.includes(category));
   }
 
   private calculateRelevanceScore(recipe: Recipe, query: string): number {
@@ -40,7 +40,7 @@ export class SearchService {
 
     const title = recipe.title.toLowerCase();
     const overview = recipe.overview.toLowerCase();
-    const category = recipe.category.toLowerCase();
+    const categories = recipe.category.map(c => c.toLowerCase());
     const keywords = recipe.keywords.map(k => k.toLowerCase());
 
     if (title === query) {
@@ -59,7 +59,8 @@ export class SearchService {
       score += 20;
     }
 
-    if (category.includes(query)) {
+    // Check if any category matches the query
+    if (categories.some(cat => cat.includes(query))) {
       score += 10;
     }
 
@@ -70,8 +71,13 @@ export class SearchService {
     const categoryMap = new Map<string, number>();
 
     recipes.forEach(recipe => {
-      const count = categoryMap.get(recipe.category) || 0;
-      categoryMap.set(recipe.category, count + 1);
+      // Each category of a recipe gets counted
+      recipe.category.forEach(cat => {
+        if (cat) {
+          const count = categoryMap.get(cat) || 0;
+          categoryMap.set(cat, count + 1);
+        }
+      });
     });
 
     const categories = Array.from(categoryMap.entries())
@@ -128,7 +134,9 @@ export class SearchService {
       'Trigger': 'Trigger',
       'Data List': 'Data List',
       'Action Button': 'Action Button',
-      'Data Loader': 'Data Loader'
+      'Data Loader': 'Data Loader',
+      'Transformation': 'Transformation',
+      'Query': 'Query'
     };
 
     return mapping[category] || category;

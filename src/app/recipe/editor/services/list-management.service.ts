@@ -108,7 +108,7 @@ export class ListManagementService implements OnDestroy {
         recipe.id.toLowerCase().includes(searchQuery.toLowerCase());
 
       const matchesCategory = !selectedCategory ||
-        recipe.category === selectedCategory;
+        recipe.category.includes(selectedCategory);
 
       return matchesSearch && matchesCategory;
     });

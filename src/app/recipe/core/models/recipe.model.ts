@@ -6,7 +6,7 @@
 export interface RecipeData {
   id: string;
   title: string;
-  category: string;
+  category: string | string[];  // Support both old (string) and new (string[]) format
   DSPVersions: string[];
   overview: string;
   generalUseCase?: string;
@@ -18,6 +18,10 @@ export interface RecipeData {
   walkthrough: WalkthroughStep[];
   verificationGIF: VerificationGIF[];
   downloadableExecutables: DownloadableExecutable[];
+  downloadFileCallout?: {
+    variant: 'info' | 'warning' | 'error' | 'success';
+    content: string;
+  };
   relatedRecipes: RelatedRecipe[];
   keywords: string[];
 }
@@ -29,7 +33,7 @@ export interface Recipe {
   id: string;
   title: string;
   slug?: string;
-  category: string;
+  category: string[];  // Always array at runtime
   DSPVersions: string[];
   overview: string;
   generalUseCase?: string;
@@ -41,6 +45,10 @@ export interface Recipe {
   walkthrough: WalkthroughStep[];
   verificationGIF: VerificationGIF[];
   downloadableExecutables: DownloadableExecutable[];
+  downloadFileCallout?: {
+    variant: 'info' | 'warning' | 'error' | 'success';
+    content: string;
+  };
   relatedRecipes: RelatedRecipe[];
   keywords: string[];
   isExpanded?: boolean;
@@ -54,7 +62,7 @@ export interface Recipe {
 export interface RecipePreviewData {
   recipeId: string;
   title: string;
-  category: string;
+  category: string[];  // Always array at runtime
   recipeData: RecipeData;
   timestamp: number;
 }
@@ -226,4 +234,16 @@ export interface EditorTab {
   recipe: RecipeData;
   hasChanges: boolean;
   isActive: boolean;
+}
+
+// ==================== Utility Functions ====================
+
+/**
+ * Normalize category to array format
+ * Handles backward compatibility with old string format
+ */
+export function normalizeCategory(category: string | string[] | undefined): string[] {
+  if (!category) return [];
+  if (Array.isArray(category)) return category;
+  return [category];
 }

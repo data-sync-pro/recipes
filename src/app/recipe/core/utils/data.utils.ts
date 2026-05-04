@@ -130,9 +130,12 @@ export function cleanRecipeForExport(
   });
 }
 
-export function sortRecipesByCategoryAndTitle<T extends { category: string; title: string }>(recipes: T[]): T[] {
+export function sortRecipesByCategoryAndTitle<T extends { category: string | string[]; title: string }>(recipes: T[]): T[] {
   return [...recipes].sort((a, b) => {
-    const categoryCompare = a.category.localeCompare(b.category);
+    // Get first category for sorting (supports both string and string[])
+    const catA = Array.isArray(a.category) ? (a.category[0] || '') : a.category;
+    const catB = Array.isArray(b.category) ? (b.category[0] || '') : b.category;
+    const categoryCompare = catA.localeCompare(catB);
     if (categoryCompare !== 0) {
       return categoryCompare;
     }

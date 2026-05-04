@@ -126,7 +126,7 @@ export class RouteHandlerService implements OnDestroy {
       this.cacheService.getRecipes$().pipe(
         map(recipes => {
           return recipes.find(r =>
-            r.category === category &&
+            r.category.includes(category) &&
             r.slug === recipeSlug
           ) || null;
         })
@@ -262,12 +262,13 @@ export class RouteHandlerService implements OnDestroy {
     currentRecipeId?: string,
     currentRecipeCategory?: string
   ): void {
+    const firstCategory = recipe.category[0] || '';
     const isSameRecipe = currentRecipeId &&
                         currentRecipeCategory &&
                         currentRecipeId === recipe.id &&
-                        currentRecipeCategory === recipe.category;
+                        recipe.category.includes(currentRecipeCategory);
 
-    this.router.navigate(['/recipes', recipe.category, recipe.slug]);
+    this.router.navigate(['/recipes', firstCategory, recipe.slug]);
 
     if (!isSameRecipe) {
       this.store.setActiveSectionId(RECIPE_SECTIONS.RECIPE_OVERVIEW);

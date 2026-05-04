@@ -2,7 +2,6 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   ViewEncapsulation,
@@ -18,8 +17,6 @@ import {
   Category,
   Filter,
   NavigationState,
-  Section,
-  Tab,
   SearchState
 } from '../core/models/recipe.model';
 import { CacheService } from '../core/services/cache.service';
@@ -33,7 +30,7 @@ import { UIState } from '../core/store/store.interface';
 import { PreviewSyncService } from './services/preview-sync.service';
 import { RouteHandlerService } from './services/route-handler.service';
 import { SearchStateService } from './services/search.service';
-import { RECIPE_CLASSES, RECIPE_MESSAGES} from '../core/constants/recipe.constants';
+import { RECIPE_CLASSES, RECIPE_MESSAGES } from '../core/constants/recipe.constants';
 import { SelectedSuggestion } from './search-overlay/search-overlay.component';
 import { RecipeLayoutComponent } from './recipe-layout/recipe-layout.component';
 
@@ -44,9 +41,8 @@ import { RecipeLayoutComponent } from './recipe-layout/recipe-layout.component';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RecipesComponent implements OnInit, OnDestroy, AfterViewInit {
+export class RecipesComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
-  private needsObserverSetup: boolean = false;
 
   @ViewChild('recipeLayout') recipeLayout!: RecipeLayoutComponent;
 
@@ -69,11 +65,8 @@ export class RecipesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   recipes: Recipe[] = [];
   categories: Category[] = [];
-  currentRecipe: Recipe | null = null;
   filteredRecipes: Recipe[] = [];
   totalRecipeCount: number = 0;
-
-  recipeTabs: Tab[] = [];
 
   currentFilter: Filter = {
     categories: []
@@ -91,7 +84,7 @@ export class RecipesComponent implements OnInit, OnDestroy, AfterViewInit {
     private routeHandlerService: RouteHandlerService,
     private searchService: SearchStateService,
     private logger: LoggerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
@@ -125,12 +118,8 @@ export class RecipesComponent implements OnInit, OnDestroy, AfterViewInit {
     this.routeHandlerService.getDataLoadedEvents()
       .pipe(takeUntil(this.destroy$))
       .subscribe(result => {
-        this.currentRecipe = result.currentRecipe;
-        this.recipeTabs = result.recipeTabs;
-
         this.recipes = result.recipes;
         this.filteredRecipes = result.filteredRecipes;
-        this.needsObserverSetup = result.needsObserverSetup;
         this.totalRecipeCount = result.totalRecipeCount;
         this.cdr.markForCheck();
       });
@@ -171,14 +160,6 @@ export class RecipesComponent implements OnInit, OnDestroy, AfterViewInit {
         this.cdr.markForCheck();
       });
 
-    this.previewSyncService.getUpdateEvents()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(event => {
-        if (event.type === 'content-updated') {
-          this.handlePreviewUpdate(event.recipe);
-        }
-      });
-
     document.body.classList.add(RECIPE_CLASSES.BODY_PAGE);
   }
 
@@ -214,16 +195,6 @@ export class RecipesComponent implements OnInit, OnDestroy, AfterViewInit {
     this.recipeNavigationService.handleInitialHash();
   }
 
-  ngAfterViewInit(): void {
-    if (this.needsObserverSetup && this.showRecipeDetails) {
-      this.needsObserverSetup = false;
-      requestAnimationFrame(() => {
-        this.observeAllSections();
-        this.recipeNavigationService.handleInitialHash();
-      });
-    }
-  }
-
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
@@ -251,19 +222,6 @@ export class RecipesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
-  private handlePreviewUpdate(recipe: Recipe): void {
-    if (!this.currentRecipe) return;
-
-    this.currentRecipe = recipe;
-
-    this.recipeTocService.setCurrentRecipe(this.currentRecipe);
-    this.recipeTabs = this.recipeTocService.generateRecipeTabs();
-
-    this.needsObserverSetup = true;
-
-    this.cdr.markForCheck();
-  }
-
   goHome(): void {
     this.routeHandlerService.goHome();
   }
@@ -273,9 +231,7 @@ export class RecipesComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   goToRecipe(recipe: Recipe): void {
-    const currentId = this.currentRecipe?.id;
-    const currentCategory = this.currentRecipe?.category;
-    this.routeHandlerService.goToRecipe(recipe, currentId, currentCategory);
+    this.routeHandlerService.goToRecipe(recipe);
   }
 
   searchRecipes(query: string): void {
@@ -311,13 +267,13 @@ export class RecipesComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   toggleCategoryFilter(categoryName: string): void {
-    const index = this.currentFilter.categories.indexOf(categoryName);
-    if (index > -1) {
-      // Remove category from filter
-      this.currentFilter.categories = this.currentFilter.categories.filter(cat => cat !== categoryName);
+    // Single-select: clicking the same category deselects it, clicking a different one replaces
+    if (this.currentFilter.categories.includes(categoryName)) {
+      // Deselect if already selected
+      this.currentFilter.categories = [];
     } else {
-      // Add category to filter
-      this.currentFilter.categories = [...this.currentFilter.categories, categoryName];
+      // Select only this category (single-select)
+      this.currentFilter.categories = [categoryName];
     }
 
     // If search is active, re-trigger the search with the new filter
@@ -333,10 +289,10 @@ export class RecipesComponent implements OnInit, OnDestroy, AfterViewInit {
     // Start with all recipes
     let filtered = [...this.recipes];
 
-    // Apply category filter
+    // Apply category filter - recipe matches if any of its categories is in the filter
     if (this.currentFilter.categories.length > 0) {
       filtered = filtered.filter(recipe =>
-        this.currentFilter.categories.includes(recipe.category)
+        recipe.category.some(cat => this.currentFilter.categories.includes(cat))
       );
     }
 
@@ -347,51 +303,6 @@ export class RecipesComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.filteredRecipes = filtered;
     this.cdr.markForCheck();
-  }
-
-  getVisibleOverviewSections() {
-    return this.recipeTocService.getVisibleOverviewSections();
-  }
-
-  getAllSectionsForRendering(): any[] {
-    return this.recipeTocService.getAllSectionsForRendering();
-  }
-
-  private observeAllSections(): void {
-    const overviewElementIds = this.recipeTocService.getOverviewSectionsForTOC()
-      .map((section: Section) => section.elementId || '')
-      .filter((id: string) => id.length > 0);
-
-    const walkthroughStepCount = this.walkthroughStepsData.length;
-
-    this.recipeNavigationService.observeAllSections(overviewElementIds, walkthroughStepCount);
-  }
-
-  downloadExecutable(url: string, title: string, originalFileName?: string): void {
-    if (!url) {
-      this.logger.error('Download URL is empty');
-      return;
-    }
-
-    const normalizedUrl = url.replace(/[\u2010-\u2015]/g, '_');
-
-    const link = document.createElement('a');
-    link.href = normalizedUrl;
-    link.download = originalFileName || title || 'download';
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    if (this.currentRecipe) {
-      this.logger.debug('Recipe download tracked', {
-        type: 'download',
-        recipeId: this.currentRecipe.id,
-        recipeTitle: this.currentRecipe.title,
-        recipeCategory: this.currentRecipe.category,
-        timestamp: new Date()
-      });
-    }
   }
 
   getRecipeCount(): number {
@@ -425,31 +336,8 @@ export class RecipesComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.ui.currentView === 'category' && !this.search.isActive;
   }
 
-  get showRecipeDetails(): boolean {
-    return this.ui.currentView === 'recipe' && !!this.currentRecipe;
-  }
-
   get currentCategory(): Category | null {
     return this.categories.find(cat => cat.name === this.navigation.category) || null;
-  }
-
-  get walkthroughSteps(): string[] {
-    if (!this.currentRecipe?.walkthrough) return [];
-
-    const walkthrough = this.currentRecipe.walkthrough;
-
-    if (Array.isArray(walkthrough)) {
-      return walkthrough.map((step, index) => step.step || `Step ${index + 1}`);
-    }
-
-    return [];
-  }
-
-  get walkthroughStepsData(): any[] {
-    if (!this.currentRecipe?.walkthrough || !Array.isArray(this.currentRecipe.walkthrough)) {
-      return [];
-    }
-    return this.currentRecipe.walkthrough;
   }
 
   trackByRecipeId(_: number, recipe: Recipe): string {
@@ -460,15 +348,7 @@ export class RecipesComponent implements OnInit, OnDestroy, AfterViewInit {
     return category.name;
   }
 
-  trackBySectionId(index: number, section: any): string {
-    return section.id || section.elementId || index.toString();
-  }
-
-  trackByStepIndex(index: number): number {
-    return index;
-  }
-
-  trackByBreadcrumbUrl(_: number, crumb: {name: string; url: string}): string {
+  trackByBreadcrumbUrl(_: number, crumb: { name: string; url: string }): string {
     return crumb.url;
   }
 

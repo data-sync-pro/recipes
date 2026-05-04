@@ -15,7 +15,7 @@
     "Category__c": "General",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "What are the five rules engines?",
+    "Question__c": "What are the five engines?",
     "Answer__c": "what-are-five-rules-engines.html",
     "isActive": true
   },
@@ -25,7 +25,7 @@
     "Category__c": "General",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "How do rules-driven, modular, record-based methods transform enterprise data management?",
+    "Question__c": "Why does rules-driven, record-based, enforced modularity define the future of enterprise applications?",
     "Answer__c": "how-rules-driven-methods-transform-data-management.html",
     "isActive": true
   },
@@ -45,7 +45,7 @@
     "Category__c": "General",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "Does DSP process any data outside the subscriber's Salesforce org?",
+    "Question__c": "Does DSP process any data outside the installed org?",
     "Answer__c": "does-dsp-process-data-outside-salesforce-org.html",
     "isActive": true
   },
@@ -58,16 +58,6 @@
     "Question__c": "How does DSP ensure security?",
     "Answer__c": "how-dsp-ensures-security.html",
     "isActive": true
-  },
-  {
-    "Id": "a0oEc000005JohTIAS",
-    "Name": "a0oEc000005JohTIAS",
-    "Category__c": "General",
-    "SubCategory__c": "",
-    "SeqNo__c": null,
-    "Question__c": "How is Data Sync Pro priced?",
-    "Answer__c": "how-is-data-sync-pro-priced.html",
-    "isActive": false
   },
   {
     "Id": "a0oEc000005JohUIAS",
@@ -265,7 +255,7 @@
     "Category__c": "Rules Engines",
     "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "What's the best way to create Batch Executables for syncing data with parent–child relationships?",
+    "Question__c": "How do I easily create Batch Executables for parent–child data syncs?",
     "Answer__c": "best-way-to-sync-parent-child-relationships.html",
     "isActive": true
   },
@@ -305,7 +295,7 @@
     "Category__c": "Rules Engines",
     "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "How can I implement incremental retrieval?",
+    "Question__c": "How do I implement incremental retrieval?",
     "Answer__c": "how-to-implement-incremental-retrieval.html",
     "isActive": true
   },
@@ -315,7 +305,7 @@
     "Category__c": "Rules Engines",
     "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "What are the key considerations for enabling Bulk API?",
+    "Question__c": "What should I consider before enabling Bulk API?",
     "Answer__c": "key-considerations-for-bulk-api.html",
     "isActive": true
   },
@@ -345,7 +335,7 @@
     "Category__c": "Rules Engines",
     "SubCategory__c": "Batch",
     "SeqNo__c": null,
-    "Question__c": "What's the best way to implement a complex Batch job with multiple actions?",
+    "Question__c": "How should I structure a complex Batch job with multiple actions?",
     "Answer__c": "best-way-to-implement-complex-job.html",
     "isActive": true
   },
@@ -357,7 +347,7 @@
     "SeqNo__c": null,
     "Question__c": "What are the advantages of pairing a blank update batch with a self-adaptive trigger?",
     "Answer__c": "advantages-of-blank-update-with-trigger.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JohxIAC",
@@ -397,16 +387,6 @@
     "SeqNo__c": null,
     "Question__c": "What are the two essential components of a Actionable #Data List?",
     "Answer__c": "two-essential-components.html",
-    "isActive": true
-  },
-  {
-    "Id": "a0oEc000005Joi1IAC",
-    "Name": "a0oEc000005Joi1IAC",
-    "Category__c": "Rules Engines",
-    "SubCategory__c": "Data List",
-    "SeqNo__c": null,
-    "Question__c": "What are the minimum requirements to create a Data List?",
-    "Answer__c": "minimum-requirements-to-create.html",
     "isActive": false
   },
   {
@@ -417,7 +397,7 @@
     "SeqNo__c": null,
     "Question__c": "What is the difference between an actionable and non-actionable Data List?",
     "Answer__c": "difference-actionable-vs-nonactionable.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005Joi3IAC",
@@ -437,7 +417,7 @@
     "SeqNo__c": null,
     "Question__c": "How do I add a #Data List to a Lightning page?",
     "Answer__c": "how-to-add-to-lightning-page.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005Joi5IAC",
@@ -447,7 +427,7 @@
     "SeqNo__c": null,
     "Question__c": "How can I customize the appearance of a #Data List action?",
     "Answer__c": "how-to-customize-action-appearance.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005Joi6IAC",
@@ -457,7 +437,7 @@
     "SeqNo__c": null,
     "Question__c": "Can I prompt users for confirmation before executing an action?",
     "Answer__c": "data-list-can-prompt-confirmation-before-action.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005Joi7IAC",
@@ -467,7 +447,7 @@
     "SeqNo__c": null,
     "Question__c": "Can I specify whether an action should be a List Action, a Row Action, or both?",
     "Answer__c": "can-specify-action-scope.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005Joi8IAC",
@@ -477,7 +457,7 @@
     "SeqNo__c": null,
     "Question__c": "Can users review and edit transformed values before executing an action?",
     "Answer__c": "can-users-review-edit-before-execution.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005Joi9IAC",
@@ -487,7 +467,7 @@
     "SeqNo__c": null,
     "Question__c": "What are the benefits of grouping multiple #Data Lists into a Pipeline?",
     "Answer__c": "data-list-benefits-of-grouping-into-pipeline.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiAIAS",
@@ -497,7 +477,7 @@
     "SeqNo__c": null,
     "Question__c": "How do I merge actions from multiple Executables into one #Data List?",
     "Answer__c": "how-to-merge-actions-from-executables.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiBIAS",
@@ -517,7 +497,7 @@
     "SeqNo__c": null,
     "Question__c": "What advantages does a custom 'New Record' action have over the default in a #Data List?",
     "Answer__c": "advantages-of-custom-new-record-action.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiDIAS",
@@ -525,7 +505,7 @@
     "Category__c": "Rules Engines",
     "SubCategory__c": "Data List",
     "SeqNo__c": null,
-    "Question__c": "Is it possible to run a #Data Loader from a #Data List as a list action?",
+    "Question__c": "Can I run a #Data Loader from a #Data List?",
     "Answer__c": "data-list-is-possible-to-run-data-loader-as-action.html",
     "isActive": true
   },
@@ -537,7 +517,7 @@
     "SeqNo__c": null,
     "Question__c": "What permissions can I configure for query results in a #Data List?",
     "Answer__c": "permissions-for-query-results.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiFIAS",
@@ -547,7 +527,7 @@
     "SeqNo__c": null,
     "Question__c": "Can I choose to open records in the Lightning record page instead of raw view?",
     "Answer__c": "can-open-records-in-lightning-page.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiGIAS",
@@ -557,7 +537,7 @@
     "SeqNo__c": null,
     "Question__c": "How do I enable Query Manager in a #Data List for end users?",
     "Answer__c": "how-to-enable-query-manager-for-users.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiHIAS",
@@ -565,7 +545,7 @@
     "Category__c": "Rules Engines",
     "SubCategory__c": "Data List",
     "SeqNo__c": null,
-    "Question__c": "What's the way to inject custom actions into Pipeline Data Lists?",
+    "Question__c": "How do I use the Pipeline Data Lists component inside a custom LWC?",
     "Answer__c": "how-to-inject-custom-actions.html",
     "isActive": true
   },
@@ -587,7 +567,7 @@
     "SeqNo__c": null,
     "Question__c": "How do I set up a #Data List to pull data from a remote Salesforce org?",
     "Answer__c": "how-to-pull-from-remote-org.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiKIAS",
@@ -607,7 +587,7 @@
     "SeqNo__c": null,
     "Question__c": "Why #Action Button?",
     "Answer__c": "why-use-action-button.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiMIAS",
@@ -617,7 +597,7 @@
     "SeqNo__c": null,
     "Question__c": "How do I create an #Action Button?",
     "Answer__c": "how-to-create-action-button.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiNIAS",
@@ -627,7 +607,7 @@
     "SeqNo__c": null,
     "Question__c": "How can I customize the appearance of an #Action Button?",
     "Answer__c": "how-to-customize-appearance.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiOIAS",
@@ -637,7 +617,7 @@
     "SeqNo__c": null,
     "Question__c": "Can I prompt users for confirmation before executing an action?",
     "Answer__c": "action-button-can-prompt-confirmation.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiPIAS",
@@ -647,7 +627,7 @@
     "SeqNo__c": null,
     "Question__c": "How can users review and edit field values before running an action?",
     "Answer__c": "how-users-review-edit-values.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiQIAS",
@@ -657,7 +637,7 @@
     "SeqNo__c": null,
     "Question__c": "What are the benefits of grouping multiple #Action Buttons into a Pipeline?",
     "Answer__c": "action-button-benefits-of-grouping-into-pipeline.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiRIAS",
@@ -665,7 +645,7 @@
     "Category__c": "Rules Engines",
     "SubCategory__c": "Action Button",
     "SeqNo__c": null,
-    "Question__c": "How can I execute multiple actions with one #Action Button?",
+    "Question__c": "How can I execute multiple actions from a single #Action Button?",
     "Answer__c": "how-to-execute-multiple-actions.html",
     "isActive": true
   },
@@ -707,7 +687,7 @@
     "SeqNo__c": null,
     "Question__c": "Can I use #Data Loader to load data into another Salesforce org?",
     "Answer__c": "can-load-to-another-org.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiWIAS",
@@ -717,7 +697,7 @@
     "SeqNo__c": null,
     "Question__c": "How are execution logs tracked in a #Data Loader process?",
     "Answer__c": "how-execution-logs-tracked.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiXIAS",
@@ -727,7 +707,7 @@
     "SeqNo__c": null,
     "Question__c": "How does a #Data Loader handle data type conversion for CSV cells stored as strings?",
     "Answer__c": "how-handles-csv-type-conversion.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiYIAS",
@@ -745,7 +725,7 @@
     "Category__c": "Rules Engines",
     "SubCategory__c": "Data Loader",
     "SeqNo__c": null,
-    "Question__c": "Does Data Loader only support CSV files upload?",
+    "Question__c": "Does #Data Loader only support CSV file uploads?",
     "Answer__c": "does-only-support-csv.html",
     "isActive": true
   },
@@ -757,7 +737,7 @@
     "SeqNo__c": null,
     "Question__c": "When should I enable serial mode?",
     "Answer__c": "when-to-enable-serial-mode.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoibIAC",
@@ -797,7 +777,7 @@
     "SeqNo__c": null,
     "Question__c": "Is it possible to run a #Data Loader from a #Data List as a list action?",
     "Answer__c": "data-loader-is-possible-to-run-from-data-list.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoifIAC",
@@ -805,7 +785,7 @@
     "Category__c": "Rules Engines",
     "SubCategory__c": "Trigger",
     "SeqNo__c": null,
-    "Question__c": "How does #Trigger work?",
+    "Question__c": "What is a #Trigger?",
     "Answer__c": "how-does-trigger-work.html",
     "isActive": true
   },
@@ -827,7 +807,7 @@
     "SeqNo__c": null,
     "Question__c": "What events are supported by #Trigger?",
     "Answer__c": "what-events-are-supported.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiiIAC",
@@ -847,7 +827,7 @@
     "SeqNo__c": null,
     "Question__c": "How to create a Self-Adaptive #Trigger?",
     "Answer__c": "how-to-create-self-adaptive-trigger.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoikIAC",
@@ -867,7 +847,7 @@
     "SeqNo__c": null,
     "Question__c": "How can I set up validation rules within a Self-Adaptive #Trigger?",
     "Answer__c": "how-to-setup-validation-rules.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoimIAC",
@@ -887,7 +867,7 @@
     "SeqNo__c": null,
     "Question__c": "How to create a #Trigger Action?",
     "Answer__c": "how-to-create-trigger-action.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoioIAC",
@@ -897,7 +877,7 @@
     "SeqNo__c": null,
     "Question__c": "What is the execution flow of a #Trigger?",
     "Answer__c": "what-is-execution-flow.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoipIAC",
@@ -967,7 +947,7 @@
     "SeqNo__c": null,
     "Question__c": "Do I need to include every field for Scoping and Mapping in the Retrieve query?",
     "Answer__c": "do-need-include-every-field.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JoiwIAC",
@@ -1045,7 +1025,7 @@
     "Category__c": "Processes",
     "SubCategory__c": "Input",
     "SeqNo__c": null,
-    "Question__c": "What naming conventions are required for #Data Loader columns?",
+    "Question__c": "What naming requirements apply to #Data Loader columns?",
     "Answer__c": "naming-conventions-for-columns.html",
     "isActive": true
   },
@@ -1057,7 +1037,7 @@
     "SeqNo__c": null,
     "Question__c": "What is the purpose of the 'Input Data Key Field'?",
     "Answer__c": "purpose-of-data-key-field.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005Joj5IAC",
@@ -1087,7 +1067,7 @@
     "SeqNo__c": null,
     "Question__c": "How do I prevent duplicate source records in iteration?",
     "Answer__c": "scoping-how-to-prevent-duplicate-records.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005Joj8IAC",
@@ -1217,13 +1197,13 @@
     "SeqNo__c": null,
     "Question__c": "How do I reference a parent field?",
     "Answer__c": "how-to-reference-parent-field.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JojLIAS",
     "Name": "a0oEc000005JojLIAS",
-    "Category__c": "Processes",
-    "SubCategory__c": "Mapping",
+    "Category__c": "Transformation",
+    "SubCategory__c": "",
     "SeqNo__c": null,
     "Question__c": "How can I manage data relationships?",
     "Answer__c": "mapping-how-to-manage-data-relationships.html",
@@ -1245,7 +1225,7 @@
     "Category__c": "Processes",
     "SubCategory__c": "Mapping",
     "SeqNo__c": null,
-    "Question__c": "What is the purpose of the 'Add Default' button?",
+    "Question__c": "What does the Add Default button do?",
     "Answer__c": "purpose-of-add-default-button.html",
     "isActive": true
   },
@@ -1255,7 +1235,7 @@
     "Category__c": "Processes",
     "SubCategory__c": "Mapping",
     "SeqNo__c": null,
-    "Question__c": "What is the purpose of the 'Clear Mappings' button?",
+    "Question__c": "What does the Clear Mappings button do?",
     "Answer__c": "purpose-of-clear-mappings-button.html",
     "isActive": true
   },
@@ -1265,7 +1245,7 @@
     "Category__c": "Processes",
     "SubCategory__c": "Mapping",
     "SeqNo__c": null,
-    "Question__c": "What is the purpose of the 'Unmapped Source Fields' button?",
+    "Question__c": "What does the Unmapped Source Fields button do?",
     "Answer__c": "purpose-of-unmapped-fields-button.html",
     "isActive": true
   },
@@ -1285,7 +1265,7 @@
     "Category__c": "Processes",
     "SubCategory__c": "Mapping",
     "SeqNo__c": null,
-    "Question__c": "What is the purpose of the 'Save' button?",
+    "Question__c": "What does the Save button do?",
     "Answer__c": "purpose-of-save-button.html",
     "isActive": true
   },
@@ -1407,7 +1387,7 @@
     "SeqNo__c": null,
     "Question__c": "Does Verify apply only to #Batch?",
     "Answer__c": "does-apply-only-to-batch.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JojeIAC",
@@ -1415,7 +1395,7 @@
     "Category__c": "Processes",
     "SubCategory__c": "Verify",
     "SeqNo__c": null,
-    "Question__c": "What are the considerations when using Verify with 'Action to Bulk API' enabled?",
+    "Question__c": "What should I keep in mind when using Verify with Action to Bulk API enabled?",
     "Answer__c": "considerations-with-bulk-api.html",
     "isActive": true
   },
@@ -1447,7 +1427,7 @@
     "SeqNo__c": null,
     "Question__c": "Where can I use formulas?",
     "Answer__c": "where-to-use-formulas.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JojiIAC",
@@ -1467,7 +1447,7 @@
     "SeqNo__c": null,
     "Question__c": "How can I manage data relationships?",
     "Answer__c": "transformation-how-to-manage-relationships.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JojkIAC",
@@ -1477,7 +1457,7 @@
     "SeqNo__c": null,
     "Question__c": "How does DSP optimize performance when using VLOOKUP or AGG functions?",
     "Answer__c": "how-dsp-optimizes-vlookup-agg.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JojlIAC",
@@ -1485,7 +1465,7 @@
     "Category__c": "Transformation",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "How can I handle complex transformations that are not natively supported?",
+    "Question__c": "How can I handle complex transformations that aren't natively supported?",
     "Answer__c": "how-to-handle-complex-unsupported.html",
     "isActive": true
   },
@@ -1507,7 +1487,7 @@
     "SeqNo__c": null,
     "Question__c": "How can I join the source data with an additional data set?",
     "Answer__c": "transformation-how-to-join-source-data.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JojoIAC",
@@ -1515,7 +1495,7 @@
     "Category__c": "Transformation",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "How can I perform data masking?",
+    "Question__c": "How do I mask sensitive data in sandbox environments?",
     "Answer__c": "how-to-perform-data-masking.html",
     "isActive": true
   },
@@ -1527,7 +1507,7 @@
     "SeqNo__c": null,
     "Question__c": "How can I skip a target field if the evaluated value is blank?",
     "Answer__c": "how-to-skip-field-if-blank.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JojqIAC",
@@ -1537,7 +1517,7 @@
     "SeqNo__c": null,
     "Question__c": "How do I prevent duplicate source records in iteration?",
     "Answer__c": "transformation-how-to-prevent-duplicate-records.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JojrIAC",
@@ -1545,7 +1525,7 @@
     "Category__c": "Transformation",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "How can I evaluate DSP expressions inside Apex code?",
+    "Question__c": "How do I evaluate DSP expressions from Apex?",
     "Answer__c": "how-to-evaluate-in-apex.html",
     "isActive": true
   },
@@ -1557,7 +1537,7 @@
     "SeqNo__c": null,
     "Question__c": "How can I format a string dynamically using DSP expressions?",
     "Answer__c": "how-to-format-string-dynamically.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JojtIAC",
@@ -1577,7 +1557,7 @@
     "SeqNo__c": null,
     "Question__c": "Who can access Query Manager?",
     "Answer__c": "who-can-access.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JojvIAC",
@@ -1585,7 +1565,7 @@
     "Category__c": "Query Manager",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "How can I build a SOQL query with Query Builder?",
+    "Question__c": "How do I build a SOQL query with Query Builder?",
     "Answer__c": "how-to-build-soql-query.html",
     "isActive": true
   },
@@ -1607,7 +1587,7 @@
     "SeqNo__c": null,
     "Question__c": "What is a Column Filter?",
     "Answer__c": "what-is-column-filter.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005JojyIAC",
@@ -1620,16 +1600,6 @@
     "isActive": true
   },
   {
-    "Id": "a0oEc000005JojzIAC",
-    "Name": "a0oEc000005JojzIAC",
-    "Category__c": "Query Manager",
-    "SubCategory__c": "",
-    "SeqNo__c": null,
-    "Question__c": "How do I query the Owner relationship when the Owner field is polymorphic?",
-    "Answer__c": "how-to-query-polymorphic-owner.html",
-    "isActive": false
-  },
-  {
     "Id": "a0oEc000005Jok0IAC",
     "Name": "a0oEc000005Jok0IAC",
     "Category__c": "Query Manager",
@@ -1637,7 +1607,7 @@
     "SeqNo__c": null,
     "Question__c": "How can I query data from a remote Salesforce org?",
     "Answer__c": "how-to-query-remote-org.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005Jok1IAC",
@@ -1647,7 +1617,7 @@
     "SeqNo__c": null,
     "Question__c": "Can I include deleted records from the Recycle Bin in my query?",
     "Answer__c": "can-include-deleted-records.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005Jok2IAC",
@@ -1657,7 +1627,7 @@
     "SeqNo__c": null,
     "Question__c": "Can I use the Query component to restore deleted records from the Recycle Bin?",
     "Answer__c": "can-restore-deleted-records.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005Jok3IAC",
@@ -1667,7 +1637,7 @@
     "SeqNo__c": null,
     "Question__c": "How do hyperlinks work in query results?",
     "Answer__c": "how-hyperlinks-work.html",
-    "isActive": true
+    "isActive": false
   },
   {
     "Id": "a0oEc000005Jok4IAC",
@@ -1675,7 +1645,7 @@
     "Category__c": "Query Manager",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "Is pagination handled on the server-side or client-side?",
+    "Question__c": "Is pagination handled server-side or client-side?",
     "Answer__c": "is-pagination-server-or-client.html",
     "isActive": true
   },
@@ -1685,7 +1655,7 @@
     "Category__c": "Query Manager",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "Is Tooling API supported in Query?",
+    "Question__c": "Is the Tooling API supported in Query?",
     "Answer__c": "is-tooling-api-supported.html",
     "isActive": true
   },
@@ -1705,7 +1675,7 @@
     "Category__c": "Query Manager",
     "SubCategory__c": "",
     "SeqNo__c": null,
-    "Question__c": "How can I integrate the Query functionality into Lightning pages?",
+    "Question__c": "How do I integrate the Query component into a Lightning page?",
     "Answer__c": "how-to-integrate-into-lightning.html",
     "isActive": true
   },

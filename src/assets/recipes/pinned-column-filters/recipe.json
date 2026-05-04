@@ -1,0 +1,50 @@
+{
+  "id": "f511e093-583e-4d55-8e91-379b283cd82e",
+  "title": "Pinned Column Filters",
+  "category": [
+    "General"
+  ],
+  "DSPVersions": [],
+  "overview": "",
+  "generalUseCase": "",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/qyhzpddgwCc",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Set Pinned Column Filters in Data List Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776981039542.png",
+          "alt": "WechatIMG541 copy"
+        }
+      ]
+    },
+    {
+      "step": "Pinned Column Filters in Data List",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776978468205.png",
+          "alt": "WechatIMG545"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "pinned-column-filters"
+}

@@ -1,0 +1,87 @@
+{
+  "id": "68fa3cbe-dcd2-4989-9c8d-45b68e91e52f",
+  "title": "Record Snapshot History with a Big Object",
+  "category": [
+    "Trigger"
+  ],
+  "DSPVersions": [],
+  "overview": "A Big Object is created to store record-level Quote change history, indexed by RecordID__c and LastModifiedDate__c. A #Trigger on Quote (after insert, after update) writes a new history record whenever a Quote is created or modified.",
+  "generalUseCase": "Use a #Trigger to automatically capture and store record snapshots in a Big Object each time a record is saved.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/aVtXiMOUsQQ",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Quote.Triggers",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776813209542.png",
+          "alt": "Screenshot 2026-04-21 at 2.05.07 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Quote.Snapshot.Insert",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776813235007.png",
+          "alt": "Screenshot 2026-04-21 at 2.05.56 PM"
+        }
+      ]
+    },
+    {
+      "step": "Trigger Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776813261844.png",
+          "alt": "Screenshot 2026-04-21 at 2.06.12 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776813321086.png",
+          "alt": "WechatIMG443"
+        }
+      ]
+    },
+    {
+      "step": "Action",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776813358652.png",
+          "alt": "Screenshot 2026-04-21 at 2.08.41 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Quote.Snapshot.Insert.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "record-snapshot-history-with-a-big-object"
+}

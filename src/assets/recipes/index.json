@@ -1,95 +1,159 @@
 {
   "recipes": [
     {
-      "folderId": "accept-cases-from-my-queues",
+      "folderId": "add-multiple-actions-to-a-data-list",
       "active": true
     },
     {
-      "folderId": "assign-default-permission-set-on-user-creation",
+      "folderId": "auto-copy-child-records-from-a-source-reference",
       "active": true
     },
     {
-      "folderId": "auto-create-contract-on-opportunity-closed-won",
+      "folderId": "build-and-run-a-query",
       "active": true
     },
     {
-      "folderId": "auto-generate-quote-line-items-on-quote-creation",
+      "folderId": "bulk-add-records-to-a-data-list",
       "active": true
     },
     {
-      "folderId": "autoclose-stagnant-cases",
+      "folderId": "bulk-merge-records-from-duplicate-job-results",
       "active": true
     },
     {
-      "folderId": "bell-notification-to-previous-owner-upon-case-owne",
+      "folderId": "centralized-validation-rules-with-self-adaptive-tr",
       "active": true
     },
     {
-      "folderId": "calculate-rollup-summaries-for-related-records",
+      "folderId": "column-filter",
       "active": true
     },
     {
-      "folderId": "cascade-account-owner-to-open-cases",
+      "folderId": "context-aware-data-loader-from-lightning-record-pa",
       "active": true
     },
     {
-      "folderId": "copy-related-records-on-parent-record-clone",
+      "folderId": "cross-org-data-migration",
       "active": true
     },
     {
-      "folderId": "create-follow-up-task-when-case-closes",
+      "folderId": "dynamic-filters",
       "active": true
     },
     {
-      "folderId": "deploy-data-sync-pro-configurations",
+      "folderId": "execute-an-action-with-trigger",
       "active": true
     },
     {
-      "folderId": "download-record-based-configurations-via-vs-code-e",
+      "folderId": "export-import-pipelines-as-templates",
       "active": true
     },
     {
-      "folderId": "export-and-import-a-pipeline",
+      "folderId": "incremental-data-backup-to-big-objects",
       "active": true
     },
     {
-      "folderId": "mask-sensitive-contact-data-in-sandboxes",
+      "folderId": "inline-edit",
       "active": true
     },
     {
-      "folderId": "reassign-opportunity-owners-for-inactive-users",
+      "folderId": "joiner-scope-filter-post-join",
       "active": true
     },
     {
-      "folderId": "recalculate-rollup-summaries-in-bulk-api",
+      "folderId": "list-action-with-line-editor",
       "active": true
     },
     {
-      "folderId": "rows-related-lists-on-opportunity-data-list",
+      "folderId": "list-action-with-template-record-editor",
       "active": true
     },
     {
-      "folderId": "send-email-notification-on-checkbox-check",
+      "folderId": "maintain-child-records-from-parent-field-changes",
       "active": true
     },
     {
-      "folderId": "transfer-open-opportunities-on-user-deactivation",
+      "folderId": "manage-saved-queries",
       "active": true
     },
     {
-      "folderId": "test-1",
+      "folderId": "mashup-related-data-from-a-remote-org",
       "active": true
     },
     {
-      "folderId": "test-2",
+      "folderId": "mask-sensitive-data-in-sandboxes",
       "active": true
     },
     {
-      "folderId": "test-3",
+      "folderId": "mass-edit",
       "active": true
     },
     {
-      "folderId": "test-4",
+      "folderId": "mass-recalculation-with-batch-blank-updates",
+      "active": true
+    },
+    {
+      "folderId": "merge-duplicate-records",
+      "active": true
+    },
+    {
+      "folderId": "migrate-salesforce-files-between-orgs",
+      "active": true
+    },
+    {
+      "folderId": "one-file-per-record-file-management",
+      "active": true
+    },
+    {
+      "folderId": "pinned-column-filters",
+      "active": true
+    },
+    {
+      "folderId": "record-action-with-pre-action-review",
+      "active": true
+    },
+    {
+      "folderId": "record-snapshot-history-with-a-big-object",
+      "active": true
+    },
+    {
+      "folderId": "restore-a-record-from-snapshot-history",
+      "active": true
+    },
+    {
+      "folderId": "restore-records-from-recycle-bin",
+      "active": true
+    },
+    {
+      "folderId": "row-related-lists",
+      "active": true
+    },
+    {
+      "folderId": "schedule-job-management",
+      "active": true
+    },
+    {
+      "folderId": "scheduled-retention-cleanup",
+      "active": true
+    },
+    {
+      "folderId": "self-adaptive-trigger-for-rollup-summary-calculati",
+      "active": true
+    },
+    {
+      "folderId": "skip-no-op-updates",
+      "active": true
+    },
+    {
+      "folderId": "the-trigger-flipper-pattern",
+      "active": true
+    },
+    {
+      "folderId": "transformable-record-based-data-loader",
+      "active": true
+    },
+    {
+      "folderId": "variables-for-named-expressions",
       "active": true
     }
   ]

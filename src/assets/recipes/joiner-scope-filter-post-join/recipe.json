@@ -1,0 +1,88 @@
+{
+  "id": "1111fce1-31bc-418e-9b40-82318302afe7",
+  "title": "Joiner + Scope Filter (Post Join)",
+  "category": [
+    "Trigger"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Trigger Executable is configured to run on Account update so that when the Owner changes, it automatically reassigns related open Quotes owned by the previous Account Owner to the new Owner.",
+  "generalUseCase": "Use Joiner + Scope Filter (Post Join) to left-join source records with their child records, then filter the joined dataset for downstream actions.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/HbyAN5hvbD0",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Opportunity.Triggers",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776971427271.png",
+          "alt": "Screenshot 2026-04-23 at 3.10.08 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Opportunity.OpenQuotes.OwnerSync",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776971464823.png",
+          "alt": "Screenshot 2026-04-23 at 3.10.34 PM"
+        }
+      ]
+    },
+    {
+      "step": "Trigger Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776971494804.png",
+          "alt": "Screenshot 2026-04-23 at 3.11.22 PM"
+        }
+      ]
+    },
+    {
+      "step": "Scoping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776971513465.png",
+          "alt": "Screenshot 2026-04-23 at 3.11.45 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776971589389.png",
+          "alt": "Screenshot 2026-04-23 at 3.12.56 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Opportunity.OpenQuotes.OwnerSync.json",
+      "url": "assets/recipes/joiner-scope-filter-post-join/downloadExecutables/Opportunity.OpenQuotes.OwnerSync.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "joiner-scope-filter-post-join"
+}

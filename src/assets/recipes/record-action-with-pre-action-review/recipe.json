@@ -1,0 +1,88 @@
+{
+  "id": "050c8831-90d5-4302-8229-638e62df2135",
+  "title": "Record Action with Pre-Action Review",
+  "category": [
+    "Action Button"
+  ],
+  "DSPVersions": [],
+  "overview": "An #Action Button is configured and placed on the Case record page to close the Case, with the Pre-Action defined. When users click the button, a screen opens with transformed/existing target field values, allowing them to review and edit those values before proceeding with the update.",
+  "generalUseCase": "Use an #Action Button on a record page to run a guided, rules-driven action—optionally showing a pre-action review screen so users can confirm or edit transformed values before execution.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/GNvoUNBQbLs",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Case.ActionButtons",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776707524212.png",
+          "alt": "Screenshot 2026-04-20 at 1.36.52 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Case.Close",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776707555575.png",
+          "alt": "Screenshot 2026-04-20 at 1.37.06 PM"
+        }
+      ]
+    },
+    {
+      "step": "Action Button Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776707582580.png",
+          "alt": "Screenshot 2026-04-20 at 1.37.19 PM"
+        }
+      ]
+    },
+    {
+      "step": "Scoping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776707601399.png",
+          "alt": "Screenshot 2026-04-20 at 1.37.27 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776707621924.png",
+          "alt": "Screenshot 2026-04-20 at 1.37.53 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Case.Close.json",
+      "url": "assets/recipes/record-action-with-pre-action-review/downloadExecutables/Case.Close.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "record-action-with-pre-action-review"
+}

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { RecipeData, RelatedRecipe } from '../../../core/models/recipe.model';
+import { RecipeData, RelatedRecipe, normalizeCategory } from '../../../core/models/recipe.model';
 import { TrackByUtil } from '../../../../shared/utils/trackby.util';
 
 @Component({
@@ -16,6 +16,8 @@ export class BasicInfoComponent {
   @Output() recipeChange = new EventEmitter<void>();
   @Output() activeChange = new EventEmitter<boolean>();
 
+  showCategoryDropdown = false;
+
   onRecipeChange(): void {
     this.recipeChange.emit();
   }
@@ -23,6 +25,36 @@ export class BasicInfoComponent {
   onActiveChange(): void {
     this.activeChange.emit(this.isActive);
     this.onRecipeChange();
+  }
+
+  // Category management methods
+  get recipeCategories(): string[] {
+    return normalizeCategory(this.recipe?.category);
+  }
+
+  toggleCategory(category: string): void {
+    let categories = this.recipeCategories;
+
+    if (categories.includes(category)) {
+      categories = categories.filter(c => c !== category);
+    } else {
+      categories = [...categories, category];
+    }
+
+    this.recipe.category = categories;
+    this.onRecipeChange();
+  }
+
+  isCategorySelected(category: string): boolean {
+    return this.recipeCategories.includes(category);
+  }
+
+  toggleCategoryDropdown(): void {
+    this.showCategoryDropdown = !this.showCategoryDropdown;
+  }
+
+  closeCategoryDropdown(): void {
+    this.showCategoryDropdown = false;
   }
 
   addDSPVersion(): void {

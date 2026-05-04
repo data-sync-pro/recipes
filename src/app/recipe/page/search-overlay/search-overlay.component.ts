@@ -58,6 +58,7 @@ export class RecipeSearchOverlayComponent implements OnInit, OnDestroy, OnChange
 
   suggestions: RecipeSearchItem[] = [];
   filteredSuggestions: RecipeSearchItem[] = [];
+  selectedIndex: number = -1;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -97,14 +98,15 @@ export class RecipeSearchOverlayComponent implements OnInit, OnDestroy, OnChange
                 ...(r.walkthrough || []).map(step => step.step)
               ];
 
+              const firstCategory = r.category[0] || '';
               return {
                 id: r.id,
                 slug: r.slug,
                 question: r.title,
-                route: `/recipes/${encodeURIComponent(r.category)}/${r.slug}`,
-                category: r.category,
+                route: `/recipes/${encodeURIComponent(firstCategory)}/${r.slug}`,
+                category: firstCategory,
                 subCategory: null,
-                tags: [r.category],
+                tags: r.category,  // Use all categories as tags
                 searchableContent: contentParts.join(' ').toLowerCase()
               };
             });
@@ -127,6 +129,38 @@ export class RecipeSearchOverlayComponent implements OnInit, OnDestroy, OnChange
   @HostListener('document:keydown.escape')
   onEscape() {
     if (this.isOpen) this.close();
+  }
+
+  @HostListener('document:keydown.arrowdown', ['$event'])
+  onArrowDown(event: Event) {
+    if (!this.isOpen || !this.filteredSuggestions.length) return;
+    event.preventDefault();
+    this.selectedIndex = Math.min(this.selectedIndex + 1, this.filteredSuggestions.length - 1);
+    this.scrollToSelectedItem();
+  }
+
+  @HostListener('document:keydown.arrowup', ['$event'])
+  onArrowUp(event: Event) {
+    if (!this.isOpen || !this.filteredSuggestions.length) return;
+    event.preventDefault();
+    this.selectedIndex = Math.max(this.selectedIndex - 1, 0);
+    this.scrollToSelectedItem();
+  }
+
+  @HostListener('document:keydown.enter', ['$event'])
+  onEnter(event: Event) {
+    if (!this.isOpen || this.selectedIndex < 0 || this.selectedIndex >= this.filteredSuggestions.length) return;
+    event.preventDefault();
+    this.onSelectSuggestion(this.filteredSuggestions[this.selectedIndex]);
+  }
+
+  private scrollToSelectedItem(): void {
+    setTimeout(() => {
+      const selectedElement = document.querySelector('.suggestion-item.active');
+      if (selectedElement) {
+        selectedElement.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }, 0);
   }
 
   onSelectSuggestion(item: RecipeSearchItem) {
@@ -182,6 +216,7 @@ export class RecipeSearchOverlayComponent implements OnInit, OnDestroy, OnChange
   }
 
   filterSuggestions() {
+    this.selectedIndex = -1; // Reset selection when filtering
     const kw = this.searchQuery.trim().toLowerCase();
 
     // Filter and add priority information

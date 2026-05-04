@@ -1,0 +1,88 @@
+{
+  "id": "0e87a74a-4ea3-4be8-905b-850c3216057f",
+  "title": "Restore a Record From Snapshot History",
+  "category": [
+    "Data List"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Data List on the Quote record page queries Quote history stored in a Big Object using a dynamic filter, and provides an action to restore the Quote from a selected version.",
+  "generalUseCase": "Use a #Data List to surface Big Object–based change history on a record page so users can review prior versions and optionally restore a selected snapshot.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/jhWCeRnmqcU",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Quote.Related.DataLists",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776813444732.png",
+          "alt": "Screenshot 2026-04-21 at 2.26.22 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Quote.Snapshot.Restore",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776813478254.png",
+          "alt": "Screenshot 2026-04-21 at 2.27.10 PM"
+        }
+      ]
+    },
+    {
+      "step": "Data List Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776813505423.png",
+          "alt": "Screenshot 2026-04-21 at 2.30.45 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776813531884.png",
+          "alt": "Screenshot 2026-04-21 at 2.31.24 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776813555449.png",
+          "alt": "Screenshot 2026-04-21 at 2.32.21 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Quote.Snapshot.Restore.json",
+      "url": "assets/recipes/restore-a-record-from-snapshot-history/downloadExecutables/Quote.Snapshot.Restore.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "restore-a-record-from-snapshot-history"
+}

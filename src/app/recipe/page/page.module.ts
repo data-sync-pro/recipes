@@ -28,7 +28,6 @@ import { RecipesComponent } from './page.component';
 import { RecipeCardComponent } from './card/card.component';
 import { RecipeSearchOverlayComponent } from './search-overlay/search-overlay.component';
 import { RecipeSidebarComponent } from './sidebar/sidebar.component';
-import { RecipeTocComponent } from './toc/toc.component';
 import { RecipeSectionComponent } from './section/section.component';
 import { RecipeDetailPageComponent } from './detail-page/detail-page.component';
 
@@ -47,7 +46,6 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
     RecipeCardComponent,
     RecipeSearchOverlayComponent,
     RecipeSidebarComponent,
-    RecipeTocComponent,
     RecipeSectionComponent,
     RecipeDetailPageComponent,
     BannerComponent,

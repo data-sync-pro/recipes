@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoggerService } from '../services/logger.service';
-import { formatFileSize, sanitizeFileName as sanitizeFileNameUtil } from '../utils';
+import { formatFileSize } from '../utils';
 import { FILE_SIZE } from '../constants/recipe.constants';
 
 export interface StoredImage {
@@ -250,6 +250,26 @@ export class FileStorageAdapter {
   }
 
   sanitizeFileName(fileName: string): string {
-    return sanitizeFileNameUtil(fileName, { lowercase: false, spaceReplacement: '_' });
+    if (!fileName) return 'unnamed.json';
+
+    // Split filename and extension
+    const lastDotIndex = fileName.lastIndexOf('.');
+    const hasExtension = lastDotIndex > 0;
+    const name = hasExtension ? fileName.substring(0, lastDotIndex) : fileName;
+    const extension = hasExtension ? fileName.substring(lastDotIndex) : '';
+
+    // Only remove characters that are invalid in filenames: / \ ? < > : * | "
+    // Keep other punctuation like parentheses, brackets, etc.
+    let sanitized = name
+      .replace(/[/\\?<>:*|"]/g, '')  // Remove invalid filename chars
+      .replace(/\s+/g, '_')           // Replace spaces with underscores
+      .trim();
+
+    // Ensure we have a valid name
+    if (!sanitized) {
+      sanitized = 'unnamed';
+    }
+
+    return sanitized + extension;
   }
 }

@@ -1,0 +1,61 @@
+{
+  "id": "117aa45e-417a-4bb6-9d06-bcdc2029c62d",
+  "title": "Transformable, Record-Based Data Loader",
+  "category": [
+    "Data Loader"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Data Loader is configured to upsert Leads from a CSV file using the Email field as the match key. Records with an existing Email are updated; otherwise, new Leads are inserted.",
+  "generalUseCase": "Use #Data Loader to ingest CSV data, apply scoping, matching, and field transformations, then action target records—reusable, native in Salesforce, and generating online execution logs for troubleshooting and compliance.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/koQUgcu_XJ8",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - DataLoaders",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776728956849.png",
+          "alt": "Screenshot 2026-04-20 at 7.49.08 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Lead.Upsert",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776982389604.png",
+          "alt": "Screenshot 2026-04-23 at 6.12.58 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776729044720.png",
+          "alt": "Screenshot 2026-04-20 at 7.50.34 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "transformable-record-based-data-loader"
+}

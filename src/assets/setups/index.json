@@ -1,0 +1,87 @@
+[
+  {
+    "id": "data-model",
+    "label": "Data Model",
+    "slug": "data-model",
+    "defaultExpanded": true,
+    "children": [
+      { "id": "objects-relationships", 
+      "label": "Objects & Relationships", 
+      "slug": "objects-relationships" 
+      },
+      {
+        "id": "direction-based-executable",
+        "label": "Direction Based Executable",
+        "slug": "direction-based-executable"
+      },
+      { "id": "connection-based-executable", 
+      "label": "Connection Based Executable", 
+      "slug": "connection-based-executable" 
+      }
+    ]
+  },
+  {
+    "id": "setup",
+    "label": "Setup",
+    "slug": "permissions",
+    "defaultExpanded": true,
+    "children": [
+      { "id": "install-package", "label": "Install Package", "slug": "install-package" },
+      { "id": "permissions", "label": "Permissions", "slug": "permissions" },
+      {
+        "id": "connection",
+        "label": "Establish Connections",
+        "slug": "connection",
+        "defaultExpanded": true,
+        "children": [
+          { "id": "current-org", "label": "Current Org", "slug": "current-org" },
+          { "id": "oauth", "label": "OAuth 2.0 (Refresh Token Flow)", "slug": "oauth" },
+          { "id": "username-password", "label": "Username & Password", "slug": "username-password", "visible": false }
+        ]
+      },
+      { "id": "trigger", "label": "Apex Trigger Hookup", "slug": "trigger" },
+      {
+        "id": "lwc",
+        "label": "Lightning Web Components",
+        "slug": "add-dsp-components-to-lightning-app-builder",
+        "defaultExpanded": true,
+        "children": [
+          { "id": "data-lists", "label": "Pipeline Data Lists", "slug": "data-lists" },
+          { "id": "quick-links", "label": "Pipeline Data List Quick Links", "slug": "quick-links" },
+          { "id": "batch-execution-button", "label": "Pipeline Batch Execution Button", "slug": "batch-execution-button"},
+          { "id": "action-buttons", "label": "Pipeline Action Buttons", "slug": "action-buttons" },
+          { "id": "data-list", "label": "Executable Data List", "slug": "data-list" },
+          { "id": "action-button", "label": "Executable Action Button", "slug": "action-button" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "apex-interfaces",
+    "label": "Apex Interfaces",
+    "slug": "data-model",
+    "defaultExpanded": true,
+    "children": [
+      {
+        "id": "SalesforceDataTransformer",
+        "label": "SalesforceDataTransformer",
+        "slug": "SalesforceDataTransformer"
+      },
+      {
+        "id": "ExecutionFinalizer",
+        "label": "ExecutionFinalizer",
+        "slug": "ExecutionFinalizer"
+      },{
+        "id": "ActionResultProcessor",
+        "label": "ActionResultProcessor",
+        "slug": "ActionResultProcessor"
+      },
+      {
+        "id": "BulkJobStatusSyncer",
+        "label": "BulkJobStatusSyncer",
+        "slug": "BulkJobStatusSyncer"
+      }
+    ]
+  }
+  
+]

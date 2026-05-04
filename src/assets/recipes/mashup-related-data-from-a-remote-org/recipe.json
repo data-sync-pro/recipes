@@ -1,0 +1,66 @@
+{
+  "id": "f3e842a7-e485-4c46-8abd-09ddd018f240",
+  "title": "Mashup Related Data from a Remote Org",
+  "category": [
+    "Data List"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Data List is configured on the Account Lightning record page to display related Opportunities from a remote Salesforce org using a dynamic filter.",
+  "generalUseCase": "Use #Data List with dynamic filters to surface related data from an authorized connected org and let users take action or synchronize records when needed. This mashup pattern avoids migrating data across orgs and accesses remote data as if it were in the current org.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/9YDBn4GvHxk",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Connection - OrgB",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776371822486.png",
+          "alt": "Screenshot 2026-04-16 at 4.23.42 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Account.OrgB.OpenOpportunities",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776371852857.png",
+          "alt": "Screenshot 2026-04-16 at 4.24.00 PM"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776804678800.png",
+          "alt": "4201776716696_.pic_hd"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Account.OrgB.OpenOpportunities.json",
+      "url": "assets/recipes/mashup-related-data-from-a-remote-org/downloadExecutables/Account.OrgB.OpenOpportunities.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "mashup-related-data-from-a-remote-org"
+}

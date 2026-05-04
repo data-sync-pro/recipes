@@ -5,7 +5,8 @@ import {
   PrerequisiteRecipe,
   StepMedia,
   StepConfig,
-  GeneralImage
+  GeneralImage,
+  normalizeCategory
 } from '../../core/models/recipe.model';
 import { LoggerService } from '../../core/services/logger.service';
 
@@ -48,13 +49,17 @@ export class ValidationService {
       });
     }
 
-    if (recipe.category && !this.isValidCategory(recipe.category)) {
-      errors.push({
-        field: 'category',
-        message: 'Invalid category value',
-        severity: 'error'
-      });
-    }
+    // Validate each category in the array
+    const categories = normalizeCategory(recipe.category);
+    categories.forEach((cat, index) => {
+      if (cat && !this.isValidCategory(cat)) {
+        errors.push({
+          field: `category[${index}]`,
+          message: `Invalid category value: ${cat}`,
+          severity: 'error'
+        });
+      }
+    });
 
     if (recipe.walkthrough && recipe.walkthrough.length > 0) {
       const stepResults = this.validateWalkthroughSteps(recipe.walkthrough);
@@ -122,10 +127,12 @@ export class ValidationService {
       });
     }
 
-    if (!recipe.category || recipe.category.trim() === '') {
+    // Check category array is not empty
+    const categories = normalizeCategory(recipe.category);
+    if (categories.length === 0) {
       errors.push({
         field: 'category',
-        message: 'Recipe category is required',
+        message: 'At least one category is required',
         severity: 'error'
       });
     }
@@ -145,7 +152,9 @@ export class ValidationService {
       'Data List',
       'Action Button',
       'Data Loader',
-      'General'
+      'General',
+      'Transformation',
+      'Query'
     ];
     return validCategories.includes(category);
   }

@@ -1,0 +1,14 @@
+<div class="cards">
+  <div *ngFor="let card of cards; trackBy: trackBySlug"
+       class="card"
+       (click)="onCardClick(card.slug)">
+    <img *ngIf="card.image"
+         [src]="getImagePath(card.image)"
+         [alt]="card.title"
+         class="card-image" />
+    <div class="card-footer">
+      <span class="card-title">{{ card.title }}</span>
+      <mat-icon class="card-arrow">arrow_forward</mat-icon>
+    </div>
+  </div>
+</div>

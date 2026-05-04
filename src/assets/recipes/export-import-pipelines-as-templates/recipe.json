@@ -1,0 +1,50 @@
+{
+  "id": "1e4d4c69-5f04-4a81-8d04-0ddc7f80b6df",
+  "title": "Export & Import Pipelines as Templates",
+  "category": [
+    "General"
+  ],
+  "DSPVersions": [],
+  "overview": "A Pipeline is created with a collection of #Batch Executables to move DSP configurations between orgs. Use Export to download the Pipeline setup as a JSON file, then Import that JSON into another Pipeline (with a Template Direction specified) to recreate the same process.",
+  "generalUseCase": "Use Pipeline Export to package DSP configurations into reusable deployment templates—either to share data-driven, standardized setups for industry solutions (e.g., Data Sync Pro, Revenue Cloud or nCino) or to manually migrate DSP configurations between environments (e.g., DEV to QA) for lightweight, small-team deployments.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/qgMmVsC6o3s",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Export Pipeline",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776883166309.png",
+          "alt": "Screenshot 2026-04-22 at 2.39.12 PM"
+        }
+      ]
+    },
+    {
+      "step": "Import Pipeline",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776883171501.png",
+          "alt": "Screenshot 2026-04-22 at 2.38.45 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "export-import-pipelines-as-templates"
+}

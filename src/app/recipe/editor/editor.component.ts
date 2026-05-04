@@ -18,7 +18,8 @@ import { EDITOR_CONSTANTS } from './editor.constants';
 import {
   Recipe,
   RecipeData,
-  EditorTab
+  EditorTab,
+  normalizeCategory
 } from '../core/models/recipe.model';
 import { IOProgress } from '../core/services/io.types';
 
@@ -43,7 +44,7 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
 
   searchQuery = '';
   selectedCategory = '';
-  categories = ['Batch', 'Trigger', 'Data List', 'Action Button', 'Data Loader', 'General'];
+  categories = ['Batch', 'Trigger', 'Data List', 'Action Button', 'Data Loader', 'General', 'Transformation', 'Query'];
 
   expandedSteps: Set<number> = new Set();
   customStepNames: { [index: number]: string } = {};
@@ -77,6 +78,13 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
 
   trackByIndex = TrackByUtil.index;
   trackById = TrackByUtil.id;
+
+  // Get first category for components that expect a single string
+  get currentRecipeFirstCategory(): string {
+    if (!this.currentRecipe?.category) return '';
+    const categories = normalizeCategory(this.currentRecipe.category);
+    return categories[0] || '';
+  }
 
   private previousTitle: string = '';
 
@@ -209,6 +217,10 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
     this.store.addEditorTab(newTab);
     this.currentRecipe = newRecipe;
     this.previousTitle = newRecipe.title;
+
+    // Switch to this recipe's customStepNames (empty for new recipe)
+    this.stepManagementService.setCurrentRecipe(newRecipe.id);
+
     this.logger.debug('New tab created', { tabId: newTab.id });
   }
 
@@ -219,6 +231,9 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
       if (tab?.recipe) {
         this.currentRecipe = tab.recipe;
         this.previousTitle = tab.recipe.title;
+
+        // Switch to this recipe's customStepNames
+        this.stepManagementService.setCurrentRecipe(tab.recipe.id);
 
         this.currentIsActive = this.listManagementService.isRecipeActive(tab.recipe.id);
 
@@ -288,6 +303,9 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
     this.currentRecipe = sourceRecipe;
     this.previousTitle = sourceRecipe.title;
     this.currentIsActive = this.listManagementService.isRecipeActive(recipe.id);
+
+    // Switch to this recipe's customStepNames
+    this.stepManagementService.setCurrentRecipe(sourceRecipe.id);
   }
 
 
@@ -655,12 +673,12 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
 
   async exportAllRecipes(): Promise<void> {
     try {
-      // Export all recipes by passing all recipes as edited recipes
-      const allRecipesAsData = this.recipeList.map(recipe => EditorUtils.convertToSourceRecord(recipe));
+      // Get edited recipes from storage to include any modifications (like uploaded executables)
+      const editedRecipes = this.listManagementService.getFilteredEditedRecipes();
       const recipeActiveStates = this.listManagementService.getAllRecipeActiveStates();
 
       await this.ioCoordinatorService.exportAllRecipes(
-        allRecipesAsData,
+        editedRecipes,
         this.recipeList,
         (progress) => this.updateImportProgress(progress),
         recipeActiveStates
@@ -702,6 +720,9 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
 
     if (confirmed) {
       this.ioCoordinatorService.clearAllData();
+
+      // Clear all customStepNames
+      this.stepManagementService.clearAllCustomStepNames();
 
       const tabs = this.store.getEditorState().tabs;
       tabs.forEach(tab => this.store.removeEditorTab(tab.id));

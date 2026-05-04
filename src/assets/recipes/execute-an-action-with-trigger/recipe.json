@@ -1,0 +1,88 @@
+{
+  "id": "3a0aba6f-2b44-45f6-acf2-aaa0afe528fe",
+  "title": "Execute an Action with Trigger",
+  "category": [
+    "Trigger"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Trigger Executable is configured on Case update so that when a Case is closed, it automatically creates a follow-up Task assigned to the Case Owner with a due date 7 days out to verify customer satisfaction.",
+  "generalUseCase": "Use #Trigger to configure an automation that runs during save when \na record meets specific criteria, automatically executing actions such \nas creating or updating related child records.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/hHQSWUALL2I",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Case.Triggers",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-0-image-1776971241438.png",
+          "alt": "Screenshot 2026-04-23 at 3.07.13 PM"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Case.Create.FollowUpTask.OnClose",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-1-image-1776971275979.png",
+          "alt": "Screenshot 2026-04-23 at 3.07.28 PM"
+        }
+      ]
+    },
+    {
+      "step": "Trigger Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-2-image-1776971296647.png",
+          "alt": "Screenshot 2026-04-23 at 3.08.06 PM"
+        }
+      ]
+    },
+    {
+      "step": "Scoping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-3-image-1776971320004.png",
+          "alt": "Screenshot 2026-04-23 at 3.08.28 PM"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/step-4-image-1776971341148.png",
+          "alt": "Screenshot 2026-04-23 at 3.08.52 PM"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [
+    {
+      "filePath": "downloadExecutables/Case.Create.FollowUpTask.OnClose.json",
+      "url": "assets/recipes/execute-an-action-with-trigger/downloadExecutables/Case.Create.FollowUpTask.OnClose.json"
+    }
+  ],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "execute-an-action-with-trigger"
+}
