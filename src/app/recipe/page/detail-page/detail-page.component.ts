@@ -112,6 +112,9 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   private isScrollingToSection: boolean = false;
   tocItems: TocItem[] = [];
 
+  // Currently displayed walkthrough tab (index into currentRecipe.walkthrough)
+  activeWalkthroughTabIndex: number = 0;
+
   // Media preview modal
   isMediaModalOpen: boolean = false;
   previewMedia: { type: string; url: string; alt: string } | null = null;
@@ -172,6 +175,9 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
           }
 
           this.currentRecipe = recipe;
+
+          // Reset to first walkthrough tab whenever the recipe changes
+          this.activeWalkthroughTabIndex = 0;
 
           // Build breadcrumb path (use first category or matched category)
           const breadcrumbCategory = recipe.category.includes(category) ? category : recipe.category[0];
@@ -349,22 +355,35 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     for (const section of this.visibleSections) {
       const tocItem: TocItem = { id: section.id, label: section.label };
 
-      // Special handling for walkthrough - add children for each step
-      if (section.id === 'walkthrough' && this.currentRecipe.walkthrough) {
-        tocItem.children = this.currentRecipe.walkthrough.map((step, index) => {
-          return {
-            id: `walkthrough-step-${index + 1}`,
-            label: `${index + 1}. ${step.step}`
-          };
-        });
+      // Walkthrough: show only the active tab's steps as children. The tab
+      // switcher itself is in the page; users navigate steps within a tab.
+      // Switching tabs rebuilds the TOC so the children always match.
+      if (section.id === 'walkthrough' && this.currentRecipe.walkthrough.length > 0) {
+        const tabIdx = this.activeWalkthroughTabIndex;
+        const activeTab = this.currentRecipe.walkthrough[tabIdx];
+        if (activeTab) {
+          tocItem.children = activeTab.steps.map((step, si) => ({
+            id: `walkthrough-tab-${tabIdx}-step-${si + 1}`,
+            label: `${si + 1}. ${step.step}`
+          }));
+        }
       }
 
       items.push(tocItem);
     }
 
-
-
     this.tocItems = items;
+  }
+
+  setActiveWalkthroughTab(index: number): void {
+    if (!this.currentRecipe || index < 0 || index >= this.currentRecipe.walkthrough.length) {
+      return;
+    }
+    if (this.activeWalkthroughTabIndex === index) return;
+
+    this.activeWalkthroughTabIndex = index;
+    this.buildTocItems();
+    this.cdr.markForCheck();
   }
 
   private setupScrollListener(): void {
@@ -388,11 +407,16 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     const sections: string[] = [];
     for (const section of this.visibleSections) {
       sections.push(section.id);
-      // Add walkthrough step IDs
-      if (section.id === 'walkthrough' && this.currentRecipe.walkthrough) {
-        this.currentRecipe.walkthrough.forEach((_, index) => {
-          sections.push(`walkthrough-step-${index + 1}`);
-        });
+      // Add walkthrough step IDs for the currently active tab only — only those
+      // steps are present in the DOM.
+      if (section.id === 'walkthrough' && this.currentRecipe.walkthrough.length > 0) {
+        const tabIdx = this.activeWalkthroughTabIndex;
+        const activeTab = this.currentRecipe.walkthrough[tabIdx];
+        if (activeTab) {
+          activeTab.steps.forEach((_, si) => {
+            sections.push(`walkthrough-tab-${tabIdx}-step-${si + 1}`);
+          });
+        }
       }
     }
 

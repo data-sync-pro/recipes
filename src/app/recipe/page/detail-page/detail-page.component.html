@@ -165,38 +165,61 @@
                 <div class="section-content">{{ currentRecipe.pipeline }}</div>
               </ng-container>
 
-              <!-- Walkthrough Section -->
+              <!-- Walkthrough Section (tab-grouped) -->
               <ng-container *ngSwitchCase="'walkthrough'">
-                <div *ngFor="let step of currentRecipe.walkthrough; let i = index"
-                     [id]="'walkthrough-step-' + (i + 1)"
-                     class="walkthrough-step">
-                  <div class="step-header">
-                    <div class="step-number-badge">{{ i + 1 }}</div>
-                    <h3 class="step-title">{{ step.step }}</h3>
-                  </div>
+                <!-- Tab buttons; only render if more than one tab to keep single-tab recipes visually unchanged -->
+                <div class="walkthrough-tabs"
+                     *ngIf="currentRecipe.walkthrough.length > 1"
+                     role="tablist">
+                  <button *ngFor="let tab of currentRecipe.walkthrough; let ti = index"
+                          type="button"
+                          class="walkthrough-tab-btn"
+                          [class.active]="ti === activeWalkthroughTabIndex"
+                          [attr.aria-selected]="ti === activeWalkthroughTabIndex"
+                          [attr.aria-controls]="'walkthrough-tab-panel-' + ti"
+                          role="tab"
+                          (click)="setActiveWalkthroughTab(ti)">
+                    {{ tab.tab }}
+                  </button>
+                </div>
 
-                  <!-- Step Media -->
-                  <div class="step-media" *ngIf="step.media && step.media.length > 0">
-                    <div *ngFor="let media of step.media" class="media-item">
-                      <img
-                        *ngIf="media.type === 'image' || media.type === 'gif'"
-                        [src]="media.displayUrl || media.url"
-                        [alt]="media.alt"
-                        loading="lazy"
-                        decoding="async"
-                        class="step-image"
-                        (click)="openMediaPreview(media)">
-                      <video
-                        *ngIf="media.type === 'video'"
-                        [src]="media.displayUrl || media.url"
-                        controls
-                        class="step-video clickable"
-                        (click)="openMediaPreview(media)">
-                        Your browser does not support the video tag.
-                      </video>
+                <ng-container *ngFor="let tab of currentRecipe.walkthrough; let ti = index">
+                  <div *ngIf="ti === activeWalkthroughTabIndex"
+                       [id]="'walkthrough-tab-' + ti"
+                       class="walkthrough-tab-panel"
+                       role="tabpanel">
+                    <div *ngFor="let step of tab.steps; let si = index"
+                         [id]="'walkthrough-tab-' + ti + '-step-' + (si + 1)"
+                         class="walkthrough-step">
+                      <div class="step-header">
+                        <div class="step-number-badge">{{ si + 1 }}</div>
+                        <h3 class="step-title">{{ step.step }}</h3>
+                      </div>
+
+                      <!-- Step Media -->
+                      <div class="step-media" *ngIf="step.media && step.media.length > 0">
+                        <div *ngFor="let media of step.media" class="media-item">
+                          <img
+                            *ngIf="media.type === 'image' || media.type === 'gif'"
+                            [src]="media.displayUrl || media.url"
+                            [alt]="media.alt"
+                            loading="lazy"
+                            decoding="async"
+                            class="step-image"
+                            (click)="openMediaPreview(media)">
+                          <video
+                            *ngIf="media.type === 'video'"
+                            [src]="media.displayUrl || media.url"
+                            controls
+                            class="step-video clickable"
+                            (click)="openMediaPreview(media)">
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </ng-container>
               </ng-container>
             </ng-container>
           </section>

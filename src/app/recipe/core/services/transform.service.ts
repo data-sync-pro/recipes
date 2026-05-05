@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { generateSlug } from '../../../shared/utils/slug.utils';
-import { RecipeData, Recipe, WalkthroughStep, DownloadFileCallout, normalizeCategory } from '../models/recipe.model';
+import {
+  RecipeData,
+  Recipe,
+  WalkthroughStep,
+  WalkthroughTab,
+  DownloadFileCallout,
+  normalizeCategory,
+  normalizeWalkthrough
+} from '../models/recipe.model';
 import { RECIPE_PATHS } from '../constants/recipe.constants';
 
 interface RecipeDataWithMetadata extends RecipeData {
@@ -35,7 +43,7 @@ export class TransformService {
       generalImages: record.generalImages || [],
       prerequisites: record.prerequisites || [],
       pipeline: record.pipeline || '',
-      walkthrough: this.processWalkthroughImagePaths(
+      walkthrough: this.processWalkthroughTabs(
         record.walkthrough || [],
         folderId
       ),
@@ -67,21 +75,35 @@ export class TransformService {
     return result;
   }
 
-  private processWalkthroughImagePaths(walkthrough: WalkthroughStep[], folderId: string): WalkthroughStep[] {
-    return walkthrough.map(step => {
-      if (step.media && Array.isArray(step.media)) {
-        step.media = step.media.map(media => {
-          if (media.type === 'image' && media.url && media.url.startsWith('images/')) {
-            return {
-              ...media,
-              url: `${RECIPE_PATHS.RECIPE_FOLDERS_BASE}${folderId}/${media.url}`
-            };
-          }
-          return media;
-        });
-      }
+  private processWalkthroughTabs(
+    walkthrough: WalkthroughTab[] | WalkthroughStep[],
+    folderId: string
+  ): WalkthroughTab[] {
+    // Normalize legacy flat arrays into a single default tab
+    const tabs = normalizeWalkthrough(walkthrough);
+
+    return tabs.map(tab => ({
+      tab: tab.tab,
+      steps: (tab.steps || []).map(step => this.processStepImagePaths(step, folderId))
+    }));
+  }
+
+  private processStepImagePaths(step: WalkthroughStep, folderId: string): WalkthroughStep {
+    if (!step.media || !Array.isArray(step.media)) {
       return step;
-    });
+    }
+    return {
+      ...step,
+      media: step.media.map(media => {
+        if (media.type === 'image' && media.url && media.url.startsWith('images/')) {
+          return {
+            ...media,
+            url: `${RECIPE_PATHS.RECIPE_FOLDERS_BASE}${folderId}/${media.url}`
+          };
+        }
+        return media;
+      })
+    };
   }
 
   private processVerificationGIF(verificationGIF: any[], folderId: string): any[] {

@@ -1,94 +1,157 @@
 <div class="form-section walkthrough-section">
   <h2>Walkthrough</h2>
 
-  <div class="step-item"
-       *ngFor="let step of walkthrough; let i = index; trackBy: trackByIndex"
-       [attr.data-step-index]="i">
-    <!-- Step Header -->
-    <div class="step-header" (click)="toggleStep(i)">
-      <div class="step-title-section">
-        <span class="step-toggle-icon">{{ isStepExpanded(i) ? '▼' : '▶' }}</span>
-        <h3>{{ getStepTitle(step, i) }}</h3>
-      </div>
-      <div class="step-actions" (click)="$event.stopPropagation()">
-        <button type="button"
-                class="btn btn-sm btn-secondary"
-                [disabled]="i === 0"
-                (click)="moveStepUp(i)">↑</button>
-        <button type="button"
-                class="btn btn-sm btn-secondary"
-                [disabled]="i === walkthrough.length - 1"
-                (click)="moveStepDown(i)">↓</button>
-        <button type="button"
-                class="btn btn-sm btn-danger"
-                (click)="removeStep(i)">Remove</button>
-      </div>
-    </div>
+  <!-- Tab Switcher -->
+  <div class="walkthrough-tab-bar" role="tablist">
+    <div *ngFor="let tab of walkthrough; let ti = index; trackBy: trackByIndex"
+         class="walkthrough-tab-chip"
+         [class.active]="ti === activeTabIndex"
+         [class.editing]="ti === editingTabIndex"
+         role="tab"
+         [attr.aria-selected]="ti === activeTabIndex"
+         (click)="setActiveTab(ti)">
 
-    <!-- Step Content (when expanded) -->
-    <div class="step-content" *ngIf="isStepExpanded(i)">
-      <!-- Step Name Selection -->
-      <div class="form-group">
-        <label>Step Name</label>
-        <select class="dsp-input"
-                [(ngModel)]="step.step"
-                (change)="onStepSelectionChange(step, i)">
-          <option value="">Select step</option>
-          <option *ngFor="let option of stepOptions" [value]="option">{{ option }}</option>
-        </select>
-      </div>
+      <!-- Read-only label (default state) -->
+      <ng-container *ngIf="ti !== editingTabIndex">
+        <span class="tab-name"
+              (dblclick)="startEditingTab(ti, $event)"
+              title="Double-click to rename">{{ tabDisplayName(tab, ti) }}</span>
 
-      <!-- Custom Step Name Input -->
-      <div class="form-group" *ngIf="step.step === 'Custom'">
-        <label>Custom Step Name</label>
-        <input type="text"
-               class="dsp-input"
-               [(ngModel)]="customStepNames[i]"
-               (input)="onCustomStepNameChange(i)"
-               placeholder="Enter custom step name">
-      </div>
+        <!-- Pencil icon: only shown for the active tab so we don't crowd inactive chips -->
+        <button type="button"
+                *ngIf="ti === activeTabIndex"
+                class="tab-action-btn tab-edit-btn"
+                title="Rename tab"
+                (click)="startEditingTab(ti, $event)">✎</button>
 
-      <!-- Configuration Section -->
-      <div class="config-section">
-        <h4>Configuration</h4>
-        <div class="config-item"
-             *ngFor="let config of step.config; let j = index; trackBy: trackByIndex">
-          <div class="autocomplete-wrapper">
-            <input type="text"
-                   class="dsp-input config-field"
-                   [(ngModel)]="config.field"
-                   (input)="onChange()"
-                   [appAutocomplete]="getFieldSuggestions(step.step)"
-                   (valueSelected)="onAutocompleteSelect($event, i, j)"
-                   placeholder="Field name">
-          </div>
-          <input type="text"
-                 class="dsp-input"
-                 [(ngModel)]="config.value"
-                 (input)="onChange()"
-                 placeholder="Value">
+        <div class="tab-actions">
           <button type="button"
-                  class="btn btn-sm btn-danger"
-                  (click)="removeConfig(i, j)">−</button>
+                  class="tab-action-btn"
+                  title="Move tab left"
+                  [disabled]="ti === 0"
+                  (click)="onMoveTabUp(ti, $event)">←</button>
+          <button type="button"
+                  class="tab-action-btn"
+                  title="Move tab right"
+                  [disabled]="ti === walkthrough.length - 1"
+                  (click)="onMoveTabDown(ti, $event)">→</button>
+          <button type="button"
+                  class="tab-action-btn tab-remove-btn"
+                  title="Remove tab"
+                  [disabled]="walkthrough.length <= 1"
+                  (click)="onRemoveTab(ti, $event)">×</button>
         </div>
-        <button type="button"
-                class="btn btn-sm btn-secondary"
-                (click)="addConfig(i)">+ Add Config</button>
-      </div>
+      </ng-container>
 
-      <!-- Media Section -->
-      <app-image-manager
-        [media]="step.media"
-        [stepIndex]="i"
-        [recipeId]="recipeId"
-        [recipeCategory]="recipeCategory"
-        (mediaChange)="onChange()">
-      </app-image-manager>
+      <!-- Editing state: input replaces label + actions -->
+      <input *ngIf="ti === editingTabIndex"
+             #tabNameInput
+             type="text"
+             class="tab-name-input"
+             [(ngModel)]="tab.tab"
+             (input)="onTabNameInput()"
+             (click)="$event.stopPropagation()"
+             (blur)="finishEditingTab()"
+             (keydown)="onTabNameKeydown($event)"
+             [placeholder]="'Tab ' + (ti + 1)">
     </div>
+
+    <button type="button"
+            class="btn btn-sm btn-secondary add-tab-btn"
+            (click)="onAddTab()">+ Add Tab</button>
   </div>
 
-  <!-- Add Step Button -->
-  <button type="button"
-          class="btn btn-secondary"
-          (click)="addStep()">+ Add Step</button>
+  <!-- Active Tab's Steps -->
+  <ng-container *ngIf="activeTab as tab">
+    <div class="step-item"
+         *ngFor="let step of tab.steps; let i = index; trackBy: trackByIndex"
+         [attr.data-step-index]="i">
+      <!-- Step Header -->
+      <div class="step-header" (click)="toggleStep(i)">
+        <div class="step-title-section">
+          <span class="step-toggle-icon">{{ isStepExpanded(i) ? '▼' : '▶' }}</span>
+          <h3>{{ getStepTitle(step, i) }}</h3>
+        </div>
+        <div class="step-actions" (click)="$event.stopPropagation()">
+          <button type="button"
+                  class="btn btn-sm btn-secondary"
+                  [disabled]="i === 0"
+                  (click)="moveStepUp(i)">↑</button>
+          <button type="button"
+                  class="btn btn-sm btn-secondary"
+                  [disabled]="i === tab.steps.length - 1"
+                  (click)="moveStepDown(i)">↓</button>
+          <button type="button"
+                  class="btn btn-sm btn-danger"
+                  (click)="removeStep(i)">Remove</button>
+        </div>
+      </div>
+
+      <!-- Step Content (when expanded) -->
+      <div class="step-content" *ngIf="isStepExpanded(i)">
+        <!-- Step Name Selection -->
+        <div class="form-group">
+          <label>Step Name</label>
+          <select class="dsp-input"
+                  [(ngModel)]="step.step"
+                  (change)="onStepSelectionChange(step, i)">
+            <option value="">Select step</option>
+            <option *ngFor="let option of stepOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+
+        <!-- Custom Step Name Input -->
+        <div class="form-group" *ngIf="step.step === 'Custom'">
+          <label>Custom Step Name</label>
+          <input type="text"
+                 class="dsp-input"
+                 [ngModel]="getCustomName(i)"
+                 (ngModelChange)="onCustomStepNameChange(i, $event)"
+                 placeholder="Enter custom step name">
+        </div>
+
+        <!-- Configuration Section -->
+        <div class="config-section">
+          <h4>Configuration</h4>
+          <div class="config-item"
+               *ngFor="let config of step.config; let j = index; trackBy: trackByIndex">
+            <div class="autocomplete-wrapper">
+              <input type="text"
+                     class="dsp-input config-field"
+                     [(ngModel)]="config.field"
+                     (input)="onChange()"
+                     [appAutocomplete]="getFieldSuggestions(step.step)"
+                     (valueSelected)="onAutocompleteSelect($event, i, j)"
+                     placeholder="Field name">
+            </div>
+            <input type="text"
+                   class="dsp-input"
+                   [(ngModel)]="config.value"
+                   (input)="onChange()"
+                   placeholder="Value">
+            <button type="button"
+                    class="btn btn-sm btn-danger"
+                    (click)="removeConfig(i, j)">−</button>
+          </div>
+          <button type="button"
+                  class="btn btn-sm btn-secondary"
+                  (click)="addConfig(i)">+ Add Config</button>
+        </div>
+
+        <!-- Media Section -->
+        <app-image-manager
+          [media]="step.media"
+          [stepIndex]="i"
+          [recipeId]="recipeId"
+          [recipeCategory]="recipeCategory"
+          (mediaChange)="onChange()">
+        </app-image-manager>
+      </div>
+    </div>
+
+    <!-- Add Step Button -->
+    <button type="button"
+            class="btn btn-secondary"
+            (click)="addStep()">+ Add Step</button>
+  </ng-container>
 </div>

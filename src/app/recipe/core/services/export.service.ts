@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RecipeData } from '../models/recipe.model';
+import { RecipeData, WalkthroughStep, isLegacyWalkthrough } from '../models/recipe.model';
 import { FileStorageAdapter } from '../storage';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { LoggerService } from './logger.service';
@@ -137,10 +137,16 @@ export class ExportService {
 
         updateProgress(`Processing images for: ${recipe.title}`);
 
-        if (recipe.walkthrough) {
+        if (recipe.walkthrough && recipe.walkthrough.length > 0) {
           const imagesFolder = recipeFolder.folder('images');
 
-          for (const step of recipe.walkthrough) {
+          // Flatten steps across both legacy WalkthroughStep[] and new
+          // WalkthroughTab[] formats so the media-collection logic stays uniform.
+          const allSteps: WalkthroughStep[] = isLegacyWalkthrough(recipe.walkthrough)
+            ? (recipe.walkthrough as WalkthroughStep[])
+            : (recipe.walkthrough as any[]).flatMap(tab => tab.steps || []);
+
+          for (const step of allSteps) {
             if (step.media) {
               for (const media of step.media) {
                 if (media.type === 'image') {

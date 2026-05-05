@@ -188,6 +188,15 @@
           (downloadableExecutablesChange)="onRecipeChange()">
         </app-file-upload>
 
+        <!-- Download File Prerequisites Callout -->
+        <app-download-file-callout-editor
+          *ngIf="currentRecipe"
+          [callouts]="currentRecipeCallouts"
+          [recipeId]="currentRecipe.id || ''"
+          [recipeCategory]="currentRecipeFirstCategory"
+          (calloutsChange)="onRecipeChange()">
+        </app-download-file-callout-editor>
+
         <!-- General Images -->
         <app-image-manager
           *ngIf="currentRecipe"
@@ -208,14 +217,18 @@
         <!-- Walkthrough -->
         <app-walkthrough-editor
           *ngIf="currentRecipe"
-          [walkthrough]="currentRecipe.walkthrough"
+          [walkthrough]="currentRecipeWalkthrough"
           [stepOptions]="stepOptions"
           [expandedSteps]="expandedSteps"
           [customStepNames]="customStepNames"
           [recipeId]="currentRecipe.id || ''"
           [recipeCategory]="currentRecipeFirstCategory"
           (walkthroughChange)="onRecipeChange()"
-          (stepExpansionToggle)="toggleStep($event)">
+          (stepExpansionToggle)="toggleStep($event)"
+          (addTab)="onAddTab()"
+          (removeTab)="onRemoveTab($event)"
+          (moveTabUp)="onMoveTabUp($event)"
+          (moveTabDown)="onMoveTabDown($event)">
         </app-walkthrough-editor>
       </div>
     </div>

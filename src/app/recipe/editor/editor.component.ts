@@ -19,8 +19,11 @@ import {
   Recipe,
   RecipeData,
   EditorTab,
+  WalkthroughStep,
+  WalkthroughTab,
   normalizeCategory
 } from '../core/models/recipe.model';
+import { CustomStepNames } from './services/step-management.service';
 import { IOProgress } from '../core/services/io.types';
 
 @Component({
@@ -46,8 +49,10 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
   selectedCategory = '';
   categories = ['Batch', 'Trigger', 'Data List', 'Action Button', 'Data Loader', 'General', 'Transformation', 'Query'];
 
-  expandedSteps: Set<number> = new Set();
-  customStepNames: { [index: number]: string } = {};
+  // Composite-key set: "tabIndex-stepIndex" → expanded
+  expandedSteps: Set<string> = new Set();
+  // 2D map keyed by tab/step index
+  customStepNames: CustomStepNames = {};
 
   showTooltip: string | null = null;
   private tooltipHideTimeout: any;
@@ -84,6 +89,23 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
     if (!this.currentRecipe?.category) return '';
     const categories = normalizeCategory(this.currentRecipe.category);
     return categories[0] || '';
+  }
+
+  // Editor now operates on tab-grouped walkthrough. Expose a typed view that
+  // also normalizes legacy flat-format recipes lazily on first access.
+  get currentRecipeWalkthrough(): WalkthroughTab[] {
+    if (!this.currentRecipe) return [];
+    return this.stepManagementService.ensureTabFormat(this.currentRecipe);
+  }
+
+  // Lazily initialize the callouts array on the recipe so the child editor can
+  // mutate by reference. Returns the same array each call for stable bindings.
+  get currentRecipeCallouts() {
+    if (!this.currentRecipe) return [];
+    if (!this.currentRecipe.downloadFileCallout) {
+      this.currentRecipe.downloadFileCallout = [];
+    }
+    return this.currentRecipe.downloadFileCallout;
   }
 
   private previousTitle: string = '';
@@ -358,114 +380,35 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
   }
 
 
-  addStep(): void {
+  // ==================== Walkthrough Tab Operations ====================
+
+  onAddTab(): void {
     if (!this.currentRecipe) return;
-
-    const added = this.stepManagementService.addStep(this.currentRecipe);
-    if (added) {
-      const newStepIndex = this.currentRecipe.walkthrough.length - 1;
-      this.stepManagementService.expandStep(newStepIndex);
-
+    if (this.stepManagementService.addTab(this.currentRecipe)) {
       this.onRecipeChange();
     }
   }
 
-  removeStep(index: number): void {
+  onRemoveTab(tabIndex: number): void {
     if (!this.currentRecipe) return;
-
-    const removed = this.stepManagementService.removeStep(this.currentRecipe, index);
-    if (removed) {
-      const steps = this.currentRecipe.walkthrough;
-      this.stepManagementService.reindexCustomStepNames(steps);
-
+    if (this.stepManagementService.removeTab(this.currentRecipe, tabIndex)) {
       this.onRecipeChange();
     }
   }
 
-  moveStepUp(index: number): void {
+  onMoveTabUp(tabIndex: number): void {
     if (!this.currentRecipe) return;
-
-    const moved = this.stepManagementService.moveStepUp(this.currentRecipe, index);
-    if (moved) {
+    if (this.stepManagementService.moveTabUp(this.currentRecipe, tabIndex)) {
       this.onRecipeChange();
     }
   }
 
-  moveStepDown(index: number): void {
+  onMoveTabDown(tabIndex: number): void {
     if (!this.currentRecipe) return;
-
-    const moved = this.stepManagementService.moveStepDown(this.currentRecipe, index);
-    if (moved) {
+    if (this.stepManagementService.moveTabDown(this.currentRecipe, tabIndex)) {
       this.onRecipeChange();
     }
   }
-
-
-  addConfig(stepIndex: number): void {
-    if (!this.currentRecipe) return;
-
-    const added = this.stepManagementService.addConfig(this.currentRecipe, stepIndex);
-    if (added) {
-      this.onRecipeChange();
-    }
-  }
-
-  removeConfig(stepIndex: number, configIndex: number): void {
-    if (!this.currentRecipe) return;
-
-    const removed = this.stepManagementService.removeConfig(
-      this.currentRecipe,
-      stepIndex,
-      configIndex
-    );
-    if (removed) {
-      this.onRecipeChange();
-    }
-  }
-
-
-  addMedia(stepIndex: number): void {
-    if (!this.currentRecipe) return;
-
-    const added = this.stepManagementService.addMedia(this.currentRecipe, stepIndex);
-    if (added) {
-      this.onRecipeChange();
-    }
-  }
-
-  async onImageDrop(event: DragEvent, stepIndex: number): Promise<void> {
-    if (!this.currentRecipe) return;
-
-    await this.imageManagementService.handleStepImageDrop(
-      event,
-      this.currentRecipe,
-      stepIndex,
-      () => this.onRecipeChange()
-    );
-  }
-
-  async handleImageFile(file: File, stepIndex: number): Promise<void> {
-    if (!this.currentRecipe) return;
-
-    await this.imageManagementService.uploadImage(
-      file,
-      this.currentRecipe,
-      'step-media',
-      { stepIndex },
-      () => this.onRecipeChange()
-    );
-  }
-
-  removeMedia(stepIndex: number, mediaIndex: number): void {
-    if (!this.currentRecipe) return;
-
-    const step = this.currentRecipe.walkthrough[stepIndex];
-    if (step?.media && mediaIndex >= 0 && mediaIndex < step.media.length) {
-      step.media.splice(mediaIndex, 1);
-      this.onRecipeChange();
-    }
-  }
-
 
   addGeneralImage(): void {
     if (!this.currentRecipe) return;
@@ -552,46 +495,13 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
   }
 
 
-  toggleStep(index: number): void {
-    this.stepManagementService.toggleStep(index);
-  }
-
-  isStepExpanded(index: number): boolean {
-    return this.stepManagementService.isStepExpanded(index);
-  }
-
-  getStepTitle(step: any, index: number): string {
-    return this.stepManagementService.getStepTitle(step, index);
+  toggleStep(payload: { tabIndex: number; stepIndex: number }): void {
+    this.stepManagementService.toggleStep(payload.tabIndex, payload.stepIndex);
   }
 
   private initializeExpandedSteps(): void {
-    if (!this.currentRecipe?.walkthrough) return;
-
+    if (!this.currentRecipe) return;
     this.stepManagementService.initializeExpandedSteps(this.currentRecipe);
-  }
-
-  onStepSelectionChange(step: any, index: number): void {
-    this.stepManagementService.onStepSelectionChange(step, index);
-    this.onRecipeChange();
-  }
-
-  onCustomStepNameChange(index: number): void {
-    const customName = this.customStepNames[index] || '';
-    this.stepManagementService.onCustomStepNameChange(index, customName);
-    this.onRecipeChange();
-  }
-
-  isCustomStep(step: any): boolean {
-    return this.stepManagementService.isCustomStep(step);
-  }
-
-
-  public onAutocompleteSelect(value: string, stepIndex: number, configIndex: number): void {
-    if (this.currentRecipe?.walkthrough?.[stepIndex]?.config?.[configIndex]) {
-      this.currentRecipe.walkthrough[stepIndex].config[configIndex].field = value;
-      this.onRecipeChange();
-      this.cdr.markForCheck();
-    }
   }
 
   getFieldSuggestions(stepType: string): string[] {

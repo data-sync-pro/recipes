@@ -328,6 +328,45 @@
         }
       }
 
+      // Walkthrough tab switcher (only rendered for multi-tab walkthroughs)
+      .walkthrough-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 20px 0;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #e5e7eb;
+
+        .walkthrough-tab-btn {
+          appearance: none;
+          background: transparent;
+          border: 1px solid transparent;
+          border-radius: 6px;
+          color: #4b5563;
+          cursor: pointer;
+          font-size: 0.875rem;
+          font-weight: 500;
+          padding: 6px 14px;
+          transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+
+          &:hover {
+            background-color: #F4F7FC;
+            color: #2253B2;
+          }
+
+          &.active {
+            background-color: #E8F0FB;
+            color: #2253B2;
+            border-color: #C7D7F0;
+          }
+        }
+      }
+
+      .walkthrough-tab-panel {
+        // Panel itself adds no extra spacing — child .walkthrough-step
+        // already has padding-bottom for separation.
+      }
+
       .walkthrough-step {
         padding-bottom: 24px;
         margin: 0px;

@@ -175,11 +175,16 @@ export class TocService {
     const walkthrough = this.currentRecipe?.walkthrough;
 
     if (Array.isArray(walkthrough)) {
-      walkthrough.forEach((step, index) => {
-        sections.push({
-          id: `step-${index}`,
-          title: step.step || `Step ${index + 1}`,
-          elementId: `step-${index}`
+      // Flatten tabs → steps so the legacy section list keeps a single sequential index.
+      let flatIndex = 0;
+      walkthrough.forEach(tab => {
+        (tab.steps || []).forEach(step => {
+          sections.push({
+            id: `step-${flatIndex}`,
+            title: step.step || `Step ${flatIndex + 1}`,
+            elementId: `step-${flatIndex}`
+          });
+          flatIndex++;
         });
       });
     }
@@ -332,16 +337,23 @@ export class TocService {
 
     const walkthrough = this.currentRecipe?.walkthrough;
     if (Array.isArray(walkthrough)) {
-      walkthrough.forEach((step, index) => {
-        sections.push({
-          id: `step-${index}`,
-          title: step.step || `Step ${index + 1}`,
-          elementId: `step-${index}`,
-          contentType: 'walkthrough-step',
-          isVisible: () => true,
-          getData: () => step,
-          data: step,
-          stepIndex: index
+      // Flatten tabs → steps so downstream consumers (which still key by a single
+      // step index) keep working until they're updated to know about tabs.
+      let flatIndex = 0;
+      walkthrough.forEach(tab => {
+        (tab.steps || []).forEach(step => {
+          const idx = flatIndex;
+          sections.push({
+            id: `step-${idx}`,
+            title: step.step || `Step ${idx + 1}`,
+            elementId: `step-${idx}`,
+            contentType: 'walkthrough-step',
+            isVisible: () => true,
+            getData: () => step,
+            data: step,
+            stepIndex: idx
+          });
+          flatIndex++;
         });
       });
     }

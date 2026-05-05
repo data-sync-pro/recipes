@@ -95,7 +95,7 @@ export class RecipeSearchOverlayComponent implements OnInit, OnDestroy, OnChange
                 r.direction || '',
                 r.connection || '',
                 ...(r.keywords || []),
-                ...(r.walkthrough || []).map(step => step.step)
+                ...(r.walkthrough || []).flatMap(tab => tab.steps.map(step => step.step))
               ];
 
               const firstCategory = r.category[0] || '';

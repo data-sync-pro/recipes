@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import {
   RecipeData,
   StepMedia,
-  GeneralImage
+  GeneralImage,
+  WalkthroughStep,
+  WalkthroughTab,
+  isLegacyWalkthrough
 } from '../../core/models/recipe.model';
 import { FileStorageAdapter } from '../../core/storage';
 import { ImageNamingService } from './image-naming.service';
@@ -16,6 +19,8 @@ export type ImageUploadPurpose =
   | 'replace-general-image';
 
 export interface ImageUploadOptions {
+  // Tab-aware location for step-media uploads (new format)
+  tabIndex?: number;
   stepIndex?: number;
   existingObject?: StepMedia | GeneralImage;
   targetInput?: HTMLInputElement;
@@ -102,6 +107,7 @@ export class ImageManagementService {
   async handleStepImageDrop(
     event: DragEvent,
     recipe: RecipeData,
+    tabIndex: number,
     stepIndex: number,
     changeCallback?: () => void
   ): Promise<void> {
@@ -114,7 +120,7 @@ export class ImageManagementService {
         files[i],
         recipe,
         'step-media',
-        { stepIndex },
+        { tabIndex, stepIndex },
         changeCallback
       );
     }
@@ -169,12 +175,9 @@ export class ImageManagementService {
     let baseName: string;
     let fullFileName: string;
 
-    if (purpose === 'step-media') {
-      baseName = this.imageNamingService.generateImageName(
-        file,
-        recipe,
-        options.stepIndex!
-      );
+    if (purpose === 'step-media' || purpose === 'replace-step-media') {
+      const step = this.locateStep(recipe, options.tabIndex, options.stepIndex);
+      baseName = this.imageNamingService.generateImageName(file, recipe, step);
       const extension = file.name.split('.').pop()?.toLowerCase() || 'jpg';
       fullFileName = `${baseName}.${extension}`;
     } else if (purpose === 'general-image') {
@@ -189,6 +192,19 @@ export class ImageManagementService {
     }
 
     return { baseName, fullFileName };
+  }
+
+  private locateStep(
+    recipe: RecipeData,
+    tabIndex?: number,
+    stepIndex?: number
+  ): WalkthroughStep | null {
+    if (stepIndex === undefined || !recipe.walkthrough) return null;
+    if (isLegacyWalkthrough(recipe.walkthrough)) {
+      return (recipe.walkthrough as WalkthroughStep[])[stepIndex] || null;
+    }
+    const tab = (recipe.walkthrough as WalkthroughTab[])[tabIndex ?? 0];
+    return tab?.steps?.[stepIndex] || null;
   }
 
   private updateRecipeWithImage(
@@ -207,7 +223,11 @@ export class ImageManagementService {
         alt: file.name.replace(/\.[^/.]+$/, '')
       };
       (media as any).displayUrl = displayUrl;
-      recipe.walkthrough[options.stepIndex!].media.push(media);
+      const step = this.locateStep(recipe, options.tabIndex, options.stepIndex);
+      if (step) {
+        if (!step.media) step.media = [];
+        step.media.push(media);
+      }
     } else if (purpose === 'general-image') {
       const generalImage: GeneralImage = {
         type: 'image',

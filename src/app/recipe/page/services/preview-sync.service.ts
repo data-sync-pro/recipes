@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { PreviewService } from '../../core/services/preview.service';
 import { LoggerService } from '../../core/services/logger.service';
-import { Recipe, RecipePreviewData, normalizeCategory } from '../../core/models/recipe.model';
+import { Recipe, RecipePreviewData, normalizeCategory, normalizeWalkthrough } from '../../core/models/recipe.model';
 
 export interface PreviewUpdateEvent {
   type: 'content-updated';
@@ -110,7 +110,7 @@ export class PreviewSyncService {
       pipeline: sourceRecipe.pipeline,
       direction: sourceRecipe.direction,
       connection: sourceRecipe.connection,
-      walkthrough: sourceRecipe.walkthrough,
+      walkthrough: normalizeWalkthrough(sourceRecipe.walkthrough),
       verificationGIF: sourceRecipe.verificationGIF,
       downloadableExecutables: sourceRecipe.downloadableExecutables,
       relatedRecipes: sourceRecipe.relatedRecipes,

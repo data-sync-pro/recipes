@@ -7,7 +7,7 @@ import { FileStorageAdapter } from '../../core/storage';
 import { ValidationService, ValidationResult } from './validation.service';
 import { LoggerService } from '../../core/services/logger.service';
 import { NotificationService } from '../../../shared/services/notification.service';
-import { cleanRecipeForExport } from '../../core/utils';
+import { cleanRecipeForExport, CleanRecipeCustomStepNames } from '../../core/utils';
 
 export interface SaveResult {
   success: boolean;
@@ -43,7 +43,7 @@ export class IOCoordinatorService {
 
   saveRecipe(
     recipe: RecipeData,
-    customStepNames: {[index: number]: string}
+    customStepNames: CleanRecipeCustomStepNames
   ): SaveResult {
     try {
       const validationResult: ValidationResult = this.validationService.validateRecipe(recipe);
@@ -82,7 +82,7 @@ export class IOCoordinatorService {
 
   saveMultipleRecipes(
     recipes: RecipeData[],
-    customStepNames: {[index: number]: string}
+    customStepNames: CleanRecipeCustomStepNames
   ): SaveResult[] {
     const results: SaveResult[] = [];
 
@@ -111,7 +111,7 @@ export class IOCoordinatorService {
 
   async exportSingleRecipe(
     recipe: RecipeData,
-    customStepNames: {[index: number]: string}
+    customStepNames: CleanRecipeCustomStepNames
   ): Promise<void> {
     try {
       const validationResult: ValidationResult = this.validationService.validateRecipe(recipe);

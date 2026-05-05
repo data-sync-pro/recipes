@@ -13,6 +13,7 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
 import { PreviewPanelComponent } from './components/preview-panel/preview-panel.component';
 import { WalkthroughEditorComponent } from './components/walkthrough-editor/walkthrough-editor.component';
 import { ImageManagerComponent } from './components/image-manager/image-manager.component';
+import { DownloadFileCalloutEditorComponent } from './components/download-file-callout-editor/download-file-callout-editor.component';
 
 // Directives
 import { AutocompleteDirective } from './directives/autocomplete.directive';
@@ -33,6 +34,7 @@ const routes: Routes = [
     PreviewPanelComponent,
     WalkthroughEditorComponent,
     ImageManagerComponent,
+    DownloadFileCalloutEditorComponent,
     AutocompleteDirective
   ],
   imports: [
