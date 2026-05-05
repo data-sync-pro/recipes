@@ -10,7 +10,7 @@
   "generalImages": [
     {
       "type": "video",
-      "url": "https://youtu.be/NO25P6J1zO0",
+      "url": "https://youtu.be/dgPIATQ8q7s",
       "alt": ""
     }
   ],
@@ -36,8 +36,8 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-1-image-1776813004274.png",
-          "alt": "Screenshot 2026-04-21 at 2.01.09 PM"
+          "url": "images/step-1-image-1777651521127.png",
+          "alt": "Screenshot 2026-05-01 120424"
         }
       ]
     },
@@ -80,6 +80,27 @@
     {
       "filePath": "downloadExecutables/Opportunity.LineItems.Clone.json",
       "url": "assets/recipes/auto-copy-child-records-from-a-source-reference/downloadExecutables/Opportunity.LineItems.Clone.json"
+    }
+  ],
+  "downloadFileCallout": [
+    {
+      "sections": [
+        {
+          "label": "Required Custom Field",
+          "objects": [
+            {
+              "name": "Opportunity",
+              "objectType": "Standard Object",
+              "fields": [
+                {
+                  "name": "OriginalOpportunity__c",
+                  "type": "Lookup(Opportunity)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "relatedRecipes": [],

@@ -93,7 +93,7 @@
             <div class="media-item" *ngFor="let media of asAny(section.data).media; trackBy: trackByMediaUrl">
               <div [ngSwitch]="media.type">
                 <div *ngSwitchCase="'image'" class="media-image" appSimpleZoomable [enableHoverZoom]="false">
-                  <img [src]="media.url" [alt]="media.alt" class="responsive-image zoomable-image">
+                  <img [src]="media.url" [alt]="media.alt" loading="lazy" decoding="async" class="responsive-image zoomable-image">
                 </div>
 
                 <div *ngSwitchCase="'video'" class="media-video">

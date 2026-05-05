@@ -71,6 +71,28 @@
       "url": "assets/recipes/centralized-validation-rules-with-self-adaptive-tr/downloadExecutables/Opportunity.SelfAdaptive.Validations.json"
     }
   ],
+  "downloadFileCallout": [
+    {
+      "sections": [
+        {
+          "label": "Required Record Type",
+          "objects": [
+            {
+              "name": "Opportunity",
+              "objectType": "Standard Object",
+              "fields": [],
+              "recordTypes": [
+                {
+                  "label": "Opportunity Record Type",
+                  "name": "RecordType"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "centralized-validation-rules-with-self-adaptive-tr"

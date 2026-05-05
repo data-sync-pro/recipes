@@ -99,7 +99,7 @@
       "pushtopics__Scheduleable__c": true,
       "pushtopics__SelfAdaptiveTrigger__c": false,
       "pushtopics__SelfExecutable__c": true,
-      "pushtopics__SeqNo__c": 20,
+      "pushtopics__SeqNo__c": 10,
       "pushtopics__SerialMode__c": false,
       "pushtopics__SkipFieldsIfTargetValueExists__c": false,
       "pushtopics__SkipNullValues__c": false,

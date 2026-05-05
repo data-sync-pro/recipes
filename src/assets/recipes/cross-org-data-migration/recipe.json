@@ -82,6 +82,31 @@
       "url": "assets/recipes/cross-org-data-migration/downloadExecutables/DataMigration.Current.OrgB.json"
     }
   ],
+  "downloadFileCallout": [
+    {
+      "sections": [
+        {
+          "label": "Required Custom Fields in Target Org",
+          "objects": [
+            {
+              "name": "Account",
+              "objectType": "Standard Object",
+              "fields": [
+                { "name": "SourceSystemID__c", "type": "Text" }
+              ]
+            },
+            {
+              "name": "Contact",
+              "objectType": "Standard Object",
+              "fields": [
+                { "name": "SourceSystemID__c", "type": "Text" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "cross-org-data-migration"

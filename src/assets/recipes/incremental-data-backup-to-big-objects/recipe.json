@@ -104,6 +104,36 @@
       "url": "assets/recipes/incremental-data-backup-to-big-objects/downloadExecutables/Cases.Backup.json"
     }
   ],
+  "downloadFileCallout": [
+    {
+      "sections": [
+        {
+          "label": "Required Big Object",
+          "objects": [
+            {
+              "name": "Case__b",
+              "objectType": "Big Object",
+              "indexFields": ["RecordID__c"],
+              "fields": [
+                { "name": "RecordID__c", "type": "Text" },
+                { "name": "CaseNumber__c", "type": "Text" },
+                { "name": "ClosedDate__c", "type": "DateTime" },
+                { "name": "CreatedDate__c", "type": "DateTime" },
+                { "name": "ContactEmail__c", "type": "Email" },
+                { "name": "Priority__c", "type": "Text" },
+                { "name": "Status__c", "type": "Text" },
+                { "name": "Subject__c", "type": "Text" },
+                { "name": "Description__c", "type": "Long Text Area" },
+                { "name": "AccountID__c", "type": "Text" },
+                { "name": "ContactID__c", "type": "Text" },
+                { "name": "OwnerID__c", "type": "Text" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "incremental-data-backup-to-big-objects"

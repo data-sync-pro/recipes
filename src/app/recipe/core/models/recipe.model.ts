@@ -18,6 +18,7 @@ export interface RecipeData {
   walkthrough: WalkthroughStep[];
   verificationGIF: VerificationGIF[];
   downloadableExecutables: DownloadableExecutable[];
+  downloadFileCallout?: DownloadFileCallout[];
   relatedRecipes: RelatedRecipe[];
   keywords: string[];
 }
@@ -41,6 +42,7 @@ export interface Recipe {
   walkthrough: WalkthroughStep[];
   verificationGIF: VerificationGIF[];
   downloadableExecutables: DownloadableExecutable[];
+  downloadFileCallout?: DownloadFileCallout[];
   relatedRecipes: RelatedRecipe[];
   keywords: string[];
   isExpanded?: boolean;
@@ -132,6 +134,42 @@ export interface DownloadableExecutable {
   title?: string;
   url?: string;
   filePath?: string;
+}
+
+/**
+ * One group of download-file prerequisites: a subtitle plus its sections of
+ * custom objects and fields the user must create in source/target org before
+ * importing the downloaded JSON. A recipe's `downloadFileCallout` is an array
+ * of these groups so multiple subtitled groups can be listed.
+ */
+export interface DownloadFileCallout {
+  type?: string;
+  sections: PrereqSection[];
+}
+
+export interface PrereqSection {
+  label?: string;
+  description?: string;
+  objects?: PrereqObject[];
+  media?: StepMedia[];
+}
+
+export interface PrereqObject {
+  name: string;
+  objectType: 'Custom Object' | 'Big Object' | 'Standard Object';
+  indexFields?: string[];
+  fields: PrereqField[];
+  recordTypes?: PrereqRecordType[];
+}
+
+export interface PrereqField {
+  name: string;
+  type: string;
+}
+
+export interface PrereqRecordType {
+  label: string;
+  name: string;
 }
 
 /**
