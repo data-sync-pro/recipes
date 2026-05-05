@@ -1,6 +1,5 @@
-<p>
-  Yes. You can embed the
-  <code>&lt;pushtopics-pipeline-data-lists&gt;</code> component inside your
+<p>You can embed the
+  <code><pushtopics></pushtopics-pipeline-data-lists></code> component inside your
   custom LWC and pass in <strong>custom action buttons</strong>. Handle events
   with <code>onlistaction</code> and <code>onrowaction</code> to run your own
   logic, and call the component's <code>refresh()</code> method to update the
@@ -8,18 +7,6 @@
 </p>
 
 <p><strong>Example:</strong></p>
-
-<pre><code>&lt;template&gt;
- &lt;pushtopics-pipeline-data-lists
-   record-id={recordId}
-   pipeline-api-name="myPipelineApiName"
-   variant="tabs"
-   tab-variant="scoped"
-   action-buttons={actionButtons}
-   onlistaction={handleListAction}
-   onrowaction={handleRowAction}&gt;
- &lt;/pushtopics-pipeline-data-lists&gt;
-&lt;/template&gt;</code></pre>
 
 <pre><code>import { LightningElement, api, track } from 'lwc';
 

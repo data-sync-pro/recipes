@@ -10,7 +10,7 @@ $breakpoint-desktop: 768px;
     grid-template-columns: $sidebar-width 1fr $toc-width;
 
     &.sidebar-collapsed {
-      grid-template-columns: $sidebar-collapsed 1fr $toc-width;
+      grid-template-columns: 0 1fr $toc-width;
     }
 
     &.toc-hidden {
@@ -18,7 +18,7 @@ $breakpoint-desktop: 768px;
     }
 
     &.sidebar-collapsed.toc-hidden {
-      grid-template-columns: $sidebar-collapsed 1fr;
+      grid-template-columns: 0 1fr;
     }
   }
 
@@ -143,9 +143,12 @@ $breakpoint-desktop: 768px;
   .faq-detail {
     padding: 24px 0;
 
+    .nav-prev-next {
+      padding: 4px;
+    }
+
     .faq-question {
       font-size: 1.5rem;
-      margin-bottom: 16px;
       line-height: 1.4;
     }
 

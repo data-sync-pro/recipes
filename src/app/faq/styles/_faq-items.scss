@@ -8,14 +8,27 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 // Virtual scrolling viewport
 .faq-virtual-viewport {
-  // Optimized calculation: 100vh - (header:60px + layout-margin:60px + title-area:90px + spacing:20px)
-  height: calc(100vh - 285px);
+  // 100vh - (header:60px + breadcrumb:50px + padding:40px + spacing:20px)
+  height: calc(100vh - 170px);
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
   pointer-events: auto;
   z-index: 10;
   position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.08) transparent;
+
+  &::-webkit-scrollbar {
+    width: 1px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 0;
+  }
 
   // When on homepage (all-faqs) without breadcrumb navigation
   .all-faqs & {
@@ -36,35 +49,36 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   // Custom scrollbar for the virtual viewport
   ::ng-deep .cdk-virtual-scroll-content-wrapper {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     pointer-events: auto !important;
-    position: static !important; // Changed from relative to static
+    position: static !important;
     z-index: auto;
-    
+
     &::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    
-    &::-webkit-scrollbar-thumb {
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 3px;
-      
-      &:hover {
-        background: rgba(0, 0, 0, 0.3);
-      }
+      display: none;
     }
   }
+
 }
 
 // Global CDK Virtual Scroll fixes
 ::ng-deep cdk-virtual-scroll-viewport {
   pointer-events: auto !important;
   position: relative !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(0, 0, 0, 0.08) transparent !important;
+
+  &::-webkit-scrollbar {
+    width: 3px !important;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.08) !important;
+    border-radius: 2px !important;
+  }
   
   .cdk-virtual-scroll-content-wrapper {
     pointer-events: auto !important;
@@ -87,10 +101,11 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 .faq-list {
   .faq-item {
-    background: #ffffff;
-    border: 1px solid #e1e5e9;
-    border-radius: 12px;
-    margin: 8px 0 16px 0; 
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #eee;
+    border-radius: 0;
+    margin: 0;
     transition: $transition;
     overflow: hidden;
     position: relative;
@@ -98,28 +113,34 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     -webkit-touch-callout: none;
-    z-index: 50; // Higher z-index to ensure clickable above breadcrumb and other elements
-    pointer-events: auto; // Explicitly enable pointer events
+    z-index: 50;
+    pointer-events: auto;
+
+    &:nth-child(even) {
+      background-color: #fcfcfd;
+    }
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-      border-color: $primary-color;
+      background-color: rgba(26, 115, 232, 0.04);
 
       .faq-question {
         color: $primary-color;
+        text-decoration: underline;
       }
 
     }
 
     &:active {
-      background-color: rgba(26, 115, 232, 0.05);
-      transform: translateY(0);
+      background-color: rgba(26, 115, 232, 0.08);
+    }
+
+    &:last-child {
+      border-bottom: none;
     }
 
 
     .faq-header {
-      padding: 24px 28px;
+      padding: 8px 0 4px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -134,12 +155,14 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     .faq-question-row {
       display: flex;
       align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 8px;
+      gap: 8px;
+      margin-bottom: 4px;
+
     }
 
     .faq-question {
       @include title-item;
+      font-weight: 400;
       flex: 1;
       transition: color 0.3s ease;
     }
@@ -166,7 +189,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       background: linear-gradient(135deg, #f8f9fa, #e9ecef);
       color: #6c757d;
       font-size: $font-size-caption;
-      padding: 6px 12px;
+      padding: 3px 8px;
       border: 1px solid #dee2e6;
     }
 
@@ -174,7 +197,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       background: linear-gradient(135deg, #e3f2fd, #bbdefb);
       color: #1565c0;
       font-size: 0.75rem;
-      padding: 4px 10px;
+      padding: 3px 8px;
       border: 1px solid #90caf9;
     }
 
@@ -209,7 +232,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   .section-title {
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 400;
     color: #2c3e50;
     padding-bottom: 40px;
   }
@@ -373,10 +396,9 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 // ==================== FAQ Feedback and Share Section ====================
 
 .faq-feedback-section {
-  margin-top: 24px;
-  padding: 16px 20px;
+  padding: 0 20px;
   position: relative;
-  margin-bottom: 24px;
+  margin-bottom: 40px;
 }
 
 .feedback-container {
@@ -645,7 +667,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   }
   
   // Remove margin since we're using grid layout
@@ -783,10 +805,8 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 // ===== Responsive Design =====
 @media (max-width: 767px) {
   .faq-feedback-section {
-    margin-top: 16px;
     padding: 12px 16px;
     border-radius: 8px;
-    
     &:hover {
       transform: none; // Disable hover transform on mobile
     }
@@ -850,14 +870,5 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   .feedback-message {
     padding: 6px 8px;
     font-size: 0.7rem;
-  }
-}
-
-// ==================== FAQ Content Image Hiding ====================
-// Hide images in FAQ display page only (does not affect faq-editor)
-.faq-answer {
-  img,
-  .faq-picture {
-    //display: none !important;
   }
 }

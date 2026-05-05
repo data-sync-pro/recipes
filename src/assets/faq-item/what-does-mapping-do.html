@@ -1,39 +1,8 @@
-<p>
-  <strong>Mapping</strong> defines how target fields are calculated before
-  execution. It acts as the transformation layer that drives data accuracy,
-  consistency, and quality. With a guided interface and extensive function
-  library, designers can configure powerful transformations with ease.
-</p>
-<p><strong>Key Capabilities:</strong></p>
-<ul>
-  <li>
-    <p>
-      <strong>Formula-Based Transformations:</strong> Apply formulas from DSP's
-      rich function library, referencing source fields (including relational
-      fields), static values, Variables (reusable formulas), and optional custom
-      Apex classes.
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Data Relationships:</strong> Seamlessly handle External IDs,
-      <code>VLOOKUP</code>s, and Record Type names.
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Autocomplete & Validation:</strong> Get real-time hints and
-      formula validation on save for accuracy.
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Automatic bulkification:</strong> Define mappings as if for one
-      record—DSP automatically bulkifies the logic for optimized performance.
-    </p>
-  </li>
-</ul>
+<p><b>Mapping </b>defines, field-by-field, how each target field's value is calculated before the action runs. For every field on the target, the designer specifies a formula or expression that produces the value to be written — a direct source-field reference, an operator-based expression, a function call, or any combination — and DSP evaluates it for each record at runtime.</p><p><strong>Key Capabilities:</strong></p><ul>
+<li><strong>Per-Field Configuration</strong> — Every target field has its own mapping row, with type-aware validation. References to source fields, related-record fields (e.g., <code>Account.Name</code>), Variables, and DSP functions can all be combined in a single expression.</li>
+<li><strong>Reference Field Handling</strong> — For relationship fields, designers can specify the <strong>Reference To</strong> object and the <strong>External Id Field</strong>, allowing target lookups to be resolved declaratively without writing custom logic.</li>
+<li><strong>Autocomplete & Validation</strong> — As designers type, autocomplete suggests available fields, operators, and functions; mappings are validated on save to catch errors before runtime.</li>
+<li><strong>Productivity Helpers</strong> — Quick actions like <strong>Add Default</strong>, <strong>Clear Mappings</strong>, and <strong>Unmapped Source Fields</strong> let designers manage large mapping sets efficiently — useful when working with objects that have hundreds of fields.</li>
+<li><strong>Automatic Bulkification</strong> — Mappings are written as if processing one record; DSP bulkifies the evaluation automatically for high-volume execution.</li></ul><br>
 
-<img
-  src="assets/image/mapping-what-does-mapping-do/mapping-what-does-mapping-do.jpg"
-/>
+<img src="assets/image/mapping-what-does-mapping-do/mapping-what-does-mapping-do.jpg">

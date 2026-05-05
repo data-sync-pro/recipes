@@ -90,6 +90,8 @@ interface TOCPaginationState {
   ]
 })
 export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
+  categorySearchQuery: string = '';
+
   search: SearchState = {
     query: '',
     focused: false,
@@ -345,7 +347,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       takeUntil(this.destroy$)
     ).subscribe({
       next: (faqs) => {
-        //console.log('📚 FAQ data loaded, count:', faqs.length);
         this.faqList = faqs;
         this.updateUIState({ isLoading: false });
         
@@ -500,6 +501,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private resetState(): void {
+    this.categorySearchQuery = '';
     this.updateSearchState({
       query: '',
       isActive: false,
@@ -716,6 +718,20 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.filteredFAQ || [];
   }
 
+  get previousFAQ(): FAQItem | null {
+    if (!this.current.faqItem) return null;
+    const list = this.currentFAQList;
+    const index = list.findIndex(item => item.id === this.current.faqItem!.id);
+    return index > 0 ? list[index - 1] : null;
+  }
+
+  get nextFAQ(): FAQItem | null {
+    if (!this.current.faqItem) return null;
+    const list = this.currentFAQList;
+    const index = list.findIndex(item => item.id === this.current.faqItem!.id);
+    return index >= 0 && index < list.length - 1 ? list[index + 1] : null;
+  }
+
   get shouldShowTOC(): boolean {
     if (this.ui.isMobile) {
       return false;
@@ -741,12 +757,23 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   get filteredFAQ(): FAQItem[] {
-    // Only apply category filter, search logic removed
-    return this.faqList.filter(item => {
+    if (this.search.query.trim()) {
+      const query = this.search.query.trim().toLowerCase();
+      return this.faqList.filter(item => item.question.toLowerCase().includes(query));
+    }
+
+    let list = this.faqList.filter(item => {
       if (this.current.category && item.category !== this.current.category) return false;
       if (this.current.subCategory && item.subCategory !== this.current.subCategory) return false;
       return true;
     });
+
+    if (this.categorySearchQuery.trim()) {
+      const q = this.categorySearchQuery.trim().toLowerCase();
+      list = list.filter(item => item.question.toLowerCase().includes(q));
+    }
+
+    return list;
   }
 
 
@@ -766,11 +793,38 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   clearSearch(): void {
-    this.resetState();
+    this.search.query = '';
+    this.search.isActive = false;
+    this.cdr.markForCheck();
+  }
+
+  onSearchInput(event: Event): void {
+    const query = (event.target as HTMLInputElement).value;
+    this.search.query = query;
+    this.search.isActive = query.trim().length > 0;
+    if (this.search.isActive) {
+      this.updateCurrentState({
+        category: '',
+        subCategory: '',
+        faqTitle: '',
+        faqItem: null
+      });
+    }
+    this.cdr.markForCheck();
+  }
+
+  onCategorySearchInput(event: Event): void {
+    this.categorySearchQuery = (event.target as HTMLInputElement).value;
+    this.cdr.markForCheck();
+  }
+
+  clearCategorySearch(): void {
+    this.categorySearchQuery = '';
+    this.cdr.markForCheck();
   }
 
 
-  
+
 
   onFaqOpened(item: FAQItem): void {
     // Update current FAQ title for breadcrumb
@@ -828,6 +882,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     item.viewCount++;
 
     
+    // Clear search state so the detail view template condition is satisfied
+    this.clearSearch();
+
     this.updateCurrentState({
       faqTitle: item.question,
       faqItem: item
@@ -936,9 +993,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     // Use answer-based URL instead of fragment-based
     const answerSlug = this.getAnswerSlug(item.answerPath);
     
-    this.router.navigate(['/', answerSlug], {
-      replaceUrl: true
-    });
+    this.router.navigate(['/', answerSlug]);
   }
 
   private clearBrowserURLFragment(): void {
@@ -1054,15 +1109,16 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     return answer.replace(/\.html$/, '').toLowerCase();
   }
   openSearchOverlay(initialQuery?: string): void {
-    this.searchOverlayInitialQuery = initialQuery || '';
-    this.updateSearchState({ isOpen: true });
+    if (this.searchInput) {
+      this.searchInput.nativeElement.focus();
+    }
   }
 
   closeSearchOverlay(): void {
-    this.searchOverlayInitialQuery = ''; 
-    this.updateSearchState({ isOpen: false });
+    this.clearSearch();
   }
   @ViewChild('faqSearchBox') faqSearchBox!: ElementRef<HTMLInputElement>;
+  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
   slugify(s: string): string {
     return s.toLowerCase()
@@ -1278,7 +1334,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   
     this.search.isOpen = false;
-  
+    // Clear search state so the detail view template condition is satisfied
+    this.clearSearch();
+
     setTimeout(() => this.openAndScroll(sel.question, sel.id));
     
     
@@ -1837,14 +1895,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     const problematicFAQs = this.faqList
       .filter(faq => !faq.safeAnswer && !faq.isLoading && faq.answerPath)
       .slice(0, 5);
-    /*
-    if (problematicFAQs.length > 0) {
-      console.log('Problematic FAQs:', problematicFAQs.map(faq => ({
-        id: faq.id,
-        question: faq.question,
-        answerPath: faq.answerPath
-      })));
-    }*/
   }
 
   // ==================== Table of Contents Methods ====================
@@ -2665,13 +2715,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     const handleStorageEvent = (event: StorageEvent) => {
       const sessionKey = `faq-preview-${faqId}`;
       const backupKey = `backup-faq-preview-${faqId}`;
-      /*
-      console.log('📡 Storage event received:', {
-        key: event.key,
-        hasNewValue: !!event.newValue,
-        storageType: event.storageArea === sessionStorage ? 'sessionStorage' : 'localStorage'
-      });
-      */
       // Check both sessionStorage and localStorage keys
       if ((event.key === sessionKey || event.key === backupKey) && event.newValue) {
         try {

@@ -1,43 +1,8 @@
-<p>
-  <strong>Match</strong> is a key step that links source records with
-  corresponding target records to determine how actions should be applied. It is
-  central to Insert, Update, Upsert, Merge, Delete, and Undelete operations,
-  ensuring records are processed correctly.
-</p>
-<p><strong>How Match works:</strong></p>
-<ul>
-  <li>
-    <p>
-      <strong>Record Matching:</strong> Compares source records to target
-      records using the Target Matching Field.
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Insert Logic:</strong> Inserts only when no match exists if a
-      Target Matching Field is defined; otherwise, inserts without checking.
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Multi-Field Matching:</strong> DSP supports one Target Matching
-      Field but allows multi-field matching through transformations (e.g.,
-      <code>VLOOKUP</code>).
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Sorting & Selection:</strong> Lets you sort matches and choose
-      whether to act on the first match (via the Principal Matched Record
-      Selection Rule) or on all matches.
-    </p>
-  </li>
-  <li>
-    <p>
-      <strong>Merge Matching:</strong> In Merge operations, the Principal
-      Matched Record becomes the Master Record to consolidate duplicates.
-    </p>
-  </li>
-</ul>
+<p><strong>Match</strong> links source records with their corresponding target records, determining how each action should be applied. It's central to Insert, Update, Upsert, Merge, Delete, and Undelete operations — ensuring records are routed and processed correctly.</p><p><strong>How Match works:</strong></p><ul>
+<li><strong>Record Matching</strong> — Compares source records to target records using the <strong>Target Matching Field</strong>.</li>
+<li><strong>Insert Logic</strong> — When a Target Matching Field is defined, records are inserted only if no match exists; without one, inserts proceed unconditionally.</li>
+<li><strong>Multi-Field Matching</strong> — DSP supports a single Target Matching Field, but multi-field matching can be achieved through transformations such as <code>VLOOKUP</code>.</li>
+<li><strong>Sorting & Selection</strong> — Matches can be sorted, and the <strong>Principal Matched Record Selection Rule</strong> controls whether the action runs on the first match or on all matches.</li>
+<li><strong>Merge Matching</strong> — In Merge operations, the <strong>Principal Matched Record</strong> becomes the Master Record used to consolidate duplicates.</li></ul><br>
 
-<img src="assets/image/match-what-does-match-do/match-what-does-match-do.jpg" />
+<img src="assets/image/match-what-does-match-do/match-what-does-match-do.jpg">

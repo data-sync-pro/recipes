@@ -1,28 +1,9 @@
-<p>All DSP rules engines share a structured process for automation and transformation, but they differ mainly in how they take input:</p><ul>
-<li>
-<p><strong>#Batch</strong> – Runs on records retrieved by a query.</p>
-</li>
-<li>
-<p><strong>#Trigger</strong> – Fire automatically when Salesforce DML events occur (insert, update, delete, undelete) on the source object.</p>
-</li>
-<li>
-<p><strong>#Data List</strong> – Shows query results to users, who can then select which records to act on.</p>
-</li>
-<li>
-<p><strong>#Action Button</strong> –</p>
-<ul>
-<li>
-<p><em>Connection-based</em>: Runs as a global action with no input data.</p>
-</li>
-<li>
-<p><em>Direction-based</em>: Uses the current record from a Lightning page as input.</p>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>#Data Loader</strong> – Similar to #Batch, but takes input from an uploaded CSV instead of a query.</p>
-</li>
-</ul><p><strong>In short:</strong> All DSP rules engines orchestrate data in the same way—by defining an input, 
-    applying logic, and performing an action on the target. What differs is how they receive their input: <strong>#Batch
-    , #Trigger, and #Data List</strong> use a source object; <strong>#Data Loader </strong> uses a CSV file; and <strong>
-    #Action Button </strong> can be configured to use either no input (global) or the current record (direction-based).</p>
+<p>All DSP rules engines follow the same structured process — defined input, transformation logic, and an action on the target. What sets them apart is how they receive input:</p><ul>
+<li><strong>#Batch</strong> — Runs asynchronously on all records returned by a query, with full execution logs.</li>
+<li><strong>#Trigger</strong> — Fires automatically on the source object's DML events (insert, update, delete, undelete), using the triggering records as input.</li>
+<li><strong>#Data List</strong> — Displays query results to users from a predefined SOQL query. Users can Create, Update, Delete, or Clone records directly on the results, or select specific records to act on.</li>
+<li><strong>#Action Button</strong> — Two modes:</li>
+<ul><li><em>Connection-based:</em> Runs as a global action with no input, or with input chained from a Data List.</li><li><em>Direct-based:</em> Uses either the current Lightning record or selected records from a Data List as input.</li></ul>
+
+<li><strong>#Data Loader</strong> — Like #Batch, but takes input from an uploaded CSV instead of a query.</li>
+</ul><p><strong>In short:</strong> every engine orchestrates data the same way — input, transformation logic, action. They differ only in where the input comes from and how they execute (async vs. sync).</p>
