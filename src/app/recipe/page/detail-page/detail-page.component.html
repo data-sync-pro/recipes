@@ -87,55 +87,58 @@
                   <img class="download-icon" src="assets/icons/download.svg" alt="Download">
                   <span class="download-title">{{ getDownloadDisplayName(file) }}</span>
                 </a>
-                  <div *ngIf="currentRecipe.downloadFileCallout?.length" class="recipe-prereqs">
-                    <h3 class="prereqs-title">Prerequisites</h3>
-                    <div class="prereqs-callout" *ngFor="let callout of currentRecipe.downloadFileCallout">
-                      <div class="prereqs-section" *ngFor="let section of callout.sections">
-                        <div class="prereqs-section-label" *ngIf="section.label">{{ section.label }}</div>
-                        <p class="prereqs-section-description" *ngIf="section.description">{{ section.description }}</p>
-                        <div class="prereqs-object" *ngFor="let obj of section.objects">
-                          <div class="prereqs-object-header">
-                            <span class="prereqs-object-name">{{ obj.name }}</span>
-                            <span class="prereqs-object-type" *ngIf="obj.objectType === 'Custom Object'">{{ obj.objectType }}</span>
-                          </div>
-                          <div class="prereqs-fields">
-                            <div class="prereqs-field" *ngFor="let field of obj.fields">
-                              <code class="prereqs-field-name">{{ field.name }}</code>
-                              <span class="prereqs-field-type">{{ field.type }}</span>
-                              <span class="prereqs-field-index" *ngIf="obj.indexFields?.includes(field.name)">Index</span>
-                            </div>
-                          </div>
-                          <div class="prereqs-record-types">
-                            <div class="prereqs-record-type" *ngFor="let recordType of obj.recordTypes">
-                              <code class="prereqs-record-type-pair">Label: {{ recordType.label }}</code>
-                              <br />
-                              <code class="prereqs-record-type-pair">Name: {{ recordType.name }}</code>
-                            </div>
+              </ng-container>
+
+              <!-- Prerequisites Section -->
+              <ng-container *ngSwitchCase="'prerequisites'">
+                <div class="recipe-prereqs">
+                  <div class="prereqs-callout" *ngFor="let callout of currentRecipe.downloadFileCallout">
+                    <div class="prereqs-section" *ngFor="let section of callout.sections">
+                      <div class="prereqs-section-label" *ngIf="section.label">{{ section.label }}</div>
+                      <p class="prereqs-section-description" *ngIf="section.description">{{ section.description }}</p>
+                      <div class="prereqs-object" *ngFor="let obj of section.objects">
+                        <div class="prereqs-object-header">
+                          <span class="prereqs-object-name">{{ obj.name }}</span>
+                          <span class="prereqs-object-type" *ngIf="obj.objectType === 'Custom Object'">{{ obj.objectType }}</span>
+                        </div>
+                        <div class="prereqs-fields">
+                          <div class="prereqs-field" *ngFor="let field of obj.fields">
+                            <code class="prereqs-field-name">{{ field.name }}</code>
+                            <span class="prereqs-field-type">{{ field.type }}</span>
+                            <span class="prereqs-field-index" *ngIf="obj.indexFields?.includes(field.name)">Index</span>
                           </div>
                         </div>
-                        <div class="prereqs-section-media" *ngIf="section.media?.length">
-                          <div *ngFor="let media of section.media" class="prereqs-media-item">
-                            <img
-                              *ngIf="media.type === 'image' || media.type === 'gif'"
-                              [src]="media.displayUrl || media.url"
-                              [alt]="media.alt"
-                              loading="lazy"
-                              decoding="async"
-                              class="prereqs-media-image"
-                              (click)="openMediaPreview(media)">
-                            <video
-                              *ngIf="media.type === 'video'"
-                              [src]="media.displayUrl || media.url"
-                              controls
-                              class="prereqs-media-video clickable"
-                              (click)="openMediaPreview(media)">
-                              Your browser does not support the video tag.
-                            </video>
+                        <div class="prereqs-record-types">
+                          <div class="prereqs-record-type" *ngFor="let recordType of obj.recordTypes">
+                            <code class="prereqs-record-type-pair">Label: {{ recordType.label }}</code>
+                            <br />
+                            <code class="prereqs-record-type-pair">Name: {{ recordType.name }}</code>
                           </div>
+                        </div>
+                      </div>
+                      <div class="prereqs-section-media" *ngIf="section.media?.length">
+                        <div *ngFor="let media of section.media" class="prereqs-media-item">
+                          <img
+                            *ngIf="media.type === 'image' || media.type === 'gif'"
+                            [src]="media.displayUrl || media.url"
+                            [alt]="media.alt"
+                            loading="lazy"
+                            decoding="async"
+                            class="prereqs-media-image"
+                            (click)="openMediaPreview(media)">
+                          <video
+                            *ngIf="media.type === 'video'"
+                            [src]="media.displayUrl || media.url"
+                            controls
+                            class="prereqs-media-video clickable"
+                            (click)="openMediaPreview(media)">
+                            Your browser does not support the video tag.
+                          </video>
                         </div>
                       </div>
                     </div>
                   </div>
+                </div>
               </ng-container>
 
               <!-- Video Demo Section -->
@@ -179,7 +182,7 @@
                           [attr.aria-controls]="'walkthrough-tab-panel-' + ti"
                           role="tab"
                           (click)="setActiveWalkthroughTab(ti)">
-                    {{ tab.tab }}
+                          {{ ti + 1 }}. {{ tab.tab }}
                   </button>
                 </div>
 
@@ -192,7 +195,12 @@
                          [id]="'walkthrough-tab-' + ti + '-step-' + (si + 1)"
                          class="walkthrough-step">
                       <div class="step-header">
-                        <div class="step-number-badge">{{ si + 1 }}</div>
+                        <div *ngIf="currentRecipe.walkthrough.length > 1; else stepBadge"
+                             class="step-bullet"
+                             aria-hidden="true">•</div>
+                        <ng-template #stepBadge>
+                          <div class="step-number-badge">{{ si + 1 }}</div>
+                        </ng-template>
                         <h3 class="step-title">{{ step.step }}</h3>
                       </div>
 
@@ -284,15 +292,40 @@
                (click)="scrollToSection($event, item.id)">
               {{ item.label }}
             </a>
-            <!-- Sub-items (e.g., walkthrough steps) -->
+            <!-- Sub-items: a child may itself have children (multi-tab
+                 walkthrough → parent group + its substeps), in which case
+                 we wrap the parent + its substeps in a .toc-group so the
+                 whole block can be highlighted as a card when something
+                 inside it is active. -->
             <ng-container *ngIf="item.children && item.children.length > 0">
-              <a *ngFor="let child of item.children"
-                 [href]="'#' + child.id"
-                 class="toc-link toc-child"
-                 [class.active]="activeTocSection === child.id"
-                 (click)="scrollToSection($event, child.id)">
-                {{ child.label }}
-              </a>
+              <ng-container *ngFor="let child of item.children">
+                <ng-container *ngIf="child.children && child.children.length > 0; else flatChild">
+                  <div class="toc-group">
+                    <a [href]="'#' + child.id"
+                       class="toc-link toc-child"
+                       [class.active]="activeTocSection === child.id"
+                       (click)="scrollToSection($event, child.id, child.tabIndex)">
+                      {{ child.label }}
+                    </a>
+                    <a *ngFor="let grand of child.children"
+                       [href]="'#' + grand.id"
+                       class="toc-link toc-child toc-grandchild"
+                       [class.active]="activeTocSection === grand.id"
+                       (click)="scrollToSection($event, grand.id, grand.tabIndex)">
+                      {{ grand.label }}
+                    </a>
+                  </div>
+                </ng-container>
+                <ng-template #flatChild>
+                  <a [href]="'#' + child.id"
+                     class="toc-link toc-child"
+                     [class.toc-grandchild]="child.indent"
+                     [class.active]="activeTocSection === child.id"
+                     (click)="scrollToSection($event, child.id, child.tabIndex)">
+                    {{ child.label }}
+                  </a>
+                </ng-template>
+              </ng-container>
             </ng-container>
           </ng-container>
         </nav>

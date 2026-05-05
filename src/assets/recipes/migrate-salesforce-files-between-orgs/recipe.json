@@ -20,10 +20,10 @@
   "connection": "",
   "walkthrough": [
     {
-      "tab": "ContentVersion (Account)",
+      "tab": "Insert ContentVersion (FirstPart)",
       "steps": [
         {
-          "step": "Current.OrgB.ContentVersion.Insert.FirstPublishLocationId.Account",
+          "step": "New Executable",
           "config": [],
           "media": [
             {
@@ -58,10 +58,10 @@
       ]
     },
     {
-      "tab": "ContentVersion (NULL)",
+      "tab": "Insert ContentVersion (SecondPart)",
       "steps": [
         {
-          "step": "Current.OrgB.ContentVersion.Insert.FirstPublishLocationId.NULL",
+          "step": "New Executable",
           "config": [],
           "media": [
             {
@@ -96,10 +96,10 @@
       ]
     },
     {
-      "tab": "ContentDocumentLink",
+      "tab": "Insert ContentDocumentLink",
       "steps": [
         {
-          "step": "Current.OrgB.ContentDocumentLink.Insert.LinkedEntityId.Account",
+          "step": "New Executable",
           "config": [],
           "media": [
             {
