@@ -87,18 +87,54 @@
                   <img class="download-icon" src="assets/icons/download.svg" alt="Download">
                   <span class="download-title">{{ getDownloadDisplayName(file) }}</span>
                 </a>
-                  <div *ngIf="currentRecipe.downloadFileCallout"
-                      class="recipe-callout"
-                      [attr.data-variant]="currentRecipe.downloadFileCallout.variant">
-                    <span class="callout-icon">
-                      <ng-container [ngSwitch]="currentRecipe.downloadFileCallout.variant">
-                        <mat-icon *ngSwitchCase="'warning'">warning</mat-icon>
-                        <mat-icon *ngSwitchCase="'error'">error</mat-icon>
-                        <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
-                        <mat-icon *ngSwitchDefault>info</mat-icon>
-                      </ng-container>
-                    </span>
-                    <span class="callout-content">{{ currentRecipe.downloadFileCallout.content }}</span>
+                  <div *ngIf="currentRecipe.downloadFileCallout?.length" class="recipe-prereqs">
+                    <h3 class="prereqs-title">Prerequisites</h3>
+                    <div class="prereqs-callout" *ngFor="let callout of currentRecipe.downloadFileCallout">
+                      <div class="prereqs-section" *ngFor="let section of callout.sections">
+                        <div class="prereqs-section-label" *ngIf="section.label">{{ section.label }}</div>
+                        <p class="prereqs-section-description" *ngIf="section.description">{{ section.description }}</p>
+                        <div class="prereqs-object" *ngFor="let obj of section.objects">
+                          <div class="prereqs-object-header">
+                            <span class="prereqs-object-name">{{ obj.name }}</span>
+                            <span class="prereqs-object-type" *ngIf="obj.objectType === 'Custom Object'">{{ obj.objectType }}</span>
+                          </div>
+                          <div class="prereqs-fields">
+                            <div class="prereqs-field" *ngFor="let field of obj.fields">
+                              <code class="prereqs-field-name">{{ field.name }}</code>
+                              <span class="prereqs-field-type">{{ field.type }}</span>
+                              <span class="prereqs-field-index" *ngIf="obj.indexFields?.includes(field.name)">Index</span>
+                            </div>
+                          </div>
+                          <div class="prereqs-record-types">
+                            <div class="prereqs-record-type" *ngFor="let recordType of obj.recordTypes">
+                              <code class="prereqs-record-type-pair">Label: {{ recordType.label }}</code>
+                              <br />
+                              <code class="prereqs-record-type-pair">Name: {{ recordType.name }}</code>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="prereqs-section-media" *ngIf="section.media?.length">
+                          <div *ngFor="let media of section.media" class="prereqs-media-item">
+                            <img
+                              *ngIf="media.type === 'image' || media.type === 'gif'"
+                              [src]="media.displayUrl || media.url"
+                              [alt]="media.alt"
+                              loading="lazy"
+                              decoding="async"
+                              class="prereqs-media-image"
+                              (click)="openMediaPreview(media)">
+                            <video
+                              *ngIf="media.type === 'video'"
+                              [src]="media.displayUrl || media.url"
+                              controls
+                              class="prereqs-media-video clickable"
+                              (click)="openMediaPreview(media)">
+                              Your browser does not support the video tag.
+                            </video>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
               </ng-container>
 

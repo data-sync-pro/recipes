@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { generateSlug } from '../../../shared/utils/slug.utils';
-import { RecipeData, Recipe, WalkthroughStep, normalizeCategory } from '../models/recipe.model';
+import { RecipeData, Recipe, WalkthroughStep, DownloadFileCallout, normalizeCategory } from '../models/recipe.model';
 import { RECIPE_PATHS } from '../constants/recipe.constants';
 
 interface RecipeDataWithMetadata extends RecipeData {
@@ -47,7 +47,10 @@ export class TransformService {
         record.downloadableExecutables || [],
         folderId
       ),
-      downloadFileCallout: record.downloadFileCallout,
+      downloadFileCallout: this.processDownloadFileCallouts(
+        record.downloadFileCallout || [],
+        folderId
+      ),
       relatedRecipes: record.relatedRecipes || [],
       keywords: record.keywords || [],
 
@@ -95,6 +98,29 @@ export class TransformService {
       }
       return media;
     });
+  }
+
+  private processDownloadFileCallouts(callouts: DownloadFileCallout[], folderId: string): DownloadFileCallout[] {
+    return callouts.map(callout => ({
+      ...callout,
+      sections: (callout.sections || []).map(section => {
+        if (!section.media || !Array.isArray(section.media)) {
+          return section;
+        }
+        return {
+          ...section,
+          media: section.media.map(media => {
+            if (media.url && !media.url.startsWith('http') && !media.url.startsWith('/')) {
+              return {
+                ...media,
+                displayUrl: `${RECIPE_PATHS.RECIPE_FOLDERS_BASE}${folderId}/${media.url}`
+              };
+            }
+            return media;
+          })
+        };
+      })
+    }));
   }
 
   private processDownloadableExecutables(executables: any[], folderId: string): any[] {

@@ -65,12 +65,7 @@
     }
   ],
   "verificationGIF": [],
-  "downloadableExecutables": [
-    {
-      "filePath": "downloadExecutables/Account.BlankUpdate.json",
-      "url": "assets/recipes/mass-recalculation-with-batch-blank-updates/downloadExecutables/Account.BlankUpdate.json"
-    }
-  ],
+  "downloadableExecutables": [],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "mass-recalculation-with-batch-blank-updates"

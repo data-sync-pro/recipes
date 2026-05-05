@@ -111,14 +111,14 @@
       "pushtopics__TargetConnectionName__c": "Current",
       "pushtopics__TargetConnectionType__c": "Salesforce",
       "pushtopics__TargetObjectName__c": "Case__b",
-      "pushtopics__TargetQueryString__c": "SELECT RecordID__c, CaseCaseNumber__c, Subject__c, Priority__c, Status__c, ContactEmail__c, ClosedDate__c FROM Case__b LIMIT 5000",
+      "pushtopics__TargetQueryString__c": "SELECT RecordID__c, CaseNumber__c, Subject__c, Priority__c, Status__c, ContactEmail__c, ClosedDate__c FROM Case__b LIMIT 5000",
       "pushtopics__Trigger__c": false,
       "pushtopics__TriggerAction__c": false,
       "pushtopics__UseDefaultAssignmentRule__c": false,
       "pushtopics__UseSalesforceUpsertAPI__c": false,
       "pushtopics__FieldMappings__r": [
         {
-          "Name": "CaseCaseNumber__c",
+          "Name": "CaseNumber__c",
           "pushtopics__Createable__c": true,
           "pushtopics__Deployable__c": false,
           "pushtopics__ExternalId__c": false,

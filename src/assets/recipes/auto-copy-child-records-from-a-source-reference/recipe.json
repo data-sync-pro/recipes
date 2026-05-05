@@ -82,6 +82,27 @@
       "url": "assets/recipes/auto-copy-child-records-from-a-source-reference/downloadExecutables/Opportunity.LineItems.Clone.json"
     }
   ],
+  "downloadFileCallout": [
+    {
+      "sections": [
+        {
+          "label": "Required Custom Field",
+          "objects": [
+            {
+              "name": "Opportunity",
+              "objectType": "Standard Object",
+              "fields": [
+                {
+                  "name": "OriginalOpportunity__c",
+                  "type": "Lookup(Opportunity)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "auto-copy-child-records-from-a-source-reference"

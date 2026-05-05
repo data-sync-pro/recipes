@@ -134,7 +134,7 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     private searchService: SearchService,
     private cdr: ChangeDetectorRef,
     private sanitizer: DomSanitizer
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Get route params and load recipe
