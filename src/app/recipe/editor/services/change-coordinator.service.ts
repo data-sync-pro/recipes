@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { RecipeData, EditorTab, StepMedia } from '../../core/models/recipe.model';
+import {
+  RecipeData,
+  EditorTab,
+  StepMedia,
+  WalkthroughStep,
+  WalkthroughTab,
+  isLegacyWalkthrough
+} from '../../core/models/recipe.model';
 import { ImageNamingService } from './image-naming.service';
 import { FileStorageAdapter } from '../../core/storage';
 import { Store } from '../../core/store/recipe.store';
@@ -100,11 +107,23 @@ export class ChangeCoordinatorService {
       let updated = false;
 
       if (recipe.walkthrough && Array.isArray(recipe.walkthrough)) {
-        for (let stepIndex = 0; stepIndex < recipe.walkthrough.length; stepIndex++) {
-          const step = recipe.walkthrough[stepIndex];
+        // Walk both legacy flat and new tab-grouped walkthrough.
+        const visitStep = async (step: WalkthroughStep) => {
           if (step.media && Array.isArray(step.media)) {
-            const mediaUpdated = await this.updateStepMediaNames(step.media, stepIndex, recipe);
+            const mediaUpdated = await this.updateStepMediaNames(step.media, step, recipe);
             updated = updated || mediaUpdated;
+          }
+        };
+
+        if (isLegacyWalkthrough(recipe.walkthrough)) {
+          for (const step of recipe.walkthrough as WalkthroughStep[]) {
+            await visitStep(step);
+          }
+        } else {
+          for (const tab of recipe.walkthrough as WalkthroughTab[]) {
+            for (const step of tab.steps || []) {
+              await visitStep(step);
+            }
           }
         }
       }
@@ -119,13 +138,13 @@ export class ChangeCoordinatorService {
 
   private async updateStepMediaNames(
     media: StepMedia[],
-    stepIndex: number,
+    step: WalkthroughStep,
     recipe: RecipeData
   ): Promise<boolean> {
     let updated = false;
 
     for (const mediaItem of media) {
-      const itemUpdated = await this.updateSingleMediaName(mediaItem, stepIndex, recipe);
+      const itemUpdated = await this.updateSingleMediaName(mediaItem, step, recipe);
       updated = updated || itemUpdated;
     }
 
@@ -134,7 +153,7 @@ export class ChangeCoordinatorService {
 
   private async updateSingleMediaName(
     media: StepMedia,
-    stepIndex: number,
+    step: WalkthroughStep,
     recipe: RecipeData
   ): Promise<boolean> {
     try {
@@ -150,7 +169,7 @@ export class ChangeCoordinatorService {
         return false;
       }
 
-      const newKey = this.imageNamingService.generateImageName(imageFile, recipe, stepIndex);
+      const newKey = this.imageNamingService.generateImageName(imageFile, recipe, step);
 
       if (currentKey === newKey) {
         return false;
@@ -171,7 +190,7 @@ export class ChangeCoordinatorService {
 
       this.logger.debug('Media name updated', {
         recipeId: recipe.id,
-        stepIndex,
+        stepName: step.step,
         oldName: currentFileName,
         newName: newFileName
       });

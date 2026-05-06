@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RecipeData } from '../../core/models/recipe.model';
+import { RecipeData, WalkthroughStep, WalkthroughTab, isLegacyWalkthrough } from '../../core/models/recipe.model';
 import { LoggerService } from '../../core/services/logger.service';
 import { createSafeString, getFileExtension } from '../../core/utils';
 
@@ -11,7 +11,11 @@ export class ImageNamingService {
     this.logger.debug('ImageNamingService initialized');
   }
 
-  generateImageName(file: File, recipe: RecipeData, stepIndex: number): string {
+  /**
+   * Generate a unique image base name for a step. Caller passes the actual
+   * step object so we don't have to worry about tab/step indexing here.
+   */
+  generateImageName(file: File, recipe: RecipeData, step: WalkthroughStep | null): string {
     try {
       if (!recipe) {
         return this.fallbackImageName();
@@ -20,7 +24,6 @@ export class ImageNamingService {
       // Get first category for naming (supports both string and string[])
       const categoryValue = Array.isArray(recipe.category) ? (recipe.category[0] || 'uncategorized') : (recipe.category || 'uncategorized');
       const category = createSafeString(categoryValue);
-      const step = recipe.walkthrough?.[stepIndex];
       const stepName = createSafeString(step?.step || 'step');
       const extension = getFileExtension(file);
       const baseName = `${category}-${stepName}-image`;
@@ -107,7 +110,7 @@ export class ImageNamingService {
     const usedNames = new Set<string>();
 
     if (recipe.walkthrough) {
-      recipe.walkthrough.forEach(step => {
+      const collect = (step: WalkthroughStep) => {
         if (step.media) {
           step.media.forEach(media => {
             if (media.url && media.url.startsWith('images/')) {
@@ -116,7 +119,15 @@ export class ImageNamingService {
             }
           });
         }
-      });
+      };
+
+      if (isLegacyWalkthrough(recipe.walkthrough)) {
+        (recipe.walkthrough as WalkthroughStep[]).forEach(collect);
+      } else {
+        (recipe.walkthrough as WalkthroughTab[]).forEach(tab => {
+          (tab.steps || []).forEach(collect);
+        });
+      }
     }
 
     return usedNames;

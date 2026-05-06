@@ -1,11 +1,14 @@
-import { RecipeData } from '../models/recipe.model';
+import { RecipeData, isLegacyWalkthrough, WalkthroughStep, WalkthroughTab } from '../models/recipe.model';
 import { RECIPE_PATHS } from '../constants/recipe.constants';
+
+// 2D map: customStepNames[tabIndex][stepIndex] → user-supplied name for Custom steps
+export type CleanRecipeCustomStepNames = { [tabIndex: number]: { [stepIndex: number]: string } };
 
 export interface CleanRecipeOptions {
   removeRuntimeProps?: boolean;
   removeInternalProps?: boolean;
   normalizeImagePaths?: boolean;
-  customStepNames?: { [index: number]: string };
+  customStepNames?: CleanRecipeCustomStepNames;
 }
 
 function deepClone<T>(obj: T): T {
@@ -64,28 +67,38 @@ export function cleanRecipeData(
     delete (cleaned as any).editorState;
   }
 
-  if (cleaned.walkthrough && Array.isArray(cleaned.walkthrough)) {
-    cleaned.walkthrough.forEach((step: any, index: number) => {
+  if (cleaned.walkthrough && Array.isArray(cleaned.walkthrough) && cleaned.walkthrough.length > 0) {
+    // Walk both legacy flat WalkthroughStep[] and new tab-grouped WalkthroughTab[].
+    // For legacy, treat as single tab at index 0 for customStepNames lookup.
+    const cleanStep = (step: WalkthroughStep, tabIndex: number, stepIndex: number) => {
       if (step.media && Array.isArray(step.media)) {
         step.media.forEach((media: any) => {
           if (options.removeRuntimeProps) {
             delete media.displayUrl;
             delete media.imageKey;
           }
-
           if (options.normalizeImagePaths && media.url) {
             media.url = normalizeImageUrl(media.url);
           }
         });
       }
-
       if (options.customStepNames && step.step === 'Custom') {
-        const customName = options.customStepNames[index];
+        const customName = options.customStepNames[tabIndex]?.[stepIndex];
         if (customName) {
           step.step = customName;
         }
       }
-    });
+    };
+
+    if (isLegacyWalkthrough(cleaned.walkthrough)) {
+      (cleaned.walkthrough as WalkthroughStep[]).forEach((step, si) => cleanStep(step, 0, si));
+    } else {
+      (cleaned.walkthrough as WalkthroughTab[]).forEach((tab, ti) => {
+        if (tab.steps && Array.isArray(tab.steps)) {
+          tab.steps.forEach((step, si) => cleanStep(step, ti, si));
+        }
+      });
+    }
   }
 
   if (cleaned.generalImages && Array.isArray(cleaned.generalImages)) {
@@ -121,7 +134,7 @@ export function cleanRecipeForStorage(recipe: RecipeData): RecipeData {
 
 export function cleanRecipeForExport(
   recipe: RecipeData,
-  customStepNames?: { [index: number]: string }
+  customStepNames?: CleanRecipeCustomStepNames
 ): RecipeData {
   return cleanRecipeData(recipe, {
     removeInternalProps: true,

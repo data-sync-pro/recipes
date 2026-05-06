@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import {
   RecipeData,
   WalkthroughStep,
+  WalkthroughTab,
   PrerequisiteRecipe,
   StepMedia,
   StepConfig,
   GeneralImage,
-  normalizeCategory
+  normalizeCategory,
+  isLegacyWalkthrough
 } from '../../core/models/recipe.model';
 import { LoggerService } from '../../core/services/logger.service';
 
@@ -62,7 +64,7 @@ export class ValidationService {
     });
 
     if (recipe.walkthrough && recipe.walkthrough.length > 0) {
-      const stepResults = this.validateWalkthroughSteps(recipe.walkthrough);
+      const stepResults = this.validateWalkthrough(recipe.walkthrough);
       errors.push(...stepResults.errors);
       warnings.push(...stepResults.warnings);
     } else {
@@ -159,7 +161,51 @@ export class ValidationService {
     return validCategories.includes(category);
   }
 
-  private validateWalkthroughSteps(steps: WalkthroughStep[]): {
+  private validateWalkthrough(walkthrough: WalkthroughTab[] | WalkthroughStep[]): {
+    errors: ValidationError[];
+    warnings: ValidationWarning[];
+  } {
+    const errors: ValidationError[] = [];
+    const warnings: ValidationWarning[] = [];
+
+    if (isLegacyWalkthrough(walkthrough)) {
+      const stepResults = this.validateWalkthroughSteps(
+        walkthrough as WalkthroughStep[],
+        'walkthrough'
+      );
+      errors.push(...stepResults.errors);
+      warnings.push(...stepResults.warnings);
+      return { errors, warnings };
+    }
+
+    (walkthrough as WalkthroughTab[]).forEach((tab, tabIndex) => {
+      const tabLabel = `walkthrough[${tabIndex}]`;
+
+      if (!tab.tab || tab.tab.trim() === '') {
+        errors.push({
+          field: `${tabLabel}.tab`,
+          message: `Walkthrough tab ${tabIndex + 1} is missing a name`,
+          severity: 'error'
+        });
+      }
+
+      if (!tab.steps || tab.steps.length === 0) {
+        warnings.push({
+          field: `${tabLabel}.steps`,
+          message: `Walkthrough tab "${tab.tab || tabIndex + 1}" has no steps`
+        });
+        return;
+      }
+
+      const stepResults = this.validateWalkthroughSteps(tab.steps, `${tabLabel}.steps`);
+      errors.push(...stepResults.errors);
+      warnings.push(...stepResults.warnings);
+    });
+
+    return { errors, warnings };
+  }
+
+  private validateWalkthroughSteps(steps: WalkthroughStep[], fieldPrefix: string): {
     errors: ValidationError[];
     warnings: ValidationWarning[];
   } {
@@ -167,7 +213,7 @@ export class ValidationService {
     const warnings: ValidationWarning[] = [];
 
     steps.forEach((step, index) => {
-      const stepLabel = `walkthrough[${index}]`;
+      const stepLabel = `${fieldPrefix}[${index}]`;
 
       if (!step.step || step.step.trim() === '') {
         errors.push({
@@ -178,13 +224,13 @@ export class ValidationService {
       }
 
       if (step.config && step.config.length > 0) {
-        const configResults = this.validateStepConfig(step.config, index);
+        const configResults = this.validateStepConfig(step.config, stepLabel, index);
         errors.push(...configResults.errors);
         warnings.push(...configResults.warnings);
       }
 
       if (step.media && step.media.length > 0) {
-        const mediaResults = this.validateStepMedia(step.media, index);
+        const mediaResults = this.validateStepMedia(step.media, stepLabel, index);
         errors.push(...mediaResults.errors);
         warnings.push(...mediaResults.warnings);
       }
@@ -193,7 +239,7 @@ export class ValidationService {
     return { errors, warnings };
   }
 
-  private validateStepConfig(config: StepConfig[], stepIndex: number): {
+  private validateStepConfig(config: StepConfig[], stepLabel: string, stepIndex: number): {
     errors: ValidationError[];
     warnings: ValidationWarning[];
   } {
@@ -201,7 +247,7 @@ export class ValidationService {
     const warnings: ValidationWarning[] = [];
 
     config.forEach((item, configIndex) => {
-      const fieldLabel = `walkthrough[${stepIndex}].config[${configIndex}]`;
+      const fieldLabel = `${stepLabel}.config[${configIndex}]`;
 
       if (!item.field || item.field.trim() === '') {
         errors.push({
@@ -222,7 +268,7 @@ export class ValidationService {
     return { errors, warnings };
   }
 
-  private validateStepMedia(media: StepMedia[], stepIndex: number): {
+  private validateStepMedia(media: StepMedia[], stepLabel: string, stepIndex: number): {
     errors: ValidationError[];
     warnings: ValidationWarning[];
   } {
@@ -230,7 +276,7 @@ export class ValidationService {
     const warnings: ValidationWarning[] = [];
 
     media.forEach((item, mediaIndex) => {
-      const fieldLabel = `walkthrough[${stepIndex}].media[${mediaIndex}]`;
+      const fieldLabel = `${stepLabel}.media[${mediaIndex}]`;
 
       if (!item.url || item.url.trim() === '') {
         errors.push({

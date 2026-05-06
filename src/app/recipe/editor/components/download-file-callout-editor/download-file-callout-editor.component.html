@@ -1,0 +1,149 @@
+<div class="form-section download-callout-section">
+  <h2>Download File Prerequisites</h2>
+  <p class="section-hint">
+    Information shown next to the downloadable executable: required custom fields,
+    permissions, screenshots etc. Each callout group is rendered as one card on the recipe page.
+  </p>
+
+  <div class="callout-group"
+       *ngFor="let callout of callouts; let ci = index; trackBy: trackByIndex">
+
+    <div class="callout-header">
+      <input type="text"
+             class="dsp-input"
+             [(ngModel)]="callout.type"
+             (input)="onChange()"
+             placeholder="Optional callout type/identifier">
+      <button type="button"
+              class="btn btn-sm btn-danger"
+              (click)="removeCallout(ci)">Remove Callout</button>
+    </div>
+
+    <!-- Sections -->
+    <div class="section-item"
+         *ngFor="let section of callout.sections; let si = index; trackBy: trackByIndex">
+
+      <div class="section-row">
+        <input type="text"
+               class="dsp-input"
+               [(ngModel)]="section.label"
+               (input)="onChange()"
+               placeholder="Section label (e.g. Required Custom Fields)">
+        <button type="button"
+                class="btn btn-sm btn-danger"
+                (click)="removeSection(ci, si)">Remove Section</button>
+      </div>
+
+      <textarea class="dsp-input"
+                rows="2"
+                [(ngModel)]="section.description"
+                (input)="onChange()"
+                placeholder="Optional description shown under the section label"></textarea>
+
+      <!-- Objects -->
+      <div class="objects-block">
+        <label class="block-label">Objects</label>
+
+        <div class="object-item"
+             *ngFor="let obj of section.objects; let oi = index; trackBy: trackByIndex">
+          <div class="object-row">
+            <input type="text"
+                   class="dsp-input"
+                   [(ngModel)]="obj.name"
+                   (input)="onChange()"
+                   placeholder="Object name (e.g. Account)">
+            <select class="dsp-input"
+                    [(ngModel)]="obj.objectType"
+                    (change)="onChange()">
+              <option *ngFor="let t of objectTypes" [value]="t">{{ t }}</option>
+            </select>
+            <button type="button"
+                    class="btn btn-sm btn-danger"
+                    (click)="removeObject(section, oi)">×</button>
+          </div>
+
+          <!-- Fields -->
+          <div class="fields-block">
+            <label class="block-label">Fields</label>
+            <div class="field-row"
+                 *ngFor="let field of obj.fields; let fi = index; trackBy: trackByIndex">
+              <input type="text"
+                     class="dsp-input field-name"
+                     [(ngModel)]="field.name"
+                     (input)="onChange()"
+                     placeholder="Field name">
+              <input type="text"
+                     class="dsp-input field-type"
+                     [(ngModel)]="field.type"
+                     (input)="onChange()"
+                     placeholder="Field type (e.g. Text, Number)">
+              <label class="index-toggle"
+                     [class.active]="isIndexField(obj, field.name)"
+                     [class.disabled]="!field.name">
+                <input type="checkbox"
+                       [checked]="isIndexField(obj, field.name)"
+                       [disabled]="!field.name"
+                       (change)="toggleIndexField(obj, field.name)">
+                Index
+              </label>
+              <button type="button"
+                      class="btn btn-sm btn-danger"
+                      (click)="removeField(obj, fi)">−</button>
+            </div>
+            <button type="button"
+                    class="btn btn-sm btn-secondary"
+                    (click)="addField(obj)">+ Add Field</button>
+          </div>
+
+          <!-- Record Types -->
+          <div class="record-types-block">
+            <label class="block-label">Record Types</label>
+            <div class="record-type-row"
+                 *ngFor="let rt of obj.recordTypes; let ri = index; trackBy: trackByIndex">
+              <input type="text"
+                     class="dsp-input"
+                     [(ngModel)]="rt.label"
+                     (input)="onChange()"
+                     placeholder="Label">
+              <input type="text"
+                     class="dsp-input"
+                     [(ngModel)]="rt.name"
+                     (input)="onChange()"
+                     placeholder="API name">
+              <button type="button"
+                      class="btn btn-sm btn-danger"
+                      (click)="removeRecordType(obj, ri)">−</button>
+            </div>
+            <button type="button"
+                    class="btn btn-sm btn-secondary"
+                    (click)="addRecordType(obj)">+ Add Record Type</button>
+          </div>
+        </div>
+
+        <button type="button"
+                class="btn btn-sm btn-secondary"
+                (click)="addObject(section)">+ Add Object</button>
+      </div>
+
+      <!-- Section Media -->
+      <div class="section-media-block">
+        <label class="block-label">Media (screenshots / GIFs)</label>
+        <app-image-manager
+          [media]="getSectionMedia(section)"
+          [stepIndex]="ci * 100 + si"
+          [recipeId]="recipeId"
+          [recipeCategory]="recipeCategory"
+          (mediaChange)="onChange()">
+        </app-image-manager>
+      </div>
+    </div>
+
+    <button type="button"
+            class="btn btn-sm btn-secondary"
+            (click)="addSection(ci)">+ Add Section</button>
+  </div>
+
+  <button type="button"
+          class="btn btn-secondary"
+          (click)="addCallout()">+ Add Callout Group</button>
+</div>

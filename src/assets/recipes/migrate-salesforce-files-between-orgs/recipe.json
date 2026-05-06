@@ -20,112 +20,127 @@
   "connection": "",
   "walkthrough": [
     {
-      "step": "Current.OrgB.ContentVersion.Insert.FirstPublishLocationId.Account",
-      "config": [],
-      "media": [
+      "tab": "Insert ContentVersion (FirstPart)",
+      "steps": [
         {
-          "type": "image",
-          "url": "images/step-0-image-1777932861502.png",
-          "alt": "f1c73332b52b22ccd374b5e72b119be6"
+          "step": "New Executable",
+          "config": [],
+          "media": [
+            {
+              "type": "image",
+              "url": "images/step-0-image-1777932861502.png",
+              "alt": "f1c73332b52b22ccd374b5e72b119be6"
+            }
+          ]
+        },
+        {
+          "step": "Retrieve",
+          "config": [],
+          "media": [
+            {
+              "type": "image",
+              "url": "images/step-1-image-1777930381449.png",
+              "alt": "Screenshot 2026-05-04 172728"
+            }
+          ]
+        },
+        {
+          "step": "Mapping",
+          "config": [],
+          "media": [
+            {
+              "type": "image",
+              "url": "images/step-3-image-1777930418822.png",
+              "alt": "Screenshot 2026-05-04 172828"
+            }
+          ]
         }
       ]
     },
     {
-      "step": "Retrieve",
-      "config": [],
-      "media": [
+      "tab": "Insert ContentVersion (SecondPart)",
+      "steps": [
         {
-          "type": "image",
-          "url": "images/step-1-image-1777930381449.png",
-          "alt": "Screenshot 2026-05-04 172728"
+          "step": "New Executable",
+          "config": [],
+          "media": [
+            {
+              "type": "image",
+              "url": "images/step-3-image-1777932945779.png",
+              "alt": "6453ad63a321f4aa6d0c50e8491e69b0"
+            }
+          ]
+        },
+        {
+          "step": "Retrieve",
+          "config": [],
+          "media": [
+            {
+              "type": "image",
+              "url": "images/step-4-image-1777933106713.png",
+              "alt": "Screenshot 2026-05-04 181631"
+            }
+          ]
+        },
+        {
+          "step": "Mapping",
+          "config": [],
+          "media": [
+            {
+              "type": "image",
+              "url": "images/step-5-image-1777933112818.png",
+              "alt": "Screenshot 2026-05-04 181655"
+            }
+          ]
         }
       ]
     },
     {
-      "step": "Mapping",
-      "config": [],
-      "media": [
+      "tab": "Insert ContentDocumentLink",
+      "steps": [
         {
-          "type": "image",
-          "url": "images/step-3-image-1777930418822.png",
-          "alt": "Screenshot 2026-05-04 172828"
-        }
-      ]
-    },
-    {
-      "step": "Current.OrgB.ContentVersion.Insert.FirstPublishLocationId.NULL",
-      "config": [],
-      "media": [
+          "step": "New Executable",
+          "config": [],
+          "media": [
+            {
+              "type": "image",
+              "url": "images/step-6-image-1777933132229.png",
+              "alt": "a2f51433a030cc8a33fa0edc68a1d91f"
+            }
+          ]
+        },
         {
-          "type": "image",
-          "url": "images/step-3-image-1777932945779.png",
-          "alt": "6453ad63a321f4aa6d0c50e8491e69b0"
-        }
-      ]
-    },
-    {
-      "step": "Retrieve",
-      "config": [],
-      "media": [
+          "step": "Retrieve",
+          "config": [],
+          "media": [
+            {
+              "type": "image",
+              "url": "images/step-7-image-1777933153235.png",
+              "alt": "Screenshot 2026-05-04 181716"
+            }
+          ]
+        },
         {
-          "type": "image",
-          "url": "images/step-4-image-1777933106713.png",
-          "alt": "Screenshot 2026-05-04 181631"
-        }
-      ]
-    },
-    {
-      "step": "Mapping",
-      "config": [],
-      "media": [
+          "step": "Scoping",
+          "config": [],
+          "media": [
+            {
+              "type": "image",
+              "url": "images/step-8-image-1777933161288.png",
+              "alt": "Screenshot 2026-05-04 181726"
+            }
+          ]
+        },
         {
-          "type": "image",
-          "url": "images/step-5-image-1777933112818.png",
-          "alt": "Screenshot 2026-05-04 181655"
-        }
-      ]
-    },
-    {
-      "step": "Current.OrgB.ContentDocumentLink.Insert.LinkedEntityId.Account",
-      "config": [],
-      "media": [
-        {
-          "type": "image",
-          "url": "images/step-6-image-1777933132229.png",
-          "alt": "a2f51433a030cc8a33fa0edc68a1d91f"
-        }
-      ]
-    },
-    {
-      "step": "Retrieve",
-      "config": [],
-      "media": [
-        {
-          "type": "image",
-          "url": "images/step-7-image-1777933153235.png",
-          "alt": "Screenshot 2026-05-04 181716"
-        }
-      ]
-    },
-    {
-      "step": "Scoping",
-      "config": [],
-      "media": [
-        {
-          "type": "image",
-          "url": "images/step-8-image-1777933161288.png",
-          "alt": "Screenshot 2026-05-04 181726"
-        }
-      ]
-    },
-    {
-      "step": "Mapping",
-      "config": [],
-      "media": [
-        {
-          "type": "image",
-          "url": "images/step-9-image-1777933169543.png",
-          "alt": "Screenshot 2026-05-04 181740"
+          "step": "Mapping",
+          "config": [],
+          "media": [
+            {
+              "type": "image",
+              "url": "images/step-9-image-1777933169543.png",
+              "alt": "Screenshot 2026-05-04 181740"
+            }
+          ]
         }
       ]
     }
@@ -175,7 +190,7 @@
       "sections": [
         {
           "label" :"Required Permission",
-          "description": "The Named Credential's authenticated user in both the Source and Target Orgs must have the \"Query All Files\" permission.",
+          "description": "Ensure that the authenticated user on both the source and target connections has the \"Query All Files\" permission enabled, either through an assigned permission set or their profile.",
           "media": [
             {
               "type": "image",

@@ -15,6 +15,131 @@
     padding-bottom: 0.5rem;
   }
 
+  // Tab switcher
+  .walkthrough-tab-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 1rem 0 1.25rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #dee2e6;
+
+    .walkthrough-tab-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 6px 4px 12px;
+      min-width: 200px;
+      border: 1px solid #ced4da;
+      border-radius: 6px;
+      background-color: #fff;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+
+      &:hover {
+        border-color: #adb5bd;
+      }
+
+      &.active {
+        border-color: #667eea;
+        background-color: #eef0ff;
+
+        .tab-name {
+          color: #2253B2;
+          font-weight: 600;
+        }
+      }
+
+      &.editing {
+        border-color: #667eea;
+        background-color: #fff;
+        box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        padding: 4px 8px;
+      }
+
+      // Read-only label fills the chip so the whole row is a click target
+      .tab-name {
+        flex: 1;
+        font-size: $font-size-content;
+        color: #495057;
+        line-height: 1.4;
+        padding: 2px 0;
+        user-select: none;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      // Inline edit input (only rendered when editing) grows to fill the chip
+      .tab-name-input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        outline: none;
+        padding: 2px 0;
+        min-width: 200px;
+        font-size: $font-size-content;
+        color: #2253B2;
+        font-weight: 600;
+      }
+
+      // Inactive tabs: hide action buttons until hovered to keep the bar clean
+      &:not(.active):not(.editing) .tab-actions,
+      &:not(.active):not(.editing) .tab-edit-btn {
+        opacity: 0;
+        transition: opacity 0.12s ease;
+        pointer-events: none;
+      }
+
+      &:not(.active):hover .tab-actions,
+      &:not(.active):hover .tab-edit-btn {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .tab-actions {
+        display: flex;
+        gap: 2px;
+      }
+
+      .tab-action-btn {
+        appearance: none;
+        background: transparent;
+        border: none;
+        border-radius: 4px;
+        color: #6c757d;
+        cursor: pointer;
+        padding: 0 6px;
+        font-size: 0.875rem;
+        line-height: 1.4;
+
+        &:hover:not(:disabled) {
+          background-color: rgba(102, 126, 234, 0.15);
+          color: #2253B2;
+        }
+
+        &:disabled {
+          opacity: 0.35;
+          cursor: not-allowed;
+        }
+
+        &.tab-remove-btn:hover:not(:disabled) {
+          background-color: rgba(220, 53, 69, 0.15);
+          color: #dc3545;
+        }
+
+        &.tab-edit-btn {
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+    .add-tab-btn {
+      margin-left: auto;
+    }
+  }
+
   .step-item {
     background-color: white;
     padding: 1.5rem;

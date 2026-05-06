@@ -15,7 +15,9 @@ export interface RecipeData {
   pipeline: string;
   direction: string;
   connection: string;
-  walkthrough: WalkthroughStep[];
+  // Source data may use either the legacy flat WalkthroughStep[] (older recipes)
+  // or the new tab-grouped WalkthroughTab[] format. TransformService normalizes.
+  walkthrough: WalkthroughTab[] | WalkthroughStep[];
   verificationGIF: VerificationGIF[];
   downloadableExecutables: DownloadableExecutable[];
   downloadFileCallout?: DownloadFileCallout[];
@@ -39,7 +41,8 @@ export interface Recipe {
   pipeline: string,
   direction: string;
   connection: string;
-  walkthrough: WalkthroughStep[];
+  // Always normalized to WalkthroughTab[] at runtime
+  walkthrough: WalkthroughTab[];
   verificationGIF: VerificationGIF[];
   downloadableExecutables: DownloadableExecutable[];
   downloadFileCallout?: DownloadFileCallout[];
@@ -91,6 +94,41 @@ export interface WalkthroughStep {
   step: string;
   config: StepConfig[];
   media: StepMedia[];
+}
+
+/**
+ * Walkthrough tab grouping multiple steps (new top-level structure).
+ * The runtime always normalizes walkthrough into an array of these.
+ */
+export interface WalkthroughTab {
+  tab: string;
+  steps: WalkthroughStep[];
+}
+
+/**
+ * Detect the legacy flat WalkthroughStep[] format. Old recipes have items with
+ * a `step` field but no `steps` field; new format uses `tab` + `steps`.
+ */
+export function isLegacyWalkthrough(
+  arr: WalkthroughTab[] | WalkthroughStep[] | undefined | null
+): arr is WalkthroughStep[] {
+  if (!arr || arr.length === 0) return false;
+  const first = arr[0] as any;
+  return first && typeof first.step === 'string' && !Array.isArray(first.steps);
+}
+
+/**
+ * Always return a WalkthroughTab[]. Legacy flat arrays are wrapped into a single
+ * default tab so callers never have to branch.
+ */
+export function normalizeWalkthrough(
+  arr: WalkthroughTab[] | WalkthroughStep[] | undefined | null
+): WalkthroughTab[] {
+  if (!arr || arr.length === 0) return [];
+  if (isLegacyWalkthrough(arr)) {
+    return [{ tab: 'Walkthrough', steps: arr }];
+  }
+  return arr as WalkthroughTab[];
 }
 
 /**

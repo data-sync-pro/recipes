@@ -4,7 +4,7 @@ import { debounceTime } from 'rxjs/operators';
 import { RecipeData, normalizeCategory } from '../../core/models/recipe.model';
 import { PreviewService } from '../../core/services/preview.service';
 import { LoggerService } from '../../core/services/logger.service';
-import { cleanRecipeForExport } from '../../core/utils';
+import { cleanRecipeForExport, CleanRecipeCustomStepNames } from '../../core/utils';
 
 /**
  * Recipe Preview Coordinator Service
@@ -28,7 +28,7 @@ export class PreviewCoordinatorService {
    */
   private previewUpdateSubject = new Subject<{
     recipe: RecipeData;
-    customStepNames: {[index: number]: string};
+    customStepNames: CleanRecipeCustomStepNames;
   }>();
 
   constructor(
@@ -61,7 +61,7 @@ export class PreviewCoordinatorService {
    */
   triggerPreviewUpdate(
     recipe: RecipeData,
-    customStepNames: {[index: number]: string}
+    customStepNames: CleanRecipeCustomStepNames
   ): void {
     this.previewUpdateSubject.next({ recipe, customStepNames });
   }
@@ -74,7 +74,7 @@ export class PreviewCoordinatorService {
    */
   private updatePreview(
     recipe: RecipeData,
-    customStepNames: {[index: number]: string}
+    customStepNames: CleanRecipeCustomStepNames
   ): void {
     try {
       // Clean recipe for preview
@@ -106,7 +106,7 @@ export class PreviewCoordinatorService {
    */
   generateJsonPreview(
     recipe: RecipeData,
-    customStepNames: {[index: number]: string}
+    customStepNames: CleanRecipeCustomStepNames
   ): string {
     try {
       // Clean recipe and convert to JSON
@@ -129,7 +129,7 @@ export class PreviewCoordinatorService {
    */
   triggerCrossTabPreviewUpdate(
     recipe: RecipeData,
-    customStepNames: {[index: number]: string}
+    customStepNames: CleanRecipeCustomStepNames
   ): void {
     try {
       // Clean recipe for preview
@@ -160,7 +160,7 @@ export class PreviewCoordinatorService {
    */
   openPreviewInNewTab(
     recipe: RecipeData,
-    customStepNames: {[index: number]: string}
+    customStepNames: CleanRecipeCustomStepNames
   ): void {
     try {
       // Clean recipe and store for preview
