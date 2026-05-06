@@ -7,7 +7,7 @@
       <div class="prereqs-fields" *ngIf="section.inlineCustomFields.length">
         <div class="prereqs-field" *ngFor="let field of section.inlineCustomFields">
           <code class="prereqs-field-name">{{ field.name }}</code>
-          <span class="prereqs-field-type">{{ field.type }}</span>
+          <span class="prereqs-field-type">{{ field.type }}<ng-container *ngIf="field.length">({{ field.length }})</ng-container></span>
           <span class="prereqs-field-index" *ngIf="field.isIndex">Index</span>
         </div>
       </div>
@@ -20,7 +20,7 @@
         <div class="prereqs-fields" *ngIf="obj.fields?.length">
           <div class="prereqs-field" *ngFor="let field of obj.fields">
             <code class="prereqs-field-name">{{ field.name }}</code>
-            <span class="prereqs-field-type">{{ field.type }}</span>
+            <span class="prereqs-field-type">{{ field.type }}<ng-container *ngIf="field.length">({{ field.length }})</ng-container></span>
             <span class="prereqs-field-index" *ngIf="obj.indexFields?.includes(field.name)">Index</span>
           </div>
         </div>

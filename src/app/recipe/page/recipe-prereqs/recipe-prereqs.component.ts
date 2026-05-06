@@ -15,6 +15,7 @@ import {
 interface InlineCustomField {
   name: string;
   type: string;
+  length?: number;
   isIndex: boolean;
 }
 
@@ -57,6 +58,7 @@ export class RecipePrereqsComponent {
           inlineCustomFields.push({
             name: this.isCustomField(field.name) ? `${obj.name}.${field.name}` : field.name,
             type: field.type,
+            length: field.length,
             isIndex: !!obj.indexFields?.includes(field.name)
           });
         }

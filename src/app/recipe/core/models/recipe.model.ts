@@ -203,6 +203,7 @@ export interface PrereqObject {
 export interface PrereqField {
   name: string;
   type: string;
+  length?: number;
 }
 
 export interface PrereqRecordType {
