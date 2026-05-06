@@ -115,18 +115,18 @@
               "objectType": "Big Object",
               "indexFields": ["RecordID__c"],
               "fields": [
-                { "name": "RecordID__c", "type": "Text" },
-                { "name": "CaseNumber__c", "type": "Text" },
+                { "name": "RecordID__c", "type": "Text", "length": 100 },
+                { "name": "CaseNumber__c", "type": "Text", "length": 255 },
                 { "name": "ClosedDate__c", "type": "DateTime" },
                 { "name": "CreatedDate__c", "type": "DateTime" },
-                { "name": "ContactEmail__c", "type": "Email" },
-                { "name": "Priority__c", "type": "Text" },
-                { "name": "Status__c", "type": "Text" },
-                { "name": "Subject__c", "type": "Text" },
-                { "name": "Description__c", "type": "Long Text Area" },
-                { "name": "AccountID__c", "type": "Text" },
-                { "name": "ContactID__c", "type": "Text" },
-                { "name": "OwnerID__c", "type": "Text" }
+                { "name": "ContactEmail__c", "type": "Email", "length": 80 },
+                { "name": "Priority__c", "type": "Text", "length": 100 },
+                { "name": "Status__c", "type": "Text", "length": 100 },
+                { "name": "Subject__c", "type": "Text", "length": 100 },
+                { "name": "Description__c", "type": "Long Text Area", "length": 32768 },
+                { "name": "AccountID__c", "type": "Text", "length": 100 },
+                { "name": "ContactID__c", "type": "Text", "length": 100 },
+                { "name": "OwnerID__c", "type": "Text", "length": 100 }
               ]
             }
           ]
