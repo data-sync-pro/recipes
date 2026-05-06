@@ -1,0 +1,23 @@
+<p>
+  Both Preview and Retrieve run a SOQL query to fetch source data, but they
+  serve different roles:
+</p>
+<ul>
+  <li>
+    <p>
+      <strong>Retrieve</strong> (used in #Batch and #Data List) defines which
+      records are processed or displayed during execution.
+    </p>
+  </li>
+  <li>
+    <p>
+      <strong>Preview</strong> (used in #Triggers and #Action Buttons) does not
+      affect input data; instead, it lets you inspect source records and their
+      transformed values before execution.
+    </p>
+  </li>
+</ul>
+<p>
+  In short, Retrieve controls the records that run, while Preview helps you
+  validate data and transformations without changing the input.
+</p>

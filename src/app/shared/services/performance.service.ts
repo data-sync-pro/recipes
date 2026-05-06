@@ -171,10 +171,11 @@ export class PerformanceService {
       const resourceObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         entries.forEach((entry: any) => {
-          // Track FAQ-related resources
-          if (entry.name.includes('/assets/faq-item/') || entry.name.includes('faqs.json')) {
+          // Track FAQ-related resources. Index loads count as list render time;
+          // per-FAQ faq.json or answer.html count as content load time.
+          if (entry.name.includes('/assets/faqs/')) {
             const loadTime = entry.responseEnd - entry.startTime;
-            if (entry.name.includes('faqs.json')) {
+            if (entry.name.endsWith('/index.json')) {
               this.updateMetric('faqListRenderTime', loadTime);
             } else {
               this.updateMetric('faqContentLoadTime', loadTime);

@@ -766,7 +766,7 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private loadOriginalContent(faq: FAQItem): void {
     // Load raw HTML content for editing (minimal processing)
-    this.loadRawHTMLForEditing(faq.answerPath)
+    this.loadRawHTMLForEditing(faq.folderId)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (rawHtmlContent) => {
@@ -1079,12 +1079,12 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
    * This shows what users will actually see on the FAQ pages
    */
   private updatePreviewFromFAQService(faq: FAQItem): void {
-    if (!faq || !faq.answerPath) {
+    if (!faq || !faq.folderId) {
       this.updatePreview(); // Fallback to simple preview
       return;
     }
 
-    this.faqService.getFAQContent(faq.answerPath)
+    this.faqService.getFAQContent(faq.folderId)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (processedContent) => {
@@ -1311,10 +1311,9 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
   private createDefaultTab(): void {
     const newFAQ: FAQItem & { isNew?: boolean } = {
       id: this.generateUUID(),
-      name: `new-faq-${Date.now()}`,
       question: 'New FAQ Question',
       category: this.categories.length > 0 ? this.categories[0] : 'General',
-      answerPath: '',
+      folderId: '',
       answer: '',
       isNew: true
     };
@@ -1518,11 +1517,10 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
       // This is a new FAQ - create a mock FAQItem for loading
       const mockFAQItem: FAQItem = {
         id: editedFAQ.faqId,
-        name: editedFAQ.faqId,
         question: editedFAQ.question,
         category: editedFAQ.category,
         subCategory: editedFAQ.subCategory || undefined,
-        answerPath: '',
+        folderId: '',
         answer: ''
       };
       
@@ -1550,8 +1548,11 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
    * Load raw HTML content for editing - completely preserve source file
    */
-  private loadRawHTMLForEditing(answerPath: string): Observable<string> {
-    const fullPath = `assets/faq-item/${answerPath}`;
+  private loadRawHTMLForEditing(folderId: string): Observable<string> {
+    if (!folderId) {
+      return of('');
+    }
+    const fullPath = `assets/faqs/${folderId}/answer.html`;
     return this.http.get(fullPath, { responseType: 'text' }).pipe(
       map((content: string) => {
         // Return exactly as-is - NO processing whatsoever
@@ -2255,10 +2256,9 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
   createNewTab(): void {
     const newFAQ: FAQItem & { isNew?: boolean } = {
       id: this.generateUUID(),
-      name: `new-faq-${Date.now()}`,
       question: 'New FAQ Question',
       category: this.categories.length > 0 ? this.categories[0] : 'General',
-      answerPath: '',
+      folderId: '',
       answer: '',
       isNew: true
     };
@@ -2476,7 +2476,7 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
    * Load original content for a tab
    */
   private loadOriginalContentForTab(tab: FAQTab): void {
-    this.loadRawHTMLForEditing(tab.faq.answerPath)
+    this.loadRawHTMLForEditing(tab.faq.folderId)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (rawHtmlContent) => {
@@ -2831,31 +2831,32 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
-   * Generate image reference path using answerPath prefix for consistent naming
+   * Generate image reference path. The folderId is the canonical FAQ slug
+   * and is also the folder name on disk under assets/faqs/.
    */
   private generateImageReference(file: File): string {
     if (!this.state.selectedFAQ) {
       throw new Error('No FAQ selected');
     }
 
-    let filePrefix: string;
-    
-    // Use answerPath prefix if available (for existing FAQs)
-    if (this.state.selectedFAQ.answerPath) {
-      filePrefix = this.getAnswerPathPrefix(this.state.selectedFAQ.answerPath);
+    let folderId: string;
+
+    // Use folderId if available (for existing FAQs)
+    if (this.state.selectedFAQ.folderId) {
+      folderId = this.state.selectedFAQ.folderId;
     } else {
-      // For new FAQs without answerPath, generate from question title
+      // For new FAQs without a folderId yet, derive from question title
       const questionTitle = this.currentQuestion || this.state.selectedFAQ.question;
       if (!questionTitle || !questionTitle.trim()) {
         throw new Error('FAQ question title is required for image naming');
       }
-      filePrefix = this.generateSlugFromTitle(questionTitle);
+      folderId = this.generateSlugFromTitle(questionTitle);
     }
 
     const fileExtension = this.getFileExtension(file.name);
-    const sequence = this.getNextImageSequence(filePrefix);
-    
-    return `assets/image/${filePrefix}/${filePrefix}-${sequence}.${fileExtension}`;
+    const sequence = this.getNextImageSequence(folderId);
+
+    return `assets/faqs/${folderId}/images/${folderId}-${sequence}.${fileExtension}`;
   }
 
   /**
@@ -2880,31 +2881,21 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
-   * Get the prefix from answerPath by removing .html extension
+   * Get next available image sequence number for the given FAQ folderId.
+   * Looks at existing temp images stored under assets/faqs/<folderId>/images/.
    */
-  private getAnswerPathPrefix(answerPath: string): string {
-    if (!answerPath) return '';
-    // Remove .html extension (case insensitive) to get the prefix
-    return answerPath.replace(/\.html$/i, '');
-  }
-
-  /**
-   * Get next available image sequence number for current FAQ using file prefix
-   */
-  private getNextImageSequence(filePrefix: string): number {
+  private getNextImageSequence(folderId: string): number {
     let maxSequence = 0;
-    
-    // Check existing temporary images for this file prefix
+
+    const seqRegex = new RegExp(`/${folderId}/images/${folderId}-(\\d+)\\.`);
     for (const path of this.tempImageMap.keys()) {
-      if (path.includes(`/${filePrefix}/${filePrefix}-`)) {
-        const match = path.match(new RegExp(`/${filePrefix}/${filePrefix}-(\\d+)\\.`));
-        if (match) {
-          const sequence = parseInt(match[1], 10);
-          maxSequence = Math.max(maxSequence, sequence);
-        }
+      const match = path.match(seqRegex);
+      if (match) {
+        const sequence = parseInt(match[1], 10);
+        maxSequence = Math.max(maxSequence, sequence);
       }
     }
-    
+
     return maxSequence + 1;
   }
 

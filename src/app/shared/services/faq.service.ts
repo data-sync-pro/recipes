@@ -8,7 +8,7 @@ import { AutoLinkService } from './auto-link.service';
 import { getFAQUrlByKey } from '../config/faq-urls.config';
 
 import {
-  SourceFAQRecord,
+  FAQMetadata,
   FAQItem,
   FAQCategory,
   FAQSubCategory,
@@ -22,8 +22,8 @@ import {
   providedIn: 'root'
 })
 export class FAQService implements OnDestroy {
-  private readonly FAQ_DATA_URL = 'assets/data/faqs.json';
-  private readonly FAQ_CONTENT_BASE = 'assets/faq-item/';
+  private readonly FAQ_INDEX_URL = 'assets/faqs/faqs.json';
+  private readonly FAQ_FOLDERS_BASE = 'assets/faqs/';
   private readonly VERSION_URL = 'assets/data/version.json';
   
   // Cache
@@ -162,12 +162,12 @@ export class FAQService implements OnDestroy {
   /**
    * Save content to local storage
    */
-  private saveToLocalStorage(answerPath: string, content: string): void {
+  private saveToLocalStorage(folderId: string, content: string): void {
     try {
       const existingCache = localStorage.getItem(this.STORAGE_KEY_FAQ_CONTENT);
       const cache = existingCache ? JSON.parse(existingCache) : {};
-      
-      cache[answerPath] = {
+
+      cache[folderId] = {
         content,
         timestamp: Date.now()
       };
@@ -223,8 +223,8 @@ export class FAQService implements OnDestroy {
       map(faqs => faqs.filter(faq => popularFaqIds.includes(faq.id))),
       tap(popularFaqs => {
         popularFaqs.forEach(faq => {
-          if (faq.answerPath && !this.contentCache.has(faq.answerPath)) {
-            this.preloadContent(faq.answerPath);
+          if (faq.folderId && !this.contentCache.has(faq.folderId)) {
+            this.preloadContent(faq.folderId);
           }
         });
       })
@@ -241,10 +241,10 @@ export class FAQService implements OnDestroy {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               const faqId = entry.target.getAttribute('data-faq-id');
-              const answerPath = entry.target.getAttribute('data-answer-path');
-              
-              if (faqId && answerPath && !this.contentCache.has(answerPath)) {
-                this.preloadContent(answerPath);
+              const folderId = entry.target.getAttribute('data-folder-id');
+
+              if (faqId && folderId && !this.contentCache.has(folderId)) {
+                this.preloadContent(folderId);
               }
             }
           });
@@ -260,10 +260,10 @@ export class FAQService implements OnDestroy {
   /**
    * Observe FAQ element for preloading
    */
-  observeForPreloading(element: Element, faqId: string, answerPath: string): void {
-    if (this.intersectionObserver && answerPath && !this.contentCache.has(answerPath)) {
+  observeForPreloading(element: Element, faqId: string, folderId: string): void {
+    if (this.intersectionObserver && folderId && !this.contentCache.has(folderId)) {
       element.setAttribute('data-faq-id', faqId);
-      element.setAttribute('data-answer-path', answerPath);
+      element.setAttribute('data-folder-id', folderId);
       this.intersectionObserver.observe(element);
     }
   }
@@ -280,22 +280,22 @@ export class FAQService implements OnDestroy {
   /**
    * Preload FAQ content in background
    */
-  private preloadContent(answerPath: string): void {
-    if (this.preloadingQueue.has(answerPath) || this.contentCache.has(answerPath)) {
+  private preloadContent(folderId: string): void {
+    if (this.preloadingQueue.has(folderId) || this.contentCache.has(folderId)) {
       return;
     }
 
-    this.preloadingQueue.add(answerPath);
-    
-    const fullPath = `${this.FAQ_CONTENT_BASE}${answerPath}`;
+    this.preloadingQueue.add(folderId);
+
+    const fullPath = this.buildAnswerUrl(folderId);
     this.http.get(fullPath, { responseType: 'text' }).pipe(
       map(content => {
-        const processedContent = this.processContent(content);
+        const processedContent = this.processContent(content, folderId);
         const safeContent = this.sanitizer.bypassSecurityTrustHtml(processedContent);
-        
-        // Save to local storage for future use
-        this.saveToLocalStorage(answerPath, processedContent);
-        
+
+        // Save raw content to local storage for future use
+        this.saveToLocalStorage(folderId, content);
+
         return safeContent;
       }),
       catchError(error => {
@@ -303,11 +303,15 @@ export class FAQService implements OnDestroy {
         return of(null);
       })
     ).subscribe(safeContent => {
-      this.preloadingQueue.delete(answerPath);
+      this.preloadingQueue.delete(folderId);
       if (safeContent) {
-        this.contentCache.set(answerPath, safeContent);
+        this.contentCache.set(folderId, safeContent);
       }
     });
+  }
+
+  private buildAnswerUrl(folderId: string): string {
+    return `${this.FAQ_FOLDERS_BASE}${folderId}/answer.html`;
   }
 
   /**
@@ -321,13 +325,26 @@ export class FAQService implements OnDestroy {
    * Get all FAQs including inactive ones for editor use
    */
   getAllFAQsForEditor(): Observable<FAQItem[]> {
-    return this.http.get<SourceFAQRecord[]>(this.FAQ_DATA_URL).pipe(
-      map(records => records
-        .map(record => this.transformToFAQItem(record))
-      ),
+    return this.fetchAllFAQItems(/* includeInactive */ true).pipe(
       catchError(error => {
         console.error('Failed to load FAQ data for editor', error);
         return of([]);
+      })
+    );
+  }
+
+  /**
+   * Single GET of assets/faqs/faqs.json — returns the full metadata list.
+   * @param includeInactive when true, returns all entries; when false, only active.
+   */
+  private fetchAllFAQItems(includeInactive: boolean): Observable<FAQItem[]> {
+    return this.http.get<{ faqs: FAQMetadata[] }>(this.FAQ_INDEX_URL).pipe(
+      map(idx => {
+        const entries = Array.isArray(idx?.faqs) ? idx.faqs : [];
+        const filtered = includeInactive
+          ? entries
+          : entries.filter(e => e.isActive !== false);
+        return filtered.map(meta => this.transformToFAQItem(meta));
       })
     );
   }
@@ -438,14 +455,14 @@ export class FAQService implements OnDestroy {
   /**
 
    */
-  getFAQContent(answerPath: string): Observable<SafeHtml> {
-    if (!answerPath) {
-      console.warn('FAQ content requested with empty answerPath');
+  getFAQContent(folderId: string): Observable<SafeHtml> {
+    if (!folderId) {
+      console.warn('FAQ content requested with empty folderId');
       return of(this.sanitizer.bypassSecurityTrustHtml('<p class="error-message">Content path not specified</p>'));
     }
 
     // Check memory cache first - but always reprocess for auto-links if terms are loaded
-    if (this.contentCache.has(answerPath)) {
+    if (this.contentCache.has(folderId)) {
 
       // If auto-link terms are loaded, we need to reprocess the cached content
       if (this.autoLinkService.isLoaded()) {
@@ -454,14 +471,14 @@ export class FAQService implements OnDestroy {
           const cachedContent = localStorage.getItem(this.STORAGE_KEY_FAQ_CONTENT);
           if (cachedContent) {
             const parsedCache = JSON.parse(cachedContent);
-            const cacheEntry = parsedCache[answerPath];
-            
+            const cacheEntry = parsedCache[folderId];
+
             if (cacheEntry && this.isCacheValid(cacheEntry.timestamp)) {
-              const processedContent = this.processContent(cacheEntry.content);
+              const processedContent = this.processContent(cacheEntry.content, folderId);
               const safeContent = this.sanitizer.bypassSecurityTrustHtml(processedContent);
-              
+
               // Update memory cache with processed content
-              this.contentCache.set(answerPath, safeContent);
+              this.contentCache.set(folderId, safeContent);
               return of(safeContent);
             }
           }
@@ -469,27 +486,27 @@ export class FAQService implements OnDestroy {
           console.warn('Failed to reprocess cached content:', error);
         }
       }
-      
+
       // Return cached content if no reprocessing needed
-      return of(this.contentCache.get(answerPath)!);
+      return of(this.contentCache.get(folderId)!);
     }
 
     const startTime = performance.now();
-    const fullPath = `${this.FAQ_CONTENT_BASE}${answerPath}`;
-    
+    const fullPath = this.buildAnswerUrl(folderId);
+
     return this.http.get(fullPath, { responseType: 'text' }).pipe(
       map(content => {
-        const processedContent = this.processContent(content);
+        const processedContent = this.processContent(content, folderId);
         const safeContent = this.sanitizer.bypassSecurityTrustHtml(processedContent);
 
         // Cache content in memory and local storage
-        this.contentCache.set(answerPath, safeContent);
-        this.saveToLocalStorage(answerPath, content); // Save raw content to local storage
-        
+        this.contentCache.set(folderId, safeContent);
+        this.saveToLocalStorage(folderId, content); // Save raw content to local storage
+
         // Track performance
         const loadTime = performance.now() - startTime;
         this.performanceService.trackCustomMetric('faqContentLoadTime', loadTime);
-        
+
         return safeContent;
       }),
       catchError(error => {
@@ -640,7 +657,7 @@ export class FAQService implements OnDestroy {
     if (!faq) {
       return of(this.sanitizer.bypassSecurityTrustHtml('<p>FAQ not found</p>'));
     }
-    return this.getFAQContent(faq.answerPath);
+    return this.getFAQContent(faq.folderId);
   }
 
   /**
@@ -704,16 +721,11 @@ export class FAQService implements OnDestroy {
   reloadFAQs(): Observable<FAQItem[]> {
     this.categoriesCache = [];
     this.clearContentCache();
-    
+
     // Return the actual HTTP request Observable, not the current cache
     this.isLoading = true;
-    
-    return this.http.get<SourceFAQRecord[]>(this.FAQ_DATA_URL).pipe(
-      map(records => {
-        const activeRecords = records.filter(record => record.isActive !== false);
-        const transformedFAQs = activeRecords.map(record => this.transformToFAQItem(record));
-        return transformedFAQs;
-      }),
+
+    return this.fetchAllFAQItems(/* includeInactive */ false).pipe(
       tap(faqs => {
         this.faqsCache$.next(faqs);
       }),
@@ -732,13 +744,9 @@ export class FAQService implements OnDestroy {
    */
   private loadFAQs(): void {
     if (this.isLoading) return;
-    
+
     this.isLoading = true;
-    this.http.get<SourceFAQRecord[]>(this.FAQ_DATA_URL).pipe(
-      map(records => records
-        .filter(record => record.isActive !== false) // Filter out inactive FAQs
-        .map(record => this.transformToFAQItem(record))
-      ),
+    this.fetchAllFAQItems(/* includeInactive */ false).pipe(
       catchError(error => {
         console.error('Failed to load FAQ data', error);
         return of([]);
@@ -750,26 +758,27 @@ export class FAQService implements OnDestroy {
   }
 
   /**
-   * Private method: Transform raw data to FAQ item
+   * Private method: Transform a FAQMetadata entry into a runtime FAQItem.
    */
-  private transformToFAQItem(record: SourceFAQRecord): FAQItem {
+  private transformToFAQItem(meta: FAQMetadata): FAQItem {
+    const category = meta.category || '';
+    const subCategory = meta.subCategory ?? null;
     return {
-      id: record.Id,
-      question: record.Question__c || '',
+      id: meta.id,
+      seqNo: meta.seqNo ?? null,
+      question: meta.question || '',
       answer: '',
-      answerPath: record.Answer__c || '',
-      category: record.Category__c || '',
-      subCategory: record.SubCategory__c,
+      folderId: meta.folderId,
+      category,
+      subCategory,
       isExpanded: false,
       userRating: null,
       viewCount: 0,
       isPopular: false,
       isLoading: false,
-      tags: record.SubCategory__c ?
-        [record.Category__c, record.SubCategory__c] :
-        [record.Category__c],
+      tags: subCategory ? [category, subCategory] : [category],
       lastUpdated: new Date(),
-      isActive: record.isActive !== false // Default to true if not specified
+      isActive: meta.isActive !== false
     };
   }
 
@@ -800,17 +809,18 @@ export class FAQService implements OnDestroy {
   }
 
   /**
-   * Create responsive image with proper error handling
+   * Create responsive image with proper error handling.
+   * @param folderId  The owning FAQ's folder. Used to resolve relative paths
+   *                  like "images/foo.jpg" to "assets/faqs/<folderId>/images/foo.jpg".
    */
-  private createResponsiveImage(src: string, attrs: string): string {
+  private createResponsiveImage(src: string, attrs: string, folderId?: string): string {
     // Extract alt text
     const altMatch = attrs.match(/alt="([^"]*)"/);
     const alt = altMatch ? altMatch[1] : 'FAQ Image';
-    
+
     // Normalize the image source URL
     let normalizedSrc = src;
-    
-    // Handle different URL patterns
+
     if (src.startsWith('http') || src.startsWith('//')) {
       // External URL - use as is
       normalizedSrc = src;
@@ -818,17 +828,21 @@ export class FAQService implements OnDestroy {
       // Absolute path - use as is
       normalizedSrc = src;
     } else if (src.startsWith('assets/')) {
-      // Already correctly formatted - ensure proper path
+      // Already a fully qualified asset path - use as is
       normalizedSrc = src;
+    } else if (folderId) {
+      // Relative path inside a FAQ folder (e.g. "images/foo.jpg") — resolve
+      // against the owning FAQ's folder.
+      normalizedSrc = `${this.FAQ_FOLDERS_BASE}${folderId}/${src.replace(/^\.?\//, '')}`;
     } else {
-      // Relative path - ensure it starts with assets/
-      normalizedSrc = `assets/${src}`;
+      // Fallback: prepend assets/ to avoid broken paths.
+      normalizedSrc = `assets/${src.replace(/^\.?\//, '')}`;
     }
 
     // Create container with comprehensive error handling
     return `<div class="faq-picture">
-      <img 
-        src="${normalizedSrc}" 
+      <img
+        src="${normalizedSrc}"
         alt="${alt}"
         class="faq-image"
         style="display: block; margin: 20px auto; max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;"
@@ -839,9 +853,10 @@ export class FAQService implements OnDestroy {
   }
 
   /**
-   * Private method: Processes FAQ content
+   * Private method: Processes FAQ content. The owning folderId is used to
+   * resolve relative image paths inside the answer HTML.
    */
-  private processContent(content: string): string {
+  private processContent(content: string, folderId?: string): string {
     
     let processedContent = content
       // Remove empty p tags but preserve content structure
@@ -892,7 +907,7 @@ export class FAQService implements OnDestroy {
           </div>`;
         }
 
-        return this.createResponsiveImage(originalSrc, attrs);
+        return this.createResponsiveImage(originalSrc, attrs, folderId);
       });
       
     // Apply auto-link terms after all other processing

@@ -1,0 +1,1525 @@
+{
+  "faqs": [
+    {
+      "id": "a0oEc000005JoiQIAS",
+      "folderId": "action-button-benefits-of-grouping-into-pipeline",
+      "question": "What are the benefits of grouping multiple #Action Buttons into a Pipeline?",
+      "category": "Rules Engines",
+      "subCategory": "Action Button",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JoiOIAS",
+      "folderId": "action-button-can-prompt-confirmation",
+      "question": "Can I prompt users for confirmation before executing an action?",
+      "category": "Rules Engines",
+      "subCategory": "Action Button",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JoiSIAS",
+      "folderId": "action-button-permissions-needed",
+      "question": "What permissions are needed to use a #Action Button?",
+      "category": "Rules Engines",
+      "subCategory": "Action Button",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohwIAC",
+      "folderId": "advantages-of-blank-update-with-trigger",
+      "question": "What are the advantages of pairing a blank update batch with a self-adaptive trigger?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JoiCIAS",
+      "folderId": "advantages-of-custom-new-record-action",
+      "question": "What advantages does a custom 'New Record' action have over the default in a #Data List?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "8599ed44-d1a0-43de-b90e-22f64d5c06dc",
+      "folderId": "apex-batch-class-splitting-performance-guide",
+      "question": "Does splitting an Apex batch class with multiple actions into multiple batch Executables slow performance a lot?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohgIAC",
+      "folderId": "batch-permissions-required-to-execute",
+      "question": "What permissions are required to execute a #Batch?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohvIAC",
+      "folderId": "best-way-to-implement-complex-job",
+      "question": "How should I structure a complex Batch job with multiple actions?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohnIAC",
+      "folderId": "best-way-to-sync-parent-child-relationships",
+      "question": "How do I easily create Batch Executables for parent–child data syncs?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohmIAC",
+      "folderId": "can-apply-common-soql-filter-to-pipeline",
+      "question": "Can I apply a common SOQL filter to all Executables in a Pipeline?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoidIAC",
+      "folderId": "can-fail-on-missing-column",
+      "question": "Can I make a load fail if a column is missing from the source file?",
+      "category": "Rules Engines",
+      "subCategory": "Data Loader",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojiIAC",
+      "folderId": "can-formulas-be-nested",
+      "question": "Can formulas be nested?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Jok1IAC",
+      "folderId": "can-include-deleted-records",
+      "question": "Can I include deleted records from the Recycle Bin in my query?",
+      "category": "Query Manager",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JoiVIAS",
+      "folderId": "can-load-to-another-org",
+      "question": "Can I use #Data Loader to load data into another Salesforce org?",
+      "category": "Rules Engines",
+      "subCategory": "Data Loader",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojGIAS",
+      "folderId": "can-match-on-relational-field",
+      "question": "Can I match target records based on a relational field?",
+      "category": "Processes",
+      "subCategory": "Match",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiFIAS",
+      "folderId": "can-open-records-in-lightning-page",
+      "question": "Can I choose to open records in the Lightning record page instead of raw view?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JohlIAC",
+      "folderId": "can-pipeline-stop-on-executable-failure",
+      "question": "Can a Pipeline execution be stopped if one of its Executables fails?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Jok2IAC",
+      "folderId": "can-restore-deleted-records",
+      "question": "Can I use the Query component to restore deleted records from the Recycle Bin?",
+      "category": "Query Manager",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojXIAS",
+      "folderId": "can-skip-update-if-blank",
+      "question": "Can I skip a field update if the transformed value is blank?",
+      "category": "Processes",
+      "subCategory": "Action",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojWIAS",
+      "folderId": "can-skip-update-if-value-exists",
+      "question": "Can I skip updating a field if the target already has a value?",
+      "category": "Processes",
+      "subCategory": "Action",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Joi7IAC",
+      "folderId": "can-specify-action-scope",
+      "question": "Can I specify whether an action should be a List Action, a Row Action, or both?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005Joi8IAC",
+      "folderId": "can-users-review-edit-before-execution",
+      "question": "Can users review and edit transformed values before executing an action?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JohcIAC",
+      "folderId": "common-use-cases",
+      "question": "What are the common use cases for #Batch?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojeIAC",
+      "folderId": "considerations-with-bulk-api",
+      "question": "What should I keep in mind when using Verify with Action to Bulk API enabled?",
+      "category": "Processes",
+      "subCategory": "Verify",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Joi9IAC",
+      "folderId": "data-list-benefits-of-grouping-into-pipeline",
+      "question": "What are the benefits of grouping multiple #Data Lists into a Pipeline?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005Joi6IAC",
+      "folderId": "data-list-can-prompt-confirmation-before-action",
+      "question": "Can I prompt users for confirmation before executing an action?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JoiDIAS",
+      "folderId": "data-list-is-possible-to-run-data-loader-as-action",
+      "question": "Can I run a #Data Loader from a #Data List?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Joi3IAC",
+      "folderId": "data-list-permissions-needed-to-use",
+      "question": "What permissions are needed to use a #Data List?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoieIAC",
+      "folderId": "data-loader-is-possible-to-run-from-data-list",
+      "question": "Is it possible to run a #Data Loader from a #Data List as a list action?",
+      "category": "Rules Engines",
+      "subCategory": "Data Loader",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JoiYIAS",
+      "folderId": "data-loader-permissions-needed",
+      "question": "What permissions are needed to use a #Data Loader?",
+      "category": "Rules Engines",
+      "subCategory": "Data Loader",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Joi2IAC",
+      "folderId": "difference-actionable-vs-nonactionable",
+      "question": "What is the difference between an actionable and non-actionable Data List?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005Joj0IAC",
+      "folderId": "difference-between-preview-and-retrieve",
+      "question": "What is the difference between Preview and Retrieve?",
+      "category": "Processes",
+      "subCategory": "Preview",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoivIAC",
+      "folderId": "do-need-include-every-field",
+      "question": "Do I need to include every field for Scoping and Mapping in the Retrieve query?",
+      "category": "Processes",
+      "subCategory": "Retrieve",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojdIAC",
+      "folderId": "does-apply-only-to-batch",
+      "question": "Does Verify apply only to #Batch?",
+      "category": "Processes",
+      "subCategory": "Verify",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JohXIAS",
+      "folderId": "does-dsp-adhere-to-sdlc",
+      "question": "Does DSP development adhere to the Software Development Life Cycle (SDLC)?",
+      "category": "General",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohpIAC",
+      "folderId": "does-dsp-allow-re-execution-of-failed",
+      "question": "Does DSP allow re-execution of failed batches?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohRIAS",
+      "folderId": "does-dsp-process-data-outside-salesforce-org",
+      "question": "Does DSP process any data outside the installed org?",
+      "category": "General",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohfIAC",
+      "folderId": "does-only-support-cross-org-migrations",
+      "question": "Does #Batch only support cross-org data migrations?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiZIAS",
+      "folderId": "does-only-support-csv",
+      "question": "Does #Data Loader only support CSV file uploads?",
+      "category": "Rules Engines",
+      "subCategory": "Data Loader",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojCIAS",
+      "folderId": "does-run-with-upsert-api",
+      "question": "Does DSP still run the Match step when \"Use Salesforce Upsert API\" is enabled in an Upsert process?",
+      "category": "Processes",
+      "subCategory": "Match",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojFIAS",
+      "folderId": "how-determine-principal-in-merge",
+      "question": "How does Match determine the principal(master) record in a Merge process?",
+      "category": "Processes",
+      "subCategory": "Match",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoifIAC",
+      "folderId": "how-does-trigger-work",
+      "question": "What is a #Trigger?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohSIAS",
+      "folderId": "how-dsp-ensures-security",
+      "question": "How does DSP ensure security?",
+      "category": "General",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojkIAC",
+      "folderId": "how-dsp-optimizes-vlookup-agg",
+      "question": "How does DSP optimize performance when using VLOOKUP or AGG functions?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JohVIAS",
+      "folderId": "how-dsp-rules-engines-compare",
+      "question": "How do DSP's rules engines compare?",
+      "category": "General",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojyIAC",
+      "folderId": "how-dynamic-filter-works",
+      "question": "How does a dynamic filter work?",
+      "category": "Query Manager",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohdIAC",
+      "folderId": "how-efficiently-handles-large-volumes",
+      "question": "How efficiently does #Batch handle large data volumes?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiWIAS",
+      "folderId": "how-execution-logs-tracked",
+      "question": "How are execution logs tracked in a #Data Loader process?",
+      "category": "Rules Engines",
+      "subCategory": "Data Loader",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojEIAS",
+      "folderId": "how-handle-multiple-sources-single-target",
+      "question": "How does DSP handle multiple source records matching a single target record?",
+      "category": "Processes",
+      "subCategory": "Match",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiXIAS",
+      "folderId": "how-handles-csv-type-conversion",
+      "question": "How does a #Data Loader handle data type conversion for CSV cells stored as strings?",
+      "category": "Rules Engines",
+      "subCategory": "Data Loader",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005Jok3IAC",
+      "folderId": "how-hyperlinks-work",
+      "question": "How do hyperlinks work in query results?",
+      "category": "Query Manager",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JohoIAC",
+      "folderId": "how-logs-are-tracked",
+      "question": "How are logs tracked for running a #Batch Executable?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohPIAS",
+      "folderId": "how-rules-driven-methods-transform-data-management",
+      "question": "Why does rules-driven, record-based, enforced modularity define the future of enterprise applications?",
+      "category": "General",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojaIAC",
+      "folderId": "how-supports-big-objects",
+      "question": "How does Action support Salesforce Big Objects?",
+      "category": "Processes",
+      "subCategory": "Action",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojbIAC",
+      "folderId": "how-supports-platform-events",
+      "question": "How does Action support Platform Events?",
+      "category": "Processes",
+      "subCategory": "Action",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoisIAC",
+      "folderId": "how-to-achieve-test-coverage",
+      "question": "Salesforce requires at least one line of test coverage in an Apex Trigger—how can I achieve this?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Joi4IAC",
+      "folderId": "how-to-add-to-lightning-page",
+      "question": "How do I add a #Data List to a Lightning page?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojUIAS",
+      "folderId": "how-to-avoid-duplicate-records",
+      "question": "How can I avoid creating duplicate records if the target already exists?",
+      "category": "Processes",
+      "subCategory": "Action",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojvIAC",
+      "folderId": "how-to-build-soql-query",
+      "question": "How do I build a SOQL query with Query Builder?",
+      "category": "Query Manager",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoikIAC",
+      "folderId": "how-to-calculate-rollup-summaries",
+      "question": "How can I calculate rollup summaries using a Self-Adaptive #Trigger?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohjIAC",
+      "folderId": "how-to-chain-multiple-executables",
+      "question": "How can I chain multiple batch Executables to run in a specific sequence?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiBIAS",
+      "folderId": "how-to-configure-row-related-lists",
+      "question": "How can I configure row's related lists in a #Data List?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojMIAS",
+      "folderId": "how-to-control-evaluation-order",
+      "question": "How do I control the order of field mappings' evaluation?",
+      "category": "Processes",
+      "subCategory": "Mapping",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiMIAS",
+      "folderId": "how-to-create-action-button",
+      "question": "How do I create an #Action Button?",
+      "category": "Rules Engines",
+      "subCategory": "Action Button",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JohzIAC",
+      "folderId": "how-to-create-actionable-data-list",
+      "question": "How do I create an Actionable #Data List?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiUIAS",
+      "folderId": "how-to-create-data-loader",
+      "question": "How do I create a #Data Loader?",
+      "category": "Rules Engines",
+      "subCategory": "Data Loader",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojmIAC",
+      "folderId": "how-to-create-reusable-formula",
+      "question": "How can I create a reusable formula?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoijIAC",
+      "folderId": "how-to-create-self-adaptive-trigger",
+      "question": "How to create a Self-Adaptive #Trigger?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JoinIAC",
+      "folderId": "how-to-create-trigger-action",
+      "question": "How to create a #Trigger Action?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005Joi5IAC",
+      "folderId": "how-to-customize-action-appearance",
+      "question": "How can I customize the appearance of a #Data List action?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JoiNIAS",
+      "folderId": "how-to-customize-appearance",
+      "question": "How can I customize the appearance of an #Action Button?",
+      "category": "Rules Engines",
+      "subCategory": "Action Button",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005Joj2IAC",
+      "folderId": "how-to-define-data-profile",
+      "question": "How do I define an input data profile in Data Loader?",
+      "category": "Processes",
+      "subCategory": "Input",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiIIAS",
+      "folderId": "how-to-enable-horizontal-scrolling",
+      "question": "How do I make a #Data List scroll horizontally?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiGIAS",
+      "folderId": "how-to-enable-query-manager-for-users",
+      "question": "How do I enable Query Manager in a #Data List for end users?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojrIAC",
+      "folderId": "how-to-evaluate-in-apex",
+      "question": "How do I evaluate DSP expressions from Apex?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiRIAS",
+      "folderId": "how-to-execute-multiple-actions",
+      "question": "How can I execute multiple actions from a single #Action Button?",
+      "category": "Rules Engines",
+      "subCategory": "Action Button",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojsIAC",
+      "folderId": "how-to-format-string-dynamically",
+      "question": "How can I format a string dynamically using DSP expressions?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojlIAC",
+      "folderId": "how-to-handle-complex-unsupported",
+      "question": "How can I handle complex transformations that aren't natively supported?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojVIAS",
+      "folderId": "how-to-implement-delta-updates",
+      "question": "How can I implement delta updates?",
+      "category": "Processes",
+      "subCategory": "Action",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohrIAC",
+      "folderId": "how-to-implement-incremental-retrieval",
+      "question": "How do I implement incremental retrieval?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiHIAS",
+      "folderId": "how-to-inject-custom-actions",
+      "question": "How do I use the Pipeline Data Lists component inside a custom LWC?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Jok7IAC",
+      "folderId": "how-to-integrate-into-lightning",
+      "question": "How do I integrate the Query component into a Lightning page?",
+      "category": "Query Manager",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiqIAC",
+      "folderId": "how-to-manage-execution-order",
+      "question": "How can I manage the execution order of #Trigger?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Jok6IAC",
+      "folderId": "how-to-manage-frequent-queries",
+      "question": "How can I manage my frequently used queries?",
+      "category": "Query Manager",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoirIAC",
+      "folderId": "how-to-manage-user-access",
+      "question": "How do I manage user access to a #Trigger?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojDIAS",
+      "folderId": "how-to-match-multiple-fields",
+      "question": "How do I match target records via multiple fields?",
+      "category": "Processes",
+      "subCategory": "Match",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiAIAS",
+      "folderId": "how-to-merge-actions-from-executables",
+      "question": "How do I merge actions from multiple Executables into one #Data List?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojoIAC",
+      "folderId": "how-to-perform-data-masking",
+      "question": "How do I mask sensitive data in sandbox environments?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoipIAC",
+      "folderId": "how-to-prevent-recursive-execution",
+      "question": "How can I prevent recursive execution in update triggers?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiJIAS",
+      "folderId": "how-to-pull-from-remote-org",
+      "question": "How do I set up a #Data List to pull data from a remote Salesforce org?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005Jok0IAC",
+      "folderId": "how-to-query-remote-org",
+      "question": "How can I query data from a remote Salesforce org?",
+      "category": "Query Manager",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojKIAS",
+      "folderId": "how-to-reference-parent-field",
+      "question": "How do I reference a parent field?",
+      "category": "Processes",
+      "subCategory": "Mapping",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JoibIAC",
+      "folderId": "how-to-retry-failed-batches",
+      "question": "How can I retry only the failed data load batches without reloading the whole dataset?",
+      "category": "Rules Engines",
+      "subCategory": "Data Loader",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohkIAC",
+      "folderId": "how-to-schedule-jobs",
+      "question": "How can I schedule Batch jobs?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohtIAC",
+      "folderId": "how-to-setup-completion-notifications",
+      "question": "How can I set up notifications for completed batch executions?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoilIAC",
+      "folderId": "how-to-setup-validation-rules",
+      "question": "How can I set up validation rules within a Self-Adaptive #Trigger?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojpIAC",
+      "folderId": "how-to-skip-field-if-blank",
+      "question": "How can I skip a target field if the evaluated value is blank?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JohuIAC",
+      "folderId": "how-to-test-on-small-sample",
+      "question": "How can I test a Batch Executable on a small sample before running it on the full dataset?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiPIAS",
+      "folderId": "how-users-review-edit-values",
+      "question": "How can users review and edit field values before running an action?",
+      "category": "Rules Engines",
+      "subCategory": "Action Button",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JohYIAS",
+      "folderId": "is-dsp-subject-to-governor-limits",
+      "question": "Is DSP subject to Salesforce governor limits?",
+      "category": "General",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohqIAC",
+      "folderId": "is-it-possible-to-revert-changes",
+      "question": "Is it possible to revert the changes made a batch execution?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Jok4IAC",
+      "folderId": "is-pagination-server-or-client",
+      "question": "Is pagination handled server-side or client-side?",
+      "category": "Query Manager",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoicIAC",
+      "folderId": "is-possible-to-revert-changes",
+      "question": "Is it possible to revert the changes made a data load?",
+      "category": "Rules Engines",
+      "subCategory": "Data Loader",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Jok5IAC",
+      "folderId": "is-tooling-api-supported",
+      "question": "Is the Tooling API supported in Query?",
+      "category": "Query Manager",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohsIAC",
+      "folderId": "key-considerations-for-bulk-api",
+      "question": "What should I consider before enabling Bulk API?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojLIAS",
+      "folderId": "mapping-how-to-manage-data-relationships",
+      "question": "How can I manage data relationships?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohiIAC",
+      "folderId": "maximum-batch-size-setting",
+      "question": "What is the maximum batch size that can be set?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohhIAC",
+      "folderId": "maximum-dataset-size",
+      "question": "What is the maximum dataset size that a DSP batch job can process?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Joj3IAC",
+      "folderId": "naming-conventions-for-columns",
+      "question": "What naming requirements apply to #Data Loader columns?",
+      "category": "Processes",
+      "subCategory": "Input",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiEIAS",
+      "folderId": "permissions-for-query-results",
+      "question": "What permissions can I configure for query results in a #Data List?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JoizIAC",
+      "folderId": "preview-how-to-preview-source-record",
+      "question": "How do I preview a source record with its transformed values before execution?",
+      "category": "Processes",
+      "subCategory": "Preview",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojNIAS",
+      "folderId": "purpose-of-add-default-button",
+      "question": "What does the Add Default button do?",
+      "category": "Processes",
+      "subCategory": "Mapping",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojHIAS",
+      "folderId": "purpose-of-additional-criteria",
+      "question": "What is the purpose of the 'Additional Target Matching Criteria' field?",
+      "category": "Processes",
+      "subCategory": "Match",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoixIAC",
+      "folderId": "purpose-of-additional-criteria-in-pipeline",
+      "question": "What is the purpose of the 'Additional Retrieve Criteria' field on a Pipeline?",
+      "category": "Processes",
+      "subCategory": "Retrieve",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojOIAS",
+      "folderId": "purpose-of-clear-mappings-button",
+      "question": "What does the Clear Mappings button do?",
+      "category": "Processes",
+      "subCategory": "Mapping",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Joj4IAC",
+      "folderId": "purpose-of-data-key-field",
+      "question": "What is the purpose of the 'Input Data Key Field'?",
+      "category": "Processes",
+      "subCategory": "Input",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojQIAS",
+      "folderId": "purpose-of-refresh-button",
+      "question": "What is the purpose of the 'Refresh' button?",
+      "category": "Processes",
+      "subCategory": "Mapping",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojRIAS",
+      "folderId": "purpose-of-save-button",
+      "question": "What does the Save button do?",
+      "category": "Processes",
+      "subCategory": "Mapping",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojIIAS",
+      "folderId": "purpose-of-sorting-components",
+      "question": "What is the purpose of the 'Matched Records Sorting Components' field?",
+      "category": "Processes",
+      "subCategory": "Match",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojPIAS",
+      "folderId": "purpose-of-unmapped-fields-button",
+      "question": "What does the Unmapped Source Fields button do?",
+      "category": "Processes",
+      "subCategory": "Mapping",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojZIAS",
+      "folderId": "purpose-of-upsert-api-field",
+      "question": "What is the purpose of the 'Use Salesforce Upsert API' field?",
+      "category": "Processes",
+      "subCategory": "Action",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojYIAS",
+      "folderId": "purpose-of-writeback",
+      "question": "What is the purpose of Writeback?",
+      "category": "Processes",
+      "subCategory": "Action",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiwIAC",
+      "folderId": "retrieve-how-to-preview-source-record",
+      "question": "How do I preview a source record with its transformed values before execution?",
+      "category": "Processes",
+      "subCategory": "Retrieve",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Joj8IAC",
+      "folderId": "scoping-how-to-join-source-data",
+      "question": "How can I join the source data with an additional data set?",
+      "category": "Processes",
+      "subCategory": "Scoping",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Joj7IAC",
+      "folderId": "scoping-how-to-prevent-duplicate-records",
+      "question": "How do I prevent duplicate source records in iteration?",
+      "category": "Processes",
+      "subCategory": "Scoping",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojgIAC",
+      "folderId": "supported-data-types",
+      "question": "What data types does DSP support in its formulas?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohbIAC",
+      "folderId": "technologies-used-to-build-engine",
+      "question": "What technologies are used to build the #Batch engine?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohUIAS",
+      "folderId": "three-core-user-personas",
+      "question": "What are the three core user personas in Data Sync Pro?",
+      "category": "General",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohWIAS",
+      "folderId": "training-required-to-start-building",
+      "question": "How much training is required to start building in Data Sync Pro?",
+      "category": "General",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojnIAC",
+      "folderId": "transformation-how-to-join-source-data",
+      "question": "How can I join the source data with an additional data set?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojjIAC",
+      "folderId": "transformation-how-to-manage-relationships",
+      "question": "How can I manage data relationships?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojqIAC",
+      "folderId": "transformation-how-to-prevent-duplicate-records",
+      "question": "How do I prevent duplicate source records in iteration?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005Joi0IAC",
+      "folderId": "two-essential-components",
+      "question": "What are the two essential components of a Actionable #Data List?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JohOIAS",
+      "folderId": "what-are-five-rules-engines",
+      "question": "What are the five engines?",
+      "category": "General",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojSIAS",
+      "folderId": "what-does-action-do",
+      "question": "What does Action do?",
+      "category": "Processes",
+      "subCategory": "Action",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Joj1IAC",
+      "folderId": "what-does-input-do",
+      "question": "What does Input do?",
+      "category": "Processes",
+      "subCategory": "Input",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojJIAS",
+      "folderId": "what-does-mapping-do",
+      "question": "What does Mapping do?",
+      "category": "Processes",
+      "subCategory": "Mapping",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Joj9IAC",
+      "folderId": "what-does-match-do",
+      "question": "What does Match do?",
+      "category": "Processes",
+      "subCategory": "Match",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiyIAC",
+      "folderId": "what-does-preview-do",
+      "question": "What does Preview do?",
+      "category": "Processes",
+      "subCategory": "Preview",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiuIAC",
+      "folderId": "what-does-retrieve-do",
+      "question": "What does Retrieve do?",
+      "category": "Processes",
+      "subCategory": "Retrieve",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Joj5IAC",
+      "folderId": "what-does-scoping-do",
+      "question": "What does Scoping do?",
+      "category": "Processes",
+      "subCategory": "Scoping",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojcIAC",
+      "folderId": "what-does-verify-do",
+      "question": "What does Verify do?",
+      "category": "Processes",
+      "subCategory": "Verify",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoihIAC",
+      "folderId": "what-events-are-supported",
+      "question": "What events are supported by #Trigger?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojBIAS",
+      "folderId": "what-happens-insert-duplicate",
+      "question": "What happens if a source record matches existing target records during an Insert?",
+      "category": "Processes",
+      "subCategory": "Match",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojAIAS",
+      "folderId": "what-happens-multiple-targets",
+      "question": "What happens if a source record matches multiple target records in an action?",
+      "category": "Processes",
+      "subCategory": "Match",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojwIAC",
+      "folderId": "what-happens-when-execute",
+      "question": "What happens when you execute a query?",
+      "category": "Query Manager",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiKIAS",
+      "folderId": "what-is-action-button",
+      "question": "What is an #Action Button?",
+      "category": "Rules Engines",
+      "subCategory": "Action Button",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohZIAS",
+      "folderId": "what-is-batch-job",
+      "question": "What is a batch job in general?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojxIAC",
+      "folderId": "what-is-column-filter",
+      "question": "What is a Column Filter?",
+      "category": "Query Manager",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JohxIAC",
+      "folderId": "what-is-data-list",
+      "question": "What is a #Data List?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiTIAS",
+      "folderId": "what-is-data-loader",
+      "question": "What is a #Data Loader?",
+      "category": "Rules Engines",
+      "subCategory": "Data Loader",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohNIAS",
+      "folderId": "what-is-data-sync-pro",
+      "question": "What is Data Sync Pro?",
+      "category": "General",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoioIAC",
+      "folderId": "what-is-execution-flow",
+      "question": "What is the execution flow of a #Trigger?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojtIAC",
+      "folderId": "what-is-query-manager",
+      "question": "What is Query Manager?",
+      "category": "Query Manager",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005Joj6IAC",
+      "folderId": "what-is-scope-filter",
+      "question": "What is a Scope Filter?",
+      "category": "Processes",
+      "subCategory": "Scoping",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiiIAC",
+      "folderId": "what-is-self-adaptive-trigger",
+      "question": "What is a Self-Adaptive #Trigger?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoimIAC",
+      "folderId": "what-is-trigger-action",
+      "question": "What is a #Trigger Action?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoitIAC",
+      "folderId": "what-is-trigger-flipper-pattern",
+      "question": "What is the TRIGGER_FLIPPER pattern?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiaIAC",
+      "folderId": "when-to-enable-serial-mode",
+      "question": "When should I enable serial mode?",
+      "category": "Rules Engines",
+      "subCategory": "Data Loader",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JoheIAC",
+      "folderId": "where-to-create-executable",
+      "question": "Where do I create a #Batch Executable?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojhIAC",
+      "folderId": "where-to-use-formulas",
+      "question": "Where can I use formulas?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojTIAS",
+      "folderId": "which-actions-are-supported",
+      "question": "Which actions are supported?",
+      "category": "Processes",
+      "subCategory": "Action",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JojuIAC",
+      "folderId": "who-can-access",
+      "question": "Who can access Query Manager?",
+      "category": "Query Manager",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JojfIAC",
+      "folderId": "why-bulkified-is-critical",
+      "question": "Why is bulkified transformation critical in enterprise data management?",
+      "category": "Transformation",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohQIAS",
+      "folderId": "why-data-sync-pro",
+      "question": "Why Data Sync Pro?",
+      "category": "General",
+      "subCategory": "",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoiLIAS",
+      "folderId": "why-use-action-button",
+      "question": "Why #Action Button?",
+      "category": "Rules Engines",
+      "subCategory": "Action Button",
+      "seqNo": null,
+      "isActive": false
+    },
+    {
+      "id": "a0oEc000005JohaIAC",
+      "folderId": "why-use-batch-engine",
+      "question": "Why #Batch?",
+      "category": "Rules Engines",
+      "subCategory": "Batch",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JohyIAC",
+      "folderId": "why-use-data-list",
+      "question": "Why #Data List?",
+      "category": "Rules Engines",
+      "subCategory": "Data List",
+      "seqNo": null,
+      "isActive": true
+    },
+    {
+      "id": "a0oEc000005JoigIAC",
+      "folderId": "why-use-trigger",
+      "question": "Why #Trigger?",
+      "category": "Rules Engines",
+      "subCategory": "Trigger",
+      "seqNo": null,
+      "isActive": true
+    }
+  ]
+}

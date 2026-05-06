@@ -556,8 +556,8 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       const faqElements = document.querySelectorAll('.faq-item');
       faqElements.forEach((element, index) => {
         const faqItem = this.filteredFAQ[index];
-        if (faqItem && faqItem.answerPath) {
-          this.faqService.observeForPreloading(element, faqItem.id, faqItem.answerPath);
+        if (faqItem && faqItem.folderId) {
+          this.faqService.observeForPreloading(element, faqItem.id, faqItem.folderId);
         }
       });
     }, 100);
@@ -842,11 +842,11 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
     // Load FAQ content
-    if (!item.safeAnswer && item.answerPath) {
+    if (!item.safeAnswer && item.folderId) {
       item.isLoading = true;
       this.cdr.markForCheck(); 
 
-      this.faqService.getFAQContent(item.answerPath).pipe(
+      this.faqService.getFAQContent(item.folderId).pipe(
         takeUntil(this.destroy$)
       ).subscribe({
         next: (content) => {
@@ -945,11 +945,11 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   private loadFAQContent(item: FAQItem): void {
     // Load FAQ content if not already loaded
-    if (!item.safeAnswer && item.answerPath) {
+    if (!item.safeAnswer && item.folderId) {
       item.isLoading = true;
       this.cdr.markForCheck(); // Trigger change detection to show loading state
 
-      this.faqService.getFAQContent(item.answerPath).pipe(
+      this.faqService.getFAQContent(item.folderId).pipe(
         takeUntil(this.destroy$)
       ).subscribe({
         next: (content) => {
@@ -991,7 +991,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private updateBrowserURL(item: FAQItem): void {
     // Use answer-based URL instead of fragment-based
-    const answerSlug = this.getAnswerSlug(item.answerPath);
+    const answerSlug = this.getAnswerSlug(item.folderId);
     
     this.router.navigate(['/', answerSlug]);
   }
@@ -1127,10 +1127,11 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
-   * Extract answer slug from answer path (remove .html extension)
+   * Extract answer slug from folderId. Now an identity since folderId IS
+   * the slug (no .html suffix). Kept as a helper for call-site clarity.
    */
-  getAnswerSlug(answerPath: string): string {
-    return answerPath.replace(/\.html$/, '');
+  getAnswerSlug(folderId: string): string {
+    return folderId;
   }
 
   /**
@@ -1173,9 +1174,8 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
     
-    // Find FAQ item by answer path
-    const answerPath = answerSlug + '.html';
-    const faqItem = this.faqList.find(item => item.answerPath === answerPath);
+    // Find FAQ item by folder id (== slug)
+    const faqItem = this.faqList.find(item => item.folderId === answerSlug);
     
     if (faqItem) {
       // Set category and subcategory based on found FAQ but don't trigger intermediate renders
@@ -1319,7 +1319,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     
     if (faqItem) {
       // Use answer-based URL
-      const answerSlug = this.getAnswerSlug(faqItem.answerPath);
+      const answerSlug = this.getAnswerSlug(faqItem.folderId);
       this.router.navigate(['/', answerSlug]);
     } else {
       // Fallback to old method if FAQ item not found
@@ -1352,14 +1352,14 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     subCategory: string | null;
   }): void {
 
-    // Find the full FAQ item to get the answerPath
+    // Find the full FAQ item to get the folderId
     const faqItem = this.faqList.find(item => 
       item.question === sel.question && item.category === sel.category
     );
     
     if (faqItem) {
       // Use answer-based URL
-      const answerSlug = this.getAnswerSlug(faqItem.answerPath);
+      const answerSlug = this.getAnswerSlug(faqItem.folderId);
       this.router.navigate(['/', answerSlug]);
     } else {
       // Fallback to old method if FAQ item not found
@@ -1436,7 +1436,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
     if (this.current.category !== faqItem.category ||
         (faqItem.subCategory && this.current.subCategory !== faqItem.subCategory)) {
-      const answerSlug = this.getAnswerSlug(faqItem.answerPath);
+      const answerSlug = this.getAnswerSlug(faqItem.folderId);
       this.router.navigate(['/', answerSlug]);
       return;
     }
@@ -1466,7 +1466,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getFAQShareUrl(faqItem: FAQItem): string {
-    const answerSlug = this.getAnswerSlug(faqItem.answerPath);
+    const answerSlug = this.getAnswerSlug(faqItem.folderId);
     const baseUrl = window.location.origin;
     return `${baseUrl}/${answerSlug}`;
   }
@@ -1893,7 +1893,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     
     
     const problematicFAQs = this.faqList
-      .filter(faq => !faq.safeAnswer && !faq.isLoading && faq.answerPath)
+      .filter(faq => !faq.safeAnswer && !faq.isLoading && faq.folderId)
       .slice(0, 5);
   }
 
@@ -2066,10 +2066,10 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     this.scrollToTop();
 
     
-    if (!item.safeAnswer && item.answerPath) {
+    if (!item.safeAnswer && item.folderId) {
       item.isLoading = true;
 
-      this.faqService.getFAQContent(item.answerPath).pipe(
+      this.faqService.getFAQContent(item.folderId).pipe(
         takeUntil(this.destroy$)
       ).subscribe({
         next: (content) => {
@@ -2629,11 +2629,10 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       // Create virtual FAQ item for preview
       const previewFAQ: FAQItem = {
         id: previewData.faqId,
-        name: previewData.faqId,
         question: previewData.question,
         category: previewData.category,
         subCategory: previewData.subCategory,
-        answerPath: '', // No path needed for preview
+        folderId: '', // No path needed for preview
         answer: '',
         safeAnswer: this.sanitizer.bypassSecurityTrustHtml(previewData.htmlContent)
       };
@@ -2676,11 +2675,10 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     // Create error FAQ item
     const errorFAQ: FAQItem = {
       id: faqId,
-      name: faqId,
       question: 'Preview Data Not Found',
       category: 'Error',
       subCategory: '',
-      answerPath: '',
+      folderId: '',
       answer: '',
       safeAnswer: this.sanitizer.bypassSecurityTrustHtml(`
         <div style="text-align: center; padding: 2rem; border: 2px dashed #f0ad4e; border-radius: 8px; background: #fdf6e3;">

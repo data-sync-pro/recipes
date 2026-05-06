@@ -2,9 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FAQStorageService, EditedFAQ } from './faq-storage.service';
 import { FAQService } from './faq.service';
-import { FAQItem } from '../models/faq.model';
+import { FAQItem, FAQMetadata } from '../models/faq.model';
 import { firstValueFrom } from 'rxjs';
 import JSZip from 'jszip';
+
+// One row in `ExportData.faqs` — same shape as one entry in
+// `assets/faqs/faqs.json` (FAQMetadata already carries folderId).
+export type ExportFAQEntry = FAQMetadata;
 
 export interface ExportData {
   metadata: {
@@ -13,8 +17,9 @@ export interface ExportData {
     itemCount: number;
     editedCount: number;
   };
-  faqs: any[];
-  htmlContent: { [key: string]: string };
+  faqs: ExportFAQEntry[];
+  // HTML content keyed by folderId (one entry per FAQ).
+  htmlContent: { [folderId: string]: string };
 }
 
 export interface ExportProgress {
@@ -37,19 +42,33 @@ export class FAQExportService {
   ) {}
 
   /**
-   * Extract image references from HTML content
+   * Extract absolute image asset paths from a FAQ's HTML. Both relative
+   * (e.g. "images/foo.jpg") and absolute ("assets/faqs/<folderId>/images/foo.jpg")
+   * forms are supported; the relative form is resolved against the owning FAQ's folder.
    */
-  private extractImageReferencesFromHTML(htmlContent: { [key: string]: string }): Set<string> {
+  private extractImageReferencesFromHTML(
+    htmlContent: { [folderId: string]: string }
+  ): Set<string> {
     const imageRefs = new Set<string>();
-    const imageRegex = /(?:src|href)\s*=\s*['"](assets\/image\/[^'"]+)['"]/gi;
-    
-    for (const content of Object.values(htmlContent)) {
+
+    // Match src/href values; capture the raw value to inspect.
+    const attrRegex = /(?:src|href)\s*=\s*['"]([^'"]+)['"]/gi;
+
+    for (const [folderId, content] of Object.entries(htmlContent)) {
       let match;
-      while ((match = imageRegex.exec(content)) !== null) {
-        imageRefs.add(match[1]); // match[1] is the captured group (the image path)
+      while ((match = attrRegex.exec(content)) !== null) {
+        const raw = match[1];
+        if (/^https?:\/\//i.test(raw) || raw.startsWith('//')) {
+          continue; // external URL
+        }
+        if (raw.startsWith('assets/faqs/') && raw.includes('/images/')) {
+          imageRefs.add(raw);
+        } else if (raw.startsWith('images/')) {
+          imageRefs.add(`assets/faqs/${folderId}/${raw}`);
+        }
       }
     }
-    
+
     return imageRefs;
   }
 
@@ -59,15 +78,15 @@ export class FAQExportService {
   private async fetchOriginalImage(imagePath: string): Promise<File | null> {
     try {
       const response = await firstValueFrom(this.http.get(imagePath, { responseType: 'blob' }));
-      
+
       // Extract filename from path
       const filename = imagePath.split('/').pop() || 'image';
-      
+
       // Convert blob to File object
-      const file = new File([response], filename, { 
-        type: response.type || 'image/jpeg' 
+      const file = new File([response], filename, {
+        type: response.type || 'image/jpeg'
       });
-      
+
       return file;
     } catch (error) {
       console.warn(`Failed to fetch original image ${imagePath}:`, error);
@@ -76,49 +95,52 @@ export class FAQExportService {
   }
 
   /**
-   * Get all original images referenced in HTML content
+   * Fetch all images referenced in HTML content.
+   * Map keys are absolute asset paths (assets/faqs/<folderId>/images/<file>).
    */
-  private async fetchAllOriginalImages(htmlContent: { [key: string]: string }): Promise<Map<string, File>> {
+  private async fetchAllOriginalImages(
+    htmlContent: { [folderId: string]: string }
+  ): Promise<Map<string, File>> {
     const imageRefs = this.extractImageReferencesFromHTML(htmlContent);
     const originalImages = new Map<string, File>();
-    
+
     for (const imagePath of imageRefs) {
       const imageFile = await this.fetchOriginalImage(imagePath);
       if (imageFile) {
         originalImages.set(imagePath, imageFile);
       }
     }
-    
+
     return originalImages;
   }
 
   async exportAllEdits(): Promise<ExportData> {
     const editedFAQs = await this.storageService.exportEdits();
     const allFAQs = this.faqService.getAllFAQs();
-    
+
     // Separate new FAQs from edited ones
     const { newFAQs, editedExistingFAQs } = this.separateNewAndEditedFAQs(editedFAQs, allFAQs);
-    
+
     // Merge edited FAQs with original data
     const mergedFAQs = this.mergeFAQData(allFAQs, editedExistingFAQs, newFAQs);
-    
-    // Prepare HTML content map
-    const htmlContent: { [key: string]: string } = {};
-    
+
+    // Prepare HTML content map keyed by folderId
+    const htmlContent: { [folderId: string]: string } = {};
+
     // Add HTML content for edited existing FAQs
     editedExistingFAQs.forEach(faq => {
-      const fileName = this.getHTMLFileName(faq.faqId);
-      if (fileName) {
+      const folderId = this.getFolderId(faq.faqId);
+      if (folderId) {
         const cleanedContent = this.cleanHTMLContent(faq.answer);
-        htmlContent[fileName] = this.decodeHTMLEntities(cleanedContent);
+        htmlContent[folderId] = this.decodeHTMLEntities(cleanedContent);
       }
     });
-    
+
     // Add HTML content for new FAQs
     newFAQs.forEach(faq => {
-      const fileName = this.generateHTMLFileNameForNewFAQ(faq);
+      const folderId = this.generateFolderIdForNewFAQ(faq);
       const cleanedContent = this.cleanHTMLContent(faq.answer);
-      htmlContent[fileName] = this.decodeHTMLEntities(cleanedContent);
+      htmlContent[folderId] = this.decodeHTMLEntities(cleanedContent);
     });
 
     const totalItemCount = allFAQs.length + newFAQs.length;
@@ -138,71 +160,59 @@ export class FAQExportService {
     return exportData;
   }
 
-  private mergeFAQData(originalFAQs: FAQItem[], editedFAQs: EditedFAQ[], newFAQs: EditedFAQ[]): any[] {
+  private mergeFAQData(
+    originalFAQs: FAQItem[],
+    editedFAQs: EditedFAQ[],
+    newFAQs: EditedFAQ[]
+  ): ExportFAQEntry[] {
     const editedMap = new Map<string, EditedFAQ>();
     editedFAQs.forEach(faq => {
       editedMap.set(faq.faqId, faq);
     });
 
     // Process existing FAQs (original + edited)
-    const existingFAQsData = originalFAQs.map(faq => {
+    const existingFAQsData: ExportFAQEntry[] = originalFAQs.map(faq => {
       const edited = editedMap.get(faq.id);
-      if (edited) {
-        // Return the original format with edited content
-        return {
-          Id: faq.id,
-          Name: faq.name || faq.id,
-          Category__c: edited.category,
-          SubCategory__c: edited.subCategory || null,
-          SeqNo__c: faq.seqNo || null,
-          Question__c: edited.question,
-          Answer__c: faq.answerPath,
-          isActive: edited.isActive !== false // Use edited isActive value
-        };
-      }
-      // Return original FAQ in export format
+      const base: ExportFAQEntry = {
+        folderId: faq.folderId,
+        id: faq.id,
+        category: edited ? edited.category : faq.category,
+        subCategory: edited ? (edited.subCategory ?? null) : (faq.subCategory ?? null),
+        seqNo: faq.seqNo ?? null,
+        question: edited ? edited.question : faq.question,
+        isActive: edited ? edited.isActive !== false : faq.isActive !== false
+      };
+      return base;
+    });
+
+    // Process new FAQs (folderId derived from sanitized question)
+    const newFAQsData: ExportFAQEntry[] = newFAQs.map(faq => {
+      const folderId = this.generateFolderIdForNewFAQ(faq);
       return {
-        Id: faq.id,
-        Name: faq.name || faq.id,
-        Category__c: faq.category,
-        SubCategory__c: faq.subCategory || null,
-        SeqNo__c: faq.seqNo || null,
-        Question__c: faq.question,
-        Answer__c: faq.answerPath,
+        folderId,
+        id: faq.faqId,
+        category: faq.category,
+        subCategory: faq.subCategory ?? null,
+        seqNo: null,
+        question: faq.question,
         isActive: faq.isActive !== false
       };
     });
 
-    // Process new FAQs
-    const newFAQsData = newFAQs.map(faq => {
-      const htmlFileName = this.generateHTMLFileNameForNewFAQ(faq);
-      return {
-        Id: faq.faqId,
-        Name: faq.faqId,
-        Category__c: faq.category,
-        SubCategory__c: faq.subCategory || null,
-        SeqNo__c: null,
-        Question__c: faq.question,
-        Answer__c: htmlFileName,
-        isActive: faq.isActive !== false // Use the actual isActive value from the edited FAQ
-      };
-    });
-
-    // Combine existing and new FAQs
     return [...existingFAQsData, ...newFAQsData];
   }
 
-  private getHTMLFileName(faqId: string): string | null {
+  private getFolderId(faqId: string): string | null {
     const faq = this.faqService.getAllFAQs().find(f => f.id === faqId);
-    return faq?.answerPath || null;
+    return faq?.folderId || null;
   }
 
   private separateNewAndEditedFAQs(editedFAQs: EditedFAQ[], originalFAQs: FAQItem[]): { newFAQs: EditedFAQ[], editedExistingFAQs: EditedFAQ[] } {
     const originalFAQIds = new Set(originalFAQs.map(f => f.id));
-    
+
     const newFAQs: EditedFAQ[] = [];
     const editedExistingFAQs: EditedFAQ[] = [];
-    
+
     editedFAQs.forEach(faq => {
       if (originalFAQIds.has(faq.faqId)) {
         editedExistingFAQs.push(faq);
@@ -210,22 +220,22 @@ export class FAQExportService {
         newFAQs.push(faq);
       }
     });
-    
+
     return { newFAQs, editedExistingFAQs };
   }
 
-  private generateHTMLFileNameForNewFAQ(faq: EditedFAQ): string {
-    // Generate a filename based on the question, sanitized for file system
+  private generateFolderIdForNewFAQ(faq: EditedFAQ): string {
+    // Generate a folder id based on the question, sanitized for file system
     const sanitizedQuestion = faq.question
       .toLowerCase()
       .replace(/[^a-z0-9\s]/g, '') // Remove special characters
       .replace(/\s+/g, '-') // Replace spaces with hyphens
       .substring(0, 50); // Limit length
-    
+
     // Use timestamp to ensure uniqueness
     const timestamp = new Date(faq.timestamp).toISOString().slice(0, 10);
-    
-    return `new-faq-${sanitizedQuestion}-${timestamp}.html`;
+
+    return `new-faq-${sanitizedQuestion}-${timestamp}`;
   }
 
   downloadAsJSON(data: ExportData): void {
@@ -236,36 +246,58 @@ export class FAQExportService {
     this.downloadFile(blob, `faq-export-${Date.now()}.json`);
   }
 
+  /**
+   * Download the consolidated FAQ metadata as JSON. Same shape as
+   * `assets/faqs/faqs.json`: { faqs: FAQMetadata[] }.
+   */
   downloadFAQsJSON(data: ExportData): void {
-    // Use the standardized normalization method
     const normalizedData = this.normalizeExportData(data);
-    
-    const faqsJson = JSON.stringify(normalizedData.faqs, null, 2);
-    const blob = new Blob([faqsJson], { type: 'application/json;charset=utf-8' });
+    const payload = { faqs: normalizedData.faqs };
+    const json = JSON.stringify(payload, null, 2);
+    const blob = new Blob([json], { type: 'application/json;charset=utf-8' });
     this.downloadFile(blob, 'faqs.json');
   }
 
   downloadHTMLFiles(data: ExportData): void {
-    Object.entries(data.htmlContent).forEach(([fileName, content]) => {
+    Object.entries(data.htmlContent).forEach(([folderId, content]) => {
       const normalizedContent = this.normalizeTextContent(content);
       const cleanedContent = this.cleanHTMLContent(normalizedContent);
       const blob = new Blob([cleanedContent], { type: 'text/html;charset=utf-8' });
-      this.downloadFile(blob, fileName);
+      this.downloadFile(blob, `${folderId}-answer.html`);
     });
   }
 
+  /**
+   * Build a ZIP that mirrors `src/assets/faqs/`:
+   *   faqs/
+   *     faqs.json                  ← consolidated metadata for all FAQs
+   *     <folderId>/
+   *       answer.html
+   *       images/<filename>
+   *   UPDATE_INSTRUCTIONS.txt
+   *   export-metadata.json
+   *
+   * `tempImages` keys are absolute asset paths
+   * (assets/faqs/<folderId>/images/<file>); we transcribe them under faqs/ in the ZIP.
+   */
   async downloadAsZip(data: ExportData, progressCallback?: (progress: ExportProgress) => void, tempImages?: Map<string, File>): Promise<void> {
     const zip = new JSZip();
-    
+
     // Normalize data before creating ZIP
     const normalizedData = this.normalizeExportData(data);
-    
-    // Get original images referenced in HTML content
+
+    // Get all images already referenced in HTML content
     const originalImages = await this.fetchAllOriginalImages(normalizedData.htmlContent);
-    
+
     const tempImageCount = tempImages ? tempImages.size : 0;
     const originalImageCount = originalImages.size;
-    const totalItems = Object.keys(data.htmlContent).length + 3 + tempImageCount + originalImageCount; // HTML files + JSON + instructions + metadata + temp images + original images
+    // 1 faqs.json + per-FAQ answer.html + instructions + metadata + images
+    const totalItems =
+      1 +
+      Object.keys(normalizedData.htmlContent).length +
+      2 +
+      tempImageCount +
+      originalImageCount;
     let currentItem = 0;
 
     const updateProgress = (step: string) => {
@@ -281,39 +313,40 @@ export class FAQExportService {
     };
 
     try {
-      // Add FAQ data JSON with normalized content
-      const faqsJson = JSON.stringify(normalizedData.faqs, null, 2);
-      zip.file('faqs.json', faqsJson);
-      updateProgress('Adding FAQ data');
+      // Consolidated metadata file: faqs/faqs.json
+      const indexPayload = { faqs: normalizedData.faqs };
+      zip.file('faqs/faqs.json', JSON.stringify(indexPayload, null, 2) + '\n');
+      updateProgress('Adding faqs.json');
 
-      // Add HTML files with normalized content
-      for (const [fileName, content] of Object.entries(normalizedData.htmlContent)) {
+      // Per-FAQ answer.html (no per-folder faq.json anymore — metadata lives
+      // in the top-level faqs.json above).
+      for (const [folderId, content] of Object.entries(normalizedData.htmlContent)) {
         const cleanedContent = this.cleanHTMLContent(content);
-        zip.file(`html-content/${fileName}`, cleanedContent);
-        updateProgress(`Adding ${fileName}`);
+        zip.file(`faqs/${folderId}/answer.html`, cleanedContent);
+        updateProgress(`Adding ${folderId}/answer.html`);
       }
 
-      // Add temporary images if provided
+      // Add temporary (newly uploaded) images.
       if (tempImages && tempImages.size > 0) {
         for (const [imagePath, imageFile] of tempImages.entries()) {
-          // Create the directory structure: src/assets/image/[faq-id]/
-          const zipImagePath = `src/${imagePath}`;
+          const zipImagePath = this.toZipImagePath(imagePath);
           zip.file(zipImagePath, imageFile);
           updateProgress(`Adding image ${imageFile.name}`);
         }
       }
 
-      // Add original images referenced in HTML content
+      // Add original images referenced in HTML content (excluding tempImages
+      // already added under the same path).
       if (originalImages.size > 0) {
         for (const [imagePath, imageFile] of originalImages.entries()) {
-          // Create the directory structure: src/assets/image/[faq-id]/
-          const zipImagePath = `src/${imagePath}`;
+          const zipImagePath = this.toZipImagePath(imagePath);
+          if (zip.file(zipImagePath)) continue; // already added by tempImages
           zip.file(zipImagePath, imageFile);
           updateProgress(`Adding original image ${imageFile.name}`);
         }
       }
 
-      // Add instructions (updated to include image instructions)
+      // Add instructions
       const instructions = this.generateUpdateInstructions(data, tempImages, originalImages);
       zip.file('UPDATE_INSTRUCTIONS.txt', instructions);
       updateProgress('Adding instructions');
@@ -323,7 +356,6 @@ export class FAQExportService {
       zip.file('export-metadata.json', metadata);
       updateProgress('Adding metadata');
 
-      // Generate ZIP
       const zipContent = await zip.generateAsync({ type: 'blob' });
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
       const fileName = `faq-export-${timestamp}.zip`;
@@ -333,6 +365,18 @@ export class FAQExportService {
       console.error('Error creating ZIP file:', error);
       throw new Error(`Failed to create ZIP file: ${error?.message || 'Unknown error'}`);
     }
+  }
+
+  /**
+   * Convert an absolute asset path to its position inside the export ZIP.
+   * `assets/faqs/foo/images/bar.jpg` -> `faqs/foo/images/bar.jpg`.
+   */
+  private toZipImagePath(absoluteAssetPath: string): string {
+    if (absoluteAssetPath.startsWith('assets/faqs/')) {
+      return absoluteAssetPath.substring('assets/'.length);
+    }
+    // Fallback: drop a leading "assets/" if present so the file lands somewhere sane.
+    return absoluteAssetPath.replace(/^assets\//, '');
   }
 
   private downloadFile(blob: Blob, fileName: string): void {
@@ -390,58 +434,50 @@ export class FAQExportService {
 
   async importFromZip(file: File): Promise<boolean> {
     try {
-      // Read the ZIP file
       const zip = new JSZip();
       const zipContent = await zip.loadAsync(file);
-      
-      // Extract and parse faqs.json
-      const faqsJsonFile = zipContent.file('faqs.json');
-      if (!faqsJsonFile) {
-        console.error('faqs.json not found in ZIP file');
+
+      // Read consolidated faqs/faqs.json
+      const indexFile = zipContent.file('faqs/faqs.json');
+      if (!indexFile) {
+        console.error('faqs/faqs.json not found in ZIP file');
         return false;
       }
-      
-      let faqsJsonContent = await faqsJsonFile.async('string');
-      
-      // Normalize text content to fix encoding issues
-      faqsJsonContent = this.normalizeTextContent(faqsJsonContent);
-      
-      let faqsData: any[];
-      
+      const indexJsonRaw = this.normalizeTextContent(await indexFile.async('string'));
+      let indexParsed: { faqs: FAQMetadata[] };
       try {
-        faqsData = JSON.parse(faqsJsonContent);
+        indexParsed = JSON.parse(indexJsonRaw);
       } catch (error) {
-        console.error('Invalid JSON in faqs.json:', error);
+        console.error('Invalid JSON in faqs/faqs.json:', error);
         return false;
       }
-      
-      // Extract HTML content files
-      const htmlContent: { [key: string]: string } = {};
-      const htmlFolder = zipContent.folder('html-content');
-      
-      if (htmlFolder) {
-        // Process each HTML file in the html-content folder
-        for (const [relativePath, file] of Object.entries(htmlFolder.files)) {
-          if (file && !file.dir && relativePath.endsWith('.html')) {
-            const fileName = relativePath.split('/').pop() || relativePath;
-            let htmlFileContent = await file.async('string');
-            
-            // Normalize HTML content to fix encoding issues
-            htmlFileContent = this.normalizeTextContent(htmlFileContent);
-            
-            htmlContent[fileName] = htmlFileContent;
-          }
+      const allMetas: FAQMetadata[] = Array.isArray(indexParsed?.faqs) ? indexParsed.faqs : [];
+
+      const faqs: ExportFAQEntry[] = [];
+      const htmlContent: { [folderId: string]: string } = {};
+
+      for (const meta of allMetas) {
+        const folderId = meta.folderId;
+        if (!folderId) {
+          console.warn('Skipping FAQ entry without folderId:', meta);
+          continue;
+        }
+        faqs.push(meta);
+
+        const htmlFile = zipContent.file(`faqs/${folderId}/answer.html`);
+        if (htmlFile) {
+          const html = this.normalizeTextContent(await htmlFile.async('string'));
+          htmlContent[folderId] = html;
         }
       }
-      
+
       // Extract metadata (optional)
       let metadata: any = {
         exportDate: new Date().toISOString(),
         version: this.EXPORT_VERSION,
-        itemCount: faqsData.length,
-        editedCount: faqsData.length
+        itemCount: faqs.length,
+        editedCount: faqs.length
       };
-      
       const metadataFile = zipContent.file('export-metadata.json');
       if (metadataFile) {
         try {
@@ -451,29 +487,19 @@ export class FAQExportService {
           console.warn('Could not parse metadata, using defaults:', error);
         }
       }
-      
-      // Construct ExportData object
-      const data: ExportData = {
-        metadata,
-        faqs: faqsData,
-        htmlContent
-      };
-      
-      // Validate the extracted data
+
+      const data: ExportData = { metadata, faqs, htmlContent };
+
       if (!this.validateExportData(data)) {
         console.error('Invalid export data format in ZIP file');
         return false;
       }
-      
-      // Process and import the data
+
       const success = await this.processImportData(data);
-      
       if (!success) {
         console.error('ZIP import failed during data processing');
       }
-      
       return success;
-      
     } catch (error) {
       console.error('Error importing ZIP file:', error);
       return false;
@@ -482,28 +508,25 @@ export class FAQExportService {
 
   private async processImportData(data: ExportData): Promise<boolean> {
     try {
-      // Convert back to EditedFAQ format
       const editedFAQs: EditedFAQ[] = [];
-      
+
       for (const faq of data.faqs) {
-        const htmlFileName = faq.Answer__c;
-        const htmlContent = data.htmlContent[htmlFileName];
-        
-        if (htmlContent) {
-          editedFAQs.push({
-            id: `${faq.Id}_imported_${Date.now()}`,
-            faqId: faq.Id,
-            question: faq.Question__c,
-            answer: this.decodeHTMLEntities(htmlContent),
-            category: faq.Category__c,
-            subCategory: faq.SubCategory__c,
-            timestamp: Date.now(),
-            version: 1
-          });
-        }
+        const htmlContent = data.htmlContent[faq.folderId];
+        if (!htmlContent) continue;
+
+        editedFAQs.push({
+          id: `${faq.id}_imported_${Date.now()}`,
+          faqId: faq.id,
+          question: faq.question,
+          answer: this.decodeHTMLEntities(htmlContent),
+          category: faq.category,
+          subCategory: faq.subCategory ?? undefined,
+          isActive: faq.isActive,
+          timestamp: Date.now(),
+          version: 1
+        });
       }
 
-      // Import to storage
       const success = await this.storageService.importEdits(editedFAQs);
       return success;
     } catch (error) {
@@ -524,61 +547,54 @@ export class FAQExportService {
   generateUpdateInstructions(data: ExportData, tempImages?: Map<string, File>, originalImages?: Map<string, File>): string {
     const hasImages = (tempImages && tempImages.size > 0) || (originalImages && originalImages.size > 0);
     const totalImageCount = (tempImages?.size || 0) + (originalImages?.size || 0);
-    
-    const imageInstructions = hasImages ? `
 
-3. Update Image Files (${totalImageCount} files total):
-   - Copy all image files from src/assets/image/ to your project's src/assets/image/ directory
-   - The following image files are included:
-${tempImages && tempImages.size > 0 ? Array.from(tempImages!.entries()).map(([path, file]) => `     - ${path} (${file.name}) [New]`).join('\n') : ''}${tempImages && tempImages.size > 0 && originalImages && originalImages.size > 0 ? '\n' : ''}${originalImages && originalImages.size > 0 ? Array.from(originalImages!.entries()).map(([path, file]) => `     - ${path} (${file.name}) [Original]`).join('\n') : ''}
-   - Ensure the directory structure is preserved: src/assets/image/[faq-id]/[faq-id]-[sequence].[ext]
-
-4. Rebuild the Application:
-   - Run: npm run build
-   - Test the changes locally: npm start
-
-5. Commit Changes:
-   - git add src/assets/data/faqs.json
-   - git add src/assets/faq-item/
-   - git add src/assets/image/
-   - git commit -m "Update FAQ content and images from editor"` : `
-
-3. Rebuild the Application:
-   - Run: npm run build
-   - Test the changes locally: npm start
-
-4. Commit Changes:
-   - git add src/assets/data/faqs.json
-   - git add src/assets/faq-item/
-   - git commit -m "Update FAQ content from editor"`;
+    const imageNote = hasImages ? `
+- Total images included: ${totalImageCount}${tempImages && tempImages.size > 0 ? ` (${tempImages.size} new)` : ''}${originalImages && originalImages.size > 0 ? ` (${originalImages.size} existing)` : ''}
+- Images live alongside their FAQ at faqs/<folderId>/images/.
+- HTML answers reference images using relative paths (images/<file>) or
+  absolute paths (assets/faqs/<folderId>/images/<file>); both work at runtime.` : '';
 
     const instructions = `
 FAQ Export Update Instructions
 ===============================
 Export Date: ${data.metadata.exportDate}
 Total FAQs: ${data.metadata.itemCount}
-Edited FAQs: ${data.metadata.editedCount}${hasImages ? `
-Total Images: ${totalImageCount}${tempImages && tempImages.size > 0 ? ` (${tempImages.size} new)` : ''}${originalImages && originalImages.size > 0 ? ` (${originalImages.size} original)` : ''}` : ''}
+Edited FAQs: ${data.metadata.editedCount}${imageNote}
+
+ZIP Layout:
+-----------
+faqs/
+  faqs.json                  ← all FAQ metadata (consolidated)
+  <folderId>/
+    answer.html
+    images/<file>
+UPDATE_INSTRUCTIONS.txt
+export-metadata.json
 
 How to Update Your Codebase:
------------------------------
+----------------------------
 
-1. Update FAQ Data:
-   - Replace src/assets/data/faqs.json with the exported faqs.json file
+1. Replace FAQ Assets:
+   - Copy the entire \`faqs/\` directory from this ZIP into \`src/assets/\`,
+     overwriting \`src/assets/faqs/\` in your project.
+   - Top-level \`faqs.json\` carries metadata for all ${Object.keys(data.htmlContent).length} FAQs;
+     each \`<folderId>/\` holds that FAQ's answer.html + images/.
 
-2. Update HTML Content:
-   - Copy all exported HTML files to src/assets/faq-item/
-   - The following files need to be updated:
-${Object.keys(data.htmlContent).map(file => `     - ${file}`).join('\n')}${imageInstructions}
+2. Rebuild and Test:
+   - Run: npm install (if needed)
+   - Run: npm start
+   - Open the FAQ page and verify the updated entries render correctly.
+
+3. Commit Changes:
+   - git add src/assets/faqs/
+   - git commit -m "Update FAQ content from editor"
 
 Notes:
 ------
-- Make sure to backup existing files before replacing
-- Review all changes before committing to version control
-- Test thoroughly in development before deploying to production${hasImages ? `
-- Image files are organized by FAQ ID to avoid conflicts
-- Image paths in HTML content use [IMG: assets/image/...] format for proper linking${originalImages && originalImages.size > 0 ? `
-- Original images are included to ensure all references work correctly` : ''}` : ''}
+- The legacy split layout (assets/data/faqs.json + assets/faq-item/ + assets/image/)
+  is no longer used. Each FAQ is now a self-contained folder under assets/faqs/.
+- Backup existing files before overwriting if you have local edits.
+- Test thoroughly in development before deploying to production.
 `;
 
     return instructions;
@@ -721,30 +737,22 @@ Notes:
   }
 
   /**
-   * Normalize entire export data structure
+   * Normalize entire export data structure (encoding fixes + entity decoding).
    */
   private normalizeExportData(data: ExportData): ExportData {
     return {
       ...data,
-      faqs: data.faqs.map(faq => {
-        const normalizedFaq: any = { ...faq };
-        
-        // Normalize existing text fields without adding new ones
-        if (faq.Question__c !== undefined) {
-          normalizedFaq.Question__c = this.normalizeTextContent(faq.Question__c || '');
-        }
-        if (faq.Category__c !== undefined) {
-          normalizedFaq.Category__c = this.normalizeTextContent(faq.Category__c || '');
-        }
-        if (faq.SubCategory__c !== undefined) {
-          normalizedFaq.SubCategory__c = this.normalizeTextContent(faq.SubCategory__c || '');
-        }
-        
-        return normalizedFaq;
-      }),
+      faqs: data.faqs.map(faq => ({
+        ...faq,
+        question: this.normalizeTextContent(faq.question || ''),
+        category: this.normalizeTextContent(faq.category || ''),
+        subCategory: faq.subCategory != null
+          ? this.normalizeTextContent(faq.subCategory)
+          : faq.subCategory ?? null
+      })),
       htmlContent: Object.fromEntries(
         Object.entries(data.htmlContent).map(([key, value]) => [
-          key, 
+          key,
           this.normalizeTextContent(value)
         ])
       )

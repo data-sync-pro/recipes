@@ -1,0 +1,23 @@
+<p>
+  It defines a shared SOQL filter applied to all Executables in the Pipeline.
+  This ensures consistent data retrieval while letting each Executable add its
+  own filters.
+</p>
+<p><strong>Benefits:</strong></p>
+<ul>
+  <li>
+    <p>Standardizes data retrieval across Executables.</p>
+  </li>
+  <li>
+    <p>Reduces redundancy by avoiding repeated filters</p>
+  </li>
+</ul>
+<p>
+  <strong>Tip:</strong> When editing an Executable's Retrieve query, temporarily
+  remove the shared criteria, make your changes, then reapply it to avoid
+  conflicts.
+</p>
+
+<img
+  src="images/purpose-of-additional-criteria-in-pipeline.jpg"
+/>

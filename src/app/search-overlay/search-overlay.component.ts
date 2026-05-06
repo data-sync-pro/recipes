@@ -13,15 +13,7 @@ import {
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
-interface RawFaq {
-  Id: string;
-  Question__c: string;
-  Answer__c: string;
-  Category__c: string;
-  SubCategory__c: string | null;
-  isActive?: boolean;
-}
+import { FAQMetadata } from '../shared/models/faq.model';
 
 interface FaqItem {
   id: string;
@@ -70,28 +62,28 @@ export class SearchOverlayComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
-    this.http.get<RawFaq[]>('assets/data/faqs.json').subscribe({
-      next: (data) => {
-        this.suggestions = data
-          .filter(r => r.isActive !== false)  // Filter out inactive FAQs
-          .map((r) => ({
-            id: r.Id,
-            question: r.Question__c,
-            route: r.Answer__c.replace('.html', ''),
-            category: r.Category__c,
-            subCategory: r.SubCategory__c,
-            tags: r.SubCategory__c
-              ? [r.Category__c, r.SubCategory__c]
-              : [r.Category__c],
-          }));
+    // Single GET — assets/faqs/faqs.json holds the full metadata list.
+    this.http.get<{ faqs: FAQMetadata[] }>('assets/faqs/faqs.json').subscribe({
+      next: (idx) => {
+        const entries = (idx?.faqs || []).filter(meta => meta.isActive !== false);
+        this.suggestions = entries.map(meta => ({
+          id: meta.id,
+          question: meta.question,
+          route: meta.folderId,
+          category: meta.category,
+          subCategory: meta.subCategory ?? null,
+          tags: meta.subCategory
+            ? [meta.category, meta.subCategory]
+            : [meta.category],
+        }));
         this.categories = [...new Set(this.suggestions.map((i) => i.category))];
         this.filterSubCategoryList();
         this.filterSuggestions();
         this.isLoading = false;
-        
+
         // Load answer texts asynchronously for search
         this.loadAnswerTexts();
-        
+
         this.cdr.detectChanges();
       },
       error: (error) => {
@@ -278,7 +270,7 @@ export class SearchOverlayComponent implements OnInit, OnChanges {
   private async loadAnswerTexts(): Promise<void> {
     const loadPromises = this.suggestions.map(async (faq) => {
       try {
-        const htmlPath = `assets/faq-item/${faq.route}.html`;
+        const htmlPath = `assets/faqs/${faq.route}/answer.html`;
         const response = await fetch(htmlPath);
         
         if (response.ok) {

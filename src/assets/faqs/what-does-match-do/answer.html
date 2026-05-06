@@ -1,0 +1,8 @@
+<p><strong>Match</strong> links source records with their corresponding target records, determining how each action should be applied. It's central to Insert, Update, Upsert, Merge, Delete, and Undelete operations — ensuring records are routed and processed correctly.</p><p><strong>How Match works:</strong></p><ul>
+<li><strong>Record Matching</strong> — Compares source records to target records using the <strong>Target Matching Field</strong>.</li>
+<li><strong>Insert Logic</strong> — When a Target Matching Field is defined, records are inserted only if no match exists; without one, inserts proceed unconditionally.</li>
+<li><strong>Multi-Field Matching</strong> — DSP supports a single Target Matching Field, but multi-field matching can be achieved through transformations such as <code>VLOOKUP</code>.</li>
+<li><strong>Sorting & Selection</strong> — Matches can be sorted, and the <strong>Principal Matched Record Selection Rule</strong> controls whether the action runs on the first match or on all matches.</li>
+<li><strong>Merge Matching</strong> — In Merge operations, the <strong>Principal Matched Record</strong> becomes the Master Record used to consolidate duplicates.</li></ul><br>
+
+<img src="images/match-what-does-match-do.jpg">

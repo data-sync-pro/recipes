@@ -137,7 +137,6 @@
              [class.inactive]="faq.isActive === false"
              (click)="selectFAQ(faq)">
           <div class="faq-item-header">
-            <span class="faq-id">{{ faq.name }}</span>
             <span class="status-indicator inactive" *ngIf="faq.isActive === false" title="Inactive FAQ">🚫</span>
             <span class="edit-indicator" *ngIf="isEdited(faq)">✏️</span>
           </div>

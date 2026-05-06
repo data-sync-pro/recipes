@@ -32,8 +32,8 @@
       "updateMode": "lazy",
       "resources": {
         "files": [
-          "/assets/faq-item/**/*.html",
-          "/assets/data/faqs.json"
+          "/assets/faqs/**/*.html",
+          "/assets/faqs/**/*.json"
         ]
       }
     },
@@ -54,7 +54,7 @@
     {
       "name": "faq-api",
       "urls": [
-        "/assets/data/faqs.json"
+        "/assets/faqs/faqs.json"
       ],
       "cacheConfig": {
         "strategy": "freshness",
@@ -66,7 +66,7 @@
     {
       "name": "faq-content",
       "urls": [
-        "/assets/faq-item/**"
+        "/assets/faqs/**"
       ],
       "cacheConfig": {
         "strategy": "performance",

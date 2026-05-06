@@ -18,12 +18,12 @@ function categoryMatcher(segments: UrlSegment[]): UrlMatchResult | null {
       'connections'
     ];
     
-    // Only match known categories, reject answerPaths
+    // Only match known categories, reject FAQ folder ids
     if (validCategories.includes(path)) {
       return { consumed: segments, posParams: { cat: segments[0] } };
     }
   }
-  return null; // Reject match, including answerPaths
+  return null; // Reject match, including FAQ folder ids
 }
 
 // Matcher function for category/subcategory routes  
@@ -52,8 +52,8 @@ function categorySubcategoryMatcher(segments: UrlSegment[]): UrlMatchResult | nu
   return null; // Reject invalid combinations
 }
 
-// Matcher function for answerPath routes (FAQ navigation)
-function answerPathMatcher(segments: UrlSegment[]): UrlMatchResult | null {
+// Matcher function for FAQ folder-id routes (FAQ navigation)
+function folderIdMatcher(segments: UrlSegment[]): UrlMatchResult | null {
   if (segments.length === 1) {
     const path = segments[0].path.toLowerCase();
     
@@ -74,12 +74,12 @@ function answerPathMatcher(segments: UrlSegment[]): UrlMatchResult | null {
     ];
     const isKnownCategory = validCategories.includes(path);
     
-    // If it looks like answerPath and is not a known category, match it
+    // If it looks like a folder id and is not a known category, match it
     if (hasMultipleHyphens && isLongerThanCategory && !isKnownCategory) {
       return { consumed: segments, posParams: { cat: segments[0] } }; // Use 'cat' param for compatibility
     }
   }
-  return null; // Reject if doesn't look like answerPath
+  return null; // Reject if doesn't look like a folder id
 }
 
 const routes: Routes = [
@@ -92,9 +92,9 @@ const routes: Routes = [
     matcher: categorySubcategoryMatcher, 
     component: FaqComponent 
   },
-  { 
-    matcher: answerPathMatcher, 
-    component: FaqComponent 
+  {
+    matcher: folderIdMatcher,
+    component: FaqComponent
   }
 ];
 

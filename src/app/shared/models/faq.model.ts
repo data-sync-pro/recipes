@@ -1,7 +1,20 @@
 import { SafeHtml } from '@angular/platform-browser';
 
-/**
+// One entry in assets/faqs/faqs.json — full metadata, including which folder
+// (under assets/faqs/) holds the answer.html + images/ for this FAQ.
+export interface FAQMetadata {
+  id: string;
+  folderId: string;
+  question: string;
+  category: string;
+  subCategory?: string | null;
+  seqNo?: string | null;
+  isActive?: boolean;
+}
 
+/**
+ * @deprecated Legacy schema of assets/data/faqs.json. Kept for import/migration
+ * compatibility only. New code should use FAQMetadata + FAQIndexItem.
  */
 export interface SourceFAQRecord {
   Id: string;
@@ -14,16 +27,13 @@ export interface SourceFAQRecord {
   isActive?: boolean;
 }
 
-/**
-
- */
 export interface FAQItem {
   id: string;
-  name?: string;
   seqNo?: string | null;
   question: string;
   answer: string;
-  answerPath: string;
+  // Folder name under assets/faqs/. Identifies the FAQ on disk and in URLs.
+  folderId: string;
   safeAnswer?: SafeHtml;
   category: string;
   subCategory?: string | null;
