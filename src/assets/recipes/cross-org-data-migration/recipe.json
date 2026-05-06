@@ -86,7 +86,7 @@
     {
       "sections": [
         {
-          "label": "Required Custom Fields in Target Org",
+          "label": "Target Org Custom Fields",
           "objects": [
             {
               "name": "Account",

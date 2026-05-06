@@ -22,7 +22,6 @@
 
     .prereqs-section-description {
       margin: 0 0 0.75rem 0;
-      padding-left: 1rem;
       font-size: 0.9rem;
       color: #2C2C2D;
       line-height: 1.55;
@@ -33,7 +32,6 @@
       flex-direction: column;
       gap: 12px;
       margin-top: 0.75rem;
-      padding-left: 1rem;
 
       .prereqs-media-item {
         width: 100%;
@@ -64,7 +62,6 @@
 
     .prereqs-object {
       margin-bottom: 0.85rem;
-      padding-left: 1rem;
 
       &:last-child {
         margin-bottom: 0;

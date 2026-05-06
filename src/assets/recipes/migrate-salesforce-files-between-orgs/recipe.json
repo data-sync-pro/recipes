@@ -156,7 +156,7 @@
     {
       "sections": [
         {
-          "label": "Required Custom Fields in Target Org",
+          "label": "Target Org Custom Fields",
           "objects": [
             {
               "name": "Account",
@@ -189,7 +189,7 @@
     {
       "sections": [
         {
-          "label" :"Required Permission",
+          "label": "Required Permission",
           "description": "Ensure that the authenticated user on both the source and target connections has the \"Query All Files\" permission enabled, either through an assigned permission set or their profile.",
           "media": [
             {
