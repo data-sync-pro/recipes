@@ -92,14 +92,14 @@
               "name": "Account",
               "objectType": "Standard Object",
               "fields": [
-                { "name": "SourceSystemID__c", "type": "Text", "length": 50 }
+                { "name": "SourceSystemID__c", "type": "Text", "length": 18 }
               ]
             },
             {
               "name": "Contact",
               "objectType": "Standard Object",
               "fields": [
-                { "name": "SourceSystemID__c", "type": "Text", "length": 50 }
+                { "name": "SourceSystemID__c", "type": "Text", "length": 18 }
               ]
             }
           ]

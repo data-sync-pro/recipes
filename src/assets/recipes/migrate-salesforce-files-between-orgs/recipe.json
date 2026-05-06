@@ -165,7 +165,7 @@
                 {
                   "name": "SourceSystemID__c",
                   "type": "Text",
-                  "length": 50
+                  "length": 18
                 }
               ]
             },
@@ -176,12 +176,12 @@
                 {
                   "name": "SourceSystemID__c",
                   "type": "Text",
-                  "length": 50
+                  "length": 18
                 },
                 {
                   "name": "ContentDocumentSourceSystemID__c",
                   "type": "Text",
-                  "length": 50
+                  "length": 18
                 }
               ]
             }
