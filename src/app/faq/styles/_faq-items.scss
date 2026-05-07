@@ -32,7 +32,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   // When on homepage (all-faqs) without breadcrumb navigation
   .all-faqs & {
-    height: calc(100vh - 200px);
+    height: calc(100vh - 170px);
   }
   
   // Mobile responsive adjustments
@@ -396,9 +396,24 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 // ==================== FAQ Feedback and Share Section ====================
 
 .faq-feedback-section {
-  padding: 0 20px;
-  position: relative;
-  margin-bottom: 40px;
+  position: fixed;
+  bottom: 1.5rem;
+  right: calc(320px + 1.5rem); // offset by TOC width when TOC is visible
+  z-index: 100;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transition: right 0.3s ease;
+
+  .faq-layout-container.toc-hidden & {
+    right: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    right: 1rem;
+    bottom: 1rem;
+  }
 }
 
 .feedback-container {
@@ -581,12 +596,17 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   width: 32px;
   height: 32px;
   padding: 0;
-  border: 1px solid #d1d5db;
+  border: 1px solid transparent;
   border-radius: 6px;
-  background: #ffffff;
-  color: #6b7280;
+  background: transparent;
+  color: #4b5563;
   cursor: pointer;
   transition: all 0.2s ease;
+  opacity: 0.85;
+
+  &:hover {
+    opacity: 1;
+  }
   
   &.copy-btn {
     // Specific styling for copy link button
@@ -613,7 +633,8 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       border-color: #10b981;
       background: #10b981;
       color: #ffffff;
-      
+      opacity: 1;
+
       lightning-icon {
         --sds-c-icon-color-foreground-default: #ffffff;
       }
@@ -805,8 +826,6 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 // ===== Responsive Design =====
 @media (max-width: 767px) {
   .faq-feedback-section {
-    padding: 12px 16px;
-    border-radius: 8px;
     &:hover {
       transform: none; // Disable hover transform on mobile
     }
