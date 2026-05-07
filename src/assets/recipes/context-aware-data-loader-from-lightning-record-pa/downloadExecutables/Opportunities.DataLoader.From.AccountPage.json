@@ -198,7 +198,7 @@
           "pushtopics__IsHeader__c": false,
           "pushtopics__IsTargetMatchingField__c": true,
           "pushtopics__Label__c": "Source System ID",
-          "pushtopics__Length__c": 50,
+          "pushtopics__Length__c": 18,
           "pushtopics__Mapping__c": "Id",
           "pushtopics__Nillable__c": true,
           "pushtopics__Type__c": "string",

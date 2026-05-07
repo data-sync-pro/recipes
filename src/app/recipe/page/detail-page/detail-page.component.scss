@@ -328,45 +328,47 @@
         }
       }
 
-      // Walkthrough tab switcher (only rendered for multi-tab walkthroughs)
+      // Walkthrough tab switcher (only rendered for multi-tab walkthroughs).
+      // Classic underlined-tabs look: shared bottom rule, active tab carries a
+      // colored underline that overlaps the rule, even-width distribution.
       .walkthrough-tabs {
         display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin: 0 0 20px 0;
-        padding-bottom: 12px;
+        justify-content: space-between;
+        margin: 0 8px 20px 8px;
         border-bottom: 1px solid #e5e7eb;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: thin;
+        padding: 0;
+
 
         .walkthrough-tab-btn {
           appearance: none;
           background: transparent;
-          border: 1px solid transparent;
-          border-radius: 6px;
+          border: none;
+          border-bottom: 2px solid transparent;
           color: #4b5563;
           cursor: pointer;
           font-size: 0.875rem;
           font-weight: 500;
-          padding: 6px 14px;
-          transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+          padding: 0 4px 10px 4px;
+          flex: 0 0 auto;
+          text-align: left;
+          transition: color 0.15s ease, border-color 0.15s ease;
 
           &:hover {
-            background-color: #F4F7FC;
             color: #2253B2;
           }
 
           &.active {
-            background-color: #E8F0FB;
             color: #2253B2;
-            border-color: #C7D7F0;
+            font-weight: 600;
+            border-bottom-color: #2253B2;
           }
         }
       }
-
-      .walkthrough-tab-panel {
-        // Panel itself adds no extra spacing — child .walkthrough-step
-        // already has padding-bottom for separation.
-      }
-
+      
       .walkthrough-step {
         padding-bottom: 24px;
         margin: 0px;
@@ -376,6 +378,16 @@
           align-items: center;
           gap: 12px;
           margin-bottom: 20px;
+          padding: 0 8px;
+
+          .step-bullet {
+            flex-shrink: 0;
+            width: 20px;
+            text-align: center;
+            color: #2253B2;
+            font-size: 1.25rem;
+            line-height: 1;
+          }
 
           .step-number-badge {
             flex-shrink: 0;
@@ -519,168 +531,6 @@
         }
       }
 
-      .recipe-prereqs {
-        margin: 1.5rem 0 1.25rem 0;
-        padding: 20px 24px;
-        background: #fff;
-        border: 1px solid #e5e7eb;
-        border-radius: 6px;
-
-        > .prereqs-title {
-          margin: 0 0 1rem 0;
-          font-size: 1rem;
-          font-weight: 500;
-          color: #2253B2;
-          line-height: 1.4;
-        }
-
-        .prereqs-callout + .prereqs-callout {
-          margin-top: 1.5rem;
-          padding-top: 1.5rem;
-          border-top: 1px solid #e5e7eb;
-        }
-
-        .prereqs-section + .prereqs-section {
-          margin-top: 1.25rem;
-        }
-
-        .prereqs-section {
-          .prereqs-section-label {
-            margin: 0 0 0.85rem 0;
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: #2C2C2D;
-            line-height: 1.4;
-          }
-
-          .prereqs-section-description {
-            margin: 0 0 0.75rem 0;
-            padding-left: 1rem;
-            font-size: 0.9rem;
-            color: #2C2C2D;
-            line-height: 1.55;
-          }
-
-          .prereqs-section-media {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 0.75rem;
-            padding-left: 1rem;
-
-            .prereqs-media-item {
-              width: 100%;
-
-              .prereqs-media-image,
-              .prereqs-media-video {
-                width: 100%;
-                max-width: 720px;
-                height: auto;
-                border: 1px solid #e5e7eb;
-                border-radius: 6px;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-              }
-
-              .prereqs-media-image {
-                cursor: pointer;
-                transition: opacity 0.2s ease;
-
-                &:hover {
-                  opacity: 0.85;
-                }
-              }
-
-              .prereqs-media-video {
-                max-height: 600px;
-              }
-            }
-          }
-
-          .prereqs-object {
-            margin-bottom: 0.85rem;
-            padding-left: 1rem;
-
-            &:last-child {
-              margin-bottom: 0;
-            }
-
-            .prereqs-object-header {
-              display: flex;
-              align-items: center;
-              gap: 8px;
-              margin-bottom: 8px;
-
-              .prereqs-object-name {
-                font-size: 0.95rem;
-                font-weight: 500;
-                color: #2C2C2D;
-              }
-
-              .prereqs-object-type {
-                display: inline-block;
-                padding: 1px 8px;
-                background: #F1F6FB;
-                color: #2253B2;
-                border-radius: 3px;
-                font-size: 0.75rem;
-                font-weight: 500;
-              }
-            }
-
-            .prereqs-fields, .prereqs-record-types {
-              display: flex;
-              flex-wrap: wrap;
-              gap: 6px;
-              padding-left: 0.75rem;
-            }
-
-            .prereqs-record-type {
-              align-items: baseline;
-              gap: 6px;
-              padding: 3px 8px;
-              background: #f5f5f5;
-              border-radius: 3px;
-            }
-
-            .prereqs-field {
-              display: inline-flex;
-              align-items: baseline;
-              gap: 6px;
-              padding: 3px 8px;
-              background: #f5f5f5;
-              border-radius: 3px;
-
-              .prereqs-field-name {
-                font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-                font-size: 0.875rem;
-                color: #2C2C2D;
-                background: transparent;
-                padding: 0;
-              }
-
-              .prereqs-field-type {
-                font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-                font-size: 0.875rem;
-                color: #5c5c5c;
-                font-style: italic;
-              }
-
-              .prereqs-field-index {
-                display: inline-block;
-                padding: 1px 6px;
-                background: #E8F0FB;
-                color: #2253B2;
-                border-radius: 3px;
-                font-size: 0.7rem;
-                font-weight: 500;
-                font-family: inherit;
-                font-style: normal;
-              }
-            }
-          }
-        }
-      }
-
     }
   }
 
@@ -758,6 +608,31 @@
             color: #2253B2;
             font-weight: 500;
           }
+
+          &.toc-grandchild {
+            position: relative;
+            padding-left: 64px;
+            font-size: 0.78125rem;
+
+            &::before {
+              content: '•';
+              position: absolute;
+              left: 48px;
+              color: #999;
+            }
+          }
+        }
+      }
+
+      // Walkthrough TOC: each parent + its substeps live in a .toc-group
+      // wrapper. When something inside is active, the whole card gets a
+      // background — same shade as .recipe-section-title for consistency.
+      .toc-group {
+        border-radius: 3px;
+        padding: 0;
+
+        &:has(.toc-link.active) {
+          background-color: #F1F6FB;
         }
       }
     }

@@ -39,6 +39,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { RecipeLayoutComponent } from './recipe-layout/recipe-layout.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
+import { RecipePrereqsComponent } from './recipe-prereqs/recipe-prereqs.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
     BreadcrumbComponent,
     RecipeLayoutComponent,
     CategoryListComponent,
-    RecipeListComponent
+    RecipeListComponent,
+    RecipePrereqsComponent
   ],
   imports: [
     CommonModule,

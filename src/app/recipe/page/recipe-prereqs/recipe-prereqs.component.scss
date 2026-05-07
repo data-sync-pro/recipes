@@ -1,0 +1,154 @@
+.recipe-prereqs {
+  margin: 12px 12px 20px 12px;
+
+  .prereqs-callout + .prereqs-callout {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .prereqs-section + .prereqs-section {
+    margin-top: 1.25rem;
+  }
+
+  .prereqs-section {
+    .prereqs-section-label {
+      margin: 0 0 0.85rem 0;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #2C2C2D;
+      line-height: 1.4;
+    }
+
+    .prereqs-section-description {
+      margin: 0 0 0.75rem 0;
+      font-size: 0.9rem;
+      color: #2C2C2D;
+      line-height: 1.55;
+    }
+
+    .prereqs-section-media {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 0.75rem;
+
+      .prereqs-media-item {
+        width: 100%;
+
+        .prereqs-media-image,
+        .prereqs-media-video {
+          width: 100%;
+          height: auto;
+          border: 1px solid #e5e7eb;
+          border-radius: 6px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .prereqs-media-image {
+          cursor: pointer;
+          transition: opacity 0.2s ease;
+
+          &:hover {
+            opacity: 0.85;
+          }
+        }
+
+        .prereqs-media-video {
+          max-height: 600px;
+        }
+      }
+    }
+
+    // Chip row — used both at section level (flat custom-field chips) and
+    // inside .prereqs-object (object's own field/record-type chips).
+    .prereqs-fields,
+    .prereqs-record-types {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 0.85rem;
+    }
+
+    .prereqs-record-type {
+      align-items: baseline;
+      gap: 6px;
+      padding: 3px 8px;
+      background: #f5f5f5;
+      border-radius: 3px;
+    }
+
+    .prereqs-field {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      padding: 3px 8px;
+      background: #f5f5f5;
+      border-radius: 3px;
+
+      .prereqs-field-name {
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-size: 0.875rem;
+        color: #2C2C2D;
+        background: transparent;
+        padding: 0;
+      }
+
+      .prereqs-field-type {
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-size: 0.875rem;
+        color: #5c5c5c;
+        font-style: italic;
+      }
+
+      .prereqs-field-index {
+        display: inline-block;
+        padding: 1px 6px;
+        background: #E8F0FB;
+        color: #2253B2;
+        border-radius: 3px;
+        font-size: 0.7rem;
+        font-weight: 500;
+        font-family: inherit;
+        font-style: normal;
+      }
+    }
+
+    .prereqs-object {
+      margin-bottom: 0.85rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .prereqs-object-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+
+        .prereqs-object-name {
+          font-size: 0.95rem;
+          font-weight: 500;
+          color: #2C2C2D;
+        }
+
+        .prereqs-object-type {
+          display: inline-block;
+          padding: 1px 8px;
+          background: #F1F6FB;
+          color: #2253B2;
+          border-radius: 3px;
+          font-size: 0.75rem;
+          font-weight: 500;
+        }
+      }
+
+      // Object-scoped chip rows get a slight indent under the object header.
+      .prereqs-fields,
+      .prereqs-record-types {
+        padding-left: 0.75rem;
+      }
+    }
+  }
+}

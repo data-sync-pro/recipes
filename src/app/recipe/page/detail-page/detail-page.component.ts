@@ -28,6 +28,8 @@ interface TocItem {
   id: string;
   label: string;
   children?: TocItem[];
+  tabIndex?: number;
+  indent?: boolean;
 }
 
 interface SectionConfig {
@@ -67,6 +69,12 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
       label: 'Video Demo',
       templateRef: 'videoDemo',
       isVisible: (_r, c) => c.cachedYouTubeVideos.length > 0
+    },
+    {
+      id: 'prerequisites',
+      label: 'Prerequisites',
+      templateRef: 'prerequisites',
+      isVisible: (r) => !!(r.downloadFileCallout && r.downloadFileCallout.length > 0)
     },
     {
       id: 'download-file',
@@ -277,23 +285,53 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  scrollToSection(event: Event, sectionId: string): void {
+  scrollToSection(event: Event, sectionId: string, tabIndex?: number): void {
     event.preventDefault();
 
-    // Set the active section immediately
     this.activeTocSection = sectionId;
+    // Suppress the scroll listener for a short window so it can't overwrite
+    // the just-clicked item with whatever section the viewport calculation
+    // picks during the programmatic scroll.
+    this.isScrollingToSection = true;
     this.cdr.markForCheck();
 
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const headerOffset = 80; // Offset for fixed header
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+    const doScroll = () => {
+      // Tab parents (id === 'walkthrough-tab-N', no '-step-N' suffix) represent
+      // the whole walkthrough for that tab. Scrolling to the panel element
+      // would land at the first substep and hide the section heading + tab
+      // switcher. Redirect to the walkthrough section so the user sees the
+      // section title and the tabs together.
+      const isTabParent = /^walkthrough-tab-\d+$/.test(sectionId);
+      const targetId = isTabParent ? 'walkthrough' : sectionId;
+      const element = document.getElementById(targetId);
+      if (!element) return;
+      element.scrollIntoView({ block: 'start', behavior: 'auto' });
+      window.scrollBy(0, -80);
+    };
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'auto'
-      });
+    const releaseGuard = () => {
+      setTimeout(() => {
+        this.isScrollingToSection = false;
+        this.cdr.markForCheck();
+      }, 300);
+    };
+
+    // If the target lives in a non-active walkthrough tab, switch tabs first
+    // and wait for the browser to lay out the newly-mounted panel before we
+    // scroll. detectChanges() commits the DOM synchronously, but layout/paint
+    // happens later — measuring before that gives positions from the previous
+    // tab and the page appears not to scroll. Two rAFs guarantee we run after
+    // the next layout+paint cycle.
+    if (typeof tabIndex === 'number' && tabIndex !== this.activeWalkthroughTabIndex) {
+      this.setActiveWalkthroughTab(tabIndex);
+      this.cdr.detectChanges();
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        doScroll();
+        releaseGuard();
+      }));
+    } else {
+      doScroll();
+      releaseGuard();
     }
   }
 
@@ -355,16 +393,37 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     for (const section of this.visibleSections) {
       const tocItem: TocItem = { id: section.id, label: section.label };
 
-      // Walkthrough: show only the active tab's steps as children. The tab
-      // switcher itself is in the page; users navigate steps within a tab.
-      // Switching tabs rebuilds the TOC so the children always match.
+      // Walkthrough: enumerate every tab as a parent entry plus its steps as
+      // indented children, regardless of which tab is currently active. This
+      // gives the TOC the full hierarchy at once. Clicking a child whose
+      // tabIndex differs from the active tab triggers a tab-switch in
+      // scrollToSection before scrolling. Single-tab recipes skip the parent
+      // entry to keep the previous flat-TOC look unchanged.
       if (section.id === 'walkthrough' && this.currentRecipe.walkthrough.length > 0) {
-        const tabIdx = this.activeWalkthroughTabIndex;
-        const activeTab = this.currentRecipe.walkthrough[tabIdx];
-        if (activeTab) {
-          tocItem.children = activeTab.steps.map((step, si) => ({
-            id: `walkthrough-tab-${tabIdx}-step-${si + 1}`,
-            label: `${si + 1}. ${step.step}`
+        const tabs = this.currentRecipe.walkthrough;
+        const isMultiTab = tabs.length > 1;
+        if (isMultiTab) {
+          // Multi-tab: real two-level tree so the template can wrap each
+          // parent + its substeps in a single group card (highlighted as a
+          // unit when something inside is active).
+          tocItem.children = tabs.map((tab, ti) => ({
+            id: `walkthrough-tab-${ti}`,
+            label: `${ti + 1}. ${tab.tab || `Tab ${ti + 1}`}`,
+            tabIndex: ti,
+            children: (tab.steps ?? []).map((step, si) => ({
+              id: `walkthrough-tab-${ti}-step-${si + 1}`,
+              label: step.step,
+              tabIndex: ti,
+              indent: true
+            }))
+          }));
+        } else {
+          // Single-tab (legacy / non-grouped): flat numbered list of steps,
+          // unchanged from before this change.
+          tocItem.children = (tabs[0]?.steps ?? []).map((step, si) => ({
+            id: `walkthrough-tab-0-step-${si + 1}`,
+            label: `${si + 1}. ${step.step}`,
+            tabIndex: 0
           }));
         }
       }
@@ -382,7 +441,6 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     if (this.activeWalkthroughTabIndex === index) return;
 
     this.activeWalkthroughTabIndex = index;
-    this.buildTocItems();
     this.cdr.markForCheck();
   }
 
@@ -443,13 +501,43 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
       }
     }
 
-    // If scrolled to bottom, activate the last TOC item
+    // If scrolled to bottom, activate the last TOC item that's currently in
+    // the DOM. The walkthrough TOC may be either a flat list (single-tab or
+    // legacy) or a two-level tree (multi-tab parent groups → substeps). We
+    // walk into the active tab's group when present and pick its last
+    // substep, otherwise fall back to the last flat child.
     const scrolledToBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 50);
     if (scrolledToBottom && this.tocItems.length > 0) {
       const lastItem = this.tocItems[this.tocItems.length - 1];
-      activeSection = lastItem.children?.length
-        ? lastItem.children[lastItem.children.length - 1].id
-        : lastItem.id;
+      if (lastItem.children?.length) {
+        const isMultiTab = lastItem.children.some(c => c.children?.length);
+        if (isMultiTab) {
+          const activeParent = lastItem.children.find(
+            c => c.tabIndex === this.activeWalkthroughTabIndex
+          );
+          if (activeParent?.children?.length) {
+            activeSection = activeParent.children[activeParent.children.length - 1].id;
+          } else {
+            activeSection = activeParent?.id ?? lastItem.id;
+          }
+        } else {
+          activeSection = lastItem.children[lastItem.children.length - 1].id;
+        }
+      } else {
+        activeSection = lastItem.id;
+      }
+    }
+
+    // When we're anywhere in the walkthrough section but the closest match is
+    // the bare top-level "walkthrough" header (panel/substeps not yet the
+    // dominant viewport block), prefer the active tab's parent group so the
+    // right-side TOC always shows which tab the user is reading.
+    if (
+      activeSection === 'walkthrough' &&
+      this.currentRecipe.walkthrough &&
+      this.currentRecipe.walkthrough.length > 1
+    ) {
+      activeSection = `walkthrough-tab-${this.activeWalkthroughTabIndex}`;
     }
 
     if (this.activeTocSection !== activeSection) {
