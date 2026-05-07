@@ -62,17 +62,15 @@
       <button class="btn btn-secondary" (click)="state.showImportDialog = true">
         Import
       </button>
-      <button class="btn btn-primary" (click)="state.showExportDialog = true"
-              [disabled]="getEditedCount() === 0">
-        <span *ngIf="getCreatedCount() > 0 && getEditedExistingCount() > 0">
-          Export ({{ getCreatedCount() }} new, {{ getEditedExistingCount() }} edited)
-        </span>
-        <span *ngIf="getCreatedCount() > 0 && getEditedExistingCount() === 0">
-          Export ({{ getCreatedCount() }} new)
-        </span>
-        <span *ngIf="getCreatedCount() === 0 && getEditedExistingCount() > 0">
-          Export ({{ getEditedExistingCount() }} edited)
-        </span>
+      <button class="btn btn-primary" (click)="exportEditAndNew()"
+              [disabled]="getEditedCount() === 0 || state.isExporting">
+        <span *ngIf="!state.isExporting">Export Edit & New ({{ getEditedCount() }})</span>
+        <span *ngIf="state.isExporting">Exporting...</span>
+      </button>
+      <button class="btn btn-primary" (click)="exportAllFaqs()"
+              [disabled]="faqList.length === 0 || state.isExporting">
+        <span *ngIf="!state.isExporting">Export All ({{ faqList.length }})</span>
+        <span *ngIf="state.isExporting">Exporting...</span>
       </button>
       <button class="btn btn-success save-all-btn" (click)="saveAllFAQs()"
               [disabled]="getUnsavedChangesCount() === 0">
@@ -463,65 +461,6 @@
   </div>
 </div>
 
-<!-- Export Dialog -->
-<div class="modal" *ngIf="state.showExportDialog" (click)="state.showExportDialog = false">
-  <div class="modal-content export-modal" (click)="$event.stopPropagation()">
-    <h2>Export FAQ Edits</h2>
-    
-    <!-- Export Progress -->
-    <div *ngIf="state.isExporting" class="export-progress">
-      <div class="progress-header">
-        <h3>{{ state.exportProgress?.step || 'Preparing export...' }}</h3>
-        <span class="progress-percentage">{{ state.exportProgress?.percentage || 0 }}%</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" [style.width.%]="state.exportProgress?.percentage || 0"></div>
-      </div>
-      <div class="progress-details" *ngIf="state.exportProgress">
-        {{ state.exportProgress.current }} / {{ state.exportProgress.total }} files processed
-      </div>
-    </div>
-    
-    <!-- Export Options -->
-    <div class="export-options" *ngIf="!state.isExporting">
-      <div class="export-option recommended">
-        <h4>📦 ZIP Archive (Recommended)</h4>
-        <p>Download all files in a single ZIP archive. Easiest to manage and deploy.</p>
-        <button class="btn btn-primary" (click)="exportAll()">
-          <span class="btn-icon">📦</span>
-          Export as ZIP
-        </button>
-      </div>
-      
-      <div class="export-option">
-        <h4>📄 Individual Files</h4>
-        <p>Download FAQ JSON, HTML files, and instructions separately.</p>
-        <button class="btn btn-secondary" (click)="exportSeparateFiles()">
-          <span class="btn-icon">📄</span>
-          Export Separate Files
-        </button>
-      </div>
-      
-      <div class="export-option">
-        <h4>🔗 JSON Only</h4>
-        <p>Download only the FAQ data in JSON format (for backup or analysis).</p>
-        <button class="btn btn-secondary" (click)="exportJSON()">
-          <span class="btn-icon">🔗</span>
-          Export JSON Data
-        </button>
-      </div>
-    </div>
-    
-    <!-- Action Buttons -->
-    <div class="modal-actions">
-      <button class="btn btn-secondary" 
-              (click)="state.showExportDialog = false"
-              [disabled]="state.isExporting">
-        {{ state.isExporting ? 'Please wait...' : 'Cancel' }}
-      </button>
-    </div>
-  </div>
-</div>
 
 <!-- Import Dialog -->
 <div class="modal" *ngIf="state.showImportDialog" (click)="state.showImportDialog = false">

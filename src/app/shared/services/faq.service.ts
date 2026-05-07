@@ -24,7 +24,11 @@ import {
 export class FAQService implements OnDestroy {
   private readonly FAQ_INDEX_URL = 'assets/faqs/faqs.json';
   private readonly FAQ_FOLDERS_BASE = 'assets/faqs/';
+  private readonly INACTIVE_PREFIX = '_inactive/';
   private readonly VERSION_URL = 'assets/data/version.json';
+
+  // folderId -> "<id>" or "_inactive/<id>"; populated when faqs.json is loaded.
+  private folderRelPath = new Map<string, string>();
   
   // Cache
   private faqsCache$ = new BehaviorSubject<FAQItem[]>([]);
@@ -310,8 +314,37 @@ export class FAQService implements OnDestroy {
     });
   }
 
+  /**
+   * Build "assets/faqs/<id>/" or "assets/faqs/_inactive/<id>/" depending on the
+   * FAQ's isActive flag (looked up from the metadata cache populated when
+   * faqs.json is loaded).
+   */
+  public getFolderUrl(folderId: string): string {
+    const rel = this.folderRelPath.get(folderId) ?? folderId;
+    return `${this.FAQ_FOLDERS_BASE}${rel}/`;
+  }
+
+  public getAnswerHtmlUrl(folderId: string): string {
+    return `${this.getFolderUrl(folderId)}answer.html`;
+  }
+
   private buildAnswerUrl(folderId: string): string {
-    return `${this.FAQ_FOLDERS_BASE}${folderId}/answer.html`;
+    return this.getAnswerHtmlUrl(folderId);
+  }
+
+  /**
+   * Record where each FAQ folder lives (active vs. _inactive) based on the
+   * isActive flag from faqs.json. Called from fetchAllFAQItems before the
+   * inactive entries are filtered out, so all folders' paths are remembered.
+   */
+  private rememberFolderPaths(metas: FAQMetadata[]): void {
+    this.folderRelPath.clear();
+    for (const m of metas) {
+      const rel = m.isActive === false
+        ? `${this.INACTIVE_PREFIX}${m.folderId}`
+        : m.folderId;
+      this.folderRelPath.set(m.folderId, rel);
+    }
   }
 
   /**
@@ -341,6 +374,9 @@ export class FAQService implements OnDestroy {
     return this.http.get<{ faqs: FAQMetadata[] }>(this.FAQ_INDEX_URL).pipe(
       map(idx => {
         const entries = Array.isArray(idx?.faqs) ? idx.faqs : [];
+        // Remember every folder's path (active vs. _inactive) before filtering,
+        // so callers asking for inactive folders later still resolve correctly.
+        this.rememberFolderPaths(entries);
         const filtered = includeInactive
           ? entries
           : entries.filter(e => e.isActive !== false);
@@ -833,7 +869,7 @@ export class FAQService implements OnDestroy {
     } else if (folderId) {
       // Relative path inside a FAQ folder (e.g. "images/foo.jpg") — resolve
       // against the owning FAQ's folder.
-      normalizedSrc = `${this.FAQ_FOLDERS_BASE}${folderId}/${src.replace(/^\.?\//, '')}`;
+      normalizedSrc = `${this.getFolderUrl(folderId)}${src.replace(/^\.?\//, '')}`;
     } else {
       // Fallback: prepend assets/ to avoid broken paths.
       normalizedSrc = `assets/${src.replace(/^\.?\//, '')}`;
@@ -919,7 +955,7 @@ export class FAQService implements OnDestroy {
             return m;
           }
           if (folderId) {
-            return `${before}${this.FAQ_FOLDERS_BASE}${folderId}/${src.replace(/^\.?\//, '')}${after}`;
+            return `${before}${this.getFolderUrl(folderId)}${src.replace(/^\.?\//, '')}${after}`;
           }
           return m;
         });

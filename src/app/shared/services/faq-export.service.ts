@@ -34,6 +34,7 @@ export interface ExportProgress {
 })
 export class FAQExportService {
   private readonly EXPORT_VERSION = '1.0.0';
+  private readonly INACTIVE_PREFIX = '_inactive/';
 
   constructor(
     private http: HttpClient,
@@ -42,12 +43,35 @@ export class FAQExportService {
   ) {}
 
   /**
+   * Build a folderId -> relative-folder-path map from the export's metadata.
+   * Returns "_inactive/<id>" for inactive FAQs and "<id>" otherwise. The caller
+   * uses this to decide where each FAQ lives both inside the export ZIP and
+   * (when resolving image references) under assets/faqs/.
+   */
+  private buildRelPathMap(metas: FAQMetadata[]): Map<string, string> {
+    const m = new Map<string, string>();
+    for (const meta of metas) {
+      if (!meta?.folderId) continue;
+      m.set(
+        meta.folderId,
+        meta.isActive === false ? `${this.INACTIVE_PREFIX}${meta.folderId}` : meta.folderId
+      );
+    }
+    return m;
+  }
+
+  private relPathOf(folderId: string, relPathMap: Map<string, string>): string {
+    return relPathMap.get(folderId) ?? folderId;
+  }
+
+  /**
    * Extract absolute image asset paths from a FAQ's HTML. Both relative
    * (e.g. "images/foo.jpg") and absolute ("assets/faqs/<folderId>/images/foo.jpg")
    * forms are supported; the relative form is resolved against the owning FAQ's folder.
    */
   private extractImageReferencesFromHTML(
-    htmlContent: { [folderId: string]: string }
+    htmlContent: { [folderId: string]: string },
+    relPathMap: Map<string, string>
   ): Set<string> {
     const imageRefs = new Set<string>();
 
@@ -55,6 +79,7 @@ export class FAQExportService {
     const attrRegex = /(?:src|href)\s*=\s*['"]([^'"]+)['"]/gi;
 
     for (const [folderId, content] of Object.entries(htmlContent)) {
+      const rel = this.relPathOf(folderId, relPathMap);
       let match;
       while ((match = attrRegex.exec(content)) !== null) {
         const raw = match[1];
@@ -64,7 +89,7 @@ export class FAQExportService {
         if (raw.startsWith('assets/faqs/') && raw.includes('/images/')) {
           imageRefs.add(raw);
         } else if (raw.startsWith('images/')) {
-          imageRefs.add(`assets/faqs/${folderId}/${raw}`);
+          imageRefs.add(`assets/faqs/${rel}/${raw}`);
         }
       }
     }
@@ -99,9 +124,10 @@ export class FAQExportService {
    * Map keys are absolute asset paths (assets/faqs/<folderId>/images/<file>).
    */
   private async fetchAllOriginalImages(
-    htmlContent: { [folderId: string]: string }
+    htmlContent: { [folderId: string]: string },
+    relPathMap: Map<string, string>
   ): Promise<Map<string, File>> {
-    const imageRefs = this.extractImageReferencesFromHTML(htmlContent);
+    const imageRefs = this.extractImageReferencesFromHTML(htmlContent, relPathMap);
     const originalImages = new Map<string, File>();
 
     for (const imagePath of imageRefs) {
@@ -112,6 +138,55 @@ export class FAQExportService {
     }
 
     return originalImages;
+  }
+
+  /**
+   * Build an ExportData covering every FAQ in `allFAQs` plus any newly-created
+   * FAQs from local storage. For existing FAQs, edited HTML overrides the
+   * on-disk `answer.html`; un-edited ones are fetched from disk.
+   */
+  async exportAll(allFAQs: FAQItem[]): Promise<ExportData> {
+    const editedFAQs = await this.storageService.exportEdits();
+    const { newFAQs, editedExistingFAQs } = this.separateNewAndEditedFAQs(editedFAQs, allFAQs);
+    const mergedFAQs = this.mergeFAQData(allFAQs, editedExistingFAQs, newFAQs);
+
+    const editedMap = new Map<string, EditedFAQ>();
+    editedExistingFAQs.forEach(e => editedMap.set(e.faqId, e));
+
+    const htmlContent: { [folderId: string]: string } = {};
+
+    for (const faq of allFAQs) {
+      const edited = editedMap.get(faq.id);
+      if (edited) {
+        const cleaned = this.cleanHTMLContent(edited.answer);
+        htmlContent[faq.folderId] = this.decodeHTMLEntities(cleaned);
+      } else {
+        const url = this.faqService.getAnswerHtmlUrl(faq.folderId);
+        try {
+          const html = await firstValueFrom(this.http.get(url, { responseType: 'text' }));
+          htmlContent[faq.folderId] = html;
+        } catch (err) {
+          console.warn(`exportAll: failed to load ${url}`, err);
+        }
+      }
+    }
+
+    newFAQs.forEach(faq => {
+      const folderId = this.generateFolderIdForNewFAQ(faq);
+      const cleaned = this.cleanHTMLContent(faq.answer);
+      htmlContent[folderId] = this.decodeHTMLEntities(cleaned);
+    });
+
+    return {
+      metadata: {
+        exportDate: new Date().toISOString(),
+        version: this.EXPORT_VERSION,
+        itemCount: allFAQs.length + newFAQs.length,
+        editedCount: editedExistingFAQs.length + newFAQs.length
+      },
+      faqs: mergedFAQs,
+      htmlContent
+    };
   }
 
   async exportAllEdits(): Promise<ExportData> {
@@ -285,9 +360,10 @@ export class FAQExportService {
 
     // Normalize data before creating ZIP
     const normalizedData = this.normalizeExportData(data);
+    const relPathMap = this.buildRelPathMap(normalizedData.faqs);
 
     // Get all images already referenced in HTML content
-    const originalImages = await this.fetchAllOriginalImages(normalizedData.htmlContent);
+    const originalImages = await this.fetchAllOriginalImages(normalizedData.htmlContent, relPathMap);
 
     const tempImageCount = tempImages ? tempImages.size : 0;
     const originalImageCount = originalImages.size;
@@ -319,11 +395,12 @@ export class FAQExportService {
       updateProgress('Adding faqs.json');
 
       // Per-FAQ answer.html (no per-folder faq.json anymore — metadata lives
-      // in the top-level faqs.json above).
+      // in the top-level faqs.json above). Inactive FAQs land under faqs/_inactive/.
       for (const [folderId, content] of Object.entries(normalizedData.htmlContent)) {
         const cleanedContent = this.cleanHTMLContent(content);
-        zip.file(`faqs/${folderId}/answer.html`, cleanedContent);
-        updateProgress(`Adding ${folderId}/answer.html`);
+        const rel = this.relPathOf(folderId, relPathMap);
+        zip.file(`faqs/${rel}/answer.html`, cleanedContent);
+        updateProgress(`Adding ${rel}/answer.html`);
       }
 
       // Add temporary (newly uploaded) images.
@@ -452,6 +529,7 @@ export class FAQExportService {
         return false;
       }
       const allMetas: FAQMetadata[] = Array.isArray(indexParsed?.faqs) ? indexParsed.faqs : [];
+      const relPathMap = this.buildRelPathMap(allMetas);
 
       const faqs: ExportFAQEntry[] = [];
       const htmlContent: { [folderId: string]: string } = {};
@@ -464,7 +542,12 @@ export class FAQExportService {
         }
         faqs.push(meta);
 
-        const htmlFile = zipContent.file(`faqs/${folderId}/answer.html`);
+        const rel = this.relPathOf(folderId, relPathMap);
+        // Try the path implied by isActive; fall back to the legacy flat layout
+        // so older ZIPs (everything under faqs/<id>/) still import.
+        const htmlFile =
+          zipContent.file(`faqs/${rel}/answer.html`) ??
+          (rel !== folderId ? zipContent.file(`faqs/${folderId}/answer.html`) : null);
         if (htmlFile) {
           const html = this.normalizeTextContent(await htmlFile.async('string'));
           htmlContent[folderId] = html;
@@ -591,8 +674,8 @@ How to Update Your Codebase:
 
 Notes:
 ------
-- The legacy split layout (assets/data/faqs.json + assets/faq-item/ + assets/image/)
-  is no longer used. Each FAQ is now a self-contained folder under assets/faqs/.
+- Each FAQ is a self-contained folder under assets/faqs/<folderId>/, with its
+  answer.html and any referenced images under images/.
 - Backup existing files before overwriting if you have local edits.
 - Test thoroughly in development before deploying to production.
 `;

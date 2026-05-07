@@ -398,7 +398,6 @@ interface EditorState {
   hasChanges: boolean;
   lastSaved: Date | null;
   showVersionHistory: boolean;
-  showExportDialog: boolean;
   showImportDialog: boolean;
   saveError: string | null;
   isExporting: boolean;
@@ -440,7 +439,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
     hasChanges: false,
     lastSaved: null,
     showVersionHistory: false,
-    showExportDialog: false,
     showImportDialog: false,
     saveError: null,
     isExporting: false,
@@ -589,7 +587,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
     
     // Escape to close dialogs
     if (event.key === 'Escape') {
-      this.state.showExportDialog = false;
       this.state.showImportDialog = false;
       this.state.showVersionHistory = false;
     }
@@ -1125,20 +1122,23 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  async exportAll(): Promise<void> {
+  async exportEditAndNew(): Promise<void> {
+    await this.runZipExport(() => this.exportService.exportAllEdits());
+  }
+
+  async exportAllFaqs(): Promise<void> {
+    await this.runZipExport(() => this.exportService.exportAll(this.faqList));
+  }
+
+  private async runZipExport(buildExportData: () => Promise<ExportData>): Promise<void> {
     this.state.isExporting = true;
     this.state.exportProgress = null;
-    
     try {
-      const exportData = await this.exportService.exportAllEdits();
-      
-      // Use new ZIP export with progress tracking and temporary images
+      const exportData = await buildExportData();
       await this.exportService.downloadAsZip(exportData, (progress: ExportProgress) => {
         this.state.exportProgress = progress;
       }, this.tempImageMap);
-      
       this.notificationService.exportSuccess(Object.keys(exportData.htmlContent).length);
-      this.state.showExportDialog = false;
     } catch (error: any) {
       const errorMessage = error?.message || 'Unknown error occurred during export';
       this.notificationService.exportError(errorMessage);
@@ -1146,49 +1146,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
     } finally {
       this.state.isExporting = false;
       this.state.exportProgress = null;
-    }
-  }
-
-  async exportSeparateFiles(): Promise<void> {
-    this.state.isExporting = true;
-    
-    try {
-      const exportData = await this.exportService.exportAllEdits();
-      
-      // Download files separately (legacy method)
-      this.exportService.downloadFAQsJSON(exportData);
-      this.exportService.downloadInstructions(exportData);
-      
-      // Download HTML files with delay
-      setTimeout(() => {
-        this.exportService.downloadHTMLFiles(exportData);
-      }, 1000);
-      
-      this.notificationService.exportSuccess(Object.keys(exportData.htmlContent).length + 2);
-      this.state.showExportDialog = false;
-    } catch (error: any) {
-      const errorMessage = error?.message || 'Unknown error occurred during export';
-      this.notificationService.exportError(errorMessage);
-      console.error('Export error:', error);
-    } finally {
-      this.state.isExporting = false;
-    }
-  }
-
-  async exportJSON(): Promise<void> {
-    this.state.isExporting = true;
-    
-    try {
-      const exportData = await this.exportService.exportAllEdits();
-      this.exportService.downloadAsJSON(exportData);
-      this.notificationService.exportSuccess(1);
-      this.state.showExportDialog = false;
-    } catch (error: any) {
-      const errorMessage = error?.message || 'Unknown error occurred during export';
-      this.notificationService.exportError(errorMessage);
-      console.error('Export JSON error:', error);
-    } finally {
-      this.state.isExporting = false;
     }
   }
 
@@ -1300,7 +1257,6 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
     
     // Close any open dialogs
     this.state.showVersionHistory = false;
-    this.state.showExportDialog = false;
     this.state.showImportDialog = false;
     
   }
@@ -1552,7 +1508,7 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
     if (!folderId) {
       return of('');
     }
-    const fullPath = `assets/faqs/${folderId}/answer.html`;
+    const fullPath = this.faqService.getAnswerHtmlUrl(folderId);
     return this.http.get(fullPath, { responseType: 'text' }).pipe(
       map((content: string) => {
         // Return exactly as-is - NO processing whatsoever
@@ -2856,7 +2812,7 @@ export class FaqEditorComponent implements OnInit, OnDestroy, AfterViewInit {
     const fileExtension = this.getFileExtension(file.name);
     const sequence = this.getNextImageSequence(folderId);
 
-    return `assets/faqs/${folderId}/images/${folderId}-${sequence}.${fileExtension}`;
+    return `${this.faqService.getFolderUrl(folderId)}images/${folderId}-${sequence}.${fileExtension}`;
   }
 
   /**

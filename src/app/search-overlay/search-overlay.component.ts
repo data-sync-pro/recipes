@@ -14,6 +14,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FAQMetadata } from '../shared/models/faq.model';
+import { FAQService } from '../shared/services/faq.service';
 
 interface FaqItem {
   id: string;
@@ -56,9 +57,10 @@ export class SearchOverlayComponent implements OnInit, OnChanges {
   private answerTexts: Map<string, string> = new Map();
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private faqService: FAQService
   ) {}
 
   ngOnInit() {
@@ -270,7 +272,7 @@ export class SearchOverlayComponent implements OnInit, OnChanges {
   private async loadAnswerTexts(): Promise<void> {
     const loadPromises = this.suggestions.map(async (faq) => {
       try {
-        const htmlPath = `assets/faqs/${faq.route}/answer.html`;
+        const htmlPath = this.faqService.getAnswerHtmlUrl(faq.route);
         const response = await fetch(htmlPath);
         
         if (response.ok) {
