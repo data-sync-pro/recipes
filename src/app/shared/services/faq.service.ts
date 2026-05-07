@@ -908,8 +908,22 @@ export class FAQService implements OnDestroy {
         }
 
         return this.createResponsiveImage(originalSrc, attrs, folderId);
-      });
-      
+      })
+      // Normalize relative data-src on .clickable-image spans (e.g. "images/foo.jpg")
+      // so simple-zoomable.directive.ts's zoomImageFromSrc receives a fully qualified
+      // path. Mirrors the <img src> handling above; keeping it here (instead of in the
+      // directive) lets the directive stay FAQ-agnostic — it's also reused outside FAQ.
+      .replace(/(<[^>]*\bclass="[^"]*\bclickable-image\b[^"]*"[^>]*\bdata-src=")([^"]+)(")/g,
+        (m, before, src, after) => {
+          if (/^(https?:)?\/\//.test(src) || src.startsWith('/') || src.startsWith('assets/')) {
+            return m;
+          }
+          if (folderId) {
+            return `${before}${this.FAQ_FOLDERS_BASE}${folderId}/${src.replace(/^\.?\//, '')}${after}`;
+          }
+          return m;
+        });
+
     // Apply auto-link terms after all other processing
     processedContent = this.autoLinkService.applyAutoLinkTerms(processedContent);
     
