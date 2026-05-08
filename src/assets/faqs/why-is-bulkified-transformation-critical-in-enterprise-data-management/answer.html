@@ -1,0 +1,6 @@
+<p>Bulkified transformation is what allows business rules defined for a single record to scale safely across thousands or millions of records â€” without rewriting logic or hitting governor limits.</p><p>In traditional development, bulkification is left to the developer: gather IDs, run queries outside loops, manage collections, batch DML. It's repetitive, easy to break, and a major source of tech debt.</p><p>DSP removes that burden. All functions, expressions, and relational references â€” including aggregations like <code>AGG_SUM</code> and parent traversals like <code>Parent.OwnerId</code> â€” are bulkified automatically. You define rules as if working with one record, and DSP handles the rest.</p><p><strong>Benefits:</strong></p><ul>
+<li><strong>Simplicity</strong> â€” Rules read the same way they're described in business terms.</li>
+<li><strong>Performance</strong> â€” Queries and DMLs are consolidated automatically.</li>
+<li><strong>Lower tech debt</strong> â€” No hand-written bulkification code to maintain, review, or rewrite as logic evolves.</li></ul><p><strong>In short:</strong> Bulkified transformation is essential for enterprise scale â€” and DSP makes it effortless.</p>
+
+<img src="images/image1.jpg">

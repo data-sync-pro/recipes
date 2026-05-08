@@ -1,0 +1,37 @@
+<div>
+  <p>
+    In a <b>Self-Adaptive #Trigger</b> Executable (<strong>Before Insert</strong>
+    or <strong>Before Update</strong>), open the
+    <strong>Mappings</strong> tab and use the
+    <strong><code>AGG</code></strong> functions from the formula
+    library to calculate rollup summaries.
+  </p>
+  <p><strong>Notes</strong></p>
+  <ul>
+    <li>
+      <p>
+        <code>AGG</code> functions do not require objects to be
+        related via a master-</p>
+    </li><li><p>detail or lookup relationshipâ€”even a
+        regular text field can be used.
+      </p></li>
+    <li>
+      <p>
+        Only configure the AGG mappings once in the
+        <strong>parent</strong> object's Self-Adaptive #Trigger.
+      </p>
+    </li>
+    <li>
+      <p>
+        Add the following line to the Apex Trigger on<strong>
+          both</strong> the <strong>parent</strong> and the <strong>child</strong> objects
+        so DSP can invoke the rules at runtime:
+      </p>
+      <pre><div><div><code>pushtopics.TriggerServices.execute();
+</code></div></div></pre>
+    </li>
+  </ul>
+</div>
+
+
+<img src="images/image1.jpg">
