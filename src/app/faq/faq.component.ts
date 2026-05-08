@@ -765,24 +765,22 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   get filteredFAQ(): FAQItem[] {
     const sidebarQ = this.search.query.trim().toLowerCase();
     if (sidebarQ) {
-      return this.rankFAQs(this.faqList, sidebarQ);
+      return this.rankFAQsGlobal(this.faqList, sidebarQ);
     }
 
-    const scoped = this.faqList.filter(item => {
+    const scopedList = this.faqList.filter(item => {
       if (this.current.category && item.category !== this.current.category) return false;
       if (this.current.subCategory && item.subCategory !== this.current.subCategory) return false;
       return true;
     });
 
     const catQ = this.categorySearchQuery.trim().toLowerCase();
-    return catQ ? this.rankFAQs(scoped, catQ) : scoped;
+    return catQ ? this.rankFAQsScoped(scopedList, catQ) : scopedList;
   }
 
-  // Match across question, answer body, category, and subCategory; rank by
-  // question > category > subCategory > answer (question wins because users
-  // typing a term usually want titles containing that term first); sort
-  // alphabetically within each priority tier.
-  private rankFAQs(items: FAQItem[], kw: string): FAQItem[] {
+  // Global sidebar ranking: 4 tiers — question > category > subCategory > answer.
+  // Tiebreaker sort: category alpha, then subCategory alpha, then question alpha.
+  private rankFAQsGlobal(items: FAQItem[], kw: string): FAQItem[] {
     return items
       .map(item => {
         const matchQuestion = item.question.toLowerCase().includes(kw);
@@ -807,6 +805,29 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
         const aSub = a.item.subCategory || '';
         const bSub = b.item.subCategory || '';
         if (aSub !== bSub) return aSub.localeCompare(bSub);
+        return a.item.question.localeCompare(b.item.question);
+      })
+      .map(entry => entry.item);
+  }
+
+  // Scoped breadcrumb ranking: results are already filtered to the current
+  // category/subCategory, so category-related tiers are degenerate. Only
+  // question > answer matters here. Tiebreaker is question alpha.
+  private rankFAQsScoped(items: FAQItem[], kw: string): FAQItem[] {
+    return items
+      .map(item => {
+        const matchQuestion = item.question.toLowerCase().includes(kw);
+        const matchAnswer = this.faqService.getAnswerText(item.id).includes(kw);
+
+        let priority = 999;
+        if (matchQuestion) priority = 1;
+        else if (matchAnswer) priority = 2;
+
+        return { item, priority };
+      })
+      .filter(entry => entry.priority !== 999)
+      .sort((a, b) => {
+        if (a.priority !== b.priority) return a.priority - b.priority;
         return a.item.question.localeCompare(b.item.question);
       })
       .map(entry => entry.item);
