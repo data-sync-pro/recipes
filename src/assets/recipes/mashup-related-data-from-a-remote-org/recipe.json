@@ -60,6 +60,44 @@
       "url": "assets/recipes/mashup-related-data-from-a-remote-org/downloadExecutables/Account.OrgB.OpenOpportunities.json"
     }
   ],
+  "downloadFileCallout": [
+    {
+      "sections": [
+        {
+          "label": "Current Org Custom Field",
+          "objects": [
+            {
+              "name": "Account",
+              "objectType": "Standard Object",
+              "fields": [
+                {
+                  "name": "SourceSystemID__c",
+                  "type": "Text",
+                  "length": 18
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Target Org Custom Field",
+          "objects": [
+            {
+              "name": "Account",
+              "objectType": "Standard Object",
+              "fields": [
+                {
+                  "name": "SourceSystemID__c",
+                  "type": "Text",
+                  "length": 18
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "mashup-related-data-from-a-remote-org"

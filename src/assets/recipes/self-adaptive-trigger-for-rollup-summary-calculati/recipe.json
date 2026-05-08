@@ -70,6 +70,31 @@
       "filePath": "downloadExecutables/Account.SelfAdaptive.Rollups.json"
     }
   ],
+  "downloadFileCallout": [
+    {
+      "sections": [
+        {
+          "label": "Required Custom Fields",
+          "objects": [
+            {
+              "name": "Account",
+              "objectType": "Standard Object",
+              "fields": [
+                { "name": "NumberOfCases__c", "type": "Number(18, 0)" },
+                { "name": "NumberOfCasesOpen__c", "type": "Number(18, 0)" },
+                { "name": "NumberOfContacts__c", "type": "Number(18, 0)" },
+                { "name": "NumberOfOpportunitiesOpen__c", "type": "Number(18, 0)" },
+                { "name": "NumberOfOpportunitiesWonThisYear__c", "type": "Number(18, 0)" },
+                { "name": "TotalOpportunityAmountOpen__c", "type": "Currency(16, 2)" },
+                { "name": "TotalOpportunityAmountWonThisYear__c", "type": "Currency(16, 2)" },
+                { "name": "MaxOpportunitiesAmountOpen__c", "type": "Currency(16, 2)" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "self-adaptive-trigger-for-rollup-summary-calculati"

@@ -81,6 +81,27 @@
       "filePath": "downloadExecutables/Case.Triggers.json"
     }
   ],
+  "downloadFileCallout": [
+    {
+      "sections": [
+        {
+          "label": "Required Custom Field",
+          "objects": [
+            {
+              "name": "Case",
+              "objectType": "Standard Object",
+              "fields": [
+                {
+                  "name": "SendNotificationToContact__c",
+                  "type": "Checkbox"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "the-trigger-flipper-pattern"

@@ -75,6 +75,28 @@
       "url": "assets/recipes/context-aware-data-loader-from-lightning-record-pa/downloadExecutables/Account.Opportunities.json"
     }
   ],
+  "downloadFileCallout": [
+    {
+      "sections": [
+        {
+          "label": "Required Custom Field",
+          "objects": [
+            {
+              "name": "Opportunity",
+              "objectType": "Standard Object",
+              "fields": [
+                {
+                  "name": "SourceSystemID__c",
+                  "type": "Text",
+                  "length": 18
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "context-aware-data-loader-from-lightning-record-pa"
