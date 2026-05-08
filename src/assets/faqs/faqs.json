@@ -228,7 +228,7 @@
                  {
                      "id":  "a0oEc000005JohnIAC",
                      "folderId":  "how-do-i-easily-create-batch-executables-for-parentchild-data-syncs",
-                     "question":  "How do I easily create Batch Executables for parentÃ¢â‚¬â€œchild data syncs?",
+                     "question":  "How do I easily create Batch Executables for parent–child data syncs?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
                      "seqNo":  null,
@@ -822,7 +822,7 @@
                  {
                      "id":  "a0oEc000005JoisIAC",
                      "folderId":  "salesforce-requires-at-least-one-line-of-test-coverage-in-an-apex-triggerhow-can-i-achieve-this",
-                     "question":  "Salesforce requires at least one line of test coverage in an Apex TriggerÃ¢â‚¬â€how can I achieve this?",
+                     "question":  "Salesforce requires at least one line of test coverage in an Apex Trigger—how can I achieve this?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
                      "seqNo":  null,

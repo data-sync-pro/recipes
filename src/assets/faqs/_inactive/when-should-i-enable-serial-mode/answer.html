@@ -2,7 +2,7 @@
   Serial mode processes records sequentially instead of in parallel. This
   reduces the risk of <strong>row locking issues</strong>(Salesforce
   <code>UNABLE_TO_LOCK_ROW</code> errors), preserves execution order, and
-  ensures safer handling of dependent transactionsâ€”for example, when multiple
+  ensures safer handling of dependent transactions—for example, when multiple
   records update the same parent or when later actions rely on earlier updates.
 </p>
 <p>
