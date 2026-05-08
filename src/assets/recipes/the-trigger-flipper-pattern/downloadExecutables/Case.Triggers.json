@@ -101,7 +101,7 @@
       "pushtopics__RetrieveOrderBy__c": "LastModifiedDate DESC NULLS LAST",
       "pushtopics__RunOnceOnRecursiveUpdates__c": true,
       "pushtopics__Scheduleable__c": false,
-      "pushtopics__ScopeFilterAfterUpdateTrigger__c": "TRIGGER_IS_FLIPPED(\"SendNotificationtoContact__c\")",
+      "pushtopics__ScopeFilterAfterUpdateTrigger__c": "TRIGGER_IS_FLIPPED(\"SendNotificationToContact__c\")",
       "pushtopics__SelfAdaptiveTrigger__c": false,
       "pushtopics__SelfExecutable__c": true,
       "pushtopics__SeqNo__c": 20,
@@ -328,7 +328,7 @@
           "pushtopics__Updateable__c": false
         },
         {
-          "Name": "SendNotificationtoContact__c",
+          "Name": "SendNotificationToContact__c",
           "pushtopics__Createable__c": true,
           "pushtopics__Deployable__c": false,
           "pushtopics__ExternalId__c": false,

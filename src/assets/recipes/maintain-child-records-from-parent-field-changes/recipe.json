@@ -126,6 +126,27 @@
       "url": "assets/recipes/maintain-child-records-from-parent-field-changes/downloadExecutables/Account.Triggers.json"
     }
   ],
+  "downloadFileCallout": [
+    {
+      "sections": [
+        {
+          "label": "Required Custom Field",
+          "objects": [
+            {
+              "name": "Account",
+              "objectType": "Standard Object",
+              "fields": [
+                {
+                  "name": "TerritoryManager__c",
+                  "type": "Lookup(User)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "maintain-child-records-from-parent-field-changes"

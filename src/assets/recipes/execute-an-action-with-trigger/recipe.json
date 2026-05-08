@@ -6,7 +6,7 @@
   ],
   "DSPVersions": [],
   "overview": "A #Trigger Executable is configured on Case update so that when a Case is closed, it automatically creates a follow-up Task assigned to the Case Owner with a due date 7 days out to verify customer satisfaction.",
-  "generalUseCase": "Use #Trigger to configure an automation that runs during save when \na record meets specific criteria, automatically executing actions such \nas creating or updating related child records.",
+  "generalUseCase": "Use #Trigger to configure an automation that runs during save when a record meets specific criteria, automatically executing actions such as creating or updating related child records.",
   "generalImages": [
     {
       "type": "video",

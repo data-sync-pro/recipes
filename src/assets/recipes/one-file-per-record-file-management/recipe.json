@@ -71,6 +71,28 @@
       "url": "assets/recipes/one-file-per-record-file-management/downloadExecutables/Opportunity.Quotes.json"
     }
   ],
+  "downloadFileCallout": [
+    {
+      "sections": [
+        {
+          "label": "Required Custom Field",
+          "objects": [
+            {
+              "name": "Quote",
+              "objectType": "Standard Object",
+              "fields": [
+                {
+                  "name": "QuotePdfFileID__c",
+                  "type": "Text",
+                  "length": 18
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "one-file-per-record-file-management"

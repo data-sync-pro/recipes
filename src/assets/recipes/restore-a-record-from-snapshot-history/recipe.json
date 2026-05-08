@@ -82,6 +82,38 @@
       "url": "assets/recipes/restore-a-record-from-snapshot-history/downloadExecutables/Quote.Snapshot.Restore.json"
     }
   ],
+  "downloadFileCallout": [
+    {
+      "sections": [
+        {
+          "label": "Required Big Object",
+          "objects": [
+            {
+              "name": "QuoteSnapshot__b",
+              "objectType": "Big Object",
+              "indexFields": ["RecordID__c", "LastModifiedDate__c"],
+              "fields": [
+                { "name": "Description__c", "type": "Text", "length": 255 },
+                { "name": "ExpirationDate__c", "type": "DateTime" },
+                { "name": "LastModifiedDate__c", "type": "DateTime" },
+                { "name": "Status__c", "type": "Text", "length": 100 },
+                { "name": "Tax__c", "type": "Number(16, 2)" },
+                { "name": "Email__c", "type": "Email", "length": 80 },
+                { "name": "Name__c", "type": "Text", "length": 255 },
+                { "name": "ContactID__c", "type": "Text", "length": 18 },
+                { "name": "ContractID__c", "type": "Text", "length": 18 },
+                { "name": "OpportunityID__c", "type": "Text", "length": 18 },
+                { "name": "OwnerID__c", "type": "Text", "length": 18 },
+                { "name": "Pricebook2ID__c", "type": "Text", "length": 18 },
+                { "name": "RecordID__c", "type": "Text", "length": 18 },
+                { "name": "LastModifiedBy__c", "type": "Text", "length": 255 }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "restore-a-record-from-snapshot-history"
