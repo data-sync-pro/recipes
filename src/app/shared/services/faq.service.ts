@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, of, throwError } from 'rxjs';
-import { map, catchError, shareReplay, tap, finalize } from 'rxjs/operators';
+import { Observable, BehaviorSubject, of, throwError, forkJoin } from 'rxjs';
+import { map, catchError, shareReplay, tap, finalize, filter, take, switchMap } from 'rxjs/operators';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { PerformanceService } from './performance.service';
 import { AutoLinkService } from './auto-link.service';
@@ -34,6 +34,10 @@ export class FAQService implements OnDestroy {
   private faqsCache$ = new BehaviorSubject<FAQItem[]>([]);
   private contentCache = new Map<string, SafeHtml>();
   private categoriesCache: FAQCategory[] = [];
+
+  // Plain-text answer cache shared across components for ranked search
+  private answerTexts = new Map<string, string>();
+  private answerTextsLoad$?: Observable<Map<string, string>>;
   
   // Local Storage Cache Keys
   private readonly STORAGE_KEY_FAQ_CONTENT = 'faq_content_cache';
@@ -330,6 +334,62 @@ export class FAQService implements OnDestroy {
 
   private buildAnswerUrl(folderId: string): string {
     return this.getAnswerHtmlUrl(folderId);
+  }
+
+  // Synchronous lookup for ranked search; empty string when cache is cold.
+  public getAnswerText(id: string): string {
+    return this.answerTexts.get(id) ?? '';
+  }
+
+  // Preload every active FAQ's answer.html as plain lowercase text so
+  // ranked search can match against answer bodies. Multicasted so the
+  // FAQ page and the search overlay share one fetch pass.
+  public loadAllAnswerTexts(): Observable<Map<string, string>> {
+    if (this.answerTextsLoad$) {
+      return this.answerTextsLoad$;
+    }
+
+    this.answerTextsLoad$ = this.getFAQs().pipe(
+      filter(faqs => faqs.length > 0),
+      take(1),
+      switchMap(faqs => {
+        const requests = faqs.map(faq =>
+          this.http
+            .get(this.getAnswerHtmlUrl(faq.folderId), { responseType: 'text' })
+            .pipe(
+              tap(html => {
+                this.answerTexts.set(faq.id, this.extractTextFromHTML(html));
+              }),
+              catchError(err => {
+                console.warn(`Failed to load answer for FAQ ${faq.id}:`, err);
+                return of(null);
+              })
+            )
+        );
+        return requests.length === 0
+          ? of(this.answerTexts)
+          : forkJoin(requests).pipe(map(() => this.answerTexts));
+      }),
+      shareReplay(1)
+    );
+
+    return this.answerTextsLoad$;
+  }
+
+  private extractTextFromHTML(html: string): string {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+
+    tempDiv.querySelectorAll('script, style').forEach(el => el.remove());
+    tempDiv.querySelectorAll('img').forEach(el => el.remove());
+
+    const text = tempDiv.textContent || tempDiv.innerText || '';
+
+    return text
+      .replace(/\s+/g, ' ')
+      .replace(/\n{2,}/g, '\n')
+      .trim()
+      .toLowerCase();
   }
 
   /**

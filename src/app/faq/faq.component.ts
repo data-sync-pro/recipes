@@ -349,22 +349,28 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       next: (faqs) => {
         this.faqList = faqs;
         this.updateUIState({ isLoading: false });
-        
+
         // Initialize TOC pagination when data is loaded
         this.updateTOCPaginationIndices();
-        
+
         // Clear cached elements when FAQ data changes
         this.cachedFaqElements = null;
         this.cachedQuestionTexts.clear();
-        
+
         // Note: Answer-based URL handling is ONLY done through route parameter processing
         // to avoid race conditions. Do not add URL handling logic here.
-        
+
         this.handlePendingFragment();
         // Set up preloading observers
         this.setupPreloadingObservers();
         // Warm cache for popular FAQs
         this.warmCacheForPopularFAQs();
+
+        // Preload answer-body text for ranked search; OnPush requires
+        // markForCheck so filteredFAQ re-runs once the cache fills in.
+        this.faqService.loadAllAnswerTexts()
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(() => this.cdr.markForCheck());
       },
       error: (error) => {
         console.error('Failed to load FAQ data:', error);
@@ -757,23 +763,53 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   get filteredFAQ(): FAQItem[] {
-    if (this.search.query.trim()) {
-      const query = this.search.query.trim().toLowerCase();
-      return this.faqList.filter(item => item.question.toLowerCase().includes(query));
+    const sidebarQ = this.search.query.trim().toLowerCase();
+    if (sidebarQ) {
+      return this.rankFAQs(this.faqList, sidebarQ);
     }
 
-    let list = this.faqList.filter(item => {
+    const scoped = this.faqList.filter(item => {
       if (this.current.category && item.category !== this.current.category) return false;
       if (this.current.subCategory && item.subCategory !== this.current.subCategory) return false;
       return true;
     });
 
-    if (this.categorySearchQuery.trim()) {
-      const q = this.categorySearchQuery.trim().toLowerCase();
-      list = list.filter(item => item.question.toLowerCase().includes(q));
-    }
+    const catQ = this.categorySearchQuery.trim().toLowerCase();
+    return catQ ? this.rankFAQs(scoped, catQ) : scoped;
+  }
 
-    return list;
+  // Match across question, answer body, category, and subCategory; rank by
+  // question > category > subCategory > answer (question wins because users
+  // typing a term usually want titles containing that term first); sort
+  // alphabetically within each priority tier.
+  private rankFAQs(items: FAQItem[], kw: string): FAQItem[] {
+    return items
+      .map(item => {
+        const matchQuestion = item.question.toLowerCase().includes(kw);
+        const matchCategory = item.category.toLowerCase().includes(kw);
+        const matchSubCategory = !!item.subCategory && item.subCategory.toLowerCase().includes(kw);
+        const matchAnswer = this.faqService.getAnswerText(item.id).includes(kw);
+
+        let priority = 999;
+        if (matchQuestion) priority = 1;
+        else if (matchCategory) priority = 2;
+        else if (matchSubCategory) priority = 3;
+        else if (matchAnswer) priority = 4;
+
+        return { item, priority };
+      })
+      .filter(entry => entry.priority !== 999)
+      .sort((a, b) => {
+        if (a.priority !== b.priority) return a.priority - b.priority;
+        if (a.item.category !== b.item.category) {
+          return a.item.category.localeCompare(b.item.category);
+        }
+        const aSub = a.item.subCategory || '';
+        const bSub = b.item.subCategory || '';
+        if (aSub !== bSub) return aSub.localeCompare(bSub);
+        return a.item.question.localeCompare(b.item.question);
+      })
+      .map(entry => entry.item);
   }
 
 
