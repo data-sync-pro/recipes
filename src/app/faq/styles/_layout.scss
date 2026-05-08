@@ -224,8 +224,13 @@ $breakpoint-desktop: 768px;
     flex-shrink: 0;
     background: none;
     border: none;
-    padding: 8px;
+    padding: 8px 0;
     color: #555;
+
+    // Pull each side outward so the chevron tip (not the icon's bounding box)
+    // visually aligns with the breadcrumb's left/right content edge.
+    &:first-child { margin-left: -10px; }
+    &:last-child  { margin-right: -10px; }
     font-size: 1.5rem;
     cursor: pointer;
     transition: all 0.2s ease;

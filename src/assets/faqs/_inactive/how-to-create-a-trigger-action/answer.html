@@ -1,0 +1,50 @@
+<p>To Create a <strong>#Trigger</strong> Action</p>
+<ol>
+  <li>
+    <p>
+      Create a new <strong>Executable</strong> from a
+      <strong>Direction</strong> or from a
+      <strong>Pipeline with a Template Direction</strong>, ensuring that the
+      <strong>Source Connection</strong> is set to the current org.
+    </p>
+  </li>
+  <li>
+    <p>
+      Select the <strong>triggering object</strong> as the source object and
+      choose the appropriate <strong>target object</strong>.
+    </p>
+  </li>
+  <li>
+    <p>
+      Define any <strong>matching fields</strong>, select the
+      <strong>Action type</strong> (Insert, Update, Upsert, Delete, etc.), and
+      click <strong>Save</strong> to create the Executable.
+    </p>
+  </li>
+  <li>
+    <p>
+      Enable the <strong>trigger events</strong> (e.g., After Insert, After
+      Update) that should fire the action.
+    </p>
+  </li>
+  <li>
+    <p>
+      Configure the <strong>Scoping</strong>, <strong>Match</strong>,
+      <strong>Mapping</strong>, and <strong>Action</strong> sections as needed
+      to control when and how the Trigger Action runs.
+    </p>
+  </li>
+</ol>
+<p>
+  This setup ensures DSP executes the Trigger Action whenever the defined
+  trigger events occur, applying rules-driven logic to automate cross-record
+  operations.
+</p>
+
+<p>
+  Note: Ensure that <code>pushtopics.TriggerServices.execute();</code>
+  is included in your Apex Trigger with all required trigger events to enable
+  execution.
+</p>
+
+<img src="images/image1.jpg">

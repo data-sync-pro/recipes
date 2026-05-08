@@ -1,0 +1,10 @@
+<p>A <strong>Scope Filter</strong> is a formula-based condition used in the <strong>Scoping</strong> step to decide which source records continue through execution.</p><ul>
+<li>A Scope Filter can return <strong>TRUE/FALSE</strong> to include/exclude records, or raise an error with the <code>ERROR()</code> function when used as a validation rule.</li>
+<li>Scope Filters are evaluated in sequence, allowing layered logic at different levels:</li>
+<ul><li><strong>Pipeline Scope Filter</strong> — a global pre-filter applied across all Executables in a Pipeline.</li><li><strong>Executable Scope Filter</strong> — the main condition for a single Executable.</li><li><strong>Trigger Scope Filters</strong> — event-specific filters for #Trigger Executables (e.g., Before Insert, After Update).</li><li><strong>Post-Join Scope Filter</strong> — applied after joins, for additional refinement of enriched data.</li></ul>
+
+
+
+</ul><p>Together, Scope Filters give precise, layered control — ensuring only relevant records move forward, while supporting validation and filtering at every stage.</p>
+
+<img src="images/image1.jpg">

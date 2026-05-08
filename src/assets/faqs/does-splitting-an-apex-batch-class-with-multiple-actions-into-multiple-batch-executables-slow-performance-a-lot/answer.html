@@ -1,0 +1,63 @@
+<p>
+  No. Splitting a batch job into modular, rules-driven Executables improves
+  clarity and maintainability without materially affecting performance. Runtime
+  is driven by the number of DML operations executed and the automation those
+  DMLs invoke (Flows, Triggers, Processes), not by whether logic runs in one
+  batch or multiple Executables.
+</p>
+
+<p>
+  <strong>Benchmark (same workload, three implementations)</strong><br />
+  Each implementation retrieves 30k Accounts, then updates those Accounts 3
+  times per batch (no field changes), with all automation disabled.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Implementation</th>
+      <th>Batch Size</th>
+      <th>Bulk API</th>
+      <th>Total Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        1) Single Apex batch class; 3 updates in <code>execute</code> method
+      </td>
+      <td>200</td>
+      <td>No</td>
+      <td>
+        <span
+          class="clickable-image"
+          data-src="images/image1.png"
+          >62 min</span
+        >
+      </td>
+    </tr>
+    <tr>
+      <td>2) DSP Pipeline; 3 identical batch Executables</td>
+      <td>200</td>
+      <td>No</td>
+      <td><span
+        class="clickable-image"
+        data-src="images/image2.png"
+        >26 min</span
+      ></td>
+    </tr>
+    <tr>
+      <td>3) DSP Pipeline; 3 identical batch Executables</td>
+      <td>2000</td>
+      <td>Yes</td>
+      <td><span
+        class="clickable-image"
+        data-src="images/image3.png"
+        >4 min</span
+      ></td>
+    </tr>
+  </tbody>
+</table>
+<img
+  src="images/image4.png"
+/>

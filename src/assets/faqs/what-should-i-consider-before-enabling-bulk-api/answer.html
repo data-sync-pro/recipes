@@ -1,0 +1,9 @@
+<p>Enabling Bulk API in Data Sync Pro delivers major performance gains but introduces important trade-offs:</p><p><strong>Benefits</strong></p><ul>
+<li><strong>Significant performance improvement</strong> — With larger batch sizes (up to 2,000 records per batch), optionally enabling serial mode, Bulk API processes high data volumes far faster than the standard API.</li>
+</ul><p><strong>Trade-offs</strong></p><ul>
+<li><strong>Asynchronous processing</strong> — Bulk API jobs run asynchronously after DSP submits them, so completion status isn't immediately reflected in DSP. Two monitoring options are available: track jobs directly on Salesforce's Bulk Data Load Jobs page for full execution details, or schedule DSP's <b><code>BulkJobStatusSyncer</code> </b>Apex class to sync high-level status back into the Batch Execution and Execution records — including job state and record counts (success/failure), but not the per-record execution details.</li>
+<li><strong>No data reversion</strong> — Actions performed via Bulk API cannot be reverted from DSP. Features like <strong>Restore Updated From Log File</strong> and <strong>Re-Create Deleted From Log File</strong> are not supported.</li>
+</ul><p>Bulk API is ideal for high-volume processing — but it requires careful setup and active monitoring to use well.</p>
+
+
+<img src="images/image1.jpg">

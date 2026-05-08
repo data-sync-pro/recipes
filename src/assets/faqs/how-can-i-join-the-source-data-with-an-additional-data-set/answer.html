@@ -1,0 +1,40 @@
+<p><b>Joiners</b> are configured in the <strong>Scoping</strong> section to 
+      <strong>combine source records with an additional dataset</strong> 
+      for advanced processing. You can use one of the following functions:
+    </p>
+    <ul>
+      <li><code>JOIN_OBJECT</code> - Combines source data with another <strong>Salesforce object</strong> 
+        or <strong>Custom Setting</strong> from a configured <strong>Connection</strong>.</li>
+      <li><code>JOIN_JSON</code> - Combines source data with a <strong>JSON array</strong> represented as a string.</li>
+    </ul>
+    <p>
+      <strong>How It Works</strong><br>
+      A Joiner operates as one of the following:
+    </p>
+    <ul>
+      <li><strong>Left Join</strong> - When <em>matching keys</em> are specified, each source record is paired 
+        with matching records from the additional dataset.</li>
+      <li><strong>Cross Join</strong> - When <em>no matching keys</em> are provided, 
+        each source record is paired with <strong>every record</strong> in the additional dataset.</li>
+    </ul>
+    <p>
+      <strong>Referencing Joined Fields</strong><br>
+      After joining, fields from the additional dataset can be referenced using:  
+       <code>$Joiner.FieldName</code>
+    </p>
+    <p>
+      These joined fields can be used in:
+    </p>
+      <ul>
+        <li><strong>Scope Filter (Post Join)</strong> - for further data refinement</li>
+        <li><strong>Mapping</strong> - for applying field transformations using the joined values</li>
+      </ul>
+    
+    <hr>
+    <p>
+      Joiners allow you to augment source records with additional data sets, 
+      enabling more advanced transformations.
+    </p>
+  
+  
+<img src="images/image1.jpg">
