@@ -1429,15 +1429,15 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
   
   private updatePageMetadata(): void {
-    let pageTitle = 'FAQ - Data Sync Pro';
+    let pageTitle = 'FAQs - Data Sync Pro';
     let pageDescription = 'Frequently Asked Questions about Data Sync Pro';
 
     if (this.current.category) {
-      pageTitle = `${this.current.category} FAQ - Data Sync Pro`;
+      pageTitle = `${this.current.category} FAQs - Data Sync Pro`;
       pageDescription = `Frequently Asked Questions about ${this.current.category}`;
 
       if (this.current.subCategory) {
-        pageTitle = `${this.current.subCategory} FAQ - Data Sync Pro`;
+        pageTitle = `${this.current.subCategory} FAQs - Data Sync Pro`;
         pageDescription = `Frequently Asked Questions about ${this.current.subCategory}`;
       }
     }
@@ -1512,7 +1512,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private updateFAQMetadata(faqItem: FAQItem): void {
-    const pageTitle = `${faqItem.question} - FAQ - Data Sync Pro`;
+    const pageTitle = `${faqItem.question} - FAQs - Data Sync Pro`;
     const pageDescription = faqItem.answer.substring(0, 160) + '...';
 
     this.title.setTitle(pageTitle);
