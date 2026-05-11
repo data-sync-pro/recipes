@@ -6,7 +6,7 @@
                      "question":  "What is Data Sync Pro?",
                      "category":  "General",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  5,
                      "isActive":  true
                  },
                  {
@@ -15,7 +15,7 @@
                      "question":  "What are the five engines?",
                      "category":  "General",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  10,
                      "isActive":  true
                  },
                  {
@@ -24,7 +24,7 @@
                      "question":  "Why does rules-driven, record-based, enforced modularity define the future of enterprise applications?",
                      "category":  "General",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  15,
                      "isActive":  true
                  },
                  {
@@ -33,7 +33,7 @@
                      "question":  "Why Data Sync Pro?",
                      "category":  "General",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  20,
                      "isActive":  true
                  },
                  {
@@ -42,7 +42,7 @@
                      "question":  "Does DSP process any data outside the installed org?",
                      "category":  "General",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  25,
                      "isActive":  true
                  },
                  {
@@ -51,7 +51,7 @@
                      "question":  "How does DSP ensure security?",
                      "category":  "General",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  30,
                      "isActive":  true
                  },
                  {
@@ -60,7 +60,7 @@
                      "question":  "What are the three core user personas in Data Sync Pro?",
                      "category":  "General",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  35,
                      "isActive":  true
                  },
                  {
@@ -69,7 +69,7 @@
                      "question":  "How do DSP\u0027s rules engines compare?",
                      "category":  "General",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  40,
                      "isActive":  true
                  },
                  {
@@ -78,7 +78,7 @@
                      "question":  "How much training is required to start building in Data Sync Pro?",
                      "category":  "General",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  45,
                      "isActive":  true
                  },
                  {
@@ -87,7 +87,7 @@
                      "question":  "Does DSP development adhere to the Software Development Life Cycle (SDLC)?",
                      "category":  "General",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  50,
                      "isActive":  true
                  },
                  {
@@ -96,7 +96,7 @@
                      "question":  "Is DSP subject to Salesforce governor limits?",
                      "category":  "General",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  55,
                      "isActive":  true
                  },
                  {
@@ -105,7 +105,7 @@
                      "question":  "What is a batch job in general?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  60,
                      "isActive":  true
                  },
                  {
@@ -114,7 +114,7 @@
                      "question":  "Why #Batch?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  65,
                      "isActive":  true
                  },
                  {
@@ -123,7 +123,7 @@
                      "question":  "What technologies are used to build the #Batch engine?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  70,
                      "isActive":  true
                  },
                  {
@@ -132,7 +132,7 @@
                      "question":  "What are the common use cases for #Batch?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  75,
                      "isActive":  true
                  },
                  {
@@ -141,7 +141,7 @@
                      "question":  "How efficiently does #Batch handle large data volumes?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  80,
                      "isActive":  true
                  },
                  {
@@ -150,7 +150,7 @@
                      "question":  "Where do I create a #Batch Executable?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  85,
                      "isActive":  true
                  },
                  {
@@ -159,7 +159,7 @@
                      "question":  "Does #Batch only support cross-org data migrations?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  90,
                      "isActive":  true
                  },
                  {
@@ -168,7 +168,7 @@
                      "question":  "What permissions are required to execute a #Batch?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  95,
                      "isActive":  true
                  },
                  {
@@ -177,7 +177,7 @@
                      "question":  "What is the maximum dataset size that a DSP batch job can process?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  100,
                      "isActive":  true
                  },
                  {
@@ -186,7 +186,7 @@
                      "question":  "What is the maximum batch size that can be set?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  105,
                      "isActive":  true
                  },
                  {
@@ -195,7 +195,7 @@
                      "question":  "How can I chain multiple batch Executables to run in a specific sequence?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  110,
                      "isActive":  true
                  },
                  {
@@ -204,7 +204,7 @@
                      "question":  "How can I schedule Batch jobs?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  115,
                      "isActive":  true
                  },
                  {
@@ -213,7 +213,7 @@
                      "question":  "Can a Pipeline execution be stopped if one of its Executables fails?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  120,
                      "isActive":  true
                  },
                  {
@@ -222,7 +222,7 @@
                      "question":  "Can I apply a common SOQL filter to all Executables in a Pipeline?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  125,
                      "isActive":  true
                  },
                  {
@@ -231,7 +231,7 @@
                      "question":  "How do I easily create Batch Executables for parent–child data syncs?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  130,
                      "isActive":  true
                  },
                  {
@@ -240,7 +240,7 @@
                      "question":  "How are logs tracked for running a #Batch Executable?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  135,
                      "isActive":  true
                  },
                  {
@@ -249,7 +249,7 @@
                      "question":  "Does DSP allow re-execution of failed batches?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  140,
                      "isActive":  true
                  },
                  {
@@ -258,7 +258,7 @@
                      "question":  "Is it possible to revert the changes made a batch execution?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  145,
                      "isActive":  true
                  },
                  {
@@ -267,7 +267,7 @@
                      "question":  "How do I implement incremental retrieval?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  150,
                      "isActive":  true
                  },
                  {
@@ -276,7 +276,7 @@
                      "question":  "What should I consider before enabling Bulk API?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  155,
                      "isActive":  true
                  },
                  {
@@ -285,7 +285,7 @@
                      "question":  "How can I set up notifications for completed batch executions?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  160,
                      "isActive":  true
                  },
                  {
@@ -294,7 +294,7 @@
                      "question":  "How can I test a Batch Executable on a small sample before running it on the full dataset?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  165,
                      "isActive":  true
                  },
                  {
@@ -303,7 +303,7 @@
                      "question":  "How should I structure a complex Batch job with multiple actions?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  170,
                      "isActive":  true
                  },
                  {
@@ -312,7 +312,7 @@
                      "question":  "What are the advantages of pairing a blank update batch with a self-adaptive trigger?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  175,
                      "isActive":  false
                  },
                  {
@@ -321,7 +321,7 @@
                      "question":  "What is a #Data List?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  180,
                      "isActive":  true
                  },
                  {
@@ -330,7 +330,7 @@
                      "question":  "Why #Data List?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  185,
                      "isActive":  true
                  },
                  {
@@ -339,7 +339,7 @@
                      "question":  "How do I create an Actionable #Data List?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  190,
                      "isActive":  true
                  },
                  {
@@ -348,7 +348,7 @@
                      "question":  "What are the two essential components of a Actionable #Data List?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  195,
                      "isActive":  false
                  },
                  {
@@ -357,7 +357,7 @@
                      "question":  "What is the difference between an actionable and non-actionable Data List?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  200,
                      "isActive":  false
                  },
                  {
@@ -366,7 +366,7 @@
                      "question":  "What permissions are needed to use a #Data List?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  205,
                      "isActive":  true
                  },
                  {
@@ -375,7 +375,7 @@
                      "question":  "How do I add a #Data List to a Lightning page?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  210,
                      "isActive":  false
                  },
                  {
@@ -384,7 +384,7 @@
                      "question":  "How can I customize the appearance of a #Data List action?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  215,
                      "isActive":  false
                  },
                  {
@@ -393,7 +393,7 @@
                      "question":  "Can I prompt users for confirmation before executing an action?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  220,
                      "isActive":  false
                  },
                  {
@@ -402,7 +402,7 @@
                      "question":  "Can I specify whether an action should be a List Action, a Row Action, or both?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  225,
                      "isActive":  false
                  },
                  {
@@ -411,7 +411,7 @@
                      "question":  "Can users review and edit transformed values before executing an action?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  230,
                      "isActive":  false
                  },
                  {
@@ -420,7 +420,7 @@
                      "question":  "What are the benefits of grouping multiple #Data Lists into a Pipeline?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  235,
                      "isActive":  false
                  },
                  {
@@ -429,7 +429,7 @@
                      "question":  "How do I merge actions from multiple Executables into one #Data List?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  240,
                      "isActive":  false
                  },
                  {
@@ -438,7 +438,7 @@
                      "question":  "How can I configure row\u0027s related lists in a #Data List?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  245,
                      "isActive":  true
                  },
                  {
@@ -447,7 +447,7 @@
                      "question":  "What advantages does a custom \u0027New Record\u0027 action have over the default in a #Data List?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  250,
                      "isActive":  false
                  },
                  {
@@ -456,7 +456,7 @@
                      "question":  "Can I run a #Data Loader from a #Data List?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  255,
                      "isActive":  true
                  },
                  {
@@ -465,7 +465,7 @@
                      "question":  "What permissions can I configure for query results in a #Data List?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  260,
                      "isActive":  false
                  },
                  {
@@ -474,7 +474,7 @@
                      "question":  "Can I choose to open records in the Lightning record page instead of raw view?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  265,
                      "isActive":  false
                  },
                  {
@@ -483,7 +483,7 @@
                      "question":  "How do I enable Query Manager in a #Data List for end users?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  270,
                      "isActive":  false
                  },
                  {
@@ -492,7 +492,7 @@
                      "question":  "How do I use the Pipeline Data Lists component inside a custom LWC?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  275,
                      "isActive":  true
                  },
                  {
@@ -501,7 +501,7 @@
                      "question":  "How do I make a #Data List scroll horizontally?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  280,
                      "isActive":  true
                  },
                  {
@@ -510,7 +510,7 @@
                      "question":  "How do I set up a #Data List to pull data from a remote Salesforce org?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data List",
-                     "seqNo":  null,
+                     "seqNo":  285,
                      "isActive":  false
                  },
                  {
@@ -519,7 +519,7 @@
                      "question":  "What is an #Action Button?",
                      "category":  "Rules Engines",
                      "subCategory":  "Action Button",
-                     "seqNo":  null,
+                     "seqNo":  290,
                      "isActive":  true
                  },
                  {
@@ -528,7 +528,7 @@
                      "question":  "Why #Action Button?",
                      "category":  "Rules Engines",
                      "subCategory":  "Action Button",
-                     "seqNo":  null,
+                     "seqNo":  295,
                      "isActive":  false
                  },
                  {
@@ -537,7 +537,7 @@
                      "question":  "How do I create an #Action Button?",
                      "category":  "Rules Engines",
                      "subCategory":  "Action Button",
-                     "seqNo":  null,
+                     "seqNo":  300,
                      "isActive":  false
                  },
                  {
@@ -546,7 +546,7 @@
                      "question":  "How can I customize the appearance of an #Action Button?",
                      "category":  "Rules Engines",
                      "subCategory":  "Action Button",
-                     "seqNo":  null,
+                     "seqNo":  305,
                      "isActive":  false
                  },
                  {
@@ -555,7 +555,7 @@
                      "question":  "Can I prompt users for confirmation before executing an action?",
                      "category":  "Rules Engines",
                      "subCategory":  "Action Button",
-                     "seqNo":  null,
+                     "seqNo":  310,
                      "isActive":  false
                  },
                  {
@@ -564,7 +564,7 @@
                      "question":  "How can users review and edit field values before running an action?",
                      "category":  "Rules Engines",
                      "subCategory":  "Action Button",
-                     "seqNo":  null,
+                     "seqNo":  315,
                      "isActive":  false
                  },
                  {
@@ -573,7 +573,7 @@
                      "question":  "What are the benefits of grouping multiple #Action Buttons into a Pipeline?",
                      "category":  "Rules Engines",
                      "subCategory":  "Action Button",
-                     "seqNo":  null,
+                     "seqNo":  320,
                      "isActive":  false
                  },
                  {
@@ -582,7 +582,7 @@
                      "question":  "How can I execute multiple actions from a single #Action Button?",
                      "category":  "Rules Engines",
                      "subCategory":  "Action Button",
-                     "seqNo":  null,
+                     "seqNo":  325,
                      "isActive":  true
                  },
                  {
@@ -591,7 +591,7 @@
                      "question":  "What permissions are needed to use a #Action Button?",
                      "category":  "Rules Engines",
                      "subCategory":  "Action Button",
-                     "seqNo":  null,
+                     "seqNo":  330,
                      "isActive":  true
                  },
                  {
@@ -600,7 +600,7 @@
                      "question":  "What is a #Data Loader?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data Loader",
-                     "seqNo":  null,
+                     "seqNo":  335,
                      "isActive":  true
                  },
                  {
@@ -609,7 +609,7 @@
                      "question":  "How do I create a #Data Loader?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data Loader",
-                     "seqNo":  null,
+                     "seqNo":  340,
                      "isActive":  true
                  },
                  {
@@ -618,7 +618,7 @@
                      "question":  "Can I use #Data Loader to load data into another Salesforce org?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data Loader",
-                     "seqNo":  null,
+                     "seqNo":  345,
                      "isActive":  false
                  },
                  {
@@ -627,7 +627,7 @@
                      "question":  "How are execution logs tracked in a #Data Loader process?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data Loader",
-                     "seqNo":  null,
+                     "seqNo":  350,
                      "isActive":  false
                  },
                  {
@@ -636,7 +636,7 @@
                      "question":  "How does a #Data Loader handle data type conversion for CSV cells stored as strings?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data Loader",
-                     "seqNo":  null,
+                     "seqNo":  355,
                      "isActive":  false
                  },
                  {
@@ -645,7 +645,7 @@
                      "question":  "What permissions are needed to use a #Data Loader?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data Loader",
-                     "seqNo":  null,
+                     "seqNo":  360,
                      "isActive":  true
                  },
                  {
@@ -654,7 +654,7 @@
                      "question":  "Does #Data Loader only support CSV file uploads?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data Loader",
-                     "seqNo":  null,
+                     "seqNo":  365,
                      "isActive":  true
                  },
                  {
@@ -663,7 +663,7 @@
                      "question":  "When should I enable serial mode?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data Loader",
-                     "seqNo":  null,
+                     "seqNo":  370,
                      "isActive":  false
                  },
                  {
@@ -672,7 +672,7 @@
                      "question":  "How can I retry only the failed data load batches without reloading the whole dataset?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data Loader",
-                     "seqNo":  null,
+                     "seqNo":  375,
                      "isActive":  true
                  },
                  {
@@ -681,7 +681,7 @@
                      "question":  "Is it possible to revert the changes made a data load?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data Loader",
-                     "seqNo":  null,
+                     "seqNo":  380,
                      "isActive":  true
                  },
                  {
@@ -690,7 +690,7 @@
                      "question":  "Can I make a load fail if a column is missing from the source file?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data Loader",
-                     "seqNo":  null,
+                     "seqNo":  385,
                      "isActive":  true
                  },
                  {
@@ -699,7 +699,7 @@
                      "question":  "Is it possible to run a #Data Loader from a #Data List as a list action?",
                      "category":  "Rules Engines",
                      "subCategory":  "Data Loader",
-                     "seqNo":  null,
+                     "seqNo":  390,
                      "isActive":  false
                  },
                  {
@@ -708,7 +708,7 @@
                      "question":  "What is a #Trigger?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  395,
                      "isActive":  true
                  },
                  {
@@ -717,7 +717,7 @@
                      "question":  "Why #Trigger?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  400,
                      "isActive":  true
                  },
                  {
@@ -726,7 +726,7 @@
                      "question":  "What events are supported by #Trigger?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  405,
                      "isActive":  false
                  },
                  {
@@ -735,7 +735,7 @@
                      "question":  "What is a Self-Adaptive #Trigger?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  410,
                      "isActive":  true
                  },
                  {
@@ -744,7 +744,7 @@
                      "question":  "How to create a Self-Adaptive #Trigger?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  415,
                      "isActive":  false
                  },
                  {
@@ -753,7 +753,7 @@
                      "question":  "How can I calculate rollup summaries using a Self-Adaptive #Trigger?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  420,
                      "isActive":  true
                  },
                  {
@@ -762,7 +762,7 @@
                      "question":  "How can I set up validation rules within a Self-Adaptive #Trigger?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  425,
                      "isActive":  false
                  },
                  {
@@ -771,7 +771,7 @@
                      "question":  "What is a #Trigger Action?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  430,
                      "isActive":  true
                  },
                  {
@@ -780,7 +780,7 @@
                      "question":  "How to create a #Trigger Action?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  435,
                      "isActive":  false
                  },
                  {
@@ -789,7 +789,7 @@
                      "question":  "What is the execution flow of a #Trigger?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  440,
                      "isActive":  false
                  },
                  {
@@ -798,7 +798,7 @@
                      "question":  "How can I prevent recursive execution in update triggers?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  445,
                      "isActive":  true
                  },
                  {
@@ -807,7 +807,7 @@
                      "question":  "How can I manage the execution order of #Trigger?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  450,
                      "isActive":  true
                  },
                  {
@@ -816,7 +816,7 @@
                      "question":  "How do I manage user access to a #Trigger?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  455,
                      "isActive":  true
                  },
                  {
@@ -825,7 +825,7 @@
                      "question":  "Salesforce requires at least one line of test coverage in an Apex Trigger—how can I achieve this?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  460,
                      "isActive":  true
                  },
                  {
@@ -834,7 +834,7 @@
                      "question":  "What is the TRIGGER_FLIPPER pattern?",
                      "category":  "Rules Engines",
                      "subCategory":  "Trigger",
-                     "seqNo":  null,
+                     "seqNo":  465,
                      "isActive":  true
                  },
                  {
@@ -843,7 +843,7 @@
                      "question":  "What does Retrieve do?",
                      "category":  "Processes",
                      "subCategory":  "Retrieve",
-                     "seqNo":  null,
+                     "seqNo":  470,
                      "isActive":  true
                  },
                  {
@@ -852,7 +852,7 @@
                      "question":  "Do I need to include every field for Scoping and Mapping in the Retrieve query?",
                      "category":  "Processes",
                      "subCategory":  "Retrieve",
-                     "seqNo":  null,
+                     "seqNo":  475,
                      "isActive":  false
                  },
                  {
@@ -861,7 +861,7 @@
                      "question":  "How do I preview a source record with its transformed values before execution?",
                      "category":  "Processes",
                      "subCategory":  "Retrieve",
-                     "seqNo":  null,
+                     "seqNo":  480,
                      "isActive":  true
                  },
                  {
@@ -870,7 +870,7 @@
                      "question":  "What is the purpose of the \u0027Additional Retrieve Criteria\u0027 field on a Pipeline?",
                      "category":  "Processes",
                      "subCategory":  "Retrieve",
-                     "seqNo":  null,
+                     "seqNo":  485,
                      "isActive":  true
                  },
                  {
@@ -879,7 +879,7 @@
                      "question":  "What does Preview do?",
                      "category":  "Processes",
                      "subCategory":  "Preview",
-                     "seqNo":  null,
+                     "seqNo":  490,
                      "isActive":  true
                  },
                  {
@@ -888,7 +888,7 @@
                      "question":  "How do I preview a source record with its transformed values before execution?",
                      "category":  "Processes",
                      "subCategory":  "Preview",
-                     "seqNo":  null,
+                     "seqNo":  495,
                      "isActive":  true
                  },
                  {
@@ -897,7 +897,7 @@
                      "question":  "What is the difference between Preview and Retrieve?",
                      "category":  "Processes",
                      "subCategory":  "Preview",
-                     "seqNo":  null,
+                     "seqNo":  500,
                      "isActive":  true
                  },
                  {
@@ -906,7 +906,7 @@
                      "question":  "What does Input do?",
                      "category":  "Processes",
                      "subCategory":  "Input",
-                     "seqNo":  null,
+                     "seqNo":  505,
                      "isActive":  true
                  },
                  {
@@ -915,7 +915,7 @@
                      "question":  "How do I define an input data profile in Data Loader?",
                      "category":  "Processes",
                      "subCategory":  "Input",
-                     "seqNo":  null,
+                     "seqNo":  510,
                      "isActive":  true
                  },
                  {
@@ -924,7 +924,7 @@
                      "question":  "What naming requirements apply to #Data Loader columns?",
                      "category":  "Processes",
                      "subCategory":  "Input",
-                     "seqNo":  null,
+                     "seqNo":  515,
                      "isActive":  true
                  },
                  {
@@ -933,7 +933,7 @@
                      "question":  "What is the purpose of the \u0027Input Data Key Field\u0027?",
                      "category":  "Processes",
                      "subCategory":  "Input",
-                     "seqNo":  null,
+                     "seqNo":  520,
                      "isActive":  false
                  },
                  {
@@ -942,7 +942,7 @@
                      "question":  "What does Scoping do?",
                      "category":  "Processes",
                      "subCategory":  "Scoping",
-                     "seqNo":  null,
+                     "seqNo":  525,
                      "isActive":  true
                  },
                  {
@@ -951,7 +951,7 @@
                      "question":  "What is a Scope Filter?",
                      "category":  "Processes",
                      "subCategory":  "Scoping",
-                     "seqNo":  null,
+                     "seqNo":  530,
                      "isActive":  true
                  },
                  {
@@ -960,7 +960,7 @@
                      "question":  "How do I prevent duplicate source records in iteration?",
                      "category":  "Processes",
                      "subCategory":  "Scoping",
-                     "seqNo":  null,
+                     "seqNo":  535,
                      "isActive":  false
                  },
                  {
@@ -969,7 +969,7 @@
                      "question":  "How can I join the source data with an additional data set?",
                      "category":  "Processes",
                      "subCategory":  "Scoping",
-                     "seqNo":  null,
+                     "seqNo":  540,
                      "isActive":  true
                  },
                  {
@@ -978,7 +978,7 @@
                      "question":  "What does Match do?",
                      "category":  "Processes",
                      "subCategory":  "Match",
-                     "seqNo":  null,
+                     "seqNo":  545,
                      "isActive":  true
                  },
                  {
@@ -987,7 +987,7 @@
                      "question":  "What happens if a source record matches multiple target records in an action?",
                      "category":  "Processes",
                      "subCategory":  "Match",
-                     "seqNo":  null,
+                     "seqNo":  550,
                      "isActive":  true
                  },
                  {
@@ -996,7 +996,7 @@
                      "question":  "What happens if a source record matches existing target records during an Insert?",
                      "category":  "Processes",
                      "subCategory":  "Match",
-                     "seqNo":  null,
+                     "seqNo":  555,
                      "isActive":  true
                  },
                  {
@@ -1005,7 +1005,7 @@
                      "question":  "Does DSP still run the Match step when \"Use Salesforce Upsert API\" is enabled in an Upsert process?",
                      "category":  "Processes",
                      "subCategory":  "Match",
-                     "seqNo":  null,
+                     "seqNo":  560,
                      "isActive":  true
                  },
                  {
@@ -1014,7 +1014,7 @@
                      "question":  "How do I match target records via multiple fields?",
                      "category":  "Processes",
                      "subCategory":  "Match",
-                     "seqNo":  null,
+                     "seqNo":  565,
                      "isActive":  true
                  },
                  {
@@ -1023,7 +1023,7 @@
                      "question":  "How does DSP handle multiple source records matching a single target record?",
                      "category":  "Processes",
                      "subCategory":  "Match",
-                     "seqNo":  null,
+                     "seqNo":  570,
                      "isActive":  true
                  },
                  {
@@ -1032,7 +1032,7 @@
                      "question":  "How does Match determine the principal(master) record in a Merge process?",
                      "category":  "Processes",
                      "subCategory":  "Match",
-                     "seqNo":  null,
+                     "seqNo":  575,
                      "isActive":  true
                  },
                  {
@@ -1041,7 +1041,7 @@
                      "question":  "Can I match target records based on a relational field?",
                      "category":  "Processes",
                      "subCategory":  "Match",
-                     "seqNo":  null,
+                     "seqNo":  580,
                      "isActive":  true
                  },
                  {
@@ -1050,7 +1050,7 @@
                      "question":  "What is the purpose of the \u0027Additional Target Matching Criteria\u0027 field?",
                      "category":  "Processes",
                      "subCategory":  "Match",
-                     "seqNo":  null,
+                     "seqNo":  585,
                      "isActive":  true
                  },
                  {
@@ -1059,7 +1059,7 @@
                      "question":  "What is the purpose of the \u0027Matched Records Sorting Components\u0027 field?",
                      "category":  "Processes",
                      "subCategory":  "Match",
-                     "seqNo":  null,
+                     "seqNo":  590,
                      "isActive":  true
                  },
                  {
@@ -1068,7 +1068,7 @@
                      "question":  "What does Mapping do?",
                      "category":  "Processes",
                      "subCategory":  "Mapping",
-                     "seqNo":  null,
+                     "seqNo":  595,
                      "isActive":  true
                  },
                  {
@@ -1077,7 +1077,7 @@
                      "question":  "How do I reference a parent field?",
                      "category":  "Processes",
                      "subCategory":  "Mapping",
-                     "seqNo":  null,
+                     "seqNo":  600,
                      "isActive":  false
                  },
                  {
@@ -1086,7 +1086,7 @@
                      "question":  "How can I manage data relationships?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  605,
                      "isActive":  true
                  },
                  {
@@ -1095,7 +1095,7 @@
                      "question":  "How do I control the order of field mappings\u0027 evaluation?",
                      "category":  "Processes",
                      "subCategory":  "Mapping",
-                     "seqNo":  null,
+                     "seqNo":  610,
                      "isActive":  true
                  },
                  {
@@ -1104,7 +1104,7 @@
                      "question":  "What does the Add Default button do?",
                      "category":  "Processes",
                      "subCategory":  "Mapping",
-                     "seqNo":  null,
+                     "seqNo":  615,
                      "isActive":  true
                  },
                  {
@@ -1113,7 +1113,7 @@
                      "question":  "What does the Clear Mappings button do?",
                      "category":  "Processes",
                      "subCategory":  "Mapping",
-                     "seqNo":  null,
+                     "seqNo":  620,
                      "isActive":  true
                  },
                  {
@@ -1122,7 +1122,7 @@
                      "question":  "What does the Unmapped Source Fields button do?",
                      "category":  "Processes",
                      "subCategory":  "Mapping",
-                     "seqNo":  null,
+                     "seqNo":  625,
                      "isActive":  true
                  },
                  {
@@ -1131,7 +1131,7 @@
                      "question":  "What is the purpose of the \u0027Refresh\u0027 button?",
                      "category":  "Processes",
                      "subCategory":  "Mapping",
-                     "seqNo":  null,
+                     "seqNo":  630,
                      "isActive":  true
                  },
                  {
@@ -1140,7 +1140,7 @@
                      "question":  "What does the Save button do?",
                      "category":  "Processes",
                      "subCategory":  "Mapping",
-                     "seqNo":  null,
+                     "seqNo":  635,
                      "isActive":  true
                  },
                  {
@@ -1149,7 +1149,7 @@
                      "question":  "What does Action do?",
                      "category":  "Processes",
                      "subCategory":  "Action",
-                     "seqNo":  null,
+                     "seqNo":  640,
                      "isActive":  true
                  },
                  {
@@ -1158,7 +1158,7 @@
                      "question":  "Which actions are supported?",
                      "category":  "Processes",
                      "subCategory":  "Action",
-                     "seqNo":  null,
+                     "seqNo":  645,
                      "isActive":  true
                  },
                  {
@@ -1167,7 +1167,7 @@
                      "question":  "How can I avoid creating duplicate records if the target already exists?",
                      "category":  "Processes",
                      "subCategory":  "Action",
-                     "seqNo":  null,
+                     "seqNo":  650,
                      "isActive":  true
                  },
                  {
@@ -1176,7 +1176,7 @@
                      "question":  "How can I implement delta updates?",
                      "category":  "Processes",
                      "subCategory":  "Action",
-                     "seqNo":  null,
+                     "seqNo":  655,
                      "isActive":  true
                  },
                  {
@@ -1185,7 +1185,7 @@
                      "question":  "Can I skip updating a field if the target already has a value?",
                      "category":  "Processes",
                      "subCategory":  "Action",
-                     "seqNo":  null,
+                     "seqNo":  660,
                      "isActive":  true
                  },
                  {
@@ -1194,7 +1194,7 @@
                      "question":  "Can I skip a field update if the transformed value is blank?",
                      "category":  "Processes",
                      "subCategory":  "Action",
-                     "seqNo":  null,
+                     "seqNo":  665,
                      "isActive":  true
                  },
                  {
@@ -1203,7 +1203,7 @@
                      "question":  "What is the purpose of Writeback?",
                      "category":  "Processes",
                      "subCategory":  "Action",
-                     "seqNo":  null,
+                     "seqNo":  670,
                      "isActive":  true
                  },
                  {
@@ -1212,7 +1212,7 @@
                      "question":  "What is the purpose of the \u0027Use Salesforce Upsert API\u0027 field?",
                      "category":  "Processes",
                      "subCategory":  "Action",
-                     "seqNo":  null,
+                     "seqNo":  675,
                      "isActive":  true
                  },
                  {
@@ -1221,7 +1221,7 @@
                      "question":  "How does Action support Salesforce Big Objects?",
                      "category":  "Processes",
                      "subCategory":  "Action",
-                     "seqNo":  null,
+                     "seqNo":  680,
                      "isActive":  true
                  },
                  {
@@ -1230,7 +1230,7 @@
                      "question":  "How does Action support Platform Events?",
                      "category":  "Processes",
                      "subCategory":  "Action",
-                     "seqNo":  null,
+                     "seqNo":  685,
                      "isActive":  true
                  },
                  {
@@ -1239,7 +1239,7 @@
                      "question":  "What does Verify do?",
                      "category":  "Processes",
                      "subCategory":  "Verify",
-                     "seqNo":  null,
+                     "seqNo":  690,
                      "isActive":  true
                  },
                  {
@@ -1248,7 +1248,7 @@
                      "question":  "Does Verify apply only to #Batch?",
                      "category":  "Processes",
                      "subCategory":  "Verify",
-                     "seqNo":  null,
+                     "seqNo":  695,
                      "isActive":  false
                  },
                  {
@@ -1257,7 +1257,7 @@
                      "question":  "What should I keep in mind when using Verify with Action to Bulk API enabled?",
                      "category":  "Processes",
                      "subCategory":  "Verify",
-                     "seqNo":  null,
+                     "seqNo":  700,
                      "isActive":  true
                  },
                  {
@@ -1266,7 +1266,7 @@
                      "question":  "Why is bulkified transformation critical in enterprise data management?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  705,
                      "isActive":  true
                  },
                  {
@@ -1275,7 +1275,7 @@
                      "question":  "What data types does DSP support in its formulas?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  710,
                      "isActive":  true
                  },
                  {
@@ -1284,7 +1284,7 @@
                      "question":  "Where can I use formulas?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  715,
                      "isActive":  false
                  },
                  {
@@ -1293,7 +1293,7 @@
                      "question":  "Can formulas be nested?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  720,
                      "isActive":  true
                  },
                  {
@@ -1302,7 +1302,7 @@
                      "question":  "How can I manage data relationships?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  725,
                      "isActive":  false
                  },
                  {
@@ -1311,7 +1311,7 @@
                      "question":  "How does DSP optimize performance when using VLOOKUP or AGG functions?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  730,
                      "isActive":  false
                  },
                  {
@@ -1320,7 +1320,7 @@
                      "question":  "How can I handle complex transformations that aren\u0027t natively supported?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  735,
                      "isActive":  true
                  },
                  {
@@ -1329,7 +1329,7 @@
                      "question":  "How can I create a reusable formula?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  740,
                      "isActive":  true
                  },
                  {
@@ -1338,7 +1338,7 @@
                      "question":  "How can I join the source data with an additional data set?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  745,
                      "isActive":  false
                  },
                  {
@@ -1347,7 +1347,7 @@
                      "question":  "How do I mask sensitive data in sandbox environments?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  750,
                      "isActive":  true
                  },
                  {
@@ -1356,7 +1356,7 @@
                      "question":  "How can I skip a target field if the evaluated value is blank?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  755,
                      "isActive":  false
                  },
                  {
@@ -1365,7 +1365,7 @@
                      "question":  "How do I prevent duplicate source records in iteration?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  760,
                      "isActive":  false
                  },
                  {
@@ -1374,7 +1374,7 @@
                      "question":  "How do I evaluate DSP expressions from Apex?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  765,
                      "isActive":  true
                  },
                  {
@@ -1383,7 +1383,7 @@
                      "question":  "How can I format a string dynamically using DSP expressions?",
                      "category":  "Transformation",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  770,
                      "isActive":  false
                  },
                  {
@@ -1392,7 +1392,7 @@
                      "question":  "What is Query Manager?",
                      "category":  "Query Manager",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  775,
                      "isActive":  true
                  },
                  {
@@ -1401,7 +1401,7 @@
                      "question":  "Who can access Query Manager?",
                      "category":  "Query Manager",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  780,
                      "isActive":  false
                  },
                  {
@@ -1410,7 +1410,7 @@
                      "question":  "How do I build a SOQL query with Query Builder?",
                      "category":  "Query Manager",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  785,
                      "isActive":  true
                  },
                  {
@@ -1419,7 +1419,7 @@
                      "question":  "What happens when you execute a query?",
                      "category":  "Query Manager",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  790,
                      "isActive":  true
                  },
                  {
@@ -1428,7 +1428,7 @@
                      "question":  "What is a Column Filter?",
                      "category":  "Query Manager",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  795,
                      "isActive":  false
                  },
                  {
@@ -1437,7 +1437,7 @@
                      "question":  "How does a dynamic filter work?",
                      "category":  "Query Manager",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  800,
                      "isActive":  true
                  },
                  {
@@ -1446,7 +1446,7 @@
                      "question":  "How can I query data from a remote Salesforce org?",
                      "category":  "Query Manager",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  805,
                      "isActive":  false
                  },
                  {
@@ -1455,7 +1455,7 @@
                      "question":  "Can I include deleted records from the Recycle Bin in my query?",
                      "category":  "Query Manager",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  810,
                      "isActive":  false
                  },
                  {
@@ -1464,7 +1464,7 @@
                      "question":  "Can I use the Query component to restore deleted records from the Recycle Bin?",
                      "category":  "Query Manager",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  815,
                      "isActive":  false
                  },
                  {
@@ -1473,7 +1473,7 @@
                      "question":  "How do hyperlinks work in query results?",
                      "category":  "Query Manager",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  820,
                      "isActive":  false
                  },
                  {
@@ -1482,7 +1482,7 @@
                      "question":  "Is pagination handled server-side or client-side?",
                      "category":  "Query Manager",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  825,
                      "isActive":  true
                  },
                  {
@@ -1491,7 +1491,7 @@
                      "question":  "Is the Tooling API supported in Query?",
                      "category":  "Query Manager",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  830,
                      "isActive":  true
                  },
                  {
@@ -1500,7 +1500,7 @@
                      "question":  "How can I manage my frequently used queries?",
                      "category":  "Query Manager",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  835,
                      "isActive":  true
                  },
                  {
@@ -1509,7 +1509,7 @@
                      "question":  "How do I integrate the Query component into a Lightning page?",
                      "category":  "Query Manager",
                      "subCategory":  "",
-                     "seqNo":  null,
+                     "seqNo":  840,
                      "isActive":  true
                  },
                  {
@@ -1518,7 +1518,7 @@
                      "question":  "Does splitting an Apex batch class with multiple actions into multiple batch Executables slow performance a lot?",
                      "category":  "Rules Engines",
                      "subCategory":  "Batch",
-                     "seqNo":  null,
+                     "seqNo":  845,
                      "isActive":  true
                  }
              ]

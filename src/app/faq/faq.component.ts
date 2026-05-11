@@ -24,6 +24,7 @@ import { FAQItem, FAQCategory, FAQSubCategory } from '../shared/models/faq.model
 import { FAQService } from '../shared/services/faq.service';
 import { PerformanceService } from '../shared/services/performance.service';
 import { FAQPreviewService, PreviewData } from '../shared/services/faq-preview.service';
+import { VALID_SUBCATEGORIES } from '../shared/config/faq-urls.config';
 
 interface SearchResult {
   item: FAQItem;
@@ -209,88 +210,31 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
       const catParam = params.get('cat');
       const subCatParam = params.get('subCat');
-      
-      if (catParam) {
+      const slugParam = params.get('slug');
+
+      if (slugParam) {
+        // Answer mode — slug present in the URL, no heuristic needed.
+        this.isProcessingAnswerPath = true;
+        const decodedSlug = this.safeDecodeURIComponent(slugParam);
+        // catParam is guaranteed by every route matcher that emits a slug.
+        const urlCat = catParam ?? '';
+        const urlSubCat = subCatParam;
+        this.ensureFaqsLoaded(() =>
+          this.handleAnswerPathNavigation(decodedSlug, urlCat, urlSubCat, true)
+        );
+      } else if (catParam) {
         const decodedCat = this.safeDecodeURIComponent(catParam);
-        
-        // Check if this looks like an answer-based URL (contains hyphens and is longer)
-        if (this.isAnswerBasedURL(decodedCat) && !subCatParam) {
-          // Set processing flag immediately to prevent race conditions
-          this.isProcessingAnswerPath = true;
-          
-          // For answer-based URLs, wait for FAQ data to be loaded
-          
-          // If FAQ data is not loaded yet, force reload and wait
-          if (this.faqList.length === 0) {
-            // Set loading state to prevent flash of default content
-            this.updateUIState({ isLoadingRouteData: true });
-            
-            // Force reload FAQ data to ensure it's loaded
-            this.faqService.reloadFAQs().pipe(
-              take(1)
-            ).subscribe({
-              next: (faqs) => {
-                this.faqList = faqs;
-                if (faqs.length > 0) {
-                  this.handleAnswerPathNavigation(decodedCat, true);
-                } else {
-                  this.router.navigate(['/']);
-                }
-                // Clear loading state
-                this.updateUIState({ isLoadingRouteData: false });
-              },
-              error: (error) => {
-                console.error('Failed to load FAQ data:', error);
-                this.updateUIState({ isLoadingRouteData: false });
-                this.router.navigate(['/']);
-              }
-            });
-          } else {
-            // FAQ data already loaded, process immediately
-            this.handleAnswerPathNavigation(decodedCat, true);
-          }
-        } else {
-          // Handle category-based URL (e.g., /general or /general/input)
-          // Wait for FAQ data to be loaded before setting category
-          if (this.faqList.length === 0) {
-            // Set loading state to prevent flash of default content
-            this.updateUIState({ isLoadingRouteData: true });
-            
-            // Force reload FAQ data to ensure it's loaded
-            this.faqService.reloadFAQs().pipe(
-              take(1)
-            ).subscribe({
-              next: (faqs) => {
-                this.faqList = faqs;
-                if (faqs.length > 0) {
-                  this.setCategoryFromRoute(decodedCat, subCatParam);
-                } else {
-                  this.router.navigate(['/']);
-                }
-                // Clear loading state
-                this.updateUIState({ isLoadingRouteData: false });
-              },
-              error: (error) => {
-                console.error('Failed to load FAQ data:', error);
-                this.updateUIState({ isLoadingRouteData: false });
-                this.router.navigate(['/']);
-              }
-            });
-          } else {
-            // FAQ data already loaded, set category immediately
-            this.setCategoryFromRoute(decodedCat, subCatParam);
-          }
-        }
+        this.ensureFaqsLoaded(() => this.setCategoryFromRoute(decodedCat, subCatParam));
       } else {
         // Root path
         this.current.category = '';
         this.current.subCategory = '';
       }
-      
+
       // Update TOC pagination when navigation changes
       this.updateTOCPaginationIndices();
       this.cdr.detectChanges();
-      
+
       this.updatePageMetadata();
     });
 
@@ -349,6 +293,10 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       next: (faqs) => {
         this.faqList = faqs;
         this.updateUIState({ isLoading: false });
+
+        // Warn if any folderId collides with a known subcategory name — the
+        // 2-segment route matcher would route it to the TOC instead of the FAQ.
+        this.assertNoFolderIdSubcategoryCollision(faqs);
 
         // Initialize TOC pagination when data is loaded
         this.updateTOCPaginationIndices();
@@ -1047,10 +995,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   private updateBrowserURL(item: FAQItem): void {
-    // Use answer-based URL instead of fragment-based
-    const answerSlug = this.getAnswerSlug(item.folderId);
-    
-    this.router.navigate(['/', answerSlug]);
+    this.router.navigate(this.buildAnswerUrlSegments(item));
   }
 
   private clearBrowserURLFragment(): void {
@@ -1068,6 +1013,72 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
     return url;
+  }
+
+  // Build router segments for an answer URL. Shape is /<cat>/<sub?>/<slug>.
+  private buildAnswerUrlSegments(item: FAQItem): string[] {
+    const segs = ['/', this.encode(item.category)];
+    if (item.subCategory) {
+      segs.push(this.encode(item.subCategory));
+    }
+    segs.push(this.getDisplaySlug(item));
+    return segs;
+  }
+
+  // Some FAQ folderIds carry a leading "<subcategory>-" prefix from when slugs
+  // had to be globally unique (e.g. preview-how-do-i-preview-... and
+  // retrieve-how-do-i-preview-...). With the category in the URL the prefix is
+  // redundant, so strip it for display. Folder names on disk stay unique.
+  private getDisplaySlug(item: FAQItem): string {
+    const folderId = this.getAnswerSlug(item.folderId);
+    if (!item.subCategory) return folderId;
+    const subSlug = item.subCategory.trim().toLowerCase().replace(/\s+/g, '-');
+    const prefix = `${subSlug}-`;
+    return folderId.startsWith(prefix) ? folderId.slice(prefix.length) : folderId;
+  }
+
+  // The 2-segment route matcher disambiguates /<cat>/<sub> from /<cat>/<slug>
+  // by checking the second segment against VALID_SUBCATEGORIES. A FAQ whose
+  // folderId equals a known subcategory would shadow the subcategory TOC route.
+  private assertNoFolderIdSubcategoryCollision(faqs: FAQItem[]): void {
+    const subs: ReadonlySet<string> = new Set<string>(VALID_SUBCATEGORIES);
+    const collisions = faqs
+      .map(f => f.folderId)
+      .filter(id => subs.has(id.toLowerCase()));
+    if (collisions.length > 0) {
+      console.warn(
+        '[FAQ] folderId collides with a subcategory name — the FAQ URL would be ' +
+        'shadowed by the subcategory TOC route:',
+        collisions,
+      );
+    }
+  }
+
+  // Reload FAQ data if the list is empty, then run the callback. Shared by
+  // the route-param subscription for both category and answer-mode navigation.
+  private ensureFaqsLoaded(cb: () => void): void {
+    if (this.faqList.length > 0) {
+      cb();
+      return;
+    }
+
+    this.updateUIState({ isLoadingRouteData: true });
+    this.faqService.reloadFAQs().pipe(take(1)).subscribe({
+      next: (faqs) => {
+        this.faqList = faqs;
+        if (faqs.length > 0) {
+          cb();
+        } else {
+          this.router.navigate(['/']);
+        }
+        this.updateUIState({ isLoadingRouteData: false });
+      },
+      error: (error) => {
+        console.error('Failed to load FAQ data:', error);
+        this.updateUIState({ isLoadingRouteData: false });
+        this.router.navigate(['/']);
+      }
+    });
   }
 
   private trackFAQView(item: FAQItem): void {
@@ -1097,12 +1108,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private autoNavigateToFAQ(faqItem: FAQItem): void {
     this.current.faqTitle = faqItem.question;
-
-    const url = faqItem.subCategory
-      ? ['/', this.encode(faqItem.category), this.encode(faqItem.subCategory)]
-      : ['/', this.encode(faqItem.category)];
-
-    this.router.navigate(url, { fragment: this.slugify(faqItem.question) });
+    this.router.navigate(this.buildAnswerUrlSegments(faqItem));
     // FAQ content will be displayed directly without panel expansion
   }
 
@@ -1192,47 +1198,39 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
-   * Check if URL looks like an answer-based URL vs category URL
-   */
-  isAnswerBasedURL(urlPath: string): boolean {
-    // Answer-based URLs are longer and contain multiple hyphens
-    // Category URLs are typically single words or short phrases
-    const hasMultipleHyphens = (urlPath.match(/-/g) || []).length >= 1;
-    const isLongerThanCategoryName = urlPath.length > 1; // Most categories are shorter
-    
-    // Check if it's a known category by looking in our category mapping
-    const isKnownCategory = this.categoryMapping.hasOwnProperty(urlPath.toLowerCase());
-    
-    // If it's a known category, treat as category URL
-    if (isKnownCategory) {
-      return false;
-    }
-    
-    // If it has multiple hyphens and is long, likely an answer-based URL
-    return hasMultipleHyphens && isLongerThanCategoryName;
-  }
-
-  /**
    * Handle navigation based on answer path URL parameter
    */
-  private handleAnswerPathNavigation(answerSlug: string, fromRouteHandler: boolean = false): void {
+  private handleAnswerPathNavigation(
+    answerSlug: string,
+    urlCat: string,
+    urlSubCat: string | null,
+    fromRouteHandler: boolean = false,
+  ): void {
     // Prevent duplicate processing, unless explicitly called from route handler
     if (this.isProcessingAnswerPath && !fromRouteHandler) {
       return;
     }
-    
+
     // Set processing flag
     this.isProcessingAnswerPath = true;
-    
+
     // At this point, FAQ data should already be loaded from route param handler
     if (this.faqList.length === 0) {
       this.isProcessingAnswerPath = false;
       this.isInitialLoad = false;
       return;
     }
-    
-    // Find FAQ item by folder id (== slug)
-    const faqItem = this.faqList.find(item => item.folderId === answerSlug);
+
+    // Match by (category, subCategory, displaySlug) — the canonical inverse of
+    // buildAnswerUrlSegments. Ensures we find the right FAQ when two FAQs in
+    // different subcategories share a question (their folderIds differ only by
+    // a subcategory prefix that we strip from URLs).
+    const faqItem = this.faqList.find(item => {
+      if (this.encode(item.category) !== urlCat) return false;
+      const itemSub = item.subCategory ? this.encode(item.subCategory) : '';
+      if (itemSub !== (urlSubCat ?? '')) return false;
+      return this.getDisplaySlug(item) === answerSlug;
+    });
     
     if (faqItem) {
       // Set category and subcategory based on found FAQ but don't trigger intermediate renders

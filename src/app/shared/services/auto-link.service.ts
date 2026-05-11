@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
-import { getFAQUrlByKey } from '../config/faq-urls.config';
+import { FaqUrlService } from './faq-url.service';
 
 interface AutoLinkTerm {
   faqLink?: string;
@@ -29,7 +29,8 @@ export class AutoLinkService {
 
   constructor(
     private http: HttpClient,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private faqUrlService: FaqUrlService
   ) {
     this.loadAutoLinkTerms();
   }
@@ -254,7 +255,7 @@ export class AutoLinkService {
     
     // FAQ link
     if (termConfig.faqLink) {
-      return getFAQUrlByKey(termConfig.faqLink);
+      return this.faqUrlService.getFAQUrlByKey(termConfig.faqLink);
     }
     
     return '';

@@ -5,7 +5,7 @@ import { map, catchError, shareReplay, tap, finalize, filter, take, switchMap } 
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { PerformanceService } from './performance.service';
 import { AutoLinkService } from './auto-link.service';
-import { getFAQUrlByKey } from '../config/faq-urls.config';
+import { FaqUrlService } from './faq-url.service';
 
 import {
   FAQMetadata,
@@ -64,7 +64,8 @@ export class FAQService implements OnDestroy {
     private http: HttpClient,
     private sanitizer: DomSanitizer,
     private performanceService: PerformanceService,
-    private autoLinkService: AutoLinkService
+    private autoLinkService: AutoLinkService,
+    private faqUrlService: FaqUrlService
   ) {
     this.initializeService();
     this.initializeIntersectionObserver();
@@ -412,6 +413,11 @@ export class FAQService implements OnDestroy {
    */
   getFAQs(): Observable<FAQItem[]> {
     return this.faqsCache$.asObservable();
+  }
+
+  /** Synchronous lookup against the cached FAQ list; empty when cache is cold. */
+  getFAQByFolderId(folderId: string): FAQItem | undefined {
+    return this.faqsCache$.getValue().find(item => item.folderId === folderId);
   }
 
   /**
@@ -968,7 +974,7 @@ export class FAQService implements OnDestroy {
           const faqLinkMatch = match.match(/data-faq-link="([^"]*)"/);
           if (faqLinkMatch) {
             const linkKey = faqLinkMatch[1];
-            const resolvedUrl = getFAQUrlByKey(linkKey);
+            const resolvedUrl = this.faqUrlService.getFAQUrlByKey(linkKey);
             if (resolvedUrl) {
               // Replace the href with the resolved URL, preserve existing classes
               return `<a${beforeHref}href="${resolvedUrl}"${afterHref}>`;

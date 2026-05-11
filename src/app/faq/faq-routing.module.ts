@@ -1,101 +1,54 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, UrlSegment, UrlMatchResult } from '@angular/router';
 import { FaqComponent } from './faq.component';
+import {
+  VALID_CATEGORIES,
+  VALID_SUBCATEGORIES,
+} from '../shared/config/faq-urls.config';
 
-// Matcher function for category routes
+const CATEGORIES: ReadonlySet<string> = new Set(VALID_CATEGORIES);
+const SUBCATEGORIES: ReadonlySet<string> = new Set(VALID_SUBCATEGORIES);
+
+// /<category>
 function categoryMatcher(segments: UrlSegment[]): UrlMatchResult | null {
-  if (segments.length === 1) {
-    const path = segments[0].path.toLowerCase();
-    // Use the same category keys as in FaqComponent.categoryMapping
-    const validCategories = [
-      'general', 
-      'processes', 
-      'process-steps',
-      'query-manager', 
-      'rules-engines', 
-      'transformation',
-      'executables',
-      'connections'
-    ];
-    
-    // Only match known categories, reject FAQ folder ids
-    if (validCategories.includes(path)) {
-      return { consumed: segments, posParams: { cat: segments[0] } };
-    }
-  }
-  return null; // Reject match, including FAQ folder ids
+  if (segments.length !== 1) return null;
+  const cat = segments[0].path.toLowerCase();
+  if (!CATEGORIES.has(cat)) return null;
+  return { consumed: segments, posParams: { cat: segments[0] } };
 }
 
-// Matcher function for category/subcategory routes  
-function categorySubcategoryMatcher(segments: UrlSegment[]): UrlMatchResult | null {
-  if (segments.length === 2) {
-    const catPath = segments[0].path.toLowerCase();
-    const subCatPath = segments[1].path.toLowerCase();
-    // Use the same category keys as in FaqComponent.categoryMapping
-    const validCategories = [
-      'general', 
-      'processes', 
-      'process-steps',
-      'query-manager', 
-      'rules-engines', 
-      'transformation',
-      'executables',
-      'connections'
-    ];
-    const validSubCategories = ['action-button', 'action', 'batch', 'data-list', 'data-loader', 'input', 'mapping', 'match', 'preview', 'retrieve', 'scoping', 'trigger', 'verify'];
-    
-    // Only match valid category/subcategory combinations
-    if (validCategories.includes(catPath) && validSubCategories.includes(subCatPath)) {
-      return { consumed: segments, posParams: { cat: segments[0], subCat: segments[1] } };
-    }
+// 2 segments: either /<category>/<subcategory> (TOC) or /<category>/<slug> (answer w/o sub).
+// Disambiguated by whether segment[1] is a known subcategory.
+function categorySubOrSlugMatcher(segments: UrlSegment[]): UrlMatchResult | null {
+  if (segments.length !== 2) return null;
+  const cat = segments[0].path.toLowerCase();
+  if (!CATEGORIES.has(cat)) return null;
+  const second = segments[1].path.toLowerCase();
+  if (SUBCATEGORIES.has(second)) {
+    return { consumed: segments, posParams: { cat: segments[0], subCat: segments[1] } };
   }
-  return null; // Reject invalid combinations
+  return { consumed: segments, posParams: { cat: segments[0], slug: segments[1] } };
 }
 
-// Matcher function for FAQ folder-id routes (FAQ navigation)
-function folderIdMatcher(segments: UrlSegment[]): UrlMatchResult | null {
-  if (segments.length === 1) {
-    const path = segments[0].path.toLowerCase();
-    
-    // Use same logic as FaqComponent.isAnswerBasedURL()
-    const hasMultipleHyphens = (path.match(/-/g) || []).length >= 1;
-    const isLongerThanCategory = path.length > 1;
-    
-    // Ensure it's not a known category
-    const validCategories = [
-      'general', 
-      'processes', 
-      'process-steps',
-      'query-manager', 
-      'rules-engines', 
-      'transformation',
-      'executables',
-      'connections'
-    ];
-    const isKnownCategory = validCategories.includes(path);
-    
-    // If it looks like a folder id and is not a known category, match it
-    if (hasMultipleHyphens && isLongerThanCategory && !isKnownCategory) {
-      return { consumed: segments, posParams: { cat: segments[0] } }; // Use 'cat' param for compatibility
-    }
-  }
-  return null; // Reject if doesn't look like a folder id
+// /<category>/<subcategory>/<slug>
+function categorySubSlugMatcher(segments: UrlSegment[]): UrlMatchResult | null {
+  if (segments.length !== 3) return null;
+  const cat = segments[0].path.toLowerCase();
+  const sub = segments[1].path.toLowerCase();
+  if (!CATEGORIES.has(cat) || !SUBCATEGORIES.has(sub)) return null;
+  return {
+    consumed: segments,
+    posParams: { cat: segments[0], subCat: segments[1], slug: segments[2] },
+  };
 }
 
 const routes: Routes = [
   { path: '', component: FaqComponent },
-  { 
-    matcher: categoryMatcher, 
-    component: FaqComponent 
-  },
-  { 
-    matcher: categorySubcategoryMatcher, 
-    component: FaqComponent 
-  },
-  {
-    matcher: folderIdMatcher,
-    component: FaqComponent
-  }
+  { matcher: categoryMatcher, component: FaqComponent },
+  { matcher: categorySubOrSlugMatcher, component: FaqComponent },
+  { matcher: categorySubSlugMatcher, component: FaqComponent },
+  // Anything else (including legacy bare /<slug> bookmarks) lands on home.
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
