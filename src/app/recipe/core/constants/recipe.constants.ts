@@ -1,12 +1,37 @@
-export const CATEGORY_ORDER: string[] = [
+import { generateSlug } from '../../../shared/utils/slug.utils';
+
+export interface CategoryDefinition {
+  readonly displayName: string;
+  readonly slug: string;
+}
+
+const CATEGORY_DISPLAY_NAMES: readonly string[] = [
   'Batch',
   'Trigger',
   'Data List',
   'Action Button',
   'Data Loader',
   'Transformation',
-  'Query'
+  'Query',
+  'General'
 ];
+
+export const CATEGORY_ORDER: ReadonlyArray<CategoryDefinition> = CATEGORY_DISPLAY_NAMES.map(name => ({
+  displayName: name,
+  slug: generateSlug(name)
+}));
+
+export function categoryToSlug(displayName: string): string {
+  const match = CATEGORY_ORDER.find(c => c.displayName === displayName);
+  return match ? match.slug : generateSlug(displayName);
+}
+
+export function slugToCategoryName(slug: string): string | null {
+  if (!slug) return null;
+  const normalized = slug.toLowerCase();
+  const match = CATEGORY_ORDER.find(c => c.slug === normalized);
+  return match ? match.displayName : null;
+}
 
 export const RECIPE_PATHS = {
   RECIPE_FOLDERS_BASE: 'assets/recipes/',

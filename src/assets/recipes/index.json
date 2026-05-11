@@ -21,7 +21,7 @@
       "active": true
     },
     {
-      "folderId": "centralized-validation-rules-with-self-adaptive-tr",
+      "folderId": "centralized-validation-rules-with-self-adaptive-trigger",
       "active": true
     },
     {
@@ -29,7 +29,7 @@
       "active": true
     },
     {
-      "folderId": "context-aware-data-loader-from-lightning-record-pa",
+      "folderId": "context-aware-data-loader-from-lightning-record-page",
       "active": true
     },
     {
@@ -137,7 +137,7 @@
       "active": true
     },
     {
-      "folderId": "self-adaptive-trigger-for-rollup-summary-calculati",
+      "folderId": "self-adaptive-trigger-for-rollup-summary-calculations",
       "active": true
     },
     {

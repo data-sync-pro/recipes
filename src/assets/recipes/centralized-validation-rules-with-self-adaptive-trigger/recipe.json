@@ -68,10 +68,10 @@
   "downloadableExecutables": [
     {
       "filePath": "downloadExecutables/Opportunity.SelfAdaptive.Validations.json",
-      "url": "assets/recipes/centralized-validation-rules-with-self-adaptive-tr/downloadExecutables/Opportunity.SelfAdaptive.Validations.json"
+      "url": "assets/recipes/centralized-validation-rules-with-self-adaptive-trigger/downloadExecutables/Opportunity.SelfAdaptive.Validations.json"
     }
   ],
   "relatedRecipes": [],
   "keywords": [],
-  "__folderId": "centralized-validation-rules-with-self-adaptive-tr"
+  "__folderId": "centralized-validation-rules-with-self-adaptive-trigger"
 }
