@@ -9,6 +9,7 @@
         [recipes]="currentRecipes"
         [categories]="categories"
         [selectedCategories]="currentFilter.categories"
+        [totalRecipeCount]="totalRecipeCount"
         [searchQuery]="search.query"
         (categoryToggle)="toggleCategoryFilter($event)"
         (searchChange)="searchRecipes($event)"

@@ -1,26 +1,40 @@
-<div class="category-list">
-    <div class="card">
-        <div class="list-title">CATEGORIES</div>
-        <div class="list">
-            <div
-                *ngFor="let category of categories; trackBy: trackByCategoryName"
-                class="list-item"
-                (click)="onCategoryChange(category.name)">
-                <input
-                    type="checkbox"
-                    [checked]="isCategorySelected(category.name)"
-                    (click)="$event.stopPropagation()"
-                    (change)="onCategoryChange(category.name)"
-                />
-                <div class="icon-text">
-                    <img
-                        class="icon"
-                        [src]="getCategoryIcon(category.name)"
-                        [alt]="category.displayName"
-                        aria-hidden="true">
-                    <span>{{ category.displayName }}</span>
-                </div>
+<nav class="category-list">
+    <!-- All Recipes -->
+    <div
+        class="nav-item home-nav"
+        [class.active]="isAllSelected"
+        (click)="onAllRecipesClick()">
+        <div class="nav-content">
+            <lightning-icon
+                iconName="utility:folder_copy"
+                size="x-small"
+                alternativeText="All Recipes"
+                class="nav-icon">
+            </lightning-icon>
+            <span class="nav-text">All Recipes</span>
+        </div>
+        <span class="nav-count">{{ totalRecipeCount }}</span>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- Categories -->
+    <div class="nav-tree">
+        <div
+            *ngFor="let category of categories; trackBy: trackByCategoryName"
+            class="nav-item"
+            [class.active]="isCategorySelected(category.name)"
+            (click)="onCategoryClick(category.name)">
+            <div class="nav-content">
+                <lightning-icon
+                    [iconName]="isCategorySelected(category.name) ? 'utility:open_folder' : 'utility:folder'"
+                    size="x-small"
+                    [alternativeText]="category.displayName + ' category'"
+                    class="nav-icon">
+                </lightning-icon>
+                <span class="nav-text">{{ category.displayName }}</span>
             </div>
+            <span class="nav-count">{{ category.count }}</span>
         </div>
     </div>
-</div>
+</nav>
