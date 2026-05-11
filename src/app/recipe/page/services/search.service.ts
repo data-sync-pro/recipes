@@ -7,6 +7,7 @@ import { SearchService as CoreSearchService } from '../../core/services/search.s
 import { Store } from '../../core/store/recipe.store';
 import { LoggerService } from '../../core/services/logger.service';
 import { SelectedSuggestion } from '../search-overlay/search-overlay.component';
+import { categoryToSlug } from '../../core/constants/recipe.constants';
 
 export interface SearchResultEvent {
   query: string;
@@ -130,7 +131,7 @@ export class SearchStateService implements OnDestroy {
   }
 
   handleSearchOverlaySelect(selectedRecipe: SelectedSuggestion): void {
-    this.router.navigate(['/recipes', selectedRecipe.category, selectedRecipe.slug]);
+    this.router.navigate(['/recipes', categoryToSlug(selectedRecipe.category), selectedRecipe.slug]);
 
     this.closeSearchOverlay();
   }

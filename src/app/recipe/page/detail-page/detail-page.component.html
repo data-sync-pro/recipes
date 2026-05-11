@@ -41,7 +41,7 @@
                 *ngFor="let recipe of group.recipes"
                 class="recipe-list-item"
                 [class.active]="recipe.slug === currentRecipe?.slug"
-                [routerLink]="['/recipes', group.category.name, recipe.slug]">
+                [routerLink]="['/recipes', categorySlug(group.category.name), recipe.slug]">
                 {{ recipe.title }}
               </a>
             </div>

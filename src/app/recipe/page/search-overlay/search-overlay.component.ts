@@ -17,6 +17,7 @@ import { takeUntil } from 'rxjs/operators';
 import { CacheService } from '../../core/services/cache.service';
 import { SearchService } from '../../core/services/search.service';
 import { LoggerService } from '../../core/services/logger.service';
+import { categoryToSlug } from '../../core/constants/recipe.constants';
 
 // Search-specific item structure for the overlay
 interface RecipeSearchItem {
@@ -103,7 +104,7 @@ export class RecipeSearchOverlayComponent implements OnInit, OnDestroy, OnChange
                 id: r.id,
                 slug: r.slug,
                 question: r.title,
-                route: `/recipes/${encodeURIComponent(firstCategory)}/${r.slug}`,
+                route: `/recipes/${categoryToSlug(firstCategory)}/${r.slug}`,
                 category: firstCategory,
                 subCategory: null,
                 tags: r.category,  // Use all categories as tags

@@ -17,6 +17,7 @@ import { Recipe, Category } from '../../core/models/recipe.model';
 import { CacheService } from '../../core/services/cache.service';
 import { SearchService } from '../../core/services/search.service';
 import { BreadcrumbItem } from '../detail-banner/detail-banner.component';
+import { categoryToSlug, slugToCategoryName } from '../../core/constants/recipe.constants';
 
 interface CategoryGroup {
   category: Category;
@@ -155,8 +156,9 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     ]).pipe(
       takeUntil(this.destroy$)
     ).subscribe(([params, recipes]) => {
-      const category = params.get('category');
+      const categorySlug = params.get('category');
       const recipeName = params.get('recipeName');
+      const category = categorySlug ? slugToCategoryName(categorySlug) : null;
 
       this.allRecipes = recipes;
       this.allCategories = this.searchService.generateCategories(recipes);
@@ -191,7 +193,7 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
           const breadcrumbCategory = recipe.category.includes(category) ? category : recipe.category[0];
           this.breadcrumbs = [
             { name: 'Recipes', url: '/recipes' },
-            { name: breadcrumbCategory, url: `/recipes/${breadcrumbCategory}` }
+            { name: breadcrumbCategory, url: `/recipes/${categoryToSlug(breadcrumbCategory)}` }
           ];
 
           // Expand the current category
@@ -229,6 +231,10 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     if (group) {
       group.isExpanded = true;
     }
+  }
+
+  categorySlug(categoryName: string): string {
+    return categoryToSlug(categoryName);
   }
 
   toggleCategory(categoryName: string): void {
@@ -281,7 +287,7 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     this.closeSearchOverlay();
     // Navigate using the route provided by the search overlay
     if (selectedItem.slug && selectedItem.category) {
-      this.router.navigate(['/recipes', selectedItem.category, selectedItem.slug]);
+      this.router.navigate(['/recipes', categoryToSlug(selectedItem.category), selectedItem.slug]);
     }
   }
 

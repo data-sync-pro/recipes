@@ -10,7 +10,7 @@ import { PreviewSyncService } from './preview-sync.service';
 import { TocService } from './toc.service';
 import { PreviewService } from '../../core/services/preview.service';
 import { LoggerService } from '../../core/services/logger.service';
-import { RECIPE_MESSAGES, RECIPE_SECTIONS } from '../../core/constants/recipe.constants';
+import { RECIPE_MESSAGES, RECIPE_SECTIONS, categoryToSlug, slugToCategoryName } from '../../core/constants/recipe.constants';
 import { sortRecipesByCategoryAndTitle } from '../../core/utils';
 
 export interface RecipeLoadResult {
@@ -54,8 +54,9 @@ export class RouteHandlerService implements OnDestroy {
   }
 
   handleRouteParams(params: ParamMap, queryParams: ParamMap): void {
-    const category = params.get('category') || '';
+    const categorySlug = params.get('category') || '';
     const recipeName = params.get('recipeName') || '';
+    const categoryDisplayName = categorySlug ? (slugToCategoryName(categorySlug) || '') : '';
 
     const isPreview = queryParams.get('preview') === 'true';
     const previewRecipeId = queryParams.get('recipeId') || undefined;
@@ -68,10 +69,10 @@ export class RouteHandlerService implements OnDestroy {
 
       if (recipeName) {
         this.store.setCurrentView('recipe');
-        this.loadRecipeDetails(category, recipeName);
-      } else if (category) {
+        this.loadRecipeDetails(categoryDisplayName, recipeName);
+      } else if (categoryDisplayName) {
         this.store.setCurrentView('category');
-        this.loadCategoryRecipes(category);
+        this.loadCategoryRecipes(categoryDisplayName);
       } else {
         this.store.setCurrentView('home');
         this.loadAllRecipes();
@@ -250,7 +251,7 @@ export class RouteHandlerService implements OnDestroy {
   }
 
   goToCategory(categoryName: string, closeMobileSidebar = false): void {
-    this.router.navigate(['/recipes', categoryName]);
+    this.router.navigate(['/recipes', categoryToSlug(categoryName)]);
 
     if (closeMobileSidebar && this.store.getUIState().isMobile) {
       this.store.closeMobileSidebar();
@@ -268,7 +269,7 @@ export class RouteHandlerService implements OnDestroy {
                         currentRecipeId === recipe.id &&
                         recipe.category.includes(currentRecipeCategory);
 
-    this.router.navigate(['/recipes', firstCategory, recipe.slug]);
+    this.router.navigate(['/recipes', categoryToSlug(firstCategory), recipe.slug]);
 
     if (!isSameRecipe) {
       this.store.setActiveSectionId(RECIPE_SECTIONS.RECIPE_OVERVIEW);
