@@ -219,8 +219,8 @@
     "JOIN_JSON": {
       "functionDoc": "JOIN_JSON"
     },
-    "JOIN_OBJECT": {
-      "functionDoc": "JOIN_OBJECT"
+    "JOIN_OBJECT_CONNECTION": {
+      "functionDoc": "JOIN_OBJECT_CONNECTION"
     },
     "LAST_INDEX_OF": {
       "functionDoc": "LAST_INDEX_OF"
