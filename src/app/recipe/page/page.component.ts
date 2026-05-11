@@ -23,6 +23,7 @@ import { CacheService } from '../core/services/cache.service';
 import { SearchService as CoreSearchService } from '../core/services/search.service';
 import { LoggerService } from '../core/services/logger.service';
 import { sortRecipesByCategoryAndTitle } from '../core/utils';
+import { categoryToSlug, slugToCategoryName } from '../core/constants/recipe.constants';
 import { TocService } from './services/toc.service';
 import { NavigationService } from './services/navigation.service';
 import { Store } from '../core/store/recipe.store';
@@ -102,8 +103,9 @@ export class RecipesComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(([params, queryParams]) => {
 
-      const category = params.get('category') || '';
+      const categorySlug = params.get('category') || '';
       const recipeName = params.get('recipeName') || '';
+      const category = categorySlug ? (slugToCategoryName(categorySlug) || '') : '';
 
       this.navigation = {
         category,
@@ -317,7 +319,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
       const categoryName = category?.displayName || this.navigation.category;
       path.push({
         name: categoryName,
-        url: `/recipes/${this.navigation.category}`
+        url: `/recipes/${categoryToSlug(this.navigation.category)}`
       });
     }
 

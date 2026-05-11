@@ -84,7 +84,7 @@ export class SearchService {
       .filter(([_, count]) => count > 0)
       .map(([category, count]) => ({
         name: category,
-        displayName: this.getCategoryDisplayName(category),
+        displayName: category,
         count
       }));
 
@@ -93,8 +93,8 @@ export class SearchService {
 
   sortCategories(categories: Category[]): Category[] {
     return [...categories].sort((a, b) => {
-      const indexA = CATEGORY_ORDER.indexOf(a.name);
-      const indexB = CATEGORY_ORDER.indexOf(b.name);
+      const indexA = CATEGORY_ORDER.findIndex(c => c.displayName === a.name);
+      const indexB = CATEGORY_ORDER.findIndex(c => c.displayName === b.name);
 
       if (indexA !== -1 && indexB !== -1) {
         return indexA - indexB;
@@ -109,8 +109,8 @@ export class SearchService {
 
   sortCategoryNames(categories: string[]): string[] {
     return [...categories].sort((a, b) => {
-      const indexA = CATEGORY_ORDER.indexOf(a);
-      const indexB = CATEGORY_ORDER.indexOf(b);
+      const indexA = CATEGORY_ORDER.findIndex(c => c.displayName === a);
+      const indexB = CATEGORY_ORDER.findIndex(c => c.displayName === b);
 
       if (indexA !== -1 && indexB !== -1) {
         return indexA - indexB;
@@ -121,24 +121,5 @@ export class SearchService {
 
       return 0;
     });
-  }
-
-  private getCategoryDisplayName(category: string): string {
-    const mapping: Record<string, string> = {
-      'action-button': 'Action Button',
-      'batch': 'Batch',
-      'data-list': 'Data List',
-      'data-loader': 'Data Loader',
-      'triggers': 'Trigger',
-      'Batch': 'Batch',
-      'Trigger': 'Trigger',
-      'Data List': 'Data List',
-      'Action Button': 'Action Button',
-      'Data Loader': 'Data Loader',
-      'Transformation': 'Transformation',
-      'Query': 'Query'
-    };
-
-    return mapping[category] || category;
   }
 }

@@ -68,11 +68,11 @@
   "downloadableExecutables": [
     {
       "filePath": "downloadExecutables/Opportunities.DataLoader.From.AccountPage.json",
-      "url": "assets/recipes/context-aware-data-loader-from-lightning-record-pa/downloadExecutables/Opportunities.DataLoader.From.AccountPage.json"
+      "url": "assets/recipes/context-aware-data-loader-from-lightning-record-page/downloadExecutables/Opportunities.DataLoader.From.AccountPage.json"
     },
     {
       "filePath": "downloadExecutables/Account.Opportunities.json",
-      "url": "assets/recipes/context-aware-data-loader-from-lightning-record-pa/downloadExecutables/Account.Opportunities.json"
+      "url": "assets/recipes/context-aware-data-loader-from-lightning-record-page/downloadExecutables/Account.Opportunities.json"
     }
   ],
   "downloadFileCallout": [
@@ -99,5 +99,5 @@
   ],
   "relatedRecipes": [],
   "keywords": [],
-  "__folderId": "context-aware-data-loader-from-lightning-record-pa"
+  "__folderId": "context-aware-data-loader-from-lightning-record-page"
 }

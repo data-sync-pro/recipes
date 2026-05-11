@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Recipe } from '../../core/models/recipe.model';
 import { Category } from '../../core/models/recipe.model';
+import { categoryToSlug } from '../../core/constants/recipe.constants';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class RecipeCardComponent {
   };
 
   get recipeLink(): string[] {
-    return ['/recipes', this.recipe.category[0] || '', this.recipe.slug || ''];
+    return ['/recipes', categoryToSlug(this.recipe.category[0] || ''), this.recipe.slug || ''];
   }
 
   onRecipeClick(): void {
