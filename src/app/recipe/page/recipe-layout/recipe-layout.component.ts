@@ -12,6 +12,7 @@ export class RecipeLayoutComponent {
   @Input() recipes: Recipe[] = [];
   @Input() categories: Category[] = [];
   @Input() selectedCategories: string[] = [];
+  @Input() totalRecipeCount: number = 0;
   @Input() searchQuery: string = '';
 
   @Output() categoryToggle = new EventEmitter<string>();

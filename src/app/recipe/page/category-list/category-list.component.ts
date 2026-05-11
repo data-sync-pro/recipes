@@ -10,9 +10,9 @@ import { Category } from '../../core/models/recipe.model';
 export class CategoryListComponent {
   @Input() categories: Category[] = [];
   @Input() selectedCategories: string[] = [];
+  @Input() totalRecipeCount: number = 0;
   @Output() categoryToggle = new EventEmitter<string>();
 
-  // Map of category names to icon paths
   categoryIcons: { [key: string]: string } = {
     'Batch': 'assets/icons/recipe/batch.svg',
     'Action Button': 'assets/icons/recipe/action-button.svg',
@@ -23,12 +23,23 @@ export class CategoryListComponent {
     'General': 'assets/icons/recipe/general.svg'
   };
 
-  onCategoryChange(categoryName: string): void {
+  onCategoryClick(categoryName: string): void {
     this.categoryToggle.emit(categoryName);
+  }
+
+  onAllRecipesClick(): void {
+    const current = this.selectedCategories[0];
+    if (current) {
+      this.categoryToggle.emit(current);
+    }
   }
 
   isCategorySelected(categoryName: string): boolean {
     return this.selectedCategories.includes(categoryName);
+  }
+
+  get isAllSelected(): boolean {
+    return this.selectedCategories.length === 0;
   }
 
   getCategoryIcon(categoryName: string): string {
