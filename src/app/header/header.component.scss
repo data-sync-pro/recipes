@@ -400,10 +400,14 @@
     }
   }
 
-  .mobile-toggle-btn:focus,
-  .logo-area:focus {
+  .mobile-toggle-btn:focus-visible,
+  .logo-area:focus-visible {
     outline: 2px solid #007bff;
     outline-offset: 2px;
     z-index: 2001;
+  }
+
+  .logo-area:focus {
+    outline: none;
   }
 }
