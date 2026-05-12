@@ -1,6 +1,7 @@
 {
   "pipeline": {
     "Name": "Opportunity.Related.DataLists",
+    "pushtopics__OriginID__c": "a0DDC000006zYuM2AU",
     "pushtopics__NotifyOwner__c": false,
     "pushtopics__RecordBasedConfigurationDeployment__c": false,
     "pushtopics__StopRemainingWhenAnExecutableFails__c": false,
@@ -83,7 +84,7 @@
       "pushtopics__QOpenLinksInRecordPage__c": true,
       "pushtopics__QPageSize__c": 10,
       "pushtopics__QRetrieveAll__c": false,
-      "pushtopics__QRetrieveFields__c": "Name, Quantity, UnitPrice, ServiceDate, LastModifiedDate",
+      "pushtopics__QRetrieveFields__c": "Product2.Name, Quantity, UnitPrice, ServiceDate, LastModifiedDate",
       "pushtopics__QRowAction__c": true,
       "pushtopics__QSeeLabelsWhileBuildingSOQL__c": true,
       "pushtopics__QShowColumnFilter__c": true,
@@ -250,7 +251,7 @@
       "pushtopics__FieldMappings__r": []
     },
     {
-      "Name": "Opportuntiy.ContactRoles",
+      "Name": "Opportunity.ContactRoles",
       "pushtopics__Action__c": "Query",
       "pushtopics__ActionButton__c": false,
       "pushtopics__QActionIndependentOfRowSelection__c": false,
@@ -264,7 +265,7 @@
       "pushtopics__AfterUpdateTrigger__c": false,
       "pushtopics__AllInternalUsersHaveReadAccess__c": false,
       "pushtopics__AllOrNothing__c": false,
-      "pushtopics__ApiName__c": "Opportuntiy.ContactRoles",
+      "pushtopics__ApiName__c": "Opportunity.ContactRoles",
       "pushtopics__ApplicableForActionButton__c": false,
       "pushtopics__ApplicableForMatchTarget__c": false,
       "pushtopics__ApplicableForSelfAdaptiveTrigger__c": false,
@@ -281,6 +282,7 @@
       "pushtopics__BypassQueueableDelegation__c": false,
       "pushtopics__ConfirmBeforeAction__c": false,
       "pushtopics__Connection__c": "a07DC000005Ms5iYAC",
+      "pushtopics__ContextRecordID__c": "001DC00000yTMuwYAG",
       "pushtopics__DataList__c": true,
       "pushtopics__DataLoader__c": false,
       "pushtopics__DeleteExistingFieldMappings__c": false,
