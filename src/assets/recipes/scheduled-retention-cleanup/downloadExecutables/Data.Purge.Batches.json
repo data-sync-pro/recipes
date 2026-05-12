@@ -1,6 +1,7 @@
 {
   "pipeline": {
     "Name": "Data.Purge.Batches",
+    "pushtopics__OriginID__c": "a0DDC000006zfjI2AQ",
     "pushtopics__NotifyOwner__c": false,
     "pushtopics__RecordBasedConfigurationDeployment__c": false,
     "pushtopics__StopRemainingWhenAnExecutableFails__c": false,

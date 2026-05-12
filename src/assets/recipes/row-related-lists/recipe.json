@@ -61,6 +61,28 @@
       "url": "assets/recipes/row-related-lists/downloadExecutables/Account.Opportunities.json"
     }
   ],
+  "downloadFileCallout": [
+    {
+      "sections": [
+        {
+          "label": "Required Custom Field",
+          "objects": [
+            {
+              "name": "Quote",
+              "objectType": "Standard Object",
+              "fields": [
+                {
+                  "name": "QuotePdfFileID__c",
+                  "type": "Text",
+                  "length": 18
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "relatedRecipes": [],
   "keywords": [],
   "__folderId": "row-related-lists"
