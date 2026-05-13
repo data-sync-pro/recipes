@@ -241,7 +241,7 @@
       </div>
 
 
-      <div *ngIf="showHome && !ui.isLoadingRouteData" class="all-faqs">
+      <div *ngIf="showHome && !ui.isLoadingRouteData && !current.faqItem" class="all-faqs">
         <h2 class="section-title" *ngIf="!search.query.trim()">All FAQs</h2>
         <h2 class="section-title" *ngIf="search.query.trim()">Search: "{{ search.query }}"</h2>
 
