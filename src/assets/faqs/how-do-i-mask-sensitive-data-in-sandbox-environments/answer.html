@@ -1,8 +1,8 @@
-<p>Use masking functions in an Executable's <strong>Field Mappings</strong> to generate masked values during execution. DSP provides functions such as:</p><ul>
+<p>Use masking functions in an Executable's <strong>Field</strong> <strong>Mappings</strong> to generate masked values during execution. DSP provides functions such as:</p><ul>
 <li><code>RANDOMIZE</code> — Randomize an existing value (e.g., <code>RANDOMIZE(Birthdate)</code>).</li>
 <li><code>RANDOM_ITEM</code> — Pick a random value from a defined list (e.g., <code>RANDOM_ITEM("United States", "Canada", "Germany", ...)</code>).</li>
 <li><code>SCRAMBLE</code> — Shuffle the characters of an existing value (e.g., <code>SCRAMBLE(FirstName)</code>).</li>
-</ul><p>These functions are only supported in <strong>sandbox environments</strong> to prevent accidental modification of production data.</p><p>You can also build custom masking formulas — for example, generating obfuscated email addresses:</p><pre><code>FirstName & "." & LastName & "@test.com"
+</ul><p>These functions are only supported in sandbox environments to prevent accidental modification of production data.</p><p>You can also build custom masking formulas — for example, generating obfuscated email addresses:</p><pre><code>FirstName & "." & LastName & "@test.com"
 </code></pre><p>For the full set of masking and transformation functions, see the <strong>Transformation</strong> documentation.</p>
 
 <img src="images/image1.jpg">
