@@ -10,7 +10,7 @@
 .detail-main-layout {
   display: flex;
   gap: 2.5vw;
-  padding: 36px 0 0 0;
+  padding: 5.6rem 0 0 0;
 }
 
 // Left Sidebar - Recipe List
@@ -22,8 +22,8 @@
 
   .sidebar-sticky {
     position: sticky;
-    top: 95px;
-    height: calc(100vh - 95px);
+    top: 80px;
+    height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
 
@@ -548,10 +548,11 @@
 .right-toc {
   flex: 0 0 20%;
   min-width: 150px;
+  margin-top: 1.25rem;
 
   .toc-sticky {
     position: sticky;
-    top: 95px;
+    top: 80px;
     //padding: 25px;
     //border-left: 1px solid #E6E6E6;
     //border-radius: 2px;
@@ -639,10 +640,16 @@
   }
 }
 
+// Mobile-only sidebar drawer chrome — hidden on desktop, shown at <=1024px.
+.sidebar-toggle-btn,
+.sidebar-backdrop {
+  display: none;
+}
+
 // Responsive - Tablets
 @media (max-width: 1200px) {
   .detail-main-layout {
-    padding: 24px 16px 0px 16px;
+    padding: 6rem 16px 0 16px;
     gap: 24px;
   }
 
@@ -655,60 +662,102 @@
   }
 }
 
-// Responsive - Mobile (hide sidebars, show content only)
+// Responsive - Mobile: sidebar becomes an off-canvas drawer, TOC is hidden,
+// content takes the full width.
 @media (max-width: 1024px) {
   .detail-main-layout {
-    flex-direction: column;
-    padding: 24px 16px 0px 16px;
+    padding: 80px 16px 0 16px;
+  }
+
+  .sidebar-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 10px;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    border: none;
+    background: transparent;
+    color: #2253B2;
+    cursor: pointer;
+    z-index: 1001;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    &:focus {
+      outline: 2px solid #2253B2;
+      outline-offset: 2px;
+    }
+  }
+
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
   }
 
   .left-sidebar {
-    flex: 0 0 auto;
-    min-width: 100%;
-    order: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 320px;
+    max-width: 85vw;
+    flex: none;
+    min-width: 0;
+    background: #fff;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+    padding: 70px 16px 16px 16px;
+    overflow-y: auto;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+
+    &.open {
+      transform: translateX(0);
+    }
 
     .sidebar-sticky {
       position: static;
+      height: auto;
 
       .recipe-list {
-        max-height: 300px;
+        max-height: none;
       }
     }
   }
 
   .detail-content {
-    order: 2;
     max-width: 100%;
-
-    .content-sections {
-      padding: 24px;
-    }
 
     h2 {
       font-size: 1.5rem;
     }
+
+    .content-section {
+      margin-bottom: 24px;
+    }
   }
 
   .right-toc {
-    flex: 0 0 auto;
-    min-width: 100%;
-    order: 3;
-
-    .toc-sticky {
-      position: static;
-    }
+    display: none;
   }
 }
 
 @media (max-width: 768px) {
   .detail-main-layout {
-    padding: 16px;
     gap: 16px;
   }
 
   .detail-content .content-sections {
-    padding: 20px;
-
     h2 {
       font-size: 1.375rem;
     }

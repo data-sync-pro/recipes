@@ -131,6 +131,9 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   // Search overlay
   isSearchOverlayOpen: boolean = false;
 
+  // Mobile sidebar drawer
+  isSidebarOpen: boolean = false;
+
   // YouTube URL cache to prevent flickering on scroll
   private youtubeUrlCache = new Map<string, SafeResourceUrl>();
 
@@ -280,6 +283,16 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
   closeSearchOverlay(): void {
     this.isSearchOverlayOpen = false;
+    this.cdr.markForCheck();
+  }
+
+  toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
+    this.cdr.markForCheck();
+  }
+
+  closeSidebar(): void {
+    this.isSidebarOpen = false;
     this.cdr.markForCheck();
   }
 

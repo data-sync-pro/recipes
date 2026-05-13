@@ -1,13 +1,22 @@
-<!-- Detail Banner with Breadcrumb -->
-<app-recipe-detail-banner
-  [title]="currentRecipe?.title || 'Recipe Details'"
-  [breadcrumbs]="breadcrumbs">
-</app-recipe-detail-banner>
-
 <div class="recipe-detail-page">
+  <button
+    type="button"
+    class="sidebar-toggle-btn"
+    (click)="toggleSidebar()"
+    [attr.aria-expanded]="isSidebarOpen"
+    aria-label="Toggle recipe list">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </button>
+
+  <div class="sidebar-backdrop" *ngIf="isSidebarOpen" (click)="closeSidebar()"></div>
+
   <div class="detail-main-layout">
     <!-- Left Sidebar - Recipe List -->
-    <aside class="left-sidebar">
+    <aside class="left-sidebar" [class.open]="isSidebarOpen">
       <div class="sidebar-sticky">
         <div class="sidebar-search">
           <img class="search-icon" src="assets/icons/recipe/search.svg" aria-hidden="true">
@@ -41,7 +50,8 @@
                 *ngFor="let recipe of group.recipes"
                 class="recipe-list-item"
                 [class.active]="recipe.slug === currentRecipe?.slug"
-                [routerLink]="['/recipes', categorySlug(group.category.name), recipe.slug]">
+                [routerLink]="['/recipes', categorySlug(group.category.name), recipe.slug]"
+                (click)="closeSidebar()">
                 {{ recipe.title }}
               </a>
             </div>
@@ -52,6 +62,11 @@
 
     <!-- Middle Content Area -->
     <main class="detail-content">
+      <app-recipe-detail-banner
+        [title]="currentRecipe?.title || 'Recipe Details'"
+        [breadcrumbs]="breadcrumbs">
+      </app-recipe-detail-banner>
+
       <!-- Section order is controlled by SECTION_CONFIG in the component -->
       <div class="content-sections" *ngIf="currentRecipe">
         <ng-container *ngFor="let section of visibleSections">
