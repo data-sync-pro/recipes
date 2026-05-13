@@ -1002,7 +1002,7 @@
                  {
                      "id":  "a0oEc000005JojCIAS",
                      "folderId":  "does-dsp-still-run-the-match-step-when-use-salesforce-upsert-api-is-enabled-in-an-upsert-process",
-                     "question":  "Does DSP still run the Match step when \"Use Salesforce Upsert API\" is enabled in an Upsert process?",
+                     "question":  "Does DSP still run the Match step when 'Use Salesforce Upsert API' is enabled in an Upsert process?",
                      "category":  "Processes",
                      "subCategory":  "Match",
                      "seqNo":  560,
