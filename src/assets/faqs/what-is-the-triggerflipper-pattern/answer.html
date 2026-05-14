@@ -1,8 +1,8 @@
 <p><b><code>TRIGGER_FLIPPER(flip_if_evaluated_true_optional)</code></b> resets a checkbox field to
-    <strong>FALSE</strong> in a <b>Self-Adaptive #Trigger</b> (before insert/update) while keeping the "flip" in memory. You
-    can then use <b><code>TRIGGER_IS_FLIPPED(field_name)</code></b> in a <b>#Trigger</b> Action's scope filter to fire the
+    FALSE in a <b>Self-Adaptive</b> <b>#Trigger</b> (before insert/update) while keeping the "flip" in memory. You
+    can then use <b><code>TRIGGER_IS_FLIPPED(field_name)</code></b> in a #Trigger Action's scope filter to fire the
     desired automation.</p>
-<p>It works like the <strong>"Send notification email"</strong> option on Case ownership changes—except instead of a
+<p>It works like the <strong>Send notification email</strong> option on Case ownership changes—except instead of a
     UI-only checkbox, DSP uses a real field on your object. Flipping the field on record save fires automation, and the
     reset makes it reusable.</p>
 <p>With an optional condition parameter (<code>flip_if_evaluated_true_optional</code>), TRIGGER_FLIPPER can also
