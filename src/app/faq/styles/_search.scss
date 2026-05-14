@@ -14,7 +14,7 @@
   right: 16px;
   width: 48px;
   height: 48px;
-  background: #1a73e8;
+  background: #2253b2;
   color: white;
   border: none;
   border-radius: 50%;
@@ -222,7 +222,7 @@
 .toc-category-name {
   font-size: 1rem;
   font-weight: 700;
-  color: #1a73e8;
+  color: #2253b2;
   margin-bottom: 2px;
 }
 
@@ -339,7 +339,7 @@
 
   &.active {
     background: linear-gradient(90deg, rgba(26, 115, 232, 0.08), transparent);
-    border-left-color: #1a73e8;
+    border-left-color: #2253b2;
     
     transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     
@@ -349,7 +349,7 @@
 
     .toc-item-title,
     .mobile-toc-item-title {
-      color: #1a73e8;
+      color: #2253b2;
       font-weight: 500;
     }
   }
@@ -403,8 +403,8 @@
   
   &:hover:not(:disabled) {
     background: #f8f9fa;
-    border-color: #1a73e8;
-    color: #1a73e8;
+    border-color: #2253b2;
+    color: #2253b2;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
   
@@ -422,7 +422,7 @@
   }
   
   &:focus-visible {
-    outline: 2px solid #1a73e8;
+    outline: 2px solid #2253b2;
     outline-offset: 2px;
   }
 }

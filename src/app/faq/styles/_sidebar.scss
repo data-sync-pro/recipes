@@ -241,7 +241,7 @@ $z-index-mobile-toggle: 1001;
       transition: $transition;
 
       &:focus-within {
-        border-color: #1a73e8;
+        border-color: #2253b2;
         background: #fff;
       }
     }
@@ -327,7 +327,7 @@ $z-index-mobile-toggle: 1001;
 
       &.active {
         background-color: #e8f0fe;
-        color: #1a73e8;
+        color: #2253b2;
         font-weight: 500;
         
         transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -339,7 +339,7 @@ $z-index-mobile-toggle: 1001;
           top: 0;
           bottom: 0;
           width: 3px;
-          background-color: #1a73e8;
+          background-color: #2253b2;
           transition: width 0.2s ease-out, background-color 0.15s ease;
         }
       }
@@ -497,7 +497,7 @@ $z-index-mobile-toggle: 1001;
     opacity: 1;
     visibility: visible;
     background: #f8f9fa;
-    border-color: #1a73e8;
+    border-color: #2253b2;
     box-shadow: 4px 0 12px rgba(26, 115, 232, 0.15);
   }
 
@@ -521,7 +521,7 @@ $z-index-mobile-toggle: 1001;
   &:hover {
     opacity: 1;
     background: #f8f9fa;
-    border-color: #1a73e8;
+    border-color: #2253b2;
     box-shadow: 4px 0 12px rgba(26, 115, 232, 0.15);
   }
 }
