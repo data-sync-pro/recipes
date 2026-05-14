@@ -378,13 +378,12 @@ export class FAQService implements OnDestroy {
   }
 
   private extractTextFromHTML(html: string): string {
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = html;
+    // DOMParser produces an inactive Document, so <img>/<script> in `html`
+    // are parsed without firing network requests (unlike `div.innerHTML=`).
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    doc.querySelectorAll('script, style, img').forEach(el => el.remove());
 
-    tempDiv.querySelectorAll('script, style').forEach(el => el.remove());
-    tempDiv.querySelectorAll('img').forEach(el => el.remove());
-
-    const text = tempDiv.textContent || tempDiv.innerText || '';
+    const text = doc.body?.textContent ?? '';
 
     return text
       .replace(/\s+/g, ' ')
