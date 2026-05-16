@@ -1,10 +1,5 @@
 // ==================== FAQ Items Styles ====================
-@import '../../../styles/typography';
-
-
-$primary-color: #2253b2;
-$accent-color: #e74c3c;
-$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+// Shared tokens come from faq.component.scss top-level imports.
 
 // Virtual scrolling viewport
 .faq-virtual-viewport {
@@ -33,18 +28,6 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   // When on homepage (all-faqs) without breadcrumb navigation
   .all-faqs & {
     height: calc(100vh - 170px);
-  }
-  
-  // Mobile responsive adjustments
-  @media (max-width: 768px) {
-    height: calc(100vh - 250px); // Mobile has smaller header and padding
-    max-height: calc(100vh - 180px);
-    min-height: 250px;
-
-    .all-faqs & {
-      height: calc(100vh - 160px);
-      max-height: calc(100vh - 160px);
-    }
   }
 
   // Custom scrollbar for the virtual viewport
@@ -186,7 +169,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .category-badge {
-      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      background: linear-gradient(135deg, $bg-light, $border-color);
       color: #6c757d;
       font-size: $font-size-caption;
       padding: 3px 8px;
@@ -254,7 +237,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     margin: 0 0 16px 0;
 
     &::before {
-      background: linear-gradient(90deg, $accent-color, #c0392b);
+      background: linear-gradient(90deg, $accent-color, $accent-color-hover);
       opacity: 0;
     }
 
@@ -292,107 +275,6 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 
-.mat-expansion-panel {
-  background: #ffffff;
-  border: 1px solid #e1e5e9;
-  border-radius: 12px !important;
-  margin-bottom: 16px;
-  box-shadow: none !important;
-  transition: $transition;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12) !important;
-    border-color: $primary-color;
-  }
-
-  &.mat-expanded {
-    border-color: $primary-color;
-    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.15) !important;
-  }
-
-  .mat-expansion-panel-header {
-    padding: 24px 28px;
-    height: auto !important;
-    border-radius: 12px !important;
-
-    &:hover {
-      background: transparent !important;
-    }
-
-    .mat-expansion-panel-header-title {
-      @include title-item;
-      margin-right: 16px;
-    }
-  }
-
-  .mat-expansion-panel-content .mat-expansion-panel-body {
-    padding: 0 28px 28px;
-    font-size: $font-size-content;
-    line-height: $line-height-content;
-    color: $text-color-content;
-
-    h1, h2, h3, h4, h5, h6 {
-      margin: 24px 0 12px;
-      font-weight: $font-weight-semibold;
-      color: $text-color-primary;
-    }
-
-    p { 
-      @include content-text;
-      margin-bottom: 16px;
-    }
-    ul, ol { margin-bottom: 16px; padding-left: 24px; }
-    li { 
-      margin-bottom: 8px;
-      color: $text-color-content;
-    }
-  }
-}
-
-
-.faq-item {
-  &.featured {
-    border-color: #ffd700;
-    background: linear-gradient(135deg, #fffbf0, #ffffff);
-
-    &::before {
-      background: linear-gradient(90deg, #ffd700, #ffed4e);
-      opacity: 1;
-    }
-
-    .faq-question {
-      color: #b8860b;
-    }
-  }
-
-  &.new::after {
-    content: 'NEW';
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: #4caf50;
-    color: white;
-    font-size: 0.7rem;
-    padding: 2px 6px;
-    border-radius: 8px;
-    font-weight: 600;
-  }
-
-  &.updated::after {
-    content: 'UPDATED';
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: #ff9800;
-    color: white;
-    font-size: 0.7rem;
-    padding: 2px 6px;
-    border-radius: 8px;
-    font-weight: 600;
-  }
-}
-
 // ==================== FAQ Feedback and Share Section ====================
 
 .faq-feedback-section {
@@ -409,11 +291,6 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   .faq-layout-container.toc-hidden & {
     right: 1.5rem;
   }
-
-  @media (max-width: 768px) {
-    right: 1rem;
-    bottom: 1rem;
-  }
 }
 
 .feedback-container {
@@ -428,19 +305,10 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  
-  @media (max-width: 767px) {
-    justify-content: flex-end;
-    gap: 12px;
-  }
 }
 
 .content-spacer {
   flex: 1;
-  
-  @media (max-width: 767px) {
-    display: none;
-  }
 }
 
 .rating-share-section {
@@ -448,12 +316,6 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   align-items: center;
   gap: 16px;
   flex-shrink: 0;
-  
-  @media (max-width: 767px) {
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
-  }
 }
 
 .rating-section {
@@ -519,14 +381,14 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
   &.rating-btn-yes {
     &:hover {
-      border-color: #10b981;
+      border-color: $color-success;
       background: #ecfdf5;
       color: #047857;
     }
     
     &.active {
-      border-color: #10b981;
-      background: #10b981;
+      border-color: $color-success;
+      background: $color-success;
       color: #ffffff;
     }
   }
@@ -624,14 +486,14 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   &.share-btn-main {
     // Specific styling for main share button
     &:hover {
-      border-color: #10b981;
+      border-color: $color-success;
       background: #ecfdf5;
-      color: #10b981;
+      color: $color-success;
     }
     
     &.active {
-      border-color: #10b981;
-      background: #10b981;
+      border-color: $color-success;
+      background: $color-success;
       color: #ffffff;
       opacity: 1;
 
@@ -823,71 +685,3 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   100% { left: 100%; }
 }
 
-// ===== Responsive Design =====
-@media (max-width: 767px) {
-  .faq-feedback-section {
-    &:hover {
-      transform: none; // Disable hover transform on mobile
-    }
-  }
-  
-  .feedback-container {
-    gap: 12px;
-  }
-  
-  .rating-header,
-  .share-header {
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .rating-buttons {
-    gap: 6px;
-  }
-  
-  .rating-btn {
-    padding: 6px 8px;
-    font-size: 0.75rem;
-    min-width: 50px;
-    
-    // Simplify mobile interactions
-    &:hover {
-      transform: none;
-    }
-    
-    &:active {
-      transform: scale(0.95);
-    }
-  }
-  
-  .share-btn {
-    width: 28px;
-    height: 28px;
-    
-    // Simplify mobile interactions
-    &:hover {
-      transform: none;
-    }
-    
-    &:active {
-      transform: scale(0.95);
-    }
-  }
-  
-  .rating-title {
-    font-size: $font-size-caption;
-  }
-  
-  .rating-section {
-    gap: 8px;
-  }
-  
-  .rating-share-section {
-    gap: 12px;
-  }
-  
-  .feedback-message {
-    padding: 6px 8px;
-    font-size: 0.7rem;
-  }
-}

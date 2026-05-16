@@ -673,17 +673,75 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   get previousFAQ(): FAQItem | null {
-    if (!this.current.faqItem) return null;
-    const list = this.currentFAQList;
-    const index = list.findIndex(item => item.id === this.current.faqItem!.id);
-    return index > 0 ? list[index - 1] : null;
+    return this.getAdjacentFAQ(-1);
   }
 
   get nextFAQ(): FAQItem | null {
-    if (!this.current.faqItem) return null;
-    const list = this.currentFAQList;
-    const index = list.findIndex(item => item.id === this.current.faqItem!.id);
-    return index >= 0 && index < list.length - 1 ? list[index + 1] : null;
+    return this.getAdjacentFAQ(1);
+  }
+
+  private getAdjacentFAQ(direction: 1 | -1): FAQItem | null {
+    const faq = this.current.faqItem;
+    if (!faq) return null;
+
+    // Use the FAQ's own scope (not current.category/subCategory) so navigation
+    // stays correct while the route update is in flight after a cross-category jump.
+    const scope = this.faqList.filter(item =>
+      item.category === faq.category &&
+      (item.subCategory || '') === (faq.subCategory || '')
+    );
+    const index = scope.findIndex(item => item.id === faq.id);
+    const adjacent = index + direction;
+    if (index >= 0 && adjacent >= 0 && adjacent < scope.length) {
+      return scope[adjacent];
+    }
+
+    return this.findFAQInAdjacentScope(faq.category, faq.subCategory || '', direction);
+  }
+
+  private findFAQInAdjacentScope(
+    fromCategory: string,
+    fromSubCategory: string,
+    direction: 1 | -1,
+  ): FAQItem | null {
+    const catIdx = this.categories.findIndex(c => c.name === fromCategory);
+    if (catIdx < 0) return null;
+
+    // First try an adjacent subCategory inside the same category.
+    if (fromSubCategory) {
+      const subs = this.categories[catIdx].subCategories;
+      const subIdx = subs.findIndex(s => s.name === fromSubCategory);
+      const targetSubIdx = subIdx + direction;
+      if (subIdx >= 0 && targetSubIdx >= 0 && targetSubIdx < subs.length) {
+        return this.edgeFAQInScope(fromCategory, subs[targetSubIdx].name, direction);
+      }
+    }
+
+    // Otherwise hop to the adjacent category and enter its edge subCategory.
+    const targetCatIdx = catIdx + direction;
+    if (targetCatIdx < 0 || targetCatIdx >= this.categories.length) return null;
+
+    const targetCat = this.categories[targetCatIdx];
+    const subs = targetCat.subCategories;
+    if (subs.length > 0) {
+      const edgeSub = direction > 0 ? subs[0] : subs[subs.length - 1];
+      return this.edgeFAQInScope(targetCat.name, edgeSub.name, direction);
+    }
+    return this.edgeFAQInScope(targetCat.name, '', direction);
+  }
+
+  private edgeFAQInScope(
+    category: string,
+    subCategory: string,
+    direction: 1 | -1,
+  ): FAQItem | null {
+    const faqs = this.faqList.filter(item => {
+      if (item.category !== category) return false;
+      const itemSub = item.subCategory || '';
+      return subCategory ? itemSub === subCategory : !itemSub;
+    });
+    if (faqs.length === 0) return null;
+    return direction > 0 ? faqs[0] : faqs[faqs.length - 1];
   }
 
   get shouldShowTOC(): boolean {

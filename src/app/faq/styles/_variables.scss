@@ -1,0 +1,37 @@
+// ==================== FAQ Shared Tokens ====================
+// Single source of truth for FAQ module's design system.
+// Long-form typography tokens still live in src/styles/_typography.scss.
+
+// ===== Breakpoints =====
+$breakpoint-desktop: 768px;  // desktop starts above this width (mobile/tablet at/below)
+
+// ===== Brand colors =====
+$primary-color: #2253b2;
+$primary-color-hover: #1557b0;
+$accent-color: #e74c3c;
+$accent-color-hover: #c0392b;
+
+// ===== Status colors =====
+$color-success: #4CAF50;
+$color-success-hover: #45a049;
+$color-danger: #f44336;
+
+// ===== Surface / background =====
+$bg-light: #f8f9fa;
+$border-color: #e9ecef;
+$border-color-strong: #dadce0;
+
+// ===== Text =====
+// Note: $text-color-primary / $text-color-content / $text-color-muted come from typography.scss.
+$text-color-secondary: #5f6368;
+
+// ===== Z-index scale =====
+$z-sidebar-desktop: 90;
+$z-overlay: 998;
+$z-sidebar-mobile: 1000;
+$z-fab: 1000;
+$z-mobile-toggle: 1001;
+$z-modal-zoom: 9999;
+
+// ===== Motion =====
+$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

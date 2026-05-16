@@ -34,7 +34,6 @@ export interface ExportProgress {
 })
 export class FAQExportService {
   private readonly EXPORT_VERSION = '1.0.0';
-  private readonly INACTIVE_PREFIX = '_inactive/';
 
   constructor(
     private http: HttpClient,
@@ -44,18 +43,14 @@ export class FAQExportService {
 
   /**
    * Build a folderId -> relative-folder-path map from the export's metadata.
-   * Returns "_inactive/<id>" for inactive FAQs and "<id>" otherwise. The caller
-   * uses this to decide where each FAQ lives both inside the export ZIP and
-   * (when resolving image references) under assets/faqs/.
+   * Returns "<cat>/<sub?>/<id>" (or the _inactive/ variant) so the ZIP layout
+   * mirrors the on-disk layout produced by FAQService.
    */
   private buildRelPathMap(metas: FAQMetadata[]): Map<string, string> {
     const m = new Map<string, string>();
     for (const meta of metas) {
       if (!meta?.folderId) continue;
-      m.set(
-        meta.folderId,
-        meta.isActive === false ? `${this.INACTIVE_PREFIX}${meta.folderId}` : meta.folderId
-      );
+      m.set(meta.folderId, this.faqService.buildRelPathFor(meta));
     }
     return m;
   }

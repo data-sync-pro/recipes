@@ -14,7 +14,7 @@
   right: 16px;
   width: 48px;
   height: 48px;
-  background: #2253b2;
+  background: $primary-color;
   color: white;
   border: none;
   border-radius: 50%;
@@ -32,12 +32,12 @@
   user-select: none;
 
   &:hover {
-    background: #1557b0;
+    background: $primary-color-hover;
     transform: scale(1.05);
   }
 
   &:active {
-    background: #1557b0;
+    background: $primary-color-hover;
     transform: scale(0.95);
   }
 }
@@ -84,12 +84,7 @@
     border-bottom: none;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-    
-    
-    @media (max-width: $breakpoint-desktop) {
-      display: none;
-    }
-    
+
     &.hidden {
       display: none;
     }
@@ -127,11 +122,11 @@
       .toc-item {
         
         &.active {
-          background: #f8f9fa;
-          border-left-color: #dadce0;
+          background: $bg-light;
+          border-left-color: $border-color-strong;
           
           .toc-item-title {
-            color: #5f6368;
+            color: $text-color-secondary;
           }
           
           .toc-item-indicator {
@@ -177,7 +172,7 @@
 .mobile-toc-header {
   padding: 20px 24px 16px;
   border-bottom: 1px solid #f1f3f4;
-  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+  background: linear-gradient(135deg, $bg-light, #ffffff);
   flex-shrink: 0; // Prevent header from shrinking
   position: relative; // Remove any sticky positioning
   
@@ -222,14 +217,14 @@
 .toc-category-name {
   font-size: 1rem;
   font-weight: 700;
-  color: #2253b2;
+  color: $primary-color;
   margin-bottom: 2px;
 }
 
 .toc-subtitle {
   font-size: 0.8rem;
   font-weight: 500;
-  color: #5f6368;
+  color: $text-color-secondary;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -263,15 +258,15 @@
   }
 
   &::-webkit-scrollbar-track {
-    background: #f8f9fa;
+    background: $bg-light;
     border-radius: 4px;
     margin: 4px 0; 
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #dadce0;
+    background: $border-color-strong;
     border-radius: 4px;
-    border: 1px solid #f8f9fa; 
+    border: 1px solid $bg-light; 
     
     &:hover {
       background: #bdc1c6;
@@ -333,13 +328,13 @@
   -ms-user-select: none;
 
   &:hover {
-    background: #f8f9fa;
-    border-left-color: #dadce0;
+    background: $bg-light;
+    border-left-color: $border-color-strong;
   }
 
   &.active {
     background: linear-gradient(90deg, rgba(26, 115, 232, 0.08), transparent);
-    border-left-color: #2253b2;
+    border-left-color: $primary-color;
     
     transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     
@@ -349,7 +344,7 @@
 
     .toc-item-title,
     .mobile-toc-item-title {
-      color: #2253b2;
+      color: $primary-color;
       font-weight: 500;
     }
   }
@@ -378,7 +373,7 @@
 
 .pagination-info {
   font-size: 0.75rem;
-  color: #5f6368;
+  color: $text-color-secondary;
   font-weight: 400;
   white-space: nowrap;
 }
@@ -395,16 +390,16 @@
   width: 28px;
   height: 28px;
   background: #ffffff;
-  border: 1px solid #dadce0;
+  border: 1px solid $border-color-strong;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: #5f6368;
+  color: $text-color-secondary;
   
   &:hover:not(:disabled) {
-    background: #f8f9fa;
-    border-color: #2253b2;
-    color: #2253b2;
+    background: $bg-light;
+    border-color: $primary-color;
+    color: $primary-color;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
   
@@ -422,7 +417,7 @@
   }
   
   &:focus-visible {
-    outline: 2px solid #2253b2;
+    outline: 2px solid $primary-color;
     outline-offset: 2px;
   }
 }
