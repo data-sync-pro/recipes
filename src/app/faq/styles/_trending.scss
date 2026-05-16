@@ -1,0 +1,67 @@
+// ==================== FAQ Trending Grid ====================
+// Card grid layout for "trending questions" homepage section.
+
+.trending-faq {
+  width: 100%;
+  margin: 20px auto 32px auto;
+
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #2c3e50;
+    padding-bottom: 40px;
+  }
+
+  .faq-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .faq-item {
+    padding: 20px 24px;
+    height: auto;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    margin: 0 0 16px 0;
+
+    &::before {
+      background: linear-gradient(90deg, $accent-color, $accent-color-hover);
+      opacity: 0;
+    }
+
+    &::after {
+      content: '→';
+      font-size: 1.2rem;
+      color: #666;
+      transition: $transition;
+      opacity: 0.6;
+    }
+
+    &:hover {
+      border-color: $accent-color;
+
+      &::before {
+        opacity: 1;
+      }
+
+      &::after {
+        color: $accent-color;
+        opacity: 1;
+        transform: translateX(4px);
+      }
+
+      .faq-question {
+        color: $accent-color;
+      }
+    }
+
+    .faq-question {
+      flex: 1;
+      padding-right: 16px;
+    }
+  }
+}

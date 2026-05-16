@@ -72,7 +72,6 @@
   }
   
   // Disable momentum scrolling on modals
-  .mobile-toc-overlay,
   .sidebar-overlay {
     -webkit-overflow-scrolling: auto;
   }
@@ -81,8 +80,7 @@
 // iOS-specific fixes
 @supports (-webkit-touch-callout: none) {
   // Fix for iOS Safari fixed positioning
-  .mobile-sidebar-toggle,
-  .mobile-toc-toggle {
+  .mobile-sidebar-toggle {
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
   }
