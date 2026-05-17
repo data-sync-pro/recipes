@@ -12,21 +12,6 @@ export interface FAQMetadata {
   isActive?: boolean;
 }
 
-/**
- * @deprecated Legacy schema of assets/data/faqs.json. Kept for import/migration
- * compatibility only. New code should use FAQMetadata + FAQIndexItem.
- */
-export interface SourceFAQRecord {
-  Id: string;
-  Name?: string;
-  Question__c: string;
-  Answer__c: string | null;
-  Category__c: string;
-  SubCategory__c: string | null;
-  SeqNo__c?: string | null;
-  isActive?: boolean;
-}
-
 export interface FAQItem {
   id: string;
   seqNo?: string | null;
@@ -38,7 +23,6 @@ export interface FAQItem {
   category: string;
   subCategory?: string | null;
   isExpanded?: boolean;
-  userRating?: boolean | null;
   viewCount?: number;
   isPopular?: boolean;
   isLoading?: boolean;
@@ -48,49 +32,18 @@ export interface FAQItem {
   isActive?: boolean;
 }
 
-/**
-
- */
-export interface FAQSearchResult extends FAQItem {
-  relevanceScore?: number;
-  highlightedQuestion?: string;
-  highlightedAnswer?: string;
-  matchedFields?: string[];
-}
-
-/**
-
- */
 export interface FAQCategory {
   name: string;
   count: number;
   subCategories: FAQSubCategory[];
 }
 
-/**
-
- */
 export interface FAQSubCategory {
   name: string;
   count: number;
   parentCategory: string;
 }
 
-/**
-
- */
-export interface PaginationInfo {
-  currentPage: number;
-  totalPages: number;
-  pageSize: number;
-  totalItems: number;
-  startIndex: number;
-  endIndex: number;
-}
-
-/**
-
- */
 export interface SearchOptions {
   category?: string;
   subCategory?: string;
@@ -99,9 +52,6 @@ export interface SearchOptions {
   fuzzySearch?: boolean;
 }
 
-/**
-
- */
 export interface FAQStats {
   totalFAQs: number;
   totalCategories: number;
@@ -110,68 +60,6 @@ export interface FAQStats {
   recentlyUpdated: FAQItem[];
 }
 
-/**
-
- */
-export interface UserPreferences {
-  preferredPageSize: number;
-  preferredRenderMode: 'basic' | 'paginated' | 'virtual';
-  searchHistory: string[];
-  recentlyViewed: string[];
-}
-
-/**
-
- */
-export interface FAQEvent {
-  type: 'view' | 'rate' | 'search';
-  faqId?: string;
-  faqQuestion?: string;
-  faqCategory?: string;
-  searchQuery?: string;
-  rating?: boolean;
-  timestamp: Date;
-  userId?: string;
-}
-
-/**
-
- */
-export type RenderStrategy = 'basic' | 'paginated' | 'virtual';
-
-/**
-
- */
-export type DeviceType = 'mobile' | 'tablet' | 'desktop';
-
-/**
-
- */
-export type ConnectionSpeed = 'slow' | 'fast';
-
-/**
-
- */
-export enum FAQContentStatus {
-  NOT_LOADED = 'not_loaded',
-  LOADING = 'loading',
-  LOADED = 'loaded',
-  ERROR = 'error'
-}
-
-/**
-
- */
-export interface SearchSuggestion {
-  text: string;
-  type: 'question' | 'category' | 'tag';
-  count?: number;
-  category?: string;
-}
-
-/**
-
- */
 export interface FAQFilter {
   categories: string[];
   subCategories: string[];
@@ -183,20 +71,7 @@ export interface FAQFilter {
   };
 }
 
-/**
-
- */
 export interface FAQSortOptions {
   field: 'question' | 'category' | 'viewCount' | 'lastUpdated';
   direction: 'asc' | 'desc';
-}
-
-/**
-
- */
-export interface FAQExportOptions {
-  format: 'json' | 'csv' | 'pdf';
-  includeCategories: string[];
-  includeAnswers: boolean;
-  includeMetadata: boolean;
 }

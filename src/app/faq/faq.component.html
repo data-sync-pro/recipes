@@ -61,21 +61,6 @@
             </div>
           </div>
 
-            <!-- Search - Collapsed -->
-            <div class="nav-item search-nav" 
-                 *ngIf="ui.sidebarCollapsed"
-                 (click)="openSearchOverlay()"
-                 title="Search FAQs">
-              <div class="nav-content">
-                <lightning-icon
-                  iconName="utility:search"
-                  size="x-small"
-                  alternativeText="Search"
-                  class="nav-icon"
-                ></lightning-icon>
-              </div>
-            </div>
-
             <!-- Home -->
             <div class="nav-item home-nav" [class.active]="showHome"
                  (click)="goHome()"

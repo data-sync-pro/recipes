@@ -279,7 +279,7 @@
 // ===== Small mobile (up to 767px) =====
 // One pixel below $breakpoint-desktop so it does not apply at exactly 768px.
 @media (max-width: 767px) {
-  // Rating / share single-line layout collapses to right-aligned column (from _faq-items.scss)
+  // Rating / share single-line layout collapses to right-aligned column
   .rating-share-inline {
     justify-content: flex-end;
     gap: 12px;
@@ -292,42 +292,17 @@
   .rating-share-section {
     flex-direction: column;
     align-items: flex-end;
-    gap: 12px; // overrides earlier 8px when stacked vertically
+    gap: 12px;
   }
 
-  // Feedback section overrides (from _faq-items.scss original 721-787 block)
   .faq-feedback-section {
     &:hover {
-      transform: none; // disable hover transform on mobile
+      transform: none;
     }
   }
 
   .feedback-container {
     gap: 12px;
-  }
-
-  .rating-header,
-  .share-header {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .rating-buttons {
-    gap: 6px;
-  }
-
-  .rating-btn {
-    padding: 6px 8px;
-    font-size: 0.75rem;
-    min-width: 50px;
-
-    &:hover {
-      transform: none;
-    }
-
-    &:active {
-      transform: scale(0.95);
-    }
   }
 
   .share-btn {
@@ -341,19 +316,6 @@
     &:active {
       transform: scale(0.95);
     }
-  }
-
-  .rating-title {
-    font-size: $font-size-caption;
-  }
-
-  .rating-section {
-    gap: 8px;
-  }
-
-  .feedback-message {
-    padding: 6px 8px;
-    font-size: 0.7rem;
   }
 }
 

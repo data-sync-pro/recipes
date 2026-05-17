@@ -4,12 +4,12 @@ import { Subject, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { FAQService } from '../shared/services/faq.service';
-import { FAQStorageService, EditedFAQ } from '../shared/services/faq-storage.service';
-import { FAQExportService, ExportData, ExportProgress } from '../shared/services/faq-export.service';
+import { FAQService } from '../faq/services/faq.service';
+import { FAQStorageService, EditedFAQ } from './services/faq-storage.service';
+import { FAQExportService, ExportData, ExportProgress } from './services/faq-export.service';
 import { FAQItem, FAQCategory } from '../shared/models/faq.model';
 import { NotificationService } from '../shared/services/notification.service';
-import { FAQPreviewService, PreviewData } from '../shared/services/faq-preview.service';
+import { FAQPreviewService, PreviewData } from './services/faq-preview.service';
 import { html_beautify } from 'js-beautify';
 
 interface DOMSelection {

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FAQStorageService, EditedFAQ } from './faq-storage.service';
-import { FAQService } from './faq.service';
-import { FAQItem, FAQMetadata } from '../models/faq.model';
+import { FAQService } from '../../faq/services/faq.service';
+import { FAQItem, FAQMetadata } from '../../shared/models/faq.model';
 import { firstValueFrom } from 'rxjs';
 import JSZip from 'jszip';
 
 // One row in `ExportData.faqs` — same shape as one entry in
 // `assets/faqs/faqs.json` (FAQMetadata already carries folderId).
-export type ExportFAQEntry = FAQMetadata;
+type ExportFAQEntry = FAQMetadata;
 
 export interface ExportData {
   metadata: {

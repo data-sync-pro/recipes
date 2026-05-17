@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { FaqUrlService } from './faq-url.service';
 
@@ -29,7 +28,6 @@ export class AutoLinkService {
 
   constructor(
     private http: HttpClient,
-    private sanitizer: DomSanitizer,
     private faqUrlService: FaqUrlService
   ) {
     this.loadAutoLinkTerms();
@@ -262,45 +260,9 @@ export class AutoLinkService {
   }
 
   /**
-   * Apply auto-link terms to SafeHtml content
-   */
-  public applyAutoLinkTermsToSafeHtml(content: SafeHtml): SafeHtml {
-    // Convert SafeHtml to string
-    const htmlString = this.sanitizer.sanitize(1, content) || '';
-    
-    // Apply auto-link terms
-    const processedContent = this.applyAutoLinkTerms(htmlString);
-    
-    // Return as SafeHtml
-    return this.sanitizer.bypassSecurityTrustHtml(processedContent);
-  }
-
-  /**
    * Check if auto-link terms are loaded
    */
   public isLoaded(): boolean {
     return this.autoLinkTermsLoaded;
-  }
-
-  /**
-   * Get loading state observable
-   */
-  public getLoadingState(): Observable<boolean> {
-    return this.loadingTerms$.asObservable();
-  }
-
-  /**
-   * Force reload auto-link terms
-   */
-  public reloadTerms(): void {
-    this.autoLinkTermsLoaded = false;
-    this.loadAutoLinkTerms();
-  }
-
-  /**
-   * Get all configured auto-link terms
-   */
-  public getTerms(): { [key: string]: AutoLinkTerm } {
-    return { ...this.autoLinkTerms };
   }
 }

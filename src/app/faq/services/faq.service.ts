@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of, throwError, forkJoin } from 'rxjs';
 import { map, catchError, shareReplay, tap, finalize, filter, take, switchMap } from 'rxjs/operators';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { PerformanceService } from './performance.service';
+import { PerformanceService } from '../../shared/services/performance.service';
 import { AutoLinkService } from './auto-link.service';
 import { FaqUrlService } from './faq-url.service';
 
@@ -11,12 +11,8 @@ import {
   FAQMetadata,
   FAQItem,
   FAQCategory,
-  FAQSubCategory,
-  SearchOptions,
-  FAQStats,
-  FAQFilter,
-  FAQSortOptions
-} from '../models/faq.model';
+  FAQSubCategory
+} from '../../shared/models/faq.model';
 
 @Injectable({
   providedIn: 'root'
@@ -279,15 +275,6 @@ export class FAQService implements OnDestroy {
   }
 
   /**
-   * Stop observing element
-   */
-  unobserveElement(element: Element): void {
-    if (this.intersectionObserver) {
-      this.intersectionObserver.unobserve(element);
-    }
-  }
-
-  /**
    * Preload FAQ content in background
    */
   private preloadContent(folderId: string): void {
@@ -469,109 +456,6 @@ export class FAQService implements OnDestroy {
   /**
 
    */
-  getFAQCount(): Observable<number> {
-    return this.getFAQs().pipe(
-      map(faqs => faqs.length)
-    );
-  }
-
-  /**
-
-   */
-  getFAQById(id: string): Observable<FAQItem | undefined> {
-    return this.getFAQs().pipe(
-      map(faqs => faqs.find(faq => faq.id === id))
-    );
-  }
-
-  /**
-
-   */
-  getFAQsByCategory(category: string, subCategory?: string): Observable<FAQItem[]> {
-    return this.getFAQs().pipe(
-      map(faqs => faqs.filter(faq => {
-        const categoryMatch = faq.category === category;
-        const subCategoryMatch = !subCategory || faq.subCategory === subCategory;
-        return categoryMatch && subCategoryMatch;
-      }))
-    );
-  }
-
-  searchFAQs(query: string, options: SearchOptions = {}): Observable<FAQItem[]> {
-    if (!query.trim()) {
-      return this.getFAQs();
-    }
-
-    return this.performanceService.measure('faq-search', () => {
-      return this.getFAQs().pipe(
-        map(faqs => this.filterFAQs(faqs, query, options))
-      );
-    }) as Observable<FAQItem[]>;
-  }
-
-  getSearchSuggestions(query: string, maxSuggestions = 8): Observable<string[]> {
-    if (!query.trim() || query.length < 2) {
-      return of([]);
-    }
-
-    return this.getFAQs().pipe(
-      map(faqs => {
-        const lowerQuery = query.toLowerCase();
-        const suggestions = new Set<string>();
-
-        faqs.forEach(faq => {
-          if (faq.question.toLowerCase().includes(lowerQuery)) {
-            suggestions.add(faq.question);
-          }
-          if (faq.category.toLowerCase().includes(lowerQuery)) {
-            suggestions.add(faq.category);
-          }
-          if (faq.subCategory?.toLowerCase().includes(lowerQuery)) {
-            suggestions.add(faq.subCategory);
-          }
-        });
-
-        return Array.from(suggestions).slice(0, maxSuggestions);
-      })
-    );
-  }
-
-  private filterFAQs(faqs: FAQItem[], query: string, options: SearchOptions): FAQItem[] {
-    const lowerQuery = query.toLowerCase();
-    let filtered = faqs.filter(faq => this.matchesFAQ(faq, lowerQuery, options));
-
-    if (options.category) {
-      filtered = filtered.filter(faq => faq.category === options.category);
-    }
-
-    if (options.subCategory) {
-      filtered = filtered.filter(faq => faq.subCategory === options.subCategory);
-    }
-
-    if (options.maxResults) {
-      filtered = filtered.slice(0, options.maxResults);
-    }
-
-    return filtered;
-  }
-
-  private matchesFAQ(faq: FAQItem, lowerQuery: string, options: SearchOptions): boolean {
-    const questionMatch = faq.question.toLowerCase().includes(lowerQuery);
-    const categoryMatch = faq.category.toLowerCase().includes(lowerQuery);
-    const subCategoryMatch = faq.subCategory?.toLowerCase().includes(lowerQuery);
-    const tagsMatch = faq.tags?.some(tag => tag.toLowerCase().includes(lowerQuery));
-    
-    let answerMatch = false;
-    if (options.includeAnswers && faq.answer) {
-      answerMatch = faq.answer.toLowerCase().includes(lowerQuery);
-    }
-
-    return questionMatch || categoryMatch || subCategoryMatch || tagsMatch || answerMatch;
-  }
-
-  /**
-
-   */
   getFAQContent(folderId: string): Observable<SafeHtml> {
     if (!folderId) {
       console.warn('FAQ content requested with empty folderId');
@@ -708,73 +592,10 @@ export class FAQService implements OnDestroy {
   }
 
   /**
-
-   */
-  getTrendingFAQs(ids: string[]): Observable<FAQItem[]> {
-    return this.getFAQs().pipe(
-      map(faqs => {
-        const faqMap = new Map(faqs.map(faq => [faq.id, faq]));
-        return ids
-          .map(id => faqMap.get(id))
-          .filter(Boolean) as FAQItem[];
-      })
-    );
-  }
-
-  /**
-
-   */
-  getFAQStats(): Observable<FAQStats> {
-    return this.getFAQs().pipe(
-      map(faqs => {
-        const categories = new Set(faqs.map(faq => faq.category));
-        const subCategories = new Set(
-          faqs.map(faq => faq.subCategory).filter(Boolean)
-        );
-
-        const mostViewed = faqs
-          .filter(faq => faq.viewCount && faq.viewCount > 0)
-          .sort((a, b) => (b.viewCount || 0) - (a.viewCount || 0))
-          .slice(0, 5);
-
-        return {
-          totalFAQs: faqs.length,
-          totalCategories: categories.size,
-          totalSubCategories: subCategories.size,
-          mostViewedFAQs: mostViewed,
-          recentlyUpdated: []
-        };
-      })
-    );
-  }
-
-  /**
-   * Update FAQ item
-   */
-  updateFAQItem(id: string, updates: Partial<FAQItem>): void {
-    const currentFAQs = this.faqsCache$.value;
-    const updatedFAQs = currentFAQs.map(faq => 
-      faq.id === id ? { ...faq, ...updates } : faq
-    );
-    this.faqsCache$.next(updatedFAQs);
-  }
-
-  /**
    * Get all FAQs synchronously
    */
   getAllFAQs(): FAQItem[] {
     return this.faqsCache$.value;
-  }
-
-  /**
-   * Get FAQ content by ID
-   */
-  getFAQContentById(id: string): Observable<SafeHtml> {
-    const faq = this.faqsCache$.value.find(f => f.id === id);
-    if (!faq) {
-      return of(this.sanitizer.bypassSecurityTrustHtml('<p>FAQ not found</p>'));
-    }
-    return this.getFAQContent(faq.folderId);
   }
 
   /**
@@ -788,48 +609,6 @@ export class FAQService implements OnDestroy {
     } catch (error) {
       console.warn('Failed to clear FAQ content from localStorage:', error);
     }
-  }
-
-  /**
-   * Get cache statistics
-   */
-  getCacheStats(): { memoryCount: number, localStorageCount: number, totalSize: number, expiredCount: number } {
-    let localStorageCount = 0;
-    let totalSize = 0;
-    let expiredCount = 0;
-    
-    try {
-      const cachedContent = localStorage.getItem(this.STORAGE_KEY_FAQ_CONTENT);
-      if (cachedContent) {
-        totalSize = cachedContent.length;
-        const cache = JSON.parse(cachedContent);
-        
-        Object.entries(cache).forEach(([key, value]: [string, any]) => {
-          localStorageCount++;
-          if (!this.isCacheValid(value.timestamp)) {
-            expiredCount++;
-          }
-        });
-      }
-    } catch (error) {
-      console.warn('Failed to get cache stats:', error);
-    }
-    
-    return {
-      memoryCount: this.contentCache.size,
-      localStorageCount,
-      totalSize,
-      expiredCount
-    };
-  }
-
-  /**
-   * Force cache cleanup
-   */
-  forceCleanup(): void {
-    this.cleanExpiredCache();
-    this.cleanExpiredMemoryCache();
-    const stats = this.getCacheStats();
   }
 
   /**
@@ -889,7 +668,6 @@ export class FAQService implements OnDestroy {
       category,
       subCategory,
       isExpanded: false,
-      userRating: null,
       viewCount: 0,
       isPopular: false,
       isLoading: false,

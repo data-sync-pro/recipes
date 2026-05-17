@@ -14,7 +14,7 @@ export interface EditedFAQ {
   version: number;
 }
 
-export interface EditSession {
+interface EditSession {
   id: string;
   startTime: number;
   lastModified: number;
@@ -305,10 +305,6 @@ export class FAQStorageService {
       console.error('Error importing edits:', error);
       return false;
     }
-  }
-
-  getCurrentSession(): Observable<EditSession | null> {
-    return this.currentSession$.asObservable();
   }
 
   getStorageStats(): Observable<{ used: number; available: number }> {

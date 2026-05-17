@@ -269,46 +269,4 @@ export class PerformanceService {
     }
   }
 
-  /**
-   * Get performance summary
-   */
-  getPerformanceSummary(): {
-    coreWebVitals: { lcp?: number; fid?: number; cls?: number };
-    customMetrics: { faqListRenderTime?: number; faqContentLoadTime?: number; searchResponseTime?: number };
-    alerts: PerformanceAlert[];
-  } {
-    return {
-      coreWebVitals: {
-        lcp: this.metrics.lcp,
-        fid: this.metrics.fid,
-        cls: this.metrics.cls
-      },
-      customMetrics: {
-        faqListRenderTime: this.metrics.faqListRenderTime,
-        faqContentLoadTime: this.metrics.faqContentLoadTime,
-        searchResponseTime: this.metrics.searchResponseTime
-      },
-      alerts: [...this.alerts]
-    };
-  }
-
-  /**
-   * Clear all alerts
-   */
-  clearAlerts(): void {
-    this.alerts = [];
-    this.alertsSubject.next([]);
-  }
-
-  /**
-   * Export metrics for analysis
-   */
-  exportMetrics(): string {
-    return JSON.stringify({
-      metrics: this.metrics,
-      alerts: this.alerts,
-      userAgent: navigator.userAgent,
-      timestamp: new Date().toISOString()
-    }, null, 2);
-  }
 }

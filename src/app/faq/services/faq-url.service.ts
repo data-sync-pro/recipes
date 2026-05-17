@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { FAQItem } from '../models/faq.model';
+import { FAQItem } from '../../shared/models/faq.model';
 import { FAQService } from './faq.service';
 
 // Static mappings for category-level navigation. The 'categories' bucket from
@@ -81,23 +81,11 @@ export class FaqUrlService {
   private buildAnswerUrl(item: FAQItem): string {
     const parts = ['', this.slug(item.category)];
     if (item.subCategory) parts.push(this.slug(item.subCategory));
-    parts.push(this.displaySlug(item));
+    parts.push(item.folderId);
     return parts.join('/');
   }
 
   private slug(name: string): string {
     return encodeURIComponent(name.trim().toLowerCase().replace(/\s+/g, '-'));
-  }
-
-  // Strip a redundant "<subcategory>-" prefix from the folderId so URLs read
-  // cleanly. Folder names on disk keep the prefix to stay globally unique.
-  // Mirrors FaqComponent.getDisplaySlug.
-  private displaySlug(item: FAQItem): string {
-    if (!item.subCategory) return item.folderId;
-    const subSlug = item.subCategory.trim().toLowerCase().replace(/\s+/g, '-');
-    const prefix = `${subSlug}-`;
-    return item.folderId.startsWith(prefix)
-      ? item.folderId.slice(prefix.length)
-      : item.folderId;
   }
 }
