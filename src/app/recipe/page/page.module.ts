@@ -33,7 +33,6 @@ import { RecipeDetailPageComponent } from './detail-page/detail-page.component';
 import { SharedModule } from '../../shared/shared.module';
 import { BannerComponent } from './banner/banner.component';
 import { RecipeDetailBannerComponent } from './detail-banner/detail-banner.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { RecipeLayoutComponent } from './recipe-layout/recipe-layout.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
@@ -50,7 +49,6 @@ import { CodeBlockPipe } from './pipes/code-block.pipe';
     RecipeDetailPageComponent,
     BannerComponent,
     RecipeDetailBannerComponent,
-    BreadcrumbComponent,
     RecipeLayoutComponent,
     CategoryListComponent,
     RecipeListComponent,

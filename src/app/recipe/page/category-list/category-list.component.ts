@@ -13,16 +13,6 @@ export class CategoryListComponent {
   @Input() totalRecipeCount: number = 0;
   @Output() categoryToggle = new EventEmitter<string>();
 
-  categoryIcons: { [key: string]: string } = {
-    'Batch': 'assets/icons/recipe/batch.svg',
-    'Action Button': 'assets/icons/recipe/action-button.svg',
-    'Trigger': 'assets/icons/recipe/trigger.svg',
-    'Data List': 'assets/icons/recipe/data-list.svg',
-    'Data Loader': 'assets/icons/recipe/data-loader.svg',
-    'Transformation': 'assets/icons/recipe/transformation.svg',
-    'General': 'assets/icons/recipe/general.svg'
-  };
-
   onCategoryClick(categoryName: string): void {
     this.categoryToggle.emit(categoryName);
   }
@@ -40,10 +30,6 @@ export class CategoryListComponent {
 
   get isAllSelected(): boolean {
     return this.selectedCategories.length === 0;
-  }
-
-  getCategoryIcon(categoryName: string): string {
-    return this.categoryIcons[categoryName];
   }
 
   trackByCategoryName(_: number, category: Category): string {

@@ -26,10 +26,6 @@ export class RecipeListComponent {
     this.searchChange.emit(value);
   }
 
-  onSearchClick(): void {
-    this.openSearchOverlay.emit();
-  }
-
   onRecipeClick(recipe: Recipe): void {
     this.recipeSelect.emit(recipe);
   }

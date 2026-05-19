@@ -3,7 +3,7 @@ import { StepMedia, GeneralImage } from '../../core/models/recipe.model';
 import { LoggerService } from '../../core/services/logger.service';
 import { FileStorageAdapter } from '../../core/storage';
 
-export interface ImageLoadResult {
+interface ImageLoadResult {
   success: boolean;
   displayUrl?: string;
   error?: string;
@@ -68,21 +68,6 @@ export class ImageLoaderService {
     } catch (error) {
       this.logger.error(`Error loading image for ${imageType}:`, error);
       return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
-    }
-  }
-
-  async isMissingImage(imageUrl: string): Promise<boolean> {
-    if (!imageUrl || !this.isIndexedDBImage(imageUrl)) {
-      return false;
-    }
-
-    try {
-      const imageKey = this.extractImageKey(imageUrl);
-      const exists = await this.fileStorageService.imageExists(imageKey);
-      return !exists;
-    } catch (error) {
-      this.logger.error('Error checking if image is missing:', error);
-      return true;
     }
   }
 

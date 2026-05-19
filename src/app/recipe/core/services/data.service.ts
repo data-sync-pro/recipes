@@ -31,7 +31,7 @@ export class DataService {
     );
   }
 
-  loadRecipeIndex(): Observable<RecipeIndexItem[]> {
+  private loadRecipeIndex(): Observable<RecipeIndexItem[]> {
     return this.http.get<{ recipes: RecipeIndexItem[] }>(this.RECIPE_INDEX_URL).pipe(
       map(indexConfig => indexConfig.recipes.filter(item => item.active)),
       catchError(error => {
@@ -41,7 +41,7 @@ export class DataService {
     );
   }
 
-  loadRecipesBatch(recipeIndexItems: RecipeIndexItem[]): Observable<RecipeData[]> {
+  private loadRecipesBatch(recipeIndexItems: RecipeIndexItem[]): Observable<RecipeData[]> {
     if (recipeIndexItems.length === 0) {
       return of([]);
     }
@@ -62,7 +62,7 @@ export class DataService {
     );
   }
 
-  loadSingleRecipe(folderId: string): Observable<RecipeData | null> {
+  private loadSingleRecipe(folderId: string): Observable<RecipeData | null> {
     const url = `${RECIPE_PATHS.RECIPE_FOLDERS_BASE}${folderId}/recipe.json`;
 
     return this.http.get<RecipeData>(url).pipe(

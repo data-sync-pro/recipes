@@ -32,8 +32,3 @@ export const TIMING = {
    */
   SCROLL_DEBOUNCE: 100
 } as const;
-
-/**
- * Type for timing constants
- */
-export type TimingConstants = typeof TIMING;

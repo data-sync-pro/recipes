@@ -24,7 +24,7 @@ export class TransformService {
     return records.map(record => this.transformSingleRecord(record));
   }
 
-  transformSingleRecord(record: RecipeData): Recipe {
+  private transformSingleRecord(record: RecipeData): Recipe {
     const metadata = record as RecipeDataWithMetadata;
     const folderId = metadata.__folderId || record.id;
 

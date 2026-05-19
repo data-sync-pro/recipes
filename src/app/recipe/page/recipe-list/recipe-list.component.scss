@@ -1,3 +1,4 @@
+@import '../styles/recipe-variables';
 
 :host {
   display: block;
@@ -49,7 +50,7 @@
     //box-shadow: 0px 1px 4px 0px #B8B8B8;
     font-size: 0.875rem;
     outline: none;
-    transition: all 0.2s ease;
+    transition: $transition-normal;
     border: 1px solid #e6e6e6;
 }
 
@@ -127,18 +128,18 @@
     color: #333;
     font-size: 0.875rem;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: $transition-normal;
 
     &:hover:not(:disabled) {
         border-color: #2252b248;
-        color: #2253B2;
+        color: $color-primary-brand;
         background-color: #f0f5ff;
     }
 
     &.active {
-        background-color: #2253B2;
+        background-color: $color-primary-brand;
         color: #fff;
-        border-color: #2253B2;
+        border-color: $color-primary-brand;
         font-weight: 600;
         opacity: 0.9;
     }

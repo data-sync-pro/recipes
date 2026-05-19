@@ -112,7 +112,6 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   // Sidebar category groups
   categoryGroups: CategoryGroup[] = [];
   filteredCategoryGroups: CategoryGroup[] = [];
-  sidebarSearchQuery: string = '';
   allRecipes: Recipe[] = [];
   allCategories: Category[] = [];
 
@@ -139,8 +138,6 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
   // Cached YouTube videos from generalImages to prevent re-rendering on scroll
   cachedYouTubeVideos: { url: string; alt: string }[] = [];
-
-  @ViewChild('sidebarSearchInput') sidebarSearchInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     private route: ActivatedRoute,
@@ -246,28 +243,6 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
       group.isExpanded = !group.isExpanded;
       this.cdr.markForCheck();
     }
-  }
-
-  onSidebarSearchInput(): void {
-    const query = this.sidebarSearchQuery.toLowerCase().trim();
-
-    if (!query) {
-      this.filteredCategoryGroups = [...this.categoryGroups];
-    } else {
-      // Filter recipes and expand categories with matching recipes
-      this.filteredCategoryGroups = this.categoryGroups.map(group => {
-        const filteredRecipes = group.recipes.filter(recipe =>
-          recipe.title.toLowerCase().includes(query)
-        );
-        return {
-          ...group,
-          recipes: filteredRecipes,
-          isExpanded: filteredRecipes.length > 0 ? true : group.isExpanded
-        };
-      }).filter(group => group.recipes.length > 0);
-    }
-
-    this.cdr.markForCheck();
   }
 
   @HostListener('document:keydown./', ['$event'])
@@ -590,13 +565,6 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
   isYouTubeUrl(url: string): boolean {
     return url?.includes('youtu.be') || url?.includes('youtube.com');
-  }
-
-  hasNonYouTubeGeneralImages(): boolean {
-    if (!this.currentRecipe?.generalImages?.length) return false;
-    return this.currentRecipe.generalImages.some(
-      media => !(media.type === 'video' && this.isYouTubeUrl(media.url))
-    );
   }
 
   getYouTubeVideosFromGeneralImages(): { url: string; alt: string }[] {

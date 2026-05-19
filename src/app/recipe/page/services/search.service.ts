@@ -111,16 +111,6 @@ export class SearchStateService implements OnDestroy {
     }
   }
 
-  clearSearch(allRecipes: Recipe[]): void {
-    this.store.clearSearch();
-
-    this.searchResult$.next({
-      query: '',
-      results: allRecipes,
-      hasResults: true
-    });
-  }
-
   openSearchOverlay(initialQuery = ''): void {
     this.searchOverlayInitialQuery$.next(initialQuery);
     this.store.openSearchOverlay();
@@ -128,12 +118,6 @@ export class SearchStateService implements OnDestroy {
 
   closeSearchOverlay(): void {
     this.store.closeSearchOverlay();
-  }
-
-  handleSearchOverlaySelect(selectedRecipe: SelectedSuggestion): void {
-    this.router.navigate(['/recipes', categoryToSlug(selectedRecipe.category), selectedRecipe.slug]);
-
-    this.closeSearchOverlay();
   }
 
   isInputFocused(): boolean {

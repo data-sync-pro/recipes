@@ -5,7 +5,7 @@ import { IndexedDBAdapter } from './indexeddb.adapter';
 import { SessionStorageAdapter } from './session-storage.adapter';
 import { LoggerService } from '../services/logger.service';
 
-export enum StorageType {
+enum StorageType {
   LOCAL = 'local',
   INDEXED_DB = 'indexeddb',
   SESSION = 'session'
@@ -68,7 +68,7 @@ export class UnifiedStorageService {
     return adapter;
   }
 
-  async getItem<T = any>(key: string, type?: StorageType): Promise<T | null> {
+  private async getItem<T = any>(key: string, type?: StorageType): Promise<T | null> {
     const adapter = this.getAdapter(type);
 
     try {
@@ -81,7 +81,7 @@ export class UnifiedStorageService {
     }
   }
 
-  async setItem<T = any>(
+  private async setItem<T = any>(
     key: string,
     value: T,
     type?: StorageType,
@@ -102,17 +102,6 @@ export class UnifiedStorageService {
       }
 
       return false;
-    }
-  }
-
-  async removeItem(key: string, type?: StorageType): Promise<void> {
-    const adapter = this.getAdapter(type);
-
-    try {
-      await adapter.removeItem(key);
-      this.logger.debug(`removeItem: ${key}`, { adapter: adapter.name });
-    } catch (error) {
-      this.logger.error(`removeItem failed: ${key}`, error);
     }
   }
 

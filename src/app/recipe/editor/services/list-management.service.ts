@@ -165,7 +165,7 @@ export class ListManagementService implements OnDestroy {
     return this.getFilteredEditedRecipes().length;
   }
 
-  recipesToTitleItems(
+  private recipesToTitleItems(
     recipes: RecipeData[],
     maxLength: number,
     maxItems: number
@@ -191,11 +191,6 @@ export class ListManagementService implements OnDestroy {
   getEditedExistingRecipeTitles(maxLength: number, maxItems: number): RecipeTitleItem[] {
     const edited = this.getFilteredEditedRecipes(false);
     return this.recipesToTitleItems(edited, maxLength, maxItems);
-  }
-
-  getEditedRecipeTitles(maxLength: number, maxItems: number): RecipeTitleItem[] {
-    const all = this.getFilteredEditedRecipes();
-    return this.recipesToTitleItems(all, maxLength, maxItems);
   }
 
   private truncateTitle(title: string, maxLength: number): string {

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ExportService } from './export.service';
 import { RecipePreviewData } from '../models/recipe.model';
 import { LoggerService } from './logger.service';
 
@@ -8,13 +7,12 @@ import { LoggerService } from './logger.service';
 })
 export class PreviewService {
   private readonly PREVIEW_KEY_PREFIX = 'recipe-preview-';
-  
+
   constructor(
-    private exportService: ExportService,
     private logger: LoggerService
   ) {}
 
-  savePreviewData(data: RecipePreviewData): void {
+  private savePreviewData(data: RecipePreviewData): void {
     const storageKey = `${this.PREVIEW_KEY_PREFIX}${data.recipeId}`;
 
     const processedData: RecipePreviewData = {

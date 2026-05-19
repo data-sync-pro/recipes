@@ -33,8 +33,3 @@ export const INTERSECTION_CONFIG = {
    */
   VISIBILITY_THRESHOLD: 0.15
 } as const;
-
-/**
- * Type for intersection configuration
- */
-export type IntersectionConfig = typeof INTERSECTION_CONFIG;

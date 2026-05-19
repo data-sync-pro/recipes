@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { StepMedia, GeneralImage } from '../../../core/models/recipe.model';
 import { TrackByUtil } from '../../../core/utils/trackby.util';
+import { getFileExtension } from '../../../core/utils';
 import { FileStorageAdapter } from '../../../core/storage';
 import { ImageNamingService } from '../../services/image-naming.service';
 import { ImageLoaderService } from '../../services/image-loader.service';
@@ -227,7 +228,7 @@ export class ImageManagerComponent implements OnChanges, AfterViewInit {
     try {
 
       const baseName = `step-${this.stepIndex}-image-${Date.now()}`;
-      const extension = this.imageNamingService.getFileExtension(file);
+      const extension = getFileExtension(file);
 
       await this.fileStorageService.storeImage(baseName, file);
 
@@ -262,7 +263,7 @@ export class ImageManagerComponent implements OnChanges, AfterViewInit {
     try {
 
       const baseName = `general-image-${Date.now()}`;
-      const extension = this.imageNamingService.getFileExtension(file);
+      const extension = getFileExtension(file);
 
       await this.fileStorageService.storeImage(baseName, file);
 
@@ -285,11 +286,6 @@ export class ImageManagerComponent implements OnChanges, AfterViewInit {
       this.logger.error('Error uploading general image:', error);
       this.notificationService.error('Failed to upload general image');
     }
-  }
-
-  async isImageMissing(media: StepMedia | GeneralImage): Promise<boolean> {
-    if (!media.url) return false;
-    return await this.imageLoaderService.isMissingImage(media.url);
   }
 
   getDisplayUrl(media: StepMedia | GeneralImage): string | undefined {

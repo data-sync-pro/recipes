@@ -17,7 +17,6 @@ export interface NavigationEvent {
 export class NavigationService {
 
   private readonly SECTION_ID_PREFIX = 'recipe-';
-  private readonly STEP_ID_PREFIX = RECIPE_SECTIONS.STEP_PREFIX;
   private readonly SECTION_SELECTOR = `[id^="recipe-"], [id^="${RECIPE_SECTIONS.STEP_PREFIX}"]`;
 
   private navigationEvent$ = new Subject<NavigationEvent>();
@@ -91,35 +90,6 @@ export class NavigationService {
     }, options);
   }
 
-  observeAllSections(overviewElementIds: string[], walkthroughStepCount: number): void {
-    if (!this.sectionObserver) return;
-
-    const allElementIds: string[] = [...overviewElementIds];
-    for (let i = 0; i < walkthroughStepCount; i++) {
-      allElementIds.push(`${this.STEP_ID_PREFIX}${i}`);
-    }
-
-    requestAnimationFrame(() => {
-      overviewElementIds.forEach(elementId => {
-        const element = document.getElementById(elementId);
-        if (element) {
-          this.sectionObserver?.observe(element);
-        }
-      });
-
-      for (let i = 0; i < walkthroughStepCount; i++) {
-        const element = document.getElementById(`${this.STEP_ID_PREFIX}${i}`);
-        if (element) {
-          this.sectionObserver?.observe(element);
-        }
-      }
-
-      this.cachedSections = Array.from(document.querySelectorAll(this.SECTION_SELECTOR));
-
-      this.detectInitialVisibleSection(allElementIds);
-    });
-  }
-
   private calculateObservationBoundaries(): { observeTop: number; observeBottom: number } {
     const headerOffset = INTERSECTION_CONFIG.HEADER_OFFSET;
     const bottomMargin = INTERSECTION_CONFIG.BOTTOM_MARGIN;
@@ -139,38 +109,6 @@ export class NavigationService {
         type: 'section-changed',
         sectionId: sectionId
       });
-    }
-  }
-
-  private detectInitialVisibleSection(elementIds: string[]): void {
-    const { observeTop, observeBottom } = this.calculateObservationBoundaries();
-
-    let bestSection: { id: string; visibleRatio: number } | null = null;
-
-    for (const elementId of elementIds) {
-      const element = document.getElementById(elementId);
-      if (!element) continue;
-
-      const rect = element.getBoundingClientRect();
-      const elementTop = window.scrollY + rect.top;
-      const elementBottom = elementTop + rect.height;
-
-      const visibleTop = Math.max(elementTop, observeTop);
-      const visibleBottom = Math.min(elementBottom, observeBottom);
-      const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-
-      const visibleRatio = visibleHeight / rect.height;
-
-      if (visibleRatio >= INTERSECTION_CONFIG.VISIBILITY_THRESHOLD) {
-        if (!bestSection || visibleRatio > bestSection.visibleRatio) {
-          bestSection = { id: elementId, visibleRatio };
-        }
-      }
-    }
-
-    if (bestSection) {
-      this.visibleSections.add(bestSection.id);
-      this.updateActiveSection(bestSection.id);
     }
   }
 
@@ -214,40 +152,6 @@ export class NavigationService {
     });
 
     return (bestSection as { id: string; visibleRatio: number; index: number } | null)?.id || Array.from(this.visibleSections)[0] || null;
-  }
-
-  navigateToOverviewSection(sectionId: string): void {
-    this.scrollToSection(sectionId);
-  }
-
-  navigateToWalkthroughSection(stepIndex: number): void {
-    this.scrollToSection(`${this.STEP_ID_PREFIX}${stepIndex}`);
-  }
-
-  private scrollToSection(elementId: string): void {
-    const element = document.getElementById(elementId);
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-
-      this.updateUrlHash(elementId);
-
-      this.store.setActiveSectionId(elementId);
-      this.navigationEvent$.next({
-        type: 'section-changed',
-        sectionId: elementId
-      });
-    }
-  }
-
-  private updateUrlHash(sectionId: string): void {
-    if (typeof window !== 'undefined' && window.history) {
-      const currentUrl = window.location.pathname + window.location.search;
-      const newUrl = `${currentUrl}#${sectionId}`;
-      window.history.replaceState(null, '', newUrl);
-    }
   }
 
   handleInitialHash(): void {

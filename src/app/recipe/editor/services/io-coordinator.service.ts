@@ -9,13 +9,13 @@ import { LoggerService } from '../../core/services/logger.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { cleanRecipeForExport, CleanRecipeCustomStepNames } from '../../core/utils';
 
-export interface SaveResult {
+interface SaveResult {
   success: boolean;
   recipeId?: string;
   errors?: string[];
 }
 
-export interface ImportResult {
+interface ImportResult {
   success: boolean;
   recipe?: RecipeData;
   recipes?: RecipeData[];
@@ -109,7 +109,7 @@ export class IOCoordinatorService {
     return results;
   }
 
-  async exportSingleRecipe(
+  private async exportSingleRecipe(
     recipe: RecipeData,
     customStepNames: CleanRecipeCustomStepNames
   ): Promise<void> {
@@ -243,7 +243,7 @@ export class IOCoordinatorService {
     }
   }
 
-  mergeRecipeData(
+  private mergeRecipeData(
     originalRecipes: Recipe[],
     editedRecipes: RecipeData[]
   ): RecipeData[] {

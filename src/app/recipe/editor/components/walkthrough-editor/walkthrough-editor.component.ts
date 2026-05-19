@@ -230,10 +230,6 @@ export class WalkthroughEditorComponent {
     this.onChange();
   }
 
-  isCustomStep(step: WalkthroughStep): boolean {
-    return step.step === 'Custom';
-  }
-
   // Used by template's [(ngModel)]
   getCustomName(stepIndex: number): string {
     const tab = this.customStepNames[this.activeTabIndex];

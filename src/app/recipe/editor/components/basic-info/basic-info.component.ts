@@ -53,10 +53,6 @@ export class BasicInfoComponent {
     this.showCategoryDropdown = !this.showCategoryDropdown;
   }
 
-  closeCategoryDropdown(): void {
-    this.showCategoryDropdown = false;
-  }
-
   addDSPVersion(): void {
     this.ensureArrayAndPush('DSPVersions', '');
   }

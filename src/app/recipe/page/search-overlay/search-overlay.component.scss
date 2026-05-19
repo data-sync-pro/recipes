@@ -95,7 +95,7 @@
 .filter-label {
   font-weight: 600;
   font-size: 1.1rem;
-  color: #2253B2;
+  color: $color-primary-brand;
   margin-bottom: 0.5rem;
 }
 
@@ -126,8 +126,8 @@
 }
 
 .filter-chip.active {
-  background-color: #2253B2;
-  border-color: #2253B2;
+  background-color: $color-primary-brand;
+  border-color: $color-primary-brand;
   opacity: 0.9;
   color: white;
 }
@@ -203,7 +203,7 @@
 
 .suggestion-item:hover .tag,
 .suggestion-item.active .tag {
-  background-color: #2253B2;
+  background-color: $color-primary-brand;
   opacity: 0.9;
   color: white;
 }

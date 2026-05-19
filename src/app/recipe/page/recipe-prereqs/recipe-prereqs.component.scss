@@ -1,3 +1,5 @@
+@import '../styles/recipe-variables';
+
 .recipe-prereqs {
   margin: 12px 12px 20px 12px;
 
@@ -105,7 +107,7 @@
         display: inline-block;
         padding: 1px 6px;
         background: #E8F0FB;
-        color: #2253B2;
+        color: $color-primary-brand;
         border-radius: 3px;
         font-size: 0.7rem;
         font-weight: 500;
@@ -137,7 +139,7 @@
           display: inline-block;
           padding: 1px 8px;
           background: #F1F6FB;
-          color: #2253B2;
+          color: $color-primary-brand;
           border-radius: 3px;
           font-size: 0.75rem;
           font-weight: 500;

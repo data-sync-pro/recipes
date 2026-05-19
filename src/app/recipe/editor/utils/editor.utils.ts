@@ -2,13 +2,6 @@ import { RecipeData, Recipe } from '../../core/models/recipe.model';
 
 export class EditorUtils {
 
-  static truncateTitle(title: string, maxLength: number): string {
-    if (!title) return '';
-    return title.length > maxLength
-      ? title.substring(0, maxLength) + '...'
-      : title;
-  }
-
   static generateUUID(): string {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
       const r = Math.random() * 16 | 0;
@@ -17,7 +10,7 @@ export class EditorUtils {
     });
   }
 
-  static generateRecipeId(title?: string): string {
+  private static generateRecipeId(title?: string): string {
     if (title) {
       const baseId = title
         .toLowerCase()
@@ -85,15 +78,5 @@ export class EditorUtils {
     if (timeout) {
       clearTimeout(timeout);
     }
-  }
-
-  static hasContent(recipe: RecipeData): boolean {
-    return !!(
-      recipe.title ||
-      recipe.overview ||
-      recipe.generalUseCase ||
-      (recipe.walkthrough && recipe.walkthrough.length > 0) ||
-      (recipe.generalImages && recipe.generalImages.length > 0)
-    );
   }
 }
