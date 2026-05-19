@@ -1,0 +1,57 @@
+<section class="form-section">
+  <h3 class="form-section-title">Tips</h3>
+  <ng-container *ngTemplateOutlet="tipList; context: { list: tips, depth: 0 }"></ng-container>
+
+  <ng-template #tipList let-list="list" let-depth="depth">
+    <div class="tips-list" [style.margin-left.rem]="depth * 0.75">
+      <div
+        *ngFor="let tip of list; let i = index; trackBy: trackByIndex"
+        class="tip-card"
+      >
+        <div class="tip-card-head">
+          <span class="tip-card-label">
+            <ng-container *ngIf="depth === 0">Tip #{{ i + 1 }}</ng-container>
+            <ng-container *ngIf="depth > 0">Sub-tip #{{ i + 1 }}</ng-container>
+          </span>
+          <div class="row-controls">
+            <button type="button" class="row-btn" (click)="moveUp(list, i)" [disabled]="i === 0">↑</button>
+            <button type="button" class="row-btn" (click)="moveDown(list, i)" [disabled]="i === list.length - 1">↓</button>
+            <button type="button" class="row-btn row-btn-danger" (click)="remove(list, i)">×</button>
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Text (HTML)</label>
+          <textarea
+            class="form-textarea"
+            rows="2"
+            appAutosize="400"
+            [(ngModel)]="tip.text"
+            (ngModelChange)="changed()"
+          ></textarea>
+        </div>
+        <div class="form-field">
+          <label>Code (optional)</label>
+          <textarea
+            class="form-textarea form-textarea-mono"
+            rows="2"
+            appAutosize="400"
+            [(ngModel)]="tip.code"
+            (ngModelChange)="changed()"
+          ></textarea>
+        </div>
+        <ng-container *ngIf="hasChildren(tip)">
+          <ng-container *ngTemplateOutlet="tipList; context: { list: tip.children, depth: depth + 1 }"></ng-container>
+        </ng-container>
+        <button type="button" class="row-btn tip-add-child" (click)="add(ensureChildren(tip))">
+          + Add sub-tip
+        </button>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="form-add-btn"
+      *ngIf="depth === 0"
+      (click)="add(list)"
+    >+ Add tip</button>
+  </ng-template>
+</section>

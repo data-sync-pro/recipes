@@ -1,0 +1,49 @@
+{
+  "title": "IS_PHONE_NUMBER",
+  "description": "<p>Returns TRUE if the provided string matches a valid phone number format; otherwise, returns FALSE.</p>",
+  "syntax": "IS_PHONE_NUMBER(string) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to evaluate."
+    }
+  ],
+  "examples": [
+    "IS_PHONE_NUMBER(\"123-456-7890\")\n-- Returns TRUE.",
+    "IS_PHONE_NUMBER(\"+1 (123) 456-7890 ext.1234\")\n-- Returns TRUE."
+  ],
+  "tips": [
+    {
+      "text": "Returns FALSE if the string is empty."
+    },
+    {
+      "text": "<p>Accepted formats:</p>",
+      "children": [
+        {
+          "text": "<p>Optional \"+\" and country code (e.g., \"+1\")</p>",
+          "children": []
+        },
+        {
+          "text": "<p>Optional parentheses around area codes</p>",
+          "children": []
+        },
+        {
+          "text": "<p>Digits separated by spaces, hyphens, or dots</p>",
+          "children": []
+        },
+        {
+          "text": "<p>Optional extensions prefixed with \"x\" or \"ext.\"</p>",
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "<p>Regex Used:</p>",
+      "children": [],
+      "code": "^(\\\\+?1[-. ]?)?(\\\\(\\\\d{3}\\\\)|\\\\d{3})?[-. ]?\\\\d{3}[-. ]?\\\\d{4}(?:[ ]?(?:x|ext\\\\.?)[ ]?\\\\d{1,5})?$|^(\\\\+?\\\\d{1,3})?[-. ]?(\\\\(\\\\d{1,4}\\\\)|\\\\d{1,4})?[-. ]?\\\\d{1,4}[-. ]?\\\\d{1,4}[-. ]?\\\\d{1,9}(?:[ ]?(?:x|ext\\\\.?)[ ]?\\\\d{1,5})?$"
+    }
+  ],
+  "relatedFormulas": []
+}

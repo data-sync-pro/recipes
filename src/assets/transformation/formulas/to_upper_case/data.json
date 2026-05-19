@@ -1,0 +1,38 @@
+{
+  "title": "TO_UPPER_CASE",
+  "description": "<p>Converts all letters in the specified text to uppercase.</p>",
+  "syntax": "TO_UPPER_CASE(string, locale_optional) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The original string."
+    },
+    {
+      "name": "locale_optional",
+      "type": "String",
+      "required": "No",
+      "description": "Locale identifier (such as \"en-US\") to apply locale-specific casing rules. If omitted, default locale is used."
+    }
+  ],
+  "examples": [
+    "TO_UPPER_CASE(\"icon\")\n-- Returns \"ICON\".",
+    "TO_UPPER_CASE(\"administrator\", \"tr\")\n-- Returns \"ADMİNİSTRATOR\".\n-- Converts the string to uppercase using Turkish locale-specific rules."
+  ],
+  "tips": [
+    {
+      "text": "<p>Non-letter characters remain unchanged.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>If no locale is provided, standard uppercase conversion rules are used.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Specify a locale (e.g., \"tr\") when locale-specific rules are required, such as special handling of the letter \"i\" in Turkish.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

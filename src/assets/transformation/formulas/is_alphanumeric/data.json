@@ -1,0 +1,27 @@
+{
+  "title": "IS_ALPHANUMERIC",
+  "description": "<p>Returns TRUE if the string contains only alphabetic characters or numeric digits; otherwise, returns FALSE.</p>",
+  "syntax": "IS_ALPHANUMERIC(string) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to evaluate."
+    }
+  ],
+  "examples": [
+    "IS_ALPHANUMERIC(\"Batch2023\")\n-- Returns TRUE.",
+    "IS_ALPHANUMERIC(\"Report 2025_v1\")\n-- Returns FALSE, only letters and numbers are accepted."
+  ],
+  "tips": [ 
+    {
+      "text": "<p>Returns FALSE if the string is empty.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Any spaces, or symbols will result in FALSE.</p>",
+      "children": []
+    }],
+  "relatedFormulas": []
+}

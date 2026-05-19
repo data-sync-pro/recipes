@@ -1,0 +1,28 @@
+{
+  "title": "RANDOMIZE",
+  "description": "<p>Returns a randomized value of the same data type as the provided input. Supports text, number, date, and boolean values.</p>",
+  "syntax": "RANDOMIZE(text/number/date/boolean) -> same type as input",
+  "parameters": [
+    {
+      "name": "text/number/date/boolean",
+      "type": "String/Number/Date/Boolean",
+      "required": "Yes",
+      "description": "Value or expression."
+    }
+  ],
+  "examples": [
+    "RANDOMIZE(\"Hello\") \n-- Possible output: \"kJsdP\".",
+    "RANDOMIZE(42) \n-- Possible output: 87.",
+    "RANDOMIZE(TO_DATE(\"2025-03-01\"))\n-- Possible output: 2024-05-14.",
+    "RANDOMIZE(true)\n-- Possible output: false."
+  ],
+  "tips": [
+    {
+      "text": "<p>This function is only allowed for actions targeting sandboxes, to prevent accidental masking of production data.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": [
+    "TO_DATE"
+  ]
+}

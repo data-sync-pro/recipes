@@ -1,0 +1,39 @@
+<div
+  class="sidebar-wrapper"
+  [class.collapsed]="collapsed$ | async"
+  [class.show-sidebar]="showSidebar"
+>
+  <aside
+    class="sidebar"
+    [class.collapsed]="(collapsed$ | async) && !showSidebar"
+  >
+    <div class="sidebar-scroll-content">
+      <app-navigation
+        [collapsed$]="collapsed$"
+        (searchOpen)="onSearchOpen()"
+        (toggleSidebar)="onToggleSidebar()">
+      </app-navigation>
+    </div>
+  </aside>
+
+  <!-- Floating buttons for collapsed state -->
+  <button
+    class="sidebar-collapse-button"
+    *ngIf="collapsed$ | async"
+    (click)="onToggleSidebar()"
+    title="Expand Sidebar"
+  >
+    <span>☰</span>
+  </button>
+
+  <button
+    class="sidebar-float-search"
+    *ngIf="collapsed$ | async"
+    (click)="onSearchOpen()"
+    title="Search"
+  >
+    <svg class="icon-search" width="20" height="20" aria-hidden="true">
+      <use href="assets/transformation/icon/search.svg#search-icon"></use>
+    </svg>
+  </button>
+</div>

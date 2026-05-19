@@ -1,0 +1,49 @@
+{
+  "title": "VLOOKUP_CONNECTION",
+  "description": "<p>Performs a dynamic lookup on a Salesforce object through a connection and returns the specified field value (including relational fields up to 5 levels), from the first matching record.</p>",
+  "syntax": "VLOOKUP_CONNECTION(connection_name, object_name, return_field_name, ...[matching_field_name, matching_field_value], additional_clause_optional) -> Object",
+  "parameters": [
+    {
+      "name": "connection_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the connection to use."
+    },
+    {
+      "name": "object_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the object to look up."
+    },
+    {
+      "name": "return_field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the field whose value will be returned."
+    },
+    {
+      "name": "…matching_field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the field used to match records."
+    },
+    {
+      "name": "…matching_field_value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The field value used as matching criteria."
+    },
+    {
+      "name": "additional_clause_optional",
+      "type": "String",
+      "required": "No",
+      "description": "Additional query conditions for more precise filtering."
+    }
+  ],
+  "examples": [
+    "VLOOKUP_CONNECTION(\"Salesforce_Prod\",\n                   \"Opportunity\",\n                   \"Amount\", \n                   \"Account.Source_System_Id__c\",\n                    Source_System_Id__c)\n-- Returns the Amount from the first Opportunity in the \"Salesforce_Prod\" org where Account.Source_System_Id__c matches the current record’s Source_System_Id__c.",
+    "VLOOKUP_CONNECTION(\"Salesforce_Prod\", \n                   \"Opportunity\", \n                   \"Amount\", \n                   \"AccountId\", Id, \n                   \"OwnerId\", $User.Id, \n                   \"FiscalYear = 2024\")\n-- Returns the Amount from the first Opportunity in the \"Salesforce_Prod\" org where:\n-- AccountId matches the current record’s Id,\n-- OwnerId matches the current user’s Id,\n-- and FiscalYear = 2024."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

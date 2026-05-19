@@ -1,0 +1,24 @@
+{
+  "title": "TRIGGER_IS_CHANGED_FROM",
+  "description": "<p>Returns TRUE if the specified field's value has changed from any of the provided old values in the current trigger context; otherwise, returns FALSE.</p>",
+  "syntax": "TRIGGER_IS_CHANGED_FROM(field_name, ...old_values) -> Boolean",
+  "parameters": [
+    {
+      "name": "field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The API name of the field to evaluate."
+    },
+    {
+      "name": "… old_values",
+      "type": "Object",
+      "required": "Yes",
+      "description": "One or more values to compare against the field’s previous value. If the previous value matches any of the specified values and the new value is different, the function returns TRUE."
+    }
+  ],
+  "examples": [
+    "TRIGGER_IS_CHANGED_FROM(\"Status\", \"New\", \"Pending\")\n-- Returns TRUE if Status changed from \"New\" or \"Pending\" to a different value in this transaction; otherwise, FALSE."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

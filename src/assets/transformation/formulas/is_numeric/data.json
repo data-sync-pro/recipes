@@ -1,0 +1,32 @@
+{
+  "title": "IS_NUMERIC",
+  "description": "<p>Returns TRUE if the provided string contains only Unicode digits; otherwise, returns FALSE.</p>",
+  "syntax": "IS_NUMERIC(string) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to evaluate."
+    }
+  ],
+  "examples": [
+    "IS_NUMERIC(\"123\")\n-- Returns TRUE.",
+    "IS_NUMERIC(\"-1.23%XYZ\")\n-- Returns FALSE, only Unicode digits are accepted."
+     ],
+  "tips": [
+    {
+      "text": "Recognizes digits from any Unicode script. For example, IS_NUMERIC(\"१२३\") (Devanagari) and IS_NUMERIC(\"٤٥٦\") (Arabic-Indic) both return TRUE.",
+      "children": []
+    },
+    {
+      "text": "<p>Returns FALSE if the string is empty.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Any letters, symbols, or spaces, will result in FALSE.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

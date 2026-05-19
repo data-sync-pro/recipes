@@ -1,0 +1,24 @@
+{
+  "title": "TO_TIME",
+  "description": "<p>Converts a time string from the context user's local time zone to a Time value in GMT.</p>",
+  "syntax": "TO_TIME(string) -> Time",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to convert into a Time, provided in a recognized time format (e.g., 'HH:mm:ss')."
+    }
+  ],
+  "examples": [
+    "TO_TIME(\"14:30:00\")\n-- Converts \"14:30:00\" from local time to a Time in GMT."
+  ],
+  "tips": [
+    {
+      "text": "<p>Accepted formats include: HH:mm:ss, HH:mm:ss.SSS, HH:mm:ss.SSSZ, HH:mm, and H.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": [
+  ]
+}

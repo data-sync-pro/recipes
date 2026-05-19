@@ -1,0 +1,88 @@
+{
+  "title": "OPERATORS",
+  "operators": {
+    "Arithmetic Operators": [
+      {
+        "operator": "+",
+        "name": "Add",
+        "description": "Calculates the sum of two numbers."
+      },
+      {
+        "operator": "-",
+        "name": "Subtract",
+        "description": "Calculates the difference between two numbers."
+      },
+      {
+        "operator": "*",
+        "name": "Multiply",
+        "description": "Calculates the product of two numbers."
+      },
+      {
+        "operator": "/",
+        "name": "Divide",
+        "description": "Calculates the quotient of two numbers."
+      },
+      {
+        "operator": "%",
+        "name": "Mod",
+        "description": "Calculates the remainder of two numbers."
+      }
+    ],
+    "Comparison Operators": [
+      {
+        "operator": "==",
+        "name": "Equal",
+        "description": "Evaluates if two values are equal."
+      },
+      {
+        "operator": "!=",
+        "name": "Not Equal",
+        "description": "Evaluates if two values are different."
+      },
+      {
+        "operator": "<",
+        "name": "Less Than",
+        "description": "Evaluates if the first value is smaller than the second."
+      },
+      {
+        "operator": ">",
+        "name": "Greater Than",
+        "description": "Evaluates if the first value is larger than the second."
+      },
+      {
+        "operator": "<=",
+        "name": "Less Than or Equal",
+        "description": "Evaluates if the first value is smaller or equal to the second."
+      },
+      {
+        "operator": ">=",
+        "name": "Greater Than or Equal",
+        "description": "Evaluates if the first value is larger or equal to the second."
+      }
+    ],
+    "Logical Operators": [
+      {
+        "operator": "&&",
+        "name": "AND",
+        "description": "Evaluates to TRUE if both conditions are true."
+      },
+      {
+        "operator": "||",
+        "name": "OR",
+        "description": "Evaluates to TRUE if at least one condition is true."
+      }
+    ],
+    "Other Operators": [
+      {
+        "operator": "()",
+        "name": "Parentheses",
+        "description": "Defines the order in which expressions are evaluated."
+      },
+      {
+        "operator": "&",
+        "name": "Concatenate",
+        "description": "Joins two or more strings together into a single string."
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "title": "TRIGGER_IS_UNDELETE",
+  "description": "<p>Returns TRUE if the current trigger context is an undelete operation (after undelete); otherwise, returns FALSE.</p>",
+  "syntax": "TRIGGER_IS_UNDELETE() -> Boolean",
+  "parameters": [],
+  "examples": [],
+  "tips": [],
+  "relatedFormulas": []
+}

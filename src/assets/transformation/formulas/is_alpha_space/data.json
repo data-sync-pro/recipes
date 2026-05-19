@@ -1,0 +1,27 @@
+{
+  "title": "IS_ALPHA_SPACE",
+  "description": "<p>Returns TRUE if the string contains only alphabetic characters or spaces; otherwise, returns FALSE.</p>",
+  "syntax": "IS_ALPHA_SPACE(string) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to evaluate."
+    }
+  ],
+  "examples": [
+    "IS_ALPHA_SPACE(\"New York\")\n-- Returns TRUE.",
+    "IS_ALPHA_SPACE(\"Team #01 Alpha\")\n-- Returns FALSE, only letters and spaces are accepted."
+  ],
+  "tips": [ 
+    {
+      "text": "<p>Returns TRUE if the string is empty.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Any numbers or symbols will result in FALSE.</p>",
+      "children": []
+    }],
+  "relatedFormulas": []
+}

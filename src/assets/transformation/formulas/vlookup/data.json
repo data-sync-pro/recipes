@@ -1,0 +1,43 @@
+{
+  "title": "VLOOKUP",
+  "description": "<p>Performs a dynamic lookup on a Salesforce object and returns the specified field value(including relational fields up to 5 levels), from the first matching record.</p>",
+  "syntax": "VLOOKUP(target_object_name, return_field_name, ...[matching_field_name, matching_field_value], additional_clause_optional) -> Object",
+  "parameters": [
+    {
+      "name": "target_object_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The API name of the object to query."
+    },
+    {
+      "name": "return_field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The API name of the field to return from the matching record(first record if there are multiple matches.)."
+    },
+    {
+      "name": "…matching_field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the field used to match records."
+    },
+    {
+      "name": "…matching_field_value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The field value used as matching criteria."
+    },
+    {
+      "name": "additional_clause_optional",
+      "type": "String",
+      "required": "No",
+      "description": "Additional SOQL criteria for restricting or ordering the matching results."
+    }
+  ],
+  "examples": [
+    "VLOOKUP(\"Opportunity\", \"Account.Name\", \"Id\", OpportunityId )\n-- Returns the Account Name from the Opportunity where Id equals OpportunityId.",
+    "VLOOKUP(\"Opportunity\", \n        \"Amount\", \n        \"AccountId\", Id, \n        \"OwnerId\", OwnerId, \n        \"Probability > 50\")\n-- Returns the Amount from the first Opportunity where:\n-- AccountId matches the current record's Id,\n-- OwnerId matches the current record's OwnerId,\n-- and Probability > 50."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

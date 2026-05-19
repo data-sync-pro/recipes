@@ -1,0 +1,16 @@
+{
+  "title": "SIN",
+  "description": "Returns the trigonometric sine of the specified angle.",
+  "syntax": "SIN(num) -> Decimal",
+  "parameters": [
+    {
+      "name": "num",
+      "type": "Decimal",
+      "required": "Yes",
+      "description": "The angle in radians."
+    }
+  ],
+  "examples": [
+    "SIN(0)\n-- Returns the sine of 0 radians."
+  ]
+}

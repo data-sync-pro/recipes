@@ -1,0 +1,16 @@
+{
+  "title": "LOG",
+  "description": "Returns the natural logarithm (base e) of the specified number.",
+  "syntax": "LOG(num) -> Decimal",
+  "parameters": [
+    {
+      "name": "num",
+      "type": "Decimal",
+      "required": "Yes",
+      "description": "A numeric literal, field, or expression."
+    }
+  ],
+  "examples": [
+    "LOG(100)\n-- Returns the natural logarithm of 100."
+  ]
+}

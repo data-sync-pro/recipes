@@ -1,0 +1,20 @@
+{
+  "title": "LEN",
+  "description": "<p>Returns the number of characters in the provided string.</p>",
+  "syntax": "LEN(string) -> Integer",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to evaluate."
+    }
+  ],
+  "examples": [
+    "LEN(\"Data Sync Pro\")\n-- Returns 13.",
+    "LEN(BillingPostalCode)\n-- Returns the character count of the BillingPostalCode field."
+
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

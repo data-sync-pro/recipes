@@ -1,0 +1,29 @@
+{
+  "title": "FORMAT_DSP_TEMPLATE (Obsolete)",
+  "description": "<p>Parses and formats a DSP template string by resolving embedded expressions and placeholders.</p>",
+  "descriptionCallouts": [
+    {
+      "type": "warning",
+      "content": "Obsolete since v3.418. Use FORMAT_STRING_TEMPLATE with merged fields in the new {!expression} syntax. Existing invocations continue to work for backward compatibility."
+    }
+  ],
+  "syntax": "FORMAT_DSP_TEMPLATE(template) -> String",
+  "parameters": [
+    {
+      "name": "template",
+      "type": "String",
+      "required": "Yes",
+      "description": "A string containing merge fields or expressions in DSP template syntax (e.g. {!FieldName}, {VLOOKUP(...)}) to be evaluated and replaced with their corresponding values. Incorrect or unparseable expressions remain literal strings in the output."
+    }
+  ],
+  "examples": [
+    "FORMAT_DSP_TEMPLATE(\n'Dear <shadow>{VLOOKUP(\"OpportunityContactRole\", \"Contact.Name\", \"OpportunityId\", Id,\"IsPrimary = TRUE\")}</shadow>, \n\nWe are pleased to inform you that your Account: <shadow>{Account.Name}</shadow> has an Opportunity currently at the stage: <shadow>{StageName}</shadow>.\n\nFeel free to reach out if you have any questions.\n\nBest Regards,   \nSales Team')\n\n/*Dear <shadow>Kristin Stanton</shadow>, \n\nWe are pleased to inform you that your Account: <shadow>Owens LLC</shadow> has an Opportunity currently at the stage: <shadow>Prospecting</shadow>. \n\nFeel free to reach out if you have any questions. \n\nBest Regards, \nSales Team*/",
+    "FORMAT_DSP_TEMPLATE('Hello <shadow>{LOOKUP(\"Account\", \"Name\", \"Id\", AccountId)}</shadow>. Your Stage: <shadow>{Opty.StageName}</shadow>.')\n-- Returns the template string with unparseable expressions unchanged because \"LOOKUP\" is misspelled and \"Opty\" is an invalid object name." 
+  ],
+  "tips": [
+    {
+      "text": "<p>To validate embedded expressions, test them individually in a field mapping's editor."
+    }
+  ],
+  "relatedFormulas": ["VLOOKUP", "FORMAT_STRING_TEMPLATE", "FORMAT_JSON_TEMPLATE"]
+}

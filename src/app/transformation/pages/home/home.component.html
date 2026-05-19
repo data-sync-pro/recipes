@@ -1,0 +1,91 @@
+<div class="home-content">
+  <h1>Formula</h1>
+  <nav class="tag-nav">
+    <ul>
+      <li>
+        <a [routerLink]="['/transformation/home', getAnchorId('Formula Elements')]">Elements of a Formula</a>
+      </li>
+      <li *ngFor="let tag of displayTags">
+        <a [routerLink]="['/transformation/home', getAnchorId(tag)]">
+          {{ tag }}
+          <ng-container *ngIf="tag !== 'Operators' && tag !== 'Global Variables'">
+            Functions
+          </ng-container>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Elements of a Formula Section -->
+  <section class="doc-subsection" *ngIf="formulaElements">
+    <h2 class="doc-title" [attr.id]="getAnchorId('Formula Elements')">{{ formulaElements.title }}</h2>
+    <p>{{ formulaElements.description }}</p>
+    <table class="doc-tables two-columns">
+      <tbody>
+        <tr *ngFor="let item of formulaElements.elements">
+          <td>{{ item.element }}</td>
+          <td>{{ item.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <!-- Functions grouped by tag -->
+  <div *ngFor="let tag of displayTags">
+    <ng-container [ngSwitch]="tag">
+      <section *ngSwitchCase="'Operators'">
+        <h2 [attr.id]="getAnchorId('Operators')">Operators</h2>
+        <div *ngIf="operators && objectKeys(operators).length">
+          <div *ngFor="let group of operators | keyvalue">
+            <h3>{{ group.key }}</h3>
+            <table class="doc-tables three-columns">
+              <tbody>
+                <tr *ngFor="let operator of group.value">
+                  <td>{{ operator.operator }}</td>
+                  <td>{{ operator.name }}</td>
+                  <td>{{ operator.description }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section *ngSwitchCase="'Global Variables'">
+        <h2 [attr.id]="getAnchorId('Global Variables')">Global Variables</h2>
+        <div *ngIf="globalVariables && globalVariables.length">
+          <table class="doc-tables two-columns">
+            <tbody>
+              <tr *ngFor="let variable of globalVariables">
+                <td>
+                  <a *ngIf="variable.variable === '$JOINER'; else plainText"
+                    [routerLink]="['/transformation', 'joiner']">
+                    {{ variable.variable }}
+                  </a>
+                </td>
+              
+                <ng-template #plainText>
+                  {{ variable.variable }}
+                </ng-template>
+                <td>{{ variable.description }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section *ngSwitchDefault>
+        <h2 [attr.id]="getAnchorId(tag)">{{ tag }} Functions</h2>
+        <table class="doc-tables two-columns">
+          <tbody>
+            <tr *ngFor="let funcName of itemsByTag[tag]">
+              <td>
+                <a (click)="goToFunction(funcName)">{{ funcName }}</a>
+              </td>
+              <td [innerHTML]="functionDescriptions[funcName] || 'Loading...'"></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </ng-container>
+  </div>
+</div>

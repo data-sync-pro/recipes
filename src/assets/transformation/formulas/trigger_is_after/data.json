@@ -1,0 +1,9 @@
+{
+  "title": "TRIGGER_IS_AFTER",
+  "description": "<p>Returns TRUE if the current trigger context is an \"after\" event (after insert, after update, after delete or after undelete); otherwise, returns FALSE.</p>",
+  "syntax": "TRIGGER_IS_AFTER() -> Boolean",
+  "parameters": [],
+  "examples": [],
+  "tips": [],
+  "relatedFormulas": []
+}

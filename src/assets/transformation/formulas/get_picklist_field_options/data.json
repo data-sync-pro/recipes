@@ -1,0 +1,28 @@
+{
+  "title": "GET_PICKLIST_FIELD_OPTIONS",
+  "description": "<p>Returns a list of options for the specified picklist field on a given object.</p>",
+  "syntax": "GET_PICKLIST_FIELD_OPTIONS(object_name, field_name) -> String[]",
+  "parameters": [
+    {
+      "name": "object_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the object."
+    },
+    {
+      "name": "field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the picklist field on the specified object. Non-picklist fields return an empty list."
+    }
+  ],
+  "examples": [
+    "GET_PICKLIST_FIELD_OPTIONS(\"Case\",\"Priority\")\n-- Returns the picklist options for Case.Priority (e.g., [\"High\", \"Medium\", \"Low\"])."
+  ],
+  "tips": [
+    {
+      "text": "<p>If the specified field is not a picklist, this function will return an empty list.</p>"
+    }
+  ],
+  "relatedFormulas": []
+}

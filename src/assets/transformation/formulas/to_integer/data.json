@@ -1,0 +1,29 @@
+{
+  "title": "TO_INTEGER",
+  "description": "<p>Converts a value to an Integer. If the input cannot be converted, the function throws an error.</p>",
+  "syntax": "TO_INTEGER(string/decimal/double/float/integer) -> Integer",
+  "parameters": [
+    {
+      "name": "string/decimal/double/float/integer",
+      "type": "String/Decimal/Double/Float/Integer",
+      "required": "Yes",
+      "description": "The string to convert into a Integer"
+    }
+  ],
+  "examples": [
+    "TO_INTEGER(\"25\")\n-- Returns 25 as an Integer.",
+    "TO_INTEGER(25.8)\n-- Returns 25."
+  ],
+  "tips": [
+    {
+      "text": "<p>If the input is a string, it must represent an integer; otherwise, an error will occur.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>For numeric inputs, any fractional part is truncated rather than rounded.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": [
+  ]
+}

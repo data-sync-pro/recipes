@@ -1,0 +1,26 @@
+{
+  "title": "TRIGGER_FLIPPER",
+  "description": "<p>This function is used within a <strong>before insert</strong> or <strong>before update</strong> trigger to track whether a specific checkbox field (defaulting to <code>FALSE</code>) has been <strong>flipped from <code>FALSE</code> to <code>TRUE</code></strong>. The \"flipped\" state is recorded <strong>in memory only</strong>.</p>\n<p>Immediately after tracking the flip, the function <strong>resets the checkbox field to <code>FALSE</code></strong>, ensuring that the field remains unchecked in the database. This mechanism allows users to manually trigger actions by checking the field on demand—without persisting the change.</p>\n<p>If the optional parameter <code>flip_if_evaluated_true_optional</code> is provided and evaluates to <code>TRUE</code>, the function will also treat the field as flipped. This allows you to define <strong>automatic rules</strong> that simulate a flip and trigger corresponding logic.</p>",
+  "syntax": "TRIGGER_FLIPPER(flip_if_evaluated_true_optional) -> Boolean",
+  "parameters": [
+    {
+      "name": "flip_if_evaluated_true_optional",
+      "type": "Boolean",
+      "required": "No",
+      "description": "Flips the field if this evaluates to true; otherwise, no flip occurs."
+    }
+  ],
+  "examples": [
+    "TRIGGER_FLIPPER() \n-- Returns TRUE the first time it's called in a flow, then FALSE for the rest.",
+    "TRIGGER_FLIPPER(Priority == \"High\") \n-- Returns TRUE again whenever the Priority equals \"High\"."
+  ],
+  "tips": [
+    {
+      "text": "<p>Typically used with the TRIGGER_IS_FLIPPED function which can be called later in the same transaction to determine whether the field was flipped and execute related actions accordingly.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": [
+    "TRIGGER_IS_FLIPPED"
+  ]
+}

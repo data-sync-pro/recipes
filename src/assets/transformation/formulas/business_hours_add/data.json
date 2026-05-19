@@ -1,0 +1,31 @@
+{
+  "title": "BUSINESS_HOURS_ADD",
+  "description": "<p>Adds a time interval to a starting Datetime, counting only business hours. The result is returned in GMT.</p>",
+  "syntax": "BUSINESS_HOURS_ADD(start_date, interval_milliseconds, business_hours_name_optional) -> Datetime",
+  "parameters": [
+    {
+      "name": "start_date",
+      "type": "Datetime",
+      "required": "Yes",
+      "description": "The starting Datetime."
+    },
+    {
+      "name": "interval_milliseconds",
+      "type": "Long",
+      "required": "Yes",
+      "description": "The interval to add, specified in milliseconds."
+    },
+    {
+      "name": "business_hours_name_optional",
+      "type": "String",
+      "required": "No",
+      "description": "The name of the business hours. If omitted, the default schedule is applied."
+    }
+  ],
+  "examples": [
+    "BUSINESS_HOURS_ADD(CreatedDate, 8 * 60 * 60 * 1000)\n-- Returns a Datetime 8 business hours after CreatedDate.",
+    "BUSINESS_HOURS_ADD(ClosedDate, -5 * 8 * 60 * 60 * 1000, \"Weekday9to5\" )\n-- Returns a Datetime 5 business days before ClosedDate using \"Weekday9to5\" hours."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

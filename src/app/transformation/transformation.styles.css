@@ -1,0 +1,81 @@
+.app-transformation {
+  color: #333;
+}
+
+.app-transformation h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0.67em 0;
+}
+
+.app-transformation h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0.83em 0;
+  color: #217B95;
+}
+
+.app-transformation h3 {
+  margin: 1em 0;
+}
+
+.app-transformation h4 {
+  margin: 1.33em 0;
+}
+
+.app-transformation p,
+.app-transformation tr,
+.app-transformation pre,
+.app-transformation ul,
+.app-transformation li {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.app-transformation p {
+  margin: 1em 0;
+}
+
+.app-transformation ul {
+  margin: 1.25rem 0 1.25rem 1.5rem;
+  padding-left: 0;
+}
+
+.app-transformation ul li {
+  margin: 0.5rem 0;
+}
+
+.app-transformation .hljs {
+  background-color: #f8f8f8 !important;
+  color: #000;
+  line-height: 1.6;
+}
+
+.app-transformation a {
+  color: #418796;
+  text-decoration: none;
+}
+
+.app-transformation a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.app-transformation .link-icon {
+  height: 14px;
+  width: 14px;
+}
+
+.app-transformation code {
+  background-color: #f5f5f5;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+.app-transformation .code-comment {
+  background-color: rgb(185, 200, 187);
+  display: inline-block;
+}

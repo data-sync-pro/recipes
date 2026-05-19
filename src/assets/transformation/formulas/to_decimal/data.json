@@ -1,0 +1,33 @@
+{
+  "title": "TO_DECIMAL",
+  "description": "<p>Converts the input value to a Decimal. If the input cannot be converted, the function throws an error.</p>",
+  "syntax": "TO_DECIMAL(string/double/long/float/integer, scale_optional) -> Decimal",
+  "parameters": [
+    {
+      "name": "string/double/long /float/integer",
+      "type": "String/Double/Long /Float/Integer",
+      "required": "Yes",
+      "description": "The string to convert into a Decimal"
+    },
+    {
+      "name": "scale_optional",
+      "type": "Integer",
+      "required": "No",
+      "description": "The number of decimal places to round to. If omitted, no rounding occurs."
+    }
+  ],
+  "examples": [
+    "TO_DECIMAL(\"25.6789\")\n-- Returns 25.6789.",
+    "TO_DECIMAL(123.456789, 3)\n-- Returns 123.457, rounded to 3 decimal places.",
+    "TO_DECIMAL(3147483647, 2)\n-- Returns 3147483647.00.",
+    "TO_DECIMAL(10/3, 3)\n-- Returns 3.333, rounded to 3 decimal places.",
+    "TO_DECIMAL(75, 3)\n-- Returns 75.000."
+  ],
+  "tips": [
+    {
+      "text": "<p>If the input is a string, it must represent a valid number; otherwise, an error will occur.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

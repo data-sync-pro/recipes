@@ -1,0 +1,17 @@
+{
+  "title": "FLOOR",
+  "description": "Returns the largest integer less than or equal to the specified number.",
+  "syntax": "FLOOR(num) -> Decimal",
+  "parameters": [
+    {
+      "name": "num",
+      "type": "Decimal",
+      "required": "Yes",
+      "description": "The value or numeric field to round down."
+    }
+  ],
+  "examples": [
+    "FLOOR(1.2)\n--Returns 1.",
+    "FLOOR(-1.2)\n--Returns -2."
+  ]
+}

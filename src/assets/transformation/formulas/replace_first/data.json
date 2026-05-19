@@ -1,0 +1,30 @@
+{
+  "title": "REPLACE_FIRST",
+  "description": "<p>Returns a new string in which only the first occurrence matching the provided regular expression (regex) within the original string is replaced by the specified replacement substring.</p>",
+  "syntax": "REPLACE_FIRST(string, regex, replacement) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The original string."
+    },
+    {
+      "name": "regex",
+      "type": "String",
+      "required": "Yes",
+      "description": "The regular expression defining the pattern to replace."
+    },
+    {
+      "name": "replacement",
+      "type": "String",
+      "required": "Yes",
+      "description": "The substring used to replace the first matched pattern."
+    }
+  ],
+  "examples": [
+    "REPLACE_FIRST(\"Order 1234: Total 56\", \"[0-9]+\", \"#\")\n-- Returns \"Order #: Total 56\"."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

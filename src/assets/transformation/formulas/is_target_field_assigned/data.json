@@ -1,0 +1,16 @@
+{
+  "title": "IS_TARGET_FIELD_ASSIGNED",
+  "description": "Returns TRUE if the mapped target field has been processed and assigned a value. Returns FALSE if the field was skipped ($SKIP_ASSIGNMENT) or has not been processed.",
+  "syntax": "IS_TARGET_FIELD_ASSIGNED(mapped_target_field_name) -> Boolean",
+  "parameters": [
+    {
+      "name": "mapped_target_field_name",
+      "type": "string",
+      "required": "Yes",
+      "description": "The API name of the mapped target field to check for assignment status."
+    }
+  ],
+  "examples": [
+    "IS_TARGET_FIELD_ASSIGNED(\"Priority\")\n-- Returns TRUE if Priority was assigned a value; returns FALSE if it was skipped or unprocessed."
+  ]
+}

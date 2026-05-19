@@ -1,0 +1,27 @@
+{
+  "title": "IS_ALPHANUMERIC_SPACE",
+  "description": "<p>Returns TRUE if the string contains only alphabetic characters, numeric digits, or spaces; otherwise, returns FALSE.</p>",
+  "syntax": "IS_ALPHANUMERIC_SPACE(string) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to evaluate."
+    }
+  ],
+  "examples": [
+    "IS_ALPHANUMERIC_SPACE(\"Acme Industries 2025\")\n-- Returns TRUE.",
+    "IS_ALPHANUMERIC_SPACE(\"ACC-12345\")\n-- Returns FALSE (contains a hyphen)."
+  ],
+  "tips": [ 
+    {
+      "text": "<p>Returns TRUE if the string is empty.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Any symbol included will cause the expression to return FALSE.</p>",
+      "children": []
+    }],
+  "relatedFormulas": []
+}

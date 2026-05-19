@@ -1,0 +1,43 @@
+{
+  "title": "AGG_MIN",
+  "description": "<p>Performs a dynamic aggregation on a specified Salesforce object and returns the <strong>minimum</strong> value of a specified field among all matching records.</p>",
+  "syntax": "AGG_MIN(aggregate_object_name, aggregate_field_name, ...[group_field_name, group_field_value], additional_filters_optional) -> Decimal",
+  "parameters": [
+    {
+      "name": "aggregate_object_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the object containing records to evaluate."
+    },
+    {
+      "name": "aggregate_field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the numeric field whose minimum value will be returned."
+    },
+    {
+      "name": "… group_field_name",
+      "type": "String",
+      "required": "No",
+      "description": "The name of the field used to filter records."
+    },
+    {
+      "name": "… group_field_value",
+      "type": "Object",
+      "required": "No",
+      "description": "The field value used as filtering criteria."
+    },
+    {
+      "name": "additional_filters_optional",
+      "type": "String",
+      "required": "No",
+      "description": "Additional conditions to filter records."
+    }
+  ],
+  "examples": [
+    "AGG_MIN(\n\t\"Opportunity\", \n\t\"Amount\", \n\t\"AccountId\", Id, \n\t\"StageName = 'Closed Won'\"\n)\n-- Returns the minimum Amount from Opportunity records grouped by AccountId, filtered by StageName = \"Closed Won\", where Opportunity.AccountId matches the Id from the source records.\n\n-- At runtime, DSP generates the following SOQL query:\nSELECT AccountId groupField0, MIN(Amount) agg0 \nFROM Opportunity \nWHERE AccountId IN ('0018K00000kPuYXQA0', '0018K00000kPuYYQA0', '0018K00000kPuYZQA0', '0018K00000kPuYaQAK', '0018K00000kPuYbQAK') AND StageName = 'Closed Won' \nGROUP BY AccountId",
+    "AGG_MIN(\n\t\"Opportunity\", \n\t\"Amount\", \n\t\"AccountId\", Id, \n\t\"OwnerId\", OwnerId, \n\t\"StageName = 'Closed Won'\"\n)\n\n-- Returns the minimum Amount from Opportunity records grouped by AccountId and OwnerId, filtered by StageName = \"Closed Won\", where Opportunity.AccountId and Opportunity.OwnerId match values from the source records.\n\n-- At runtime, DSP generates the following SOQL query:\nSELECT AccountId groupField0, OwnerId groupField1, MIN(Amount) agg0 \nFROM Opportunity \nWHERE (AccountId IN ('0018K00000kPuYXQA0', '0018K00000kPuYYQA0', '0018K00000kPuYZQA0', '0018K00000kPuYaQAK', '0018K00000kPuYbQAK') AND OwnerId IN ('005D2000006JY2bIAG', '0058K0000047WdvQAE', '0055e000007rpICAAY')) AND StageName = 'Closed Won'\nGROUP BY AccountId, OwnerId"
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

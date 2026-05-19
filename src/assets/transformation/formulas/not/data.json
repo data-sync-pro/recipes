@@ -1,0 +1,25 @@
+{
+  "title": "NOT",
+  "description": "<p>Returns TRUE if the provided logical value evaluates to FALSE; otherwise, returns FALSE.</p>",
+  "syntax": "NOT(logical) -> Boolean",
+  "parameters": [
+    {
+      "name": "logical",
+      "type": "Boolean",
+      "required": "Yes",
+      "description": "The logical value or expression to evaluate."
+    }
+  ],
+  "examples": [
+    "NOT(TRUE)\n-- Return FALSE.",
+    "NOT(1 > 2)\n-- Return TRUE.",
+    "NOT(Priority == \"High\")\n-- Returns TRUE if Priority is not equal to \"High\"."
+  ],
+  "tips": [
+    {
+      "text": "<p>It functions the same as the ! operator.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

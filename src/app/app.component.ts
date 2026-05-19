@@ -17,9 +17,12 @@ export class AppComponent implements OnInit {
       .pipe(filter((event: RouterEvent): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         // Hide header and footer on editor pages
-        this.showHeaderFooter = !event.url.includes('/faq-editor') && !event.url.includes('/recipe-editor');
+        this.showHeaderFooter = !event.url.includes('/faq-editor')
+          && !event.url.includes('/recipe-editor')
+          && !event.url.startsWith('/transformation/editor');
 
         // Show scroll-to-top button only on recipe pages
+        // (transformation pages have their own internal scroll-to-top tied to the content scroll container)
         this.showScrollToTop = event.url.startsWith('/recipes');
       });
   }

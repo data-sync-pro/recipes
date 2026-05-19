@@ -1,0 +1,34 @@
+{
+  "title": "DISTANCE",
+  "description": "Calculates the distance between two locations in kilometers.",
+  "syntax": "DISTANCE(lat1, lon1, lat2, lon2) -> Double",
+  "parameters": [
+    {
+      "name": "lat1",
+      "type": "Double",
+      "required": "Yes",
+      "description": "Latitude of the first point."
+    },
+    {
+      "name": "lon1",
+      "type": "Double",
+      "required": "Yes",
+      "description": "Longitude of the first location."
+    },
+    {
+      "name": "lat2",
+      "type": "Double",
+      "required": "Yes",
+      "description": "Latitude of the second point."
+    },
+    {
+      "name": "lon2",
+      "type": "Double",
+      "required": "Yes",
+      "description": "Longitude of the second location."
+    }
+  ],
+  "examples": [
+    "DISTANCE(40.7128, -74.0060, 51.5074, -0.1278)\n-- Returns 5570.222179737957."
+  ]
+}

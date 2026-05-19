@@ -1,0 +1,47 @@
+{
+  "title": "JOIN_OBJECT_SOURCE",
+  "description": "<p>Returns records from the specified object via the Source connection that match the provided joining field–value pairs, with an optional additional filtering clause.</p>",
+  "syntax": "JOIN_OBJECT_SOURCE(object_name, ...[joining_field_name, joining_field_value], additional_clause_optional)",
+  "parameters": [
+    {
+      "name": "object_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the object from which records are retrieved."
+    },
+    {
+      "name": "joining_field_name",
+      "type": "String",
+      "required": "No",
+      "description": "The field name to match for filtering records. Multiple pairs allowed. Left Join if any pairs are included; Cross Join if all are omitted."
+    },
+    {
+      "name": "joining_field_value",
+      "type": "Object",
+      "required": "No",
+      "description": "The field value used as a filter criterion."
+    },
+    {
+      "name": "additional_clause_optional",
+      "type": "String",
+      "required": "No",
+      "description": "An additional query clause for more specific filtering."
+    }
+  ],
+  "examples": [
+    "JOIN_OBJECT_SOURCE(\n            \"Opportunity\",\n            \"AccountId\", Id, \n            \"IsClosed = true\"\n)\n-- Fetches Opportunities from the $Source connection where AccountId equals the current record’s Id, further filtered to IsClosed = true."
+  ],
+  "tips": [
+    {
+      "text": "<p>Defines this function during the Scoping stage to retrieve and prepare data for subsequent use in the Mapping stage.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Be careful to provide joining pairs when using this function. Omitting joining criteria can result in cross joins, creating excessively large record sets. Follow Salesforce best practices to prevent exceeding system limits.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": [
+    "$JOINER"
+  ]
+}

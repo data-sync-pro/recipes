@@ -1,0 +1,42 @@
+{
+  "title": "MAP_VALUE_CONTAINS_IGNORE_CASE",
+  "description": "<p>Returns the corresponding return value for the first compare substring found within the provided string, performing case-insensitive matching. If no substrings match, returns default return value optional. If default return value optional is omitted and no match occurs, the function returns $SKIP_ASSIGNMENT.</p>",
+  "syntax": "MAP_VALUE_CONTAINS_IGNORE_CASE(string, ...[compare_substring, return_value], default_return_value_optional) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to evaluate (case-insensitive)."
+    },
+    {
+      "name": "… compare_substring",
+      "type": "String",
+      "required": "Yes",
+      "description": "The substring to search for within the provided string."
+    },
+    {
+      "name": "… return_value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The value returned if the compare substring is found."
+    },
+    {
+      "name": "default_return_value_optional",
+      "type": "Object",
+      "required": "No",
+      "description": "The value returned if no substrings match. If omitted and no match occurs, returns $SKIP_ASSIGNMENT."
+    }
+  ],
+  "examples": [
+    "MAP_VALUE_CONTAINS_IGNORE_CASE(\"New York - office\", \"new york\", \"NY\", \"California\", \"CA\", \"Other\") \n-- Returns \"NY\" (case-insensitive).",
+    "MAP_VALUE_CONTAINS_IGNORE_CASE(Description, \"platinum\", \"Partner\", \"individual\", \"Person\")\n-- Returns \"Partner\" if Description contains \"platinum\".\n-- Returns \"Person\" if it contains \"individual\".\n-- Returns $SKIP_ASSIGNMENT otherwise.\n-- Matching is case-insensitive and stops at the first match."
+  ],
+  "tips": [
+    {
+      "text": "<p>Ensure that <strong>return_value</strong> and <strong>default_return_value_optional</strong> are of the same data type.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

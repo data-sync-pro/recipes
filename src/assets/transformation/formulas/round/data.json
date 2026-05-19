@@ -1,0 +1,23 @@
+{
+  "title": "ROUND",
+  "description": "Returns the value rounded to the nearest integer using half-even rounding.",
+  "syntax": "ROUND(number) -> Integer",
+  "parameters": [
+    {
+      "name": "number",
+      "type": "Decimal",
+      "required": "Yes",
+      "description": "A numeric literal, field, or expression to round."
+    }
+  ],
+  "examples": [
+    "ROUND(4.5)\n-- Returns 4.",
+    "ROUND(-4.5)\n-- Returns -4."
+  ],
+  "tips": [
+    {
+      "text": "Throws an error if the rounded result is outside the supported 32-bit integer range (−2,147,483,648 to 2,147,483,647).",
+      "children": []
+    }
+  ]
+}

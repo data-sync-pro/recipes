@@ -1,0 +1,18 @@
+{
+  "title": "IS_FIRST_IN_ITERATION",
+  "description": "<p>Returns TRUE the first time a given combination of evaluated expression values occurs in the current iteration, and FALSE for any duplicates after.</p>",
+  "syntax": "IS_FIRST_IN_ITERATION(...expressions) -> Boolean",
+  "parameters": [
+    {
+      "name": "… expressions",
+      "type": "Object",
+      "required": "Yes",
+      "description": "One or more expressions combined to determine if this is the first occurrence in the source data iteration."
+    }
+  ],
+  "examples": [
+    "IS_FIRST_IN_ITERATION(FirstName, LastName)\n-- Returns TRUE for the first combination and FALSE for subsequent duplicates.\n"
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

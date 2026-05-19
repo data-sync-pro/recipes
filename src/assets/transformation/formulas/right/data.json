@@ -1,0 +1,30 @@
+{
+  "title": "RIGHT",
+  "description": "<p>Returns a substring containing the specified number of characters from the end (right side) of the provided string.</p>",
+  "syntax": "RIGHT(string, num_chars) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The original string."
+    },
+    {
+      "name": "num_chars",
+      "type": "Integer",
+      "required": "Yes",
+      "description": "The number of characters to extract from the left."
+    }
+  ],
+  "examples": [
+    "RIGHT(\"Q2Report\", 10)\n-- Returns the entire string \"Q2Report\" since 10 exceeds its length.",
+    "RIGHT(Phone, 4)\n-- Returns the last 4 characters of the Phone field."
+  ],
+  "tips": [
+    {
+      "text": "<p>num_chars must be a non-negative integer. If num_chars is 0, an empty string is returned.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

@@ -1,0 +1,19 @@
+{
+  "title": "MINUTE",
+  "description": "Extracts the minute (0–59) from a Datetime value, based on the context user’s local time zone.",
+  "syntax": "MINUTE(datetime) -> Integer",
+  "parameters": [
+    {
+      "name": "datetime",
+      "type": "Datetime",
+      "required": "Yes",
+      "description": "The Datetime value from which the minute is extracted."
+    }
+  ],
+  "examples": [
+    "MINUTE(NOW())\n-- Returns 55 (if now = 2024-09-18T15:25:22.418Z and user is in GMT+5:30)."
+  ],
+  "relatedFormulas": [
+    "NOW"
+  ]
+}

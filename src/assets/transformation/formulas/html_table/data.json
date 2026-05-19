@@ -1,0 +1,50 @@
+{
+  "title": "HTML_TABLE",
+  "description": "Generates a formatted HTML table string from records of the specified source object, filtered by matching field-value pairs and an optional query clause.",
+  "syntax": "HTML_TABLE(source_object_name, display_field_names, ...[matching_field_name, matching_field_value], additional_clause_optional) -> String",
+  "parameters": [
+    {
+      "name": "source_object_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The API name of the object to query."
+    },
+    {
+      "name": "display_field_names",
+      "type": "String",
+      "required": "Yes",
+      "description": "A comma-separated list of field API names to include as columns in the HTML table."
+    },
+    {
+      "name": "...matching_field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The field API name used to filter records."
+    },
+    {
+      "name": "...matching_field_value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The value to match against the corresponding field."
+    },
+    {
+      "name": "additional_clause_optional",
+      "type": "String",
+      "required": "No",
+      "description": "Additional query conditions for more precise filtering."
+    }
+  ],
+  "examples": [
+    {
+      "code": "HTML_TABLE(\n        \"Opportunity\", \n        \"Name, Amount, StageName, CloseDate\", \n        \"AccountId\", Id, \n        \"Amount > 5000 ORDER BY CloseDate DESC\"\n    )\n-- Returns an HTML table string of Opportunity records related to the Account, filtered by Amount and sorted by CloseDate.",
+      "description": "Rendered table example：",
+      "images": [
+        {
+          "src": "images/figure_1.png",
+          "alt": "HTML Table Rendered Example"
+        }
+      ]
+    }
+  ],
+  "relatedFormulas": []
+}

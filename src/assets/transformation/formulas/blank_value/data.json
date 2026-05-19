@@ -1,0 +1,25 @@
+{
+  "title": "BLANK_VALUE",
+  "description": "<p>Returns a substitute value if the provided value is blank or empty; otherwise, returns the original value.</p>",
+  "syntax": "BLANK_VALUE(value, substitute_value) -> Object",
+  "parameters": [
+    {
+      "name": "value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The value to evaluate."
+    },
+    {
+      "name": "substitute_value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The substitute value to return if the provided value is blank."
+    }
+  ],
+  "examples": [
+    "BLANK_VALUE(\"\", \"N/A\")\n-- Returns \"N/A\".",
+    "BLANK_VALUE(Rating, \"No Data\")\n-- Returns \"No Data\" if Rating is NULL or blank; otherwise, returns Rating."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

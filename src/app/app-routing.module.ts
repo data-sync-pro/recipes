@@ -16,7 +16,11 @@ const routes: Routes = [
     loadChildren: () => import('./recipe/editor/editor.module').then(m => m.RecipeEditorModule)
   },
   {
-    path: '', 
+    path: 'transformation',
+    loadChildren: () => import('./transformation/transformation.module').then(m => m.TransformationModule)
+  },
+  {
+    path: '',
     loadChildren: () => import('./faq/faq.module').then(m => m.FaqModule)
   },
   // Exclude assets from Angular routing - let the browser handle them directly

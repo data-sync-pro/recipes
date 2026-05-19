@@ -1,0 +1,32 @@
+{
+  "title": "IF",
+  "description": "<p>Evaluates a logical condition. If TRUE, returns value_if_true. If FALSE, returns value_if_false_optional (if provided); otherwise returns $SKIP_ASSIGNMENT.</p>",
+  "syntax": "IF(...[logical_test, value_if_true], value_if_false_optional) -> Object",
+  "parameters": [
+    {
+      "name": "… logical_test",
+      "type": "Boolean",
+      "required": "Yes",
+      "description": "The condition to evaluate."
+    },
+    {
+      "name": "… value_if_true",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The value returned when the condition is TRUE."
+    },
+    {
+      "name": "value_if_false_optional",
+      "type": "Object",
+      "required": "No",
+      "description": "The value returned when the condition is FALSE."
+    }
+  ],
+  "examples": [
+    "IF(1 > 2, \"A\", \"B\") \n-- Returns \"B\".",
+    "IF(1 > 2, \"A\") \n-- Returns $SKIP_ASSIGNMENT.",
+    "IF(Probability > 80, \"High\",\n   Probability > 40, \"Medium\",\n   \"Low\")\n-- Returns \"High\" if Probability > 80.\n-- Returns \"Medium\" if Probability > 40.\n-- Otherwise, returns \"Low\"."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

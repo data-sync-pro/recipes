@@ -1,0 +1,43 @@
+{
+  "title": "JOIN_JSON",
+  "description": "<p>Returns a filtered array containing objects from the provided JSON array that match the specified field name and field value criteria.</p>",
+  "syntax": "JOIN_JSON(json_array_string, ...[joining_field_name, joining_field_value])",
+  "parameters": [
+    {
+      "name": "json_array_string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The JSON array of objects to filter."
+    },
+    {
+      "name": "… joining_field_name",
+      "type": "String",
+      "required": "No",
+      "description": "The field name to use as the filter criterion. Multiple pairs allowed. Left Join if any pairs are included; Cross Join if all are omitted."
+    },
+    {
+      "name": "… joining_field_value",
+      "type": "Object",
+      "required": "No",
+      "description": "Field value to match for filtering."
+    }
+  ],
+  "examples": [
+    "JOIN_JSON('[\"red\", \"green\", \"blue\"]')\n-- Performs a cross join, as no joining criteria are provided.\n-- Each record in the current context is joined with every value in the JSON array.",
+    "JOIN_JSON('[\n  {\n    \"Id\": \"0068K000007tDwxQAE\", \n    \"AccountId\": \"0018K00000kQI8RQAW\",\n    \"OwnerId\": \"0055e000006XrYrAAK\", \n    \"Type\": \"New Business\",\n    \"ShippingCountry\": \"Canada\",\n    \"ShippingState\": \"Quebec\"\n  },\n  {\n    \"Id\": \"0068K000007tDwyQAE\", \n    \"AccountId\": \"0018K00000kQI8SQAW\",\n    \"OwnerId\": \"0055e000006WuzOAAS\", \n    \"Type\": \"New Business\",\n    \"ShippingCountry\": \"Canada\",\n    \"ShippingState\": \"Vancouver\"\n  }\n]', \"ShippingCountry\", ShippingCountry__c)\n-- Performs a left join on ShippingCountry.\n-- Each record joins with JSON objects where ShippingCountry__c equals ShippingCountry.\n-- If no match is found, the original record remains unchanged.\n-- Joined fields can be accessed using $Joiner (e.g., $Joiner.Id, $Joiner.ShippingState).",
+    "JOIN_JSON('[\n  {\n    \"Id\": \"0068K000007tDwxQAE\", \n    \"AccountId\": \"0018K00000kQI8RQAW\",\n    \"OwnerId\": \"0055e000006XrYrAAK\", \n    \"Type\": \"New Business\",\n    \"ShippingCountry\": \"Canada\",\n    \"ShippingState\": \"Quebec\"\n  },\n  {\n    \"Id\": \"0068K000007tDwyQAE\", \n    \"AccountId\": \"0018K00000kQI8SQAW\",\n    \"OwnerId\": \"0055e000006WuzOAAS\", \n    \"Type\": \"New Business\",\n    \"ShippingCountry\": \"Canada\",\n    \"ShippingState\": \"Vancouver\"\n  }\n]', \"ShippingCountry\", ShippingCountry__c, \"ShippingState\", ShippingState__c)\n-- Performs a left join on ShippingCountry and ShippingState.\n-- Each record joins only with JSON objects that match both fields.\n-- If no matche is found, the original record remains unchanged.\n-- Joined fields can be accessed using $Joiner (e.g., $Joiner.Id, $Joiner.ShippingState)."
+  ],
+  "tips": [
+    {
+      "text": "<p>Defines this function during the Scoping stage to retrieve and prepare data for subsequent use in the Mapping stage.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Be careful to provide joining pairs when using this function. Omitting joining criteria can result in cross joins, creating excessively large record sets. Follow Salesforce best practices to prevent exceeding system limits.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": [
+    "$JOINER"
+  ]
+}

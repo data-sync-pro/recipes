@@ -1,0 +1,43 @@
+{
+  "title": "AGG_COUNT",
+  "description": "<p>Performs a dynamic aggregation on a specified Salesforce object and returns the <strong>count</strong> of records matching the provided conditions.</p>",
+  "syntax": "AGG_COUNT(aggregate_object_name, aggregate_field_name, ...[group_field_name, group_field_value], additional_filters_optional) -> Integer",
+  "parameters": [
+    {
+      "name": "aggregate_object_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the object containing records to count."
+    },
+    {
+      "name": "aggregate_field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the field used for counting records."
+    },
+    {
+      "name": "… group_field_name",
+      "type": "String",
+      "required": "No",
+      "description": "The name of the field used to filter records."
+    },
+    {
+      "name": "… group_field_value",
+      "type": "Object",
+      "required": "No",
+      "description": "The field value used as filtering criteria."
+    },
+    {
+      "name": "additional_filters_optional",
+      "type": "String",
+      "required": "No",
+      "description": "Additional conditions to filter records."
+    }
+  ],
+  "examples": [
+    "AGG_COUNT(\n\t\"Opportunity\", \n\t\"Id\", \n\t\"AccountId\", Id, \n\t\"StageName = 'Closed Won'\"\n)\n-- Returns the count of Opportunity records grouped by AccountId, filtered by StageName = \"Closed Won\", where Opportunity.AccountId matches the Id of Account records from the Source. \n\n-- At runtime, DSP generates the following SOQL query:\nSELECT AccountId groupField0, COUNT(Id) agg0 \nFROM Opportunity \nWHERE AccountId IN ('0018K00000kPuYXQA0', '0018K00000kPuYYQA0', '0018K00000kPuYZQA0', '0018K00000kPuYaQAK', '0018K00000kPuYbQAK') AND StageName = 'Closed Won' \nGROUP BY AccountId",
+    "AGG_COUNT(\n\t\"Opportunity\", \n\t\"Id\", \n\t\"AccountId\", Id, \n\t\"OwnerId\", OwnerId, \n\t\"StageName = 'Closed Won'\"\n)\n-- Returns the count of Opportunity records grouped by AccountId and OwnerId, filtered by StageName = \"Closed Won\", where Opportunity.AccountId and Opportunity.OwnerId match the corresponding values from the source records. \n\n-- At runtime, DSP generates the following SOQL query:\nSELECT AccountId groupField0, OwnerId groupField1, COUNT(Id) agg0 \nFROM Opportunity \nWHERE (AccountId IN ('0018K00000kPuYXQA0', '0018K00000kPuYYQA0', '0018K00000kPuYZQA0', '0018K00000kPuYaQAK', '0018K00000kPuYbQAK') AND OwnerId IN ('005D2000006JY2bIAG','0058K0000047WdvQAE','0055e000007rpICAAY')) AND StageName = 'Closed Won' \nGROUP BY AccountId, OwnerId"
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

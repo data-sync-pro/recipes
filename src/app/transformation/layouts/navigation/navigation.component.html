@@ -1,0 +1,86 @@
+<nav class="nav">
+  <div class="nav-header">
+    <!-- Expanded state: search box + collapse button -->
+    <div class="nav-header-expanded" *ngIf="!(collapsed$ | async)">
+      <app-search-box (searchClick)="onSearchClick()"></app-search-box>
+      <button
+        class="nav-collapse-button"
+        (click)="onToggleSidebar()"
+        title="Collapse Sidebar"
+      >
+        <span>☰</span>
+      </button>
+    </div>
+
+    <!-- Collapsed state: navigation header hidden, using sidebar floating buttons -->
+  </div>
+  <ul class="nav-section">
+    <li
+      *ngFor="let category of functionCategories"
+      class="nav-category"
+    >
+      <div class="category-header" (click)="toggleCategory(category)">
+        <span
+          class="arrow"
+          [class.expanded]="
+            category.name === 'Operators'
+              ? operatorExpand
+              : category.name === 'Global Variables'
+              ? globalVariableExpand
+              : category.name === 'Apex Class'
+              ? apexClassExpand
+              : category.expanded
+          "
+        >
+          {{
+            category.name === "Operators"
+              ? operatorExpand
+                ? "−"
+                : "+"
+              : category.name === "Global Variables"
+              ? globalVariableExpand
+                ? "−"
+                : "+"
+              : category.name === "Apex Class"
+              ? apexClassExpand
+                ? "−"
+                : "+"
+              : category.expanded
+              ? "−"
+              : "+"
+          }}
+        </span>
+        {{ category.name
+        }}{{
+          category.name !== "Operators" &&
+          category.name !== "Global Variables" &&
+          category.name !== "Apex Class" &&
+          category.name !== 'Home'            
+            ? ' Functions'
+            : ''
+        }}
+      </div>
+      <ul
+        class="function-list"
+        *ngIf="
+          category.name !== 'Operators' &&
+          category.name !== 'Global Variables' &&
+          category.name !== 'Apex Class' &&
+           category.name !== 'Home' &&          
+          category.expanded
+        "
+      >
+        <li
+          class="nav-item"
+          *ngFor="let func of category.functions"
+          routerLinkActive="active"
+        >
+          <a
+            [routerLink]="['/transformation', categorySlug(category.name), func.route]"
+            >{{ func.name }}</a
+          >
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>

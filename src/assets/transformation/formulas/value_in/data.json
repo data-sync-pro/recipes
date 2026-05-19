@@ -1,0 +1,27 @@
+{
+  "title": "VALUE_IN",
+  "description": "<p>Returns TRUE if the provided value matches any of the specified compare values; otherwise, returns FALSE.</p>",
+  "syntax": "VALUE_IN(value, ...compare_values) -> Boolean",
+  "parameters": [
+    {
+      "name": "value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The value to evaluate."
+    },
+    {
+      "name": "...compare_values",
+      "type": "Object",
+      "required": "Yes",
+      "description": "One or more values to compare against."
+    }
+  ],
+  "examples": [
+    "VALUE_IN(3, 1, 2, 3)\n-- Returns TRUE because 3 is one of the provided compare values.",
+    "VALUE_IN(SUBSTRING_AFTER(Email, \"@\"), \"nvidia.com\", \"amd.com\", \"tesla.com\")\n-- Returns TRUE if the email domain matches any specified domain (\"nvidia.com\", \"amd.com\", or \"tesla.com\")."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "SUBSTRING_AFTER"
+  ]
+}

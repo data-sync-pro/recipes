@@ -1,0 +1,23 @@
+{
+  "title": "RANDOM_ITEM",
+  "description": "<p>Returns a random item from the given set of items.</p>",
+  "syntax": "RANDOM_ITEM(...item) -> Object",
+  "parameters": [
+    {
+      "name": "...item",
+      "type": "Object",
+      "required": "Yes",
+      "description": "Set of items."
+    }
+  ],
+  "examples": [
+    "RANDOM_ITEM(\"New\", \"In Progress\", \"Escalated\", \"Closed\")\n-- Possible output: \"In Progress\"."
+  ],
+  "tips": [
+    {
+      "text": "<p>This function is only allowed for actions targeting sandboxes, to prevent accidental masking of production data.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

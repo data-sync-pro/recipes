@@ -1,0 +1,24 @@
+{
+  "title": "STRING_JOIN",
+  "description": "<p>Returns a single concatenated string formed by joining multiple provided objects using the specified separator string. Each object is converted to its string representation before concatenation.</p>",
+  "syntax": "STRING_JOIN(...object, separator_string) -> String",
+  "parameters": [
+    {
+      "name": "...object",
+      "type": "Object",
+      "required": "Yes",
+      "description": "Objects or values to concatenate."
+    },
+    {
+      "name": "separator_string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The separator used between each object's string representation."
+    }
+  ],
+  "examples": [
+    "STRING_JOIN(1, 2, 3, \"-\")\n-- Returns \"1-2-3\"."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

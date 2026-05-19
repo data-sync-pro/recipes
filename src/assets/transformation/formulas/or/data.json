@@ -1,0 +1,24 @@
+{
+  "title": "OR",
+  "description": "<p>Returns TRUE if any provided logical condition evaluates to TRUE; otherwise, returns FALSE.</p>",
+  "syntax": "OR(...logical) -> Boolean",
+  "parameters": [
+    {
+      "name": "… logical",
+      "type": "Boolean",
+      "required": "Yes",
+      "description": "A list of expressions to evaluate."
+    }
+  ],
+  "examples": [
+    "OR(5 < 3, 10 == 10)\n-- Returns TRUE.",
+    "OR(1 > 2, 3 > 4)\n-- Returns FALSE."
+  ],
+  "tips": [
+    {
+      "text": "<p>It functions the same as the || operator.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

@@ -1,0 +1,20 @@
+{
+  "title": "SECOND",
+  "description": "Extracts the second (0–59) from a Datetime value.",
+  "syntax": "SECOND(datetime) -> Integer",
+  "parameters": [
+    {
+      "name": "datetime",
+      "type": "Datetime",
+      "required": "Yes",
+      "description": "The Datetime value from which the second is extracted."
+    }
+  ],
+  "examples": [
+    "SECOND(NOW())\n-- Returns 22 (if now = 2024-09-18T15:25:22.418Z)."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "NOW"
+  ]
+}

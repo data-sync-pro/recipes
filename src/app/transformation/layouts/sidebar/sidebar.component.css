@@ -1,0 +1,88 @@
+/* ===========================
+   Sidebar Wrapper and Collapse
+   =========================== */
+.sidebar-wrapper {
+  position: relative;
+  left: 0;
+  height: calc(100vh - 64.7px);
+  width: 290px;
+  background-color: white;
+  border-right: none;
+  z-index: 0;
+}
+
+.sidebar-wrapper.collapsed {
+  width: 0;
+}
+
+/* ===========================
+   Sidebar Main Styles
+   =========================== */
+.sidebar {
+  width: 290px;
+  transition: width 0s ease, opacity 0s ease;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px);
+  overflow-y: scroll;
+  opacity: 1;
+  scrollbar-width: none;
+  border-right: 1px solid #e0e0e0;
+  overflow-x: hidden;
+}
+
+.sidebar.collapsed {
+  width: 0px;
+}
+
+/* ===========================
+   Sidebar Collapse Button
+   =========================== */
+.sidebar-collapse-button {
+  position: fixed;
+  top: 77px;
+  left: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s ease;
+  z-index: 10;
+  padding: 8px;
+  border-radius: 4px;
+  margin-left: 2px;
+}
+
+.sidebar-collapse-button:hover {
+  color: #418796;
+}
+
+/* ===========================
+   Sidebar Floating Buttons (Collapse & Search)
+   =========================== */
+.sidebar-float-search {
+  position: fixed;
+  top: 115px;
+  left: 11px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  z-index: 10;
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-float-search:hover {
+  color: #418796;
+}
+
+.sidebar-float-search .icon-search {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke: currentColor;
+}

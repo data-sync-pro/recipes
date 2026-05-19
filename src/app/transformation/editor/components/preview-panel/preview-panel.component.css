@@ -1,0 +1,31 @@
+.preview-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-header {
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  background: #f7f7f7;
+  position: sticky;
+  top: 0;
+}
+
+.preview-content {
+  margin: 0;
+  padding: 1rem;
+  font-family: 'Cascadia Code', Consolas, monospace;
+  font-size: 0.78rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.preview-empty {
+  padding: 1rem;
+  color: #888;
+  font-style: italic;
+}

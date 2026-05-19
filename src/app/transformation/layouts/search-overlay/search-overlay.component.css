@@ -1,0 +1,200 @@
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 80px;
+}
+
+.search-overlay-content {
+  position: relative;
+  background: #fff;
+  width: 80%;
+  max-width: 900px;
+  min-height: 250px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.overlay-search-wrapper {
+  position: relative;
+}
+
+.overlay-search-box {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 48px 12px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  height: 44px;
+  font-size: 1rem;
+}
+
+.overlay-search-box:focus {
+  outline: none;
+  border-color: #418796;
+  border-width: 1.75px;
+}
+
+.shortcut-hint {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #eee;
+  font-size: 1rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #555;
+}
+
+.shortcut-clickable {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.shortcut-clickable:hover {
+  background-color: #ddd;
+}
+
+.suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.suggestion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  background-color: #f8f9fa;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  color: #333;
+  flex-wrap: wrap;
+}
+.suggestion-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.suggestion-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  justify-content: flex-end;
+}
+
+.tag {
+  background-color: #d9e4e8;
+  color: #333;
+  padding: 3px 8px;
+  font-size: 0.9rem;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.suggestion-item:hover,
+.suggestion-item.selected {
+  background-color: #d9e4e8;
+}
+
+.suggestion-item:hover .tag,
+.suggestion-item.selected .tag {
+  background-color: #418796;
+  color: white;
+}
+
+.icon {
+  color: #0070f3;
+}
+.filters-section {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-label {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #418796;
+  margin-bottom: 0.5rem;
+}
+
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-chip {
+  padding: 6px 14px;
+  background-color: #f1f1f1;
+  border-radius: 9999px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.filter-chip.active {
+  background-color: #418796;
+  border-color: #418796;
+  color: white;
+}
+
+.scrollable-container {
+  max-height: 120px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.clear-filters-btn {
+  padding: 4px 12px;
+  background-color: #eb9090;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.clear-filters-btn:hover {
+  background-color: #b95252;
+}

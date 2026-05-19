@@ -1,0 +1,17 @@
+{
+  "title": "CEILING",
+  "description": "Returns the smallest integer greater than or equal to the specified number.",
+  "syntax": "CEILING(num) -> Decimal",
+  "parameters": [
+    {
+      "name": "num",
+      "type": "Decimal",
+      "required": "Yes",
+      "description": "The value or numeric field to round up."
+    }
+  ],
+  "examples": [
+    "CEILING(1.1)\n-- Return 2.",
+    "CEILING(-1.1)\n-- Return -1."
+  ]
+}

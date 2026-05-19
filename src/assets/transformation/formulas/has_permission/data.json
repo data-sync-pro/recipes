@@ -1,0 +1,19 @@
+{
+  "title": "HAS_PERMISSION",
+  "description": "<p>Returns TRUE if the context user has any of the specified custom permissions. Otherwise, returns FALSE.</p>",
+  "syntax": "HAS_PERMISSION(...custom_permission_names)-> Boolean",
+  "parameters": [
+    {
+      "name": "...custom_permission_names",
+      "type": "String",
+      "required": "Yes",
+      "description": "One or more API names of Custom Permissions to check against the current user’s permission sets."
+    }
+  ],
+  "examples": [
+    "HAS_PERMISSION(\"Admin_Access\")\n-- Returns TRUE if the context user has the \"Admin_Access\" permission; otherwise, returns FALSE.",
+    "HAS_PERMISSION(\"Manage_Cases\", \"View_Case_Data_List\")\n-- Returns TRUE if the context user has either the \"Manage_Cases\" or \"View_Case_Data_List\" permission; otherwise, returns FALSE."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

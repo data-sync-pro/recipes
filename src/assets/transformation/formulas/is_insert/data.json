@@ -1,0 +1,9 @@
+{
+  "title": "IS_INSERT",
+  "description": "<p>Returns TRUE if the current action is an <strong>Insert</strong>, otherwise, returns FALSE. In an <strong>Upsert</strong> process where <strong>Use Salesforce Upsert API</strong> is unchecked, DSP performs matching based on the <strong>Target Matching Field</strong> and separates records into <strong>Insert</strong> and <strong>Update</strong> actions. Use this function to apply different transformations depending on whether a record is being inserted or updated.</p>",
+  "syntax": "IS_INSERT() -> Boolean",
+  "parameters": [],
+  "examples": [],
+  "tips": [],
+  "relatedFormulas": []
+}

@@ -1,0 +1,35 @@
+{
+  "title": "SUBSTRING",
+  "description": "<p>Returns a substring extracted from the provided string, beginning at the start_index (inclusive) and ending at the end_index (exclusive). Indexing is zero-based.</p>",
+  "syntax": "SUBSTRING(string, start_index, end_index) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The original string."
+    },
+    {
+      "name": "start_index",
+      "type": "Integer",
+      "required": "Yes",
+      "description": "The starting index position (inclusive). Must be non-negative."
+    },
+    {
+      "name": "end_index",
+      "type": "Integer",
+      "required": "Yes",
+      "description": "The ending index position (exclusive). Must be greater than or equal to start_index."
+    }
+  ],
+  "examples": [
+    "SUBSTRING(\"Order SO-10056 closed\", 6, 14)\n-- Returns \"SO-10056\".\n-- Extracts characters from index 6 up to, but not including, index 14."
+  ],
+  "tips": [
+    {
+      "text": "<p>If end_index exceeds the length of the string, the substring extends to the end of the string.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

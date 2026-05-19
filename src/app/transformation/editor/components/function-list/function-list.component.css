@@ -1,0 +1,149 @@
+.function-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.function-list-header {
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1;
+}
+
+.function-filter {
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+.function-list-meta {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 0.4rem;
+}
+
+.function-list-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.function-list-item {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f4f4f4;
+  font-size: 0.9rem;
+}
+
+.function-list-item:hover {
+  background: #f5f8ff;
+}
+
+.function-list-item.active {
+  background: #e8f0ff;
+  color: #2854c5;
+  font-weight: 600;
+}
+
+.function-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.function-tag {
+  font-size: 0.7rem;
+  color: #888;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.4rem;
+  background: #f0f0f0;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.function-list-item.active .function-tag {
+  background: #d4e0fa;
+  color: #2854c5;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 0.35rem;
+  vertical-align: middle;
+}
+
+.status-dot-pending {
+  background: #f0a824;
+}
+
+.status-dot-saved {
+  background: #1f9d54;
+}
+
+.function-list-item.is-pending .function-name {
+  color: #8a5800;
+}
+
+.function-list-item.is-saved .function-name {
+  color: #1f7a40;
+}
+
+.function-list-item.active.is-pending .function-name,
+.function-list-item.active.is-saved .function-name {
+  color: #2854c5;
+}
+
+.status-summary {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-summary-pending {
+  color: #b97400;
+}
+
+.status-summary-saved {
+  color: #1f7a40;
+}
+
+.function-list-section-title {
+  margin: 0;
+  padding: 0.5rem 0.75rem 0.25rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888;
+  font-weight: 600;
+  background: #fafafa;
+}
+
+.function-list-section-specials {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.4rem;
+}
+
+.function-tag-special {
+  background: #ecf3ff !important;
+  color: #2854c5 !important;
+  font-style: italic;
+}
+
+.function-tag-untagged {
+  background: #fdf3f3 !important;
+  color: #b32525 !important;
+  font-style: italic;
+}

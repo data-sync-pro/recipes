@@ -1,0 +1,33 @@
+{
+  "title": "ERROR_VALUE",
+  "description": "<p>Returns the substitute value if evaluating the value results in an error; otherwise, returns the original value. </p>",
+  "syntax": "ERROR_VALUE(value, substitute_value) -> Object",
+  "parameters": [
+    {
+      "name": "value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The value to evaluate."
+    },
+    {
+      "name": "substitute_value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The value to return if the evaluation of \"value\" results in an error."
+    }
+  ],
+  "examples": [
+    "ERROR_VALUE(1/0, 0)\n-- Returns 0 because the division by zero results in an error.",
+    "ERROR_VALUE(CloseDate - TODAY(), 0)\n-- Returns the days between CloseDate and today; returns 0 if the calculation errors (e.g., CloseDate is NULL)."
+  ],
+  "tips": [
+    {
+      "text": "Use ERROR_VALUE to  prevent formula errors from invalid calculations or missing data.",
+      "children": []
+    },
+    {
+      "text": "Ensure value and substitute_value are of the same data type."
+    }
+  ],
+  "relatedFormulas": ["TODAY"]
+}

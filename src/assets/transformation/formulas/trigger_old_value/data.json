@@ -1,0 +1,18 @@
+{
+  "title": "TRIGGER_OLD_VALUE",
+  "description": "<p>Returns the previous value of the specified field in an Update DML operation.</p>",
+  "syntax": "TRIGGER_OLD_VALUE(field_name) -> Object",
+  "parameters": [
+    {
+      "name": "field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The API name of the field."
+    }
+  ],
+  "examples": [
+    "TRIGGER_OLD_VALUE(\"Priority\")\n-- Returns the previous value of Priority in an update operation."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}
