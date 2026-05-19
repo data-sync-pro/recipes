@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { PrerequisiteRecipe, QuickLink } from '../../../core/models/recipe.model';
-import { TrackByUtil } from '../../../../shared/utils/trackby.util';
+import { TrackByUtil } from '../../../core/utils/trackby.util';
 
 @Component({
   selector: 'app-prerequisites-editor',

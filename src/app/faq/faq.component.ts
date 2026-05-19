@@ -12,15 +12,14 @@ import {
 } from '@angular/core';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AnalyticsService } from '../analytics.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
 
-import { FAQItem, FAQCategory, FAQSubCategory } from '../shared/models/faq.model';
+import { FAQItem, FAQCategory, FAQSubCategory } from './models/faq.model';
 import { FAQService } from './services/faq.service';
-import { FAQPreviewService, PreviewData } from '../faq-editor/services/faq-preview.service';
+import { FAQPreviewService, PreviewData } from './editor/services/faq-preview.service';
 import { VALID_SUBCATEGORIES } from './config/faq-urls.config';
 
 interface SearchState {
@@ -121,7 +120,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private analyticsService: AnalyticsService,
     private faqService: FAQService,
     private meta: Meta,
     private title: Title,
@@ -159,7 +157,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cleanupFavoriteData();
     this.loadSidebarState();
     this.checkMobileView();
-    this.setupScrollListener();
     this.setupFooterObserver();
     this.setupOptimizedScrollListener();
     this.setupNavLinkHandler();
@@ -488,11 +485,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   get isSidebarCollapsed(): boolean {
     return this.ui.sidebarCollapsed;
   }
-
-  get isMobileSidebarOpen(): boolean {
-    return this.ui.mobileSidebarOpen;
-  }
-
 
   private _cachedTrendingQuestions?: FAQItem[];
   private _lastFaqListLength?: number;
@@ -928,16 +920,8 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  private trackFAQView(item: FAQItem): void {
-    if (this.analyticsService.userConsented) {
-      this.analyticsService.trackCustomEvent({
-        eventType: 'faq_view',
-        faqId: item.id,
-        faqQuestion: item.question,
-        faqCategory: item.category,
-        timestamp: new Date().toISOString()
-      });
-    }
+  private trackFAQView(_item: FAQItem): void {
+    // Analytics removed; placeholder kept for future tracking integration.
   }
 
 
@@ -1073,113 +1057,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
-  private openAndScroll(question: string, faqId?: string): void {
-    setTimeout(() => {
-      // Prioritize ID-based search if ID is provided
-      const idx = faqId 
-        ? this.filteredFAQ.findIndex(f => f.id === faqId)
-        : this.filteredFAQ.findIndex(f => f.question === question);
-      
-      if (idx >= 0) {
-        const faqItem = this.filteredFAQ[idx];
-        
-        // Show FAQ detail directly
-        this.showFAQDetail(faqItem);
-        
-        // Scroll to top instead of FAQ item for better navigation experience
-        this.scrollToTop();
-      }
-    });
-  }
-  
-  trackBySlug(_: number, item: FAQItem) { return item.id; }
-
-  handleSearchSelect(sel: {
-    id?: string;
-    question: string;
-    category: string;
-    subCategory: string | null;
-    subCatFilterApplied?: boolean;
-  }): void {
-  
-    // Find the full FAQ item using ID for unique identification
-    let faqItem = null;
-    
-    // First try to find by ID if provided (most accurate)
-    if (sel.id) {
-      faqItem = this.faqList.find(item => item.id === sel.id);
-    }
-    
-    // If not found by ID or ID not provided, try by question, category, and subCategory
-    if (!faqItem) {
-      faqItem = this.faqList.find(item => 
-        item.question === sel.question && 
-        item.category === sel.category &&
-        item.subCategory === sel.subCategory
-      );
-    }
-    
-    // Last fallback: just question and category (original logic)
-    if (!faqItem) {
-      faqItem = this.faqList.find(item => 
-        item.question === sel.question && 
-        item.category === sel.category
-      );
-    }
-    
-    if (faqItem) {
-      // Use answer-based URL
-      const answerSlug = this.getAnswerSlug(faqItem.folderId);
-      this.router.navigate(['/', answerSlug]);
-    } else {
-      // Fallback to old method if FAQ item not found
-      const cat = sel.category;
-      const sub = sel.subCategory ?? '';
-      const frag = this.slugify(sel.question);
-      
-      this.router.navigate(
-        sub ? ['/', cat, sub] : ['/', cat],
-        { fragment: frag }
-      );
-    }
-  
-    // Clear search state so the detail view template condition is satisfied
-    this.clearSearch();
-
-    setTimeout(() => this.openAndScroll(sel.question, sel.id));
-    
-    
-    if (this.ui.isMobile && this.ui.mobileSidebarOpen) {
-      this.closeMobileSidebar();
-    }
-  }
-  
-  
-  handleTrendingSelect(sel: {
-    question: string;
-    category: string;
-    subCategory: string | null;
-  }): void {
-
-    // Find the full FAQ item to get the folderId
-    const faqItem = this.faqList.find(item => 
-      item.question === sel.question && item.category === sel.category
-    );
-    
-    if (faqItem) {
-      // Use answer-based URL
-      const answerSlug = this.getAnswerSlug(faqItem.folderId);
-      this.router.navigate(['/', answerSlug]);
-    } else {
-      // Fallback to old method if FAQ item not found
-      const frag = this.slugify(sel.question);
-      this.router.navigate(['/', sel.category], { fragment: frag });
-    }
-
-    setTimeout(() => this.openAndScroll(sel.question));
-  }
-
-  
   private updatePageMetadata(): void {
     let pageTitle = 'FAQs - Data Sync Pro';
     let pageDescription = 'Frequently Asked Questions about Data Sync Pro';
@@ -1300,13 +1177,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.fallbackCopyToClipboard(shareUrl);
     }
-    this.analyticsService.trackCustomEvent({
-      eventType: 'faq_share',
-      action: 'copy_link',
-      faqQuestion: faqItem.question,
-      faqCategory: faqItem.category,
-      timestamp: new Date().toISOString()
-    });
   }
 
   private fallbackCopyToClipboard(text: string): void {
@@ -1351,15 +1221,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
     if (socialUrl) {
       window.open(socialUrl, '_blank', 'width=600,height=400');
-
-      this.analyticsService.trackCustomEvent({
-        eventType: 'faq_share',
-        action: `share_${platform}`,
-        faqQuestion: faqItem.question,
-        faqCategory: faqItem.category,
-        platform: platform,
-        timestamp: new Date().toISOString()
-      });
     }
   }
 
@@ -1410,21 +1271,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.ui.isMobile) {
       this.closeMobileSidebar();
     }
-  }
-
-  getSubCategoriesForCategory(categoryName: string): FAQSubCategory[] {
-    const category = this.categories.find(cat => cat.name === categoryName);
-    return category ? category.subCategories : [];
-  }
-
-  // Sidebar toggle functionality
-  toggleSidebar(): void {
-    const collapsed = !this.ui.sidebarCollapsed;
-    this.updateUIState({ sidebarCollapsed: collapsed });
-    // Save state to localStorage for persistence
-    localStorage.setItem('faq-sidebar-collapsed', collapsed.toString());
-    // Force change detection to ensure icon updates immediately
-    this.cdr.detectChanges();
   }
 
   toggleTOC(): void {
@@ -1612,11 +1458,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
 
    */
-  private setupScrollListener(): void {
-    // This method is now merged into setupOptimizedScrollListener
-    // Keep for backward compatibility but don't add actual listeners
-  }
-
   /**
 
    */
@@ -1975,27 +1816,10 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     this.updateTOCFooterState(footerStatus);
     
     // Update breadcrumb sticky behavior
-    this.updateBreadcrumbScrollState(scrollPosition);
     
     
     if (scrollPosition % 3 === 0) {
       this.updateFooterOffsetOptimized(footerStatus.footerOffset);
-    }
-  }
-
-  /**
-   * Update breadcrumb navigation scroll state for sticky behavior
-   */
-  private updateBreadcrumbScrollState(scrollPosition: number): void {
-    const breadcrumbNav = document.querySelector('.breadcrumb-nav');
-    if (breadcrumbNav) {
-      // Add 'scrolled' class when user has scrolled down
-      const scrollThreshold = 20; // Small threshold to avoid flickering
-      if (scrollPosition > scrollThreshold) {
-        breadcrumbNav.classList.add('scrolled');
-      } else {
-        breadcrumbNav.classList.remove('scrolled');
-      }
     }
   }
 
@@ -2098,8 +1922,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   // Cache DOM elements to avoid repeated queries
-  private cachedSidebar: Element | null = null;
-  private cachedToc: Element | null = null;
   private lastFooterStatus: { inFooterZone: boolean; approaching: boolean; footerOffset: number } | null = null;
   private footerCheckDebounce: number = 0;
 
@@ -2147,21 +1969,8 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     
     // Clear cached elements
-    this.cachedSidebar = null;
-    this.cachedToc = null;
     this.cachedFaqElements = null;
     this.cachedQuestionTexts.clear();
-
-    // Reset CSS variables and classes
-    document.documentElement.style.removeProperty('--footer-offset');
-    
-    // Remove footer-visible classes using cached elements or query if needed
-    if (this.cachedSidebar || (this.cachedSidebar = document.querySelector('.faq-sidebar'))) {
-      this.cachedSidebar.classList.remove('footer-visible');
-    }
-    if (this.cachedToc || (this.cachedToc = document.querySelector('.faq-toc.desktop-toc'))) {
-      this.cachedToc.classList.remove('footer-visible');
-    }
   }
 
   // ========================

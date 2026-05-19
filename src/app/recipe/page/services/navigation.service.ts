@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { Store } from '../../core/store/recipe.store';
-import { TIMING } from '../../../shared/constants/timing.constants';
-import { INTERSECTION_CONFIG } from '../../../shared/constants/observer.constants';
+import { TIMING } from '../constants/timing.constants';
+import { INTERSECTION_CONFIG } from '../constants/observer.constants';
 import { RECIPE_SECTIONS } from '../../core/constants/recipe.constants';
 
 export interface NavigationEvent {

@@ -5,11 +5,8 @@
   
   button,
   [role="button"],
-  .clickable,
   .nav-item,
   .faq-item,
-  .popular-faq-item,
-  .contact-button,
   .breadcrumb-item,
   .toc-item {
     -webkit-tap-highlight-color: transparent;
@@ -54,8 +51,7 @@
   
   // Prevent text selection on interactive elements
   .faq-header,
-  .nav-content,
-  .sidebar-search-btn {
+  .nav-content {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -122,15 +118,6 @@
     overscroll-behavior-y: contain;
   }
   
-  // Only prevent scroll when modals are open
-  body {
-    &.sidebar-open,
-    &.toc-open {
-      position: fixed;
-      overflow: hidden;
-      width: 100%;
-    }
-  }
 }
 
 // Fix for iOS input zoom
@@ -186,10 +173,6 @@ button {
 // Fix for iOS Safari bottom bar
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   .faq-container {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-  
-  .mobile-sidebar {
     padding-bottom: env(safe-area-inset-bottom);
   }
 }

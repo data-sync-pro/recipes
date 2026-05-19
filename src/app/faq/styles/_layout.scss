@@ -6,7 +6,6 @@
 
 $header-height: 60px;
 $sidebar-width: 280px;
-$sidebar-collapsed: 56px;
 $toc-width: 320px;
 
 .faq-layout-container {
@@ -24,15 +23,6 @@ $toc-width: 320px;
   padding: 20px 2vw;
   background: #ffffff;
   margin-bottom: 40px;
-
-  .visually-hidden {
-    position: absolute !important;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-    white-space: nowrap;
-  }
 }
 
 // Compact breadcrumb navigation - sticky positioning
@@ -150,8 +140,7 @@ $toc-width: 320px;
   min-height: auto;
 }
 
-.section-title,
-.category-title {
+.section-title {
   font-size: 2.1rem !important;
   font-weight: 400 !important;
   color: #1a1a1a;
@@ -283,30 +272,6 @@ $toc-width: 320px;
       td:first-child {
         width: 50%;
       }
-    }
-  }
-}
-
-.zoom-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: $z-modal-zoom;
-  cursor: zoom-out;
-
-  .zoomed-image {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 95%;
-    max-height: 95%;
-    object-fit: contain;
-    cursor: zoom-out;
-    transition: transform 0.2s ease;
-
-    &:hover {
-      transform: translate(-50%, -50%) scale(1.02);
     }
   }
 }

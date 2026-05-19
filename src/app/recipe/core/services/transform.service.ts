@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { generateSlug } from '../../../shared/utils/slug.utils';
+import { generateSlug } from '../utils/slug.utils';
 import {
   RecipeData,
   Recipe,

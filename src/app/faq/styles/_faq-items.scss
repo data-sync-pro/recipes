@@ -67,55 +67,6 @@
       transition: color 0.3s ease;
     }
 
-    .category-badges {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-
-    .category-badge,
-    .subcategory-badge {
-      font-weight: 500;
-      border-radius: 20px;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: $transition;
-    }
-
-    .category-badge {
-      background: linear-gradient(135deg, $bg-light, $border-color);
-      color: #6c757d;
-      font-size: $font-size-caption;
-      padding: 3px 8px;
-      border: 1px solid #dee2e6;
-    }
-
-    .subcategory-badge {
-      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-      color: #1565c0;
-      font-size: 0.75rem;
-      padding: 3px 8px;
-      border: 1px solid #90caf9;
-    }
-
-    .faq-badges {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 4px;
-
-      .view-count {
-        font-size: $font-size-caption;
-        color: $text-color-muted;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-      }
-    }
-
     .faq-actions {
       display: flex;
       align-items: center;

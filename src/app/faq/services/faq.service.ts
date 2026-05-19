@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of, throwError, forkJoin } from 'rxjs';
 import { map, catchError, shareReplay, tap, finalize, filter, take, switchMap } from 'rxjs/operators';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { PerformanceService } from '../../shared/services/performance.service';
+import { PerformanceService } from './performance.service';
 import { AutoLinkService } from './auto-link.service';
 import { FaqUrlService } from './faq-url.service';
 
@@ -12,7 +12,7 @@ import {
   FAQItem,
   FAQCategory,
   FAQSubCategory
-} from '../../shared/models/faq.model';
+} from '../models/faq.model';
 
 @Injectable({
   providedIn: 'root'
@@ -675,32 +675,6 @@ export class FAQService implements OnDestroy {
       lastUpdated: new Date(),
       isActive: meta.isActive !== false
     };
-  }
-
-  /**
-   * Check if browser supports WebP format
-   */
-  private supportsWebP(): boolean {
-    const canvas = document.createElement('canvas');
-    canvas.width = 1;
-    canvas.height = 1;
-    return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
-  }
-
-  /**
-   * Convert image source to WebP if supported and available
-   */
-  private getOptimizedImageSrc(originalSrc: string): string {
-    if (!this.supportsWebP()) {
-      return originalSrc;
-    }
-
-    // Convert common image extensions to WebP variants
-    const webpSrc = originalSrc
-      .replace(/\.(jpg|jpeg|png)$/i, '.webp')
-      .replace(/\.(jpg|jpeg|png)\?/i, '.webp?');
-
-    return webpSrc;
   }
 
   /**

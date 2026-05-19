@@ -29,11 +29,6 @@
               "src/404.html",
               "src/.nojekyll",
               "src/CNAME",
-              {
-                "glob": "**/*.html",
-                "input": "src/app/designer-guide/designer-guide-item",
-                "output": "/designer-guide"
-              },
               "src/manifest.webmanifest"
             ],
             "styles": [
@@ -42,7 +37,7 @@
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles"]
+              "includePaths": ["src/app/shared/styles"]
             },
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"

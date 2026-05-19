@@ -264,4 +264,7 @@
       white-space: pre-line;
     }
   }
+
+  // First column wider, others equal width
+  th:first-child, td:first-child { width: 50%; }
 }

@@ -2,7 +2,6 @@
 // Shared tokens ($transition, $breakpoint-desktop, z-index scale) come from _variables.scss.
 
 $sidebar-width: 280px;
-$sidebar-collapsed: 56px;
 
 .faq-sidebar {
   grid-area: sidebar;
@@ -19,23 +18,8 @@ $sidebar-collapsed: 56px;
       margin-right: 0;
     }
 
-    .sidebar-title-section {
-      opacity: 0;
-      pointer-events: none;
-    }
-
     .sidebar-search {
       display: none;
-    }
-
-    
-    .sidebar-header {
-      justify-content: center;
-      padding: 16px 12px;
-      
-      .sidebar-toggle-btn {
-        margin: 0;
-      }
     }
 
     .nav-item {
@@ -80,40 +64,8 @@ $sidebar-collapsed: 56px;
     padding: 16px 20px;
     border-bottom: 1px solid #f1f3f4;
     min-height: 64px;
-    flex-shrink: 0; 
+    flex-shrink: 0;
 
-    .sidebar-main-title {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: #202124;
-      margin: 0;
-    }
-
-    .sidebar-subtitle {
-      font-size: 0.75rem;
-      color: $text-color-secondary;
-    }
-
-    .sidebar-toggle-btn {
-      background: transparent;
-      border: none;
-      border-radius: 4px;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: $transition;
-      color: $text-color-secondary;
-
-      &:hover {
-        background-color: #f1f3f4;
-        color: #202124;
-      }
-    }
-
-    
     .mobile-sidebar-close {
       background: transparent;
       border: none;
@@ -224,20 +176,6 @@ $sidebar-collapsed: 56px;
     .home-nav {
       border-bottom: 1px solid #f1f3f4;
       margin-bottom: 4px;
-    }
-    .section-divider {
-      height: 1px;
-      background: #f1f3f4;
-      margin: 0 0 8px 0;
-    }
-
-    .section-label {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: $text-color-secondary;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 0 20px 2px;
     }
 
     .nav-item {
@@ -412,60 +350,3 @@ $sidebar-collapsed: 56px;
   }
 }
 
-// Sidebar toggle button - mirrors TOC toggle style
-.faq-layout-container > .sidebar-toggle-btn {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 280px; // $sidebar-width
-  width: 56px;
-  height: 56px;
-  background: #ffffff;
-  border: 1px solid #e1e5e9;
-  border-radius: 0 6px 6px 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 85;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  box-shadow: none;
-  color: $text-color-secondary;
-  border-color: transparent;
-  background: transparent;
-
-  &:hover {
-    opacity: 1;
-    visibility: visible;
-    background: $bg-light;
-    border-color: $primary-color;
-    box-shadow: 4px 0 12px rgba(26, 115, 232, 0.15);
-  }
-
-  &:active {
-    transform: translateY(-50%) scale(0.95);
-  }
-}
-
-.faq-layout-container.sidebar-collapsed > .sidebar-toggle-btn {
-  left: 0;
-  opacity: 0.2;
-  visibility: visible;
-  border-color: transparent;
-  box-shadow: none;
-  background: transparent;
-
-  &:hover {
-    opacity: 1;
-    background: $bg-light;
-    border-color: $primary-color;
-    box-shadow: 4px 0 12px rgba(26, 115, 232, 0.15);
-  }
-}
-
-.faq-layout-container:not(.sidebar-collapsed) .faq-sidebar:hover ~ .sidebar-toggle-btn {
-  opacity: 1;
-  visibility: visible;
-}

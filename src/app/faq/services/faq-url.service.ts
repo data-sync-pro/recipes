@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { FAQItem } from '../../shared/models/faq.model';
+import { FAQItem } from '../models/faq.model';
 import { FAQService } from './faq.service';
 
 // Static mappings for category-level navigation. The 'categories' bucket from

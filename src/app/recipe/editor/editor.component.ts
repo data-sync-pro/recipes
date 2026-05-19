@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener, Chan
 import { Subject, takeUntil, map } from 'rxjs';
 import { LoggerService } from '../core/services/logger.service';
 import { NotificationService } from '../../shared/services/notification.service';
-import { ClipboardUtil } from '../../shared/utils/clipboard.util';
+import { ClipboardUtil } from '../core/utils/clipboard.util';
 import { Store } from '../core/store/recipe.store';
 import { EditorState } from '../core/store/store.interface';
 import { ListManagementService, RecipeTitleItem } from './services/list-management.service';
@@ -13,7 +13,7 @@ import { ChangeCoordinatorService } from './services/change-coordinator.service'
 import { FieldSuggestionService } from './services/field-suggestion.service';
 import { ImageManagementService } from './services/image-management.service';
 import { EditorUtils } from './utils/editor.utils';
-import { TrackByUtil } from '../../shared/utils/trackby.util';
+import { TrackByUtil } from '../core/utils/trackby.util';
 import { EDITOR_CONSTANTS } from './editor.constants';
 import {
   Recipe,

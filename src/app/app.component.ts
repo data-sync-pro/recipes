@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, Event as RouterEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { AnalyticsService } from './analytics.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +10,7 @@ export class AppComponent implements OnInit {
   showHeaderFooter = true;
   showScrollToTop = false;
 
-  constructor(
-    private analyticsService: AnalyticsService,
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.router.events
@@ -25,31 +21,6 @@ export class AppComponent implements OnInit {
 
         // Show scroll-to-top button only on recipe pages
         this.showScrollToTop = event.url.startsWith('/recipes');
-
-        if (this.analyticsService.userConsented) {
-          this.analyticsService.trackPageView(event.urlAfterRedirects);
-        }
       });
   }
-
-  // Global document click listener (unchanged)
-  /*
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    const targetElement = event.target as HTMLElement;
-    const elementInfo = targetElement.id
-      ? `#${targetElement.id}`
-      : targetElement.className
-      ? `.${targetElement.className}`
-      : targetElement.tagName;
-
-    if (this.analyticsService.userConsented) {
-      const clickData = {
-        element: elementInfo,
-        timestamp: new Date().toISOString()
-      };
-      this.analyticsService.trackClickEvent(clickData);
-    }
-  }
-  */
 }

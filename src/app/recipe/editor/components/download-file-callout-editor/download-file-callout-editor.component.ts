@@ -6,7 +6,7 @@ import {
   PrereqField,
   PrereqRecordType
 } from '../../../core/models/recipe.model';
-import { TrackByUtil } from '../../../../shared/utils/trackby.util';
+import { TrackByUtil } from '../../../core/utils/trackby.util';
 
 const OBJECT_TYPES: PrereqObject['objectType'][] = ['Custom Object', 'Big Object', 'Standard Object'];
 

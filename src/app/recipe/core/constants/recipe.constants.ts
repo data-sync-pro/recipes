@@ -1,4 +1,4 @@
-import { generateSlug } from '../../../shared/utils/slug.utils';
+import { generateSlug } from '../utils/slug.utils';
 
 export interface CategoryDefinition {
   readonly displayName: string;

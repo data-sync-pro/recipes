@@ -15,7 +15,7 @@ import {
   StepConfig
 } from '../../../core/models/recipe.model';
 import { FieldSuggestionService } from '../../services/field-suggestion.service';
-import { TrackByUtil } from '../../../../shared/utils/trackby.util';
+import { TrackByUtil } from '../../../core/utils/trackby.util';
 import { CustomStepNames } from '../../services/step-management.service';
 
 /**

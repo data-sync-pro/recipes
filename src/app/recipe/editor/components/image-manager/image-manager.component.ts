@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { StepMedia, GeneralImage } from '../../../core/models/recipe.model';
-import { TrackByUtil } from '../../../../shared/utils/trackby.util';
+import { TrackByUtil } from '../../../core/utils/trackby.util';
 import { FileStorageAdapter } from '../../../core/storage';
 import { ImageNamingService } from '../../services/image-naming.service';
 import { ImageLoaderService } from '../../services/image-loader.service';

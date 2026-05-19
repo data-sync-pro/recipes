@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
-import { FaqEditorComponent } from './faq-editor/faq-editor.component';
+import { FaqEditorComponent } from './faq/editor/faq-editor.component';
 
 const routes: Routes = [
   {
