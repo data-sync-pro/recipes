@@ -1,4 +1,4 @@
-<!-- assets/transformation/icon/search.svg -->
+<!-- assets/icons/transformation/search.svg -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
   <!-- NEW: 用 <symbol> 包装，stroke 改为 currentColor 以便继承颜色 -->
   <symbol id="search-icon" viewBox="0 0 24 24">
