@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, map, distinctUntilChanged } from 'rxjs';
 import {
   StoreState,
@@ -14,7 +14,7 @@ import { RECIPE_SECTIONS } from '../constants/recipe.constants';
 @Injectable({
   providedIn: 'root'
 })
-export class Store {
+export class Store implements OnDestroy {
   private readonly initialState: StoreState = {
     data: {
       recipes: [],
@@ -320,6 +320,17 @@ export class Store {
     };
 
     window.addEventListener('resize', this.resizeHandler);
+  }
+
+  ngOnDestroy(): void {
+    if (this.resizeTimer) {
+      clearTimeout(this.resizeTimer);
+      this.resizeTimer = null;
+    }
+    if (this.resizeHandler && typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.resizeHandler);
+      this.resizeHandler = null;
+    }
   }
 
 

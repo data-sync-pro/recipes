@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, isDevMode, APP_INITIALIZER } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -20,9 +21,7 @@ import { FaqEditorComponent } from './faq/editor/faq-editor.component';
  * Called during app bootstrap to load recipe data before app starts
  */
 export function initializeRecipes(recipeOrchestration: OrchestrationService) {
-  return () => {
-    return recipeOrchestration.initializeRecipes().toPromise();
-  };
+  return () => firstValueFrom(recipeOrchestration.initializeRecipes());
 }
 
 @NgModule({

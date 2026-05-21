@@ -27,7 +27,7 @@
         <div class="filter-chips scrollable-container">
           <span
             class="filter-chip"
-            *ngFor="let tag of tags"
+            *ngFor="let tag of tags; trackBy: trackByString"
             [class.active]="selectedTags.includes(tag)"
             (click)="toggleTag(tag)"
           >
@@ -42,7 +42,7 @@
           filteredSuggestions.length > 0
         "
       >
-        <ng-container *ngFor="let item of filteredSuggestions; let i = index">
+        <ng-container *ngFor="let item of filteredSuggestions; let i = index; trackBy: trackBySuggestionName">
           <div
             class="suggestion-item"
             [class.selected]="selectedIndex === i"
@@ -53,7 +53,7 @@
               <span>{{ item.name }}</span>
             </div>
             <div class="suggestion-tags">
-              <span class="tag" *ngFor="let tag of item.Tags">{{ tag }}</span>
+              <span class="tag" *ngFor="let tag of item.Tags; trackBy: trackByString">{{ tag }}</span>
             </div>
           </div>
         </ng-container>

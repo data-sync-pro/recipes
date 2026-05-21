@@ -5,7 +5,7 @@
       <li>
         <a [routerLink]="['/transformation/home', getAnchorId('Formula Elements')]">Elements of a Formula</a>
       </li>
-      <li *ngFor="let tag of displayTags">
+      <li *ngFor="let tag of displayTags; trackBy: trackByString">
         <a [routerLink]="['/transformation/home', getAnchorId(tag)]">
           {{ tag }}
           <ng-container *ngIf="tag !== 'Operators' && tag !== 'Global Variables'">
@@ -22,7 +22,7 @@
     <p>{{ formulaElements.description }}</p>
     <table class="doc-tables two-columns">
       <tbody>
-        <tr *ngFor="let item of formulaElements.elements">
+        <tr *ngFor="let item of formulaElements.elements; trackBy: trackByElement">
           <td>{{ item.element }}</td>
           <td>{{ item.description }}</td>
         </tr>
@@ -30,16 +30,16 @@
     </table>
   </section>
   <!-- Functions grouped by tag -->
-  <div *ngFor="let tag of displayTags">
+  <div *ngFor="let tag of displayTags; trackBy: trackByString">
     <ng-container [ngSwitch]="tag">
       <section *ngSwitchCase="'Operators'">
         <h2 [attr.id]="getAnchorId('Operators')">Operators</h2>
         <div *ngIf="operators && objectKeys(operators).length">
-          <div *ngFor="let group of operators | keyvalue">
+          <div *ngFor="let group of operators | keyvalue; trackBy: trackByKey">
             <h3>{{ group.key }}</h3>
             <table class="doc-tables three-columns">
               <tbody>
-                <tr *ngFor="let operator of group.value">
+                <tr *ngFor="let operator of group.value; trackBy: trackByOperator">
                   <td>{{ operator.operator }}</td>
                   <td>{{ operator.name }}</td>
                   <td>{{ operator.description }}</td>
@@ -55,14 +55,14 @@
         <div *ngIf="globalVariables && globalVariables.length">
           <table class="doc-tables two-columns">
             <tbody>
-              <tr *ngFor="let variable of globalVariables">
+              <tr *ngFor="let variable of globalVariables; trackBy: trackByVariable">
                 <td>
                   <a *ngIf="variable.variable === '$JOINER'; else plainText"
                     [routerLink]="['/transformation', 'joiner']">
                     {{ variable.variable }}
                   </a>
                 </td>
-              
+
                 <ng-template #plainText>
                   {{ variable.variable }}
                 </ng-template>
@@ -77,7 +77,7 @@
         <h2 [attr.id]="getAnchorId(tag)">{{ tag }} Functions</h2>
         <table class="doc-tables two-columns">
           <tbody>
-            <tr *ngFor="let funcName of itemsByTag[tag]">
+            <tr *ngFor="let funcName of itemsByTag[tag]; trackBy: trackByString">
               <td>
                 <a (click)="goToFunction(funcName)">{{ funcName }}</a>
               </td>

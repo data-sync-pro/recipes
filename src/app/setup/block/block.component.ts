@@ -67,6 +67,10 @@ export class SetupBlockComponent implements AfterViewChecked {
     } else if (url.includes('/embed/')) {
       videoId = url.split('/embed/')[1]?.split(/[?#]/)[0] || '';
     }
+    // Reject malformed IDs so we never trust an empty / attacker-controlled value
+    if (!/^[A-Za-z0-9_-]{11}$/.test(videoId)) {
+      return this.sanitizer.bypassSecurityTrustResourceUrl('about:blank');
+    }
     return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}?rel=0`);
   }
 

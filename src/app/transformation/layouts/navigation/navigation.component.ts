@@ -38,6 +38,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
   categorySlug = categorySlug;
 
   private destroy$ = new Subject<void>();
+  // Cache the latest active category so updateActiveCategory() can read it
+  // synchronously instead of resubscribing to the observable on every nav.
+  private currentActiveCategory: string = '';
   operatorExpand = false;
   globalVariableExpand = false;
   apexClassExpand = false;
@@ -58,6 +61,14 @@ export class NavigationComponent implements OnInit, OnDestroy {
         if (params['activeCategory']) {
           this.sidebarService.setActiveCategory(params['activeCategory']);
         }
+      });
+
+    // Subscribe once: cache active category and refresh expand state whenever it changes
+    this.sidebarService.activeCategory$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((activeCategory) => {
+        this.currentActiveCategory = activeCategory ?? '';
+        this.updateActiveCategory();
       });
 
     this.http.get<FunctionItem[]>('assets/transformation/formulas/tags.json').subscribe((data) => {
@@ -85,6 +96,14 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   onSearchClick(): void {
     this.searchOpen.emit();
+  }
+
+  trackByCategoryName(_: number, category: FunctionCategory): string {
+    return category.name;
+  }
+
+  trackByFunctionRoute(_: number, fn: { route: string }): string {
+    return fn.route;
   }
 
   onToggleSidebar(): void {
@@ -166,34 +185,31 @@ export class NavigationComponent implements OnInit, OnDestroy {
     const explicitCategory = second ? categoryNameFromSlug(first) : null;
     const activeRoute = second ?? first;
 
-    this.sidebarService.activeCategory$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((activeCategory) => {
-        this.functionCategories.forEach((category) => {
-          if (category.name === 'Home') {
-            category.expanded = activeRoute === '' || activeRoute === 'home';
-          } else if (category.name === 'Operators') {
-            this.operatorExpand = activeRoute === 'operators';
-          } else if (category.name === 'Global Variables') {
-            this.globalVariableExpand = activeRoute === 'global_variables' ||
-              activeRoute === 'joiner' ||
-              explicitCategory === 'Global Variables' ||
-              activeCategory === 'Global Variables';
-          } else if (category.name === 'Apex Class') {
-            this.apexClassExpand = activeRoute === 'apex_class' ||
-              explicitCategory === 'Apex Class';
-          } else {
-            if (explicitCategory) {
-              category.expanded = category.name === explicitCategory;
-            } else if (activeCategory) {
-              category.expanded = category.name === activeCategory;
-            } else {
-              category.expanded = category.functions.some(
-                (fn) => fn.route === activeRoute
-              );
-            }
-          }
-        });
-      });
+    const activeCategory = this.currentActiveCategory;
+    this.functionCategories.forEach((category) => {
+      if (category.name === 'Home') {
+        category.expanded = activeRoute === '' || activeRoute === 'home';
+      } else if (category.name === 'Operators') {
+        this.operatorExpand = activeRoute === 'operators';
+      } else if (category.name === 'Global Variables') {
+        this.globalVariableExpand = activeRoute === 'global_variables' ||
+          activeRoute === 'joiner' ||
+          explicitCategory === 'Global Variables' ||
+          activeCategory === 'Global Variables';
+      } else if (category.name === 'Apex Class') {
+        this.apexClassExpand = activeRoute === 'apex_class' ||
+          explicitCategory === 'Apex Class';
+      } else {
+        if (explicitCategory) {
+          category.expanded = category.name === explicitCategory;
+        } else if (activeCategory) {
+          category.expanded = category.name === activeCategory;
+        } else {
+          category.expanded = category.functions.some(
+            (fn) => fn.route === activeRoute
+          );
+        }
+      }
+    });
   }
 }

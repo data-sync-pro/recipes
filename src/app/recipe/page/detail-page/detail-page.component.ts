@@ -133,8 +133,11 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   // Mobile sidebar drawer
   isSidebarOpen: boolean = false;
 
-  // YouTube URL cache to prevent flickering on scroll
+  // YouTube URL cache to prevent flickering on scroll. Capped so the Map can't
+  // grow unbounded over a long session — Map keeps insertion order, so deleting
+  // the first key evicts the oldest entry (simple LRU).
   private youtubeUrlCache = new Map<string, SafeResourceUrl>();
+  private static readonly YOUTUBE_CACHE_MAX = 100;
 
   // Cached YouTube videos from generalImages to prevent re-rendering on scroll
   cachedYouTubeVideos: { url: string; alt: string }[] = [];
@@ -367,14 +370,6 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
       .filter(item => item.length > 0);
   }
 
-  // shouldShowRulesEngine(): boolean {
-  //   if (!this.currentRecipe) {
-  //     return false;
-  //   }
-  //   // Show Rules Engine section if category does not include 'Transformation'
-  //   return !this.currentRecipe.category.some(c => c.toLowerCase() === 'transformation');
-  // }
-
   private buildTocItems(): void {
     if (!this.currentRecipe) {
       this.tocItems = [];
@@ -583,29 +578,44 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   }
 
   getYouTubeEmbedUrl(url: string): SafeResourceUrl {
-    // Return cached URL to prevent iframe flickering on scroll
-    if (this.youtubeUrlCache.has(url)) {
-      return this.youtubeUrlCache.get(url)!;
+    const cached = this.youtubeUrlCache.get(url);
+    if (cached) {
+      return cached;
     }
 
     let videoId = '';
 
     if (url.includes('youtu.be/')) {
-      // Format: https://youtu.be/VIDEO_ID
-      videoId = url.split('youtu.be/')[1]?.split('?')[0] || '';
+      videoId = url.split('youtu.be/')[1]?.split(/[?#]/)[0] ?? '';
     } else if (url.includes('youtube.com/watch')) {
-      // Format: https://www.youtube.com/watch?v=VIDEO_ID
-      const urlParams = new URL(url).searchParams;
-      videoId = urlParams.get('v') || '';
+      try {
+        videoId = new URL(url).searchParams.get('v') ?? '';
+      } catch {
+        videoId = '';
+      }
     } else if (url.includes('youtube.com/embed/')) {
-      // Already embed format
-      videoId = url.split('youtube.com/embed/')[1]?.split('?')[0] || '';
+      videoId = url.split('youtube.com/embed/')[1]?.split(/[?#]/)[0] ?? '';
     }
 
-    const embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0`;
-    const safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
-    this.youtubeUrlCache.set(url, safeUrl);
+    // YouTube IDs are 11 chars of [A-Za-z0-9_-]. Reject anything else so we
+    // don't hand a malformed/empty value to bypassSecurityTrustResourceUrl.
+    const target = /^[A-Za-z0-9_-]{11}$/.test(videoId)
+      ? `https://www.youtube.com/embed/${videoId}?rel=0`
+      : 'about:blank';
+
+    const safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(target);
+    this.rememberYouTubeUrl(url, safeUrl);
     return safeUrl;
+  }
+
+  private rememberYouTubeUrl(key: string, value: SafeResourceUrl): void {
+    if (this.youtubeUrlCache.size >= RecipeDetailPageComponent.YOUTUBE_CACHE_MAX) {
+      const oldestKey = this.youtubeUrlCache.keys().next().value;
+      if (oldestKey !== undefined) {
+        this.youtubeUrlCache.delete(oldestKey);
+      }
+    }
+    this.youtubeUrlCache.set(key, value);
   }
 
   ngOnDestroy(): void {

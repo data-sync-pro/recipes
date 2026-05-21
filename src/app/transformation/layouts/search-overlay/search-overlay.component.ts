@@ -3,6 +3,7 @@ import {
   Output,
   EventEmitter,
   OnInit,
+  OnDestroy,
   ViewChild,
   ElementRef,
   Input,
@@ -18,7 +19,7 @@ import { SidebarService } from 'src/app/transformation/services/sidebar.service'
   templateUrl: './search-overlay.component.html',
   styleUrls: ['./search-overlay.component.css'],
 })
-export class SearchOverlayComponent implements OnInit, OnChanges {
+export class SearchOverlayComponent implements OnInit, OnChanges, OnDestroy {
   @Input() isOpen: boolean = false;
   @Output() closed = new EventEmitter<void>();
   @ViewChild('searchInput') searchInputRef!: ElementRef<HTMLInputElement>;
@@ -29,6 +30,10 @@ export class SearchOverlayComponent implements OnInit, OnChanges {
   suggestions: any[] = [];
   filteredSuggestions: any[] = [];
   selectedIndex: number = -1;
+
+  // Track pending UI timers so we can cancel them on destroy
+  private focusTimeoutId: ReturnType<typeof setTimeout> | null = null;
+  private scrollTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
   constructor(private http: HttpClient, private router: Router,private sidebarService: SidebarService) {}
 
@@ -123,15 +128,38 @@ export class SearchOverlayComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isOpen']?.currentValue === true) {
-      setTimeout(() => {
+      if (this.focusTimeoutId !== null) {
+        clearTimeout(this.focusTimeoutId);
+      }
+      this.focusTimeoutId = setTimeout(() => {
+        this.focusTimeoutId = null;
         this.searchInputRef?.nativeElement?.focus();
       }, 0);
       this.selectedIndex = -1;
     }
   }
 
+  ngOnDestroy(): void {
+    if (this.focusTimeoutId !== null) {
+      clearTimeout(this.focusTimeoutId);
+      this.focusTimeoutId = null;
+    }
+    if (this.scrollTimeoutId !== null) {
+      clearTimeout(this.scrollTimeoutId);
+      this.scrollTimeoutId = null;
+    }
+  }
+
   close() {
     this.closed.emit();
+  }
+
+  trackByString(_: number, value: string): string {
+    return value;
+  }
+
+  trackBySuggestionName(_: number, item: { name: string }): string {
+    return item.name;
   }
 
   filterSuggestions() {
@@ -214,7 +242,11 @@ export class SearchOverlayComponent implements OnInit, OnChanges {
   }
 
   private scrollToSelected() {
-    setTimeout(() => {
+    if (this.scrollTimeoutId !== null) {
+      clearTimeout(this.scrollTimeoutId);
+    }
+    this.scrollTimeoutId = setTimeout(() => {
+      this.scrollTimeoutId = null;
       const selected = document.querySelector('.suggestion-item.selected');
       if (selected) {
         selected.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

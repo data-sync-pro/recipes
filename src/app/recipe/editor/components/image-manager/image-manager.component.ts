@@ -60,10 +60,16 @@ export class ImageManagerComponent implements OnChanges, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.isInitialized = true;
-    // Load images after view is initialized
+    // Defer image loading one tick so view bindings have settled. The async
+    // loaders return promises; surface failures via the logger instead of
+    // letting them become unhandled rejections.
     setTimeout(() => {
-      this.loadAllMediaImages();
-      this.loadAllGeneralImages();
+      this.loadAllMediaImages().catch((err) =>
+        this.logger.error('Failed to load media images', err)
+      );
+      this.loadAllGeneralImages().catch((err) =>
+        this.logger.error('Failed to load general images', err)
+      );
     }, 0);
   }
 
