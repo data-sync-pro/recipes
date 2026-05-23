@@ -65,8 +65,8 @@ a {
   }
 }
 
-// FAQ content table styles
-.faq-content table,
+// Global table styles (used by setup/block, faq-editor, designer-guide)
+// Note: FAQ has its own scoped table style under .faq-answer table to stay isolated.
 table {
   border-collapse: collapse;
   width: 100%;
@@ -83,7 +83,7 @@ table {
     border: 1px solid #ddd;
   }
 
-  // 第一列更宽，其他列等宽
+  // First column wider, others equal width
   th:first-child, td:first-child {
     width: 50%;
   }

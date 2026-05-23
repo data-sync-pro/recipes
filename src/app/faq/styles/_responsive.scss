@@ -1,12 +1,10 @@
+// ==================== FAQ Responsive Overrides ====================
+// All breakpoint-based @media queries live here. iOS / touch detection stays
+// in _mobile-ios.scss. Variables come from _variables.scss + _layout.scss.
 
-
-
-$breakpoint-desktop: 768px;
-
-
-.faq-layout-container {
-
-  @media (min-width: #{$breakpoint-desktop + 1px}) {
+// ===== Desktop (above $breakpoint-desktop) =====
+@media (min-width: #{$breakpoint-desktop + 1px}) {
+  .faq-layout-container {
     grid-template-columns: $sidebar-width 1fr $toc-width;
 
     &.sidebar-collapsed {
@@ -22,29 +20,85 @@ $breakpoint-desktop: 768px;
     }
   }
 
+  .faq-sidebar {
+    position: sticky;
+    top: $header-height;
+    height: calc(100vh - $header-height);
+    overflow: hidden;
+    transform: none;
+    transition: $transition;
+  }
+}
 
-  @media (max-width: $breakpoint-desktop) {
+// ===== Mobile and Tablet (up to $breakpoint-desktop) =====
+@media (max-width: $breakpoint-desktop) {
+  .faq-layout-container {
     grid-template-areas: "main";
     grid-template-columns: 1fr;
 
     .faq-toc {
       display: none;
     }
-  }
-}
 
-// Mobile and Tablet (up to 768px)
-@media (max-width: $breakpoint-desktop) {
+    // Hide desktop sidebar toggle on mobile (from _sidebar.scss)
+    > .sidebar-toggle-btn {
+      display: none;
+    }
+  }
+
   .faq-container {
     margin: 60px 0 0 0;
     padding: 12px 16px;
-    
 
+    // When TOC is hidden on mobile (from _layout.scss)
+    &.toc-hidden {
+      margin-right: 0;
+    }
   }
 
+  // Hide breadcrumb on mobile (from _layout.scss)
+  .breadcrumb-nav {
+    display: none;
+  }
+
+  // Shorter breadcrumb truncation on mobile (from _layout.scss)
+  .breadcrumb-item span {
+    max-width: 80px;
+  }
+
+  // Hide TOC toggle button on mobile (from _layout.scss)
+  .toc-toggle-btn {
+    display: none;
+  }
+
+  // Sidebar becomes full-width slide-in drawer (from _sidebar.scss)
   .faq-sidebar {
     width: 100%;
-    
+    position: fixed;
+    left: 0;
+    top: $header-height;
+    height: calc(100vh - $header-height);
+    overflow: hidden;
+    transform: translateX(-100%);
+    will-change: transform;
+    z-index: $z-sidebar-mobile;
+
+    &.mobile-open {
+      transform: translateX(0);
+      isolation: isolate;
+
+      .sidebar-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .nav-item {
+        position: relative;
+        z-index: 2;
+        pointer-events: auto;
+        touch-action: manipulation;
+      }
+    }
   }
 
   .faq-toc {
@@ -60,17 +114,33 @@ $breakpoint-desktop: 768px;
   }
 
   .sidebar-overlay {
-    display: none !important; 
+    display: none !important;
   }
 
-  
+  // Virtual scroll viewport gets shorter mobile height (from _faq-items.scss)
+  .faq-virtual-viewport {
+    height: calc(100vh - 250px); // mobile has smaller header and padding
+    max-height: calc(100vh - 180px);
+    min-height: 250px;
+
+    .all-faqs & {
+      height: calc(100vh - 160px);
+      max-height: calc(100vh - 160px);
+    }
+  }
+
+  // Floating feedback section pulls into mobile corner (from _faq-items.scss)
+  .faq-feedback-section {
+    right: 1rem;
+    bottom: 1rem;
+  }
+
   .section-title,
   .category-title {
     font-size: 2rem !important;
     padding-bottom: 32px;
   }
 
-  
   .faq-list .faq-item {
     margin-bottom: 12px;
     border-radius: 8px;
@@ -115,7 +185,6 @@ $breakpoint-desktop: 768px;
     }
   }
 
-  
   .trending-faq {
     margin: 16px auto 24px auto;
 
@@ -139,7 +208,6 @@ $breakpoint-desktop: 768px;
     }
   }
 
-  
   .faq-detail {
     padding: 24px 0;
 
@@ -171,7 +239,6 @@ $breakpoint-desktop: 768px;
     }
   }
 
-  
   .search-no-results {
     padding: 32px 16px;
 
@@ -201,7 +268,6 @@ $breakpoint-desktop: 768px;
     }
   }
 
-
   .faq-image {
     margin: 15px auto;
     border-radius: 6px;
@@ -210,7 +276,88 @@ $breakpoint-desktop: 768px;
   }
 }
 
-// Print styles
+// ===== Small mobile (up to 767px) =====
+// One pixel below $breakpoint-desktop so it does not apply at exactly 768px.
+@media (max-width: 767px) {
+  // Rating / share single-line layout collapses to right-aligned column (from _faq-items.scss)
+  .rating-share-inline {
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  .content-spacer {
+    display: none;
+  }
+
+  .rating-share-section {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px; // overrides earlier 8px when stacked vertically
+  }
+
+  // Feedback section overrides (from _faq-items.scss original 721-787 block)
+  .faq-feedback-section {
+    &:hover {
+      transform: none; // disable hover transform on mobile
+    }
+  }
+
+  .feedback-container {
+    gap: 12px;
+  }
+
+  .rating-header,
+  .share-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rating-buttons {
+    gap: 6px;
+  }
+
+  .rating-btn {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+    min-width: 50px;
+
+    &:hover {
+      transform: none;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  .share-btn {
+    width: 28px;
+    height: 28px;
+
+    &:hover {
+      transform: none;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  .rating-title {
+    font-size: $font-size-caption;
+  }
+
+  .rating-section {
+    gap: 8px;
+  }
+
+  .feedback-message {
+    padding: 6px 8px;
+    font-size: 0.7rem;
+  }
+}
+
+// ===== Print =====
 @media print {
   .faq-sidebar,
   .faq-toc,

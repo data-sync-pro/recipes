@@ -1,0 +1,26 @@
+<p>
+  The <strong>Retrieve</strong> step defines how source data is queried from a
+  connected Salesforce org. It's the entry point for record selection in both
+  #Batches and #Data Lists.
+</p>
+<ul>
+  <li>
+    <p>
+      <strong>In</strong> <strong>#Batch</strong>: Retrieve specifies the source records for
+      batch execution—similar to the <code>start()</code> method in Salesforce's
+      <code>Database.Batchable</code> interface.
+    </p>
+  </li>
+  <li>
+    <p>
+      <strong>In</strong> <strong>#Data List</strong>: Retrieve defines the SOQL query used to
+      display records to users in the UI.
+    </p>
+  </li>
+</ul>
+<p>
+  At runtime, DSP automatically fetches only the fields required by downstream
+  steps (<strong>Scoping</strong>, <strong>Match</strong>, <strong>Mapping</strong>). Fields selected in the Retrieve query are
+  used mainly for preview and display.</p>
+
+<img src="images/image1.jpg">

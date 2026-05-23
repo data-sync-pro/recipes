@@ -27,7 +27,8 @@ export class FAQService implements OnDestroy {
   private readonly INACTIVE_PREFIX = '_inactive/';
   private readonly VERSION_URL = 'assets/data/version.json';
 
-  // folderId -> "<id>" or "_inactive/<id>"; populated when faqs.json is loaded.
+  // folderId -> "<cat>/<sub?>/<id>" or "_inactive/<cat>/<sub?>/<id>";
+  // populated when faqs.json is loaded.
   private folderRelPath = new Map<string, string>();
   
   // Cache
@@ -320,9 +321,9 @@ export class FAQService implements OnDestroy {
   }
 
   /**
-   * Build "assets/faqs/<id>/" or "assets/faqs/_inactive/<id>/" depending on the
-   * FAQ's isActive flag (looked up from the metadata cache populated when
-   * faqs.json is loaded).
+   * Build "assets/faqs/<cat>/<sub?>/<id>/" (or the _inactive/ variant) based on
+   * the FAQ's category, subCategory, and isActive flag from the metadata cache
+   * populated when faqs.json is loaded.
    */
   public getFolderUrl(folderId: string): string {
     const rel = this.folderRelPath.get(folderId) ?? folderId;
@@ -378,13 +379,12 @@ export class FAQService implements OnDestroy {
   }
 
   private extractTextFromHTML(html: string): string {
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = html;
+    // DOMParser produces an inactive Document, so <img>/<script> in `html`
+    // are parsed without firing network requests (unlike `div.innerHTML=`).
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    doc.querySelectorAll('script, style, img').forEach(el => el.remove());
 
-    tempDiv.querySelectorAll('script, style').forEach(el => el.remove());
-    tempDiv.querySelectorAll('img').forEach(el => el.remove());
-
-    const text = tempDiv.textContent || tempDiv.innerText || '';
+    const text = doc.body?.textContent ?? '';
 
     return text
       .replace(/\s+/g, ' ')
@@ -393,18 +393,33 @@ export class FAQService implements OnDestroy {
       .toLowerCase();
   }
 
+  private slug(s: string): string {
+    return s.trim().toLowerCase().replace(/\s+/g, '-');
+  }
+
   /**
-   * Record where each FAQ folder lives (active vs. _inactive) based on the
+   * Compose the on-disk relative path "<cat>/<sub?>/<folderId>" (with the
+   * _inactive/ prefix when applicable). Shared with FAQExportService so disk
+   * and export layouts stay in lockstep.
+   */
+  public buildRelPathFor(
+    meta: Pick<FAQMetadata, 'folderId' | 'category' | 'subCategory' | 'isActive'>
+  ): string {
+    const cat = this.slug(meta.category ?? '');
+    const sub = meta.subCategory ? this.slug(meta.subCategory) : '';
+    const tail = sub ? `${cat}/${sub}/${meta.folderId}` : `${cat}/${meta.folderId}`;
+    return meta.isActive === false ? `${this.INACTIVE_PREFIX}${tail}` : tail;
+  }
+
+  /**
+   * Record where each FAQ folder lives based on its category/subCategory and
    * isActive flag from faqs.json. Called from fetchAllFAQItems before the
    * inactive entries are filtered out, so all folders' paths are remembered.
    */
   private rememberFolderPaths(metas: FAQMetadata[]): void {
     this.folderRelPath.clear();
     for (const m of metas) {
-      const rel = m.isActive === false
-        ? `${this.INACTIVE_PREFIX}${m.folderId}`
-        : m.folderId;
-      this.folderRelPath.set(m.folderId, rel);
+      this.folderRelPath.set(m.folderId, this.buildRelPathFor(m));
     }
   }
 

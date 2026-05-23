@@ -28,7 +28,7 @@ const KEY_TO_FOLDER_ID: { readonly [key: string]: string } = {
   'batch.what-is-batch': 'what-is-batch-job',
   'data-list.what-is-data-list': 'what-is-data-list',
   'triggers.how-it-works': 'how-does-trigger-work',
-  'trigger.what-is-self-adaptive-trigger': 'what-is-self-adaptive-trigger',
+  'trigger.what-is-self-adaptive-trigger': 'what-is-a-self-adaptive-trigger',
   'action-button.what-is-action-button': 'what-is-action-button',
   'data-loader.how-it-works': 'what-is-data-loader',
   'input.what-does-input-do': 'what-does-input-do',

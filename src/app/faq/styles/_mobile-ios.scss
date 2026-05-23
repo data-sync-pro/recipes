@@ -11,8 +11,7 @@
   .popular-faq-item,
   .contact-button,
   .breadcrumb-item,
-  .toc-item,
-  .trending-question-item {
+  .toc-item {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     -webkit-touch-callout: none;
@@ -96,7 +95,7 @@
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 
-    @media (max-width: 768px) {
+    @media (max-width: $breakpoint-desktop) {
       &:not(.mobile-open) {
         -webkit-transform: translate3d(-100%, 0, 0);
         transform: translate3d(-100%, 0, 0);
@@ -137,7 +136,7 @@
 }
 
 // Fix for iOS input zoom
-@media (max-width: 768px) {
+@media (max-width: $breakpoint-desktop) {
   input,
   textarea,
   select {
@@ -173,7 +172,7 @@
   // Use active state instead of hover
   .faq-item:active {
     background-color: rgba(26, 115, 232, 0.08);
-    border-color: #1a73e8;
+    border-color: $primary-color;
   }
   
   .nav-item:active {
@@ -198,7 +197,7 @@ button {
 }
 
 // Improve form inputs on mobile
-@media (max-width: 768px) {
+@media (max-width: $breakpoint-desktop) {
   input[type="text"],
   input[type="search"],
   input[type="email"],

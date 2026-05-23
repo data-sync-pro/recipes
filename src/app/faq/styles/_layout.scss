@@ -9,8 +9,6 @@ $sidebar-width: 280px;
 $sidebar-collapsed: 56px;
 $toc-width: 320px;
 
-$breakpoint-desktop: 768px;
-
 .faq-layout-container {
   display: grid;
   grid-template-areas:
@@ -19,11 +17,6 @@ $breakpoint-desktop: 768px;
   margin-top: $header-height;
   min-height: 0;
   transition: grid-template-columns 0s cubic-bezier(0.4, 0.0, 0.2, 1);
-
-  @media (max-width: $breakpoint-desktop) {
-    grid-template-areas: "main main main";
-    grid-template-columns: 1fr;
-  }
 }
 
 .faq-container {
@@ -31,13 +24,6 @@ $breakpoint-desktop: 768px;
   padding: 20px 2vw;
   background: #ffffff;
   margin-bottom: 40px;
-
-  &.toc-hidden {
-
-    @media (max-width: $breakpoint-desktop) {
-      margin-right: 0;
-    }
-  }
 
   .visually-hidden {
     position: absolute !important;
@@ -59,10 +45,6 @@ $breakpoint-desktop: 768px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  @media (max-width: 768px) {
-    display: none;
-  }
-
   isolation: isolate;
 }
 
@@ -72,12 +54,12 @@ $breakpoint-desktop: 768px;
   gap: 6px;
   margin-left: 6px;
   padding: 6px 12px;
-  border: 1px solid #dadce0;
+  border: 1px solid $border-color-strong;
   border-radius: 8px;
-  background: #f8f9fa;
+  background: $bg-light;
 
   &:focus-within {
-    border-color: #1a73e8;
+    border-color: $primary-color;
     background: #fff;
   }
 
@@ -85,7 +67,7 @@ $breakpoint-desktop: 768px;
     background: none;
     border: none;
     cursor: pointer;
-    color: #5f6368;
+    color: $text-color-secondary;
     padding: 2px;
     display: flex;
     align-items: center;
@@ -105,7 +87,7 @@ $breakpoint-desktop: 768px;
   width: 200px;
 
   &::placeholder {
-    color: #5f6368;
+    color: $text-color-secondary;
   }
 }
 
@@ -125,7 +107,7 @@ $breakpoint-desktop: 768px;
   gap: 4px;
   background: none;
   border: none;
-  color: #1a73e8;
+  color: $primary-color;
   font-size: 1.1rem;
   font-weight: 400;
   cursor: pointer;
@@ -136,11 +118,11 @@ $breakpoint-desktop: 768px;
 
   &:hover:not(.active) {
     background-color: rgba(26, 115, 232, 0.08);
-    color: #1557b0;
+    color: $primary-color-hover;
   }
 
   &.active {
-    color: #5f6368;
+    color: $text-color-secondary;
     cursor: default;
     font-weight: 500;
   }
@@ -150,11 +132,6 @@ $breakpoint-desktop: 768px;
     max-width: 120px;
     overflow: hidden;
     text-overflow: ellipsis;
-
-    // Mobile responsive text truncation
-    @media (max-width: $breakpoint-desktop) {
-      max-width: 80px;
-    }
   }
 }
 
@@ -171,12 +148,6 @@ $breakpoint-desktop: 768px;
   padding: 0;
   background: #ffffff;
   min-height: auto;
-
-
-  
- // &.footer-aware {
- //   margin-bottom: calc(120px + var(--footer-offset, 0px));
- // }
 }
 
 .section-title,
@@ -188,7 +159,7 @@ $breakpoint-desktop: 768px;
   margin: 0 0 8px 0 !important;
   line-height: 1.2;
   text-align: center;
-  border-bottom: 2px solid #e9ecef;
+  border-bottom: 2px solid $border-color;
 }
 
 .all-faqs,
@@ -212,7 +183,7 @@ $breakpoint-desktop: 768px;
     align-items: center;
     gap: 12px;
     margin-bottom: 24px;
-    border-bottom: 2px solid #e9ecef;
+    border-bottom: 2px solid $border-color;
     
     padding-bottom: 16px;
   }
@@ -236,7 +207,7 @@ $breakpoint-desktop: 768px;
     transition: all 0.2s ease;
 
     &:hover:not(:disabled) {
-      background: #f8f9fa;
+      background: $bg-light;
       color: #1a1a1a;
       border-radius: 6px;
     }
@@ -272,23 +243,46 @@ $breakpoint-desktop: 768px;
     }
 
     p { margin-bottom: 16px; }
-    ul, ol { margin-bottom: 16px; padding-left: 24px; }
+    ul, ol { margin-bottom: 16px; padding-left: 4rem; }
     li { margin-bottom: 8px; }
 
 
     code {
-      background: #f8f9fa;
+      background: $bg-light;
       border-radius: 4px;
       font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
       font-size: 0.9em;
     }
 
     pre {
-      background: #f8f9fa;
+      background: $bg-light;
       padding: 16px;
       border-radius: 8px;
       overflow-x: auto;
       margin-bottom: 16px;
+    }
+
+    // Scoped table styles so global `table` rules cannot leak into FAQ display.
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1em 0;
+
+      th {
+        padding: 8px;
+        border: 1px solid #ddd;
+        background-color: #f5f5f5;
+      }
+
+      td {
+        padding: 8px;
+        border: 1px solid #ddd;
+      }
+
+      th:first-child,
+      td:first-child {
+        width: 50%;
+      }
     }
   }
 }
@@ -297,7 +291,7 @@ $breakpoint-desktop: 768px;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.8);
-  z-index: 9999;
+  z-index: $z-modal-zoom;
   cursor: zoom-out;
 
   .zoomed-image {
@@ -339,7 +333,7 @@ $breakpoint-desktop: 768px;
       content: '🖼️ Image could not be loaded';
       display: block;
       padding: 20px;
-      background: #f8f9fa;
+      background: $bg-light;
       border: 2px dashed #dee2e6;
       border-radius: 8px;
       text-align: center;
@@ -454,18 +448,13 @@ $breakpoint-desktop: 768px;
   &:hover {
     opacity: 1;
     visibility: visible;
-    background: #f8f9fa;
-    border-color: #1a73e8;
+    background: $bg-light;
+    border-color: $primary-color;
     box-shadow: -4px 0 12px rgba(26, 115, 232, 0.15);
   }
 
   &:active {
     transform: translateY(-50%) scale(0.95);
-  }
-
-  // Hide on mobile and tablet
-  @media (max-width: $breakpoint-desktop) {
-    display: none;
   }
 }
 

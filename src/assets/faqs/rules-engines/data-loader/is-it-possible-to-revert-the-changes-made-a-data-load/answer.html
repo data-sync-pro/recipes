@@ -1,0 +1,47 @@
+<p>
+  Yes, changes made by a data load can be reverted depending on
+  the action type and configuration. DSP provides flexible rollback options:
+</p>
+
+<h3><strong>For Updates</strong>:</h3>
+<ul>
+  <li>
+    If <strong>Log to File</strong> is enabled, the target target data is saved
+    as a JSON log file before the update. To revert updates, use
+    <strong>Restore Updated From Log File</strong> quick action on the
+    Batch Execution or Execution record.
+  </li>
+</ul>
+
+<h3><strong>For Inserts:</strong></h3>
+<ul>
+  <li>
+    Click <strong>Delete Inserted Records</strong> from the Execution record to
+    delete all records inserted.
+  </li>
+  <li>
+    To delete records from a specific batch, go to the Batch Execution record,
+    open the <strong>Verify</strong> tab, select and delete target records
+    directly from the data list.
+  </li>
+</ul>
+
+<h3><strong>For Deletes:</strong></h3>
+<ul>
+  <li>
+    Use <strong>Restore From Recycle Bin</strong> if the records are still
+    available in the recycle bin. This will keep the original record ID.
+  </li>
+  <li>
+    If <strong>Log to File</strong> is enabled, use
+    <strong>Re-Create Deleted From Log File</strong> on the Batch Execution to
+    restore deleted data from the saved log file.
+  </li>
+</ul>
+
+<hr />
+
+<p>
+  <strong>Note:</strong> Reversion is not supported when
+  <strong>Action to Bulk API</strong> is enabled.
+</p>

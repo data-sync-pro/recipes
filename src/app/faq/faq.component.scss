@@ -1,13 +1,16 @@
 // ==================== FAQ Component Main Styles ====================
 
-// Import optimized style modules
+// Shared design tokens — must come first so all partials see them
+@import '../../styles/typography';
+@import './styles/variables';
+
+// Component style modules
 @import './styles/layout';
 @import './styles/sidebar';
 @import './styles/search';
 @import './styles/faq-items';
 @import './styles/responsive';
 @import './styles/mobile-ios';
-@import './styles/debug';
 
 // FAQ Editor Floating Action Button
 .fab-edit-button {
@@ -17,7 +20,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: #4CAF50;
+  background: $color-success;
   color: white;
   border: none;
   box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
@@ -25,11 +28,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: $z-fab;
   transition: all 0.3s ease;
   
   &:hover {
-    background: #45a049;
+    background: $color-success-hover;
     box-shadow: 0 6px 16px rgba(76, 175, 80, 0.5);
     transform: translateY(-2px);
   }
@@ -78,7 +81,7 @@
       
       &:focus {
         outline: none;
-        border-color: #4CAF50;
+        border-color: $color-success;
       }
     }
     
@@ -97,11 +100,11 @@
         transition: background-color 0.3s;
         
         &.btn-primary {
-          background: #4CAF50;
+          background: $color-success;
           color: white;
           
           &:hover {
-            background: #45a049;
+            background: $color-success-hover;
           }
         }
         
@@ -117,7 +120,7 @@
     }
     
     .password-error {
-      color: #f44336;
+      color: $color-danger;
       font-size: 0.875rem;
       text-align: center;
       margin-top: 0.5rem;

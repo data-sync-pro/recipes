@@ -1,0 +1,10 @@
+<p>A <strong>#Data List</strong> becomes actionable when it's paired with one or more actions that operate on — or alongside — the records users see. There are two ways to create one:</p><ul>
+<li><strong>Direction-based Executable</strong> — A single Executable defines both sides of the experience: the source query drives the 
+    #Data List, and the target action runs against the records selected from that list. Use this when the list and its 
+    action are tightly coupled.</li>
+<li><strong>Connection-based Executable + Action Buttons</strong> — Define the #Data List as a Connection-based Executable (query only), 
+    then associate one or more action buttons through the <strong>#Action Button</strong> field, which references Action Button Executables
+     on the Pipeline. Each button's input can either come from the selected rows (to operate on existing records) or be independent of the
+      selection (for example, to add new records to the list). Use this when a list needs multiple actions, when actions should be reusable
+       across lists, or when actions extend beyond just acting on the current rows.</li>
+</ul><p>In both cases, the #Data List and its actions stay cohesive and rules-driven — managed declaratively through Executables and Pipelines.</p>

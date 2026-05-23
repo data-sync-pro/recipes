@@ -1,0 +1,33 @@
+<p>
+  You can control evaluation order using the <strong>Seq No.</strong> column in
+  <b>Field</b> <b>Mappings</b>
+</p>
+<ol>
+  <li>
+    <p>In the Executable, open the Related tab.</p>
+  </li>
+  <li>
+    <p>Find the Field Mappings related list.</p>
+  </li>
+  <li>
+    <p>
+      Edit the Seq No. values inline to set the evaluation
+      sequence.
+    </p>
+  </li>
+  <li>
+    <p>Save your changes.</p>
+  </li>
+</ol>
+<p>
+  When Seq No. is defined, DSP processes mappings in that order. If the
+  source and target are the same record, transformations are
+  <strong>accumulative</strong>—so a field's output can be used in subsequent
+  transformations. You may also use
+  <strong><code>EVALUATED_FIELD_VALUE</code></strong> to reference the value of
+  a target field from a prior evaluation.
+</p>
+
+<img
+  src="images/image1.jpg"
+/>

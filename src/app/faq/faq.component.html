@@ -9,19 +9,6 @@
   ☰
 </button>
 
-<!-- Mobile TOC toggle button - DISABLED -->
-<!--
-<button
-  class="mobile-toc-toggle"
-  (click)="toggleMobileTOC($event)"
-  (touchstart)="handleTouchStart()"
-  *ngIf="false"
-  aria-label="Toggle table of contents"
->
-  📋
-</button>
--->
-
 <!-- Mobile sidebar overlay -->
 <div
   class="sidebar-overlay"
@@ -164,22 +151,6 @@
       </div>
     </aside>
 
-  <!-- Sidebar Toggle Button — temporarily disabled
-  <button
-    class="sidebar-toggle-btn"
-    (click)="toggleSidebar()"
-    [title]="ui.sidebarCollapsed ? 'Show Sidebar' : 'Hide Sidebar'"
-    *ngIf="!ui.isMobile"
-  >
-    <lightning-icon
-      [iconName]="ui.sidebarCollapsed ? 'utility:chevronright' : 'utility:chevronleft'"
-      size="x-large"
-      [alternativeText]="ui.sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'"
-    ></lightning-icon>
-  </button>
-  -->
-
-
   <!-- Main content area with proper container -->
   <div class="faq-container" [class.toc-hidden]="ui.tocHidden">
   
@@ -241,7 +212,7 @@
       </div>
 
 
-      <div *ngIf="showHome && !ui.isLoadingRouteData" class="all-faqs">
+      <div *ngIf="showHome && !ui.isLoadingRouteData && !current.faqItem" class="all-faqs">
         <h2 class="section-title" *ngIf="!search.query.trim()">All FAQs</h2>
         <h2 class="section-title" *ngIf="search.query.trim()">Search: "{{ search.query }}"</h2>
 
@@ -308,30 +279,6 @@
 
                 <!-- Rating and Share combined section on the right -->
                 <div class="rating-share-section">
-                  <!-- Rating section commented out for later use
-                  <span class="rating-title">Is this helpful?</span>
-                  <div class="rating-buttons">
-                    <button
-                      class="rating-btn rating-btn-yes"
-                      (click)="rateFAQ(current.faqItem, true)"
-                      [class.active]="current.faqItem.userRating === true"
-                      [attr.aria-pressed]="current.faqItem.userRating === true"
-                      title="Yes, this was helpful"
-                    >
-                      <span class="rating-icon">👍</span>
-                    </button>
-                    <button
-                      class="rating-btn rating-btn-no"
-                      (click)="rateFAQ(current.faqItem, false)"
-                      [class.active]="current.faqItem.userRating === false"
-                      [attr.aria-pressed]="current.faqItem.userRating === false"
-                      title="No, this was not helpful"
-                    >
-                      <span class="rating-icon">👎</span>
-                    </button>
-                  </div>
-                  -->
-                  
                   <!-- Share Options -->
                   <div class="share-buttons">
                     <button
@@ -411,20 +358,6 @@
                 </div>
               </div>
               
-              <!-- Thank you message - commented out since rating is disabled
-              <div class="rating-feedback" *ngIf="current.faqItem.userRating !== null">
-                <div class="feedback-message" [class.positive]="current.faqItem.userRating" [class.negative]="!current.faqItem.userRating">
-                  <lightning-icon 
-                    [iconName]="current.faqItem.userRating ? 'utility:success' : 'utility:info'"
-                    size="xx-small" 
-                    [alternativeText]="current.faqItem.userRating ? 'Success' : 'Info'">
-                  </lightning-icon>
-                  <span class="feedback-text">
-                    {{ current.faqItem.userRating ? 'Thank you for your feedback!' : 'Thanks! We\'ll work on improving this.' }}
-                  </span>
-                </div>
-              </div>
-              -->
             </div>
           </div>
         </div>
@@ -568,88 +501,6 @@
     ></lightning-icon>
   </button>
 </div>
-
-
-<!-- Removed duplicate TOC - now using grid-positioned version above -->
-
-<!-- Mobile TOC Drawer - DISABLED -->
-<!--
-<div class="mobile-toc-overlay" 
-     [class.active]="ui.mobileTOCOpen" 
-     (click)="closeMobileTOC()"
-     *ngIf="false"></div>
--->
-
-<!-- Mobile TOC Sidebar - DISABLED -->
-<!--
-<aside
-  class="faq-toc mobile-toc"
-  *ngIf="false"
-  [class.open]="ui.mobileTOCOpen"
->
-  <div class="mobile-toc-content">
-    <div class="mobile-toc-header">
-      <div class="mobile-toc-header-content">
-        <h3 class="mobile-toc-title">
-          {{ showHome ? 'Trending Questions' : currentTOCTitle }}
-        </h3>
-        <button 
-          class="mobile-toc-close" 
-          (click)="closeMobileTOC()"
-          aria-label="Close Table of Contents">
-          ✕
-        </button>
-      </div>
-      
-      <div class="mobile-toc-pagination" *ngIf="tocPagination.totalPages > 1">
-        <div class="pagination-info">{{ tocPaginationInfo }}</div>
-        <div class="pagination-buttons">
-          <button 
-            class="pagination-btn prev-btn"
-            [disabled]="!hasPreviousTOCPage"
-            (click)="goToPreviousTOCPage()"
-            title="Previous page">
-            <lightning-icon iconName="utility:chevronleft" size="xx-small" alternativeText="Previous"></lightning-icon>
-          </button>
-          <button 
-            class="pagination-btn next-btn"
-            [disabled]="!hasNextTOCPage"
-            (click)="goToNextTOCPage()"
-            title="Next page">
-            <lightning-icon iconName="utility:chevronright" size="xx-small" alternativeText="Next"></lightning-icon>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="mobile-toc-list">
-      <ng-container *ngIf="showHome">
-        <div
-          class="mobile-toc-item trending-item"
-          *ngFor="let item of paginatedTrendingQuestions; trackBy: trackByFAQ"
-          [class.active]="isCurrentFAQ(item)"
-          (click)="selectTrendingQuestion(item); closeMobileTOC()"
-        >
-          <div class="mobile-toc-item-title">{{ item.question }}</div>
-          <div class="mobile-toc-item-indicator" *ngIf="isCurrentFAQ(item)">🔥</div>
-        </div>
-      </ng-container>
-
-      <ng-container *ngIf="!showHome">
-        <div
-          class="mobile-toc-item"
-          *ngFor="let item of paginatedCurrentFAQList; trackBy: trackByFAQ"
-          [class.active]="isCurrentFAQ(item)"
-          (click)="scrollToFAQ(item); closeMobileTOC()"
-        >
-          <div class="mobile-toc-item-title">{{ item.question }}</div>
-          <div class="mobile-toc-item-indicator" *ngIf="isCurrentFAQ(item)">📍</div>
-        </div>
-      </ng-container>
-    </div>
-  </div>
-</aside>
--->
 
 
 <ng-template #faqListTemplate let-faqItems="faqItems">

@@ -1,0 +1,42 @@
+<p>
+  All DSP rules engines follow the same structured process — defined input,
+  transformation logic, and an action on the target. What sets them apart is how
+  they receive input:
+</p>
+<ul>
+  <li>
+    <strong>#Batch</strong> — Runs asynchronously on all records returned by a
+    query, with full execution logs.
+  </li>
+  <li>
+    <strong>#Trigger</strong> — Fires automatically on the source object's DML
+    events (insert, update, delete, undelete), using the triggering records as
+    input.
+  </li>
+  <li>
+    <strong>#Data List</strong> — Displays query results to users from a
+    predefined SOQL query. Users can Create, Update, Delete, or Clone records
+    directly on the results, or select specific records to act on.
+  </li>
+  <li><strong>#Action Button</strong> — Two modes:</li>
+  <ul>
+    <li>
+      <em>Connection-based:</em> Runs as a global action with no input, or with
+      input chained from a Data List.
+    </li>
+    <li>
+      <em>Direction-based:</em> Uses either the current Lightning record or
+      selected records from a Data List as input.
+    </li>
+  </ul>
+
+  <li>
+    <strong>#Data Loader</strong> — Like #Batch, but takes input from an
+    uploaded CSV instead of a query.
+  </li>
+</ul>
+<p>
+  <strong>In short:</strong> every engine orchestrates data the same way —
+  input, transformation logic, action. They differ only in where the input comes
+  from and how they execute (async vs. sync).
+</p>
