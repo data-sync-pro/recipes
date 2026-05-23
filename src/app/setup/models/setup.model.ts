@@ -17,7 +17,7 @@ export interface NavNode {
   defaultExpanded?: boolean;     // for items with children: start expanded?
 }
 
-export type BlockType = "h2" | "h3" | "h4" | "p" | "ul" | "ol" | "image" | "video" | "code" | "callout" | "instruction" | "table";
+export type BlockType = "h2" | "h3" | "h4" | "p" | "ul" | "ol" | "image" | "video" | "code" | "callout" | "instruction" | "table" | "tabs" | "fields" | "field-groups";
 
 export type CalloutVariant = "info" | "warning" | "error" | "success";
 
@@ -30,6 +30,22 @@ export interface TableColumn {
 
 export type ImageSize = "small" | "medium" | "large" | "full";
 
+export interface TabItem {
+  label: string;
+  children: Block[];
+}
+
+export interface FieldItem {
+  name: string;
+  required?: boolean;
+  description: string;
+}
+
+export interface FieldGroup {
+  title: string;
+  fields: FieldItem[];
+}
+
 export interface Block {
   type: BlockType;
   content?: string;
@@ -40,9 +56,15 @@ export interface Block {
   src?: string;        // video
   language?: string;   // code
   variant?: CalloutVariant; // callout
+  title?: string;      // callout - optional bold heading rendered above content
   steps?: string[];    // instruction - list of steps before the image
   columns?: TableColumn[];  // table
   rows?: Record<string, string>[];  // table
+  items?: TabItem[];   // tabs
+  fields?: FieldItem[]; // fields
+  groups?: FieldGroup[]; // field-groups
+  filterPlaceholder?: string; // field-groups - placeholder text for the filter input
+  defaultExpanded?: boolean; // h3 - start expanded instead of collapsed
 }
 
 export interface Page {

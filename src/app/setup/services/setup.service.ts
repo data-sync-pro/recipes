@@ -115,6 +115,14 @@ export class SetupService {
   }
 
   /**
+   * Synchronous accessor for the already-loaded nav tree. Returns [] until
+   * getNavTree() has resolved at least once (SetupComponent loads it on init).
+   */
+  getCachedNavTree(): NavNode[] {
+    return this.navTreeCache ?? [];
+  }
+
+  /**
    * Find a node by slug in the tree
    */
   findNodeBySlug(nodes: NavNode[], slug: string): NavNode | null {

@@ -40,7 +40,7 @@
 
   <!-- Paragraph -->
   <ng-container *ngSwitchCase="'p'">
-    <p class="block-p" [innerHTML]="block.content"></p>
+    <p class="block-p" [innerHTML]="renderContent(block.content)"></p>
     <ng-container *ngIf="block.children">
       <app-setup-block
         *ngFor="let child of block.children; trackBy: trackByIndex"
@@ -50,19 +50,37 @@
     </ng-container>
   </ng-container>
 
-  <!-- Unordered List -->
-  <ul *ngSwitchCase="'ul'" class="block-list">
-    <li *ngFor="let child of block.children; trackBy: trackByIndex">
-      <app-setup-block [block]="child" [basePath]="basePath"></app-setup-block>
-    </li>
-  </ul>
+  <!-- Unordered List - single child renders inline without a bullet -->
+  <ng-container *ngSwitchCase="'ul'">
+    <app-setup-block
+      *ngIf="block.children?.length === 1; else multipleUl"
+      [block]="block.children![0]"
+      [basePath]="basePath">
+    </app-setup-block>
+    <ng-template #multipleUl>
+      <ul *ngIf="(block.children?.length || 0) > 1" class="block-list">
+        <li *ngFor="let child of block.children; trackBy: trackByIndex">
+          <app-setup-block [block]="child" [basePath]="basePath"></app-setup-block>
+        </li>
+      </ul>
+    </ng-template>
+  </ng-container>
 
-  <!-- Ordered List -->
-  <ol *ngSwitchCase="'ol'" class="block-list block-list-ordered">
-    <li *ngFor="let child of block.children; trackBy: trackByIndex">
-      <app-setup-block [block]="child" [basePath]="basePath"></app-setup-block>
-    </li>
-  </ol>
+  <!-- Ordered List - single child renders inline without a number -->
+  <ng-container *ngSwitchCase="'ol'">
+    <app-setup-block
+      *ngIf="block.children?.length === 1; else multipleOl"
+      [block]="block.children![0]"
+      [basePath]="basePath">
+    </app-setup-block>
+    <ng-template #multipleOl>
+      <ol *ngIf="(block.children?.length || 0) > 1" class="block-list block-list-ordered">
+        <li *ngFor="let child of block.children; trackBy: trackByIndex">
+          <app-setup-block [block]="child" [basePath]="basePath"></app-setup-block>
+        </li>
+      </ol>
+    </ng-template>
+  </ng-container>
 
   <!-- Image -->
   <figure *ngSwitchCase="'image'" class="block-figure" [attr.data-size]="block.size || 'full'" appSimpleZoomable [enableHoverZoom]="false">
@@ -91,16 +109,53 @@
   <pre *ngSwitchCase="'code'" class="block-code"><code #codeBlock [class]="'language-' + getPrismLanguage(block.language)">{{ block.content }}</code></pre>
 
   <!-- Callout -->
-  <div *ngSwitchCase="'callout'" class="block-callout" [attr.data-variant]="block.variant || 'info'">
-    <span class="callout-icon">
-      <ng-container [ngSwitch]="block.variant">
-        <mat-icon *ngSwitchCase="'warning'">warning</mat-icon>
-        <mat-icon *ngSwitchCase="'error'">error</mat-icon>
-        <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
-        <mat-icon *ngSwitchDefault>info</mat-icon>
-      </ng-container>
-    </span>
-    <span class="callout-content">{{ block.content }}</span>
+  <div *ngSwitchCase="'callout'" class="block-callout" [attr.data-variant]="block.variant || 'info'" [class.has-title]="!!block.title">
+    <!-- With title: header (icon + title) on top, body below -->
+    <ng-container *ngIf="block.title">
+      <div class="callout-header">
+        <span class="callout-icon">
+          <ng-container [ngSwitch]="block.variant">
+            <mat-icon *ngSwitchCase="'warning'">warning</mat-icon>
+            <mat-icon *ngSwitchCase="'error'">error</mat-icon>
+            <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
+            <mat-icon *ngSwitchDefault>info_outline</mat-icon>
+          </ng-container>
+        </span>
+        <div class="callout-title">{{ block.title }}</div>
+      </div>
+      <div *ngIf="block.content || block.children?.length" class="callout-body">
+        <div *ngIf="block.content" class="callout-content" [innerHTML]="renderContent(block.content)"></div>
+        <ng-container *ngIf="block.children">
+          <app-setup-block
+            *ngFor="let child of block.children; trackBy: trackByIndex"
+            [block]="child"
+            [basePath]="basePath">
+          </app-setup-block>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <!-- Without title: icon + content inline (original layout, preserves existing callouts) -->
+    <ng-container *ngIf="!block.title">
+      <span class="callout-icon">
+        <ng-container [ngSwitch]="block.variant">
+          <mat-icon *ngSwitchCase="'warning'">warning</mat-icon>
+          <mat-icon *ngSwitchCase="'error'">error</mat-icon>
+          <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
+          <mat-icon *ngSwitchDefault>info_outline</mat-icon>
+        </ng-container>
+      </span>
+      <div class="callout-body">
+        <div *ngIf="block.content" class="callout-content" [innerHTML]="renderContent(block.content)"></div>
+        <ng-container *ngIf="block.children">
+          <app-setup-block
+            *ngFor="let child of block.children; trackBy: trackByIndex"
+            [block]="child"
+            [basePath]="basePath">
+          </app-setup-block>
+        </ng-container>
+      </div>
+    </ng-container>
   </div>
 
   <!-- Instruction (steps + image) -->
@@ -118,6 +173,55 @@
     </figure>
   </div>
 
+  <!-- Tabs -->
+  <div *ngSwitchCase="'tabs'" class="block-tabs">
+    <div class="tabs-header" role="tablist">
+      <button
+        *ngFor="let item of block.items; let i = index; trackBy: trackByIndex"
+        type="button"
+        role="tab"
+        class="tab-button"
+        [class.active]="activeTabIndex === i"
+        [attr.aria-selected]="activeTabIndex === i"
+        (click)="selectTab(i)">
+        {{ item.label }}
+      </button>
+    </div>
+    <div class="tabs-panel" role="tabpanel" *ngIf="block.items && block.items[activeTabIndex] as activeItem">
+      <app-setup-block
+        *ngFor="let child of activeItem.children; trackBy: trackByIndex"
+        [block]="child"
+        [basePath]="basePath">
+      </app-setup-block>
+    </div>
+  </div>
+
+  <!-- Fields (field reference table: name + required + description) -->
+  <table *ngSwitchCase="'fields'" class="block-fields">
+    <thead>
+      <tr>
+        <th class="fields-name-col">Field</th>
+        <th class="fields-desc-col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of block.fields; trackBy: trackByIndex" [class.is-optional]="!item.required">
+        <td class="field-name">
+          <code>{{ item.name }}</code>
+          <span *ngIf="item.required" class="field-required" aria-label="required">*</span>
+        </td>
+        <td class="field-description" [innerHTML]="renderContent(item.description)"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Field Groups (grouped field reference with filter) -->
+  <app-field-groups
+    *ngSwitchCase="'field-groups'"
+    [groups]="block.groups || []"
+    [placeholder]="block.filterPlaceholder || 'Filter fields'">
+  </app-field-groups>
+
   <!-- Table -->
   <table *ngSwitchCase="'table'" class="block-table">
     <thead>
@@ -133,7 +237,7 @@
       <tr *ngFor="let row of block.rows">
         <td *ngFor="let col of block.columns"
             [style.textAlign]="col.align || 'left'"
-            [innerHTML]="row[col.key]">
+            [innerHTML]="renderContent(row[col.key])">
         </td>
       </tr>
     </tbody>

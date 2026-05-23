@@ -10,13 +10,15 @@ import { SetupRoutingModule } from './setup-routing.module';
 import { SetupComponent } from './setup.component';
 import { SetupBlockComponent } from './block/block.component';
 import { SetupCardComponent } from './card/card.component';
+import { FieldGroupsComponent } from './field-groups/field-groups.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     SetupComponent,
     SetupBlockComponent,
-    SetupCardComponent
+    SetupCardComponent,
+    FieldGroupsComponent
   ],
   imports: [
     CommonModule,
