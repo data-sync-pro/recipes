@@ -162,7 +162,9 @@ export class SetupService {
     const traverse = (nodeList: NavNode[]) => {
       for (const node of nodeList) {
         if (node.visible !== false) {
-          slugs.push(node.slug);
+          if (node.slug) {
+            slugs.push(node.slug);
+          }
           if (node.children) {
             traverse(node.children);
           }

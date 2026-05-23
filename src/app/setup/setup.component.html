@@ -1,9 +1,9 @@
 <div class="setup-page">
-  <div class="setup-banner">
+  <!-- <div class="setup-banner">
     <div class="setup-banner-content">
       <h1 class="setup-banner-title">Getting Started</h1>
     </div>
-  </div>
+  </div> -->
 
   <div class="setup-main-layout">
     <!-- Left Sidebar - Setup Titles -->
@@ -24,7 +24,8 @@
              [class.active]="isActive(node)"
              [class.in-path]="isInActivePath(node)"
              [class.has-children]="node.children?.length"
-             (click)="selectSetup(node.slug)">
+             [class.expand-only]="node.expandOnly"
+             (click)="onNodeClick(node)">
           <span class="nav-label">{{ node.label }}</span>
           <!-- <mat-icon *ngIf="node.children?.length"
                     class="expand-icon"

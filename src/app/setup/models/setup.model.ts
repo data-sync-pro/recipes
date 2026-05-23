@@ -11,10 +11,11 @@ export interface SetupIndexItem {
 export interface NavNode {
   id: string;                    // unique identifier
   label: string;                 // sidebar display text
-  slug: string;                  // URL path segment, all items have pages
+  slug?: string;                 // URL path segment; omitted for pure grouping nodes
   children?: NavNode[];          // nested items (recursive)
   visible?: boolean;             // default true, false = hidden from sidebar
   defaultExpanded?: boolean;     // for items with children: start expanded?
+  expandOnly?: boolean;          // grouping node: click toggles expand instead of navigating
 }
 
 export type BlockType = "h2" | "h3" | "h4" | "p" | "ul" | "ol" | "image" | "video" | "code" | "callout" | "instruction" | "table" | "tabs" | "fields" | "field-groups";

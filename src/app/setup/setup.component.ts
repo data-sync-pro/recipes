@@ -155,8 +155,11 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private getFirstPageSlug(nodes: NavNode[]): string | null {
     for (const node of nodes) {
-      if (node.visible !== false) {
-        return node.slug;
+      if (node.visible === false) continue;
+      if (node.slug) return node.slug;
+      if (node.children?.length) {
+        const childSlug = this.getFirstPageSlug(node.children);
+        if (childSlug) return childSlug;
       }
     }
     return null;
@@ -246,13 +249,28 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   selectSetup(slug: string): void {
-    // Build the full path for the URL
+    // Build the full path for the URL (skip grouping nodes with no slug)
     const path = this.setupService.getPathToNode(this.navTree, slug);
     if (path && path.length > 0) {
-      const slugPath = path.map(n => n.slug);
+      const slugPath = path.map(n => n.slug).filter((s): s is string => !!s);
       this.router.navigate(['/setup', ...slugPath]);
     } else {
       this.router.navigate(['/setup', slug]);
+    }
+  }
+
+  onNodeClick(node: NavNode): void {
+    if (node.expandOnly && node.children?.length) {
+      if (this.expandedIds.has(node.id)) {
+        this.expandedIds.delete(node.id);
+      } else {
+        this.expandedIds.add(node.id);
+      }
+      this.cdr.markForCheck();
+      return;
+    }
+    if (node.slug) {
+      this.selectSetup(node.slug);
     }
   }
 
