@@ -1,0 +1,60 @@
+{
+  "title": "Data Loader Settings",
+  "blocks": [
+    {
+      "type": "field-groups",
+      "filterPlaceholder": "Filter fields",
+      "groups": [
+        {
+          "title": "Execution Settings",
+          "fields": [
+            {
+              "name": "Action to Bulk API?",
+              "description": "When enabled, DSP utilizes the bulk API for data submission rather than direct DML operations. Adjust the Batch Size for the best performance outcome with the considerations of the governor limits to be consumed especially the CPU time and heap size if too many records are involved in a single batch. The actual DML results can be checked in the Setup -> Bulk Data Load Jobs, instead of in the Batch Executions."
+            },
+            {
+              "name": "Batch Size",
+              "description": "The number of source records taken into each batch execution."
+            },
+            {
+              "name": "Pipeline",
+              "description": "The Pipeline this Executable belongs to. Pipelines group related Executables so you can navigate, filter, and reorder them together. Within a Pipeline, Executables run/display in the order set by their sequence number."
+            },
+            {
+              "name": "Serial Mode?",
+              "description": "When enabled, DSP runs in serial mode. Note: serial mode executes slower since one batch has to wait for the previous one to complete before getting started. Check it if you need to guarantee the execution order or when you face the limitation - 'Future method cannot be called from a future or batch method'."
+            },
+            {
+              "name": "Seq No.",
+              "description": "Sequence number of this Executable within its Pipeline, determining the order of batch executions, triggers, data lists, and action buttons."
+            },
+            {
+              "name": "Log to File?",
+              "description": "When enabled, DSP stores the matched target records and the pre-action request and response payloads in a ContentDocument linked to each Batch Execution. These logs provide an audit trail and allow data restoration if required. Note: File logging increases runtime overhead and consumes additional storage."
+            },
+            {
+              "name": "Stop Execution When a Batch Fails?",
+              "description": "When enabled, DSP will attempt to stop the remaining batches if any batch fails."
+            },
+            {
+              "name": "Error Out if Source Attributes Missing?",
+              "description": "When enabled, during execution, if there is any source attribute part of the field mappings that is missing from the payload, DSP will error out. Otherwise, DSP will treat it as NULL."
+            },
+            {
+              "name": "Relax Field Mapping's Type Check?",
+              "description": "When enabled, field mappings resolving a String type will be allowed to save even if the mapped field's type is not a String. DSP will try to convert the String value during run time to the mapped field's type, e.g. Date, Double, etc. For Date, Datetime, and Time, the string format should follow what the JSON.deserialize() takes in its parameter. Note: formulas & functions still enforce type checking on their parameters even if it is checked."
+            },
+            {
+              "name": "Execution Finalizer",
+              "description": "Apex class name that implements the ExecutionFinalizer interface and runs after the Execution is completed."
+            },
+            {
+              "name": "Access Permissions",
+              "description": "Comma separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

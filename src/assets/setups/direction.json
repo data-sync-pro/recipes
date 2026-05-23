@@ -1,0 +1,9 @@
+{
+  "title": "Direction",
+  "blocks": [
+    {
+      "type": "p",
+      "content": "A Direction defines the Source and Target Connections for Executables, providing a reusable configuration for specifying Executables' input and output objects."
+    }
+  ]
+}

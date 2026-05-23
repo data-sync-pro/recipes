@@ -2,12 +2,13 @@
   {
     "id": "data-model",
     "label": "Data Model",
-    "slug": "data-model",
+    "expandOnly": true,
     "defaultExpanded": true,
     "children": [
-      { "id": "objects-relationships", 
-      "label": "Objects & Relationships", 
-      "slug": "objects-relationships" 
+      { "id": "data-model-overview", "label": "Overview", "slug": "data-model" },
+      { "id": "objects-relationships",
+      "label": "Objects & Relationships",
+      "slug": "objects-relationships"
       },
       {
         "id": "direction-based-executable",
@@ -23,23 +24,81 @@
   {
     "id": "setup",
     "label": "Setup",
-    "slug": "permissions",
+    "slug": "install-package",
     "defaultExpanded": true,
     "children": [
       { "id": "install-package", "label": "Install Package", "slug": "install-package" },
       { "id": "permissions", "label": "Permissions", "slug": "permissions" },
       {
         "id": "connection",
-        "label": "Establish Connections",
-        "slug": "connection",
+        "label": "Connection",
+        "expandOnly": true,
         "defaultExpanded": true,
         "children": [
+          { "id": "connection-overview", "label": "Overview", "slug": "connection" },
           { "id": "current-org", "label": "Current Org", "slug": "current-org" },
-          { "id": "oauth", "label": "OAuth 2.0 (Refresh Token Flow)", "slug": "oauth" },
-          { "id": "username-password", "label": "Username & Password", "slug": "username-password", "visible": false }
+          { "id": "oauth", "label": "OAuth 2.0 (Refresh Token Flow)", "slug": "oauth" }
         ]
       },
-      { "id": "trigger", "label": "Apex Trigger Hookup", "slug": "trigger" },
+      {
+        "id": "direction",
+        "label": "Direction",
+        "slug": "direction",
+        "defaultExpanded": true,
+        "children": [
+          { "id": "new-direction", "label": "New Direction", "slug": "new-direction" }
+        ]
+      },
+      {
+        "id": "pipeline",
+        "label": "Pipeline",
+        "slug": "pipeline",
+        "defaultExpanded": true,
+        "children": [
+          { "id": "new-pipeline", "label": "New Pipeline", "slug": "new-pipeline" },
+          { "id": "pipeline-settings", "label": "Pipeline Settings", "slug": "pipeline-settings" }
+        ]
+      },
+      {
+        "id": "executable",
+        "label": "Executable",
+        "slug": "executable",
+        "defaultExpanded": true,
+        "children": [
+          { "id": "new-executable", "label": "New Executable", "slug": "new-executable" },
+          { "id": "batch-settings", "label": "#Batch Settings", "slug": "batch-settings" },
+          { "id": "data-list-settings", "label": "#Data List Settings", "slug": "data-list-settings" },
+          { "id": "apex-trigger-hookup", "label": "Apex Trigger Hookup", "slug": "apex-trigger-hookup" },
+          { "id": "trigger-settings", "label": "#Trigger Settings", "slug": "trigger-settings" },
+          { "id": "action-button-settings", "label": "#Action Button Settings", "slug": "action-button-settings" },
+          { "id": "data-loader-settings", "label": "#Data Loader Settings", "slug": "data-loader-settings" },
+          {
+            "id": "process",
+            "label": "Process",
+            "slug": "process",
+            "defaultExpanded": true,
+            "children": [
+              { "id": "process-retrieve", "label": "Retrieve", "slug": "process-retrieve" },
+              { "id": "process-preview", "label": "Preview", "slug": "process-preview" },
+              { "id": "process-input", "label": "Input", "slug": "process-input" },
+              { "id": "process-scoping", "label": "Scoping", "slug": "process-scoping" },
+              { "id": "process-match", "label": "Match", "slug": "process-match" },
+              { "id": "process-mapping", "label": "Mapping", "slug": "process-mapping" },
+              { "id": "process-action", "label": "Action", "slug": "process-action" },
+              { "id": "process-verify", "label": "Verify", "slug": "process-verify" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "schedule",
+        "label": "Schedule",
+        "slug": "schedule",
+        "defaultExpanded": true,
+        "children": [
+          { "id": "new-schedule", "label": "New Schedule", "slug": "new-schedule" }
+        ]
+      },
       {
         "id": "lwc",
         "label": "Lightning Web Components",
