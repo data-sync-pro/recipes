@@ -1,9 +1,0 @@
-{
-  "title": "Schedule",
-  "blocks": [
-    {
-      "type": "p",
-      "content": "A Schedule defines and manages the scheduling of a batch job item for a Pipeline, Executable, or Apex Class, including its frequency, timing, activation, running user, and job status."
-    }
-  ]
-}

@@ -51,7 +51,7 @@
           ]
         },
         {
-          "title": "# Action Button",
+          "title": "#Action Button",
           "fields": [
             {
               "name": "Visible Action Buttons",
@@ -60,7 +60,7 @@
           ]
         },
         {
-          "title": "# Data List",
+          "title": "#Data List",
           "fields": [
             {
               "name": "Variant",

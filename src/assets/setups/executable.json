@@ -1,9 +1,0 @@
-{
-  "title": "Executable",
-  "blocks": [
-    {
-      "type": "p",
-      "content": "An Executable provides a modular, declarative, rules-driven, simple yet powerful framework for scalable data operations in Salesforce, with clear input, output, and powerful transformation capabilities."
-    }
-  ]
-}

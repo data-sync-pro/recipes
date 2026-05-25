@@ -1,12 +1,12 @@
 {
-  "title": "Trigger Settings",
+  "title": "#Trigger Settings",
   "blocks": [
     {
       "type": "field-groups",
       "filterPlaceholder": "Filter fields",
       "groups": [
         {
-          "title": "Trigger Events",
+          "title": "#Trigger Events",
           "fields": [
             {
               "name": "Before Insert Trigger?",

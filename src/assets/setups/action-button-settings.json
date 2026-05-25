@@ -1,12 +1,12 @@
 {
-  "title": "Action Button Settings",
+  "title": "#Action Button Settings",
   "blocks": [
     {
       "type": "field-groups",
       "filterPlaceholder": "Filter fields",
       "groups": [
         {
-          "title": "Action Button",
+          "title": "#Action Button",
           "fields": [
             {
               "name": "Action Button Label",
@@ -64,7 +64,7 @@
           ]
         },
         {
-          "title": "Action Button on Data List",
+          "title": "#Action Button on #Data List",
           "fields": [
             {
               "name": "Q: List Action?",

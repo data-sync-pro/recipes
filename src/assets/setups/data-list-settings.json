@@ -1,12 +1,12 @@
 {
-  "title": "Data List Settings",
+  "title": "#Data List Settings",
   "blocks": [
     {
       "type": "field-groups",
       "filterPlaceholder": "Filter fields",
       "groups": [
         {
-          "title": "Action Button",
+          "title": "#Action Button",
           "fields": [
             {
               "name": "Action Button Label",
@@ -214,11 +214,11 @@
             },
             {
               "name": "Q: Download as JSON?",
-              "description": "When checked, users can download the query results as a JSON file."
+              "description": "If checked, users can download the query results as a JSON file."
             },
             {
-              "name": "Q: See Labels While Building SOQL?",
-              "description": "When enabled, users see object and field labels instead of API names while building SOQL queries—useful for business users who may not be familiar with API naming conventions. This setting applies only when the Data List is used in Lightning App Builder."
+              "name": "Q: See Labels While Building Query?",
+              "description": "When enabled, users see object and field labels instead of API names while building a query — useful for business users who may not be familiar with API naming conventions."
             },
             {
               "name": "Q: Column Widths Mode",

@@ -9,33 +9,77 @@
     <!-- Left Sidebar - Setup Titles -->
     <aside class="left-sidebar">
       <div class="sidebar-sticky">
-        <div class="category-list">
+        <div class="sidebar-header">
+          <span class="sidebar-label">User Manual</span>
+          <span class="sidebar-count">{{ totalPageCount }} pages</span>
+        </div>
+
+        <div class="sidebar-filter">
+          <div class="filter-input-wrap" [class.has-value]="!!filterQuery">
+            <mat-icon class="filter-icon">search</mat-icon>
+            <input
+              #filterInput
+              type="text"
+              class="filter-input"
+              placeholder="Filter user manual pages…"
+              [value]="filterQuery"
+              (input)="onFilterChange($any($event.target).value)"
+              (keydown.escape)="clearFilter()"
+              aria-label="Filter setup pages" />
+            <button *ngIf="filterQuery; else kbdHint"
+                    class="filter-clear"
+                    type="button"
+                    (click)="clearFilter()"
+                    aria-label="Clear filter">
+              <mat-icon>close</mat-icon>
+            </button>
+            <ng-template #kbdHint>
+              <span class="filter-kbd" aria-hidden="true">/</span>
+            </ng-template>
+          </div>
+        </div>
+
+        <nav class="category-list" aria-label="Setup navigation">
           <ng-container *ngFor="let node of navTree; trackBy: trackByNodeId">
             <ng-container *ngTemplateOutlet="navNodeTemplate; context: { $implicit: node, level: 0 }"></ng-container>
           </ng-container>
-        </div>
+          <div class="filter-empty" *ngIf="filterQuery && !hasAnyMatch">
+            <mat-icon>search_off</mat-icon>
+            <p>No pages match &ldquo;{{ filterQuery }}&rdquo;</p>
+          </div>
+        </nav>
       </div>
     </aside>
 
     <!-- Recursive template for nav nodes -->
     <ng-template #navNodeTemplate let-node let-level="level">
-      <div class="nav-node" [class.level-0]="level === 0" [class.level-1]="level === 1" [class.level-2]="level === 2" [class.level-3]="level >= 3">
+      <div class="nav-node"
+           *ngIf="isNodeVisible(node)"
+           [class.level-0]="level === 0"
+           [class.level-1]="level === 1"
+           [class.level-2]="level === 2"
+           [class.level-3]="level >= 3">
         <div class="nav-item"
              [class.active]="isActive(node)"
-             [class.in-path]="isInActivePath(node)"
+             [class.in-path]="isInActivePath(node) && !isActive(node)"
              [class.has-children]="node.children?.length"
-             [class.expand-only]="node.expandOnly"
-             (click)="onNodeClick(node)">
+             (click)="onNodeClick(node)"
+             [attr.aria-current]="isActive(node) ? 'page' : null"
+             [attr.aria-expanded]="node.children?.length ? isExpanded(node) : null">
+          <span class="chevron-slot"
+                (click)="node.children?.length && toggleExpand(node, $event)"
+                [attr.role]="node.children?.length ? 'button' : null"
+                [attr.aria-label]="node.children?.length ? (isExpanded(node) ? 'Collapse' : 'Expand') : null">
+            <mat-icon *ngIf="node.children?.length" class="expand-icon">
+              {{ isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+            </mat-icon>
+          </span>
           <span class="nav-label">{{ node.label }}</span>
-          <!-- <mat-icon *ngIf="node.children?.length"
-                    class="expand-icon"
-                    [class.expanded]="isExpanded(node)"
-                    (click)="toggleExpand(node, $event)">
-            {{ isExpanded(node) ? 'expand_less' : 'expand_more' }}
-          </mat-icon> -->
         </div>
         <!-- Children -->
-        <div class="nav-children" *ngIf="node.children?.length && isExpanded(node)">
+        <div class="nav-children"
+             *ngIf="node.children?.length && isExpanded(node)"
+             [class.has-active]="branchHasActive(node)">
           <ng-container *ngFor="let child of node.children; trackBy: trackByNodeId">
             <ng-container *ngTemplateOutlet="navNodeTemplate; context: { $implicit: child, level: level + 1 }"></ng-container>
           </ng-container>

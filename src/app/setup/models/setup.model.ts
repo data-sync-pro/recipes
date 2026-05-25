@@ -7,15 +7,15 @@ export interface SetupIndexItem {
   hidden?: boolean; // hide from sidebar but keep page accessible
 }
 
-// New navigation tree structure - supports infinite nesting
+// New navigation tree structure - supports infinite nesting.
+// Nodes with children but no slug behave as grouping nodes (click toggles
+// expand/collapse). Nodes with children are always expanded by default.
 export interface NavNode {
   id: string;                    // unique identifier
   label: string;                 // sidebar display text
-  slug?: string;                 // URL path segment; omitted for pure grouping nodes
+  slug?: string;                 // URL path segment; omitted for grouping nodes
   children?: NavNode[];          // nested items (recursive)
   visible?: boolean;             // default true, false = hidden from sidebar
-  defaultExpanded?: boolean;     // for items with children: start expanded?
-  expandOnly?: boolean;          // grouping node: click toggles expand instead of navigating
 }
 
 export type BlockType = "h2" | "h3" | "h4" | "p" | "ul" | "ol" | "image" | "video" | "code" | "callout" | "instruction" | "table" | "tabs" | "fields" | "field-groups";

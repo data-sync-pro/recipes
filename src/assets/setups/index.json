@@ -2,8 +2,6 @@
   {
     "id": "data-model",
     "label": "Data Model",
-    "expandOnly": true,
-    "defaultExpanded": true,
     "children": [
       { "id": "data-model-overview", "label": "Overview", "slug": "data-model" },
       { "id": "objects-relationships",
@@ -15,25 +13,21 @@
         "label": "Direction Based Executable",
         "slug": "direction-based-executable"
       },
-      { "id": "connection-based-executable", 
-      "label": "Connection Based Executable", 
-      "slug": "connection-based-executable" 
+      { "id": "connection-based-executable",
+      "label": "Connection Based Executable",
+      "slug": "connection-based-executable"
       }
     ]
   },
   {
     "id": "setup",
     "label": "Setup",
-    "slug": "install-package",
-    "defaultExpanded": true,
     "children": [
       { "id": "install-package", "label": "Install Package", "slug": "install-package" },
       { "id": "permissions", "label": "Permissions", "slug": "permissions" },
       {
         "id": "connection",
         "label": "Connection",
-        "expandOnly": true,
-        "defaultExpanded": true,
         "children": [
           { "id": "connection-overview", "label": "Overview", "slug": "connection" },
           { "id": "current-org", "label": "Current Org", "slug": "current-org" },
@@ -43,8 +37,6 @@
       {
         "id": "direction",
         "label": "Direction",
-        "slug": "direction",
-        "defaultExpanded": true,
         "children": [
           { "id": "new-direction", "label": "New Direction", "slug": "new-direction" }
         ]
@@ -52,8 +44,6 @@
       {
         "id": "pipeline",
         "label": "Pipeline",
-        "slug": "pipeline",
-        "defaultExpanded": true,
         "children": [
           { "id": "new-pipeline", "label": "New Pipeline", "slug": "new-pipeline" },
           { "id": "pipeline-settings", "label": "Pipeline Settings", "slug": "pipeline-settings" }
@@ -62,8 +52,6 @@
       {
         "id": "executable",
         "label": "Executable",
-        "slug": "executable",
-        "defaultExpanded": true,
         "children": [
           { "id": "new-executable", "label": "New Executable", "slug": "new-executable" },
           { "id": "batch-settings", "label": "#Batch Settings", "slug": "batch-settings" },
@@ -75,8 +63,6 @@
           {
             "id": "process",
             "label": "Process",
-            "slug": "process",
-            "defaultExpanded": true,
             "children": [
               { "id": "process-retrieve", "label": "Retrieve", "slug": "process-retrieve" },
               { "id": "process-preview", "label": "Preview", "slug": "process-preview" },
@@ -93,8 +79,6 @@
       {
         "id": "schedule",
         "label": "Schedule",
-        "slug": "schedule",
-        "defaultExpanded": true,
         "children": [
           { "id": "new-schedule", "label": "New Schedule", "slug": "new-schedule" }
         ]
@@ -103,7 +87,6 @@
         "id": "lwc",
         "label": "Lightning Web Components",
         "slug": "add-dsp-components-to-lightning-app-builder",
-        "defaultExpanded": true,
         "children": [
           { "id": "data-lists", "label": "Pipeline Data Lists", "slug": "data-lists" },
           { "id": "quick-links", "label": "Pipeline Data List Quick Links", "slug": "quick-links" },
@@ -118,8 +101,6 @@
   {
     "id": "apex-interfaces",
     "label": "Apex Interfaces",
-    "slug": "data-model",
-    "defaultExpanded": true,
     "children": [
       {
         "id": "SalesforceDataTransformer",
@@ -142,5 +123,5 @@
       }
     ]
   }
-  
+
 ]
