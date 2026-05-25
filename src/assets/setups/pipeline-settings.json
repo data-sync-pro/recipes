@@ -1,0 +1,74 @@
+{
+  "title": "Pipeline Settings",
+  "blocks": [
+    {
+      "type": "field-groups",
+      "filterPlaceholder": "Filter fields",
+      "groups": [
+        {
+          "title": "Information",
+          "fields": [
+            {
+              "name": "Pipeline API Name",
+              "description": "API Name for the Pipeline. If left blank, it automatically defaults to the Pipeline's Name when the record is saved."
+            },
+            {
+              "name": "Template Direction",
+              "description": "Used as a template for creating Executables from this Pipeline."
+            },
+            {
+              "name": "Deployable?",
+              "description": "Indicates whether this Pipeline is deployable; automatically set to true if any associated Executable is deployable."
+            },
+            {
+              "name": "All Internal Users Can Read Executables?",
+              "description": "Update to this field will sync with the \"All Internal Users Have Read Access?\" field of the related Executables. \"All Internal Users Have Read Access?\" is used to share the Executables with All Internal Users for accessing Executables through the record page or the LWCs that are in reference to those Executables, such as the Executable Data List and Pipeline Data Lists."
+            },
+            {
+              "name": "Record-Based Configuration Deployment?",
+              "description": "Specifies whether this Pipeline deploys record-based configuration. When enabled, the Data Sync Pro VS Code plugin exports the source data of all related Executables as JSON, supporting local backup and metadata-driven version control in a code repository."
+            },
+            {
+              "name": "Raw Record",
+              "description": "Opens a full field inspector for this record, showing every field's API name, type, and value, with quick search, edit, and clone."
+            },
+            {
+              "name": "Access Permissions",
+              "description": "Comma separated custom permission names. If set, Pipeline components/execution are accessible only to users who have at least one listed permission."
+            },
+            {
+              "name": "Additional Retrieve Criteria",
+              "description": "Additional SOQL criteria appended to each Executable's Retrieve query, refining data retrieval with extra conditions (e.g., LastModifiedDate > 2022-01-01T00:00:00Z)."
+            },
+            {
+              "name": "Scope Filter",
+              "description": "Shared Scope Filter for this Pipeline, applied in addition to each Executable's individual filters to refine data processing across the entire Pipeline."
+            },
+            {
+              "name": "Origin ID",
+              "description": "Identifier used for matching records during cross-system synchronization. It defaults to the Salesforce record ID on save but can be overridden with a custom unique value. Once established, it must remain unchanged after the initial sync."
+            }
+          ]
+        },
+        {
+          "title": "#Action Button",
+          "fields": [
+            {
+              "name": "Visible Action Buttons",
+              "description": "Maximum number of Action Buttons displayed directly on the Pipeline Action Buttons component. Additional buttons are collapsed as menu items."
+            }
+          ]
+        },
+        {
+          "title": "#Data List",
+          "fields": [
+            {
+              "name": "Variant",
+              "description": "Specifies how Pipeline components are displayed. If not specified, ‘stack’ is used by default."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

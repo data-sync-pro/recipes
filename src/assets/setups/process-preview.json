@@ -1,0 +1,18 @@
+{
+  "title": "Preview",
+  "blocks": [
+    {
+      "type": "p",
+      "content": "The Preview step allow users view source records and inspect transformed values before execution. It does not influence which records are processed."
+    },
+    {
+      "type": "p",
+      "content": "For <strong>#Trigger</strong>, input data comes from the trigger context (records being inserted, updated, or deleted). For <strong>#Action Button</strong>, input data comes from the loaded record in the Lightning Record Page."
+    },
+    {
+      "type": "image",
+      "content": "image/process/preview.png",
+      "alt": "Preview step showing source records and transformed values"
+    }
+  ]
+}

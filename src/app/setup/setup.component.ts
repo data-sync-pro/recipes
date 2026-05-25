@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
@@ -16,12 +16,20 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   private destroy$ = new Subject<void>();
   private observer: IntersectionObserver | null = null;
 
+  @ViewChild('filterInput') filterInputRef?: ElementRef<HTMLInputElement>;
+
   // Legacy - kept for backward compatibility
   setupIndex: SetupIndexItem[] = [];
 
   // New navigation tree
   navTree: NavNode[] = [];
   expandedIds: Set<string> = new Set();
+
+  // Filter
+  filterQuery: string = '';
+  private preFilterExpanded: Set<string> | null = null;
+  private visibleNodeIds: Set<string> | null = null;
+  private contentIndex: Map<string, string> | null = null;
 
   currentSetup: Page | null = null;
   currentSlug: string | null = null;
@@ -98,6 +106,7 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
           this.navTree = tree;
           this.initializeExpandedState(tree);
           this.watchRoute();
+          this.prefetchContentIndex();
         },
         error: () => {
           this.isLoading = false;
@@ -106,13 +115,27 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
       });
   }
 
+  private prefetchContentIndex(): void {
+    this.setupService.getContentIndex()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(index => {
+        this.contentIndex = index;
+        // If the user is already filtering, re-run with content matches now available.
+        if (this.filterQuery) {
+          this.visibleNodeIds = this.computeVisibleIds(
+            this.navTree,
+            this.filterQuery.toLowerCase()
+          );
+          this.expandAllInSet(this.navTree, this.visibleNodeIds);
+          this.cdr.markForCheck();
+        }
+      });
+  }
+
   private initializeExpandedState(nodes: NavNode[]): void {
     for (const node of nodes) {
-      // Expand by default if has children (unless explicitly set to false)
-      if (node.children?.length && node.defaultExpanded !== false) {
+      if (node.children?.length) {
         this.expandedIds.add(node.id);
-      }
-      if (node.children) {
         this.initializeExpandedState(node.children);
       }
     }
@@ -155,8 +178,11 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private getFirstPageSlug(nodes: NavNode[]): string | null {
     for (const node of nodes) {
-      if (node.visible !== false) {
-        return node.slug;
+      if (node.visible === false) continue;
+      if (node.slug) return node.slug;
+      if (node.children?.length) {
+        const childSlug = this.getFirstPageSlug(node.children);
+        if (childSlug) return childSlug;
       }
     }
     return null;
@@ -246,13 +272,29 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   selectSetup(slug: string): void {
-    // Build the full path for the URL
+    // Build the full path for the URL (skip grouping nodes with no slug)
     const path = this.setupService.getPathToNode(this.navTree, slug);
     if (path && path.length > 0) {
-      const slugPath = path.map(n => n.slug);
+      const slugPath = path.map(n => n.slug).filter((s): s is string => !!s);
       this.router.navigate(['/setup', ...slugPath]);
     } else {
       this.router.navigate(['/setup', slug]);
+    }
+  }
+
+  onNodeClick(node: NavNode): void {
+    // Grouping node (no slug): click toggles expand
+    if (!node.slug && node.children?.length) {
+      if (this.expandedIds.has(node.id)) {
+        this.expandedIds.delete(node.id);
+      } else {
+        this.expandedIds.add(node.id);
+      }
+      this.cdr.markForCheck();
+      return;
+    }
+    if (node.slug) {
+      this.selectSetup(node.slug);
     }
   }
 
@@ -281,8 +323,130 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
     return path?.some(n => n.id === node.id) || false;
   }
 
+  branchHasActive(node: NavNode): boolean {
+    if (!this.currentSlug) return false;
+    if (node.slug === this.currentSlug) return true;
+    return node.children?.some(c => this.branchHasActive(c)) ?? false;
+  }
+
   trackByNodeId(_: number, node: NavNode): string {
     return node.id;
+  }
+
+  // ==================== Filter ====================
+
+  get totalPageCount(): number {
+    return this.setupService.flattenSlugs(this.navTree).length;
+  }
+
+  get hasAnyMatch(): boolean {
+    if (!this.filterQuery) return true;
+    return (this.visibleNodeIds?.size ?? 0) > 0;
+  }
+
+  isNodeVisible(node: NavNode): boolean {
+    if (!this.visibleNodeIds) return true;
+    return this.visibleNodeIds.has(node.id);
+  }
+
+  onFilterChange(value: string): void {
+    const previouslyEmpty = !this.filterQuery;
+    this.filterQuery = value;
+
+    if (this.filterQuery && previouslyEmpty) {
+      this.preFilterExpanded = new Set(this.expandedIds);
+    }
+
+    if (!this.filterQuery) {
+      this.visibleNodeIds = null;
+      if (this.preFilterExpanded) {
+        this.expandedIds = this.preFilterExpanded;
+        this.preFilterExpanded = null;
+      }
+    } else {
+      this.visibleNodeIds = this.computeVisibleIds(
+        this.navTree,
+        this.filterQuery.toLowerCase()
+      );
+      // Auto-expand every parent of a visible node so matches are revealed.
+      this.expandAllInSet(this.navTree, this.visibleNodeIds);
+    }
+
+    this.cdr.markForCheck();
+  }
+
+  clearFilter(): void {
+    this.onFilterChange('');
+    this.filterInputRef?.nativeElement.focus();
+  }
+
+  /**
+   * A node is visible when it matches the query, OR an ancestor matched
+   * (so the user sees a matched branch in full), OR a descendant matched
+   * (so the user can navigate down to the match).
+   */
+  private computeVisibleIds(nodes: NavNode[], q: string): Set<string> {
+    const visible = new Set<string>();
+
+    const addSubtree = (node: NavNode) => {
+      visible.add(node.id);
+      node.children?.forEach(addSubtree);
+    };
+
+    const walk = (list: NavNode[], ancestors: NavNode[]): boolean => {
+      let any = false;
+      for (const node of list) {
+        const labelMatch = node.label.toLowerCase().includes(q);
+        const contentMatch =
+          !labelMatch &&
+          !!node.slug &&
+          !!this.contentIndex?.get(node.slug)?.includes(q);
+        const selfMatch = labelMatch || contentMatch;
+        if (selfMatch) {
+          ancestors.forEach(a => visible.add(a.id));
+          addSubtree(node);
+          if (node.children) {
+            walk(node.children, [...ancestors, node]);
+          }
+          any = true;
+        } else if (node.children) {
+          const childMatched = walk(node.children, [...ancestors, node]);
+          if (childMatched) {
+            visible.add(node.id);
+            ancestors.forEach(a => visible.add(a.id));
+            any = true;
+          }
+        }
+      }
+      return any;
+    };
+
+    walk(nodes, []);
+    return visible;
+  }
+
+  private expandAllInSet(nodes: NavNode[], visible: Set<string>): void {
+    for (const node of nodes) {
+      if (visible.has(node.id) && node.children?.length) {
+        this.expandedIds.add(node.id);
+        this.expandAllInSet(node.children, visible);
+      }
+    }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onDocumentKeydown(event: KeyboardEvent): void {
+    if (event.key !== '/' || event.metaKey || event.ctrlKey || event.altKey) return;
+    const target = event.target as HTMLElement | null;
+    const isEditable =
+      !!target &&
+      (target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable);
+    if (isEditable) return;
+    event.preventDefault();
+    this.filterInputRef?.nativeElement.focus();
+    this.filterInputRef?.nativeElement.select();
   }
 
   scrollToBlock(content: string): void {
