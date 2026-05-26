@@ -1,0 +1,35 @@
+{
+  "title": "Verify",
+  "blocks": [
+    {
+      "type": "p",
+      "content": "Verify (available only in <strong>#Batch</strong>) defines a query on the target object. After each Batch Execution, the batch log includes a Verify tab where DSP automatically queries and displays target records with the fields defined in the Executable's Verify step."
+    },
+    {
+      "type": "p",
+      "content": "Verify is a built-in inspection step in <strong>#Batch</strong> that lets you query and review records on the target object — without leaving DSP. It runs at two levels:"
+    },
+    {
+      "type": "ul",
+      "children": [
+        {
+          "type": "p",
+          "content": "<strong>On a #Batch Executable (Verify tab)</strong> — Run an ad-hoc SOQL query against the target object to spot-check data before or after an execution. Useful for confirming records meet expected criteria, validating field values, or building queries with the Query Builder."
+        },
+        {
+          "type": "p",
+          "content": "<strong>On a #Batch Execution record (Verify tab)</strong> — Automatically scoped to the target records processed by that specific run, so you can review exactly which records were affected and confirm the batch produced the expected outcome."
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "content": "Together, these views make it easy to validate logic during build, troubleshoot after a run, and audit results for compliance — all using familiar SOQL, directly inside DSP."
+    },
+    {
+      "type": "image",
+      "content": "image/process/verify.png",
+      "alt": "Verify step querying target object records inside DSP"
+    }
+  ]
+}

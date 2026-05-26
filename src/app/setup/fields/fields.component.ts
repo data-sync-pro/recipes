@@ -1,14 +1,16 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { FieldGroup } from '../models/setup.model';
+import { FieldGroup, FieldItem } from '../models/setup.model';
 
 @Component({
-  selector: 'app-field-groups',
-  templateUrl: './field-groups.component.html',
-  styleUrls: ['./field-groups.component.scss'],
+  selector: 'app-setup-fields',
+  templateUrl: './fields.component.html',
+  styleUrls: ['./fields.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FieldGroupsComponent {
+export class SetupFieldsComponent {
+  @Input() fields: FieldItem[] = [];
   @Input() groups: FieldGroup[] = [];
+  @Input() showFilter = false;
   @Input() placeholder = 'Filter fields';
 
   filterQuery = '';
@@ -17,10 +19,17 @@ export class FieldGroupsComponent {
     this.filterQuery = (event.target as HTMLInputElement).value;
   }
 
+  private get normalizedGroups(): FieldGroup[] {
+    if (this.groups?.length) return this.groups;
+    if (this.fields?.length) return [{ title: '', fields: this.fields }];
+    return [];
+  }
+
   get filteredGroups(): FieldGroup[] {
+    const groups = this.normalizedGroups;
     const q = this.filterQuery.trim().toLowerCase();
-    if (!q) return this.groups;
-    return this.groups
+    if (!q) return groups;
+    return groups
       .map(g => ({
         title: g.title,
         fields: g.fields.filter(f =>

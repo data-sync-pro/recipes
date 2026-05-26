@@ -18,7 +18,7 @@ export interface NavNode {
   visible?: boolean;             // default true, false = hidden from sidebar
 }
 
-export type BlockType = "h2" | "h3" | "h4" | "p" | "ul" | "ol" | "image" | "video" | "code" | "callout" | "instruction" | "table" | "tabs" | "fields" | "field-groups";
+export type BlockType = "h2" | "h3" | "h4" | "p" | "ul" | "ol" | "image" | "video" | "code" | "callout" | "instruction" | "table" | "tabs" | "fields";
 
 export type CalloutVariant = "info" | "warning" | "error" | "success";
 
@@ -63,8 +63,8 @@ export interface Block {
   rows?: Record<string, string>[];  // table
   items?: TabItem[];   // tabs
   fields?: FieldItem[]; // fields
-  groups?: FieldGroup[]; // field-groups
-  filterPlaceholder?: string; // field-groups - placeholder text for the filter input
+  groups?: FieldGroup[]; // fields - grouped variant
+  filterPlaceholder?: string; // fields - when set, shows a filter input with this placeholder
   defaultExpanded?: boolean; // h3 - start expanded instead of collapsed
 }
 

@@ -2,7 +2,7 @@
   "title": "#Batch Settings",
   "blocks": [
     {
-      "type": "field-groups",
+      "type": "fields",
       "filterPlaceholder": "Filter fields",
       "groups": [
         {

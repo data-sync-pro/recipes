@@ -196,31 +196,14 @@
     </div>
   </div>
 
-  <!-- Fields (field reference table: name + required + description) -->
-  <table *ngSwitchCase="'fields'" class="block-fields">
-    <thead>
-      <tr>
-        <th class="fields-name-col">Field</th>
-        <th class="fields-desc-col">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of block.fields; trackBy: trackByIndex" [class.is-optional]="!item.required">
-        <td class="field-name">
-          <code>{{ item.name }}</code>
-          <span *ngIf="item.required" class="field-required" aria-label="required">*</span>
-        </td>
-        <td class="field-description" [innerHTML]="renderContent(item.description)"></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Field Groups (grouped field reference with filter) -->
-  <app-field-groups
-    *ngSwitchCase="'field-groups'"
+  <!-- Fields (field reference table: flat or grouped, with optional filter) -->
+  <app-setup-fields
+    *ngSwitchCase="'fields'"
+    [fields]="block.fields || []"
     [groups]="block.groups || []"
+    [showFilter]="!!block.filterPlaceholder"
     [placeholder]="block.filterPlaceholder || 'Filter fields'">
-  </app-field-groups>
+  </app-setup-fields>
 
   <!-- Table -->
   <table *ngSwitchCase="'table'" class="block-table">

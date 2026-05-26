@@ -1,0 +1,88 @@
+{
+  "title": "Action",
+  "blocks": [
+    {
+      "type": "p",
+      "content": "Action defines what operation runs against the target object once Scoping, Match, and Mapping have produced the records to be processed."
+    },
+    {
+      "type": "p",
+      "content": "Action Settings include:"
+    },
+    {
+      "type": "ul",
+      "children": [
+        {
+          "type": "p",
+          "content": "<strong>Target Object & Action</strong> — Choose the target object and the operation to perform: Insert, Update, Upsert, Delete, Undelete, Merge, Publish, or extended actions like Lead Conversion, Send Email, and Bell Notification."
+        },
+        {
+          "type": "p",
+          "content": "<strong>Update Behavior</strong> — Skip Record Update if No Changes, Skip Fields if Target Value Exists, and Skip Null Value Fields give precise control over when and how target fields are written."
+        },
+        {
+          "type": "p",
+          "content": "<strong>DML Controls</strong> — All or Nothing governs whether partial successes are allowed; Bypass Duplicate Rule Alerts suppresses Salesforce duplicate warnings; Use Salesforce Upsert API opts into the native upsert behavior; Disable Feed Tracking suppresses Chatter feed entries for the operation."
+        },
+        {
+          "type": "p",
+          "content": "<strong>Source Writeback</strong> — Optionally write a value back to the source record after a successful action — useful for marking records as processed, deployed, or synced. Configured via Source Object Writeback Field and Source Object Writeback Value."
+        },
+        {
+          "type": "p",
+          "content": "<strong>Action Result Processor</strong> — Plug in custom logic to process the result of each action (e.g., post-action handling, custom logging)."
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "content": "image/process/action.png",
+      "alt": "Action step configuring the target operation and DML behavior"
+    },
+    {
+      "type": "fields",
+      "fields": [
+        {
+          "name": "Skip Record Update if No Changes?",
+          "description": "When checked, records without changes in the target data are excluded from the update operation, preventing unnecessary DML calls and downstream automation from executing."
+        },
+        {
+          "name": "Use Salesforce Upsert API?",
+          "description": "When enabled and the Action is Upsert, DSP will utilize the standard Salesforce Upsert API to execute the action in a single DML operation, without attempting to match the target and treating the Insert and Update as separate processes."
+        },
+        {
+          "name": "Skip Fields if Target Value Exists?",
+          "description": "When enabled, DSP skips assigning values to any target fields that already contain data, preserving existing values during synchronization or import."
+        },
+        {
+          "name": "All or Nothing?",
+          "description": "When enabled, DSP rolls back DML on any failure. In batch executions, only the batches that encounter errors are rolled back. When the Native Upsert API is disabled, DSP splits upserts into separate Insert and Update calls and rolls back only the failing calls. Note: In Trigger contexts, DML always follows all-or-none semantics regardless of this setting."
+        },
+        {
+          "name": "Skip Null Value Fields?",
+          "description": "When enabled, target fields evaluated as NULL per the mapping will be excluded from the request payload."
+        },
+        {
+          "name": "Bypass Duplicate Rule Alerts?",
+          "description": "When enabled, DSP bypasses the Duplicate Rule Alert during target execution. Note: System Administrators always bypass this alert—regardless of this setting—per standard Salesforce behavior."
+        },
+        {
+          "name": "Source Object Writeback Field",
+          "description": "API name of the source object field that receives DSP write-back results for succeeded target actions—including skipped updates."
+        },
+        {
+          "name": "Source Object Writeback Value",
+          "description": "Stores the value written back to the source object's field after a successful target operation, including cases where updates are skipped. When configured for 'Target Record ID(s)', this field contains a comma-separated list of matching target record IDs for each source record."
+        },
+        {
+          "name": "Disable Feed Tracking?",
+          "description": "Applies only when the Target is an integrated Connection."
+        },
+        {
+          "name": "Action Result Processor",
+          "description": "Apex class name that implements ActionResultProcessor. If set, DSP calls it after the action with the results so you can perform custom logging or trigger follow-up processes."
+        }
+      ]
+    }
+  ]
+}
