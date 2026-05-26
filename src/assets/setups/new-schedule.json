@@ -1,0 +1,44 @@
+{
+  "title": "New Schedule",
+  "blocks": [
+    {
+      "type": "callout",
+      "title": "Before You Start",
+      "children": [
+        {
+          "type": "ul",
+          "children": [
+            {
+              "type": "p",
+              "content": "Requires the Data Sync Pro Administrator permission set."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "h3",
+      "content": "1. Navigate to Schedules tab and click New.",
+      "defaultExpanded": true,
+      "children": [
+        {
+          "type": "image",
+          "content": "image/schedule/new-schedule-button.png",
+          "alt": "Click the New button on the Schedules tab"
+        }
+      ]
+    },
+    {
+      "type": "h3",
+      "content": "2. Fill in Schedule Details and click Save.",
+      "defaultExpanded": true,
+      "children": [
+        {
+          "type": "image",
+          "content": "image/schedule/new-schedule-form.png",
+          "alt": "New Schedule form with cron expression and target Executable/Pipeline"
+        }
+      ]
+    }
+  ]
+}

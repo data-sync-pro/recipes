@@ -1,13 +1,13 @@
 <ng-container *ngIf="filteredGroups as visibleGroups">
-  <table class="field-groups-table">
+  <table class="setup-fields-table">
     <colgroup>
       <col class="col-name" />
       <col class="col-desc" />
     </colgroup>
-    <thead>
+    <thead *ngIf="showFilter">
       <tr class="filter-row">
         <th colspan="2">
-          <div class="field-groups-filter">
+          <div class="filter-wrap">
             <mat-icon class="filter-icon" aria-hidden="true">search</mat-icon>
             <input
               type="search"
@@ -22,11 +22,14 @@
     </thead>
     <tbody>
       <ng-container *ngFor="let group of visibleGroups; trackBy: trackByIndex">
-        <tr class="group-row">
+        <tr *ngIf="group.title" class="group-row">
           <td colspan="2">{{ group.title }}</td>
         </tr>
         <tr *ngFor="let item of group.fields; trackBy: trackByIndex" class="field-row">
-          <td class="cell-name"><code>{{ item.name }}</code></td>
+          <td class="cell-name">
+            <code>{{ item.name }}</code>
+            <span *ngIf="item.required" class="field-required" aria-label="required">*</span>
+          </td>
           <td class="cell-desc">{{ item.description }}</td>
         </tr>
       </ng-container>

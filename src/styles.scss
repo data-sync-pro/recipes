@@ -65,6 +65,16 @@ a {
   }
 }
 
+// Setup block <strong> tone-down. Must live globally: setup block injects
+// JSON-authored HTML via [innerHTML], which bypasses Angular's emulated
+// view encapsulation, so component-scoped rules never match it.
+.block-p strong,
+.block-list strong,
+.callout-content strong,
+.block-table strong {
+  font-weight: 500;
+}
+
 // Global table styles (used by setup/block, faq-editor, designer-guide)
 // Note: FAQ has its own scoped table style under .faq-answer table to stay isolated.
 table {
