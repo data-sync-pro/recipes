@@ -97,31 +97,5 @@
         ]
       }
     ]
-  },
-  {
-    "id": "apex-interfaces",
-    "label": "Apex Interfaces",
-    "children": [
-      {
-        "id": "SalesforceDataTransformer",
-        "label": "SalesforceDataTransformer",
-        "slug": "SalesforceDataTransformer"
-      },
-      {
-        "id": "ExecutionFinalizer",
-        "label": "ExecutionFinalizer",
-        "slug": "ExecutionFinalizer"
-      },{
-        "id": "ActionResultProcessor",
-        "label": "ActionResultProcessor",
-        "slug": "ActionResultProcessor"
-      },
-      {
-        "id": "BulkJobStatusSyncer",
-        "label": "BulkJobStatusSyncer",
-        "slug": "BulkJobStatusSyncer"
-      }
-    ]
   }
-
 ]
