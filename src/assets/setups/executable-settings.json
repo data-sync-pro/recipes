@@ -10,7 +10,7 @@
           "fields": [
             {
               "name": "Executable Name",
-              "description": ""
+              "description": "Name of the Executable."
             },
             {
               "name": "Executable API Name",
@@ -22,7 +22,7 @@
             },
             {
               "name": "Direction",
-              "description": ""
+              "description": "The Direction this Executable runs against." 
             },
             {
               "name": "Seq No.",
@@ -30,11 +30,11 @@
             },
             {
               "name": "Owner",
-              "description": ""
+              "description": "The user who owns this Executable."
             },
             {
               "name": "Deployable?",
-              "description": ""
+              "description": "Indicates whether this Executable can be deployed."
             },
             {
               "name": "Raw Record",
@@ -50,7 +50,7 @@
             },
             {
               "name": "Description",
-              "description": ""
+              "description": "A description of the Executable."
             },
             {
               "name": "Specification",
@@ -63,23 +63,23 @@
           "fields": [
             {
               "name": "#Batch",
-              "description": ""
+              "description": "Handles large-volume processing. Replaces Apex batch jobs with declarative transformations, data enrich, cleansing, and high-performance org-to-org migrations."
             },
             {
               "name": "#Trigger",
-              "description": ""
+              "description": "Executes bulkified automation on DML events (insert, update, delete, undelete), bringing rules-driven simplicity to transformations, validations, and downstream actions."
             },
             {
               "name": "#Data List",
-              "description": ""
+              "description": "Turns queries into interactive, configurable tables with rules-driven actions, letting business users filter, explore, edit, and act on records at the list or row level."
             },
             {
               "name": "#Action Button",
-              "description": ""
+              "description": "Adds configurable buttons to the Lightning Pages or Data Lists for guided actions, with support for pre-populated transformations, line editors and workflows."
             },
             {
               "name": "#Data Loader",
-              "description": ""
+              "description": "Enables reusable CSV imports with built-in transformation logic, delivering secure, auditable, and scalable data loading across Salesforce orgs."
             }
           ]
         },
@@ -88,11 +88,11 @@
           "fields": [
             {
               "name": "Source Object Name",
-              "description": ""
+              "description": "Name of the Source Object."
             },
             {
               "name": "Target Object Name",
-              "description": ""
+              "description": "Name of the Target Object."
             },
             {
               "name": "Target Matching Field",
@@ -100,7 +100,7 @@
             },
             {
               "name": "Action",
-              "description": ""
+              "description": "The action to be performed on the target records."
             }
           ]
         }
