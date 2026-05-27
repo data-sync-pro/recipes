@@ -1,0 +1,115 @@
+:host {
+  display: block;
+}
+
+// Collapse with .page-title's 1.5rem bottom margin when this is the first
+// block on the page. Otherwise normal flow with the previous block applies.
+:host-context(.page-title + app-setup-block) {
+  margin-top: -1.5rem;
+}
+
+.setup-fields-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+col.col-name { width: 30%; }
+col.col-desc { width: 70%; }
+
+// Filter row inside thead — toolbar look, not a header look
+.filter-row > th {
+  padding: 0.5rem 0 0.5rem 1rem;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  font-weight: normal;
+  text-align: left;
+}
+
+.filter-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 280px;
+  max-width: 100%;
+  margin-left: auto; // right-align inside the th cell
+
+  .filter-icon {
+    position: absolute;
+    left: 0.625rem;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: #9ca3af;
+    pointer-events: none;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+    font-size: 0.9rem;
+    color: #1f2937;
+    background: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+    &::placeholder { color: #9ca3af; }
+
+    &:focus {
+      border-color: #2252b248;
+    }
+
+    &::-webkit-search-cancel-button { -webkit-appearance: none; }
+  }
+}
+
+// Group divider row inside tbody
+.group-row > td {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+// Field rows
+.field-row > td {
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  color: #333;
+  border-bottom: 1px solid #e2e8f0;
+  line-height: 1.5;
+  vertical-align: top;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.cell-name code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.95em;
+  background: transparent;
+  padding: 0;
+  color: #1f2937;
+}
+
+.field-required {
+  color: #dc2626;
+  margin-left: 0.25em;
+  font-weight: 600;
+}
+
+.empty-row > td {
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #6b7280;
+  background: #f8fafc;
+}

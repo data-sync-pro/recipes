@@ -1,0 +1,80 @@
+{
+  "title": "Scoping",
+  "blocks": [
+    {
+      "type": "p",
+      "content": "Scoping refines source data in-memory — using filters and joins — to define the exact dataset that flows into downstream processing. It's available in every DSP rules engine: <strong>#Batch</strong>, <strong>#Data List</strong>, <strong>#Trigger</strong>, <strong>#Action Button</strong>, and <strong>#Data Loader</strong>."
+    },
+    {
+      "type": "p",
+      "content": "Key functions:"
+    },
+    {
+      "type": "ul",
+      "children": [
+        {
+          "type": "p",
+          "content": "<strong>Scope Filters (in-memory filtering)</strong> — Use DSP formulas and expressions to determine which source records proceed to Match, Mapping, and Action steps."
+        },
+        {
+          "type": "p",
+          "content": "<strong>Source Joins</strong> — Combine source data with another object (from any Connection) or with a JSON array. DSP supports left joins and cross joins, enabling multi-source refinement and dynamic filtering."
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "content": "Scoping is intended for advanced data shaping that can't be expressed in the initial SOQL query (Retrieve). It runs after data is retrieved or uploaded — but before Match, Mapping, and Actions."
+    },
+    {
+      "type": "image",
+      "content": "image/process/scoping.png",
+      "alt": "Scoping step with in-memory filters and joins"
+    },
+    {
+      "type": "fields",
+      "fields": [
+        {
+          "name": "Joiner",
+          "description": "Defines a second record set to form a join with the retrieved source data by using the JOIN_JSON or JOIN_OBJECT function. If matching field(s) are provided, DSP performs a left join; otherwise, it defaults to a cross join (also known as a Cartesian product). Following the join, the combined record set will become the source data for the execution flow. To reference fields from the second record set in the filters or field mappings, utilize the symbol $Joiner (e.g. $Joiner.FieldA__c)."
+        },
+        {
+          "name": "Scope Filter",
+          "description": "DSP expression that evaluates each source record for inclusion in processing; records for which it returns false or $SKIP_ASSIGNMENT are excluded from further processing."
+        },
+        {
+          "name": "Scope Filter(Post Join)",
+          "description": "DSP expression that evaluates each joined record after the Join process; records for which it returns false or $SKIP_ASSIGNMENT are excluded from further processing."
+        },
+        {
+          "name": "Scope Filter(Before Insert Trigger)",
+          "description": "Additional filter applied to evaluate the scoped records when being executed in the Before Insert trigger of the source object."
+        },
+        {
+          "name": "Scope Filter(Before Update Trigger)",
+          "description": "Additional filter applied to evaluate the scoped records when being executed in the Before Update trigger of the source object."
+        },
+        {
+          "name": "Scope Filter(Before Delete Trigger)",
+          "description": "Additional filter applied to evaluate the scoped records when being executed in the Before Delete trigger of the source object."
+        },
+        {
+          "name": "Scope Filter(After Insert Trigger)",
+          "description": "Additional filter applied to evaluate the scoped records when being executed in the After Insert trigger of the source object."
+        },
+        {
+          "name": "Scope Filter(After Update Trigger)",
+          "description": "Additional filter applied to evaluate the scoped records when being executed in the After Update trigger of the source object."
+        },
+        {
+          "name": "Scope Filter(After Delete Trigger)",
+          "description": "Additional filter applied to evaluate the scoped records when being executed in the After Delete trigger of the source object."
+        },
+        {
+          "name": "Scope Filter(After Undelete Trigger)",
+          "description": "Additional filter applied to evaluate the scoped records when being executed in the After Undelete trigger of the source object."
+        }
+      ]
+    }
+  ]
+}

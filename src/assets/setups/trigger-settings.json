@@ -1,0 +1,81 @@
+{
+  "title": "#Trigger Settings",
+  "blocks": [
+    {
+      "type": "fields",
+      "filterPlaceholder": "Filter fields",
+      "groups": [
+        {
+          "title": "#Trigger Events",
+          "fields": [
+            {
+              "name": "Before Insert Trigger?",
+              "description": "When enabled, the Executable runs on the Before Insert event, using the records in the 'Trigger.new' context as its input."
+            },
+            {
+              "name": "After Insert Trigger?",
+              "description": "When enabled, the Executable runs on the After Insert event, using the records in the 'Trigger.new' context as its input."
+            },
+            {
+              "name": "Before Update Trigger?",
+              "description": "When enabled, the Executable runs on the Before Update event, using the records in the 'Trigger.new' context as its input."
+            },
+            {
+              "name": "After Update Trigger?",
+              "description": "When enabled, the Executable runs on the After Update event, using the records in the 'Trigger.new' context as its input."
+            },
+            {
+              "name": "Before Delete Trigger?",
+              "description": "When enabled, the Executable runs on the Before Delete event, using the records in the 'Trigger.old' context as its input."
+            },
+            {
+              "name": "After Delete Trigger?",
+              "description": "When enabled, the Executable runs on the After Delete event, using the records in the 'Trigger.old' context as its input."
+            },
+            {
+              "name": "After Undelete Trigger?",
+              "description": "When enabled, the Executable runs on the After Undelete event, using the records in the 'Trigger.new' context as its input."
+            }
+          ]
+        },
+        {
+          "title": "Order of Execution, Permissions, and More",
+          "fields": [
+            {
+              "name": "Pipeline",
+              "description": "The Pipeline this Executable belongs to. Pipelines group related Executables so you can navigate, filter, and reorder them together. Within a Pipeline, Executables run in the order set by their sequence number."
+            },
+            {
+              "name": "Seq No.",
+              "description": "Sequence number of this Executable within its Pipeline, determining the order of batch executions, triggers, data lists, and action buttons."
+            },
+            {
+              "name": "Applicable for Self-Adaptive Trigger?",
+              "description": "Executables where the source and target objects are the same, the Action is \"Update\" or \"Upsert\", and have a one-to-one match through the \"Id\" field, are considered Applicable for Self-Adaptive Trigger. A Self-Adaptive Trigger operates on the same record being processed, dynamically adapting to its own field values for in-memory transformations or validations, with no DML committed."
+            },
+            {
+              "name": "Applicable for Trigger Action?",
+              "description": "Indicates that this Executable is a Trigger Action (not Self-Adaptive). Trigger Action performs DML on target records; Self-Adaptive applies field transformations/validations in memory without committing DML."
+            },
+            {
+              "name": "All Internal Users Have Read Access?",
+              "description": "When enabled, DSP creates a sharing record granting all internal users read access to the current Executable; this field is automatically turned on when #Trigger, #Data List, or #Action Button is enabled and can be disabled manually to revoke that access."
+            },
+            {
+              "name": "Run Once on Recursive Updates?",
+              "description": "When enabled, the trigger logic defined in the Executable will be executed only once when recursive updates occur, preventing multiple executions for a single trigger event. Note: If the Executable is enabled for both Before Update and After Update, and both events trigger the execution, it will not be considered recursion, and the logic will be executed twice."
+            },
+            {
+              "name": "Access Permissions",
+              "description": "Comma separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
+            },
+            {
+              "name": "Bypass Triggers Custom Permissions",
+              "description": "Comma separated custom permission names. If set, users with any of the custom permissions will bypass the trigger execution."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

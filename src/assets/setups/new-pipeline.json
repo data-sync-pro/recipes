@@ -1,0 +1,44 @@
+{
+  "title": "New Pipeline",
+  "blocks": [
+    {
+      "type": "callout",
+      "title": "Before You Start",
+      "children": [
+        {
+          "type": "ul",
+          "children": [
+            {
+              "type": "p",
+              "content": "Requires the Data Sync Pro Administrator permission set."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "h3",
+      "content": "1. Navigate to Pipelines tab and click New.",
+      "defaultExpanded": true,
+      "children": [
+        {
+          "type": "image",
+          "content": "image/pipeline/new-pipeline-button.png",
+          "alt": "Click the New button on the Pipelines tab"
+        }
+      ]
+    },
+    {
+      "type": "h3",
+      "content": "2. Enter a Pipeline Name and click Save.",
+      "defaultExpanded": true,
+      "children": [
+        {
+          "type": "image",
+          "content": "image/pipeline/new-pipeline-form.png",
+          "alt": "Enter a Pipeline Name and click Save"
+        }
+      ]
+    }
+  ]
+}

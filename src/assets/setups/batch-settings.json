@@ -1,0 +1,90 @@
+{
+  "title": "#Batch Settings",
+  "blocks": [
+    {
+      "type": "fields",
+      "filterPlaceholder": "Filter fields",
+      "groups": [
+        {
+          "title": "Execution Settings",
+          "fields": [
+            {
+              "name": "Action to Bulk API?",
+              "description": "When enabled, DSP utilizes the bulk API for data submission rather than direct DML operations. Adjust the Batch Size for the best performance outcome with the considerations of the governor limits to be consumed especially the CPU time and heap size if too many records are involved in a single batch. The actual DML results can be checked in the Setup -> Bulk Data Load Jobs, instead of in the Batch Executions."
+            },
+            {
+              "name": "Batch Size",
+              "description": "The number of source records taken into each batch execution."
+            },
+            {
+              "name": "Stop Execution When a Batch Fails?",
+              "description": "When enabled, DSP will attempt to stop the remaining batches if any batch fails."
+            },
+            {
+              "name": "Log to File?",
+              "description": "When enabled, DSP stores the matched target records and the pre-action request and response payloads in a ContentDocument linked to each Batch Execution. These logs provide an audit trail and allow data restoration if required. Note: File logging increases runtime overhead and consumes additional storage."
+            },
+            {
+              "name": "Auto Retry Failed Batches?",
+              "description": "When enabled, upon the completion of the batch job execution, DSP will automatically retry the failed batches."
+            },
+            {
+              "name": "Serial Mode?",
+              "description": "When enabled, DSP runs in serial mode. Note: serial mode executes slower since one batch has to wait for the previous one to complete before getting started. Check it if you need to guarantee the execution order or when you face the limitation - 'Future method cannot be called from a future or batch method'."
+            },
+            {
+              "name": "Execution Finalizer",
+              "description": "Apex class name that implements the ExecutionFinalizer interface and runs after the Execution is completed."
+            },
+            {
+              "name": "Bypass Queueable Delegation?",
+              "description": "Specifies whether batch executions bypass delegation to a Queueable process and run directly. (Queueable delegation improves execution speed — disable only when necessary, such as when the daily async execution limit is approaching.)"
+            },
+            {
+              "name": "Access Permissions",
+              "description": "Comma separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
+            },
+            {
+              "name": "Retrieve Limit",
+              "description": "The maximum number of records to be retrieved from the source."
+            }
+          ]
+        },
+        {
+          "title": "Incremental Retrieval",
+          "fields": [
+            {
+              "name": "Incremental Retrieval Since",
+              "description": "Defines the date-time option used to derive the cut-off timestamp for incremental batch executions; DSP retrieves only records whose value in the selected field is later than that calculated timestamp."
+            },
+            {
+              "name": "Incremental Retrieval Field",
+              "description": "Enter the API name of the date-time field to use for incremental batch executions. If left blank, \"SystemModstamp\" is used by default."
+            },
+            {
+              "name": "Incremental Retrieval Seed Time",
+              "description": "Timestamp defining the starting point for the initial incremental batch execution. For subsequent runs, DSP recalculates the cut-off using the \"Incremental Retrieval Since\" setting."
+            }
+          ]
+        },
+        {
+          "title": "Notifications",
+          "fields": [
+            {
+              "name": "Notify When Execution Completes",
+              "description": "If enabled, DSP sends an email notification when an Execution(batch) is completed. This also depends on the Email Deliverability setting if running in Sandbox."
+            },
+            {
+              "name": "Notify Email Addresses",
+              "description": "Comma seperated email addresses."
+            },
+            {
+              "name": "Notify Owner?",
+              "description": "When enabled (and 'Notify When Execution Completes' is active), adds the Executable owner to the email notification recipients upon execution completion."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

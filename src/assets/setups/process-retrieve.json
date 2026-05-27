@@ -1,0 +1,22 @@
+{
+  "title": "Retrieve",
+  "blocks": [
+    {
+      "type": "p",
+      "content": "The Retrieve step defines the source query for an Executable."
+    },
+    {
+      "type": "p",
+      "content": "For <strong>#Batch</strong>, it selects the records to process. For <strong>#Data List</strong>, it selects the records displayed in the UI."
+    },
+    {
+      "type": "p",
+      "content": "DSP automatically includes fields required by downstream steps, such as Scoping, Match, and Mapping. Fields selected in Retrieve are mainly used for preview and display."
+    },
+    {
+      "type": "image",
+      "content": "image/process/retrieve.png",
+      "alt": "Retrieve step with SOQL query and record preview"
+    }
+  ]
+}

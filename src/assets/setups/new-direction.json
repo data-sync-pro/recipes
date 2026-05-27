@@ -1,0 +1,48 @@
+{
+  "title": "New Direction",
+  "blocks": [
+    {
+      "type": "callout",
+      "title": "Before You Start",
+      "children": [
+        {
+          "type": "ul",
+          "children": [
+            {
+              "type": "p",
+              "content": "Ensure both Source and Target Connections exist before proceeding. For setup instructions, see [[current-org]] or [[oauth]]."
+            },
+            {
+              "type": "p",
+              "content": "Requires the Data Sync Pro Administrator permission set."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "h3",
+      "content": "1. Navigate to Directions tab and click New.",
+      "defaultExpanded": true,
+      "children": [
+        {
+          "type": "image",
+          "content": "image/direction/new-direction-button.png",
+          "alt": "Click the New button on the Directions tab"
+        }
+      ]
+    },
+    {
+      "type": "h3",
+      "content": "2. Fill in Direction Details",
+      "defaultExpanded": true,
+      "children": [
+        {
+          "type": "image",
+          "content": "image/direction/new-direction-form.png",
+          "alt": "New Direction form with required fields"
+        }
+      ]
+    }
+  ]
+}

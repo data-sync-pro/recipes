@@ -1,5 +1,5 @@
 {
-  "title": "Establish Connections",
+  "title": "Connection",
   "order": 2,
   "blocks": [
     {
@@ -14,30 +14,30 @@
       ]
     },
     {
-      "type": "image",
-      "content": "image/connection/connection.png",
-      "alt": "Authentication Flow Diagram"
+      "type": "h2",
+      "content": "Authentication Flow"
     },
     {
       "type": "p",
-      "content": "As shown in the diagram, Data Sync Pro handles authentication through two paths:"
+      "content": "Data Sync Pro handles authentication through two paths, decided at runtime based on the <code>Is Current Org</code> flag on the Connection record."
+    },
+    {
+      "type": "image",
+      "content": "image/connection/connection.png",
+      "alt": "Authentication Flow Diagram"
     },
     {
       "type": "ul",
       "children": [
         {
           "type": "p",
-          "content": "<strong>Current Org:</strong> If \"Is Current Org\" is selected, DSP runs as the Currently Logged-in User, requiring no additional credentials."
+          "content": "<strong>Current Org</strong>: Runs as the currently logged-in user, requiring no additional credentials."
         },
         {
           "type": "p",
-          "content": "<strong>OAuth 2.0 Flow:</strong> For remote connections, DSP utilizes a Named Credential to authenticate via an OAuth Token."
+          "content": "<strong>OAuth 2.0 (Refresh Token Flow)</strong>: Authenticates through a Named Credential using an OAuth token issued through the Refresh Token flow."
         }
       ]
-    },
-    {
-      "type": "p",
-      "content": "Select a connection type from the sidebar to view detailed setup instructions."
     }
   ]
 }

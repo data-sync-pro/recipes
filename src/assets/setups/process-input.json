@@ -1,0 +1,23 @@
+{
+  "title": "Input",
+  "blocks": [
+    {
+      "type": "p",
+      "content": "Input defines the data profile of an uploaded CSV file — how its columns map to fields in DSP. Scoping and Field Mappings use this structure to prepare the data for processing. The Input step ensures the data is correctly interpreted and aligned before transformation and execution."
+    },
+    {
+      "type": "image",
+      "content": "image/process/input.png",
+      "alt": "Input step defining CSV column structure for Data Loader"
+    },
+    {
+      "type": "fields",
+      "fields": [
+        {
+          "name": "Input Data Key Field",
+          "description": "The the unique identifier field of a source record(case sensitive), used by DSP in its internal processing including the logging. It is used in connection-based Executables, where the source data is from the CSV upload. For SalesforceToSalesforce Executables, 'Id' is used regardless whether this field is defined."
+        }
+      ]
+    }
+  ]
+}

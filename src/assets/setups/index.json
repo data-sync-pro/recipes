@@ -2,49 +2,91 @@
   {
     "id": "data-model",
     "label": "Data Model",
-    "slug": "data-model",
-    "defaultExpanded": true,
     "children": [
-      { "id": "objects-relationships", 
-      "label": "Objects & Relationships", 
-      "slug": "objects-relationships" 
+      { "id": "data-model-overview", "label": "Overview", "slug": "data-model" },
+      { "id": "objects-relationships",
+      "label": "Objects & Relationships",
+      "slug": "objects-relationships"
       },
       {
         "id": "direction-based-executable",
         "label": "Direction Based Executable",
         "slug": "direction-based-executable"
       },
-      { "id": "connection-based-executable", 
-      "label": "Connection Based Executable", 
-      "slug": "connection-based-executable" 
+      { "id": "connection-based-executable",
+      "label": "Connection Based Executable",
+      "slug": "connection-based-executable"
       }
     ]
   },
   {
     "id": "setup",
     "label": "Setup",
-    "slug": "permissions",
-    "defaultExpanded": true,
     "children": [
       { "id": "install-package", "label": "Install Package", "slug": "install-package" },
       { "id": "permissions", "label": "Permissions", "slug": "permissions" },
       {
         "id": "connection",
-        "label": "Establish Connections",
-        "slug": "connection",
-        "defaultExpanded": true,
+        "label": "Connection",
         "children": [
+          { "id": "connection-overview", "label": "Overview", "slug": "connection" },
           { "id": "current-org", "label": "Current Org", "slug": "current-org" },
-          { "id": "oauth", "label": "OAuth 2.0 (Refresh Token Flow)", "slug": "oauth" },
-          { "id": "username-password", "label": "Username & Password", "slug": "username-password", "visible": false }
+          { "id": "oauth", "label": "OAuth 2.0 (Refresh Token Flow)", "slug": "oauth" }
         ]
       },
-      { "id": "trigger", "label": "Apex Trigger Hookup", "slug": "trigger" },
+      {
+        "id": "direction",
+        "label": "Direction",
+        "children": [
+          { "id": "new-direction", "label": "New Direction", "slug": "new-direction" }
+        ]
+      },
+      {
+        "id": "pipeline",
+        "label": "Pipeline",
+        "children": [
+          { "id": "new-pipeline", "label": "New Pipeline", "slug": "new-pipeline" },
+          { "id": "pipeline-settings", "label": "Pipeline Settings", "slug": "pipeline-settings" }
+        ]
+      },
+      {
+        "id": "executable",
+        "label": "Executable",
+        "children": [
+          { "id": "new-executable", "label": "New Executable", "slug": "new-executable" },
+          { "id": "batch-settings", "label": "#Batch Settings", "slug": "batch-settings" },
+          { "id": "data-list-settings", "label": "#Data List Settings", "slug": "data-list-settings" },
+          { "id": "apex-trigger-hookup", "label": "Apex Trigger Hookup", "slug": "apex-trigger-hookup" },
+          { "id": "trigger-settings", "label": "#Trigger Settings", "slug": "trigger-settings" },
+          { "id": "action-button-settings", "label": "#Action Button Settings", "slug": "action-button-settings" },
+          { "id": "data-loader-settings", "label": "#Data Loader Settings", "slug": "data-loader-settings" },
+          {
+            "id": "process",
+            "label": "Process",
+            "children": [
+              { "id": "process-retrieve", "label": "Retrieve", "slug": "process-retrieve" },
+              { "id": "process-preview", "label": "Preview", "slug": "process-preview" },
+              { "id": "process-input", "label": "Input", "slug": "process-input" },
+              { "id": "process-scoping", "label": "Scoping", "slug": "process-scoping" },
+              { "id": "process-match", "label": "Match", "slug": "process-match" },
+              { "id": "process-mapping", "label": "Mapping", "slug": "process-mapping" },
+              { "id": "process-action", "label": "Action", "slug": "process-action" },
+              { "id": "process-verify", "label": "Verify", "slug": "process-verify" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "schedule",
+        "label": "Schedule",
+        "children": [
+          { "id": "new-schedule", "label": "New Schedule", "slug": "new-schedule" }
+        ]
+      },
       {
         "id": "lwc",
         "label": "Lightning Web Components",
         "slug": "add-dsp-components-to-lightning-app-builder",
-        "defaultExpanded": true,
         "children": [
           { "id": "data-lists", "label": "Pipeline Data Lists", "slug": "data-lists" },
           { "id": "quick-links", "label": "Pipeline Data List Quick Links", "slug": "quick-links" },
@@ -55,33 +97,5 @@
         ]
       }
     ]
-  },
-  {
-    "id": "apex-interfaces",
-    "label": "Apex Interfaces",
-    "slug": "data-model",
-    "defaultExpanded": true,
-    "children": [
-      {
-        "id": "SalesforceDataTransformer",
-        "label": "SalesforceDataTransformer",
-        "slug": "SalesforceDataTransformer"
-      },
-      {
-        "id": "ExecutionFinalizer",
-        "label": "ExecutionFinalizer",
-        "slug": "ExecutionFinalizer"
-      },{
-        "id": "ActionResultProcessor",
-        "label": "ActionResultProcessor",
-        "slug": "ActionResultProcessor"
-      },
-      {
-        "id": "BulkJobStatusSyncer",
-        "label": "BulkJobStatusSyncer",
-        "slug": "BulkJobStatusSyncer"
-      }
-    ]
   }
-  
 ]
