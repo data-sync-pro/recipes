@@ -114,10 +114,6 @@
   max-width: 100%;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  &:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  }
 }
 
 .block-video-container {
@@ -231,6 +227,7 @@
     line-height: 1.6;
     color: #333333;
   }
+
 
   // Normalize nested blocks (children) so they match callout typography
   .callout-body {
@@ -370,7 +367,8 @@
   }
 }
 
-a.setup-link {
+a.setup-link,
+a.setup-link-external {
   color: #2253B2;
   text-decoration: underline;
   cursor: pointer;

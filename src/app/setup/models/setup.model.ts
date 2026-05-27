@@ -47,6 +47,7 @@ export interface FieldGroup {
   fields: FieldItem[];
 }
 
+
 export interface Block {
   type: BlockType;
   content?: string;
@@ -69,8 +70,9 @@ export interface Block {
 }
 
 export interface Page {
-  slug?: string;     
+  slug?: string;
   title: string;
   order: number;
   blocks: Block[];
+  related?: string[]; // slugs to other setup pages; labels resolved from nav tree
 }

@@ -106,6 +106,18 @@
           [cards]="lwcCards"
           (cardClick)="onCardClick($event)">
         </app-setup-card>
+
+        <aside *ngIf="relatedItems.length" class="setup-related" aria-label="Related pages">
+          <h2 class="setup-related-title">Related</h2>
+          <ul class="setup-related-list">
+            <li *ngFor="let item of relatedItems">
+              <a [routerLink]="item.routerLink" class="setup-related-link">
+                <mat-icon class="setup-related-arrow">arrow_forward</mat-icon>
+                <span>{{ item.label }}</span>
+              </a>
+            </li>
+          </ul>
+        </aside>
       </ng-container>
 
       <div *ngIf="!isLoading && !currentSetup" class="setup-empty">

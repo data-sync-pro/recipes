@@ -5,6 +5,10 @@ import { takeUntil, filter } from 'rxjs/operators';
 import { SetupService } from './services/setup.service';
 import { Page, Block, SetupIndexItem, NavNode } from './models/setup.model';
 import { CardItem } from './card/card.component';
+import { CacheService } from '../recipe/core/services/cache.service';
+import { OrchestrationService } from '../recipe/core/services/orchestration.service';
+import { Recipe } from '../recipe/core/models/recipe.model';
+import { categoryToSlug } from '../recipe/core/constants/recipe.constants';
 
 @Component({
   selector: 'app-setup',
@@ -36,6 +40,9 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading = true;
   activeBlockId: string | null = null;
 
+  private recipeCache: Recipe[] = [];
+  private recipeLoadKicked = false;
+
   // Lightning Web Components cards
   lwcCards: CardItem[] = [
     { title: 'Pipeline Data Lists', slug: 'data-lists', image: 'image/lightning-page/data_lists.png' },
@@ -48,11 +55,19 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private router: Router,
     private setupService: SetupService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private cacheService: CacheService,
+    private orchestrationService: OrchestrationService
   ) {}
 
   ngOnInit(): void {
     this.loadIndex();
+    this.cacheService.getRecipes$()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(recipes => {
+        this.recipeCache = recipes;
+        this.cdr.markForCheck();
+      });
   }
 
   ngAfterViewInit(): void {
@@ -501,5 +516,19 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onCardClick(slug: string): void {
     this.selectSetup(slug);
+  }
+
+  get relatedItems(): { slug: string; label: string; routerLink: string[] }[] {
+    const slugs = this.currentSetup?.related;
+    if (!slugs?.length) return [];
+    const items: { slug: string; label: string; routerLink: string[] }[] = [];
+    for (const slug of slugs) {
+      const node = this.setupService.findNodeBySlug(this.navTree, slug);
+      if (!node?.slug) continue;
+      const path = this.setupService.getPathToNode(this.navTree, node.slug);
+      const segments = path?.map(n => n.slug).filter((s): s is string => !!s) ?? [node.slug];
+      items.push({ slug: node.slug, label: node.label, routerLink: ['/setup', ...segments] });
+    }
+    return items;
   }
 }

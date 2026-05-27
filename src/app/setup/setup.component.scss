@@ -350,6 +350,55 @@ $hover-bg: #f1f5f9;
   }
 }
 
+.setup-related {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+
+  .setup-related-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #6b7280;
+    margin: 0 0 0.75rem;
+  }
+
+  .setup-related-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .setup-related-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0;
+    color: #2253B2;
+    text-decoration: none;
+    font-size: 0.95rem;
+    line-height: 1.4;
+
+    .setup-related-arrow {
+      font-size: 1rem;
+      width: 1rem;
+      height: 1rem;
+      color: #94a3b8;
+      transition: transform 120ms ease, color 120ms ease;
+    }
+
+    &:hover {
+      text-decoration: underline;
+
+      .setup-related-arrow {
+        color: #2253B2;
+        transform: translateX(2px);
+      }
+    }
+  }
+}
+
 .setup-loading {
   display: flex;
   flex-direction: column;
