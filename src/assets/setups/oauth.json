@@ -129,7 +129,7 @@
             },
             {
               "type": "p",
-              "content": "<strong>Scope</strong>: Enter the OAuth scopes enabled in the Connected Org's External Client App. Separate multiple scopes with spaces."
+              "content": "<strong>Scope</strong>: Enter required scopes. Separate multiple scopes with spaces."
             }
           ]
         },
