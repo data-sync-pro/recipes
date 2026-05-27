@@ -24,12 +24,13 @@
           "alt": "New Schedule form with cron expression and target Executable/Pipeline"
         }
       ]
-    },
+    }
+  ],
+  "related": [
     {
-      "type": "callout",
-      "variant": "info",
-      "title": "See also",
-      "content": "Guidance on managing scheduled jobs: [Schedule Job Management](/recipes/general/schedule-job-management)."
+      "label": "Schedule Job Management",
+      "url": "/recipes/general/schedule-job-management",
+      "newTab": true
     }
   ]
 }

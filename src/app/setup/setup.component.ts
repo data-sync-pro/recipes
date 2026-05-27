@@ -518,16 +518,20 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
     this.selectSetup(slug);
   }
 
-  get relatedItems(): { slug: string; label: string; routerLink: string[] }[] {
-    const slugs = this.currentSetup?.related;
-    if (!slugs?.length) return [];
-    const items: { slug: string; label: string; routerLink: string[] }[] = [];
-    for (const slug of slugs) {
-      const node = this.setupService.findNodeBySlug(this.navTree, slug);
-      if (!node?.slug) continue;
-      const path = this.setupService.getPathToNode(this.navTree, node.slug);
-      const segments = path?.map(n => n.slug).filter((s): s is string => !!s) ?? [node.slug];
-      items.push({ slug: node.slug, label: node.label, routerLink: ['/setup', ...segments] });
+  get relatedItems(): { key: string; label: string; routerLink?: string[]; href?: string; newTab?: boolean }[] {
+    const entries = this.currentSetup?.related;
+    if (!entries?.length) return [];
+    const items: { key: string; label: string; routerLink?: string[]; href?: string; newTab?: boolean }[] = [];
+    for (const entry of entries) {
+      if (typeof entry === 'string') {
+        const node = this.setupService.findNodeBySlug(this.navTree, entry);
+        if (!node?.slug) continue;
+        const path = this.setupService.getPathToNode(this.navTree, node.slug);
+        const segments = path?.map(n => n.slug).filter((s): s is string => !!s) ?? [node.slug];
+        items.push({ key: node.slug, label: node.label, routerLink: ['/setup', ...segments] });
+      } else {
+        items.push({ key: entry.url, label: entry.label, href: entry.url, newTab: entry.newTab });
+      }
     }
     return items;
   }

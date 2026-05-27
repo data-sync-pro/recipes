@@ -353,15 +353,14 @@ $hover-bg: #f1f5f9;
 .setup-related {
   margin-top: 4rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #e5e7eb;
-
+  border-top: 2px solid #e9ecef;
   .setup-related-title {
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: #6b7280;
-    margin: 0 0 0.75rem;
+    color: #333;
+    margin: 0 0 0.5rem;
   }
 
   .setup-related-list {
@@ -377,7 +376,7 @@ $hover-bg: #f1f5f9;
     padding: 0.375rem 0;
     color: #2253B2;
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.4;
 
     .setup-related-arrow {
@@ -388,12 +387,23 @@ $hover-bg: #f1f5f9;
       transition: transform 120ms ease, color 120ms ease;
     }
 
+    .setup-related-external {
+      font-size: 0.875rem;
+      width: 0.875rem;
+      height: 0.875rem;
+      color: #94a3b8;
+    }
+
     &:hover {
       text-decoration: underline;
 
       .setup-related-arrow {
         color: #2253B2;
         transform: translateX(2px);
+      }
+
+      .setup-related-external {
+        color: #2253B2;
       }
     }
   }
