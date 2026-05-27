@@ -1,5 +1,5 @@
 import { RecipeData, isLegacyWalkthrough, WalkthroughStep, WalkthroughTab } from '../models/recipe.model';
-import { RECIPE_PATHS } from '../constants/recipe.constants';
+import { RECIPE_PATHS, CATEGORY_ORDER } from '../constants/recipe.constants';
 
 // 2D map: customStepNames[tabIndex][stepIndex] → user-supplied name for Custom steps
 export type CleanRecipeCustomStepNames = { [tabIndex: number]: { [stepIndex: number]: string } };
@@ -144,13 +144,24 @@ export function cleanRecipeForExport(
 }
 
 export function sortRecipesByCategoryAndTitle<T extends { category: string | string[]; title: string }>(recipes: T[]): T[] {
+  const rankOf = (cat: string): number => {
+    const idx = CATEGORY_ORDER.findIndex(c => c.displayName === cat);
+    return idx === -1 ? Number.MAX_SAFE_INTEGER : idx;
+  };
+
   return [...recipes].sort((a, b) => {
-    // Get first category for sorting (supports both string and string[])
     const catA = Array.isArray(a.category) ? (a.category[0] || '') : a.category;
     const catB = Array.isArray(b.category) ? (b.category[0] || '') : b.category;
-    const categoryCompare = catA.localeCompare(catB);
-    if (categoryCompare !== 0) {
-      return categoryCompare;
+    const rankA = rankOf(catA);
+    const rankB = rankOf(catB);
+    if (rankA !== rankB) {
+      return rankA - rankB;
+    }
+    // Unknown categories: fall back to alphabetical category compare so they
+    // group together instead of interleaving by title.
+    if (rankA === Number.MAX_SAFE_INTEGER) {
+      const catCompare = catA.localeCompare(catB);
+      if (catCompare !== 0) return catCompare;
     }
     return a.title.localeCompare(b.title);
   });
