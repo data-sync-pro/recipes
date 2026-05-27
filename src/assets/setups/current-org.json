@@ -2,21 +2,6 @@
   "title": "Current Org",
   "blocks": [
     {
-      "type": "callout",
-      "title": "Before You Start",
-      "children": [
-        {
-          "type": "ul",
-          "children": [
-            {
-              "type": "p",
-              "content": "Requires the Data Sync Pro Administrator permission set."
-            }
-          ]
-        }
-      ]
-    },
-    {
       "type": "p",
       "content": "A Current Org Connection runs as the <strong>currently logged-in user</strong> and requires no additional credentials. All queries and DML operations execute using that user's permissions."
     },

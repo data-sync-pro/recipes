@@ -27,25 +27,6 @@
       "content": "Configure OAuth 2.0 Refresh Token Flow Authentication"
     },
     {
-      "type": "callout",
-      "title": "Before You Start",
-      "children": [
-        {
-          "type": "ul",
-          "children": [
-            {
-              "type": "p",
-              "content": "Requires the Data Sync Pro Administrator permission set."
-            },
-            {
-              "type": "p",
-              "content": "Requires access to configure authentication settings in both the Connected Org and the DSP App Org."
-            }
-          ]
-        }
-      ]
-    },
-    {
       "type": "p",
       "content": "Complete the steps below to configure OAuth 2.0 authentication between the Connected Org and the DSP App Org."
     },

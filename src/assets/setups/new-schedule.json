@@ -2,21 +2,6 @@
   "title": "New Schedule",
   "blocks": [
     {
-      "type": "callout",
-      "title": "Before You Start",
-      "children": [
-        {
-          "type": "ul",
-          "children": [
-            {
-              "type": "p",
-              "content": "Requires the Data Sync Pro Administrator permission set."
-            }
-          ]
-        }
-      ]
-    },
-    {
       "type": "h3",
       "content": "1. Navigate to Schedules tab and click New.",
       "defaultExpanded": true,

@@ -21,7 +21,7 @@
               #filterInput
               type="text"
               class="filter-input"
-              placeholder="Filter user manual pages…"
+              placeholder="Search…"
               [value]="filterQuery"
               (input)="onFilterChange($any($event.target).value)"
               (keydown.escape)="clearFilter()"
@@ -96,7 +96,7 @@
       <ng-container *ngIf="!isLoading && currentSetup">
         <h1 class="page-title">{{ currentSetup.title }}</h1>
         <app-setup-block
-          *ngFor="let block of currentSetup.blocks; trackBy: trackByIndex"
+          *ngFor="let block of currentSetup.blocks"
           [block]="block">
         </app-setup-block>
 
