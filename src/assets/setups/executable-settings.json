@@ -22,7 +22,7 @@
             },
             {
               "name": "Direction",
-              "description": "The Direction this Executable runs against." 
+              "description": "Defines the source and target of this Executable's data flow — where records are read from and actioned to." 
             },
             {
               "name": "Seq No.",
@@ -34,7 +34,7 @@
             },
             {
               "name": "Deployable?",
-              "description": "Indicates whether this Executable can be deployed."
+              "description": "Indicates whether this Executable can be deployed to other orgs (e.g., sandbox to production)."
             },
             {
               "name": "Raw Record",
@@ -50,7 +50,7 @@
             },
             {
               "name": "Description",
-              "description": "A description of the Executable."
+              "description": "A brief description of the Executable's purpose and scope."
             },
             {
               "name": "Specification",
@@ -63,23 +63,23 @@
           "fields": [
             {
               "name": "#Batch",
-              "description": "Handles large-volume processing. Replaces Apex batch jobs with declarative transformations, data enrich, cleansing, and high-performance org-to-org migrations."
+              "description": "Enables this Executable to run as a batch job — scheduled or on-demand."  
             },
             {
               "name": "#Trigger",
-              "description": "Executes bulkified automation on DML events (insert, update, delete, undelete), bringing rules-driven simplicity to transformations, validations, and downstream actions."
+              "description": "Enables this Executable to run as a trigger." 
             },
             {
               "name": "#Data List",
-              "description": "Turns queries into interactive, configurable tables with rules-driven actions, letting business users filter, explore, edit, and act on records at the list or row level."
+              "description": "Enables this Executable to run as a Data List."
             },
             {
               "name": "#Action Button",
-              "description": "Adds configurable buttons to the Lightning Pages or Data Lists for guided actions, with support for pre-populated transformations, line editors and workflows."
+              "description": "Enables this Executable to run as an Action Button."
             },
             {
               "name": "#Data Loader",
-              "description": "Enables reusable CSV imports with built-in transformation logic, delivering secure, auditable, and scalable data loading across Salesforce orgs."
+              "description": "Enables this Executable to run as a Data Loader — for reusable, transformable CSV imports."
             }
           ]
         },
