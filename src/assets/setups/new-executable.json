@@ -4,7 +4,7 @@
     
     {
       "type": "p",
-      "content": "Create an Executable from a Pipeline, Direction, or Connection. This guide uses a Pipeline as the starting point."
+      "content": "Executables can be created from a Pipeline, Direction, or Connection. This guide uses a Pipeline with a configured Template Direction as an example."
     },
     {
       "type": "tabs",
