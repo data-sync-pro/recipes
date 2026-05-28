@@ -43,11 +43,12 @@ export class SetupBlockComponent implements OnInit, AfterViewChecked {
 
   // Inline link syntax:
   //   [[slug]] / [[slug|Label]]   → internal setup link (same tab, SPA routing)
+  //   [[slug]]^ / [[slug|Label]]^ → internal setup link opened in a new tab
   //   [Label](url)                → external link (new tab); use for recipes/web URLs
   // Unresolved [[slug]] renders as a visible broken-link span so authors notice.
   renderContent(content: string | undefined): string {
     if (!content) return '';
-    let result = content.replace(/\[\[([^|\]]+?)(?:\|([^\]]+?))?\]\]/g, (_match, slug: string, label?: string) => {
+    let result = content.replace(/\[\[([^|\]]+?)(?:\|([^\]]+?))?\]\](\^)?/g, (_match, slug: string, label: string | undefined, newTab: string | undefined) => {
       const tree = this.setupService.getCachedNavTree();
       const node = this.setupService.findNodeBySlug(tree, slug.trim());
       const text = (label ?? node?.label ?? slug).trim();
@@ -56,7 +57,8 @@ export class SetupBlockComponent implements OnInit, AfterViewChecked {
       }
       const path = node.slug ? this.setupService.getPathToNode(tree, node.slug) : null;
       const href = path ? '/setup/' + path.map(n => n.slug).filter((s): s is string => !!s).join('/') : '#';
-      return `<a class="setup-link" href="${href}" data-slug="${node.slug ?? ''}">${text}</a>`;
+      const targetAttrs = newTab ? ' target="_blank" rel="noopener noreferrer"' : '';
+      return `<a class="setup-link" href="${href}" data-slug="${node.slug ?? ''}"${targetAttrs}>${text}</a>`;
     });
     result = result.replace(/\[([^\]]+?)\]\(([^)]+?)\)/g, (_match, label: string, url: string) => {
       return `<a class="setup-link-external" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
@@ -72,6 +74,7 @@ export class SetupBlockComponent implements OnInit, AfterViewChecked {
     }
     const target = (event.target as HTMLElement | null)?.closest('a.setup-link') as HTMLAnchorElement | null;
     if (!target) return;
+    if (target.target === '_blank') return;
     const slug = target.dataset['slug'];
     if (!slug) return;
     const tree = this.setupService.getCachedNavTree();

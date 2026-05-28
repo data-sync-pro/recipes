@@ -25,6 +25,10 @@
               "description": "Defines the source and target of this Executable's data flow — where records are read from and actioned to." 
             },
             {
+              "name": "Connection",
+              "description": "The Connection this Executable runs against."
+            },
+            {
               "name": "Seq No.",
               "description": "Sequence number of this Executable within its Pipeline, determining the order of batch executions, triggers, data lists, and action buttons."
             },
