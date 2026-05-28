@@ -47,6 +47,7 @@ export interface FieldGroup {
   fields: FieldItem[];
 }
 
+
 export interface Block {
   type: BlockType;
   content?: string;
@@ -68,9 +69,18 @@ export interface Block {
   defaultExpanded?: boolean; // h3 - start expanded instead of collapsed
 }
 
+export interface RelatedLink {
+  label: string;
+  url: string;
+  newTab?: boolean;
+}
+
 export interface Page {
-  slug?: string;     
+  slug?: string;
   title: string;
   order: number;
   blocks: Block[];
+  // Setup slug (label auto-resolved from nav tree) or literal { label, url, newTab? }
+  // for cross-module / external links (e.g. recipes).
+  related?: (string | RelatedLink)[];
 }

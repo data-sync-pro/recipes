@@ -21,7 +21,7 @@
               #filterInput
               type="text"
               class="filter-input"
-              placeholder="Filter user manual pages…"
+              placeholder="Search…"
               [value]="filterQuery"
               (input)="onFilterChange($any($event.target).value)"
               (keydown.escape)="clearFilter()"
@@ -96,7 +96,7 @@
       <ng-container *ngIf="!isLoading && currentSetup">
         <h1 class="page-title">{{ currentSetup.title }}</h1>
         <app-setup-block
-          *ngFor="let block of currentSetup.blocks; trackBy: trackByIndex"
+          *ngFor="let block of currentSetup.blocks"
           [block]="block">
         </app-setup-block>
 
@@ -106,6 +106,27 @@
           [cards]="lwcCards"
           (cardClick)="onCardClick($event)">
         </app-setup-card>
+
+        <aside *ngIf="relatedItems.length" class="setup-related" aria-label="Related pages">
+          <h2 class="setup-related-title">Related</h2>
+          <ul class="setup-related-list">
+            <li *ngFor="let item of relatedItems">
+              <a *ngIf="item.routerLink" [routerLink]="item.routerLink" class="setup-related-link">
+                <mat-icon class="setup-related-arrow">arrow_forward</mat-icon>
+                <span>{{ item.label }}</span>
+              </a>
+              <a *ngIf="item.href"
+                 [href]="item.href"
+                 [attr.target]="item.newTab ? '_blank' : null"
+                 [attr.rel]="item.newTab ? 'noopener noreferrer' : null"
+                 class="setup-related-link">
+                <mat-icon class="setup-related-arrow">arrow_forward</mat-icon>
+                <span>{{ item.label }}</span>
+                <mat-icon *ngIf="item.newTab" class="setup-related-external">open_in_new</mat-icon>
+              </a>
+            </li>
+          </ul>
+        </aside>
       </ng-container>
 
       <div *ngIf="!isLoading && !currentSetup" class="setup-empty">

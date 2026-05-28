@@ -54,6 +54,7 @@
         "label": "Executable",
         "children": [
           { "id": "new-executable", "label": "New Executable", "slug": "new-executable" },
+          { "id": "executable-settings", "label": "Executable Settings", "slug": "executable-settings" },
           { "id": "batch-settings", "label": "#Batch Settings", "slug": "batch-settings" },
           { "id": "data-list-settings", "label": "#Data List Settings", "slug": "data-list-settings" },
           { "id": "apex-trigger-hookup", "label": "Apex Trigger Hookup", "slug": "apex-trigger-hookup" },

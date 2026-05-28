@@ -9,6 +9,10 @@
           "title": "Information",
           "fields": [
             {
+              "name": "Pipeline Name",
+              "description": "Name of the Pipeline."
+            },
+            {
               "name": "Pipeline API Name",
               "description": "API Name for the Pipeline. If left blank, it automatically defaults to the Pipeline's Name when the record is saved."
             },
@@ -19,6 +23,14 @@
             {
               "name": "Deployable?",
               "description": "Indicates whether this Pipeline is deployable; automatically set to true if any associated Executable is deployable."
+            },
+            {
+              "name": "Description",
+              "description": "A brief description of the Pipeline's purpose and scope."
+            },
+            {
+              "name": "Specification",
+              "description": "Free-form field for documenting detailed information about the Pipeline, including its configurations, underlying rationale, and any additional notes."
             },
             {
               "name": "All Internal Users Can Read Executables?",

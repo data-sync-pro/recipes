@@ -64,7 +64,7 @@
           ]
         },
         {
-          "title": "#Action Button on #Data List",
+          "title": "Action Button on Data List",
           "fields": [
             {
               "name": "Q: List Action?",
@@ -85,6 +85,19 @@
             {
               "name": "Q: List Action Max Row Selection",
               "description": "Maximum number of selected rows allowed for this list action. If the selection exceeds this value, the action is disabled. Leave blank for no limit. Defaults to 1 when the source object is a Big Object."
+            }
+          ]
+        },
+        {
+          "title": "Chained Data List(s)",
+          "fields": [
+            {
+              "name": "Chained Data List",
+              "description": "Data List used in Action Button's chained flow. When specified, clicking the Action Button opens the Data List for row selection. The selected rows become Context Records for the next Data List, if that Data List also has a Chained Data List defined. The sequence continues until no further Chained Data List is set. The rows selected in the final Data List become the input for the Action Button."
+            },
+            {
+              "name": "Chained Data Lists",
+              "description": "Data List Pipeline used in Action Button's chained flow. When specified, clicking the Action Button opens the Data Lists in this Pipeline for row selection. Once this field is set, no further Chained Data Lists are evaluated in the flow. The rows selected in the Data Lists become the input for the Action Button."
             }
           ]
         }

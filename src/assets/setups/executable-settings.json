@@ -1,0 +1,114 @@
+{
+  "title": "Executable Settings",
+  "blocks": [
+    {
+      "type": "fields",
+      "filterPlaceholder": "Filter fields",
+      "groups": [
+        {
+          "title": "Information",
+          "fields": [
+            {
+              "name": "Executable Name",
+              "description": "Name of the Executable."
+            },
+            {
+              "name": "Executable API Name",
+              "description": "API Name for the Executable. If left blank, it automatically defaults to the Executable's Name when the record is saved."
+            },
+            {
+              "name": "Pipeline",
+              "description": "The Pipeline this Executable belongs to. Pipelines group related Executables so you can navigate, filter, and reorder them together. Within a Pipeline, Executables run or display in the order set by their sequence number."
+            },
+            {
+              "name": "Direction",
+              "description": "Defines the source and target of this Executable's data flow — where records are read from and actioned to." 
+            },
+            {
+              "name": "Connection",
+              "description": "The Connection this Executable runs against."
+            },
+            {
+              "name": "Seq No.",
+              "description": "Sequence number of this Executable within its Pipeline, determining the order of batch executions, triggers, data lists, and action buttons."
+            },
+            {
+              "name": "Owner",
+              "description": "The user who owns this Executable."
+            },
+            {
+              "name": "Deployable?",
+              "description": "Indicates whether this Executable can be deployed to other orgs (e.g., sandbox to production)."
+            },
+            {
+              "name": "Raw Record",
+              "description": "Opens a full field inspector for this record, showing every field's API name, type, and value, with quick search, edit, and clone."
+            },
+            {
+              "name": "All Internal Users Have Read Access?",
+              "description": "When enabled, DSP creates a sharing record granting all internal users read access to the current Executable; this field is automatically turned on when #Trigger, #Data List, or #Action Button is enabled and can be disabled manually to revoke that access."
+            },
+            {
+              "name": "Origin ID",
+              "description": "Identifier used for matching records during cross-system synchronization. It defaults to the Salesforce record ID on save but can be overridden with a custom unique value. Once established, it must remain unchanged after the initial sync."
+            },
+            {
+              "name": "Description",
+              "description": "A brief description of the Executable's purpose and scope."
+            },
+            {
+              "name": "Specification",
+              "description": "Free-form field for documenting detailed information about the Executable, including its configurations, underlying rationale, and any additional notes."
+            }
+          ]
+        },
+        {
+          "title": "Rules Engines",
+          "fields": [
+            {
+              "name": "#Batch",
+              "description": "Enables this Executable to run as a batch job — scheduled or on-demand."  
+            },
+            {
+              "name": "#Trigger",
+              "description": "Enables this Executable to run as a trigger." 
+            },
+            {
+              "name": "#Data List",
+              "description": "Enables this Executable to run as a Data List."
+            },
+            {
+              "name": "#Action Button",
+              "description": "Enables this Executable to run as an Action Button."
+            },
+            {
+              "name": "#Data Loader",
+              "description": "Enables this Executable to run as a Data Loader — for reusable, transformable CSV imports."
+            }
+          ]
+        },
+        {
+          "title": "Input / Output",
+          "fields": [
+            {
+              "name": "Source Object Name",
+              "description": "Name of the Source Object."
+            },
+            {
+              "name": "Target Object Name",
+              "description": "Name of the Target Object."
+            },
+            {
+              "name": "Target Matching Field",
+              "description": "API name of the target field (case-sensitive) used to identify matching target records. If multiple matches are found for a source record and the Principal Selection Rule is defined, only the principal record is selected—otherwise, all matches are used. Actions then execute based on these results (e.g. Insert is skipped when matches exist, Update runs only for matched records, and Merge consolidates secondary matches into the principal record)."
+            },
+            {
+              "name": "Action",
+              "description": "The action to be performed on the target records."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
