@@ -110,7 +110,7 @@
             },
             {
               "type": "p",
-              "content": "<strong>Scope</strong>:  Enter required scopes. Separate multiple scopes with spaces."
+              "content": "<strong>Scope</strong>: Enter required scopes. Separate multiple scopes with spaces."
             }
           ]
         },
