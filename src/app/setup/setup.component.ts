@@ -119,7 +119,9 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe({
         next: (tree) => {
           this.navTree = tree;
-          this.initializeExpandedState(tree);
+          this.expandedIds = new Set(
+            tree.flatMap(n => n.children?.length ? [n.id] : [])
+          );
           this.watchRoute();
           this.prefetchContentIndex();
         },
@@ -145,15 +147,6 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
           this.cdr.markForCheck();
         }
       });
-  }
-
-  private initializeExpandedState(nodes: NavNode[]): void {
-    for (const node of nodes) {
-      if (node.children?.length) {
-        this.expandedIds.add(node.id);
-        this.initializeExpandedState(node.children);
-      }
-    }
   }
 
   private watchRoute(): void {
