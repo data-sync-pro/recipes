@@ -26,6 +26,7 @@
       "type": "image",
       "content": "image/apex/salesforce-data-transformer.png",
       "alt": "Reference the SalesforceDataTransformer class in a target field's mapping"
+    
     }
   ],
   "related": [
