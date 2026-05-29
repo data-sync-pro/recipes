@@ -98,5 +98,15 @@
         ]
       }
     ]
+  },
+  {
+    "id": "apex-extensions",
+    "label": "Apex Extensions",
+    "children": [
+      { "id": "salesforce-data-transformer", "label": "Salesforce Data Transformer", "slug": "salesforce-data-transformer" },
+      { "id": "execution-finalizer", "label": "Execution Finalizer", "slug": "execution-finalizer" },
+      { "id": "action-result-processor", "label": "Action Result Processor", "slug": "action-result-processor" },
+      { "id": "bulk-job-status-syncer", "label": "Bulk Job Status Syncer", "slug": "bulk-job-status-syncer" }
+    ]
   }
 ]
