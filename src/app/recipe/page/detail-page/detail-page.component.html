@@ -18,17 +18,29 @@
     <!-- Left Sidebar - Recipe List -->
     <aside class="left-sidebar" [class.open]="isSidebarOpen">
       <div class="sidebar-sticky">
-        <div class="sidebar-search">
-          <img class="search-icon" src="assets/icons/recipe/search.svg" aria-hidden="true">
-          <input
-            #sidebarSearchInput
-            type="text"
-            placeholder="Search..."
-            class="sidebar-search-input"
-            (click)="openSearchOverlay()"
-            (focus)="openSearchOverlay()"
-            readonly>
-          <span class="shortcut-hint">/</span>
+        <div class="sidebar-filter">
+          <div class="filter-input-wrap" [class.has-value]="!!sidebarSearchQuery">
+            <mat-icon class="filter-icon">search</mat-icon>
+            <input
+              #sidebarSearchInput
+              type="text"
+              class="filter-input"
+              placeholder="Search…"
+              [value]="sidebarSearchQuery"
+              (input)="onSidebarSearchInput($any($event.target).value)"
+              (keydown.escape)="clearFilter()"
+              aria-label="Filter recipes" />
+            <button *ngIf="sidebarSearchQuery; else kbdHint"
+                    class="filter-clear"
+                    type="button"
+                    (click)="clearFilter()"
+                    aria-label="Clear filter">
+              <mat-icon>close</mat-icon>
+            </button>
+            <ng-template #kbdHint>
+              <span class="filter-kbd" aria-hidden="true">/</span>
+            </ng-template>
+          </div>
         </div>
         <div class="category-list">
           <div *ngFor="let group of filteredCategoryGroups" class="category-group">

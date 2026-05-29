@@ -248,17 +248,22 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSidebarSearchInput(): void {
-    const query = this.sidebarSearchQuery.toLowerCase().trim();
+  onSidebarSearchInput(value?: string): void {
+    if (typeof value === 'string') {
+      this.sidebarSearchQuery = value;
+    }
+    const query = this.sidebarSearchQuery.trim();
 
     if (!query) {
       this.filteredCategoryGroups = [...this.categoryGroups];
     } else {
-      // Filter recipes and expand categories with matching recipes
+      // Reuse the core relevance search so sidebar matches title / overview /
+      // keywords / categories just like the global search overlay.
+      const matchedIds = new Set(
+        this.searchService.search(this.allRecipes, query).map(r => r.id)
+      );
       this.filteredCategoryGroups = this.categoryGroups.map(group => {
-        const filteredRecipes = group.recipes.filter(recipe =>
-          recipe.title.toLowerCase().includes(query)
-        );
+        const filteredRecipes = group.recipes.filter(r => matchedIds.has(r.id));
         return {
           ...group,
           recipes: filteredRecipes,
@@ -270,10 +275,28 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
+  clearFilter(): void {
+    this.sidebarSearchQuery = '';
+    this.onSidebarSearchInput();
+    this.sidebarSearchInput?.nativeElement.focus();
+  }
+
   @HostListener('document:keydown./', ['$event'])
-  onSlashKey(event: Event) {
+  onSlashKey(event: KeyboardEvent) {
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+    const target = event.target as HTMLElement | null;
+    const isEditable =
+      !!target &&
+      (target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable);
+    if (isEditable) return;
     event.preventDefault();
-    this.openSearchOverlay();
+    const el = this.sidebarSearchInput?.nativeElement;
+    if (el) {
+      el.focus();
+      el.select();
+    }
   }
 
   openSearchOverlay(): void {
