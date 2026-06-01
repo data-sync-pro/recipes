@@ -11,7 +11,7 @@
     },
     {
       "type": "code",
-      "content": "global interface ExecutionFinalizer {\n    void execute(pushtopics__Execution__c execution);\n}",
+      "content": "global interface pushtopic.ExecutionFinalizer {\n    void execute(pushtopics__Execution__c execution);\n}",
       "language": "apex"
     },
     {
