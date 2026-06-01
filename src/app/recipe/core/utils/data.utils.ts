@@ -52,7 +52,7 @@ function normalizeExecutablePath(path: string): string {
   return path;
 }
 
-export function cleanRecipeData(
+function cleanRecipeData(
   recipe: RecipeData,
   options: CleanRecipeOptions = {}
 ): RecipeData {

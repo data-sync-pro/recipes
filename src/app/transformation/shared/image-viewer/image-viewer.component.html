@@ -1,0 +1,41 @@
+<div class="image-viewer-overlay" (click)="onOverlayClick()">
+  <div class="image-viewer-container">
+    <img 
+      [src]="imageUrl" 
+      [alt]="imageAlt"
+      [ngStyle]="imageStyle"
+      (click)="onImageClick($event)"
+      (mousedown)="onMouseDown($event)"
+      class="viewer-image"
+    />
+    
+    <div class="zoom-controls" (click)="$event.stopPropagation()">
+      <button class="zoom-btn" (click)="zoomOut(); $event.stopPropagation()" [disabled]="zoomLevel <= minZoom" title="Zoom out (- or ↓)">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"/>
+        </svg>
+      </button>
+      
+      <span class="zoom-level">{{ (zoomLevel * 100).toFixed(0) }}%</span>
+      
+      <button class="zoom-btn" (click)="zoomIn(); $event.stopPropagation()" [disabled]="zoomLevel >= maxZoom" title="Zoom in (+ or ↑)">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"/>
+        </svg>
+      </button>
+      
+      <button class="zoom-btn" (click)="resetZoom(); $event.stopPropagation()" title="Reset zoom (0)">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+          <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 1 1 0 000 2H6a2 2 0 100 4h4a2 2 0 100-4 1 1 0 100-2A2 2 0 0114 5v5a2 2 0 01-2 2H8a2 2 0 01-2-2V5z"/>
+        </svg>
+      </button>
+    </div>
+    
+    <button class="close-btn" (click)="close(); $event.stopPropagation()" title="Close (Esc)">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+      </svg>
+    </button>
+  </div>
+</div>

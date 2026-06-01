@@ -1,0 +1,16 @@
+{
+  "title": "EXP",
+  "description": "Returns the value of e raised to the specified number.",
+  "syntax": "EXP(num) -> Decimal",
+  "parameters": [
+    {
+      "name": "num",
+      "type": "Decimal",
+      "required": "Yes",
+      "description": "A numeric literal, field, or expression representing the exponent."
+    }
+  ],
+  "examples": [
+    "EXP(2)\n-- Returns the value of e squared."
+  ]
+}

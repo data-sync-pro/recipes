@@ -1,0 +1,74 @@
+<header class="header-container"
+        [class.is-portrait]="isPortrait"
+        [class.is-mobile]="isMobile"
+        [class.is-tablet]="isTablet"
+        role="banner">
+  <a href="https://www.pushtopic.com/" class="logo-area" target="_blank" rel="noopener" aria-label="Pushtopic - Data Sync Pro">
+    <img src="assets/icons/logo.png" alt="Data Sync Pro Logo" class="company-logo" />
+  </a>
+  <button
+    class="mobile-toggle-btn"
+    (click)="toggleNav()"
+    *ngIf="isMobile"
+    [attr.aria-expanded]="navOpen"
+    [attr.aria-controls]="'main-navigation'"
+    aria-label="Toggle navigation menu"
+    type="button"
+  >
+    <span class="sr-only">{{ navOpen ? 'Close Menu' : 'Open Menu' }}</span>
+    <span class="hamburger-icon" [class.active]="navOpen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  </button>
+  <nav
+    id="main-navigation"
+    class="nav-links"
+    [class.mobile-nav]="isMobile && navOpen"
+    [class.tablet-nav]="isTablet"
+    role="navigation"
+    aria-label="Main navigation"
+  >
+    <ul class="nav-list" role="menubar">
+      <li
+        class="nav-item"
+        *ngFor="let item of navItems; let i = index"
+        (click)="onNavItemClick(i)"
+        [class.open]="item.isOpen"
+        role="none"
+      >
+        <a
+          [routerLink]="item.link"
+          class="nav-link"
+          role="menuitem"
+          [attr.aria-haspopup]="item.hasMegaMenu ? 'true' : null"
+          [attr.aria-expanded]="item.hasMegaMenu ? item.isOpen : null"
+        >
+          {{ item.label }}
+        </a>
+
+        <div class="mega-menu" *ngIf="item.hasMegaMenu" role="menu">
+          <div class="mega-menu-inner">
+            <div class="mega-column">
+              <h3>Column A</h3>
+              <p class="column-description">Description for Column A</p>
+              <div class="mega-sub-menu">
+                <a routerLink="/sub-link1" role="menuitem">Sub Link 1</a>
+                <a routerLink="/sub-link2" role="menuitem">Sub Link 2</a>
+              </div>
+            </div>
+
+            <div class="mega-column">
+              <h3>Column B</h3>
+              <p class="column-description">Description for Column B</p>
+              <div class="mega-sub-menu">
+                <a routerLink="/sub-link3" role="menuitem">Sub Link 3</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>

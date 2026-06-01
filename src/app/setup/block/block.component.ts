@@ -3,8 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Block } from '../models/setup.model';
 import { SetupService } from '../services/setup.service';
-import Prism from 'prismjs';
-import 'prismjs/components/prism-java';
+import hljs from 'highlight.js';
 
 @Component({
   selector: 'app-setup-block',
@@ -86,7 +85,7 @@ export class SetupBlockComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked(): void {
     if (this.block.type === 'code' && this.codeBlock && !this.highlighted) {
-      Prism.highlightElement(this.codeBlock.nativeElement);
+      hljs.highlightElement(this.codeBlock.nativeElement);
       this.highlighted = true;
     }
   }
@@ -127,10 +126,14 @@ export class SetupBlockComponent implements OnInit, AfterViewChecked {
     } else if (url.includes('/embed/')) {
       videoId = url.split('/embed/')[1]?.split(/[?#]/)[0] || '';
     }
+    // Reject malformed IDs so we never trust an empty / attacker-controlled value
+    if (!/^[A-Za-z0-9_-]{11}$/.test(videoId)) {
+      return this.sanitizer.bypassSecurityTrustResourceUrl('about:blank');
+    }
     return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}?rel=0`);
   }
 
-  getPrismLanguage(language: string | undefined): string {
+  getHljsLanguage(language: string | undefined): string {
     const languageMap: Record<string, string> = {
       'apex': 'java',
       'soql': 'sql',

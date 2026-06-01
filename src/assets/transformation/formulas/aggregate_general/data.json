@@ -1,0 +1,11 @@
+{
+  "title": "AGGREGATION GENERAL",
+  "description": "<p>DSP optimizes performance by reducing SOQL queries, combining multiple mergeable aggregate functions into a single query whenever possible.</p>",
+  "syntax": "",
+  "parameters": [],
+  "examples": [
+    "AGG_AVG(\"Opportunity\", \"Amount\", \"AccountId\", Id, \"StageName = 'Closed Won'\")\nAGG_SUM(\"Opportunity\", \"Amount\", \"AccountId\", Id, \"StageName = 'Closed Won'\")\nAGG_COUNT(\"Opportunity\", \"Id\", \"AccountId\", Id, \"StageName = 'Closed Won'\")\n\n-- DSP merges these into one SOQL query:\nSELECT AVG(Amount) agg0, SUM(Amount) agg1, COUNT(Id) agg2, AccountId groupField0 \nFROM Opportunity \nWHERE AccountId IN ('0018K00000kPuYXQA0','0018K00000kPuYYQA0','0018K00000kPuYZQA0','0018K00000kPuYaQAK','0018K00000kPuYbQAK') AND StageName = 'Closed Won' \nGROUP BY AccountId"
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

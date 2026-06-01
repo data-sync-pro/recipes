@@ -1,0 +1,79 @@
+// ==================== FAQ Virtual Scroll ====================
+// Viewport for cdk-virtual-scroll, scrollbar styling, and the fallback non-virtual list container.
+
+.faq-virtual-viewport {
+  // 100vh - (header:60px + breadcrumb:50px + padding:40px + spacing:20px)
+  height: calc(100vh - 170px);
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  pointer-events: auto;
+  z-index: 10;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.08) transparent;
+
+  &::-webkit-scrollbar {
+    width: 1px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 0;
+  }
+
+  // When on homepage (all-faqs) without breadcrumb navigation
+  .all-faqs & {
+    height: calc(100vh - 170px);
+  }
+
+  ::ng-deep .cdk-virtual-scroll-content-wrapper {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    pointer-events: auto !important;
+    position: static !important;
+    z-index: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+// Global CDK Virtual Scroll fixes
+::ng-deep cdk-virtual-scroll-viewport {
+  pointer-events: auto !important;
+  position: relative !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(0, 0, 0, 0.08) transparent !important;
+
+  &::-webkit-scrollbar {
+    width: 3px !important;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.08) !important;
+    border-radius: 2px !important;
+  }
+
+  .cdk-virtual-scroll-content-wrapper {
+    pointer-events: auto !important;
+    position: static !important;
+  }
+
+  .cdk-virtual-scroll-spacer {
+    pointer-events: none !important;
+  }
+}
+
+// Regular list container for smaller lists (under virtual-scroll threshold)
+.faq-regular-list {
+  width: 100%;
+  pointer-events: auto;
+  z-index: 10;
+  position: relative;
+}

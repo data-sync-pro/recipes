@@ -27,15 +27,12 @@ import { RecipePageRoutingModule } from './page-routing.module';
 import { RecipesComponent } from './page.component';
 import { RecipeCardComponent } from './card/card.component';
 import { RecipeSearchOverlayComponent } from './search-overlay/search-overlay.component';
-import { RecipeSidebarComponent } from './sidebar/sidebar.component';
-import { RecipeSectionComponent } from './section/section.component';
 import { RecipeDetailPageComponent } from './detail-page/detail-page.component';
 
 // Shared Modules and Components
 import { SharedModule } from '../../shared/shared.module';
 import { BannerComponent } from './banner/banner.component';
 import { RecipeDetailBannerComponent } from './detail-banner/detail-banner.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { RecipeLayoutComponent } from './recipe-layout/recipe-layout.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
@@ -43,23 +40,24 @@ import { RecipePrereqsComponent } from './recipe-prereqs/recipe-prereqs.componen
 import { RecipeNavSidebarComponent } from './recipe-nav-sidebar/recipe-nav-sidebar.component';
 import { RecipeCountComponent } from './recipe-count/recipe-count.component';
 
+// Pipes
+import { CodeBlockPipe } from './pipes/code-block.pipe';
+
 @NgModule({
   declarations: [
     RecipesComponent,
     RecipeCardComponent,
     RecipeSearchOverlayComponent,
-    RecipeSidebarComponent,
-    RecipeSectionComponent,
     RecipeDetailPageComponent,
     BannerComponent,
     RecipeDetailBannerComponent,
-    BreadcrumbComponent,
     RecipeLayoutComponent,
     CategoryListComponent,
     RecipeListComponent,
     RecipePrereqsComponent,
     RecipeNavSidebarComponent,
-    RecipeCountComponent
+    RecipeCountComponent,
+    CodeBlockPipe
   ],
   imports: [
     CommonModule,

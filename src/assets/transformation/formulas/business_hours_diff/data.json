@@ -1,0 +1,32 @@
+{
+  "title": "BUSINESS_HOURS_DIFF",
+  "description": "<p>Calculates the difference in milliseconds between two Datetime values within business hours. Uses the default schedule if none is provided.</p>",
+  "syntax": "BUSINESS_HOURS_DIFF(start_date, end_date, business_hours_name_optional) -> Long",
+  "parameters": [
+    {
+      "name": "start_date",
+      "type": "Datetime",
+      "required": "Yes",
+      "description": "The starting Datetime."
+    },
+    {
+      "name": "end_date",
+      "type": "Datetime",
+      "required": "Yes",
+      "description": "The ending Datetime."
+    },
+    {
+      "name": "business_hours_name_optional",
+      "type": "String",
+      "required": "No",
+      "description": "The name of the business hours."
+    }
+  ],
+  "examples": [
+    "BUSINESS_HOURS_DIFF(CreatedDate, ClosedDate)\n-- Returns the number of milliseconds between CreatedDate and ClosedDate during default business hours.", 
+    "BUSINESS_HOURS_DIFF(Case_Created__c, First_Response__c, \"SupportSchedule\")\n-- Returns the number of milliseconds between Case_Created__c and First_Response__c during \"SupportSchedule\" hours."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+  ]
+}

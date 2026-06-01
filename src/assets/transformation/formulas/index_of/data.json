@@ -1,0 +1,32 @@
+{
+  "title": "INDEX_OF",
+  "description": "<p>Returns the zero-based index of the first occurrence of substring within string (case-sensitive). Optionally starts searching from index_optional. Returns -1 if not found.</p>",
+  "syntax": "INDEX_OF(string, substring, index_optional) -> Integer",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to search within."
+    },
+    {
+      "name": "substring",
+      "type": "String",
+      "required": "Yes",
+      "description": "The substring to locate."
+    },
+    {
+      "name": "index_optional",
+      "type": "Integer",
+      "required": "No",
+      "description": "The starting index for the search (zero-based). Defaults to 0."
+    }
+  ],
+  "examples": [
+    "INDEX_OF(\"Status=OK\", \"status\")\n-- Returns -1.",
+    "INDEX_OF(\"Log entry: userID=1234\", \"userID=\")\n-- Returns 11.",
+    "INDEX_OF(\"SystemA-12345-Order-ABC\", \"-\", 10)\n-- Returns 13. Finds the first occurrence of \"-\" starting from index 10."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

@@ -151,11 +151,4 @@ export class ImageNamingService {
   private fallbackImageName(): string {
     return `image-${Date.now()}`;
   }
-
-  /**
-   * @deprecated Use getFileExtension from core/utils instead
-   */
-  getFileExtension(file: File): string {
-    return getFileExtension(file);
-  }
 }

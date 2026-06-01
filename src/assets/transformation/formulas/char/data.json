@@ -1,0 +1,17 @@
+{
+  "title": "CHAR",
+  "description": "Returns the character corresponding to the specified ASCII code.",
+  "syntax": "CHAR(int) -> String",
+  "parameters": [
+    {
+      "name": "int",
+      "type": "Integer",
+      "required": "Yes",
+      "description": "An integer value representing a valid ASCII character code."
+    }
+  ],
+  "examples": [
+    "CHAR(65)\n-- Returns \"A\".",
+    "CHAR(189)\n-- Returns \"½\"."
+  ]
+}

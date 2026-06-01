@@ -1,0 +1,64 @@
+{
+  "globalVariables": [
+    {
+      "variable": "$CONTEXT_RECORD_ID",
+      "description": "$CONTEXT_RECORD_ID is used in UI-based rules engines—such as Data Loader, Data List, and Action Button—to dynamically reference the current record ID from the Lightning Record Page. When used in transformations, it is automatically replaced with the record’s ID at runtime."
+    },
+    {
+      "variable": "$EXECUTABLE_NAME",
+      "description": "$EXECUTABLE_NAME returns the name of the currently running Executable."
+    },
+    {
+      "variable": "$EXECUTABLE_ID",
+      "description": "$EXECUTABLE_ID returns the Id of the currently running Executable."
+    },
+    {
+      "variable": "$JOINER",
+      "description": "$Joiner is a prefix used to reference fields from a dataset that has been joined in the Scoping step of an Executable (left-join or cross-join). It allows downstream logic—such as Scope Filter (Post Join) rules and field mappings—to access the joined record’s fields. For example, $Joiner.Parent__r.Status__c references the Status__c field on the joined record’s Parent__r relationship."
+    },
+    {
+      "variable": "$LAST_EXECUTION",
+      "description": "$LAST_EXECUTION references the most recent Execution record for the current Executable (any outcome), allowing formulas to read fields from that Execution."
+    },
+    {
+      "variable": "$LAST_SUCCESSFUL_EXECUTION",
+      "description": "$LAST_SUCCESSFUL_EXECUTION references the most recent successful Execution record for the current Executable, allowing formulas to read fields from that Execution."
+    },
+    {
+      "variable": "$ORG_DOMAIN_URL",
+      "description": "Returns current org's domain URL."
+    },
+    {
+      "variable": "$SKIP_ASSIGNMENT",
+      "description": "`$SKIP_ASSIGNMENT` is a special keyword used in DSP formulas to conditionally bypass processing based on dynamic logic. Field Mapping: If a formula evaluates to `$SKIP_ASSIGNMENT`, the target field is excluded from the request payload. Scope Filters: If a formula evaluates to `$SKIP_ASSIGNMENT`, the source record is omitted from processing.\nThis enables fine-grained control over field-level assignments and record-level processing."
+    },
+    {
+      "variable": "$User.Email",
+      "description": "Returns the email address of the running user."
+    },
+    {
+      "variable": "$User.FirstName",
+      "description": "Returns the first name of the running user."
+    },
+    {
+      "variable": "$User.LastName",
+      "description": "Returns the last name of the running user."
+    },
+    {
+      "variable": "$User.Name",
+      "description": "Returns the full name of the running user."
+    },
+    {
+      "variable": "$User.ProfileId",
+      "description": "Returns the Profile Id of the running user."
+    },
+    {
+      "variable": "$User.Username",
+      "description": "Returns the username of the running user."
+    },
+    {
+      "variable": "$User.Id",
+      "description": "Returns the Id of the running user."
+    }
+  ]
+}

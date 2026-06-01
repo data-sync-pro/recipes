@@ -1,0 +1,26 @@
+{
+  "title": "ENDS_WITH_IGNORE_CASE",
+  "description": "<p>Returns TRUE if the provided string ends with any of the specified compare_strings. The comparison is case-insensitive. Otherwise, returns FALSE.</p>",
+  "syntax": "ENDS_WITH_IGNORE_CASE(string, ...compare_strings) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The source string to evaluate."
+    },
+    {
+      "name": "… compare_strings",
+      "type": "String",
+      "required": "Yes",
+      "description": "One or more strings to compare against the end of the source string."
+    }
+  ],
+  "examples": [
+    "ENDS_WITH_IGNORE_CASE(\"Salesforce Platform\", \"platform\") \n-- Returns TRUE (case-insensitive).",
+    "ENDS_WITH_IGNORE_CASE(Email, \".gov\", \".edu\")\n-- Returns TRUE if Email ends with \".gov\" or \".edu\" in any case; otherwise, returns FALSE."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+  ]
+}

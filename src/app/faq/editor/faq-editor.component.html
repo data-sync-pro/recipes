@@ -1,0 +1,494 @@
+<div class="faq-editor-container">
+  <!-- Header Bar -->
+  <div class="editor-header">
+    <div class="editor-brand">
+      <a routerLink="/" class="brand-link" title="Return to Data Sync Pro">
+        <img src="assets/icons/logo.png" alt="Data Sync Pro" class="brand-logo">
+        <span class="brand-text">DSP</span>
+      </a>
+      <h1 class="editor-title">FAQ Editor</h1>
+    </div>
+    
+    <div class="editor-stats">
+      <span class="stat-item">
+        <strong>{{ faqList.length }}</strong> Total FAQs
+      </span>
+      <span class="stat-item created tooltip-container" 
+            *ngIf="getCreatedCount() > 0"
+            (mouseenter)="showTooltip = 'created'" 
+            (mouseleave)="showTooltip = null">
+        <strong>{{ getCreatedCount() }}</strong> Created
+        <div class="tooltip-content" *ngIf="showTooltip === 'created'">
+          <div class="tooltip-header">Created FAQs:</div>
+          <div class="tooltip-item clickable" 
+               *ngFor="let item of getCreatedFAQTitles()"
+               (click)="onTooltipFAQClick(item.faqId); $event.stopPropagation()"
+               title="Click to edit this FAQ">
+            {{ item.title }}
+          </div>
+          <div class="tooltip-more" *ngIf="getCreatedCount() > 10">
+            ...and {{ getCreatedCount() - 10 }} more
+          </div>
+        </div>
+      </span>
+      <span class="stat-item edited tooltip-container" 
+            *ngIf="getEditedExistingCount() > 0"
+            (mouseenter)="showTooltip = 'edited'" 
+            (mouseleave)="showTooltip = null">
+        <strong>{{ getEditedExistingCount() }}</strong> Edited
+        <div class="tooltip-content" *ngIf="showTooltip === 'edited'">
+          <div class="tooltip-header">Edited FAQs:</div>
+          <div class="tooltip-item clickable" 
+               *ngFor="let item of getEditedExistingFAQTitles()"
+               (click)="onTooltipFAQClick(item.faqId); $event.stopPropagation()"
+               title="Click to edit this FAQ">
+            {{ item.title }}
+          </div>
+          <div class="tooltip-more" *ngIf="getEditedExistingCount() > 10">
+            ...and {{ getEditedExistingCount() - 10 }} more
+          </div>
+        </div>
+      </span>
+      <span class="stat-item" *ngIf="state.lastSaved">
+        Last saved: {{ formatDate(state.lastSaved) }}
+      </span>
+    </div>
+
+    <div class="editor-actions">
+      <button class="btn btn-secondary" (click)="state.showVersionHistory = true" 
+              [disabled]="!state.selectedFAQ">
+        Version History
+      </button>
+      <button class="btn btn-secondary" (click)="state.showImportDialog = true">
+        Import
+      </button>
+      <button class="btn btn-primary" (click)="exportEditAndNew()"
+              [disabled]="getEditedCount() === 0 || state.isExporting">
+        <span *ngIf="!state.isExporting">Export Edit & New ({{ getEditedCount() }})</span>
+        <span *ngIf="state.isExporting">Exporting...</span>
+      </button>
+      <button class="btn btn-primary" (click)="exportAllFaqs()"
+              [disabled]="faqList.length === 0 || state.isExporting">
+        <span *ngIf="!state.isExporting">Export All ({{ faqList.length }})</span>
+        <span *ngIf="state.isExporting">Exporting...</span>
+      </button>
+      <button class="btn btn-success save-all-btn" (click)="saveAllFAQs()"
+              [disabled]="getUnsavedChangesCount() === 0">
+        <span *ngIf="getUnsavedChangesCount() === 0">Save All</span>
+        <span *ngIf="getUnsavedChangesCount() === 1">Save (1 unsaved)</span>
+        <span *ngIf="getUnsavedChangesCount() > 1">Save All ({{ getUnsavedChangesCount() }} unsaved)</span>
+      </button>
+      <button class="btn btn-danger" (click)="clearAllEdits()"
+              [disabled]="getEditedCount() === 0">
+        Clear All
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabs Container -->
+  <div class="tabs-container">
+    <div class="tabs">
+      <!-- Existing tabs -->
+      <div class="tab" 
+           *ngFor="let tab of state.tabs; trackBy: trackByTabIndex"
+           [class.active]="tab.isActive"
+           [class.has-changes]="tab.hasChanges"
+           (click)="selectTab(tab.id)">
+        <span class="tab-title">{{ tab.title }}</span>
+        <span class="changes-indicator" *ngIf="tab.hasChanges">●</span>
+        <button class="close-tab" 
+                *ngIf="state.tabs.length > 1"
+                (click)="closeTab(tab.id); $event.stopPropagation()">×</button>
+      </div>
+      
+      <!-- Add FAQ button -->
+      <button class="add-tab" (click)="createNewTab()">+ Add FAQ</button>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="editor-main">
+    <!-- Left Sidebar - FAQ List -->
+    <div class="faq-list-panel">
+      <!-- Search and Filter -->
+      <div class="list-controls">
+        <input type="text" 
+               class="search-input"
+               placeholder="Search FAQs..."
+               [(ngModel)]="searchQuery"
+               (input)="filterFAQs()">
+        
+        <select class="category-filter"
+                [(ngModel)]="selectedCategory"
+                (change)="filterFAQs()">
+          <option value="">All Categories</option>
+          <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+        </select>
+      </div>
+
+      <!-- FAQ List -->
+      <div class="faq-list">
+        <div class="faq-item"
+             *ngFor="let faq of filteredFAQs"
+             [class.selected]="state.selectedFAQ?.id === faq.id"
+             [class.edited]="isEdited(faq)"
+             [class.inactive]="faq.isActive === false"
+             (click)="selectFAQ(faq)">
+          <div class="faq-item-header">
+            <span class="status-indicator inactive" *ngIf="faq.isActive === false" title="Inactive FAQ">🚫</span>
+            <span class="edit-indicator" *ngIf="isEdited(faq)">✏️</span>
+          </div>
+          <div class="faq-question">{{ faq.question }}</div>
+          <div class="faq-category">{{ faq.category }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Selection States - moved inside editor-main -->
+    <div class="no-selection" *ngIf="!state.selectedFAQ && state.tabs.length === 0">
+      <p>Select a FAQ or create new</p>
+    </div>
+
+    <div class="tab-mode-no-selection" *ngIf="!state.selectedFAQ && state.tabs.length > 0">
+    </div>
+
+    <!-- Middle - Editor -->
+    <div class="editor-panel" *ngIf="state.selectedFAQ">
+      <!-- Hidden image input for image upload functionality -->
+      <input type="file" 
+             #imageInput
+             accept=".jpg,.jpeg,.png,.gif,.webp"
+             style="display: none"
+             (change)="handleImageSelection($event)">
+      
+      <div class="editor-toolbar">
+        <h2>Edit FAQ</h2>
+        <div class="toolbar-actions">
+          <button class="btn btn-sm btn-success" 
+                  (click)="saveFAQ()"
+                  [disabled]="!state.hasChanges || state.isSaving"
+                  title="Save changes (Ctrl+S)">
+            <span *ngIf="state.isSaving" class="spinner"></span>
+            {{ state.isSaving ? 'Saving...' : 'Save' }}
+          </button>
+          <button class="btn btn-sm btn-secondary" 
+                  (click)="resetCurrentFAQ()"
+                  [disabled]="!state.selectedFAQ"
+                  title="Reset current FAQ to original content">
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- FAQ Metadata -->
+      <div class="faq-metadata">
+        <div class="form-row">
+          <div class="form-group active-field">
+            <label class="checkbox-label">
+              <input type="checkbox" 
+                     [(ngModel)]="currentIsActive"
+                     (change)="state.hasChanges = true; onTabContentChange()">
+              <span class="checkbox-text">Active</span>
+            </label>
+          </div>
+          
+          <div class="form-group question-field">
+            <label>Question:</label>
+            <input type="text" 
+                   class="form-control"
+                   [(ngModel)]="currentQuestion"
+                   (input)="state.hasChanges = true; onTabContentChange()">
+          </div>
+          
+          <div class="form-group category-field">
+            <label>Category:</label>
+            <select class="form-control"
+                    [(ngModel)]="currentCategory"
+                    (change)="onCategoryChange()">
+              <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+            </select>
+          </div>
+          
+          <div class="form-group subcategory-field" *ngIf="subCategories.length > 0">
+            <label>Sub Category:</label>
+            <select class="form-control"
+                    [(ngModel)]="currentSubCategory"
+                    (change)="onSubCategoryChange()">
+              <option value="">-- No Sub Category --</option>
+              <option *ngFor="let subCat of subCategories" [value]="subCat">{{ subCat }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- HTML Editor Toolbar -->
+      <div class="html-editor-toolbar" *ngIf="!state.isLoading && state.selectedFAQ">
+          <!-- Row 1: Basic Operations -->
+          <div class="toolbar-row">
+            <div class="toolbar-group">
+              <button class="btn btn-sm btn-secondary" 
+                      (click)="performUndo()"
+                      title="Undo (Ctrl+Z)"
+                      [disabled]="!canUndo()">
+                <span class="btn-icon">↶</span>
+              </button>
+              <button class="btn btn-sm btn-secondary" 
+                      (click)="performRedo()"
+                      title="Redo (Ctrl+Y)"
+                      [disabled]="!canRedo()">
+                <span class="btn-icon">↷</span>
+              </button>
+            </div>
+            
+            <div class="toolbar-separator"></div>
+            
+            <div class="toolbar-group">
+              <button class="btn btn-sm btn-secondary" 
+                      (click)="clearFormatting()"
+                      title="Clear Formatting">
+                <span class="btn-icon">🧹</span>
+                Clear
+              </button>
+              <button class="btn btn-sm btn-secondary" 
+                      (click)="formatHTML()"
+                      title="Format HTML (Alt+Shift+F)"
+                      [disabled]="!editorContent">
+                <span class="btn-icon">🎨</span>
+                Format
+              </button>
+            </div>
+            
+            <div class="toolbar-separator"></div>
+            
+            <div class="toolbar-group">
+              <button class="btn btn-sm btn-secondary" 
+                      (click)="wrapSelectedText('<strong>', '</strong>')"
+                      title="Bold (Ctrl+B)">
+                <span class="btn-icon"><strong>B</strong></span>
+              </button>
+              <button class="btn btn-sm btn-secondary" 
+                      (click)="wrapSelectedText('<em>', '</em>')"
+                      title="Italic (Ctrl+I)">
+                <span class="btn-icon"><em>I</em></span>
+              </button>
+              <button class="btn btn-sm btn-secondary" 
+                      (click)="wrapSelectedText('<u>', '</u>')"
+                      title="Underline (Ctrl+U)">
+                <span class="btn-icon"><u>U</u></span>
+              </button>
+              <button class="btn btn-sm btn-secondary" 
+                      (click)="wrapSelectedText('<code>', '</code>')"
+                      title="Inline Code">
+                <span class="btn-icon">&lt;/&gt;</span>
+              </button>
+            </div>
+            
+            <div class="toolbar-separator"></div>
+            
+            <div class="toolbar-group">
+              <button class="btn btn-sm btn-secondary" 
+                      (click)="alignLeft()"
+                      title="Align Left">
+                <span class="btn-icon">⬅</span>
+              </button>
+              <button class="btn btn-sm btn-secondary" 
+                      (click)="alignCenter()"
+                      title="Align Center">
+                <span class="btn-icon">⬌</span>
+              </button>
+              <button class="btn btn-sm btn-secondary" 
+                      (click)="alignRight()"
+                      title="Align Right">
+                <span class="btn-icon">➡</span>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Row 2: Advanced Operations -->
+          <div class="toolbar-row">
+            <div class="toolbar-group">
+              <button class="btn btn-sm btn-info" 
+                      (click)="insertHeading()"
+                      title="Insert Heading">
+                <span class="btn-icon">H</span>
+                Heading
+              </button>
+              <button class="btn btn-sm btn-info" 
+                      (click)="insertParagraph()"
+                      title="New Paragraph">
+                <span class="btn-icon">¶</span>
+                Para
+              </button>
+              <button class="btn btn-sm btn-info" 
+                      (click)="insertBlockquote()"
+                      title="Blockquote">
+                <span class="btn-icon">❝</span>
+                Quote
+              </button>
+            </div>
+            
+            <div class="toolbar-separator"></div>
+            
+            <div class="toolbar-group">
+              <button class="btn btn-sm btn-info" 
+                      (click)="insertUnorderedList()"
+                      title="Bullet List">
+                <span class="btn-icon">•</span>
+                List
+              </button>
+              <button class="btn btn-sm btn-info" 
+                      (click)="insertOrderedList()"
+                      title="Numbered List">
+                <span class="btn-icon">1.</span>
+                Num
+              </button>
+              <button class="btn btn-sm btn-secondary" 
+                      (click)="outdent()"
+                      title="Decrease Indent">
+                <span class="btn-icon">⇤</span>
+              </button>
+              <button class="btn btn-sm btn-secondary" 
+                      (click)="indent()"
+                      title="Increase Indent">
+                <span class="btn-icon">⇥</span>
+              </button>
+            </div>
+            
+            <div class="toolbar-separator"></div>
+            
+            <div class="toolbar-group">
+              <button class="btn btn-sm btn-info" 
+                      (click)="insertLink()"
+                      title="Insert Link (Ctrl+K)">
+                <span class="btn-icon">🔗</span>
+                Link
+              </button>
+              <button class="btn btn-sm btn-info" 
+                      (click)="triggerImageUpload()"
+                      title="Insert Image">
+                <span class="btn-icon">📷</span>
+                Image
+              </button>
+              <button class="btn btn-sm btn-info" 
+                      (click)="insertTable()"
+                      title="Insert Table">
+                <span class="btn-icon">⊞</span>
+                Table
+              </button>
+              <button class="btn btn-sm btn-info" 
+                      (click)="insertHorizontalRule()"
+                      title="Horizontal Line">
+                <span class="btn-icon">—</span>
+                Line
+              </button>
+            </div>
+          </div>
+      </div>
+
+      <!-- HTML Source Code Editor -->
+      <div class="editor-content" *ngIf="state.selectedFAQ">
+        <div class="loading-indicator" *ngIf="state.isLoading">
+          <p>Loading content...</p>
+        </div>
+        
+        <div 
+          #htmlSourceEditor
+          class="html-wysiwyg-editor" 
+          [class.hidden]="state.isLoading"
+          contenteditable="true"
+          (input)="onEditorContentChange()"
+          placeholder="Content will appear here..."
+          spellcheck="false"></div>
+      </div>
+    </div>
+
+    <!-- Right - Preview -->
+    <div class="preview-panel" *ngIf="state.selectedFAQ">
+      <div class="preview-header">
+        <h3>Preview</h3>
+        <div class="preview-actions">
+          <button class="btn btn-sm btn-primary new-tab-btn"
+                  (click)="openPreviewInNewTab()"
+                  title="Open preview in new tab">
+            Preview
+          </button>
+          <button class="btn btn-sm btn-secondary preview-toggle"
+                  (click)="togglePreviewMode()"
+                  [title]="state.previewMode === 'rendered' ? 'Show Export Source Code' : 'Show Rendered Preview'">
+            <span class="btn-icon">{{ state.previewMode === 'rendered' ? '{ }' : '👁' }}</span>
+            {{ state.previewMode === 'rendered' ? 'Show Source' : 'Show Preview' }}
+          </button>
+        </div>
+      </div>
+      <div class="preview-content" 
+           *ngIf="state.previewMode === 'rendered'"
+           [innerHTML]="previewContent" 
+           appSimpleZoomable></div>
+      <div class="source-code-content" 
+           *ngIf="state.previewMode === 'source'">
+        <pre><code>{{ getExportSourceCode() }}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Storage Stats -->
+  <div class="storage-stats">
+    <div class="storage-bar">
+      <div class="storage-used" [style.width.%]="storageStats.percentage"></div>
+    </div>
+    <span class="storage-text">
+      Storage: {{ formatBytes(storageStats.used) }} / {{ formatBytes(storageStats.available) }}
+    </span>
+  </div>
+</div>
+
+<!-- Version History Modal -->
+<div class="modal" *ngIf="state.showVersionHistory" (click)="state.showVersionHistory = false">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>Version History</h2>
+    <div class="version-list">
+      <div class="version-item" *ngFor="let version of versionHistory">
+        <div class="version-info">
+          <strong>Version {{ version.version }}</strong>
+          <span>{{ version.timestamp | date:'medium' }}</span>
+        </div>
+        <button class="btn btn-sm btn-primary" (click)="restoreVersion(version)">
+          Restore
+        </button>
+      </div>
+    </div>
+    <button class="btn btn-secondary" (click)="state.showVersionHistory = false">Close</button>
+  </div>
+</div>
+
+
+<!-- Import Dialog -->
+<div class="modal" *ngIf="state.showImportDialog" (click)="state.showImportDialog = false">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>Import FAQ Data</h2>
+    <p>Select a previously exported file to import:</p>
+    <div class="import-info">
+      <div class="file-type-info">
+        <strong>Supported formats:</strong>
+        <ul>
+          <li><strong>.json</strong> - Single JSON file with FAQ data</li>
+          <li><strong>.zip</strong> - Complete export package with JSON and HTML files</li>
+        </ul>
+      </div>
+    </div>
+    <input type="file" 
+           #fileInput
+           accept=".json,.zip"
+           style="display: none"
+           (change)="importFile($event)">
+    <div class="modal-actions">
+      <button class="btn btn-primary" (click)="triggerFileInput()">
+        <span class="btn-icon">📁</span>
+        Choose File
+      </button>
+      <button class="btn btn-secondary" (click)="state.showImportDialog = false">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

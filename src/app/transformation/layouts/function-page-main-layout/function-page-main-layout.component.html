@@ -1,0 +1,20 @@
+<div class="container app-transformation">
+  <!-- Sidebar Component -->
+  <app-sidebar
+    [collapsed$]="collapsed$"
+    [showSidebar]="showSidebar"
+    (toggleSidebar)="onToggleSidebar()"
+    (searchOpen)="onSearchOpen()">
+  </app-sidebar>
+
+  <main class="content" #contentRef [class.sidebar-collapsed]="collapsed$ | async">
+    <router-outlet></router-outlet>
+    <app-scroll-to-top [scrollContainer]="contentRef"></app-scroll-to-top>
+  </main>
+
+  <app-search-overlay
+    *ngIf="isSearchOpen"
+    [isOpen]="isSearchOpen"
+    (closed)="isSearchOpen = false"
+  ></app-search-overlay>
+</div>

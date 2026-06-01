@@ -118,38 +118,6 @@ export class PreviewCoordinatorService {
     }
   }
 
-  // ==================== Cross-Tab Preview ====================
-
-  /**
-   * Trigger cross-tab preview update
-   * Updates preview data that can be accessed from other tabs
-   *
-   * @param recipe - Recipe to preview
-   * @param customStepNames - Custom step names mapping
-   */
-  triggerCrossTabPreviewUpdate(
-    recipe: RecipeData,
-    customStepNames: CleanRecipeCustomStepNames
-  ): void {
-    try {
-      // Clean recipe for preview
-      const cleanedRecipe = cleanRecipeForExport(recipe, customStepNames);
-
-      // Store in preview service (accessible across tabs)
-      this.previewService.updatePreviewData({
-        recipeId: recipe.id,
-        title: recipe.title,
-        category: normalizeCategory(recipe.category),
-        recipeData: cleanedRecipe,
-        timestamp: Date.now()
-      });
-
-      this.logger.debug('Cross-tab preview updated', { recipeId: recipe.id });
-    } catch (error) {
-      this.logger.error('Failed to update cross-tab preview', error);
-    }
-  }
-
   // ==================== External Preview Window ====================
 
   /**

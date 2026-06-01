@@ -1,130 +1,15 @@
 // ==================== FAQ Component Main Styles ====================
 
 // Shared design tokens — must come first so all partials see them
-@import '../../styles/typography';
+@import 'typography';
 @import './styles/variables';
 
 // Component style modules
 @import './styles/layout';
 @import './styles/sidebar';
-@import './styles/search';
+@import './styles/virtual-scroll';
 @import './styles/faq-items';
+@import './styles/feedback-share';
+@import './styles/toc';
 @import './styles/responsive';
 @import './styles/mobile-ios';
-
-// FAQ Editor Floating Action Button
-.fab-edit-button {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: $color-success;
-  color: white;
-  border: none;
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: $z-fab;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background: $color-success-hover;
-    box-shadow: 0 6px 16px rgba(76, 175, 80, 0.5);
-    transform: translateY(-2px);
-  }
-  
-  .fab-icon {
-    font-size: 20px;
-  }
-}
-
-// Password Dialog
-.password-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1100;
-  
-  .password-dialog {
-    background: white;
-    border-radius: 8px;
-    padding: 2rem;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    
-    h2 {
-      margin: 0 0 1.5rem 0;
-      font-size: 1.5rem;
-      color: #333;
-      text-align: center;
-    }
-    
-    .password-input {
-      width: 100%;
-      padding: 0.75rem;
-      border: 2px solid #e0e0e0;
-      border-radius: 4px;
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      transition: border-color 0.3s;
-      
-      &:focus {
-        outline: none;
-        border-color: $color-success;
-      }
-    }
-    
-    .dialog-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      
-      .btn {
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: 4px;
-        font-size: 0.9rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        
-        &.btn-primary {
-          background: $color-success;
-          color: white;
-          
-          &:hover {
-            background: $color-success-hover;
-          }
-        }
-        
-        &.btn-secondary {
-          background: #f0f0f0;
-          color: #333;
-          
-          &:hover {
-            background: #e0e0e0;
-          }
-        }
-      }
-    }
-    
-    .password-error {
-      color: $color-danger;
-      font-size: 0.875rem;
-      text-align: center;
-      margin-top: 0.5rem;
-    }
-  }
-}
-

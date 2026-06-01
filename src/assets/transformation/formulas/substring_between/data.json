@@ -1,0 +1,43 @@
+{
+  "title": "SUBSTRING_BETWEEN",
+  "description": "<p>Returns the substring found between the first occurrences of the specified open and close substrings within the provided string. If either the open or close substring isn't found, returns an empty string. The search is case-sensitive.</p>",
+  "syntax": "SUBSTRING_BETWEEN(string, open, close) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The original string."
+    },
+    {
+      "name": "open",
+      "type": "String",
+      "required": "Yes",
+      "description": "The starting separator."
+    },
+    {
+      "name": "close",
+      "type": "String",
+      "required": "Yes",
+      "description": "The ending separator."
+    }
+  ],
+  "examples": [
+    "SUBSTRING_BETWEEN(\"Invoice <INV-2026-009>\", \"<\", \">\")\n-- Returns \"INV-2026-009\"."
+  ],
+  "tips": [
+    {
+      "text": "<p>The function returns an empty string if either the open or close delimiter is not found.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>It locates the first occurrence of the open delimiter and the first occurrence of the close delimiter following it.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>When the open and close delimiters are identical, the first occurrence is treated as the opening delimiter, and the next occurrence is treated as the closing delimiter. If only one occurrence exists, the function returns an empty string.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

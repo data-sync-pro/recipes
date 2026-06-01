@@ -1,0 +1,38 @@
+{
+  "title": "FORMAT_DATETIME",
+  "description": "<p>Formats a Date or Datetime as a string.</p>",
+  "syntax": "FORMAT_DATETIME(date/datetime, format_string_optional, timezone_optional) -> String",
+  "parameters": [
+    {
+      "name": "date/datetime",
+      "type": "Date/Datetime",
+      "required": "Yes",
+      "description": "The Date or Datetime to format."
+    },
+    {
+      "name": "format_string_optional",
+      "type": "String",
+      "required": "No",
+      "description": "The format pattern. Defaults to a standard format if not provided."
+    },
+    {
+      "name": "timezone_optional",
+      "type": "String",
+      "required": "No",
+      "description": "Time zone identifier (e.g., 'CST'). Defaults to the user's local time zone."
+    }
+  ],
+  "examples": [
+    "FORMAT_DATETIME(CreatedDate)\n-- Returns CreatedDate as a formatted string (e.g., \"3/9/2022, 3:06 PM\") in user's local time zone.",
+    "FORMAT_DATETIME(NOW(), \"yyyy-MM-dd HH:mm:ss\", \"PST\")\n-- Returns the current Datetime as a string formatted as \"yyyy-MM-dd HH:mm:ss\" in PST."
+  ],
+  "tips": [
+    {
+      "text": "<p>Format patterns: yyyy for year, MM for month, dd for day, HH for 24-hour, hh for 12-hour, mm for minute, ss for second.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": [
+    "NOW"
+  ]
+}

@@ -1,0 +1,198 @@
+// ==================== FAQ Feedback & Share ====================
+// Floating fixed-position rating + share controls and their dropdown.
+// Also hosts shared @keyframes since most are used by this section.
+
+.faq-feedback-section {
+  position: fixed;
+  bottom: 1.5rem;
+  right: calc(320px + 1.5rem); // offset by TOC width when TOC is visible
+  z-index: 100;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transition: right 0.3s ease;
+
+  .faq-layout-container.toc-hidden & {
+    right: 1.5rem;
+  }
+}
+
+.feedback-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+// ===== Single line rating + share layout =====
+.rating-share-inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.content-spacer {
+  flex: 1;
+}
+
+.rating-share-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+// ===== Share buttons =====
+.share-buttons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.85;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &.copy-btn {
+    &:hover {
+      border-color: #3b82f6;
+      background: #eff6ff;
+      color: #3b82f6;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &.share-btn-main {
+    &:hover {
+      border-color: $color-success;
+      background: #ecfdf5;
+      color: $color-success;
+    }
+
+    &.active {
+      border-color: $color-success;
+      background: $color-success;
+      color: #ffffff;
+      opacity: 1;
+
+      lightning-icon {
+        --sds-c-icon-color-foreground-default: #ffffff;
+      }
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  lightning-icon {
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+}
+
+.social-share-dropdown {
+  position: relative;
+}
+
+.social-menu {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  width: 88px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  z-index: 1000;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 0;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  lightning-icon {
+    flex-shrink: 0;
+  }
+
+  &.twitter:hover {
+    background: #1da1f2;
+    border-color: #1da1f2;
+    color: #ffffff;
+
+    lightning-icon {
+      --sds-c-icon-color-foreground-default: #ffffff;
+    }
+  }
+
+  &.facebook:hover {
+    background: #1877f2;
+    border-color: #1877f2;
+    color: #ffffff;
+
+    lightning-icon {
+      --sds-c-icon-color-foreground-default: #ffffff;
+    }
+  }
+
+  &.linkedin:hover {
+    background: #0a66c2;
+    border-color: #0a66c2;
+    color: #ffffff;
+
+    lightning-icon {
+      --sds-c-icon-color-foreground-default: #ffffff;
+    }
+  }
+
+  &.email:hover {
+    background: #ea4335;
+    border-color: #ea4335;
+    color: #ffffff;
+
+    lightning-icon {
+      --sds-c-icon-color-foreground-default: #ffffff;
+    }
+  }
+}
+

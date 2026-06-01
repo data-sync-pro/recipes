@@ -1,0 +1,35 @@
+{
+  "title": "STARTS_WITH",
+  "description": "<p>Returns TRUE if the provided string starts with any of the specified compare_strings (case-sensitive); otherwise, returns FALSE.</p>",
+  "syntax": "STARTS_WITH(string, ...compare_strings) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to evaluate."
+    },
+    {
+      "name": "...compare_strings",
+      "type": "String",
+      "required": "Yes",
+      "description": "One or more strings to check for at the beginning of the source string."
+    }
+  ],
+  "examples": [
+    "STARTS_WITH(Email, \"sales@\")\n-- Returns TRUE if Email starts with \"sales@\"; otherwise, returns FALSE.",
+    "STARTS_WITH(\"Invoice-2023-001\", \"INV\", \"Invoice\")\n-- Returns TRUE because the string starts with \"Invoice\" (case-sensitive)."
+  ],
+  "tips": [
+    {
+      "text": "<p>An empty compare_strings always returns TRUE since every string starts with an empty string.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Punctuation and symbols are treated like letters.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": [
+  ]
+}

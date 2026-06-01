@@ -1,0 +1,9 @@
+<div class="preview-panel">
+  <div class="preview-header">JSON Preview</div>
+  <ng-container *ngIf="previewJson$ | async as json; else empty">
+    <pre class="preview-content">{{ json }}</pre>
+  </ng-container>
+  <ng-template #empty>
+    <p class="preview-empty">Select a function to preview its data.</p>
+  </ng-template>
+</div>

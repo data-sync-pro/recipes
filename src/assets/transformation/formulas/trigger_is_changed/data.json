@@ -1,0 +1,18 @@
+{
+  "title": "TRIGGER_IS_CHANGED",
+  "description": "<p>Returns TRUE if any of the specified fields have been modified from their previous values during the update DML operation; otherwise, returns FALSE.</p>",
+  "syntax": "TRIGGER_IS_CHANGED(...field_names) -> Boolean",
+  "parameters": [
+    {
+      "name": "… field_names",
+      "type": "String",
+      "required": "Yes",
+      "description": "One or more field API names to evaluate. Each field is compared between the current and previous versions of the record."
+    }
+  ],
+  "examples": [
+    "TRIGGER_IS_CHANGED(\"Priority\", \"Status\")\n-- Returns TRUE if Priority or Status has changed, otherwise FALSE."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

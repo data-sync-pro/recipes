@@ -1,0 +1,28 @@
+{
+  "title": "IS_ALL_LOWER_CASE",
+  "description": "<p>Returns TRUE if the string contains only lowercase alphabetical characters; otherwise, returns FALSE.</p>",
+  "syntax": "IS_ALL_LOWER_CASE(string) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to evaluate."
+    }
+  ],
+  "examples": [
+    "IS_ALL_LOWER_CASE(\"sensorstatus\")\n-- Returns TRUE.",
+    "IS_ALL_LOWER_CASE(\"Device #01\")\n-- Returns FALSE, only lowercase letters a–z are accepted."
+  ],
+  "tips": [
+    {
+      "text": "<p>Returns FALSE if the string is empty.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Only lowercase letters (a–z) are accepted; any uppercase letters, numbers, spaces, or symbols will result in FALSE.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

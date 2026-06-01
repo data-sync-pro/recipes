@@ -1,0 +1,9 @@
+{
+  "title": "TRIGGER_IS_UPDATE",
+  "description": "<p>Returns TRUE if the current trigger context involves an update operation (before update or after update); otherwise, returns FALSE.</p>",
+  "syntax": "TRIGGER_IS_UPDATE() -> Boolean",
+  "parameters": [],
+  "examples": [],
+  "tips": [],
+  "relatedFormulas": []
+}

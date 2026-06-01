@@ -1,0 +1,19 @@
+{
+  "title": "MIN",
+  "description": "<p>Returns the smallest number from the given set of numbers.</p>",
+  "syntax": "MIN(...num) -> Number",
+  "parameters": [
+    {
+      "name": "… num",
+      "type": "Number",
+      "required": "Yes",
+      "description": "Set of numbers to evaluate. At least 2 numbers are required."
+    }
+  ],
+  "examples": [
+    "MIN(4, 8, 1, 10) \n-- Returns 1.",
+    "MIN(-2, -10, -5) \n-- Returns -10."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

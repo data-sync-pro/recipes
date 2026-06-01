@@ -1,0 +1,25 @@
+{
+  "title": "EQUALS",
+  "description": "<p>Returns TRUE if the value matches any of the given compare_values (case-sensitive); otherwise, returns FALSE.</p>",
+  "syntax": "EQUALS(value, ...compare_values) -> Boolean",
+  "parameters": [
+    {
+      "name": "value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The value to be compared."
+    },
+    {
+      "name": "…compare_values",
+      "type": "Object",
+      "required": "Yes",
+      "description": "One or more values to compare with the given value."
+    }
+  ],
+  "examples": [
+    "EQUALS(\"ny\", \"CA\", \"NY\")\n-- Returns FALSE (no match, case-sensitive).",
+    "EQUALS(Status, \"Open\", \"Closed\")\n-- Returns TRUE if Status is \"Open\" or \"Closed\"(case-sensitive); otherwise, returns FALSE."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

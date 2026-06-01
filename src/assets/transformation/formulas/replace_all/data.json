@@ -1,0 +1,30 @@
+{
+  "title": "REPLACE_ALL",
+  "description": "<p>Returns a new string in which all occurrences matching the provided regular expression (regex) within the original string are replaced by the specified replacement substring.</p>",
+  "syntax": "REPLACE_ALL(string, regex, replacement) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The original string."
+    },
+    {
+      "name": "regex",
+      "type": "String",
+      "required": "Yes",
+      "description": "The regular expression defining patterns to replace."
+    },
+    {
+      "name": "replacement",
+      "type": "String",
+      "required": "Yes",
+      "description": "The substring used to replace matched patterns."
+    }
+  ],
+  "examples": [
+    "REPLACE_ALL(\n\t\"The user logged in at 10:00 and logged out at 17:00.\",\n\t\"\\b(?:[01]?\\d|2[0-3]):[0-5]\\d\\b\",\n\t\"[TIME]\"\n)\n-- Returns \"The user logged in at [TIME] and logged out at [TIME].\""
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

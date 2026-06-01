@@ -1,0 +1,48 @@
+<section class="form-section">
+  <h3 class="form-section-title">Examples</h3>
+  <div class="example-list">
+    <div
+      *ngFor="let s of slots; let i = index; trackBy: trackByIndex"
+      class="example-card"
+    >
+      <div class="example-card-head">
+        <span class="example-card-label">Example #{{ i + 1 }}</span>
+        <label class="example-rich-toggle">
+          <input type="checkbox" [(ngModel)]="s.isRich" (ngModelChange)="changed()" />
+          Rich (with description / images)
+        </label>
+        <div class="row-controls">
+          <button type="button" class="row-btn" (click)="moveUp(i)" [disabled]="i === 0">↑</button>
+          <button type="button" class="row-btn" (click)="moveDown(i)" [disabled]="i === slots.length - 1">↓</button>
+          <button type="button" class="row-btn row-btn-danger" (click)="remove(i)">×</button>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Code</label>
+        <textarea
+          class="form-textarea form-textarea-mono"
+          rows="4"
+          appAutosize="500"
+          [(ngModel)]="s.code"
+          (ngModelChange)="changed()"
+        ></textarea>
+      </div>
+
+      <ng-container *ngIf="s.isRich">
+        <div class="form-field">
+          <label>Description</label>
+          <input
+            type="text"
+            class="form-input"
+            [(ngModel)]="s.description"
+            (ngModelChange)="changed()"
+          />
+        </div>
+        <app-images-section [images]="s.images" heading="Example Images"></app-images-section>
+      </ng-container>
+    </div>
+  </div>
+  <p class="form-empty-hint" *ngIf="!slots.length">No examples yet.</p>
+  <button type="button" class="form-add-btn" (click)="add()">+ Add example</button>
+</section>

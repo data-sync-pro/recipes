@@ -1,0 +1,42 @@
+{
+  "title": "MAP_VALUE_STARTS_WITH_IGNORE_CASE",
+  "description": "<p>Returns the corresponding return_value for the first compare_substring that matches the beginning of the provided string, performing case-insensitive matching. If no substrings match, returns default_return_value_optional. If default_return_value_optional is omitted and no matches occur, the function returns $SKIP_ASSIGNMENT.</p>",
+  "syntax": "MAP_VALUE_STARTS_WITH_IGNORE_CASE(string, ...[compare_substring, return_value], default_return_value_optional)-> Object",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to evaluate (case-insensitive)."
+    },
+    {
+      "name": "… compare_substring",
+      "type": "String",
+      "required": "Yes",
+      "description": "The substring to match at the beginning of the provided string."
+    },
+    {
+      "name": "… return_value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The value returned if compare_substring matches."
+    },
+    {
+      "name": "default_return_value_optional",
+      "type": "Object",
+      "required": "No",
+      "description": "The value returned if no substrings match. If omitted and no match occurs, returns $SKIP_ASSIGNMENT."
+    }
+  ],
+  "examples": [
+    "MAP_VALUE_STARTS_WITH_IGNORE_CASE(\"ca-san francisco\", \"CA\", \"California\", \"NY\", \"New York\", \"Other\") \n-- Returns \"California\"(case-insensitive).",
+    "MAP_VALUE_STARTS_WITH_IGNORE_CASE(Description, \"platinum\", \"Partner\", \"individual\", \"Person\")\n-- Returns \"Partner\" if Description starts with \"platinum\".\n-- Returns \"Person\" if it starts with \"individual\".\n-- Returns $SKIP_ASSIGNMENT otherwise.\n-- Matching is case-insensitive and stops at the first match."
+  ],
+  "tips": [
+    {
+      "text": "<p>Ensure that <strong>return_value</strong> and <strong>default_return_value_optional</strong> are of the same data type.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

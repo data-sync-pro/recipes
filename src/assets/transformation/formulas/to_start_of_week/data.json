@@ -1,0 +1,24 @@
+{
+  "title": "TO_START_OF_WEEK",
+  "description": "Returns the date representing the first day of the week for a specified date.",
+  "syntax": "TO_START_OF_WEEK(date) -> Date",
+  "parameters": [
+    {
+      "name": "date",
+      "type": "Date",
+      "required": "Yes",
+      "description": "The input date used to determine the start date of its corresponding week."
+    }
+   
+  ],
+  "examples": [
+    "TO_START_OF_WEEK(DATE(2025, 4, 16))\n-- Returns 2025-04-13, the Sunday before April 16, 2025 (a Wednesday)."
+  ],
+  "tips": [{
+    "text": "<p>Week calculations begin on Sunday.</p>",
+    "children": []
+  }],
+  "relatedFormulas": [
+    "Date"
+  ]
+}

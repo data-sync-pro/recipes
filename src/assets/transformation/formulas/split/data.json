@@ -1,0 +1,28 @@
+{
+  "title": "SPLIT",
+  "description": "Returns an array of substrings by splitting a string using a regular expression delimiter.",
+  "syntax": "SPLIT(string, regex) -> String[]",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The input string to split."
+    },
+    {
+      "name": "regex",
+      "type": "String",
+      "required": "Yes",
+      "description": "The regular expression used as the delimiter."
+    }
+  ],
+    "examples": [
+      "SPLIT(\"Sales, Marketing;  Support,  Finance\", \"[,;\\s]+\")\n-- Returns [\"Sales\", \"Marketing\", \"Support\", \"Finance\"]."],
+    "tips": [
+       {
+      "text": "<p>If regex does not match any part of string, SPLIT returns a single-element array with the original string.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

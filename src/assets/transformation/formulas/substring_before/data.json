@@ -1,0 +1,42 @@
+{
+  "title": "SUBSTRING_BEFORE",
+  "description": "<p>Returns the substring that occurs before the first occurrence of the specified separator within the provided string. If the separator is not found, returns an empty string. The search is case-sensitive.</p>",
+  "syntax": "SUBSTRING_BEFORE(string, separator) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The original string."
+    },
+    {
+      "name": "separator",
+      "type": "String",
+      "required": "Yes",
+      "description": "The separator to search for within the string."
+    }
+  ],
+  "examples": [
+    "SUBSTRING_BEFORE(\"REF-2025-1234\", \"-\")\n-- Returns \"REF\". \n-- Extracts the substring before the first occurrence of \"-\"."
+  ],
+  "tips": [
+    {
+      "text": "<p>The function returns an empty string if any of these occur:</p>",
+      "children": [
+        {
+          "text": "<p>the separator appears at the beginning of the string,</p>",
+          "children": []
+        },
+        {
+          "text": "<p>the separator is an empty string.</p>",
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "<p>If the separator is not found in the string, the function returns the entire string.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

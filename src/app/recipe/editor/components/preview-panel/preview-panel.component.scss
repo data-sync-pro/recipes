@@ -1,5 +1,7 @@
 // Import typography
-@import '../../../../../styles/typography';
+@import 'typography';
+@import '../../../page/styles/recipe-variables';
+@import '../../../page/styles/component-mixins';
 
 // Host element styles (容器级样式)
 :host {
@@ -62,13 +64,7 @@
 
   // Button styles
   .btn {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.2s;
+    @include btn-base;
     font-size: $font-size-content;
 
     &.btn-sm {
@@ -76,27 +72,7 @@
       font-size: $font-size-caption;
     }
 
-    &.btn-primary {
-      background-color: #007bff;
-      color: white;
-
-      &:hover:not(:disabled) {
-        background-color: #0056b3;
-      }
-    }
-
-    &.btn-secondary {
-      background-color: #6c757d;
-      color: white;
-
-      &:hover:not(:disabled) {
-        background-color: #545b62;
-      }
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+    &.btn-primary { @include btn-variant($color-btn-primary, $color-btn-primary-hover); }
+    &.btn-secondary { @include btn-variant($color-btn-secondary, $color-btn-secondary-hover); }
   }
 }

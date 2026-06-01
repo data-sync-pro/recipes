@@ -1,0 +1,24 @@
+{
+  "title": "NOW",
+  "description": "<p>Returns the current Datetime based on the context user's local time zone.</p>",
+  "syntax": "NOW() -> Datetime",
+  "parameters": [],
+  "examples": [
+    "NOW()\n-- Returns the current Datetime (e.g., 09/19/2024, 21:33:46).",
+    "ADD_DAYS(NOW(), 3)\n-- Returns the Datetime 3 days after the current Datetime (e.g., 09/22/2024, 21:33:46)."
+  ],
+  "tips": [
+    {
+      "text": "<p>Use TODAY function if you prefer a date-only value.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Use the ADD_DAYS function to add days to a Datetime.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": [
+    "ADD_DAYS",
+    "TODAY"
+  ]
+}

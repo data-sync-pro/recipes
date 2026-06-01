@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { StepMedia, GeneralImage } from '../../../core/models/recipe.model';
-import { TrackByUtil } from '../../../../shared/utils/trackby.util';
+import { TrackByUtil } from '../../../core/utils/trackby.util';
+import { getFileExtension } from '../../../core/utils';
 import { FileStorageAdapter } from '../../../core/storage';
 import { ImageNamingService } from '../../services/image-naming.service';
 import { ImageLoaderService } from '../../services/image-loader.service';
@@ -59,10 +60,16 @@ export class ImageManagerComponent implements OnChanges, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.isInitialized = true;
-    // Load images after view is initialized
+    // Defer image loading one tick so view bindings have settled. The async
+    // loaders return promises; surface failures via the logger instead of
+    // letting them become unhandled rejections.
     setTimeout(() => {
-      this.loadAllMediaImages();
-      this.loadAllGeneralImages();
+      this.loadAllMediaImages().catch((err) =>
+        this.logger.error('Failed to load media images', err)
+      );
+      this.loadAllGeneralImages().catch((err) =>
+        this.logger.error('Failed to load general images', err)
+      );
     }, 0);
   }
 
@@ -227,7 +234,7 @@ export class ImageManagerComponent implements OnChanges, AfterViewInit {
     try {
 
       const baseName = `step-${this.stepIndex}-image-${Date.now()}`;
-      const extension = this.imageNamingService.getFileExtension(file);
+      const extension = getFileExtension(file);
 
       await this.fileStorageService.storeImage(baseName, file);
 
@@ -262,7 +269,7 @@ export class ImageManagerComponent implements OnChanges, AfterViewInit {
     try {
 
       const baseName = `general-image-${Date.now()}`;
-      const extension = this.imageNamingService.getFileExtension(file);
+      const extension = getFileExtension(file);
 
       await this.fileStorageService.storeImage(baseName, file);
 
@@ -285,11 +292,6 @@ export class ImageManagerComponent implements OnChanges, AfterViewInit {
       this.logger.error('Error uploading general image:', error);
       this.notificationService.error('Failed to upload general image');
     }
-  }
-
-  async isImageMissing(media: StepMedia | GeneralImage): Promise<boolean> {
-    if (!media.url) return false;
-    return await this.imageLoaderService.isMissingImage(media.url);
   }
 
   getDisplayUrl(media: StepMedia | GeneralImage): string | undefined {

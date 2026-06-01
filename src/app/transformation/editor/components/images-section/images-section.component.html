@@ -1,0 +1,27 @@
+<div class="images-section">
+  <h4 class="images-section-title" *ngIf="heading">{{ heading }}</h4>
+  <div class="image-grid" *ngIf="list.length">
+    <div
+      *ngFor="let img of list; let i = index; trackBy: trackByIndex"
+      class="image-card"
+    >
+      <div class="image-thumb-wrap">
+        <img class="image-thumb" [src]="resolve(img.src)" [alt]="img.alt || ''" loading="lazy" />
+        <span class="image-badge image-badge-uploaded" *ngIf="isUploaded(img.src)">new</span>
+      </div>
+      <div class="image-card-fields">
+        <div class="image-src" [title]="img.src">{{ img.src }}</div>
+        <input
+          type="text"
+          class="form-input form-input-compact"
+          placeholder="alt text"
+          [(ngModel)]="img.alt"
+          (ngModelChange)="altChanged()"
+        />
+      </div>
+      <button type="button" class="row-btn row-btn-danger image-remove" (click)="remove(i)" title="Remove">×</button>
+    </div>
+  </div>
+  <p class="form-empty-hint" *ngIf="!list.length">No images.</p>
+  <app-image-uploader (filesSelected)="onFiles($event)"></app-image-uploader>
+</div>

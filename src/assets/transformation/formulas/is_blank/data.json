@@ -1,0 +1,19 @@
+{
+  "title": "IS_BLANK",
+  "description": "<p>Returns TRUE if the value is blank (NULL, empty, or contains only whitespace); otherwise, returns FALSE.</p>",
+  "syntax": "IS_BLANK(value) -> Boolean",
+  "parameters": [
+    {
+      "name": "value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The value to evaluate."
+    }
+  ],
+  "examples": [
+    "IS_BLANK(Email)\n-- Returns TRUE if Email is NULL, empty or contains only whitespace characters."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+  ]
+}

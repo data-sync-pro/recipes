@@ -1,0 +1,30 @@
+{
+  "title": "LEFT",
+  "description": "<p>Returns a substring containing the specified number of characters from the beginning (left side) of the provided string. If num_chars exceeds the string length, the entire string is returned.</p>",
+  "syntax": "LEFT(string, num_chars) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to extract characters from."
+    },
+    {
+      "name": "num_chars",
+      "type": "Integer",
+      "required": "Yes",
+      "description": "The number of characters to extract from the left."
+    }
+  ],
+  "examples": [
+    "LEFT(CaseNumber, 3)\n-- Returns the first 3 characters from CaseNumber.",
+    "LEFT(\"Q2Report\", 20)\n-- Returns the entire string \"Q2Report\" since 20 exceeds its length."
+    ],
+  "tips": [
+    {
+      "text": "<p>num_chars must be a non-negative integer. If num_chars is 0, an empty string is returned.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

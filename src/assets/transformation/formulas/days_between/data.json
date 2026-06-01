@@ -1,0 +1,28 @@
+{
+  "title": "DAYS_BETWEEN",
+  "description": "<p>Returns the number of days between two provided Dates. The result is positive if end_date occurs after start_date, negative if it occurs before, and zero if the dates are identical.</p>",
+  "syntax": "DAYS_BETWEEN(start_date, end_date) -> Integer",
+  "parameters": [
+    {
+      "name": "start_date",
+      "type": "Date",
+      "required": "Yes",
+      "description": "The starting Date."
+    },
+    {
+      "name": "end_date",
+      "type": "Date",
+      "required": "Yes",
+      "description": "The ending Date."
+    }
+  ],
+  "examples": [
+    "DAYS_BETWEEN(DATE(2024, 1, 1), DATE(2024, 1, 10))\n-- Returns 9.",
+    "DAYS_BETWEEN(DATE(2024, 1, 10), DATE(2024, 1, 1))\n-- Returns -9.",
+    "DAYS_BETWEEN(StartDate, CloseDate)\n-- Returns the number of days between StartDate and CloseDate."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "DATE"
+  ]
+}

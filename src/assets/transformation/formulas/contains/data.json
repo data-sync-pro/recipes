@@ -1,0 +1,26 @@
+{
+  "title": "CONTAINS",
+  "description": "<p>Returns TRUE if the provided string contains any of the specified compare_strings. The comparison is case-sensitive. Otherwise, returns FALSE.</p>",
+  "syntax": "CONTAINS(string, ...compare_strings) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The source string to search within."
+    },
+    {
+      "name": "… compare_strings",
+      "type": "String",
+      "required": "Yes",
+      "description": "One or more strings to search for within the source string."
+    }
+  ],
+  "examples": [
+    "CONTAINS(\"Quarterly Financial Report 2024\", \"quarterly\", \"financial\")\n-- Returns FALSE (no match, case-sensitive).",
+    "CONTAINS(Subject, \"Urgent\", \"ASAP\")\n-- Returns TRUE if Subject contains \"Urgent\" or \"ASAP\"; otherwise, returns FALSE."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+  ]
+}

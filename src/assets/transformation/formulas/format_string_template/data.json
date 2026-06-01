@@ -1,0 +1,21 @@
+{
+  "title": "FORMAT_STRING_TEMPLATE",
+  "description": "Parses and formats a template string by resolving embedded expressions and merge fields into standard string output.",
+  "syntax": "FORMAT_STRING_TEMPLATE(template) -> String",
+  "parameters": [
+    {
+      "name": "template",
+      "type": "String",
+      "required": "Yes",
+      "description": "A string containing merge fields or expressions in template syntax to be evaluated and replaced with their corresponding values. Incorrect or unparseable expressions remain as literal text in the output."
+    }
+  ],
+   "examples": [
+    "FORMAT_STRING_TEMPLATE(\n'Dear <shadow>{!VLOOKUP(\"OpportunityContactRole\", \"Contact.Name\", \"OpportunityId\", Id,\"IsPrimary = TRUE\")}</shadow>, \n\nWe are pleased to inform you that your Account: <shadow>{!Account.Name}</shadow> has an Opportunity currently at the stage: <shadow>{!StageName}</shadow>.\n\nFeel free to reach out if you have any questions.\n\nBest Regards,   \nSales Team')\n\n/*Dear <shadow>Kristin Stanton</shadow>, \n\nWe are pleased to inform you that your Account: <shadow>Owens LLC</shadow> has an Opportunity currently at the stage: <shadow>Prospecting</shadow>. \n\nFeel free to reach out if you have any questions. \n\nBest Regards, \nSales Team*/",
+    "FORMAT_STRING_TEMPLATE('The opportunity <shadow>{!Name}</shadow> is currently in the <shadow>{!Stage}</shadow> stage.')\n\n/*The opportunity <shadow>Frontier Ultra Old Summit Consulting Co-Globex Q3 Upgrade</shadow> is currently in the <shadow>{!Stage}</shadow> stage.*/\n\n-- \"Stage\" is a typo for the field name StageName. Since DSP cannot resolve it, the expression remains unresolved in the output string."
+  ],
+  "relatedFormulas": [
+    "FORMAT_JSON_TEMPLATE",
+    "VLOOKUP"
+  ]
+}

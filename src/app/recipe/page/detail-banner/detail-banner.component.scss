@@ -1,3 +1,5 @@
+@import '../styles/recipe-variables';
+
 .recipe-detail-banner {
   padding-bottom: 0.45rem;
 }
@@ -26,7 +28,7 @@
       transition: color 0.2s ease;
 
       &:hover {
-        color: #2253B2;
+        color: $color-primary-brand;
         font-weight: 500;
       }
     }
@@ -42,14 +44,14 @@
 .recipe-title {
   font-size: 2.25rem;
   font-weight: 500;
-  color: #2253B2;
+  color: $color-primary-brand;
   margin: 2rem 0 1.5rem 0;
   line-height: 1.3;
   text-align: center;
 }
 
 // Responsive
-@media (max-width: 768px) {
+@include tablet {
   .breadcrumb {
     font-size: 0.8125rem;
     padding-bottom: 12px;

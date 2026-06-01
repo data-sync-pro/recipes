@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { DownloadableExecutable } from '../../../core/models/recipe.model';
-import { TrackByUtil } from '../../../../shared/utils/trackby.util';
+import { TrackByUtil } from '../../../core/utils/trackby.util';
 import { FileStorageAdapter } from '../../../core/storage';
 import { NotificationService } from '../../../../shared/services/notification.service';
 import { LoggerService } from '../../../core/services/logger.service';

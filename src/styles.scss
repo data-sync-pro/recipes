@@ -1,14 +1,14 @@
 // Import typography variables first
-@import './styles/typography';
+@import 'typography';
 
 // Import Salesforce Lightning Design System components
 @import 'salesforce-components';
 
 // Import notification styles
-@import './styles/notification.scss';
+@import 'notification';
 
-// Import Prism syntax highlighting theme
-@import 'prismjs/themes/prism';
+// Setup/block code blocks use highlight.js, which the app loads globally via
+// highlight.js/styles/vs.min.css (see angular.json). No per-block theme needed.
 
 html, body { min-height: 100%; height: auto; }
 body {
@@ -23,24 +23,6 @@ html {
 
   &::-webkit-scrollbar {
     display: none;
-  }
-}
-
-.router-link-active {
-  outline: none;
-  box-shadow: none;
-  border: none;
-  background-image: none;
-  text-decoration: none;
-}
-
-a {
-  &:focus,
-  &:active,
-  &:focus-visible {
-    outline: none;
-    box-shadow: none;
-    border: none;
   }
 }
 
@@ -76,7 +58,7 @@ a {
 }
 
 // Setup block inline <code>. Lives here for the same reason as <strong> above.
-// Block code (Prism-highlighted <pre class="block-code">) is unaffected — these
+// Block code (hljs-highlighted <pre class="block-code">) is unaffected — these
 // selectors only match <code> inside text containers, not inside <pre>.
 .block-p code,
 .block-list code,
@@ -146,4 +128,8 @@ body.recipe-page app-footer {
   vertical-align: text-top;
   background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 24 24' fill='%23666' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3e%3c/svg%3e");
 
+}
+
+.block-code {
+  @import 'highlight.js/styles/atom-one-light';
 }

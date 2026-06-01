@@ -1,0 +1,19 @@
+<label
+  class="uploader"
+  [class.dragging]="isDragging"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+>
+  <input
+    type="file"
+    accept="image/*"
+    multiple
+    class="uploader-input"
+    (change)="onFileInput($event)"
+  />
+  <span class="uploader-label">
+    <ng-container *ngIf="!isDragging">Drop images here or click to choose</ng-container>
+    <ng-container *ngIf="isDragging">Release to upload</ng-container>
+  </span>
+</label>

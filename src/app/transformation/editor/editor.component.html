@@ -1,0 +1,130 @@
+<div class="editor-shell app-transformation">
+  <header class="editor-topbar">
+    <div class="editor-topbar-left">
+      <span class="editor-topbar-title">Formula Editor</span>
+      <span class="editor-topbar-current" *ngIf="selectedDocName$ | async as name">
+        — editing <strong>{{ name }}</strong>
+        <span class="new-badge" *ngIf="isCurrentNew()">new</span>
+      </span>
+      <span
+        class="save-status"
+        *ngIf="saveStatusLabel$ | async as label"
+        [class.save-status-pending]="hasPendingSave$ | async"
+      >{{ label }}</span>
+    </div>
+    <div class="editor-topbar-right">
+      <button
+        type="button"
+        class="toolbar-btn toolbar-btn-secondary"
+        (click)="openNewFunctionModal()"
+        title="Create a new function"
+      >
+        + New Function
+      </button>
+      <button
+        type="button"
+        class="toolbar-btn toolbar-btn-secondary"
+        (click)="revertCurrent()"
+        [disabled]="!isCurrentDirty()"
+        title="Discard local changes"
+      >
+        Revert
+      </button>
+      <button
+        type="button"
+        class="toolbar-btn toolbar-btn-primary"
+        (click)="saveNow()"
+        [disabled]="!(hasPendingSave$ | async)"
+        title="Save all pending edits to local browser storage."
+      >
+        Save all
+      </button>
+      <button
+        type="button"
+        class="toolbar-btn toolbar-btn-secondary"
+        (click)="exportCurrent()"
+        [disabled]="!(canExport$ | async)"
+        title="Download current function as data.json (or ZIP if it has uploaded images)"
+      >
+        Export this
+      </button>
+      <button
+        type="button"
+        class="toolbar-btn toolbar-btn-primary"
+        (click)="exportAll()"
+        [disabled]="!(hasAnyDirty$ | async)"
+        title="Export all dirty + new functions as a single ZIP"
+      >
+        Export all
+      </button>
+      <button
+        type="button"
+        class="toolbar-btn toolbar-btn-danger"
+        (click)="clearAllData()"
+        title="Discard every draft, new function and uploaded image in this browser"
+      >
+        Clear all data
+      </button>
+      <a class="editor-back-link" [routerLink]="['/transformation/home']">← Back to Docs</a>
+    </div>
+  </header>
+
+  <div class="editor-banner editor-banner-info" *ngIf="hasUnexportedImages()">
+    {{ uploadedImageCount() }} uploaded image{{ uploadedImageCount() === 1 ? '' : 's' }} for this function — kept locally in IndexedDB. Export to bundle them with data.json for the repo.
+  </div>
+
+  <div class="editor-body">
+    <aside class="editor-pane editor-pane-left">
+      <app-function-list></app-function-list>
+    </aside>
+    <main class="editor-pane editor-pane-center">
+      <ng-container *ngIf="currentDoc$ | async as doc; else noSelection">
+        <ng-container *ngIf="(selectedDocName$ | async) as docName">
+          <ng-container [ngSwitch]="docName">
+            <app-raw-json-section
+              *ngSwitchCase="'operators'"
+              [doc]="doc"
+              hint="The operators page has a special structure (operators table). Edit as raw JSON."
+            ></app-raw-json-section>
+            <app-raw-json-section
+              *ngSwitchCase="'global_variables'"
+              [doc]="doc"
+              hint="Top-level file at src/assets/transformation/formulas/global_variables.json — list of { variable, description } entries. On export it goes to that path (not into a function folder)."
+            ></app-raw-json-section>
+            <app-raw-json-section
+              *ngSwitchCase="'elements_of_formula'"
+              [doc]="doc"
+              hint="Top-level file at src/assets/transformation/formulas/elements_of_formula.json — title, description, and a list of { element, description } entries. On export it goes to that path (not into a function folder)."
+            ></app-raw-json-section>
+            <ng-container *ngSwitchDefault>
+              <app-basic-info-section [doc]="doc"></app-basic-info-section>
+              <app-tags-section></app-tags-section>
+              <app-description-section [doc]="doc"></app-description-section>
+              <app-parameters-section [doc]="doc"></app-parameters-section>
+              <app-examples-section [doc]="doc"></app-examples-section>
+              <app-tips-section [doc]="doc"></app-tips-section>
+              <app-callouts-section heading="Description Callouts" [doc]="doc" field="descriptionCallouts"></app-callouts-section>
+              <app-callouts-section heading="Syntax Callouts" [doc]="doc" field="syntaxCallouts"></app-callouts-section>
+              <app-callouts-section heading="Parameters Callouts" [doc]="doc" field="parametersCallouts"></app-callouts-section>
+              <app-callouts-section heading="Examples Callouts" [doc]="doc" field="examplesCallouts"></app-callouts-section>
+              <app-callouts-section heading="Tips Callouts" [doc]="doc" field="tipsCallouts"></app-callouts-section>
+              <app-related-formulas-section [doc]="doc"></app-related-formulas-section>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+      <ng-template #noSelection>
+        <p class="editor-placeholder">Select a function from the left to start editing.</p>
+      </ng-template>
+    </main>
+    <aside class="editor-pane editor-pane-right">
+      <app-preview-panel></app-preview-panel>
+    </aside>
+  </div>
+</div>
+
+<app-new-function-modal
+  *ngIf="showNewFunctionModal"
+  [availableTags]="availableTags"
+  (closed)="closeNewFunctionModal()"
+></app-new-function-modal>

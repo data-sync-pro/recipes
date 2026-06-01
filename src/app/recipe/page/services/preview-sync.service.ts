@@ -1,21 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
 import { PreviewService } from '../../core/services/preview.service';
 import { LoggerService } from '../../core/services/logger.service';
 import { Recipe, RecipePreviewData, normalizeCategory, normalizeWalkthrough } from '../../core/models/recipe.model';
-
-export interface PreviewUpdateEvent {
-  type: 'content-updated';
-  recipe: Recipe;
-  previewData: RecipePreviewData;
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class PreviewSyncService {
 
-  private updateEvent$ = new Subject<PreviewUpdateEvent>();
   private storageEventListener?: (event: StorageEvent) => void;
   private updateInterval?: number;
   private currentRecipeId?: string;
@@ -25,10 +17,6 @@ export class PreviewSyncService {
     private previewService: PreviewService,
     private logger: LoggerService
   ) {}
-
-  getUpdateEvents(): Observable<PreviewUpdateEvent> {
-    return this.updateEvent$.asObservable();
-  }
 
   setupPreviewSync(recipeId: string): void {
     this.cleanup();
@@ -71,19 +59,11 @@ export class PreviewSyncService {
   }
 
   private handlePreviewUpdate(previewData: RecipePreviewData): void {
-    const recipe = this.convertPreviewToRecipeItem(previewData);
-
     this.currentTimestamp = previewData.timestamp;
 
     if (typeof document !== 'undefined') {
       document.title = `[Preview] ${previewData.title} - Data Sync Pro Recipes`;
     }
-
-    this.updateEvent$.next({
-      type: 'content-updated',
-      recipe,
-      previewData
-    });
   }
 
   private checkForPreviewUpdates(recipeId: string): void {

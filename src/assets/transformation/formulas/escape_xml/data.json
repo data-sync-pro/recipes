@@ -1,0 +1,17 @@
+{
+  "title": "ESCAPE_XML",
+  "description": "<p>Returns a string with special XML characters replaced by their corresponding XML entities. Useful for safely including strings within XML documents.</p>",
+  "syntax": "ESCAPE_XML(string) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "A text value, merge field, or expression to escape."
+    }
+  ],
+  "examples": [
+    "ESCAPE_XML(\"<note priority=\"high\">Review & Approve</note>\")\n-- Returns \"&lt;note priority=&quot;high&quot;&gt;Review &amp; Approve&lt;/note&gt;\""  ],
+  "tips": [],
+  "relatedFormulas": []
+}

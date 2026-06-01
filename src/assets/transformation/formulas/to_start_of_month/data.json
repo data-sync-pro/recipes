@@ -1,0 +1,19 @@
+{
+  "title": "TO_START_OF_MONTH",
+  "description": "Returns the first day of the month for a specified date.",
+  "syntax": "TO_START_OF_MONTH(date) -> Date",
+  "parameters": [
+    {
+      "name": "date",
+      "type": "Date",
+      "required": "Yes",
+      "description": "The date for which the start of the month is calculated."
+    }
+  ],
+  "examples": [
+    "TO_START_OF_MONTH(DATE(2025, 4, 15))\n-- Returns 2025-04-01."
+  ],
+  "relatedFormulas": [
+    "DATE"
+  ]
+}

@@ -1,0 +1,63 @@
+<section class="form-section">
+  <h3 class="form-section-title">Parameters</h3>
+  <table class="param-table" *ngIf="params.length">
+    <thead>
+      <tr>
+        <th class="col-name">Name</th>
+        <th class="col-type">Type</th>
+        <th class="col-required">Required</th>
+        <th class="col-desc">Description</th>
+        <th class="col-actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of params; let i = index; trackBy: trackByIndex">
+        <td>
+          <input
+            type="text"
+            class="form-input form-input-compact"
+            [(ngModel)]="p.name"
+            (ngModelChange)="changed()"
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            class="form-input form-input-compact"
+            [(ngModel)]="p.type"
+            (ngModelChange)="changed()"
+            list="param-types"
+          />
+        </td>
+        <td>
+          <select
+            class="form-input form-input-compact"
+            [(ngModel)]="p.required"
+            (ngModelChange)="changed()"
+          >
+            <option *ngFor="let r of requiredOptions" [value]="r">{{ r }}</option>
+          </select>
+        </td>
+        <td>
+          <textarea
+            class="form-textarea form-input-compact param-desc-textarea"
+            rows="1"
+            appAutosize="200"
+            [(ngModel)]="p.description"
+            (ngModelChange)="changed()"
+          ></textarea>
+        </td>
+        <td class="row-controls">
+          <button type="button" class="row-btn" (click)="moveUp(i)" [disabled]="i === 0" title="Move up">↑</button>
+          <button type="button" class="row-btn" (click)="moveDown(i)" [disabled]="i === params.length - 1" title="Move down">↓</button>
+          <button type="button" class="row-btn row-btn-danger" (click)="remove(i)" title="Remove">×</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="form-empty-hint" *ngIf="!params.length">No parameters defined.</p>
+  <button type="button" class="form-add-btn" (click)="add()">+ Add parameter</button>
+  <datalist id="param-types">
+    <option *ngFor="let t of typeOptions" [value]="t"></option>
+  </datalist>
+</section>

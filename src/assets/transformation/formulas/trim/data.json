@@ -1,0 +1,19 @@
+{
+  "title": "TRIM",
+  "description": "<p>Returns a string with leading and trailing whitespace removed.</p>",
+  "syntax": "TRIM(string) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to trim."
+    }
+  ],
+  "examples": [
+    "TRIM(\"  FY25 Budget Report  \")\n-- Returns \"FY25 Budget Report\".",
+    "TRIM(Description)\n-- Returns Description with leading and trailing whitespace removed."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

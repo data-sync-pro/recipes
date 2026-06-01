@@ -1,0 +1,9 @@
+{
+  "title": "TRIGGER_IS_BEFORE",
+  "description": "<p>Returns TRUE if the current trigger context is a \"before\" event (before insert, before update, or before delete); otherwise, returns FALSE.</p>",
+  "syntax": "TRIGGER_IS_BEFORE() -> Boolean",
+  "parameters": [],
+  "examples": [],
+  "tips": [],
+  "relatedFormulas": []
+}
