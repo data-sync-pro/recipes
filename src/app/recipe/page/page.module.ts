@@ -56,7 +56,8 @@ import { CodeBlockPipe } from './pipes/code-block.pipe';
     RecipeListComponent,
     RecipePrereqsComponent,
     RecipeNavSidebarComponent,
-    RecipeCountComponent
+    RecipeCountComponent,
+    CodeBlockPipe
   ],
   imports: [
     CommonModule,
