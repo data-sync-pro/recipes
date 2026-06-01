@@ -1,32 +1,8 @@
 <div class="recipe-list">
-    <!-- Search Input Section -->
-    <div class="search-bar-wrapper">
-        <div class="search-wrapper">
-            <img class="icon" src="assets/icons/recipe/search.svg" aria-hidden="true">
-            <input
-                #filterInput
-                type="text"
-                placeholder="Search..."
-                class="search-input"
-                [value]="searchQuery"
-                (input)="onSearchInput($event)"
-                (keydown.escape)="filterInput.blur()"
-            >
-            <span class="shortcut-hint">/</span>
-        </div>
-    </div>
-    <!--
-    <div class="result-count">{{ recipes.length }} Results</div>
-    -->
-
     <!-- Recipe Cards List -->
     <div class="result-list">
-        <app-recipe-card
-            *ngFor="let recipe of paginatedRecipes; trackBy: trackByRecipeId"
-            [recipe]="recipe"
-            [categories]="categories"
-            (recipeSelect)="onRecipeClick($event)"
-            class="result-item">
+        <app-recipe-card *ngFor="let recipe of paginatedRecipes; trackBy: trackByRecipeId" [recipe]="recipe"
+            [categories]="categories" (recipeSelect)="onRecipeClick($event)" class="result-item">
         </app-recipe-card>
 
         <!-- Empty State -->
@@ -38,29 +14,20 @@
     <!-- Pagination -->
     <div *ngIf="recipes.length > itemsPerPage" class="pagination">
         <!-- First Page -->
-        <button
-            class="pagination-btn"
-            [disabled]="currentPage === 1"
-            (click)="goToFirstPage()"
+        <button class="pagination-btn" [disabled]="currentPage === 1" (click)="goToFirstPage()"
             aria-label="Go to first page">
             &laquo;
         </button>
 
         <!-- Previous Page -->
-        <button
-            class="pagination-btn"
-            [disabled]="currentPage === 1"
-            (click)="goToPreviousPage()"
+        <button class="pagination-btn" [disabled]="currentPage === 1" (click)="goToPreviousPage()"
             aria-label="Go to previous page">
             &lsaquo;
         </button>
 
         <!-- Page Numbers -->
         <ng-container *ngFor="let page of pageNumbers">
-            <button
-                *ngIf="page > 0"
-                class="pagination-btn"
-                [class.active]="currentPage === page"
+            <button *ngIf="page > 0" class="pagination-btn" [class.active]="currentPage === page"
                 (click)="goToPage(page)">
                 {{ page }}
             </button>
@@ -68,19 +35,13 @@
         </ng-container>
 
         <!-- Next Page -->
-        <button
-            class="pagination-btn"
-            [disabled]="currentPage === totalPages"
-            (click)="goToNextPage()"
+        <button class="pagination-btn" [disabled]="currentPage === totalPages" (click)="goToNextPage()"
             aria-label="Go to next page">
             &rsaquo;
         </button>
 
         <!-- Last Page -->
-        <button
-            class="pagination-btn"
-            [disabled]="currentPage === totalPages"
-            (click)="goToLastPage()"
+        <button class="pagination-btn" [disabled]="currentPage === totalPages" (click)="goToLastPage()"
             aria-label="Go to last page">
             &raquo;
         </button>

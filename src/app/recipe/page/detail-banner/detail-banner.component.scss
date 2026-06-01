@@ -1,9 +1,10 @@
 .recipe-detail-banner {
-  padding-bottom: 0.85rem;
+  padding-bottom: 0.45rem;
 }
 
 .banner-container {
   box-sizing: border-box;
+  padding-top: 0.5rem;
 }
 
 // Breadcrumb Navigation
@@ -11,7 +12,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
   border-bottom: 1px solid #E6E6E6;
   font-size: 0.875rem;
 

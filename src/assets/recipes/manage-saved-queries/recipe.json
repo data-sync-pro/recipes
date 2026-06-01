@@ -2,7 +2,7 @@
   "id": "66971d38-6e3e-4aaf-a8a1-0518ddeb5ab7",
   "title": "Manage Saved Queries",
   "category": [
-    "General"
+    "Query"
   ],
   "DSPVersions": [],
   "overview": "Click Save Query to store your SOQL for reuse. Later, use Select Query to pick a saved query (most-recent first); DSP parses it into the visual SOQL Builder so you can review, refine, and run it again. In Saved Queries, you can relabel, update, delete, or download entries anytime.",

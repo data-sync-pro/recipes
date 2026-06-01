@@ -1,10 +1,8 @@
 <div class="recipe-layout">
-    <app-category-list
-        [categories]="categories"
-        [selectedCategories]="selectedCategories"
-        [totalRecipeCount]="totalRecipeCount"
-        (categoryToggle)="onCategoryToggle($event)">
-    </app-category-list>
+    <app-recipe-nav-sidebar
+        [recipes]="allRecipes"
+        [categories]="categories">
+    </app-recipe-nav-sidebar>
 
     <app-recipe-list
         [recipes]="recipes"
