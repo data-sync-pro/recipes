@@ -41,6 +41,7 @@ import { CategoryListComponent } from './category-list/category-list.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipePrereqsComponent } from './recipe-prereqs/recipe-prereqs.component';
 import { RecipeNavSidebarComponent } from './recipe-nav-sidebar/recipe-nav-sidebar.component';
+import { RecipeCountComponent } from './recipe-count/recipe-count.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { RecipeNavSidebarComponent } from './recipe-nav-sidebar/recipe-nav-sideb
     CategoryListComponent,
     RecipeListComponent,
     RecipePrereqsComponent,
-    RecipeNavSidebarComponent
+    RecipeNavSidebarComponent,
+    RecipeCountComponent
   ],
   imports: [
     CommonModule,

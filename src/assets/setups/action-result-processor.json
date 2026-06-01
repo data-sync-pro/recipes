@@ -11,7 +11,7 @@
     },
     {
       "type": "code",
-      "content": "global interface ActionResultProcessor {\n    void process(List<pushtopics.ActionResult> actionResults);\n}",
+      "content": "global interface pushtopic.ActionResultProcessor {\n    void process(List<pushtopics.ActionResult> actionResults);\n}",
       "language": "apex"
     },
     {

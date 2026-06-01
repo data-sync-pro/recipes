@@ -53,6 +53,7 @@
             [class.collapsed]="!group.isExpanded"
             aria-hidden="true">
           <span class="category-name">{{ group.category.displayName }}</span>
+          <app-recipe-count [count]="group.category.count"></app-recipe-count>
         </div>
 
         <!-- Recipe List (shown when expanded) -->
