@@ -9,6 +9,7 @@ import { CacheService } from '../recipe/core/services/cache.service';
 import { OrchestrationService } from '../recipe/core/services/orchestration.service';
 import { Recipe } from '../recipe/core/models/recipe.model';
 import { categoryToSlug } from '../recipe/core/constants/recipe.constants';
+import { scrollToTopOnNavigation } from '../recipe/core/utils/scroll.util';
 
 @Component({
   selector: 'app-setup',
@@ -170,6 +171,10 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
     const slug = match ? match[1].split('/').pop() : null;
 
     if (slug && slug !== this.currentSlug) {
+      // Scroll synchronously here (not in loadSetup's async content callback):
+      // the navigation trigger is only readable while the navigation is still
+      // in progress. The guard above guarantees the page actually changed.
+      scrollToTopOnNavigation(this.router, true);
       this.loadSetup(slug);
       this.expandParentsOfSlug(slug);
     } else if (!slug && this.navTree.length > 0) {

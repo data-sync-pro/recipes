@@ -3,7 +3,11 @@
   "blocks": [
     {
       "type": "p",
-      "content": "An Apex extension point that lets you run custom logic immediately after a Data Sync Pro Execution completes."
+      "content": "An Apex extension point that runs custom logic immediately after an Execution completes — for both <strong>#Batch</strong> and <strong>#Data Loader</strong>. Implement it when you need to react to a completed run: send notifications, write audit or summary records, or trigger downstream processes."
+    },
+    {
+      "type": "p",
+      "content": "The <code>execute()</code> method receives the completed <code>Execution__c</code> record, so you can inspect its status, counts, and errors."
     },
     {
       "type": "h2",

@@ -3,7 +3,7 @@
   "blocks": [
     {
       "type": "p",
-      "content": "A built-in Apex class that keeps Execution records in sync with their asynchronous Bulk API jobs."
+      "content": "A built-in Apex class that polls Salesforce Bulk API and updates the corresponding Execution records as their asynchronous jobs complete."
     },
     {
       "type": "h2",
@@ -11,7 +11,15 @@
     },
     {
       "type": "p",
-      "content": "When an Executable Action runs through the Bulk API, Salesforce processes the job asynchronously. The action returns before the job finishes, so the Execution does not yet know the job's final outcome. <code>BulkJobStatusSyncer</code> checks the status of these Bulk API jobs and writes the results back to the corresponding <code>pushtopics__Execution__c</code> record, keeping its status and statistics accurate."
+      "content": "When a <strong>#Batch</strong> or <strong>#Data Loader</strong> run uses the Bulk API, the actual record processing is offloaded to a separate Salesforce Bulk job. DSP submits the work and finishes its own run, but the Bulk job continues independently — its final status, counts, and errors aren't yet on the Execution record."
+    },
+    {
+      "type": "p",
+      "content": ""
+    },
+    {
+      "type": "p",
+      "content": "<code>BulkJobStatusSyncer</code> fills this gap by polling the Bulk API for job status and writing the results back to the Execution record, keeping its status and statistics accurate."
     },
     {
       "type": "h2",
@@ -19,7 +27,24 @@
     },
     {
       "type": "p",
-      "content": "Run <code>BulkJobStatusSyncer</code> on a Schedule. Create a Schedule, set <code>BulkJobStatusSyncer</code> as its Apex class, and configure the run frequency."
+      "content": "Schedule BulkJobStatusSyncer from DSP Schedule management:"
+    },
+    {
+      "type": "ul",
+      "children": [
+        {
+          "type": "p",
+          "content": "Set Apex Class Name to <code>BulkJobStatusSyncer</code>."
+        },
+        {
+          "type": "p",
+          "content": "Choose a Frequency."
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "content": "The more often it runs, the sooner completed Bulk jobs are reflected on their Execution records."
     },
     {
       "type": "image",
