@@ -9,14 +9,19 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', 'src', 'assets', 'transformation', 'formulas');
 
-const entries = readdirSync(ROOT)
-  .filter((name) => {
-    const dir = join(ROOT, name);
-    if (!statSync(dir).isDirectory()) return false;
-    return existsSync(join(dir, 'data.json'));
-  })
-  .sort();
+try {
+  const entries = readdirSync(ROOT)
+    .filter((name) => {
+      const dir = join(ROOT, name);
+      if (!statSync(dir).isDirectory()) return false;
+      return existsSync(join(dir, 'data.json'));
+    })
+    .sort();
 
-const outPath = join(ROOT, '_index.json');
-writeFileSync(outPath, JSON.stringify(entries, null, 2) + '\n', 'utf8');
-console.log(`Wrote ${entries.length} function names to ${outPath}`);
+  const outPath = join(ROOT, '_index.json');
+  writeFileSync(outPath, JSON.stringify(entries, null, 2) + '\n', 'utf8');
+  console.log(`Wrote ${entries.length} function names to ${outPath}`);
+} catch (error) {
+  console.error('Failed to generate formulas index:', error && error.message ? error.message : error);
+  process.exit(1);
+}

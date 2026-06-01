@@ -13,6 +13,12 @@ export class SimpleZoomableDirective implements AfterViewInit, OnDestroy {
   private zoomed = false;
   private clickListener?: (event: Event) => void;
   private mutationObserver?: MutationObserver;
+  // Track hover handlers per image so we can detach them in cleanup
+  private imageHoverHandlers = new WeakMap<
+    HTMLImageElement,
+    { enter: () => void; leave: () => void }
+  >();
+  private processedImages = new Set<HTMLImageElement>();
 
   constructor(
     private el: ElementRef<HTMLElement>,
@@ -56,6 +62,10 @@ export class SimpleZoomableDirective implements AfterViewInit, OnDestroy {
   }
 
   private setupMutationObserver(): void {
+    // Defensive: disconnect any pre-existing observer before creating a new one
+    if (this.mutationObserver) {
+      this.mutationObserver.disconnect();
+    }
     this.mutationObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'childList') {
@@ -121,8 +131,10 @@ export class SimpleZoomableDirective implements AfterViewInit, OnDestroy {
 
       img.addEventListener('mouseenter', mouseEnterHandler);
       img.addEventListener('mouseleave', mouseLeaveHandler);
+      this.imageHoverHandlers.set(img, { enter: mouseEnterHandler, leave: mouseLeaveHandler });
     }
 
+    this.processedImages.add(img);
     img.setAttribute('data-zoomable-processed', 'true');
     
     if (img.complete) {
@@ -383,7 +395,17 @@ export class SimpleZoomableDirective implements AfterViewInit, OnDestroy {
     }
     if (this.mutationObserver) {
       this.mutationObserver.disconnect();
+      this.mutationObserver = undefined;
     }
+    // Remove hover listeners we attached to images
+    this.processedImages.forEach((img) => {
+      const handlers = this.imageHoverHandlers.get(img);
+      if (handlers) {
+        img.removeEventListener('mouseenter', handlers.enter);
+        img.removeEventListener('mouseleave', handlers.leave);
+      }
+    });
+    this.processedImages.clear();
     if (this.zoomed) {
       this.closeZoom();
     }

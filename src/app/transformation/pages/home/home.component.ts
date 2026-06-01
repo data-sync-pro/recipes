@@ -1,6 +1,8 @@
 import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { forkJoin, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { DocsService, DocData } from '../../services/docs.service';
 import { categorySlug } from '../../utils/route.util';
 interface FunctionTag {
@@ -16,7 +18,6 @@ interface FunctionTag {
 export class HomeComponent implements OnInit, AfterViewChecked {
   tagsData: FunctionTag[] = [];
   itemsByTag: { [tag: string]: string[] } = {};
-  uniqueTags: string[] = [];
   displayTags: string[] = [];
   functionDescriptions: { [funcName: string]: string } = {};
   formulaElements: any = null;
@@ -128,40 +129,42 @@ export class HomeComponent implements OnInit, AfterViewChecked {
         return tagSet.has(tag);
       });
 
-      // Also build uniqueTags from tagSet for any other internal processing if needed
-      this.uniqueTags = Array.from(tagSet); // if you need it, though displayTags is used for display
-
       this.loadFunctionDescriptions();
     });
   }
 
 
-  // Dynamically load each function's description from its JSON file
+  // Dynamically load each function's description from its JSON file.
+  // Fire all requests in parallel (forkJoin) instead of one-at-a-time so the
+  // home page is not bottlenecked by N sequential round-trips.
   loadFunctionDescriptions() {
-    this.tagsData.forEach(item => {
-      const funcName = item["Item Name"];
-      
-      if (funcName.toUpperCase() === 'GLOBAL_VARIABLES') {
-        return;
-      }
-      
-      const baseName = funcName.toLowerCase().replace(/\s/g, '_');
-      const filePath = `assets/transformation/formulas/${baseName}/data.json`;
-      this.http.get<any>(filePath).subscribe(
-        funcData => {
-          if (funcName.trim().toLowerCase() === 'apex class') {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(funcData.description, 'text/html');
-            const firstParagraph = doc.querySelector('p');
-            this.functionDescriptions[funcName] = firstParagraph && firstParagraph.textContent ? firstParagraph.textContent.trim() : 'Description not available.';
-          } else {
-            this.functionDescriptions[funcName] = funcData.description;
-          }
-        },
-        error => {
-          this.functionDescriptions[funcName] = 'Description not available.';
-        }
-      );
+    const fallback = 'Description not available.';
+    const requests = this.tagsData
+      .filter(item => item["Item Name"].toUpperCase() !== 'GLOBAL_VARIABLES')
+      .map(item => {
+        const funcName = item["Item Name"];
+        const baseName = funcName.toLowerCase().replace(/\s/g, '_');
+        const filePath = `assets/transformation/formulas/${baseName}/data.json`;
+        return this.http.get<any>(filePath).pipe(
+          map(funcData => {
+            if (funcName.trim().toLowerCase() === 'apex class') {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(funcData.description ?? '', 'text/html');
+              const firstParagraph = doc.querySelector('p');
+              const text = firstParagraph?.textContent?.trim();
+              return { funcName, description: text || fallback };
+            }
+            return { funcName, description: funcData.description ?? fallback };
+          }),
+          catchError(() => of({ funcName, description: fallback }))
+        );
+      });
+
+    if (requests.length === 0) return;
+    forkJoin(requests).subscribe(results => {
+      results.forEach(({ funcName, description }) => {
+        this.functionDescriptions[funcName] = description;
+      });
     });
   }
 
@@ -193,6 +196,26 @@ export class HomeComponent implements OnInit, AfterViewChecked {
 
   getAnchorId(text: string): string {
     return text.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+  }
+
+  trackByString(_: number, value: string): string {
+    return value;
+  }
+
+  trackByElement(_: number, item: { element: string }): string {
+    return item.element;
+  }
+
+  trackByOperator(_: number, op: { operator: string }): string {
+    return op.operator;
+  }
+
+  trackByVariable(_: number, gv: { variable: string }): string {
+    return gv.variable;
+  }
+
+  trackByKey(_: number, kv: { key: string }): string {
+    return kv.key;
   }
   goToFunction(funcName: string) {
     // Build a category-prefixed URL (/text/char) using the function's primary

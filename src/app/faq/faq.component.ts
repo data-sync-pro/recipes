@@ -110,6 +110,8 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   categories: FAQCategory[] = [];
 
   private destroy$ = new Subject<void>();
+  private previewUpdateInterval: ReturnType<typeof setInterval> | null = null;
+  private previewStorageHandler: ((event: StorageEvent) => void) | null = null;
   private pendingFragment?: string;
   private scrollTimeout: any;
   private activeScrollElement: string = '';
@@ -231,19 +233,37 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-    
+
     // Clean up timeouts
     if (this.scrollTimeout) {
       clearTimeout(this.scrollTimeout);
     }
-    
+
+    // Clean up preview listener (storage event + polling interval)
+    this.cleanupPreviewUpdateListener();
+
     // Clean up intersection observer (no longer needed without expansion panels)
-    
+
     // Clean up footer observer
     this.cleanupFooterObserver();
-    
+
     // Clean up nav link handler
     this.cleanupNavLinkHandler();
+  }
+
+  /**
+   * Tear down the preview-update listener: removes the storage event handler
+   * and stops the fallback polling interval.
+   */
+  private cleanupPreviewUpdateListener(): void {
+    if (this.previewUpdateInterval !== null) {
+      clearInterval(this.previewUpdateInterval);
+      this.previewUpdateInterval = null;
+    }
+    if (this.previewStorageHandler) {
+      window.removeEventListener('storage', this.previewStorageHandler);
+      this.previewStorageHandler = null;
+    }
   }
 
   private initFaqData(): void {
@@ -338,17 +358,17 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   
   goHome(): void {
     this.resetState();
-    this.router.navigate(['/']);
+    this.router.navigate(['/faq']);
   }
-  
+
   goCategory(cat: string): void {
     this.resetState();
-    this.router.navigate(['/', this.encode(cat)]);
+    this.router.navigate(['/faq', this.encode(cat)]);
   }
 
   goSubCategory(categoryName: string, subCategoryName: string): void {
     this.resetState();
-    this.router.navigate(['/', this.encode(categoryName), this.encode(subCategoryName)]);
+    this.router.navigate(['/faq', this.encode(categoryName), this.encode(subCategoryName)]);
   }
 
   private navLinkHandler = (event: MouseEvent) => {
@@ -390,15 +410,33 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   };
 
+  private navLinkHandlerAttached = false;
+  private navLinkHandlerTimeoutId: ReturnType<typeof setTimeout> | null = null;
+
   private setupNavLinkHandler(): void {
-    // Use setTimeout to ensure the DOM is ready
-    setTimeout(() => {
-      document.addEventListener('click', this.navLinkHandler);
+    if (this.navLinkHandlerAttached || this.navLinkHandlerTimeoutId !== null) {
+      // Already scheduled or attached — avoid duplicate listeners
+      return;
+    }
+    // Defer until DOM is ready
+    this.navLinkHandlerTimeoutId = setTimeout(() => {
+      this.navLinkHandlerTimeoutId = null;
+      if (!this.navLinkHandlerAttached) {
+        document.addEventListener('click', this.navLinkHandler);
+        this.navLinkHandlerAttached = true;
+      }
     }, 100);
   }
 
   private cleanupNavLinkHandler(): void {
-    document.removeEventListener('click', this.navLinkHandler);
+    if (this.navLinkHandlerTimeoutId !== null) {
+      clearTimeout(this.navLinkHandlerTimeoutId);
+      this.navLinkHandlerTimeoutId = null;
+    }
+    if (this.navLinkHandlerAttached) {
+      document.removeEventListener('click', this.navLinkHandler);
+      this.navLinkHandlerAttached = false;
+    }
   }
 
   private resetState(): void {
@@ -866,9 +904,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(this.buildAnswerUrlSegments(item));
   }
 
-  // Build router segments for an answer URL. Shape is /<cat>/<sub?>/<slug>.
+  // Build router segments for an answer URL. Shape is /faq/<cat>/<sub?>/<slug>.
   private buildAnswerUrlSegments(item: FAQItem): string[] {
-    const segs = ['/', this.encode(item.category)];
+    const segs = ['/faq', this.encode(item.category)];
     if (item.subCategory) {
       segs.push(this.encode(item.subCategory));
     }
@@ -908,14 +946,14 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
         if (faqs.length > 0) {
           cb();
         } else {
-          this.router.navigate(['/']);
+          this.router.navigate(['/faq']);
         }
         this.updateUIState({ isLoadingRouteData: false });
       },
       error: (error) => {
         console.error('Failed to load FAQ data:', error);
         this.updateUIState({ isLoadingRouteData: false });
-        this.router.navigate(['/']);
+        this.router.navigate(['/faq']);
       }
     });
   }
@@ -998,7 +1036,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       this.isProcessingAnswerPath = false;
 
       // If FAQ not found, redirect to home to avoid broken state
-      this.router.navigate(['/']);
+      this.router.navigate(['/faq']);
     }
   }
 
@@ -1123,7 +1161,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.current.category !== faqItem.category ||
         (faqItem.subCategory && this.current.subCategory !== faqItem.subCategory)) {
       const answerSlug = this.getAnswerSlug(faqItem.folderId);
-      this.router.navigate(['/', answerSlug]);
+      this.router.navigate(['/faq', answerSlug]);
       return;
     }
 
@@ -1250,8 +1288,8 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     
     
     this.resetState();
-    this.router.navigate(['/', this.encode(categoryName)]);
-    
+    this.router.navigate(['/faq', this.encode(categoryName)]);
+
     if (this.ui.isMobile) {
       this.closeMobileSidebar();
     }
@@ -1263,9 +1301,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       event.stopPropagation();
     }
     this.resetState();
-    
+
     if (this.current.category) {
-      this.router.navigate(['/', this.encode(this.current.category), this.encode(subCategoryName)]);
+      this.router.navigate(['/faq', this.encode(this.current.category), this.encode(subCategoryName)]);
     }
     
     if (this.ui.isMobile) {
@@ -2072,36 +2110,32 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
    * Listen for preview content updates from editor
    */
   private setupPreviewUpdateListener(faqId: string): void {
-    
-    // Enhanced storage event listener
-    const handleStorageEvent = (event: StorageEvent) => {
+    // If a previous listener is still attached, tear it down first so we don't leak
+    this.cleanupPreviewUpdateListener();
+
+    // Enhanced storage event listener — keep the reference so it can be removed later
+    this.previewStorageHandler = (event: StorageEvent) => {
       const sessionKey = `faq-preview-${faqId}`;
       const backupKey = `backup-faq-preview-${faqId}`;
       // Check both sessionStorage and localStorage keys
       if ((event.key === sessionKey || event.key === backupKey) && event.newValue) {
         try {
           const updatedData: PreviewData = JSON.parse(event.newValue);
-          
+
           this.updatePreviewContent(updatedData);
         } catch (error) {
-          console.error('❌ Error parsing preview update data:', error);
+          console.error('Error parsing preview update data:', error);
         }
       }
     };
 
     // Listen for storage events (cross-tab communication)
-    window.addEventListener('storage', handleStorageEvent);
-    
-    // Enhanced periodic check for updates (fallback mechanism)
-    const updateInterval = setInterval(() => {
+    window.addEventListener('storage', this.previewStorageHandler);
+
+    // Periodic check for updates (fallback mechanism — same-tab updates don't fire storage events)
+    this.previewUpdateInterval = setInterval(() => {
       this.checkForPreviewUpdates(faqId);
-    }, 1000); // Increased frequency to 1 second for better responsiveness
-    
-    // Clean up interval on destroy
-    this.destroy$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      clearInterval(updateInterval);
-      window.removeEventListener('storage', handleStorageEvent);
-    });
+    }, 1000);
   }
 
   /**

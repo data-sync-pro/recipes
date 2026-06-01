@@ -204,7 +204,9 @@ export class EditorStateService implements OnDestroy {
     if (this.selectedDocNameSubject.value === docName) {
       this.emitCurrentTags();
     }
-    this.saveStatusSubject.next({ kind: 'pending' });
+    // After revert, there are no dirty edits — surface 'idle' so the UI does
+    // not falsely advertise pending changes.
+    this.saveStatusSubject.next({ kind: 'idle' });
 
     if (wasSelected) {
       if (wasNew) {

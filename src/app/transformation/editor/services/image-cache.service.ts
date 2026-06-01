@@ -21,7 +21,12 @@ export class ImageCacheService implements OnDestroy {
   readonly changes$: Observable<void> = this.changeSubject.asObservable();
 
   constructor(private db: ImageDbService) {
-    void this.restoreFromDb();
+    // Restore is best-effort: if IndexedDB is unavailable (private mode, quota
+    // exceeded, schema mismatch) we still want the in-memory cache to work for
+    // the current session. Surface the failure so it is visible in dev tools.
+    this.restoreFromDb().catch((err) => {
+      console.error('ImageCacheService: failed to restore from IndexedDB', err);
+    });
   }
 
   ngOnDestroy(): void {

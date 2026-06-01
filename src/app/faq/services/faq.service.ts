@@ -747,11 +747,17 @@ export class FAQService implements OnDestroy {
               return `<a${beforeHref}href="${resolvedUrl}"${afterHref}>`;
             }
           }
-          
+
+          // Normalize hand-authored internal hrefs onto the /faq mount point.
+          const normalizedHref = href.startsWith('/faq') ? href : `/faq${href}`;
+
           // Only add faq-internal-link class if no existing class is present
           const hasClass = beforeHref.includes('class=') || afterHref.includes('class=');
           if (!hasClass) {
-            return `<a${beforeHref}href="${href}"${afterHref} class="faq-internal-link">`;
+            return `<a${beforeHref}href="${normalizedHref}"${afterHref} class="faq-internal-link">`;
+          }
+          if (normalizedHref !== href) {
+            return `<a${beforeHref}href="${normalizedHref}"${afterHref}>`;
           }
         }
         return match;
