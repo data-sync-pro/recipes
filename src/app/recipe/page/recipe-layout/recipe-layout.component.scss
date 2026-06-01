@@ -1,5 +1,5 @@
 .recipe-layout {
-    margin: 36px 0 98px 0;
+    margin: 36px 0 0 0;
     display: flex;
     align-items: flex-start;
     gap: 2.5vw;
@@ -7,6 +7,7 @@
     app-recipe-nav-sidebar {
         flex: 0 0 22%;
         min-width: 0;
+        align-self: stretch;
     }
 
     app-recipe-list {
