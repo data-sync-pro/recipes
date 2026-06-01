@@ -129,13 +129,12 @@
 .block-code {
   margin: 1rem 0;
   padding: 1rem;
-  background: #2d2d2d;
+  background: #f8f8f8;
   border-radius: 8px;
   overflow-x: auto;
 
   code {
-    font-family: 'Fira Code', 'Consolas', monospace;
-    font-size: 0.875rem;
+    font-size: 1rem;
     white-space: pre-wrap;
     word-break: break-word;
     background: transparent;

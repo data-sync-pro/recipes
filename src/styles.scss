@@ -8,7 +8,7 @@
 @import './styles/notification.scss';
 
 // Import Prism syntax highlighting theme
-@import 'prismjs/themes/prism-tomorrow';
+@import 'prismjs/themes/prism';
 
 html, body { min-height: 100%; height: auto; }
 body {
@@ -73,6 +73,23 @@ a {
 .callout-content strong,
 .block-table strong {
   font-weight: 500;
+}
+
+// Setup block inline <code>. Lives here for the same reason as <strong> above.
+// Block code (Prism-highlighted <pre class="block-code">) is unaffected — these
+// selectors only match <code> inside text containers, not inside <pre>.
+.block-p code,
+.block-list code,
+.callout-content code,
+.block-table code,
+.block-caption code {
+  padding: 0.1em 0.4em;
+  background: #f5f5f5;
+  border-radius: 4px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #800000;
+  word-break: break-word;
 }
 
 // Global table styles (used by setup/block, faq-editor, designer-guide)

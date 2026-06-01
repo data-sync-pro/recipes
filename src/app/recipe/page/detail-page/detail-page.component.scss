@@ -11,165 +11,11 @@
   display: flex;
   gap: 2.5vw;
   padding: 5.6rem 0 0 0;
-}
 
-// Left Sidebar - Recipe List
-.left-sidebar {
-  flex: 0 0 22%;
-  min-width: 0;
-  border-radius: 2px;
-  background-color: white;
-
-  .sidebar-sticky {
-    position: sticky;
-    top: 80px;
-    height: calc(100vh - 80px);
-    display: flex;
-    flex-direction: column;
-
-    .sidebar-search {
-      position: relative;
-      margin-bottom: 16px;
-
-      .search-icon {
-        position: absolute;
-        left: 8px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 16px;
-        height: 16px;
-        pointer-events: none;
-        z-index: 1;
-      }
-
-      .sidebar-search-input {
-        width: 100%;
-        padding: 8px 28px;
-        font-size: 0.875rem;
-        border: 1px solid #E7E7E7;
-        border-radius: 2px;
-        outline: none;
-        box-sizing: border-box;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        cursor: pointer;
-
-        &::placeholder {
-          color: #9ca3af;
-        }
-
-        &:hover {
-          border-color: #2252b248;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        &:focus {
-          border-color: #2252b248;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-      }
-
-      .shortcut-hint {
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: #F5F5F6;
-        font-size: 0.875rem;
-        padding: 0px 8px;
-        border-radius: 4px;
-        color: #8c8c8c;
-        pointer-events: none;
-      }
-    }
-
-    .category-list {
-      background: #fff;
-      border-radius: 0;
-      flex: 1;
-      min-height: 0;
-      overflow-y: auto;
-      scrollbar-width: thin;
-
-      .category-group {
-        .category-header {
-          display: flex;
-          align-items: center;
-          padding: 6px 8px 6px 8px;
-          cursor: pointer;
-          transition: background 0.2s ease;
-          font-size: 0.875rem;
-          color: #5c5c5c;
-          user-select: none;
-          background-color: #fff;
-
-          .chevron-down-icon {
-            width: 14px;
-            height: 14px;
-            margin-right: 8px;
-            transition: transform 0.2s ease;
-
-            &.collapsed {
-              transform: rotate(-90deg);
-            }
-
-            &:not(.collapsed) {
-              ~.category-name {
-                font-weight: 500;
-              }
-            }
-          }
-
-          .category-name {
-            flex: 1;
-          }
-
-          &:hover {
-            font-weight: 500;
-            background-color: #F1F6FB;
-          }
-
-          &:has(.chevron-down-icon:not(.collapsed)) {
-            margin-bottom: 8px;
-          }
-        }
-
-        // Make the category header sticky when it contains an active recipe
-        &:has(.recipe-list-item.active) .category-header {
-          position: sticky;
-          top: 0;
-          z-index: 10;
-        }
-
-        .recipe-list {
-          margin-left: 15px;
-          border-left: 1px solid #E6E6E6;
-
-          .recipe-list-item {
-            text-decoration: none;
-            padding: 3px 9px 3px 15px;
-            font-size: 0.75rem;
-            color: #5c5c5c;
-            cursor: pointer;
-            border-bottom: none;
-            line-height: 1.5;
-            margin: 4px 0 4px 0px;
-            display: block;
-
-            &:hover {
-              color: #2253B2;
-              border-left: 3px solid #2253B2CC;
-            }
-
-            &.active {
-              color: #2253B2;
-              font-weight: 500;
-              border-left: 3px solid #2253B2CC;
-              background-color: #F1F6FB;
-            }
-          }
-        }
-      }
-    }
+  // Left Sidebar - Recipe List (its own styles live in the component)
+  app-recipe-nav-sidebar {
+    flex: 0 0 22%;
+    min-width: 0;
   }
 }
 
@@ -640,12 +486,6 @@
   }
 }
 
-// Mobile-only sidebar drawer chrome — hidden on desktop, shown at <=1024px.
-.sidebar-toggle-btn,
-.sidebar-backdrop {
-  display: none;
-}
-
 // Responsive - Tablets
 @media (max-width: 1200px) {
   .detail-main-layout {
@@ -653,7 +493,7 @@
     gap: 24px;
   }
 
-  .left-sidebar {
+  app-recipe-nav-sidebar {
     flex: 0 0 22%;
   }
 
@@ -669,70 +509,10 @@
     padding: 80px 16px 0 16px;
   }
 
-  .sidebar-toggle-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 10px;
-    right: 1.5rem;
-    width: 40px;
-    height: 40px;
-    border-radius: 4px;
-    border: none;
-    background: transparent;
-    color: #2253B2;
-    cursor: pointer;
-    z-index: 1001;
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: rgba(0, 123, 255, 0.1);
-    }
-
-    &:focus {
-      outline: 2px solid #2253B2;
-      outline-offset: 2px;
-    }
-  }
-
-  .sidebar-backdrop {
-    display: block;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1000;
-  }
-
-  .left-sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 320px;
-    max-width: 85vw;
-    flex: none;
-    min-width: 0;
-    background: #fff;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: 1001;
-    padding: 70px 16px 16px 16px;
-    overflow-y: auto;
-    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
-
-    &.open {
-      transform: translateX(0);
-    }
-
-    .sidebar-sticky {
-      position: static;
-      height: auto;
-
-      .recipe-list {
-        max-height: none;
-      }
-    }
+  // Sidebar becomes a fixed off-canvas drawer (styled inside the component);
+  // drop its element out of flow so the content area takes the full width.
+  app-recipe-nav-sidebar {
+    display: contents;
   }
 
   .detail-content {
