@@ -1,0 +1,107 @@
+{
+  "title": "#Action Button Settings",
+  "blocks": [
+    {
+      "type": "fields",
+      "filterPlaceholder": "Filter fields",
+      "groups": [
+        {
+          "title": "#Action Button",
+          "fields": [
+            {
+              "name": "Action Button Label",
+              "description": "Sets the label of the action button. Defaults to \"Execute\" if left blank."
+            },
+            {
+              "name": "Action Button Variant",
+              "description": "Defines the visual style of the action button."
+            },
+            {
+              "name": "Confirm Before Action?",
+              "description": "When enabled, DSP will display a confirmation modal when the action button is clicked. The action will only proceed after the user confirms. To customize the message shown in the modal, use the 'Action Confirm Message' field."
+            },
+            {
+              "name": "Action Button Icon Name",
+              "description": "Name of the Lightning Design System icon to display for the Action Button, in the format category:iconName (e.g. utility:email)."
+            },
+            {
+              "name": "Action Confirm Message",
+              "description": "Specifies the confirmation message displayed to the user when 'Confirm Before Action?' is selected and before the action runs."
+            },
+            {
+              "name": "Success Message(UI)",
+              "description": "Custom toast notification message displayed upon successful execution. If left undefined, the system default message is used."
+            },
+            {
+              "name": "Access Permissions",
+              "description": "Comma separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
+            },
+            {
+              "name": "Visibility Criteria",
+              "description": "Expression that returns a Boolean value and determines whether the component is visible. If the component is placed on a Lightning Record Page, the current record is used as the input context when evaluating the expression."
+            }
+          ]
+        },
+        {
+          "title": "Pre-Action Settings",
+          "fields": [
+            {
+              "name": "Pre-Action: Screen Title",
+              "description": "Specifies the title displayed at the top of the pre-action screen where users can review or edit fields before the action runs. If not specified, the Executable's Name is used by default."
+            },
+            {
+              "name": "Pre-Action: View Fields",
+              "description": "Comma-separated API names of the target object fields shown on the pre-action screen when the action button is clicked."
+            },
+            {
+              "name": "Pre-Action: Template Record Editor?",
+              "description": "When enabled, the Pre-Action screen opens a single editor using the first transformed target record as the template when multiple target records exist. Any field changes are applied to all target records."
+            },
+            {
+              "name": "Pre-Action: Edit Fields",
+              "description": "Comma-separated API names of the target object fields that open in edit mode on the pre-action screen when the action button is clicked."
+            }
+          ]
+        },
+        {
+          "title": "Action Button on Data List",
+          "fields": [
+            {
+              "name": "Q: List Action?",
+              "description": "When enabled, the Action Button appears as a list action(top right of the Data List), allowing the action to be applied to selected records."
+            },
+            {
+              "name": "Q: Row Action?",
+              "description": "When enabled, an action button is added to each row, allowing the action to be executed on that individual record."
+            },
+            {
+              "name": "Q: List Action Min Row Selection",
+              "description": "The minimum number of rows that must be selected from the query results for the list action to proceed. Defaults to 1 if not specified."
+            },
+            {
+              "name": "Q: Action Independent of Row Selection?",
+              "description": "Applies to an Action Button placed on a Data List. If enabled, the current page record is used as input instead of the selected rows in the Data List. Note: for a Direction-based Executable, Source Object Name must match the input object. For a Connection-based Executable, if Chained Data List(s) is configured, the input is used as the Context Record(s) to resolve dynamic filters for that Chained Data List."
+            },
+            {
+              "name": "Q: List Action Max Row Selection",
+              "description": "Maximum number of selected rows allowed for this list action. If the selection exceeds this value, the action is disabled. Leave blank for no limit. Defaults to 1 when the source object is a Big Object."
+            }
+          ]
+        },
+        {
+          "title": "Chained Data List(s)",
+          "fields": [
+            {
+              "name": "Chained Data List",
+              "description": "Data List used in Action Button's chained flow. When specified, clicking the Action Button opens the Data List for row selection. The selected rows become Context Records for the next Data List, if that Data List also has a Chained Data List defined. The sequence continues until no further Chained Data List is set. The rows selected in the final Data List become the input for the Action Button."
+            },
+            {
+              "name": "Chained Data Lists",
+              "description": "Data List Pipeline used in Action Button's chained flow. When specified, clicking the Action Button opens the Data Lists in this Pipeline for row selection. Once this field is set, no further Chained Data Lists are evaluated in the flow. The rows selected in the Data Lists become the input for the Action Button."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

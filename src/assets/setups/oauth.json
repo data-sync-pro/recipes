@@ -1,6 +1,5 @@
 {
   "title": "OAuth 2.0 (Refresh Token Flow)",
-  "order": 2,
   "blocks": [
     {
       "type": "p",
@@ -9,16 +8,25 @@
     {
       "type": "ul",
       "children": [
-        { "type": "p", "content": "External Client App" },
-        { "type": "p", "content": "Auth. Provider" },
-        { "type": "p", "content": "Named Credential" }
+        {
+          "type": "p",
+          "content": "External Client App"
+        },
+        {
+          "type": "p",
+          "content": "Auth. Provider"
+        },
+        {
+          "type": "p",
+          "content": "Named Credential"
+        }
       ]
     },
     {
       "type": "h2",
       "content": "Configure OAuth 2.0 Refresh Token Flow Authentication"
     },
-     {
+    {
       "type": "p",
       "content": "Complete the steps below to configure OAuth 2.0 authentication between the Connected Org and the DSP App Org."
     },
@@ -92,9 +100,18 @@
         {
           "type": "ul",
           "children": [
-            { "type": "p", "content": "<strong>URL</strong>: Enter the Connected Org domain URL (found in My Domain Settings)." },
-            { "type": "p", "content": "<strong>Auth. Provider</strong>: Select the Auth. Provider created earlier." },
-            { "type": "p", "content": "<strong>Scope</strong>: Enter the OAuth scopes enabled in the Connected Org's External Client App. Separate multiple scopes with spaces." }
+            {
+              "type": "p",
+              "content": "<strong>URL</strong>: Enter the Connected Org domain URL (found in My Domain Settings)."
+            },
+            {
+              "type": "p",
+              "content": "<strong>Auth. Provider</strong>: Select the Auth. Provider created earlier."
+            },
+            {
+              "type": "p",
+              "content": "<strong>Scope</strong>: Enter required scopes. Separate multiple scopes with spaces."
+            }
           ]
         },
         {
@@ -115,5 +132,3 @@
     }
   ]
 }
-
-

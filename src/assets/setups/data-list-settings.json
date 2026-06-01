@@ -1,0 +1,296 @@
+{
+  "title": "#Data List Settings",
+  "blocks": [
+    {
+      "type": "fields",
+      "filterPlaceholder": "Filter fields",
+      "groups": [
+        {
+          "title": "#Action Button",
+          "fields": [
+            {
+              "name": "Action Button Label",
+              "description": "Sets the label of the action button. Defaults to \"Execute\" if left blank."
+            },
+            {
+              "name": "Action Button Variant",
+              "description": "Defines the visual style of the action button."
+            },
+            {
+              "name": "Q: List Action?",
+              "description": "When enabled, the Action Button appears as a list action(top right of the Data List), allowing the action to be applied to selected records."
+            },
+            {
+              "name": "Action Button Icon Name",
+              "description": "Name of the Lightning Design System icon to display for the Action Button, in the format category:iconName (e.g. utility:email)."
+            },
+            {
+              "name": "Q: List Action Min Row Selection",
+              "description": "The minimum number of rows that must be selected from the query results for the list action to proceed. Defaults to 1 if not specified."
+            },
+            {
+              "name": "Confirm Before Action?",
+              "description": "When enabled, DSP will display a confirmation modal when the action button is clicked. The action will only proceed after the user confirms. To customize the message shown in the modal, use the 'Action Confirm Message' field."
+            },
+            {
+              "name": "Q: List Action Max Row Selection",
+              "description": "Maximum number of selected rows allowed for this list action. If the selection exceeds this value, the action is disabled. Leave blank for no limit. Defaults to 1 when the source object is a Big Object."
+            },
+            {
+              "name": "Action Confirm Message",
+              "description": "Specifies the confirmation message displayed to the user when 'Confirm Before Action?' is selected and before the action runs."
+            },
+            {
+              "name": "Q: Row Action?",
+              "description": "When enabled, an action button is added to each row, allowing the action to be executed on that individual record."
+            },
+            {
+              "name": "Success Message(UI)",
+              "description": "Custom toast notification message displayed upon successful execution. If left undefined, the system default message is used."
+            }
+          ]
+        },
+        {
+          "title": "Pre-Action Settings",
+          "fields": [
+            {
+              "name": "Pre-Action: Screen Title",
+              "description": "Specifies the title displayed at the top of the pre-action screen where users can review or edit fields before the action runs. If not specified, the Executable's Name is used by default."
+            },
+            {
+              "name": "Pre-Action: View Fields",
+              "description": "Comma-separated API names of the target object fields shown on the pre-action screen when the action button is clicked."
+            },
+            {
+              "name": "Pre-Action: Template Record Editor?",
+              "description": "When enabled, the Pre-Action screen opens a single editor using the first transformed target record as the template when multiple target records exist. Any field changes are applied to all target records."
+            },
+            {
+              "name": "Pre-Action: Edit Fields",
+              "description": "Comma-separated API names of the target object fields that open in edit mode on the pre-action screen when the action button is clicked."
+            }
+          ]
+        },
+        {
+          "title": "Linked Executables & Pipelines",
+          "fields": [
+            {
+              "name": "Q: Action Buttons",
+              "description": "The Pipeline associated with this Data List that defines the actions performed on selected rows from its query results."
+            },
+            {
+              "name": "Q: Row Related Lists",
+              "description": "The Pipeline that defines related Data Lists for each row. The Related Lists row action uses this Pipeline's configuration to dynamically retrieve and display the associated data."
+            },
+            {
+              "name": "Chained Data List",
+              "description": "Data List used in Action Button's chained flow. When specified, clicking the Action Button opens the Data List for row selection. The selected rows become Context Records for the next Data List, if that Data List also has a Chained Data List defined. The sequence continues until no further Chained Data List is set. The rows selected in the final Data List become the input for the Action Button."
+            },
+            {
+              "name": "Q: New Record Process",
+              "description": "The Executable that handles the New Record process from the Data List."
+            },
+            {
+              "name": "Chained Data Lists",
+              "description": "Data List Pipeline used in Action Button's chained flow. When specified, clicking the Action Button opens the Data Lists in this Pipeline for row selection. Once this field is set, no further Chained Data Lists are evaluated in the flow. The rows selected in the Data Lists become the input for the Action Button."
+            },
+            {
+              "name": "Q: Data Loader",
+              "description": "The Executable that handles the Data Loader process from the Data List."
+            }
+          ]
+        },
+        {
+          "title": "Permissions(Query Results)",
+          "fields": [
+            {
+              "name": "Q: Createable?",
+              "description": "When enabled, a standard New Record icon button is shown on the Data List for users with Create access to create new records. Note: Remote Connections do not support the standard New Record action; Use a custom Action Button if needed."
+            },
+            {
+              "name": "Q: Deletable?",
+              "description": "When enabled, users can delete records from the Data List, provided they have the Delete access."
+            },
+            {
+              "name": "Q: Editable?",
+              "description": "When enabled, users can edit records in the Data List, provided they have Edit access to the records and relevant fields."
+            },
+            {
+              "name": "Q: Downloadable?",
+              "description": "Specifies whether query results in the Data List can be downloaded. Requires the 'Download Data in Query' custom permission."
+            },
+            {
+              "name": "Q: Show Mass Edit Button?",
+              "description": "Indicates whether to show the Mass Edit button icon on the Data List."
+            },
+            {
+              "name": "Q: Show Row Action 'Clone'?",
+              "description": "When enabled and the connection is the current org, the \"Clone\" row action appears for each record—provided the Data List is createable and the user has Create access."
+            },
+            {
+              "name": "Q: Show Row Action 'Edit'?",
+              "description": "When enabled and the connection is the current org, the \"Edit\" row action appears for each record—provided the Data List is editable and the user has Edit access."
+            },
+            {
+              "name": "Q: Show Row Action 'Delete'?",
+              "description": "When enabled, the \"Delete\" row action appears for each record—provided the Data List is deletable and the user has Delete access."
+            },
+            {
+              "name": "Q: Editable Fields",
+              "description": "Comma-separated API names of Data List fields designated as editable, subject to the user's object and field-level edit permissions. If left blank, users can edit the fields for which they have edit access."
+            },
+            {
+              "name": "Access Permissions",
+              "description": "Comma separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
+            },
+            {
+              "name": "Visibility Criteria",
+              "description": "Expression that returns a Boolean value and determines whether the component is visible. If the component is placed on a Lightning Record Page, the current record is used as the input context when evaluating the expression."
+            }
+          ]
+        },
+        {
+          "title": "Appearance & More",
+          "fields": [
+            {
+              "name": "Q: Results Title",
+              "description": "Sets the title of the Data List query results."
+            },
+            {
+              "name": "Q: Show Column Filter?",
+              "description": "When enabled, the Column Filter will be available on the Data List for further filtering."
+            },
+            {
+              "name": "Q: Results Icon Name",
+              "description": "Name of the Lightning Design System icon to display for the query results, in the format category:iconName (e.g. standard:opportunity)."
+            },
+            {
+              "name": "Q: Pinned Column Filter Field Names",
+              "description": "Comma-separated list of field API names to show as pinned column filters in the Data List."
+            },
+            {
+              "name": "Q: Help Text",
+              "description": "Display as help text next to the Q result's title."
+            },
+            {
+              "name": "Q: Pinned Column Filters Header Limit",
+              "description": "Maximum number of pinned column filters embedded in the query results header. If not set, the default is 3. If the number of pinned column filters exceeds this limit, they are shown in a separate area above the results."
+            },
+            {
+              "name": "Q: Open Links in Record Page?",
+              "description": "Applies to Data Lists added to Lightning Pages. When selected, hyperlinks in the Data List will open in the standard Lightning Record Page rather than within Data Sync Pro's Record view."
+            },
+            {
+              "name": "Q: Column Filter Default Field Name",
+              "description": "Sets the default Column Filter to the field's API name exactly as it appears in the SELECT clause."
+            },
+            {
+              "name": "Q: Open Links in Current Tab?",
+              "description": "When enabled, record links in the Data List open in the current tab instead of a new one."
+            },
+            {
+              "name": "Q: Filterable Column Field Names",
+              "description": "Comma-separated list of field API names that can be used as column filters for this Data List."
+            },
+            {
+              "name": "Q: Use Navigation For New Record?",
+              "description": "Indicates whether new record creation should launch the standard Salesforce New Record page. This enables advanced features such as dynamic forms, but users must manually refresh the data list to see the update."
+            },
+            {
+              "name": "Q: Existing Value Filter Field Names",
+              "description": "Comma-separated field API names whose existing values are used to populate Column Filter options for this Data List."
+            },
+            {
+              "name": "Q: Query Manager Toggleable?",
+              "description": "When enabled, the Data List displays the icon button to toggle the Query Manager on and off."
+            },
+            {
+              "name": "Q: Show Picklist Labels?",
+              "description": "When enabled, picklist labels will be shown in the Data List; otherwise API values are displayed."
+            },
+            {
+              "name": "Q: Hide Others in Query Builder?",
+              "description": "When enabled, the 'Others' section will be hidden from the Query Builder."
+            },
+            {
+              "name": "Q: Download as JSON?",
+              "description": "If checked, users can download the query results as a JSON file."
+            },
+            {
+              "name": "Q: See Labels While Building Query?",
+              "description": "When enabled, users see object and field labels instead of API names while building a query — useful for business users who may not be familiar with API naming conventions."
+            },
+            {
+              "name": "Q: Column Widths Mode",
+              "description": "Specifies how column widths are calculated. Set to 'fixed' for columns with equal widths. Set to 'auto' for column widths that are based on the width of the column content and the table width. The default is 'fixed'."
+            },
+            {
+              "name": "Q: Sorted By",
+              "description": "Defines the initial sort field on the Data List user interface. If 'Q Retrieval All' is selected, this field will also be used to sort the results in-memory."
+            },
+            {
+              "name": "Q: Min Column Width",
+              "description": "The minimum width in pixels for all columns when the Column Width Mode is 'auto'. Example: 80"
+            },
+            {
+              "name": "Q: Sorted Direction",
+              "description": "Used in conjunction with 'Q Sorted By'. The available values are 'asc', 'desc'."
+            },
+            {
+              "name": "Q: Max Column Width",
+              "description": "The maximum width in pixels for all columns when the Column Width Mode is 'auto'. Example: 300"
+            },
+            {
+              "name": "Q: Retrieve All?",
+              "description": "When selected, DSP retrieves and caches the full result set locally in a single request, enabling client-side pagination and reducing server calls during navigation. Recommended for small result sets only. For Salesforce Big Objects—which don't support OFFSET and LIMIT—client-side pagination always applies regardless of this setting."
+            },
+            {
+              "name": "Q: Page Size",
+              "description": "The number of records displayed per page in the Data List."
+            },
+            {
+              "name": "Q: Override Columns",
+              "description": "Override the default column labels by listing pairs in this format: fieldApiName1: label1, fieldApiName2: label2. Alternatively, supply a JSON array of Lightning Datatable column definition objects to customize additional settings (e.g. [{\"fieldName\":\"AccountSource\",\"label\":\"Source\", \"typeAttributes\": {\"options\": [\"Web\", \"Phone Inquiry\"]}}])."
+            },
+            {
+              "name": "Q: Min Row Selection",
+              "description": "The minimum number of rows that must be selected from the query results to proceed."
+            },
+            {
+              "name": "Q: Key Field",
+              "description": "The field used as the row key for the Data List. By default, \"Id\" is used. Override it when needed."
+            },
+            {
+              "name": "Q: Max Row Selection",
+              "description": "The maximum number of rows that can be selected from the query results. Checkboxes are used for selection by default, and radio buttons are used when this value is 1."
+            },
+            {
+              "name": "Group Name",
+              "description": "The name of the group used to organize Pipeline components. If not specified, the Source Object Name is used for grouping."
+            },
+            {
+              "name": "Q: Max Visiable List Action Buttons",
+              "description": "The maximum number of list action buttons shown on the data list. If blank, 3 buttons are shown by default; any additional actions appear as menu items in the dropdown."
+            },
+            {
+              "name": "Context Record ID",
+              "description": "Used to simulate a record context and reference related field values (up to 5 levels deep) in SOQL filters when compiling the Retrieve query or evaluating Visibility Criteria expressions. If a DSP UI component that uses this setting (such as a Data List or Action Button) is placed on a Lightning Record Page, this Record ID automatically adapts to the ID of the record being viewed."
+            },
+            {
+              "name": "Q: Show Results in Tiles on Small Screen",
+              "description": "When enabled, when the screen is small, the Data List will be shown in tiles instead of lightning datatable. The default width of a small screen is '<= 500px'. You may also define the max width of the small screen via the field 'Small Screen Viewport Width'."
+            },
+            {
+              "name": "Source Object ContentDocument ID Field",
+              "description": "The text field on the Source Object used to store the ContentDocument ID for file uploads. When specified in a #Data List, a row action is automatically added—'Upload File' when the field is blank, or 'Preview File' when the field has a value."
+            },
+            {
+              "name": "Q: Small Screen Viewport Width",
+              "description": "Used to define the max width(in pixels) of a small screen so that if 'Show Results in Tiles on Small Screen' is checked, the Data List will be displayed in tiles instead of lightning datatable when the screen viewport is 'small'. If not defined, screen width '<= 500px' is considered as a 'small' screen."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

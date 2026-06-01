@@ -1,0 +1,52 @@
+{
+  "title": "New Executable",
+  "blocks": [
+    
+    {
+      "type": "p",
+      "content": "Executables can be created from a Pipeline, Direction, or Connection. This guide uses a Pipeline with a configured Template Direction as an example."
+    },
+    {
+      "type": "tabs",
+      "items": [
+        {
+          "label": "New Direction Executable",
+          "children": [
+            {
+              "type": "image",
+              "content": "image/executable/new-executable-form.png",
+              "alt": "New Direction Executable dialog opened from a Pipeline"
+            }
+          ]
+        },
+        {
+          "label": "New Source Query",
+          "children": [
+            {
+              "type": "image",
+              "content": "image/executable/new-query-form.png",
+              "alt": "New Source Query dialog opened from a Pipeline"
+            }
+          ]
+        },
+        {
+          "label": "New Target Action",
+          "children": [
+            {
+              "type": "image",
+              "content": "image/executable/new-action-form.png",
+              "alt": "New Target Action dialog opened from a Pipeline"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "related": [
+    {
+      "label": "Data Sync Pro Recipes",
+      "url": "/recipes",
+      "newTab": true
+    }
+  ]
+}

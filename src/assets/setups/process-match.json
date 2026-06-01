@@ -1,0 +1,76 @@
+{
+  "title": "Match",
+  "blocks": [
+    {
+      "type": "p",
+      "content": "Match links source records with their corresponding target records and determines how each action is applied. It underlies the Insert, Update, Upsert, Merge, Delete, and Undelete operations, ensuring records are routed and processed correctly."
+    },
+    {
+      "type": "ul",
+      "children": [
+        {
+          "type": "p",
+          "content": "<strong>Record matching</strong> — Match compares source records to target records using the Target Matching Field."
+        },
+        {
+          "type": "p",
+          "content": "<strong>Insert logic</strong> — When a Target Matching Field is defined, records are inserted only if no match exists. Without one, inserts proceed unconditionally."
+        },
+        {
+          "type": "p",
+          "content": "<strong>Multi-field matching</strong> — DSP supports a single Target Matching Field. Multi-field matching can be achieved through transformations such as VLOOKUP."
+        },
+        {
+          "type": "p",
+          "content": "<strong>Sorting and selection</strong> — Matches can be sorted, and the Principal Matched Record Selection Rule controls whether the action runs on the first match or on all matches."
+        },
+        {
+          "type": "p",
+          "content": "<strong>Merge matching</strong> — In Merge operations, the Principal Matched Record becomes the Master Record used to consolidate duplicates."
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "content": "image/process/match.png",
+      "alt": "Match step linking source records to target records"
+    },
+    {
+      "type": "fields",
+      "fields": [
+        {
+          "name": "Target Matching Field",
+          "description": "API name of the target field(case-sensitive) used to identify matching target records. If multiple matches are found for a source record and the Principal Selection Rule is defined, only the principal record is selected—otherwise, all matches are used. Actions then execute based on these results (e.g. Insert is skipped when matches exist, Update runs only for matched records, and Merge consolidates secondary matches into the principal record)."
+        },
+        {
+          "name": "Additional Target Matching Criteria",
+          "description": "This outlines the supplementary SOQL conditions that will be considered when matching the presence of the target data. It is commonly employed when the source and target objects exhibit a one-to-many relationship, and specific criteria must be met for actions to be taken on the target records."
+        },
+        {
+          "name": "Apply Duplicate Matching?",
+          "description": "When checked, DSP uses Salesforce's Duplicate Management API to identify duplicates based on your configured duplicate rules, and applies the action only to matching records on the Target Object. Records from any other object type are ignored during processing."
+        },
+        {
+          "name": "Matched Records Sorting Components",
+          "description": "Semicolon-separated DSP expressions specifying the sort order when multiple matches are found. Components are evaluated in sequence; prefix an expression with '-' to sort it in descending order. Boolean values are sorted with TRUE before FALSE. Example: '-$FIELDS_COUNT;-LEN(Description);CreatedDate' sorts first by Fields Count (descending), Description length (descending), and then CreatedDate (ascending). (Note: $FIELDS_COUNT is a special variable representing the number of populated fields.)"
+        },
+        {
+          "name": "Principal Matched Record Selection Rule",
+          "description": "Selection rule that determines which matched record serves as the primary record when multiple matches are found—used to identify the master record for merges and the target record for updates or deletions."
+        },
+        {
+          "name": "Principal Selection Child Relationship",
+          "description": "The Child Relationship API Name used when 'Most Child Records' is selected in the 'Principal Record Selection Rule'."
+        },
+        {
+          "name": "Principal Selection on Duplicate Object?",
+          "description": "In the Merge process, when merging data through DuplicateRecordSet (source) and DuplicateRecordItem (target), this checkbox determines whether the selection rule applies to the duplicate object or directly to the DuplicateRecordItem."
+        },
+        {
+          "name": "Duplicate Record Object Name",
+          "description": "When 'Principal Selection on Duplicate Object?' is selected, this field specifies which object the DuplicateRecordItem references. Currently, only Account, Contact, Lead and Case are supported."
+        }
+      ]
+    }
+  ]
+}

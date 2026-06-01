@@ -257,9 +257,12 @@ export class RecipesComponent implements OnInit, OnDestroy {
       );
     }
 
-    // Apply search filter if active
+    // Apply search filter if active. Search results keep their own relevance
+    // ordering; otherwise we sort to match the sidebar category order.
     if (this.search.isActive && this.search.query) {
       filtered = this.coreSearchService.search(filtered, this.search.query);
+    } else {
+      filtered = sortRecipesByCategoryAndTitle(filtered);
     }
 
     this.filteredRecipes = filtered;

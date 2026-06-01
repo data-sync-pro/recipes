@@ -1,0 +1,31 @@
+{
+  "title": "Execution Finalizer",
+  "blocks": [
+    {
+      "type": "p",
+      "content": "An Apex extension point that lets you run custom logic immediately after a Data Sync Pro Execution completes."
+    },
+    {
+      "type": "h2",
+      "content": "Interface Definition"
+    },
+    {
+      "type": "code",
+      "content": "global interface pushtopic.ExecutionFinalizer {\n    void execute(pushtopics__Execution__c execution);\n}",
+      "language": "apex"
+    },
+    {
+      "type": "h2",
+      "content": "How to Use"
+    },
+    {
+      "type": "p",
+      "content": "Implement <code>pushtopics.ExecutionFinalizer</code>, then reference the class on the Executable:"
+    },
+    {
+      "type": "image",
+      "content": "image/apex/execution-finalizer.png",
+      "alt": "Reference the ExecutionFinalizer class on the Executable"
+    }
+  ]
+}

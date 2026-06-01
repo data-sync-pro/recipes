@@ -1,18 +1,9 @@
 {
   "title": "Current Org",
-  "order": 1,
   "blocks": [
     {
       "type": "p",
-      "content": "The \"Is Current Org?\" checkbox is a field on the Connection object. When checked, DSP runs in the context of the <strong>currently logged-in user</strong> and does not require additional credentials."
-    },
-    {
-      "type": "p",
-      "content": "All queries and DML operations are executed using that user’s permissions."
-    },
-    {
-      "type": "p",
-      "content": "For a detailed walkthrough, refer to the video below."
+      "content": "A Current Org Connection runs as the <strong>currently logged-in user</strong> and requires no additional credentials. All queries and DML operations execute using that user's permissions."
     },
     {
       "type": "video",

@@ -37,6 +37,8 @@ import { RecipeLayoutComponent } from './recipe-layout/recipe-layout.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipePrereqsComponent } from './recipe-prereqs/recipe-prereqs.component';
+import { RecipeNavSidebarComponent } from './recipe-nav-sidebar/recipe-nav-sidebar.component';
+import { RecipeCountComponent } from './recipe-count/recipe-count.component';
 
 // Pipes
 import { CodeBlockPipe } from './pipes/code-block.pipe';
@@ -53,7 +55,8 @@ import { CodeBlockPipe } from './pipes/code-block.pipe';
     CategoryListComponent,
     RecipeListComponent,
     RecipePrereqsComponent,
-    CodeBlockPipe
+    RecipeNavSidebarComponent,
+    RecipeCountComponent
   ],
   imports: [
     CommonModule,
