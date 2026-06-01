@@ -1,4 +1,4 @@
-import { generateSlug } from '../../../shared/utils/slug.utils';
+import { generateSlug } from '../utils/slug.utils';
 
 export interface CategoryDefinition {
   readonly displayName: string;
@@ -60,8 +60,4 @@ export const RECIPE_SECTIONS = {
 
 export const FILE_SIZE = {
   MAX_FILE_SIZE_BYTES: 5 * 1024 * 1024
-} as const;
-
-export const TIME_CONSTANTS = {
-  MS_PER_DAY: 24 * 60 * 60 * 1000
 } as const;

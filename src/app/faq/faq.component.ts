@@ -7,44 +7,24 @@ import {
   OnDestroy,
   AfterViewInit,
   ViewEncapsulation,
-  ViewChildren,
-  QueryList,
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { trigger, style, transition, animate } from '@angular/animations';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AnalyticsService } from '../analytics.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, fromEvent } from 'rxjs';
-import { takeUntil, debounceTime, take, filter, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil, take } from 'rxjs/operators';
 
-import { FAQItem, FAQCategory, FAQSubCategory } from '../shared/models/faq.model';
-import { FAQService } from '../shared/services/faq.service';
-import { PerformanceService } from '../shared/services/performance.service';
-import { FAQPreviewService, PreviewData } from '../shared/services/faq-preview.service';
-import { VALID_SUBCATEGORIES } from '../shared/config/faq-urls.config';
-
-interface SearchResult {
-  item: FAQItem;
-  score: number;
-  matchType: 'title' | 'content' | 'category';
-  matchedText: string;
-  highlightedQuestion: string;
-  highlightedAnswer: string;
-}
+import { FAQItem, FAQCategory, FAQSubCategory } from './models/faq.model';
+import { FAQService } from './services/faq.service';
+import { FAQPreviewService, PreviewData } from './editor/services/faq-preview.service';
+import { VALID_SUBCATEGORIES } from './config/faq-urls.config';
 
 interface SearchState {
   query: string;
-  focused: boolean;
   isActive: boolean;
-  results: SearchResult[];
-  hasResults: boolean;
-  suggestions: string[];
-  showSuggestions: boolean;
-  selectedIndex: number;
-  isOpen: boolean;
 }
 
 interface CurrentState {
@@ -59,7 +39,6 @@ interface UIState {
   isLoadingRouteData: boolean;
   sidebarCollapsed: boolean;
   mobileSidebarOpen: boolean;
-  mobileTOCOpen: boolean;
   isMobile: boolean;
   tocHidden: boolean;
 }
@@ -95,19 +74,8 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
   search: SearchState = {
     query: '',
-    focused: false,
-    isActive: false,
-    results: [],
-    hasResults: true,
-    suggestions: [],
-    showSuggestions: false,
-    selectedIndex: -1,
-    isOpen: false
+    isActive: false
   };
-
-  // Search overlay initial query
-  searchOverlayInitialQuery = '';
-
 
   current: CurrentState = {
     category: '',
@@ -121,7 +89,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     isLoadingRouteData: false,
     sidebarCollapsed: false,
     mobileSidebarOpen: false,
-    mobileTOCOpen: false,
     isMobile: false,
     tocHidden: true
   };
@@ -143,23 +110,22 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   categories: FAQCategory[] = [];
 
   private destroy$ = new Subject<void>();
+  private previewUpdateInterval: ReturnType<typeof setInterval> | null = null;
+  private previewStorageHandler: ((event: StorageEvent) => void) | null = null;
   private pendingFragment?: string;
   private scrollTimeout: any;
   private activeScrollElement: string = '';
   private userHasScrolled: boolean = false;
-  private isInitialLoad = true;
   private isProcessingAnswerPath = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private analyticsService: AnalyticsService,
     private faqService: FAQService,
     private meta: Meta,
     private title: Title,
     private cdr: ChangeDetectorRef,
-    private performanceService: PerformanceService,
     private previewService: FAQPreviewService
   ) {}
 
@@ -190,11 +156,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     });
     
-    this.loadRatingsFromLocalStorage();
     this.cleanupFavoriteData();
     this.loadSidebarState();
     this.checkMobileView();
-    this.setupScrollListener();
     this.setupFooterObserver();
     this.setupOptimizedScrollListener();
     this.setupNavLinkHandler();
@@ -269,19 +233,37 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-    
+
     // Clean up timeouts
     if (this.scrollTimeout) {
       clearTimeout(this.scrollTimeout);
     }
-    
+
+    // Clean up preview listener (storage event + polling interval)
+    this.cleanupPreviewUpdateListener();
+
     // Clean up intersection observer (no longer needed without expansion panels)
-    
+
     // Clean up footer observer
     this.cleanupFooterObserver();
-    
+
     // Clean up nav link handler
     this.cleanupNavLinkHandler();
+  }
+
+  /**
+   * Tear down the preview-update listener: removes the storage event handler
+   * and stops the fallback polling interval.
+   */
+  private cleanupPreviewUpdateListener(): void {
+    if (this.previewUpdateInterval !== null) {
+      clearInterval(this.previewUpdateInterval);
+      this.previewUpdateInterval = null;
+    }
+    if (this.previewStorageHandler) {
+      window.removeEventListener('storage', this.previewStorageHandler);
+      this.previewStorageHandler = null;
+    }
   }
 
   private initFaqData(): void {
@@ -376,27 +358,17 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   
   goHome(): void {
     this.resetState();
-    this.router.navigate(['/']);
+    this.router.navigate(['/faq']);
   }
-  
+
   goCategory(cat: string): void {
     this.resetState();
-    this.router.navigate(['/', this.encode(cat)]);
+    this.router.navigate(['/faq', this.encode(cat)]);
   }
 
   goSubCategory(categoryName: string, subCategoryName: string): void {
     this.resetState();
-    this.router.navigate(['/', this.encode(categoryName), this.encode(subCategoryName)]);
-  }
-
-  goBack(): void {
-    if (this.current.subCategory) {
-      // If in subcategory, go back to category
-      this.goCategory(this.current.category);
-    } else if (this.current.category) {
-      // If in category, go back to home
-      this.goHome();
-    }
+    this.router.navigate(['/faq', this.encode(categoryName), this.encode(subCategoryName)]);
   }
 
   private navLinkHandler = (event: MouseEvent) => {
@@ -438,32 +410,40 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   };
 
+  private navLinkHandlerAttached = false;
+  private navLinkHandlerTimeoutId: ReturnType<typeof setTimeout> | null = null;
+
   private setupNavLinkHandler(): void {
-    // Use setTimeout to ensure the DOM is ready
-    setTimeout(() => {
-      document.addEventListener('click', this.navLinkHandler);
+    if (this.navLinkHandlerAttached || this.navLinkHandlerTimeoutId !== null) {
+      // Already scheduled or attached — avoid duplicate listeners
+      return;
+    }
+    // Defer until DOM is ready
+    this.navLinkHandlerTimeoutId = setTimeout(() => {
+      this.navLinkHandlerTimeoutId = null;
+      if (!this.navLinkHandlerAttached) {
+        document.addEventListener('click', this.navLinkHandler);
+        this.navLinkHandlerAttached = true;
+      }
     }, 100);
   }
 
   private cleanupNavLinkHandler(): void {
-    document.removeEventListener('click', this.navLinkHandler);
-  }
-
-  goSub(cat: string, sub: string): void {
-    this.resetState();
-    this.router.navigate(['/', this.encode(cat), this.encode(sub)]);
+    if (this.navLinkHandlerTimeoutId !== null) {
+      clearTimeout(this.navLinkHandlerTimeoutId);
+      this.navLinkHandlerTimeoutId = null;
+    }
+    if (this.navLinkHandlerAttached) {
+      document.removeEventListener('click', this.navLinkHandler);
+      this.navLinkHandlerAttached = false;
+    }
   }
 
   private resetState(): void {
     this.categorySearchQuery = '';
     this.updateSearchState({
       query: '',
-      isActive: false,
-      suggestions: [],
-      showSuggestions: false,
-      selectedIndex: -1,
-      results: [],
-      hasResults: true
+      isActive: false
     });
     
     this.updateCurrentState({
@@ -531,70 +511,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
 
-  private highlightKeywords(text: string, keywords: string[]): string {
-    if (!keywords.length || !text) return text;
-
-    return keywords.reduce((highlighted, keyword) => {
-      if (!keyword.trim()) return highlighted;
-      const regex = new RegExp(`(${this.escapeRegExp(keyword)})`, 'gi');
-      return highlighted.replace(regex, '<mark class="search-highlight">$1</mark>');
-    }, text);
-  }
-
-  private escapeRegExp(string: string): string {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
-
-  private calculateRelevanceScore(item: FAQItem, query: string): { score: number; matchType: 'title' | 'content' | 'category'; matchedText: string } {
-    const lowerQuery = query.toLowerCase();
-    const lowerQuestion = item.question.toLowerCase();
-    const lowerAnswer = item.answer.toLowerCase();
-    const lowerCategory = item.category.toLowerCase();
-    const lowerSubCategory = item.subCategory?.toLowerCase() || '';
-
-    let score = 0;
-    let matchType: 'title' | 'content' | 'category' = 'content';
-    let matchedText = '';
-
-    if (lowerQuestion === lowerQuery) {
-      score = 100;
-      matchType = 'title';
-      matchedText = item.question;
-    }
-    else if (lowerQuestion.startsWith(lowerQuery)) {
-      score = 90;
-      matchType = 'title';
-      matchedText = item.question;
-    }
-    else if (lowerQuestion.includes(lowerQuery)) {
-      score = 80;
-      matchType = 'title';
-      matchedText = item.question;
-    }
-    else if (lowerCategory.includes(lowerQuery) || lowerSubCategory.includes(lowerQuery)) {
-      score = 60;
-      matchType = 'category';
-      matchedText = item.category + (item.subCategory ? ` > ${item.subCategory}` : '');
-    }
-    else if (lowerAnswer.includes(lowerQuery)) {
-      score = 40;
-      matchType = 'content';
-      const index = lowerAnswer.indexOf(lowerQuery);
-      const start = Math.max(0, index - 50);
-      const end = Math.min(lowerAnswer.length, index + lowerQuery.length + 50);
-      matchedText = item.answer.substring(start, end);
-      if (start > 0) matchedText = '...' + matchedText;
-      if (end < item.answer.length) matchedText = matchedText + '...';
-    }
-
-    return { score, matchType, matchedText };
-  }
-
   // Computed properties for better OnPush performance
-  get categoryNames(): string[] {
-    return this.categories.map(cat => cat.name);
-  }
-
   get allFaqList(): FAQItem[] {
     return this.faqList;
   }
@@ -603,33 +520,8 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.ui.isLoading;
   }
 
-  get isMobileView(): boolean {
-    return this.ui.isMobile;
-  }
-
   get isSidebarCollapsed(): boolean {
     return this.ui.sidebarCollapsed;
-  }
-
-  get isMobileSidebarOpen(): boolean {
-    return this.ui.mobileSidebarOpen;
-  }
-
-
-  get isSearchOpen(): boolean {
-    return this.search.isOpen;
-  }
-
-  get currentCategory(): string {
-    return this.current.category;
-  }
-
-  get currentSubCategory(): string {
-    return this.current.subCategory;
-  }
-
-  get currentFaqItem(): FAQItem | null {
-    return this.current.faqItem;
   }
 
   private _cachedTrendingQuestions?: FAQItem[];
@@ -656,16 +548,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     
     return this._cachedTrendingQuestions;
-  }
-
-  get currentTOCTitle(): string {
-    if (this.current.subCategory) {
-      return this.current.subCategory + ' FAQs';
-    }
-    if (this.current.category) {
-      return this.current.category + ' FAQs';
-    }
-    return 'Contents';
   }
 
   get currentFAQList(): FAQItem[] {
@@ -757,17 +639,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
            this.currentFAQList.length > 1;
   }
 
-  get tocItemCount(): number {
-    if (this.showHome) {
-      return this.trendingQuestions.length;
-    }
-    return this.currentFAQList.length;
-  }
-
-  get popularFAQs(): FAQItem[] {
-    return this.faqList.slice(0, 5);
-  }
-
   get filteredFAQ(): FAQItem[] {
     const sidebarQ = this.search.query.trim().toLowerCase();
     if (sidebarQ) {
@@ -841,19 +712,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
 
-
-  selectPopularFAQ(faq: FAQItem, event?: Event): void {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    // Navigate directly to FAQ without search logic
-    this.autoNavigateToFAQ(faq);
-  }
-
-  contactSupport(): void {
-    window.open('mailto:support@data-sync-pro.io?subject=FAQ Support Request', '_blank');
-  }
 
   clearSearch(): void {
     this.search.query = '';
@@ -1032,16 +890,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  onFaqClosed(): void {
-    // Clear current FAQ title and item when FAQ is closed
-    this.clearBrowserURLFragment();
-    this.current.faqTitle = '';
-    this.current.faqItem = null;
-  }
-
-
-
-
   private scrollToElement(elementId: string): void {
     setTimeout(() => {
       const element = document.getElementById(elementId);
@@ -1056,43 +904,14 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(this.buildAnswerUrlSegments(item));
   }
 
-  private clearBrowserURLFragment(): void {
-    const url = this.buildFAQUrl(this.current.category, this.current.subCategory);
-    this.router.navigate([url], { replaceUrl: true });
-  }
-
-  private buildFAQUrl(category?: string | null, subCategory?: string | null): string {
-    let url = '/';
-    if (category) {
-      // Use the encode method which now handles lowercase conversion
-      url += `/${this.encode(category)}`;
-      if (subCategory) {
-        url += `/${this.encode(subCategory)}`;
-      }
-    }
-    return url;
-  }
-
-  // Build router segments for an answer URL. Shape is /<cat>/<sub?>/<slug>.
+  // Build router segments for an answer URL. Shape is /faq/<cat>/<sub?>/<slug>.
   private buildAnswerUrlSegments(item: FAQItem): string[] {
-    const segs = ['/', this.encode(item.category)];
+    const segs = ['/faq', this.encode(item.category)];
     if (item.subCategory) {
       segs.push(this.encode(item.subCategory));
     }
-    segs.push(this.getDisplaySlug(item));
+    segs.push(this.getAnswerSlug(item.folderId));
     return segs;
-  }
-
-  // Some FAQ folderIds carry a leading "<subcategory>-" prefix from when slugs
-  // had to be globally unique (e.g. preview-how-do-i-preview-... and
-  // retrieve-how-do-i-preview-...). With the category in the URL the prefix is
-  // redundant, so strip it for display. Folder names on disk stay unique.
-  private getDisplaySlug(item: FAQItem): string {
-    const folderId = this.getAnswerSlug(item.folderId);
-    if (!item.subCategory) return folderId;
-    const subSlug = item.subCategory.trim().toLowerCase().replace(/\s+/g, '-');
-    const prefix = `${subSlug}-`;
-    return folderId.startsWith(prefix) ? folderId.slice(prefix.length) : folderId;
   }
 
   // The 2-segment route matcher disambiguates /<cat>/<sub> from /<cat>/<slug>
@@ -1127,118 +946,30 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
         if (faqs.length > 0) {
           cb();
         } else {
-          this.router.navigate(['/']);
+          this.router.navigate(['/faq']);
         }
         this.updateUIState({ isLoadingRouteData: false });
       },
       error: (error) => {
         console.error('Failed to load FAQ data:', error);
         this.updateUIState({ isLoadingRouteData: false });
-        this.router.navigate(['/']);
+        this.router.navigate(['/faq']);
       }
     });
   }
 
-  private trackFAQView(item: FAQItem): void {
-    if (this.analyticsService.userConsented) {
-      this.analyticsService.trackCustomEvent({
-        eventType: 'faq_view',
-        faqId: item.id,
-        faqQuestion: item.question,
-        faqCategory: item.category,
-        timestamp: new Date().toISOString()
-      });
-    }
-  }
-
-  onSearchBlur(): void {
-    this.updateSearchState({ focused: false });
-    // Delay hiding suggestions to allow for click events
-    setTimeout(() => {
-      this.updateSearchState({ showSuggestions: false });
-    }, 200);
+  private trackFAQView(_item: FAQItem): void {
+    // Analytics removed; placeholder kept for future tracking integration.
   }
 
 
 
 
-
-
-  private autoNavigateToFAQ(faqItem: FAQItem): void {
-    this.current.faqTitle = faqItem.question;
-    this.router.navigate(this.buildAnswerUrlSegments(faqItem));
-    // FAQ content will be displayed directly without panel expansion
-  }
-
-
-
-
-
-  getCategoryForSuggestion(suggestion: string): string {
-    const faqItem = this.faqList.find(item => item.question === suggestion);
-    return faqItem ? `${faqItem.category}${faqItem.subCategory ? ' > ' + faqItem.subCategory : ''}` : '';
-  }
-
-
-
-
-
-  rateFAQ(item: FAQItem, isHelpful: boolean): void {
-    item.userRating = isHelpful;
-    this.saveRatingsToLocalStorage();
-
-    // Track rating
-    if (this.analyticsService.userConsented) {
-      this.analyticsService.trackCustomEvent({
-        eventType: 'faq_rating',
-        faqQuestion: item.question,
-        isHelpful,
-        timestamp: new Date().toISOString()
-      });
-    }
-  }
-
-
-
-  private saveRatingsToLocalStorage(): void {
-    const ratings: { [key: string]: boolean } = {};
-    this.faqList.forEach(item => {
-      if (item.userRating !== undefined && item.userRating !== null) {
-        ratings[item.question] = item.userRating;
-      }
-    });
-    localStorage.setItem('faqRatings', JSON.stringify(ratings));
-  }
-
-  private loadRatingsFromLocalStorage(): void {
-    const ratingsJson = localStorage.getItem('faqRatings');
-    if (ratingsJson) {
-      const ratings: { [key: string]: boolean } = JSON.parse(ratingsJson);
-      this.faqList.forEach(item => {
-        if (ratings.hasOwnProperty(item.question)) {
-          item.userRating = ratings[item.question];
-        }
-      });
-    }
-  }
 
   private cleanupFavoriteData(): void {
     localStorage.removeItem('faqFavorites');
   }
 
-  toRegistryKey(answer: string): string {
-    return answer.replace(/\.html$/, '').toLowerCase();
-  }
-  openSearchOverlay(initialQuery?: string): void {
-    if (this.searchInput) {
-      this.searchInput.nativeElement.focus();
-    }
-  }
-
-  closeSearchOverlay(): void {
-    this.clearSearch();
-  }
-  @ViewChild('faqSearchBox') faqSearchBox!: ElementRef<HTMLInputElement>;
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
   slugify(s: string): string {
@@ -1275,19 +1006,16 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     // At this point, FAQ data should already be loaded from route param handler
     if (this.faqList.length === 0) {
       this.isProcessingAnswerPath = false;
-      this.isInitialLoad = false;
       return;
     }
 
-    // Match by (category, subCategory, displaySlug) — the canonical inverse of
-    // buildAnswerUrlSegments. Ensures we find the right FAQ when two FAQs in
-    // different subcategories share a question (their folderIds differ only by
-    // a subcategory prefix that we strip from URLs).
+    // Match by (category, subCategory, folderId) — the canonical inverse of
+    // buildAnswerUrlSegments.
     const faqItem = this.faqList.find(item => {
       if (this.encode(item.category) !== urlCat) return false;
       const itemSub = item.subCategory ? this.encode(item.subCategory) : '';
       if (itemSub !== (urlSubCat ?? '')) return false;
-      return this.getDisplaySlug(item) === answerSlug;
+      return this.getAnswerSlug(item.folderId) === answerSlug;
     });
     
     if (faqItem) {
@@ -1297,8 +1025,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       
       // Mark processing as complete before showing FAQ detail
       this.isProcessingAnswerPath = false;
-      this.isInitialLoad = false;
-      
+
       // Show FAQ detail directly without delay to prevent category flash
       this.showFAQDetail(faqItem);
       
@@ -1307,10 +1034,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       // Reset processing flag on failure
       this.isProcessingAnswerPath = false;
-      this.isInitialLoad = false;
-      
+
       // If FAQ not found, redirect to home to avoid broken state
-      this.router.navigate(['/']);
+      this.router.navigate(['/faq']);
     }
   }
 
@@ -1369,121 +1095,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
-  /**
-
-   */
-  getCategoryDescription(): string {
-    return '';
-  }
-
-  private openAndScroll(question: string, faqId?: string): void {
-    setTimeout(() => {
-      // Prioritize ID-based search if ID is provided
-      const idx = faqId 
-        ? this.filteredFAQ.findIndex(f => f.id === faqId)
-        : this.filteredFAQ.findIndex(f => f.question === question);
-      
-      if (idx >= 0) {
-        const faqItem = this.filteredFAQ[idx];
-        
-        // Show FAQ detail directly
-        this.showFAQDetail(faqItem);
-        
-        // Scroll to top instead of FAQ item for better navigation experience
-        this.scrollToTop();
-      }
-    });
-  }
-  
-  trackBySlug(_: number, item: FAQItem) { return item.id; }
-
-  handleSearchSelect(sel: {
-    id?: string;
-    question: string;
-    category: string;
-    subCategory: string | null;
-    subCatFilterApplied?: boolean;
-  }): void {
-  
-    // Find the full FAQ item using ID for unique identification
-    let faqItem = null;
-    
-    // First try to find by ID if provided (most accurate)
-    if (sel.id) {
-      faqItem = this.faqList.find(item => item.id === sel.id);
-    }
-    
-    // If not found by ID or ID not provided, try by question, category, and subCategory
-    if (!faqItem) {
-      faqItem = this.faqList.find(item => 
-        item.question === sel.question && 
-        item.category === sel.category &&
-        item.subCategory === sel.subCategory
-      );
-    }
-    
-    // Last fallback: just question and category (original logic)
-    if (!faqItem) {
-      faqItem = this.faqList.find(item => 
-        item.question === sel.question && 
-        item.category === sel.category
-      );
-    }
-    
-    if (faqItem) {
-      // Use answer-based URL
-      const answerSlug = this.getAnswerSlug(faqItem.folderId);
-      this.router.navigate(['/', answerSlug]);
-    } else {
-      // Fallback to old method if FAQ item not found
-      const cat = sel.category;
-      const sub = sel.subCategory ?? '';
-      const frag = this.slugify(sel.question);
-      
-      this.router.navigate(
-        sub ? ['/', cat, sub] : ['/', cat],
-        { fragment: frag }
-      );
-    }
-  
-    this.search.isOpen = false;
-    // Clear search state so the detail view template condition is satisfied
-    this.clearSearch();
-
-    setTimeout(() => this.openAndScroll(sel.question, sel.id));
-    
-    
-    if (this.ui.isMobile && this.ui.mobileSidebarOpen) {
-      this.closeMobileSidebar();
-    }
-  }
-  
-  
-  handleTrendingSelect(sel: {
-    question: string;
-    category: string;
-    subCategory: string | null;
-  }): void {
-
-    // Find the full FAQ item to get the folderId
-    const faqItem = this.faqList.find(item => 
-      item.question === sel.question && item.category === sel.category
-    );
-    
-    if (faqItem) {
-      // Use answer-based URL
-      const answerSlug = this.getAnswerSlug(faqItem.folderId);
-      this.router.navigate(['/', answerSlug]);
-    } else {
-      // Fallback to old method if FAQ item not found
-      const frag = this.slugify(sel.question);
-      this.router.navigate(['/', sel.category], { fragment: frag });
-    }
-
-    setTimeout(() => this.openAndScroll(sel.question));
-  }
-
-  
   private updatePageMetadata(): void {
     let pageTitle = 'FAQs - Data Sync Pro';
     let pageDescription = 'Frequently Asked Questions about Data Sync Pro';
@@ -1550,7 +1161,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.current.category !== faqItem.category ||
         (faqItem.subCategory && this.current.subCategory !== faqItem.subCategory)) {
       const answerSlug = this.getAnswerSlug(faqItem.folderId);
-      this.router.navigate(['/', answerSlug]);
+      this.router.navigate(['/faq', answerSlug]);
       return;
     }
 
@@ -1598,21 +1209,12 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     const shareUrl = this.getFAQShareUrl(faqItem);
 
     if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(shareUrl).then(() => {
-        //this.showCopySuccess();
-      }).catch(() => {
+      navigator.clipboard.writeText(shareUrl).catch(() => {
         this.fallbackCopyToClipboard(shareUrl);
       });
     } else {
       this.fallbackCopyToClipboard(shareUrl);
     }
-    this.analyticsService.trackCustomEvent({
-      eventType: 'faq_share',
-      action: 'copy_link',
-      faqQuestion: faqItem.question,
-      faqCategory: faqItem.category,
-      timestamp: new Date().toISOString()
-    });
   }
 
   private fallbackCopyToClipboard(text: string): void {
@@ -1627,58 +1229,11 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
     try {
       document.execCommand('copy');
-      //this.showCopySuccess();
     } catch (err) {
       console.error('Failed to copy text: ', err);
     }
 
     document.body.removeChild(textArea);
-  }
-
-  private showCopySuccess(): void {
-    const toast = document.createElement('div');
-    toast.textContent = '✅ Link copied to clipboard!';
-    toast.style.cssText = `
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #28a745;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 500;
-      z-index: 10000;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      animation: slideIn 0.3s ease;
-    `;
-
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes slideIn {
-        from { transform: translateX(100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-      }
-      @keyframes slideOut {
-        from { transform: translateX(0); opacity: 1; }
-        to { transform: translateX(100%); opacity: 0; }
-      }
-    `;
-    document.head.appendChild(style);
-
-    document.body.appendChild(toast);
-
-    setTimeout(() => {
-      toast.style.animation = 'slideOut 0.3s ease';
-      setTimeout(() => {
-        if (toast.parentNode) {
-          document.body.removeChild(toast);
-        }
-        if (style.parentNode) {
-          document.head.removeChild(style);
-        }
-      }, 300);
-    }, 3000);
   }
 
   shareToSocial(platform: string, faqItem: FAQItem): void {
@@ -1704,15 +1259,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
     if (socialUrl) {
       window.open(socialUrl, '_blank', 'width=600,height=400');
-
-      this.analyticsService.trackCustomEvent({
-        eventType: 'faq_share',
-        action: `share_${platform}`,
-        faqQuestion: faqItem.question,
-        faqCategory: faqItem.category,
-        platform: platform,
-        timestamp: new Date().toISOString()
-      });
     }
   }
 
@@ -1742,8 +1288,8 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     
     
     this.resetState();
-    this.router.navigate(['/', this.encode(categoryName)]);
-    
+    this.router.navigate(['/faq', this.encode(categoryName)]);
+
     if (this.ui.isMobile) {
       this.closeMobileSidebar();
     }
@@ -1755,29 +1301,14 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       event.stopPropagation();
     }
     this.resetState();
-    
+
     if (this.current.category) {
-      this.router.navigate(['/', this.encode(this.current.category), this.encode(subCategoryName)]);
+      this.router.navigate(['/faq', this.encode(this.current.category), this.encode(subCategoryName)]);
     }
     
     if (this.ui.isMobile) {
       this.closeMobileSidebar();
     }
-  }
-
-  getSubCategoriesForCategory(categoryName: string): FAQSubCategory[] {
-    const category = this.categories.find(cat => cat.name === categoryName);
-    return category ? category.subCategories : [];
-  }
-
-  // Sidebar toggle functionality
-  toggleSidebar(): void {
-    const collapsed = !this.ui.sidebarCollapsed;
-    this.updateUIState({ sidebarCollapsed: collapsed });
-    // Save state to localStorage for persistence
-    localStorage.setItem('faq-sidebar-collapsed', collapsed.toString());
-    // Force change detection to ensure icon updates immediately
-    this.cdr.detectChanges();
   }
 
   toggleTOC(): void {
@@ -1833,31 +1364,12 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     this.updateUIState({ mobileSidebarOpen: false });
   }
 
-  toggleMobileTOC(event?: Event): void {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    this.updateUIState({ mobileTOCOpen: !this.ui.mobileTOCOpen });
-  }
-
-  closeMobileTOC(event?: Event): void {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    this.updateUIState({ mobileTOCOpen: false });
-  }
-
   @HostListener('window:resize', ['$event'])
   onResize(_event: any): void {
     this.checkMobileView();
-    // Close mobile sidebar and TOC when switching to desktop
+    // Close mobile sidebar when switching to desktop
     if (!this.ui.isMobile) {
-      this.updateUIState({ 
-        mobileSidebarOpen: false,
-        mobileTOCOpen: false 
-      });
+      this.updateUIState({ mobileSidebarOpen: false });
     }
   }
 
@@ -1871,39 +1383,19 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       activeElement.getAttribute('contenteditable') === 'true'
     );
 
-    // Ctrl+K or Cmd+K to open search overlay
+    // Ctrl+K / Cmd+K to focus the sidebar search input
     if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
       event.preventDefault();
-      this.openSearchOverlay();
+      this.searchInput?.nativeElement.focus();
     }
 
     if (event.key === '/' && !isInputActive) {
       event.preventDefault();
-      this.openSearchOverlay();
-    }
-
-    // Escape to close search overlay
-    if (event.key === 'Escape' && this.search.isOpen) {
-      this.updateSearchState({ isOpen: false });
+      this.searchInput?.nativeElement.focus();
     }
   }
 
   // ==================== TOC Pagination Methods ====================
-
-  /**
-   * Calculate pagination state for TOC
-   */
-  private calculateTOCPagination(totalItems: number): void {
-    this.tocPagination.totalPages = Math.ceil(totalItems / this.tocPagination.itemsPerPage);
-    
-    // Ensure current page is within bounds
-    if (this.tocPagination.currentPage > this.tocPagination.totalPages) {
-      this.tocPagination.currentPage = 1;
-    }
-    
-    this.updateTOCPaginationIndices();
-  }
-
 
   /**
    * Check if previous page is available
@@ -1999,27 +1491,11 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // ==================== Debug Methods ====================
   
-  /**
-
-   */
-  debugFAQStatus(): void {
-    
-    
-    const problematicFAQs = this.faqList
-      .filter(faq => !faq.safeAnswer && !faq.isLoading && faq.folderId)
-      .slice(0, 5);
-  }
-
   // ==================== Table of Contents Methods ====================
 
   /**
 
    */
-  private setupScrollListener(): void {
-    // This method is now merged into setupOptimizedScrollListener
-    // Keep for backward compatibility but don't add actual listeners
-  }
-
   /**
 
    */
@@ -2212,147 +1688,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  /**
-   * Auto-scroll to the clicked FAQ item for better reading experience
-   * This method intelligently chooses the best scroll target based on the context
-   */
-  private autoScrollToFAQItem(item: FAQItem): void {
-    // Use a short delay to ensure DOM updates are complete
-    setTimeout(() => {
-      // Strategy 1: Try to find the FAQ item by its ID (slugified question)
-      const slugifiedId = this.slugify(item.question);
-      let targetElement = document.getElementById(slugifiedId);
-      
-      // Strategy 2: If not found by ID, try to find by question text in FAQ items
-      if (!targetElement) {
-        const faqItems = document.querySelectorAll('.faq-item');
-        for (let i = 0; i < faqItems.length; i++) {
-          const questionElement = faqItems[i].querySelector('.faq-question');
-          if (questionElement && questionElement.textContent?.trim() === item.question) {
-            targetElement = faqItems[i] as HTMLElement;
-            break;
-          }
-        }
-      }
-      
-      // Strategy 3: If still not found, look for the question header specifically
-      if (!targetElement) {
-        const questionHeaders = document.querySelectorAll('h3.faq-question');
-        for (let i = 0; i < questionHeaders.length; i++) {
-          if (questionHeaders[i].textContent?.trim() === item.question) {
-            targetElement = questionHeaders[i] as HTMLElement;
-            break;
-          }
-        }
-      }
-      
-      // Strategy 4: Try to find by data attributes if available
-      if (!targetElement) {
-        const elementsWithDataId = document.querySelectorAll(`[data-faq-id="${item.id}"]`);
-        if (elementsWithDataId.length > 0) {
-          targetElement = elementsWithDataId[0] as HTMLElement;
-        }
-      }
-      
-      if (targetElement) {
-        // Calculate optimal scroll position with header offset
-        const headerOffset = 100; // Account for fixed header
-        const elementRect = targetElement.getBoundingClientRect();
-        const elementPosition = elementRect.top + window.pageYOffset;
-        const optimalScrollPosition = Math.max(0, elementPosition - headerOffset);
-        
-        // Smooth scroll to the FAQ item
-        window.scrollTo({
-          top: optimalScrollPosition,
-          behavior: 'smooth'
-        });
-        
-        // Optional: Add visual feedback by briefly highlighting the target
-        this.addVisualScrollFeedback(targetElement);
-        
-      } else {
-        // Fallback: If no specific element found, scroll to top of FAQ section
-        const faqMain = document.querySelector('.faq-main');
-        if (faqMain) {
-          const headerOffset = 80;
-          const elementRect = faqMain.getBoundingClientRect();
-          const elementPosition = elementRect.top + window.pageYOffset;
-          const scrollPosition = Math.max(0, elementPosition - headerOffset);
-          
-          window.scrollTo({
-            top: scrollPosition,
-            behavior: 'smooth'
-          });
-          } else {
-          // Final fallback: scroll to top
-          this.scrollToTop();
-        }
-      }
-    }, 150); // Small delay to ensure DOM is ready
-  }
-
-  /**
-   * Add brief visual feedback to indicate successful scroll target
-   */
-  private addVisualScrollFeedback(element: HTMLElement): void {
-    // Add a brief highlight effect to show the user which FAQ was targeted
-    const originalBoxShadow = element.style.boxShadow;
-    element.style.transition = 'box-shadow 0.3s ease';
-    element.style.boxShadow = '0 0 0 3px rgba(26, 115, 232, 0.3)';
-    
-    // Remove the highlight after a short duration
-    setTimeout(() => {
-      element.style.boxShadow = originalBoxShadow;
-      // Remove transition after effect is complete
-      setTimeout(() => {
-        element.style.transition = '';
-      }, 300);
-    }, 1000);
-  }
-
-  /**
-
-   */
-  private smoothScrollToFAQElement(item: FAQItem): void {
-    
-    setTimeout(() => {
-      const elementId = this.slugify(item.question);
-      const element = document.getElementById(elementId);
-      
-      if (element) {
-        const headerOffset = 100; 
-        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      } else {
-        
-        const faqItems = document.querySelectorAll('.faq-item');
-        for (let i = 0; i < faqItems.length; i++) {
-          const questionElement = faqItems[i].querySelector('.faq-question');
-          if (questionElement && questionElement.textContent === item.question) {
-            const headerOffset = 100;
-            const elementPosition = faqItems[i].getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = elementPosition - headerOffset;
-
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
-            });
-            break;
-          }
-        }
-      }
-    }, 100);
-  }
-
-
-  /**
-
-   */
   selectTrendingQuestion(item: FAQItem, event?: Event): void {
     if (event) {
       event.preventDefault();
@@ -2470,13 +1805,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
-   * Easing function for smooth animation
-   */
-  private easeInOutCubic(t: number): number {
-    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  }
-
-  /**
    * Setup single optimized scroll listener for all scroll-related functionality
    */
   private setupOptimizedScrollListener(): void {
@@ -2526,27 +1854,10 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     this.updateTOCFooterState(footerStatus);
     
     // Update breadcrumb sticky behavior
-    this.updateBreadcrumbScrollState(scrollPosition);
     
     
     if (scrollPosition % 3 === 0) {
       this.updateFooterOffsetOptimized(footerStatus.footerOffset);
-    }
-  }
-
-  /**
-   * Update breadcrumb navigation scroll state for sticky behavior
-   */
-  private updateBreadcrumbScrollState(scrollPosition: number): void {
-    const breadcrumbNav = document.querySelector('.breadcrumb-nav');
-    if (breadcrumbNav) {
-      // Add 'scrolled' class when user has scrolled down
-      const scrollThreshold = 20; // Small threshold to avoid flickering
-      if (scrollPosition > scrollThreshold) {
-        breadcrumbNav.classList.add('scrolled');
-      } else {
-        breadcrumbNav.classList.remove('scrolled');
-      }
     }
   }
 
@@ -2649,12 +1960,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   // Cache DOM elements to avoid repeated queries
-  private cachedSidebar: Element | null = null;
-  private cachedToc: Element | null = null;
-  private lastFooterState: boolean | null = null;
-  private lastFooterOffset: number | null = null;
-  
-  
   private lastFooterStatus: { inFooterZone: boolean; approaching: boolean; footerOffset: number } | null = null;
   private footerCheckDebounce: number = 0;
 
@@ -2702,23 +2007,8 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     
     // Clear cached elements
-    this.cachedSidebar = null;
-    this.cachedToc = null;
     this.cachedFaqElements = null;
     this.cachedQuestionTexts.clear();
-    this.lastFooterState = null;
-    this.lastFooterOffset = null;
-    
-    // Reset CSS variables and classes
-    document.documentElement.style.removeProperty('--footer-offset');
-    
-    // Remove footer-visible classes using cached elements or query if needed
-    if (this.cachedSidebar || (this.cachedSidebar = document.querySelector('.faq-sidebar'))) {
-      this.cachedSidebar.classList.remove('footer-visible');
-    }
-    if (this.cachedToc || (this.cachedToc = document.querySelector('.faq-toc.desktop-toc'))) {
-      this.cachedToc.classList.remove('footer-visible');
-    }
   }
 
   // ========================
@@ -2761,7 +2051,6 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       
       // Hide sidebar search results since we're showing preview
       this.search.isActive = false;
-      this.search.isOpen = false;
       
       // Set UI state to show content
       this.ui.isLoading = false;
@@ -2821,36 +2110,32 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
    * Listen for preview content updates from editor
    */
   private setupPreviewUpdateListener(faqId: string): void {
-    
-    // Enhanced storage event listener
-    const handleStorageEvent = (event: StorageEvent) => {
+    // If a previous listener is still attached, tear it down first so we don't leak
+    this.cleanupPreviewUpdateListener();
+
+    // Enhanced storage event listener — keep the reference so it can be removed later
+    this.previewStorageHandler = (event: StorageEvent) => {
       const sessionKey = `faq-preview-${faqId}`;
       const backupKey = `backup-faq-preview-${faqId}`;
       // Check both sessionStorage and localStorage keys
       if ((event.key === sessionKey || event.key === backupKey) && event.newValue) {
         try {
           const updatedData: PreviewData = JSON.parse(event.newValue);
-          
+
           this.updatePreviewContent(updatedData);
         } catch (error) {
-          console.error('❌ Error parsing preview update data:', error);
+          console.error('Error parsing preview update data:', error);
         }
       }
     };
 
     // Listen for storage events (cross-tab communication)
-    window.addEventListener('storage', handleStorageEvent);
-    
-    // Enhanced periodic check for updates (fallback mechanism)
-    const updateInterval = setInterval(() => {
+    window.addEventListener('storage', this.previewStorageHandler);
+
+    // Periodic check for updates (fallback mechanism — same-tab updates don't fire storage events)
+    this.previewUpdateInterval = setInterval(() => {
       this.checkForPreviewUpdates(faqId);
-    }, 1000); // Increased frequency to 1 second for better responsiveness
-    
-    // Clean up interval on destroy
-    this.destroy$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      clearInterval(updateInterval);
-      window.removeEventListener('storage', handleStorageEvent);
-    });
+    }, 1000);
   }
 
   /**

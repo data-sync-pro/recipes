@@ -1,0 +1,38 @@
+{
+  "title": "TO_STRING",
+  "description": "<p>Converts the specified value into an unformatted text string.</p>",
+  "syntax": "TO_STRING(value) -> String",
+  "parameters": [
+    {
+      "name": "value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The value to convert."
+    }
+  ],
+  "examples": [
+    "TO_STRING(0.25)\n-- Returns \"0.25\".",
+    "TO_STRING(NOW())\n-- Returns the current date and time as a string."
+  ],
+  "tips": [
+    {
+      "text": "<p>The returned text is unformatted; it does not include currency symbols, percent signs, or commas.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Values are not locale-sensitive (e.g., 24.42 EUR becomes \"24.42\").</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Dates are returned as yyyy-MM-dd.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Datetime values are returned as yyyy-MM-dd HH:mm:ss.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": [
+    "NOW"
+  ]
+}

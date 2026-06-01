@@ -1,0 +1,40 @@
+{
+  "title": "EVALUATE",
+  "description": "Returns the value of a formula stored in a custom field, evaluated at runtime. Optionally retrieves fields from related records.",
+  "syntax": "EVALUATE(formula_string, retrieve_source_fields, relationship_name_optional) -> Object",
+  "parameters": [
+    {
+      "name": "formula_string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The formula to evaluate."
+    },
+    {
+      "name": "retrieve_source_fields",
+      "type": "String",
+      "required": "Yes",
+      "description": "A comma-separated list of source fields whose values are used as inputs when evaluating the formula."
+    },
+    {
+      "name": "relationship_name_optional",
+      "type": "String",
+      "required": "No",
+      "description": "The Object name used to retrieve fields from a related record."
+    }
+  ],
+  "examples": [
+    {
+      "code": "-- PricingRule__c is a custom field on OpportunityLineItem\n-- Example pricing rule: IF(Quantity >= 10000, UnitPrice * 0.9, UnitPrice)\n-- Quantity = 18000, UnitPrice = 100 → returns 90.",
+      "images" : [
+        {
+          "src" : "images/figure_1.png",
+          "alt" : "Evaluate Example"
+        }
+      ]
+
+    }  
+    ],
+  "tips": [
+  ],
+  "relatedFormula": []
+}

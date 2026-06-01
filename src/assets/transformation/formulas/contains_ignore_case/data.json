@@ -1,0 +1,26 @@
+{
+  "title": "CONTAINS_IGNORE_CASE",
+  "description": "<p>Returns TRUE if the provided string contains any of the specified compare_strings, ignoring case differences. Otherwise, returns FALSE.</p>",
+  "syntax": "CONTAINS_IGNORE_CASE(string, ...compare_strings) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The source string to search within."
+    },
+    {
+      "name": "...compare_strings",
+      "type": "String",
+      "required": "Yes",
+      "description": "One or more strings to search for within the source string."
+    }
+  ],
+  "examples": [
+    "CONTAINS_IGNORE_CASE(\"Annual Financial Review 2024\", \"Quarterly\", \"financial\")\n-- Returns TRUE (\"financial\" matches, case-insensitive).",
+    "CONTAINS_IGNORE_CASE(Subject, \"Urgent\", \"ASAP\")\n-- Returns TRUE if Subject contains \"Urgent\" or \"ASAP\" in any case; otherwise, returns FALSE."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+  ]
+}

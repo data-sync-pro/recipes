@@ -1,0 +1,54 @@
+<div class="modal-backdrop" (click)="cancel()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <h3 class="modal-title">New Function</h3>
+    <p class="modal-hint">
+      Creates a draft. The new function appears in the sidebar with an "unsaved" badge.
+      Bulk-export to get a tags.json patch you can merge into the source file.
+    </p>
+
+    <div class="form-field">
+      <label for="new-name">Name (snake_case)</label>
+      <input
+        id="new-name"
+        type="text"
+        class="form-input"
+        [(ngModel)]="name"
+        placeholder="e.g. my_function"
+        autofocus
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="new-title">Title</label>
+      <input
+        id="new-title"
+        type="text"
+        class="form-input"
+        [(ngModel)]="title"
+        placeholder="e.g. MY_FUNCTION (defaults to NAME if empty)"
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="new-tag">Primary tag</label>
+      <input
+        id="new-tag"
+        type="text"
+        class="form-input"
+        list="primary-tag-options"
+        [(ngModel)]="primaryTag"
+        placeholder="e.g. Text"
+      />
+      <datalist id="primary-tag-options">
+        <option *ngFor="let t of availableTags" [value]="t"></option>
+      </datalist>
+    </div>
+
+    <p class="form-warning" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <div class="modal-actions">
+      <button type="button" class="toolbar-btn toolbar-btn-secondary" (click)="cancel()">Cancel</button>
+      <button type="button" class="toolbar-btn toolbar-btn-primary" (click)="create()">Create</button>
+    </div>
+  </div>
+</div>

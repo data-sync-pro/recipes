@@ -1,0 +1,33 @@
+{
+  "title": "ADD_DAYS",
+  "description": "<p>Returns a Date or Datetime adjusted by the specified number of days, either forward (positive) or backward (negative), relative to the provided Date or Datetime.</p>",
+  "syntax": "ADD_DAYS(date/datetime, num) -> Date/Datetime",
+  "parameters": [
+    {
+      "name": "date/datetime",
+      "type": "Date/Datetime",
+      "required": "Yes",
+      "description": "The original Date or Datetime to adjust."
+    },
+    {
+      "name": "num",
+      "type": "Integer",
+      "required": "Yes",
+      "description": "The number of months to add (positive) or subtract (negative)."
+    }
+  ],
+  "examples": [
+    "ADD_DAYS(DATE(2024, 8, 8), 4)\n-- Adds 4 days to 2024-08-08.\n-- Returns 2024-08-12.",
+    "ADD_DAYS(NOW(), -3)\n-- Subtracts 3 days from now."
+  ],
+  "tips": [
+    {
+      "text": "<p>The return type depends on the first parameter: if it's a Date, the result is a Date; if it's a Datetime, the result is a Datetime.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": [
+    "DATE",
+    "NOW"
+  ]
+}

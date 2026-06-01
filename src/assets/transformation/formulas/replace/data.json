@@ -1,0 +1,31 @@
+{
+  "title": "REPLACE",
+  "description": "<p>Returns a new string by replacing all case-sensitive occurrences of a target substring in the original string with a specified replacement.</p>",
+  "syntax": "REPLACE(string, target, replacement) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The original string."
+    },
+    {
+      "name": "target",
+      "type": "String",
+      "required": "Yes",
+      "description": "The substring to replace."
+    },
+    {
+      "name": "replacement",
+      "type": "String",
+      "required": "Yes",
+      "description": "The substring to insert in place of the target substring."
+    }
+  ],
+  "examples": [
+    "REPLACE(\"PROD-ABC-123\", \"-\", \"_\")\n-- Returns \"PROD_ABC_123\".",
+    "REPLACE(CaseDescription, \"urgent\", \"important\")\n-- Replaces all occurrences of \"urgent\" with \"important\" in the field CaseDescription (case-sensitive)."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

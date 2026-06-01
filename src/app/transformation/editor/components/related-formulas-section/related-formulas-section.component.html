@@ -1,0 +1,24 @@
+<section class="form-section">
+  <h3 class="form-section-title">Related Formulas</h3>
+  <div class="related-list">
+    <div
+      *ngFor="let _ of list; let i = index; trackBy: trackByIndex"
+      class="related-row"
+    >
+      <input
+        type="text"
+        class="form-input"
+        [ngModel]="list[i]"
+        (ngModelChange)="setAt(i, $event)"
+        placeholder="e.g. CONTAINS"
+      />
+      <div class="row-controls">
+        <button type="button" class="row-btn" (click)="moveUp(i)" [disabled]="i === 0">↑</button>
+        <button type="button" class="row-btn" (click)="moveDown(i)" [disabled]="i === list.length - 1">↓</button>
+        <button type="button" class="row-btn row-btn-danger" (click)="remove(i)">×</button>
+      </div>
+    </div>
+  </div>
+  <p class="form-empty-hint" *ngIf="!list.length">No related formulas.</p>
+  <button type="button" class="form-add-btn" (click)="add()">+ Add related formula</button>
+</section>

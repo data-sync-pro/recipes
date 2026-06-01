@@ -1,0 +1,26 @@
+{
+  "title": "EQUALS_IGNORE_CASE",
+  "description": "<p>Returns TRUE if the value matches any of the given compare_values (case-insensitive); otherwise, returns FALSE.",
+  "syntax": "EQUALS_IGNORE_CASE(string, ...compare_strings) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The value to be compared."
+    },
+    {
+      "name": "… compare_strings",
+      "type": "String",
+      "required": "Yes",
+      "description": "One or more values to compare with the given value."
+    }
+  ],
+  "examples": [
+    "EQUALS_IGNORE_CASE(\"ny\", \"CA\", \"NY\")\n-- Returns TRUE (case-insensitive).",
+    "EQUALS_IGNORE_CASE(Status, \"in progress\", \"completed\")\n-- Returns TRUE if Status is \"in progress\" or \"completed\" (case-insensitive); otherwise, returns FALSE."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+  ]
+}

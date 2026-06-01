@@ -41,5 +41,3 @@ export interface StoreState {
   editor: EditorState;
   ui: UIState;
 }
-
-export type StateUpdate = Partial<StoreState>;

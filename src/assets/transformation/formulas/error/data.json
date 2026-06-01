@@ -1,0 +1,28 @@
+{
+  "title": "ERROR",
+  "description": "<p>Throws an exception with a custom message, optionally based on a specified condition. If a condition is provided, an exception is thrown only if the condition evaluates to TRUE.</p>",
+  "syntax": "ERROR(…[message, condition_optional]) -> Error",
+  "parameters": [
+    {
+      "name": "… message",
+      "type": "String",
+      "required": "Yes",
+      "description": "The error message for the exception to be thrown when the condition is met."
+    },
+    {
+      "name": "… condition_optional",
+      "type": "Boolean",
+      "required": "No",
+      "description": "A logical expression that determines whether the error should be triggered. If omitted, the error is always raised with the provided message."
+    }
+  ],
+  "examples": [
+    "ERROR(\n    \"Amount must be a number\", NOT(IS_NUMERIC(Amount)),\n    \"Amount must be greater than zero\", Amount <= 0\n)\n-- First pair: Raises an error if Amount is not a number.\n-- Second pair: Raises an error if Amount is less than or equal to zero.",
+    "ERROR(\"Invalid\")\n-- Raises an error with the message \"Invalid\" unconditionally."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "NOT",
+    "IS_NUMERIC"
+  ]
+}

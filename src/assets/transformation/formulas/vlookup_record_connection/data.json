@@ -1,0 +1,56 @@
+{
+    "title": "VLOOKUP_RECORD_CONNECTION",
+    "description": "<p>Performs a dynamic lookup on a Salesforce object through a connection and returns the full Object record from the first record that matches the provided field-value pairs.</p>",
+    "syntax": "VLOOKUP_RECORD_CONNECTION(connection_name, object_name, ...[matching_field_name, matching_field_value], additional_clause_optional) -> Object",
+    "parameters": [
+    {
+      "name": "connection_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the connection to use."
+    },
+    {
+      "name": "object_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the object to look up."
+    },
+    {
+      "name": "...matching_field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the field used to match records."
+    },
+    {
+      "name": "...matching_field_value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The field value used as matching criteria."
+    },
+    {
+      "name": "additional_clause_optional",
+      "type": "String",
+      "required": "No",
+      "description": "Additional query conditions for more precise filtering."
+    }
+  ],
+    "examples": [
+      "VLOOKUP_RECORD_CONNECTION(\"Salesforce_Prod\",\n                          \"Opportunity\",\n                          \"Source_System_Id__c\",\n                           Source_System_Id__c)\n-- Returns the Opportunity record from the \"Salesforce_Prod\" org where Source_System_Id__c matches the current record’s Source_System_Id__c.",
+      "VLOOKUP_RECORD_CONNECTION(\"Salesforce_Prod\", \n                          \"Opportunity\", \n                          \"Source_System_Id__c\", Source_System_Id__c, \n                          \"Amount > 50000\")\n-- Returns the Opportunity record from the \"Salesforce_Prod\" org where:\n-- Source_System_Id__c matches the current record’s Source_System_Id__c,\n-- and Amount > 50,000."
+],
+    "tips": [
+    {
+      "text": "<p>Use VLOOKUP_RECORD_CONNECTION under the <strong>“Related”</strong> tab in the <strong>“Variables”</strong> section. You can also set the variable’s <strong>Scope</strong>—Executable, Pipeline, Connection, or Global.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>After the variable is created, reference it in the <strong>Mapping</strong> step (e.g., <code>#accountVar.Name</code>, <code>#accountVar.OwnerId</code>).</p>",
+      "children": []
+    },
+    {
+      "text": "<p>SOQL queries have a <strong>governor limit of 50,000</strong> rows per transaction. Optimize your filters or leverage indexing to ensure your lookup remains within this limit.</p>",
+      "children": []
+      }
+  ],
+    "relatedFormulas": []
+  }

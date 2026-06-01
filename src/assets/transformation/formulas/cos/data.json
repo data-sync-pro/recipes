@@ -1,0 +1,16 @@
+{
+  "title": "COS",
+  "description": "Returns the trigonometric cosine of the specified angle.",
+  "syntax": "COS(num) -> Decimal",
+  "parameters": [
+    {
+      "name": "num",
+      "type": "Decimal",
+      "required": "Yes",
+      "description": "The angle in radians."
+    }
+  ],
+  "examples": [
+    "COS(0)\n-- Returns the cosine of 1 radians."
+  ]
+}

@@ -246,18 +246,6 @@ export class RouteHandlerService implements OnDestroy {
     this.store.setLoadingOverlay(false);
   }
 
-  goHome(): void {
-    this.router.navigate(['/recipes']);
-  }
-
-  goToCategory(categoryName: string, closeMobileSidebar = false): void {
-    this.router.navigate(['/recipes', categoryToSlug(categoryName)]);
-
-    if (closeMobileSidebar && this.store.getUIState().isMobile) {
-      this.store.closeMobileSidebar();
-    }
-  }
-
   goToRecipe(
     recipe: Recipe,
     currentRecipeId?: string,

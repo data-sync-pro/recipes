@@ -1,0 +1,16 @@
+{
+  "title": "TAN",
+  "description": "Returns the trigonometric tangent of the specified angle.",
+  "syntax": "TAN(num) -> Decimal",
+  "parameters": [
+    {
+      "name": "num",
+      "type": "Decimal",
+      "required": "Yes",
+      "description": "The angle in radians."
+    }
+  ],
+  "examples": [
+    "TAN(0)\n-- Returns the tangent of 0 radians."
+  ]
+}

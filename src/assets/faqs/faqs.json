@@ -857,7 +857,7 @@
                  },
                  {
                      "id":  "a0oEc000005JoiwIAC",
-                     "folderId":  "retrieve-how-do-i-preview-a-source-record-with-its-transformed-values-before-execution",
+                     "folderId":  "how-do-i-preview-a-source-record-with-its-transformed-values-before-execution",
                      "question":  "How do I preview a source record with its transformed values before execution?",
                      "category":  "Processes",
                      "subCategory":  "Retrieve",
@@ -884,7 +884,7 @@
                  },
                  {
                      "id":  "a0oEc000005JoizIAC",
-                     "folderId":  "preview-how-do-i-preview-a-source-record-with-its-transformed-values-before-execution",
+                     "folderId":  "how-do-i-preview-a-source-record-with-its-transformed-values-before-execution",
                      "question":  "How do I preview a source record with its transformed values before execution?",
                      "category":  "Processes",
                      "subCategory":  "Preview",

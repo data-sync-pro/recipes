@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
-import { FaqEditorComponent } from './faq-editor/faq-editor.component';
+import { FaqEditorComponent } from './faq/editor/faq-editor.component';
 
 const routes: Routes = [
   {
@@ -16,15 +16,20 @@ const routes: Routes = [
     loadChildren: () => import('./recipe/editor/editor.module').then(m => m.RecipeEditorModule)
   },
   {
-    path: '', 
+    path: 'transformation',
+    loadChildren: () => import('./transformation/transformation.module').then(m => m.TransformationModule)
+  },
+  {
+    path: 'faq',
     loadChildren: () => import('./faq/faq.module').then(m => m.FaqModule)
   },
+  { path: '', redirectTo: 'faq', pathMatch: 'full' },
   // Exclude assets from Angular routing - let the browser handle them directly
   {
     path: 'assets',
     children: [] // Empty children means Angular won't handle routes starting with 'assets'
   },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'faq' },
 ];
 
 @NgModule({

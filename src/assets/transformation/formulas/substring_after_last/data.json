@@ -1,0 +1,42 @@
+{
+  "title": "SUBSTRING_AFTER_LAST",
+  "description": "<p>Returns the substring that occurs after the last occurrence of the specified separator within the provided string. If the separator is not found, returns an empty string. The search is case-sensitive.</p>",
+  "syntax": "SUBSTRING_AFTER_LAST(string, separator) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The original string."
+    },
+    {
+      "name": "separator",
+      "type": "String",
+      "required": "Yes",
+      "description": "The separator to search for within the string."
+    }
+  ],
+  "examples": [
+    "SUBSTRING_AFTER_LAST(\"REF-2025-1234\", \"-\")\n-- Returns \"1234\".\n-- Extracts the substring after the last occurrence of \"-\"."
+  ],
+  "tips": [
+    {
+      "text": "<p>The function returns an empty string if any of these occur:</p>",
+      "children": [
+        {
+          "text": "<p>the separator is not found in string,</p>",
+          "children": []
+        },
+        {
+          "text": "<p>the separator appears at the end of string,</p>",
+          "children": []
+        },
+        {
+          "text": "<p>the separator is an empty string.</p>",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "relatedFormulas": []
+}

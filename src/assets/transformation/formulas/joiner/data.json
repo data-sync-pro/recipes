@@ -1,0 +1,16 @@
+{
+  "title": "$JOINER",
+  "description": "<p>After using JOIN_OBJECT_CONNECTION or JOIN_JSON, the $JOINER function becomes available in the Mapping stage. Returns the value of the specified field from the joined or related record.</p>",
+  "syntax": "$JOINER.FieldName",
+  "parameters": [],
+  "examples": [
+    "$JOINER.Name\n-- Accesses the \"Name\" field from the joined record."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "JOIN_OBJECT_CONNECTION",
+    "JOIN_OBJECT_SOURCE",
+    "JOIN_OBJECT_TARGET",
+    "JOIN_JSON"
+  ]
+}

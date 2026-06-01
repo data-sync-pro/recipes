@@ -1,0 +1,26 @@
+{
+  "title": "ENDS_WITH",
+  "description": "<p>Returns TRUE if the provided string ends with any of the specified compare_strings. The comparison is case-sensitive. Otherwise, returns FALSE.</p>",
+  "syntax": "ENDS_WITH(string, ...compare_strings) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The source string to evaluate."
+    },
+    {
+      "name": "… compare_strings",
+      "type": "String",
+      "required": "Yes",
+      "description": "One or more strings to compare against the end of the source string."
+    }
+  ],
+  "examples": [
+    "ENDS_WITH(\"Salesforce Platform\", \"platform\") \n-- Returns FALSE (no match, case-sensitive).",
+    "ENDS_WITH(Website, \".org\", \".gov\")\n-- Returns TRUE if Website ends with \".org\" or \".gov\"; otherwise, returns FALSE."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+  ]
+}

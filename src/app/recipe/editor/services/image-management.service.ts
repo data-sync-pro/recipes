@@ -12,13 +12,13 @@ import { ImageNamingService } from './image-naming.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { LoggerService } from '../../core/services/logger.service';
 
-export type ImageUploadPurpose =
+type ImageUploadPurpose =
   | 'step-media'
   | 'general-image'
   | 'replace-step-media'
   | 'replace-general-image';
 
-export interface ImageUploadOptions {
+interface ImageUploadOptions {
   // Tab-aware location for step-media uploads (new format)
   tabIndex?: number;
   stepIndex?: number;
@@ -26,7 +26,7 @@ export interface ImageUploadOptions {
   targetInput?: HTMLInputElement;
 }
 
-export interface ImageUploadResult {
+interface ImageUploadResult {
   success: boolean;
   baseName?: string;
   fullFileName?: string;
@@ -101,28 +101,6 @@ export class ImageManagementService {
       this.logger.error('Error uploading image:', error);
       this.notificationService.error('Failed to upload image');
       return { success: false, error: 'Upload failed' };
-    }
-  }
-
-  async handleStepImageDrop(
-    event: DragEvent,
-    recipe: RecipeData,
-    tabIndex: number,
-    stepIndex: number,
-    changeCallback?: () => void
-  ): Promise<void> {
-    event.preventDefault();
-    const files = event.dataTransfer?.files;
-    if (!files || files.length === 0) return;
-
-    for (let i = 0; i < files.length; i++) {
-      await this.uploadImage(
-        files[i],
-        recipe,
-        'step-media',
-        { tabIndex, stepIndex },
-        changeCallback
-      );
     }
   }
 

@@ -68,7 +68,7 @@ export class StorageService {
     this.storage.setItem(this.EDITED_IDS_KEY, ids);
   }
 
-  deleteEditedRecipe(recipeId: string): boolean {
+  private deleteEditedRecipe(recipeId: string): boolean {
     try {
       const editedRecipes = this.getAllEditedRecipes();
       const filteredRecipes = editedRecipes.filter(r => r.id !== recipeId);
@@ -103,16 +103,6 @@ export class StorageService {
 
   getAllActiveStates(): { [recipeId: string]: boolean } {
     return this.storage.getItem<{ [recipeId: string]: boolean }>(this.ACTIVE_STATES_KEY, {}) || {};
-  }
-
-  clearActiveState(recipeId: string): void {
-    try {
-      const activeStates = this.getAllActiveStates();
-      delete activeStates[recipeId];
-      this.storage.setItem(this.ACTIVE_STATES_KEY, activeStates);
-    } catch (error) {
-      this.logger.error('Error clearing recipe active state:', error);
-    }
   }
 
   clearAllActiveStates(): void {

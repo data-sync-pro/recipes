@@ -1,0 +1,9 @@
+{
+  "title": "IS_PRODUCTION",
+  "description": "<p>Returns TRUE if the current execution is running in a Production environment, otherwise, returns FALSE.</p>",
+  "syntax": "IS_PRODUCTION() -> Boolean",
+  "parameters": [],
+  "examples": [],
+  "tips": [],
+  "relatedFormulas": []
+}

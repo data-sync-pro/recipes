@@ -1,0 +1,12 @@
+<section class="form-section">
+  <h3 class="form-section-title">Raw JSON</h3>
+  <p class="form-empty-hint" *ngIf="hint">{{ hint }}</p>
+  <textarea
+    class="form-textarea form-textarea-mono"
+    rows="30"
+    appAutosize="800"
+    [(ngModel)]="textValue"
+    (ngModelChange)="onChange()"
+  ></textarea>
+  <p class="form-warning" *ngIf="parseError">⚠ JSON parse error: {{ parseError }}</p>
+</section>

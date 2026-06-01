@@ -1,0 +1,27 @@
+{
+  "title": "IS_ALPHA",
+  "description": "<p>Returns TRUE if the string contains only alphabetic characters; otherwise, returns FALSE.</p>",
+  "syntax": "IS_ALPHA(string) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to evaluate."
+    }
+  ],
+  "examples": [
+    "IS_ALPHA(\"JohnSmith\")\n-- Returns TRUE.",
+    "IS_ALPHA(\"Report 2025_v1\")\n-- Returns FALSE, only letters are accepted."
+  ],
+  "tips": [ 
+  {
+    "text": "<p>Returns FALSE if the string is empty.</p>",
+    "children": []
+  },
+  {
+    "text": "<p>Any numbers, spaces, or symbols will result in FALSE.</p>",
+    "children": []
+  }],
+  "relatedFormulas": []
+}

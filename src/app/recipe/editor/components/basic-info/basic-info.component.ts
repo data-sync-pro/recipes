@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { RecipeData, RelatedRecipe, normalizeCategory } from '../../../core/models/recipe.model';
-import { TrackByUtil } from '../../../../shared/utils/trackby.util';
+import { TrackByUtil } from '../../../core/utils/trackby.util';
 
 @Component({
   selector: 'app-basic-info',
@@ -51,10 +51,6 @@ export class BasicInfoComponent {
 
   toggleCategoryDropdown(): void {
     this.showCategoryDropdown = !this.showCategoryDropdown;
-  }
-
-  closeCategoryDropdown(): void {
-    this.showCategoryDropdown = false;
   }
 
   addDSPVersion(): void {

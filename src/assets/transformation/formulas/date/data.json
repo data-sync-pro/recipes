@@ -1,0 +1,30 @@
+{
+  "title": "DATE",
+  "description": "<p>Returns a Date constructed from the specified year, month, and day components.</p>",
+  "syntax": "DATE(year, month, day) -> Date",
+  "parameters": [
+    {
+      "name": "year",
+      "type": "Integer",
+      "required": "Yes",
+      "description": "The year component."
+    },
+    {
+      "name": "month",
+      "type": "Integer",
+      "required": "Yes",
+      "description": "The month component (1–12)."
+    },
+    {
+      "name": "day",
+      "type": "Integer",
+      "required": "Yes",
+      "description": "The day component of the month."
+    }
+  ],
+  "examples": [
+    "DATE(2005, 1, 2)\n-- Returns 2005-01-02."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

@@ -1,0 +1,31 @@
+{
+  "title": "LAST_INDEX_OF",
+  "description": "<p>Returns the starting position (zero-based index) of the last occurrence of substring within string. The search is case-sensitive. If end_position_optional is provided, the search considers characters from the start of the string up to the specified end position. Returns -1 if the substring is not found.</p>",
+  "syntax": "LAST_INDEX_OF(string, substring, end_position_optional) -> Integer",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to search within."
+    },
+    {
+      "name": "substring",
+      "type": "String",
+      "required": "Yes",
+      "description": "The substring to locate."
+    },
+    {
+      "name": "end_position_optional",
+      "type": "Integer",
+      "required": "No",
+      "description": "The zero-based index indicating the end position for the search. If omitted, searches the entire string."
+    }
+  ],
+  "examples": [
+    "LAST_INDEX_OF(\"ERR_100|DONE|ERR_200|DONE\", \"ERR_\", 8)\n -- Returns 0. Finds \"ERR_\" at index 0 within the first 8 characters.",
+    "LAST_INDEX_OF(\"Status: Info, Status: Warn\", \"status\")\n -- Returns -1 (no match, case-sensitive)."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

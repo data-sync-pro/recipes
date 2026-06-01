@@ -1,0 +1,9 @@
+{
+  "title": "TRIGGER_IS_INSERT",
+  "description": "<p>Returns TRUE if the current trigger context involves an insert operation (before insert or after insert); otherwise, returns FALSE.</p>",
+  "syntax": "TRIGGER_IS_INSERT() -> Boolean",
+  "parameters": [],
+  "examples": [],
+  "tips": [],
+  "relatedFormulas": []
+}

@@ -1,0 +1,18 @@
+{
+  "title": "ESCAPE_HTML4",
+  "description": "<p>Returns a string with characters escaped according to HTML 4 standards. Converts special HTML characters into their corresponding HTML entities to safely display as literal text in web pages.</p>",
+  "syntax": "ESCAPE_HTML4(string) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "A text value, merge field, or expression to escape."
+    }
+  ],
+  "examples": [
+    "ESCAPE_HTML4(\"<div>Hello, world!</div>\")\n-- Returns \"&lt;div&gt;Hello, world!&lt;/div&gt;\""    
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

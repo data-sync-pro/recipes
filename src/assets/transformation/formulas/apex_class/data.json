@@ -1,0 +1,18 @@
+{
+  "title": "APEX CLASS",
+  "description": "<p><code>pushtopics.SalesforceDataTransformer</code> is a global interface that enables custom Apex logic within DSP formulas, extending the package’s out-of-box transformations when built-in functions are insufficient. Reference an implementation in a formula using the placeholder syntax <code>$apexClassName</code>.</p>",
+  "images": [
+    {
+      "src": "images/apex_class.jpg",
+      "alt": "APEX CLASS"
+    }
+  ],
+  "descriptionCode": "global interface SalesforceDataTransformer {\n    /**\n     * Specifies an array of field API names to retrieve from the source records.\n     * This ensures DSP includes all required fields during the Retrieve step,\n     * making them available for the Scoping, Match, and Mapping steps.\n     */\n    String[] retrieveSourceFields();\n\n    Object transform(List<Map<String, Object>> contextSourceRecords,\n                     Map<String, Object> currentSourceRecord,\n                     String assignedToFieldName);\n}",
+  "syntax": "",
+  "parameters": [],
+  "examples": [
+    "global with sharing class BulkifiedDataTransformerExample implements pushtopics.SalesforceDataTransformer {\n\n    private static Map<Id, Account> cachedAccountMap = null;\n\n    global String[] retrieveSourceFields() {\n        // Ensures fields(including relational fields) are retrieved by DSP in the source records.\n        return new String[]{'RecordType.DeveloperName', 'GetAllOpportunityAmounts__c'};\n    }\n\n    global Object transform(\n        List<Map<String, Object>> contextSourceRecords,\n        Map<String, Object> currentSourceRecord,\n        String assignedToFieldName\n    ){\n        Object recordTypeDevName = ((RecordType)currentSourceRecord.get('RecordType')).DeveloperName;\n        Object getAllOpportunityAmounts = currentSourceRecord.get('GetAllOpportunityAmounts__c');\n\n        if(recordTypeDevName == 'Business' && getAllOpportunityAmounts == true){\n\n            Account account = getAccountWithChildRelationships(\n\t\t\t\tcontextSourceRecords, \n\t\t\t\tcurrentSourceRecord\n\t\t\t      );\n\n            String ret = '';\n    \n            for(Opportunity opportunity : account.Opportunities){\n    \n                ret += opportunity.StageName + ':' + opportunity.Amount + ';';\n            }\n    \n            return ret;\n        }\n        else{\n\n            return null;\n        }\n    }\n\n    private Account getAccountWithChildRelationships(\n        List<Map<String, Object>> contextSourceRecords,\n        Map<String, Object> currentSourceRecord\n    ){\n\n        // Bulkified logic: lazy loads data on first use and then caches it in a static variable for the rest of the transaction to avoid repeat queries.\n\n        if(cachedAccountMap == null){\n\n            cachedAccountMap = new Map<Id, Account>(\n                [SELECT Id,  \n                (SELECT Amount, StageName FROM Opportunities) \n                FROM Account \n                WHERE Id IN :getFieldValuesAsString(contextSourceRecords, 'Id')]\n            );\n        }\n\n        return cachedAccountMap.get((Id)currentSourceRecord.get('Id'));\n    }\n\n    // A reusable utility method for extracting string field values from a list of JSON objects.\n    private static String[] getFieldValuesAsString(\n        List<Map<String, Object>> records, \n        String fieldName\n    ){\n\n        String[] ret = new String[]{};\n\n        for(Map<String, Object> record : records){\n\n            String fieldValueAsString = (String)record.get(fieldName);\n\n            if(fieldValueAsString != null){\n\n                ret.add(fieldValueAsString);\n            }\n        }\n\n        return ret;\n    }\n}"
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

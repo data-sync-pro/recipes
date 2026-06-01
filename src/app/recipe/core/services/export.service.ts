@@ -266,34 +266,6 @@ export class ExportService {
     }
   }
 
-  async exportAsJSON(recipes: RecipeData[]): Promise<void> {
-    try {
-      const indexRecipes = this.generateRecipeIndex(recipes);
-
-      const exportData = {
-        metadata: {
-          exportDate: new Date().toISOString(),
-          version: '1.0.0',
-          recipeCount: recipes.length,
-          format: 'recipe-collection'
-        },
-        index: { recipes: indexRecipes },
-        recipes: recipes
-      };
-
-      const jsonString = JSON.stringify(exportData, null, 2);
-      const blob = new Blob([jsonString], { type: 'application/json' });
-      const timestamp = new Date().toISOString().split('T')[0];
-      const filename = `recipes_${timestamp}.json`;
-
-      this.downloadBlob(blob, filename);
-      this.notificationService.success(`${recipes.length} recipes exported as JSON with index`);
-    } catch (error) {
-      this.logger.error('Error exporting recipes as JSON', error);
-      this.notificationService.error('Failed to export recipes as JSON');
-    }
-  }
-
   private generateRecipeIndex(recipes: RecipeData[], recipeActiveStates?: Map<string, boolean>): RecipeIndexEntry[] {
     const validRecipes = recipes.filter(recipe => recipe.id && recipe.title);
     const existingFolders = new Set<string>();

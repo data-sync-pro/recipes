@@ -1,0 +1,22 @@
+{
+  "title": "IS_CURRENT_USER_IN_OWNER_QUEUE",
+  "description": "<p>Returns TRUE if the current context user is a member of the record owner's queue. Otherwise, returns FALSE.</p>",
+  "syntax": "IS_CURRENT_USER_IN_OWNER_QUEUE() -> Boolean",
+  "parameters": [],
+  "examples": [],
+  "tips": [
+    {
+      "text": "<p>Returns TRUE only if the record’s owner is a queue and the current user belongs to that queue—either directly (as an individual member) or indirectly (via a public group, role, or role hierarchy).</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Ensure the queue is configured to support the current record’s object type.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>If queue membership uses \"Roles and Subordinates,\" verify that the user’s role is within the defined hierarchy.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

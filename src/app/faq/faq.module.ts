@@ -9,12 +9,12 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { FaqRoutingModule } from './faq-routing.module';
 import { FaqComponent } from './faq.component';
-import { SearchOverlayComponent } from '../search-overlay/search-overlay.component';
+import { FaqSkeletonComponent } from './components/faq-skeleton.component';
 import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [
     FaqComponent,
-    SearchOverlayComponent
+    FaqSkeletonComponent
   ],
   imports: [
     CommonModule,

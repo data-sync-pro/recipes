@@ -91,7 +91,7 @@ export class SearchService {
     return this.sortCategories(categories);
   }
 
-  sortCategories(categories: Category[]): Category[] {
+  private sortCategories(categories: Category[]): Category[] {
     return [...categories].sort((a, b) => {
       const indexA = CATEGORY_ORDER.findIndex(c => c.displayName === a.name);
       const indexB = CATEGORY_ORDER.findIndex(c => c.displayName === b.name);

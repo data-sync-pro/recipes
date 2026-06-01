@@ -1,0 +1,20 @@
+{
+  "title": "YEAR",
+  "description": "<p>Returns the year component from a Date or Date Time, evaluated in the context user's local time zone.</p>",
+  "syntax": "YEAR(date/datetime) -> Integer",
+  "parameters": [
+    {
+      "name": "date/datetime",
+      "type": "Date/Datetime",
+      "required": "Yes",
+      "description": "The Date or Datetime to extract the year from."
+    }
+  ],
+  "examples": [
+    "YEAR(DATE(2024, 1, 25))\n-- Returns 2024."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "DATE"
+  ]
+}

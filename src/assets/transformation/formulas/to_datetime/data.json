@@ -1,0 +1,35 @@
+{
+  "title": "TO_DATETIME",
+  "description": "<p>Converts a string in a recognized date/time format into a Datetime value. The result is returned in GMT. If the input string cannot be parsed, an error is thrown.</p>",
+  "syntax": "TO_DATETIME(string) -> Datetime",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to convert into a Datetime, provided in a recognized date/time format."
+    }
+  ],
+  "examples": [
+    "TO_DATETIME(\"2002-10-09T19:00:00-05:00\")\n-- Returns 2002-10-10T00:00:00.000Z as a Datetime in GMT."
+  ],
+  "tips": [
+    {
+      "text": "<p>Returns null for blank or null inputs.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Primarily parses using Salesforce's built-in Datetime.parse().</p>",
+      "children": []
+    },
+    {
+      "text": "<p>If primary parsing fails, falls back to parsing via JSON deserialization.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Throws an ApplicationException if all parsing attempts fail.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

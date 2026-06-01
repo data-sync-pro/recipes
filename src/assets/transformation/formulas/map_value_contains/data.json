@@ -1,0 +1,42 @@
+{
+  "title": "MAP_VALUE_CONTAINS",
+  "description": "<p>Returns the corresponding return_value for the first compare_substring found within the provided string (case-sensitive). If no substrings match, returns default_return_value_optional. If default_return_value_optional is omitted and no matches occur, the function returns $SKIP_ASSIGNMENT.</p>",
+  "syntax": "MAP_VALUE_CONTAINS(string, ...[compare_substring, return_value], default_return_value_optional)-> Object",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to evaluate (case-sensitive)."
+    },
+    {
+      "name": "… compare_substring",
+      "type": "String",
+      "required": "Yes",
+      "description": "The substring to search for within the provided string."
+    },
+    {
+      "name": "… return_value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The value returned if the compare substring is found."
+    },
+    {
+      "name": "default_return_value_optional",
+      "type": "Object",
+      "required": "No",
+      "description": "The value returned if no substrings match. If omitted and no match occurs, returns $SKIP_ASSIGNMENT."
+    }
+  ],
+  "examples": [
+    "MAP_VALUE_CONTAINS(\"New York - Office\", \"new york\", \"NY\", \"California\", \"CA\", \"Other\") \n-- Returns \"Other\" (case-sensitive).",
+    "MAP_VALUE_CONTAINS(Description, \"Platinum\", \"Partner\", \"Individual\", \"Person\")\n-- Returns \"Partner\" if Description contains \"Platinum\".\n-- Returns \"Person\" if it contains \"Individual\".\n-- Returns $SKIP_ASSIGNMENT otherwise.\n-- Matching is case-sensitive and stops at the first match."
+  ],
+  "tips": [
+    {
+      "text": "<p>Ensure that <strong>return_value</strong> and <strong>default_return_value_optional</strong> are of the same data type.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

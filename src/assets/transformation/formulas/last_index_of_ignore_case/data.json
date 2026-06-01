@@ -1,0 +1,31 @@
+{
+  "title": "LAST_INDEX_OF_IGNORE_CASE",
+  "description": "<p>Returns the starting position (zero-based index) of the last occurrence of substring within string, ignoring case differences. If end_position_optional is provided, the search considers characters from the start of the string up to the specified end position. Returns -1 if the substring is not found.</p>",
+  "syntax": "LAST_INDEX_OF_IGNORE_CASE(string, substring, end_position_optional) -> Integer",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to search within."
+    },
+    {
+      "name": "substring",
+      "type": "String",
+      "required": "Yes",
+      "description": "The substring to locate."
+    },
+    {
+      "name": "end_position_optional",
+      "type": "Integer",
+      "required": "No",
+      "description": "The zero-based index indicating the end position for the search. If omitted, searches the entire string."
+    }
+  ],
+  "examples": [
+    "LAST_INDEX_OF_IGNORE_CASE(\"Status_OK|Status_Fail|Status_Pending\", \"STATUS\", 20)\n -- Returns 10. Finds \"Status\" within the first 20 characters (case-insensitive).",
+    "LAST_INDEX_OF_IGNORE_CASE(\"Error: Info, Error: Warn, Error: Critical\", \"error\")\n --Returns 26. Finds \"Error\" at index 26 (case-insensitive)."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

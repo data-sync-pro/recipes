@@ -1,0 +1,21 @@
+{
+  "title": "DAY_OF_YEAR",
+  "description": "Returns the day number within the year for a given date, ranging from 1 to 365 or 366.",
+  "syntax": "DAY_OF_YEAR(date) -> Integer",
+  "parameters": [
+    {
+      "name": "date",
+      "type": "Date",
+      "required": "Yes",
+      "description": "The date to evaluate."
+    }
+  ],
+  "examples": [
+    "DAY_OF_YEAR(DATE(2024, 1, 1))\n-- Returns 1.",
+    "DAY_OF_YEAR(DATE(2024, 12, 31))\n-- Returns 366."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "DATE"
+  ]
+}

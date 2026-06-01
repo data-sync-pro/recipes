@@ -1,0 +1,34 @@
+{
+    "title": "Elements of a Formula",
+    "description": "A formula can contain references to the values of source fields, operators, functions, literal values, or other formulas. Use any or all of these elements to build a formula.",
+    "elements": [
+      {
+        "element": "Apex Class",
+        "description": "Custom Apex classes implementing the pushtopics.TargetValueMapper interface for advanced transformations. Reference the class using the format {!apexClassName}."
+      },
+      {
+        "element": "Field Reference",
+        "description": "A reference to another field's value using merge fields. Use field_name for standard fields, field_name__c for custom fields, or object_name__r.field_name for related objects. Field references are case-sensitive."
+      },
+      
+      {
+        "element": "Function",
+        "description": "Predefined operations that accept input and return a result. For example, TODAY() returns the current date without needing input, whereas TEXT(value) converts numbers, percents, or currency into text."
+      },
+      {
+        "element": "Global Variable",
+        "description": "Built-in variables available for field mappings, such as $User.Id, $User.UserName, $User.Email, and $User.ProfileId."
+      },
+      {
+        "element": "Literal Value",
+        "description": "A fixed text or numeric value you enter directly into a formula. For example, the formula ROUND((Amount * 0.02), 2) includes a literal numeric value of 0.02."
+      },
+      
+      {
+        "element": "Operator",
+        "description": "Symbols indicating calculation type or evaluation order, such as + for addition or parentheses ( ) to prioritize expressions."
+      }
+    ]
+  }
+  
+  

@@ -1,0 +1,19 @@
+{
+  "title": "MAX",
+  "description": "<p>Returns the largest number from the given set of numbers.</p>",
+  "syntax": "MAX(...num) -> Number",
+  "parameters": [
+    {
+      "name": "… num",
+      "type": "Number",
+      "required": "Yes",
+      "description": "Set of numbers to evaluate; At least 2 numbers are required."
+    }
+  ],
+  "examples": [
+    "MAX(4, 8, 1, 10) \n-- Returns 10.",
+    "MAX(-2, -10, -5) \n-- Returns -2."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

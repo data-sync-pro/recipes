@@ -1,0 +1,5 @@
+{
+  "title": "HAS_DUPLICATES",
+  "description": "Returns TRUE if the current source record has duplicate records identified by Matching Rules configured in Salesforce Duplicate Management.",
+  "syntax": "HAS_DUPLICATES() -> Boolean"
+}

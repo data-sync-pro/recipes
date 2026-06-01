@@ -10,8 +10,3 @@ export function getFileExtension(file: File): string {
   const extension = file.name.split('.').pop()?.toLowerCase();
   return extension || 'jpg';
 }
-
-export function getExtensionFromFilename(filename: string): string {
-  const extension = filename.split('.').pop()?.toLowerCase();
-  return extension || 'jpg';
-}

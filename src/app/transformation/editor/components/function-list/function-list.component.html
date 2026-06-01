@@ -1,0 +1,57 @@
+<div class="function-list">
+  <div class="function-list-header">
+    <input
+      type="text"
+      class="function-filter"
+      placeholder="Filter functions…"
+      [(ngModel)]="filterText"
+      (ngModelChange)="onFilterChange()"
+    />
+    <div class="function-list-meta">
+      {{ filtered.length }} / {{ functions.length }}
+      <span *ngIf="pending.size" class="status-summary status-summary-pending">· {{ pending.size }} unsaved</span>
+      <span *ngIf="dirty.size - pending.size > 0" class="status-summary status-summary-saved">· {{ dirty.size - pending.size }} saved</span>
+    </div>
+  </div>
+  <div class="function-list-section function-list-section-specials">
+    <h4 class="function-list-section-title">Special pages</h4>
+    <ul class="function-list-items">
+      <li
+        *ngFor="let fn of specials"
+        class="function-list-item function-list-item-special"
+        [class.active]="fn.name === selected"
+        [class.is-pending]="isPending(fn)"
+        [class.is-saved]="isSaved(fn)"
+        (click)="select(fn)"
+      >
+        <span class="function-name">
+          <span class="status-dot status-dot-pending" *ngIf="isPending(fn)" title="Unsaved changes"></span>
+          <span class="status-dot status-dot-saved" *ngIf="isSaved(fn)" title="Saved draft (not yet exported)"></span>
+          {{ fn.display }}
+        </span>
+        <span class="function-tag function-tag-special">special</span>
+      </li>
+    </ul>
+  </div>
+  <div class="function-list-section">
+    <h4 class="function-list-section-title">Functions</h4>
+    <ul class="function-list-items">
+      <li
+        *ngFor="let fn of filtered"
+        class="function-list-item"
+        [class.active]="fn.name === selected"
+        [class.is-pending]="isPending(fn)"
+        [class.is-saved]="isSaved(fn)"
+        (click)="select(fn)"
+      >
+        <span class="function-name">
+          <span class="status-dot status-dot-pending" *ngIf="isPending(fn)" title="Unsaved changes"></span>
+          <span class="status-dot status-dot-saved" *ngIf="isSaved(fn)" title="Saved draft (not yet exported)"></span>
+          {{ fn.display }}
+        </span>
+        <span class="function-tag" *ngIf="fn.primaryTag">{{ fn.primaryTag }}</span>
+        <span class="function-tag function-tag-untagged" *ngIf="!fn.primaryTag">untagged</span>
+      </li>
+    </ul>
+  </div>
+</div>

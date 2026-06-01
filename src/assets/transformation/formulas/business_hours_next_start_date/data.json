@@ -1,0 +1,28 @@
+{
+  "title": "BUSINESS_HOURS_NEXT_START_DATE",
+  "description": "<p>Returns the next Datetime business hours open after the specified target date; returns the target date itself if it's within business hours. The result is returned in GMT.</p>",
+  "syntax": "BUSINESS_HOURS_NEXT_START_DATE(target_date, business_hours_name_optional) -> Datetime",
+  "parameters": [
+    {
+      "name": "target_date",
+      "type": "Datetime",
+      "required": "Yes",
+      "description": "The Datetime from which to find the next start of business hours."
+    },
+    {
+      "name": "business_hours_name_optional",
+      "type": "String",
+      "required": "No",
+      "description": "The name of the business hours. If omitted, the default schedule is applied."
+    }
+  ],
+  "examples": [
+    "BUSINESS_HOURS_NEXT_START_DATE(TO_DATETIME(\"2023-10-01T10:00:00Z\"))\n-- Returns the specified Datetime if it's within the default business hours; otherwise, returns the next start time after it.",
+    "BUSINESS_HOURS_NEXT_START_DATE(NOW(), \"Weekday9to5\")\n-- Returns the current Datetime if it's within \"Weekday9to5\" hours; otherwise, returns the next start time after it."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "TO_DATETIME",
+    "NOW"
+  ]
+}

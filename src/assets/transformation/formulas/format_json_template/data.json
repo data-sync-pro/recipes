@@ -1,0 +1,19 @@
+{
+  "title": "FORMAT_JSON_TEMPLATE",
+  "description": "Parses and formats a JSON template string by resolving embedded expressions and merge fields into JSON-formatted output.",
+  "syntax": "FORMAT_JSON_TEMPLATE(template) -> String",
+  "parameters": [
+    {
+      "name": "template",
+      "type": "String",
+      "required": "Yes",
+      "description": "A JSON template string containing merge fields or expressions in template syntax to be evaluated and serialized into JSON-formatted output. Incorrect or unparseable expressions remain as literal text in the output."
+    }
+  ],
+  "examples": [
+    "FORMAT_JSON_TEMPLATE(\n'{\n  \"accountName\": <shadow>{!Account.Name}</shadow>,\n  \"stageName\": <shadow>{!StageName}</shadow>,\n  \"amount\": <shadow>{!Amount}</shadow>,\n  \"isClosed\": <shadow>{!IsClosed}</shadow>\n}'\n)\n-- Returns a JSON string populated with record data.\n/*{\n  \"accountName\": <shadow>\"Owens LLC\"</shadow>,\n  \"stageName\": <shadow>\"Prospecting\"</shadow>,\n  \"amount\": <shadow>125000</shadow>,\n  \"isClosed\": <shadow>false</shadow>\n}*/"
+  ],
+  "relatedFormulas": [
+    "FORMAT_STRING_TEMPLATE"
+  ]
+}

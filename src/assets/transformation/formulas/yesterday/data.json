@@ -1,0 +1,11 @@
+{
+  "title": "YESTERDAY",
+  "description": "<p>Returns the date value representing yesterday, evaluated in the context user's local time zone.</p>",
+  "syntax": "YESTERDAY() -> Date",
+  "parameters": [],
+  "examples": [
+    "YESTERDAY()\n-- Returns yesterday's date."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

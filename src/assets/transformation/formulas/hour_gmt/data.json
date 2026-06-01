@@ -1,0 +1,20 @@
+{
+  "title": "HOUR_GMT",
+  "description": "Extracts the hour (0–23) from a Datetime value, based on GMT.",
+  "syntax": "HOUR_GMT(datetime) -> Integer",
+  "parameters": [
+    {
+      "name": "datetime",
+      "type": "Datetime",
+      "required": "Yes",
+      "description": "The Datetime value from which the hour is extracted."
+    }
+  ],
+  "examples": [
+    "HOUR_GMT(NOW())\n-- Returns 15 (if now = 2024-09-18T15:25:22.418Z)."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "NOW"
+  ]
+}

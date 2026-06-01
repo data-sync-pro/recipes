@@ -1,0 +1,23 @@
+{
+  "title": "SCRAMBLE",
+  "description": "<p>Shuffle the items in the current batch and select one at random.</p>",
+  "syntax": "SCRAMBLE(value) -> same data type as value",
+  "parameters": [
+    {
+      "name": "value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "Value whose content will be scrambled."
+    }
+  ],
+  "examples": [
+    "SCRAMBLE(FirstName) \n-- Returns the FirstName from a randomly selected record in the execution batch."
+  ],
+  "tips": [
+    {
+      "text": "<p>This function is only allowed for actions targeting sandboxes, to prevent accidental masking of production data.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

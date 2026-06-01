@@ -4,7 +4,7 @@ import { FaqComponent } from './faq.component';
 import {
   VALID_CATEGORIES,
   VALID_SUBCATEGORIES,
-} from '../shared/config/faq-urls.config';
+} from './config/faq-urls.config';
 
 const CATEGORIES: ReadonlySet<string> = new Set(VALID_CATEGORIES);
 const SUBCATEGORIES: ReadonlySet<string> = new Set(VALID_SUBCATEGORIES);

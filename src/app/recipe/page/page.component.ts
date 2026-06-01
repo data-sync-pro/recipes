@@ -9,7 +9,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { Subject, combineLatest } from 'rxjs';
-import { takeUntil, distinctUntilChanged } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 import {
@@ -23,7 +23,7 @@ import { CacheService } from '../core/services/cache.service';
 import { SearchService as CoreSearchService } from '../core/services/search.service';
 import { LoggerService } from '../core/services/logger.service';
 import { sortRecipesByCategoryAndTitle } from '../core/utils';
-import { categoryToSlug, slugToCategoryName } from '../core/constants/recipe.constants';
+import { slugToCategoryName } from '../core/constants/recipe.constants';
 import { TocService } from './services/toc.service';
 import { NavigationService } from './services/navigation.service';
 import { Store } from '../core/store/recipe.store';
@@ -32,7 +32,6 @@ import { PreviewSyncService } from './services/preview-sync.service';
 import { RouteHandlerService } from './services/route-handler.service';
 import { SearchStateService } from './services/search.service';
 import { RECIPE_CLASSES, RECIPE_MESSAGES } from '../core/constants/recipe.constants';
-import { SelectedSuggestion } from './search-overlay/search-overlay.component';
 import { RecipeLayoutComponent } from './recipe-layout/recipe-layout.component';
 
 @Component({
@@ -56,8 +55,6 @@ export class RecipesComponent implements OnInit, OnDestroy {
     hasResults: true,
     isOverlayOpen: false
   };
-
-  searchOverlayInitialQuery = '';
 
   navigation: NavigationState = {
     category: '',
@@ -152,16 +149,6 @@ export class RecipesComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
       });
 
-    this.searchService.getSearchOverlayInitialQuery()
-      .pipe(
-        distinctUntilChanged(),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(query => {
-        this.searchOverlayInitialQuery = query;
-        this.cdr.markForCheck();
-      });
-
     document.body.classList.add(RECIPE_CLASSES.BODY_PAGE);
   }
 
@@ -224,14 +211,6 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
   }
 
-  goHome(): void {
-    this.routeHandlerService.goHome();
-  }
-
-  goToCategory(categoryName: string): void {
-    this.routeHandlerService.goToCategory(categoryName, true);
-  }
-
   goToRecipe(recipe: Recipe): void {
     this.routeHandlerService.goToRecipe(recipe);
   }
@@ -240,32 +219,12 @@ export class RecipesComponent implements OnInit, OnDestroy {
     this.searchService.searchRecipes(query, this.currentFilter, this.recipes);
   }
 
-  clearSearch(): void {
-    this.searchService.clearSearch(this.recipes);
-  }
-
   openSearchOverlay(initialQuery = ''): void {
     this.searchService.openSearchOverlay(initialQuery);
   }
 
   closeSearchOverlay(): void {
     this.searchService.closeSearchOverlay();
-  }
-
-  handleSearchOverlaySelect(selectedRecipe: SelectedSuggestion): void {
-    this.searchService.handleSearchOverlaySelect(selectedRecipe);
-  }
-
-  toggleSidebar(): void {
-    this.store.toggleSidebar();
-  }
-
-  toggleMobileSidebar(): void {
-    this.store.toggleMobileSidebar();
-  }
-
-  closeMobileSidebar(): void {
-    this.store.closeMobileSidebar();
   }
 
   toggleCategoryFilter(categoryName: string): void {
@@ -310,51 +269,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
-  getRecipeCount(): number {
-    return this.totalRecipeCount;
-  }
-
-  get breadcrumbPath(): { name: string; url: string }[] {
-    const path = [{ name: 'Recipes', url: '/recipes' }];
-
-    if (this.navigation.category) {
-      const category = this.categories.find(cat => cat.name === this.navigation.category);
-      const categoryName = category?.displayName || this.navigation.category;
-      path.push({
-        name: categoryName,
-        url: `/recipes/${categoryToSlug(this.navigation.category)}`
-      });
-    }
-
-    return path;
-  }
-
   get currentRecipes(): Recipe[] {
     return this.search.isActive ? this.search.results : this.filteredRecipes;
   }
-
-  get showHome(): boolean {
-    return this.ui.currentView === 'home' && !this.search.isActive;
-  }
-
-  get showCategory(): boolean {
-    return this.ui.currentView === 'category' && !this.search.isActive;
-  }
-
-  get currentCategory(): Category | null {
-    return this.categories.find(cat => cat.name === this.navigation.category) || null;
-  }
-
-  trackByRecipeId(_: number, recipe: Recipe): string {
-    return recipe.id;
-  }
-
-  trackByCategoryName(_: number, category: Category): string {
-    return category.name;
-  }
-
-  trackByBreadcrumbUrl(_: number, crumb: { name: string; url: string }): string {
-    return crumb.url;
-  }
-
 }

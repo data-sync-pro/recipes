@@ -38,7 +38,7 @@
 
     &.active {
         background-color: rgba(34, 83, 178, 0.08);
-        color: #2253B2;
+        color: $color-primary-brand;
         font-weight: 500;
         transition: $transition-fast;
 

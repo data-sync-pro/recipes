@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener, Chan
 import { Subject, takeUntil, map } from 'rxjs';
 import { LoggerService } from '../core/services/logger.service';
 import { NotificationService } from '../../shared/services/notification.service';
-import { ClipboardUtil } from '../../shared/utils/clipboard.util';
+import { ClipboardUtil } from '../core/utils/clipboard.util';
 import { Store } from '../core/store/recipe.store';
 import { EditorState } from '../core/store/store.interface';
 import { ListManagementService, RecipeTitleItem } from './services/list-management.service';
@@ -13,7 +13,7 @@ import { ChangeCoordinatorService } from './services/change-coordinator.service'
 import { FieldSuggestionService } from './services/field-suggestion.service';
 import { ImageManagementService } from './services/image-management.service';
 import { EditorUtils } from './utils/editor.utils';
-import { TrackByUtil } from '../../shared/utils/trackby.util';
+import { TrackByUtil } from '../core/utils/trackby.util';
 import { EDITOR_CONSTANTS } from './editor.constants';
 import {
   Recipe,
@@ -82,7 +82,6 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
   ];
 
   trackByIndex = TrackByUtil.index;
-  trackById = TrackByUtil.id;
 
   // Get first category for components that expect a single string
   get currentRecipeFirstCategory(): string {
@@ -410,91 +409,6 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
     }
   }
 
-  addGeneralImage(): void {
-    if (!this.currentRecipe) return;
-    this.imageManagementService.addEmptyGeneralImage(
-      this.currentRecipe,
-      () => this.onRecipeChange()
-    );
-  }
-
-  async handleGeneralImageFile(file: File): Promise<void> {
-    if (!this.currentRecipe) return;
-
-    await this.imageManagementService.uploadImage(
-      file,
-      this.currentRecipe,
-      'general-image',
-      {},
-      () => this.onRecipeChange()
-    );
-  }
-
-  removeGeneralImage(index: number): void {
-    if (!this.currentRecipe) return;
-
-    if (this.currentRecipe.generalImages && index >= 0 && index < this.currentRecipe.generalImages.length) {
-      this.currentRecipe.generalImages.splice(index, 1);
-      this.onRecipeChange();
-    }
-  }
-
-  async onGeneralImageDrop(event: DragEvent): Promise<void> {
-    if (!this.currentRecipe) return;
-
-    await this.imageManagementService.handleGeneralImageDrop(
-      event,
-      this.currentRecipe,
-      () => this.onRecipeChange()
-    );
-  }
-
-
-  public handleMissingImage(media: any, stepIndex: number): void {
-    if (media) {
-      media.isMissing = true;
-    }
-  }
-
-  public handleMissingGeneralImage(image: any, imageIndex: number): void {
-    if (image) {
-      image.isMissing = true;
-    }
-  }
-
-  public async replaceMissingImage(event: Event, media: any, stepIndex: number): Promise<void> {
-    const target = event.target as HTMLInputElement;
-    const file = target.files?.[0];
-    if (!file || !this.currentRecipe) return;
-
-    await this.imageManagementService.uploadImage(
-      file,
-      this.currentRecipe,
-      'replace-step-media',
-      { existingObject: media, stepIndex, targetInput: target },
-      () => this.onRecipeChange()
-    );
-
-    target.value = '';
-  }
-
-  public async replaceMissingGeneralImage(event: Event, image: any, imageIndex: number): Promise<void> {
-    const target = event.target as HTMLInputElement;
-    const file = target.files?.[0];
-    if (!file || !this.currentRecipe) return;
-
-    await this.imageManagementService.uploadImage(
-      file,
-      this.currentRecipe,
-      'replace-general-image',
-      { existingObject: image, targetInput: target },
-      () => this.onRecipeChange()
-    );
-
-    target.value = '';
-  }
-
-
   toggleStep(payload: { tabIndex: number; stepIndex: number }): void {
     this.stepManagementService.toggleStep(payload.tabIndex, payload.stepIndex);
   }
@@ -502,10 +416,6 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
   private initializeExpandedSteps(): void {
     if (!this.currentRecipe) return;
     this.stepManagementService.initializeExpandedSteps(this.currentRecipe);
-  }
-
-  getFieldSuggestions(stepType: string): string[] {
-    return this.fieldSuggestionService.getFieldSuggestions(stepType);
   }
 
 
@@ -697,14 +607,6 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
     );
   }
 
-  getEditedRecipeTitles(): RecipeTitleItem[] {
-    return this.listManagementService.getEditedRecipeTitles(
-      EDITOR_CONSTANTS.TITLE_MAX_LENGTH_TOOLTIP,
-      EDITOR_CONSTANTS.MAX_TOOLTIP_ITEMS
-    );
-  }
-
-
   onTooltipEnter(type: string): void {
     EditorUtils.clearTimeoutSafely(this.tooltipHideTimeout);
     this.showTooltip = type;
@@ -723,13 +625,6 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
     if (recipe) {
       this.loadRecipeToEditor(recipe);
     }
-  }
-
-
-  onImageError(event: Event): void {
-    const img = event.target as HTMLImageElement;
-    img.style.display = 'none';
-    this.logger.warn('Failed to load image:', img.src);
   }
 
 

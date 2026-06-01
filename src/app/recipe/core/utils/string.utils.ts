@@ -12,7 +12,7 @@ const DEFAULT_OPTIONS: Required<SanitizeOptions> = {
   fallback: 'unnamed'
 };
 
-export function sanitizeFileName(text: string, options: SanitizeOptions = {}): string {
+function sanitizeFileName(text: string, options: SanitizeOptions = {}): string {
   if (!text || typeof text !== 'string') {
     return options.fallback ?? DEFAULT_OPTIONS.fallback;
   }

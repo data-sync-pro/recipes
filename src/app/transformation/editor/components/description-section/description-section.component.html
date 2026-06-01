@@ -1,0 +1,26 @@
+<section class="form-section">
+  <h3 class="form-section-title">Description</h3>
+  <div class="form-field">
+    <label for="description">Description (HTML)</label>
+    <textarea
+      id="description"
+      class="form-textarea"
+      rows="6"
+      appAutosize="500"
+      [(ngModel)]="doc.description"
+      (ngModelChange)="changed()"
+    ></textarea>
+  </div>
+  <div class="form-field">
+    <label for="descriptionCode">Description Code</label>
+    <textarea
+      id="descriptionCode"
+      class="form-textarea form-textarea-mono"
+      rows="6"
+      appAutosize="500"
+      [(ngModel)]="doc.descriptionCode"
+      (ngModelChange)="changed()"
+    ></textarea>
+  </div>
+  <app-images-section [images]="doc.images" heading="Description Images"></app-images-section>
+</section>

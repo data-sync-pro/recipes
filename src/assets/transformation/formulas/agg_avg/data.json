@@ -1,0 +1,43 @@
+{
+  "title": "AGG_AVG",
+  "description": "<p>Performs a dynamic aggregation on a specified Salesforce object and returns the <strong>average</strong> of a selected numeric field from all records that match the given criteria.</p>",
+  "syntax": "AGG_AVG(aggregate_object_name, aggregate_field_name, ...[group_field_name, group_field_value], additional_filters_optional) -> Decimal",
+  "parameters": [
+    {
+      "name": "aggregate_object_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the object containing data to aggregate."
+    },
+    {
+      "name": "aggregate_field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the numeric field to average."
+    },
+    {
+      "name": "… group_field_name",
+      "type": "String",
+      "required": "No",
+      "description": "The name of the field used for grouping records."
+    },
+    {
+      "name": "… group_field_value",
+      "type": "Object",
+      "required": "No",
+      "description": "The field value used as grouping criteria."
+    },
+    {
+      "name": "additional_filters_optional",
+      "type": "String",
+      "required": "No",
+      "description": "Additional filter conditions to apply."
+    }
+  ],
+  "examples": [
+    "AGG_AVG(\n\t\"Opportunity\", \n\t\"Amount\", \n\t\"AccountId\", Id, \n\t\"StageName = 'Closed Won'\"\n)\n-- Returns the average Amount from Opportunity records grouped by AccountId, filtered by StageName = \"Closed Won\", where Opportunity.AccountId matches the Id from the source records. \n\n-- At runtime, DSP generates the following SOQL query:\nSELECT AccountId groupField0, AVG(Amount) agg0\nFROM Opportunity \nWHERE AccountId IN ('0018K00000kPuYXQA0', '0018K00000kPuYYQA0', '0018K00000kPuYZQA0', '0018K00000kPuYaQAK', '0018K00000kPuYbQAK') AND StageName = 'Closed Won' \nGROUP BY AccountId",
+    "AGG_AVG(\n\t\"Opportunity\", \n\t\"Amount\",\n\t\"AccountId\", Id,\n\t\"OwnerId\", OwnerId,\n\t\"Type = 'New Business' AND CALENDAR_YEAR(CloseDate) = 2023\"\n)\n--  Returns the average Amount from Opportunity records grouped by AccountId and OwnerId, filtered by Type = \"New Business\" and CloseDate in calendar year 2023, where Opportunity.AccountId and Opportunity.OwnerId match the corresponding values from the source records.\n\n-- At runtime, DSP generates the following SOQL query:\nSELECT AccountId groupField0, OwnerId groupField1, AVG(Amount) agg0 \nFROM Opportunity \nWHERE (AccountId IN ('0018K00000kPuYXQA0', '0018K00000kPuYYQA0', '0018K00000kPuYZQA0', '0018K00000kPuYaQAK', '0018K00000kPuYbQAK') AND OwnerId IN ('005D2000006JY2bIAG', '0058K0000047WdvQAE', '0055e000007rpICAAY')) AND Type = 'New Business' AND CALENDAR_YEAR(CloseDate) = 2023 \nGROUP BY AccountId, OwnerId"
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

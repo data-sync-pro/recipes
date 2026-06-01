@@ -12,13 +12,13 @@ import { FileStorageAdapter } from '../../core/storage';
 import { Store } from '../../core/store/recipe.store';
 import { LoggerService } from '../../core/services/logger.service';
 
-export interface RecipeChangeResult {
+interface RecipeChangeResult {
   tabUpdated: boolean;
   titleChanged: boolean;
   imagesScheduled: boolean;
 }
 
-export interface TitleChangeResult {
+interface TitleChangeResult {
   changed: boolean;
   oldTitle: string;
   newTitle: string;
@@ -90,7 +90,7 @@ export class ChangeCoordinatorService {
     return result;
   }
 
-  scheduleImageNameUpdate(recipe: RecipeData): void {
+  private scheduleImageNameUpdate(recipe: RecipeData): void {
     if (this.imageNameUpdateTimeout) {
       clearTimeout(this.imageNameUpdateTimeout);
     }
@@ -102,7 +102,7 @@ export class ChangeCoordinatorService {
     this.logger.debug('Image name update scheduled', { recipeId: recipe.id });
   }
 
-  async updateImageNamesForContentChange(recipe: RecipeData): Promise<void> {
+  private async updateImageNamesForContentChange(recipe: RecipeData): Promise<void> {
     try {
       let updated = false;
 

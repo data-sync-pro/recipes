@@ -1,0 +1,20 @@
+{
+  "title": "TRIGGER_IS_FLIPPED",
+  "description": "<p>Returns TRUE if the specified field's value has changed in the current transaction (i.e., the field was updated or flipped from its previous value).</p>",
+  "syntax": "TRIGGER_IS_FLIPPED(field_name) -> Boolean",
+  "parameters": [
+    {
+      "name": "field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the field to check for value change."
+    }
+  ],
+  "examples": [
+    "TRIGGER_IS_FLIPPED(\"IsClosed\")\n-- Returns TRUE if IsClosed was flipped from FALSE to TRUE in this transaction.\n-- Typically used with TRIGGER_FLIPPER() to detect one-time manual triggers in before-insert or before-update contexts."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "TRIGGER_FLIPPER"
+  ]
+}

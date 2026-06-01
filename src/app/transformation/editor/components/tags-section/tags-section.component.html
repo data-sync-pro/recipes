@@ -1,0 +1,50 @@
+<section class="form-section">
+  <h3 class="form-section-title">
+    Tags
+    <span class="tag-override-hint" *ngIf="isOverridden">— modified, will appear in tags.json.patch on export</span>
+  </h3>
+  <div class="tag-chips" *ngIf="tags.length">
+    <span
+      *ngFor="let t of tags; let i = index; trackBy: trackByIndex"
+      class="tag-chip"
+      [class.tag-chip-primary]="i === 0"
+    >
+      <span class="tag-chip-label">{{ t }}</span>
+      <button
+        type="button"
+        class="tag-chip-action"
+        (click)="moveUp(i)"
+        [disabled]="i === 0"
+        title="Move up (the first tag is treated as primary)"
+      >↑</button>
+      <button
+        type="button"
+        class="tag-chip-action"
+        (click)="moveDown(i)"
+        [disabled]="i === tags.length - 1"
+        title="Move down"
+      >↓</button>
+      <button
+        type="button"
+        class="tag-chip-action tag-chip-remove"
+        (click)="removeTag(i)"
+        title="Remove"
+      >×</button>
+    </span>
+  </div>
+  <p class="form-empty-hint" *ngIf="!tags.length">No tags. Add at least one to make this function show up under a category.</p>
+  <div class="tag-add-row">
+    <input
+      type="text"
+      class="form-input"
+      list="tag-options"
+      [(ngModel)]="newTag"
+      (keydown.enter)="addTag(); $event.preventDefault()"
+      placeholder="Add a tag (e.g. Logical)"
+    />
+    <button type="button" class="form-add-btn" (click)="addTag()">+ Add tag</button>
+    <datalist id="tag-options">
+      <option *ngFor="let t of availableTags" [value]="t"></option>
+    </datalist>
+  </div>
+</section>

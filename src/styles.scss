@@ -1,11 +1,11 @@
 // Import typography variables first
-@import './styles/typography';
+@import 'typography';
 
 // Import Salesforce Lightning Design System components
 @import 'salesforce-components';
 
 // Import notification styles
-@import './styles/notification.scss';
+@import 'notification';
 
 // Import Prism syntax highlighting theme
 @import 'prismjs/themes/prism';
@@ -23,24 +23,6 @@ html {
 
   &::-webkit-scrollbar {
     display: none;
-  }
-}
-
-.router-link-active {
-  outline: none;
-  box-shadow: none;
-  border: none;
-  background-image: none;
-  text-decoration: none;
-}
-
-a {
-  &:focus,
-  &:active,
-  &:focus-visible {
-    outline: none;
-    box-shadow: none;
-    border: none;
   }
 }
 

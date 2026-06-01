@@ -1,0 +1,23 @@
+.breadcrumb {
+  margin: 0;    
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 3.7rem;
+}
+
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "/";
+  padding-left: 0.25rem;
+  color: #333;
+}
+
+.breadcrumb-item a {
+  color: #333;
+  text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}

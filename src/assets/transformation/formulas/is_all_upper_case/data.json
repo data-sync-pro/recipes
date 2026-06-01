@@ -1,0 +1,28 @@
+{
+  "title": "IS_ALL_UPPER_CASE",
+  "description": "<p>Returns TRUE if the string contains only uppercase alphabetical characters; otherwise, returns FALSE.</p>",
+  "syntax": "IS_ALL_UPPER_CASE(string) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to evaluate."
+    }
+  ],
+  "examples": [
+    "IS_ALL_UPPER_CASE(\"STATUSOK\")\n-- Returns TRUE.",
+    "IS_ALL_UPPER_CASE(\"Device #01\")\n-- Returns FALSE, only uppercase letters A–Z are accepted."
+  ],
+  "tips": [
+    {
+      "text": "<p>Returns FALSE if the string is empty.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Only uppercase letters (A–Z) are accepted; any lowercase letters, numbers, spaces, or symbols will result in FALSE.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

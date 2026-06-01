@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, map, distinctUntilChanged } from 'rxjs';
 import {
   StoreState,
   DataState,
   EditorState,
-  UIState,
-  StateUpdate
+  UIState
 } from './store.interface';
-import { Recipe, RecipeData, EditorTab } from '../models/recipe.model';
+import { Recipe, EditorTab } from '../models/recipe.model';
 import { LoggerService } from '../services/logger.service';
 import { RECIPE_SECTIONS } from '../constants/recipe.constants';
 
@@ -15,7 +14,7 @@ import { RECIPE_SECTIONS } from '../constants/recipe.constants';
 @Injectable({
   providedIn: 'root'
 })
-export class Store {
+export class Store implements OnDestroy {
   private readonly initialState: StoreState = {
     data: {
       recipes: [],
@@ -81,12 +80,8 @@ export class Store {
     this.setupViewportListener();
   }
 
-  getState(): StoreState {
+  private getState(): StoreState {
     return this.stateSubject.value;
-  }
-
-  getDataState(): DataState {
-    return this.stateSubject.value.data;
   }
 
   getEditorState(): EditorState {
@@ -95,18 +90,6 @@ export class Store {
 
   getUIState(): UIState {
     return this.stateSubject.value.ui;
-  }
-
-  updateState(update: StateUpdate): void {
-    const currentState = this.getState();
-    const newState: StoreState = {
-      data: update.data ? { ...currentState.data, ...update.data } : currentState.data,
-      editor: update.editor ? { ...currentState.editor, ...update.editor } : currentState.editor,
-      ui: update.ui ? { ...currentState.ui, ...update.ui } : currentState.ui
-    };
-
-    this.stateSubject.next(newState);
-    this.logger.debug('State updated', update);
   }
 
   updateDataState(update: Partial<DataState>): void {
@@ -118,7 +101,7 @@ export class Store {
     this.stateSubject.next(newState);
   }
 
-  updateEditorState(update: Partial<EditorState>): void {
+  private updateEditorState(update: Partial<EditorState>): void {
     const currentState = this.getState();
     const newState: StoreState = {
       ...currentState,
@@ -136,19 +119,9 @@ export class Store {
     this.stateSubject.next(newState);
   }
 
-  resetState(): void {
-    this.stateSubject.next(this.initialState);
-    this.logger.info('State reset to initial values');
-  }
-
   setRecipes(recipes: Recipe[]): void {
     this.updateDataState({ recipes });
   }
-
-
-
-
-
 
   setLoadingRecipes(isLoading: boolean): void {
     this.updateDataState({ isLoadingRecipes: isLoading });
@@ -157,10 +130,6 @@ export class Store {
   setRecipesLoadError(error: string | null): void {
     this.updateDataState({ recipesLoadError: error });
   }
-
-
-
-
 
   openSearchOverlay(): void {
     this.updateDataState({ searchOverlayOpen: true });
@@ -184,7 +153,6 @@ export class Store {
       searchHasResults: true
     });
   }
-
 
   addEditorTab(tab: EditorTab): void {
     const currentTabs = this.getEditorState().tabs;
@@ -244,13 +212,9 @@ export class Store {
     return true;
   }
 
-
-
-
   setEditorImporting(isImporting: boolean, progress: EditorState['importProgress'] = null): void {
     this.updateEditorState({ isImporting, importProgress: progress });
   }
-
 
   setCurrentView(view: 'home' | 'category' | 'recipe' | 'editor'): void {
     this.updateUIState({ currentView: view });
@@ -261,7 +225,7 @@ export class Store {
     this.setSidebarCollapsed(!currentState.sidebarCollapsed);
   }
 
-  setSidebarCollapsed(collapsed: boolean): void {
+  private setSidebarCollapsed(collapsed: boolean): void {
     this.updateUIState({ sidebarCollapsed: collapsed });
     this.saveUIPreferences();
   }
@@ -271,15 +235,9 @@ export class Store {
     this.updateUIState({ mobileSidebarOpen: !currentState.mobileSidebarOpen });
   }
 
-
   closeMobileSidebar(): void {
     this.updateUIState({ mobileSidebarOpen: false });
   }
-
-  setMobile(isMobile: boolean): void {
-    this.updateUIState({ isMobile });
-  }
-
 
   setActiveSectionId(sectionId: string): void {
     this.updateUIState({ activeSectionId: sectionId });
@@ -293,30 +251,14 @@ export class Store {
     this.updateUIState({ showLoadingOverlay: show });
   }
 
-
-
-
-
   getActiveEditorTab(): EditorTab | undefined {
     const editorState = this.getEditorState();
     return editorState.tabs.find(t => t.id === editorState.activeTabId);
   }
 
-  getCurrentRecipe(): RecipeData | null {
-    const activeTab = this.getActiveEditorTab();
-    return activeTab ? activeTab.recipe : null;
-  }
-
   hasUnsavedChanges(): boolean {
     return this.getEditorState().tabs.some(t => t.hasChanges);
   }
-
-
-
-
-
-
-
 
   selectActiveTab(): Observable<EditorTab | undefined> {
     return this.editor$.pipe(
@@ -324,11 +266,6 @@ export class Store {
       distinctUntilChanged()
     );
   }
-
-
-
-
-
 
   private loadUIPreferences(): void {
     if (typeof localStorage === 'undefined') {
@@ -385,6 +322,17 @@ export class Store {
     window.addEventListener('resize', this.resizeHandler);
   }
 
+  ngOnDestroy(): void {
+    if (this.resizeTimer) {
+      clearTimeout(this.resizeTimer);
+      this.resizeTimer = null;
+    }
+    if (this.resizeHandler && typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.resizeHandler);
+      this.resizeHandler = null;
+    }
+  }
+
 
   private checkMobileView(): void {
     if (typeof window === 'undefined') {
@@ -397,17 +345,5 @@ export class Store {
     if (isMobile !== currentMobile) {
       this.updateUIState({ isMobile });
     }
-  }
-
-  destroy(): void {
-    if (this.resizeTimer) {
-      clearTimeout(this.resizeTimer);
-    }
-
-    if (this.resizeHandler && typeof window !== 'undefined') {
-      window.removeEventListener('resize', this.resizeHandler);
-    }
-
-    this.logger.debug('Store destroyed');
   }
 }

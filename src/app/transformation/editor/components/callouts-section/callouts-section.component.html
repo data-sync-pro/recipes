@@ -1,0 +1,42 @@
+<section class="form-section">
+  <h3 class="form-section-title">{{ heading }}</h3>
+  <div class="callout-list">
+    <div
+      *ngFor="let c of callouts; let i = index; trackBy: trackByIndex"
+      class="callout-card"
+      [attr.data-type]="c.type"
+    >
+      <div class="callout-card-head">
+        <select
+          class="form-input form-input-compact callout-type-select"
+          [(ngModel)]="c.type"
+          (ngModelChange)="changed()"
+        >
+          <option *ngFor="let t of typeOptions" [value]="t">{{ t }}</option>
+        </select>
+        <input
+          type="text"
+          class="form-input form-input-compact callout-title-input"
+          placeholder="Optional title"
+          [(ngModel)]="c.title"
+          (ngModelChange)="changed()"
+        />
+        <div class="row-controls">
+          <button type="button" class="row-btn" (click)="moveUp(i)" [disabled]="i === 0">↑</button>
+          <button type="button" class="row-btn" (click)="moveDown(i)" [disabled]="i === callouts.length - 1">↓</button>
+          <button type="button" class="row-btn row-btn-danger" (click)="remove(i)">×</button>
+        </div>
+      </div>
+      <textarea
+        class="form-textarea"
+        rows="3"
+        appAutosize="400"
+        placeholder="Content (HTML allowed)"
+        [(ngModel)]="c.content"
+        (ngModelChange)="changed()"
+      ></textarea>
+    </div>
+  </div>
+  <p class="form-empty-hint" *ngIf="!callouts.length">No callouts.</p>
+  <button type="button" class="form-add-btn" (click)="add()">+ Add callout</button>
+</section>

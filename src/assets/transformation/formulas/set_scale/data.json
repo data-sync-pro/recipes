@@ -1,0 +1,23 @@
+{
+  "title": "SET_SCALE",
+  "description": "Rounds a number to the specified number of decimal places using half-even rounding.",
+  "syntax": "SET_SCALE(num, num_digits) -> Decimal",
+  "parameters": [
+    {
+      "name": "num",
+      "type": "Number",
+      "required": "Yes",
+      "description": "A numeric literal, field, or expression to format."
+    },
+    {
+      "name": "num_digits",
+      "type": "Integer",
+      "required": "Yes",
+      "description": "The number of digits to keep after the decimal point."
+    }
+  ],
+  "examples": [
+    "SET_SCALE(12.345, 2)\n-- Returns 12.34.",
+    "SET_SCALE(-2.25, 1)\n-- Returns -2.2."
+  ]
+}

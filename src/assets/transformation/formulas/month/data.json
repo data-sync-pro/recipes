@@ -1,0 +1,22 @@
+{
+  "title": "MONTH",
+  "description": "<p>Returns the month component (1=January) from a Date or Datetime, evaluated in the context user's local time zone.</p>",
+  "syntax": "MONTH(date/datetime) -> Integer",
+  "parameters": [
+    {
+      "name": "date/datetime",
+      "type": "Date/Datetime",
+      "required": "Yes",
+      "description": "The Date or Datetime to extract the month from."
+    }
+  ],
+  "examples": [
+    "MONTH(DATE(2024, 1, 25))\n-- Returns 1.",
+    "MONTH(TO_DATETIME(\"2024-08-15T14:45:00.000Z\"))\n-- Returns 8."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "DATE",
+    "TO_DATETIME"
+  ]
+}

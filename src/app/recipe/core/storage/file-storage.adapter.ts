@@ -172,13 +172,13 @@ export class FileStorageAdapter {
     }
   }
 
-  isValidImageFile(file: File): boolean {
+  private isValidImageFile(file: File): boolean {
     const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
     return validTypes.includes(file.type);
   }
 
 
-  isValidFileSize(file: File): boolean {
+  private isValidFileSize(file: File): boolean {
     return file.size <= FILE_SIZE.MAX_FILE_SIZE_BYTES;
   }
 

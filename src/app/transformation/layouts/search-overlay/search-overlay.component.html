@@ -1,0 +1,63 @@
+<div class="search-overlay" (click)="close()">
+  <div class="search-overlay-content" (click)="$event.stopPropagation()">
+    <div class="overlay-search-wrapper">
+      <input
+        #searchInput
+        type="text"
+        class="overlay-search-box"
+        placeholder="Search..."
+        [(ngModel)]="searchQuery"
+        (input)="filterSuggestions()"
+        (keydown)="onKeyDown($event)"
+      />
+      <span class="shortcut-hint shortcut-clickable" (click)="close()"
+        >Esc</span
+      >
+    </div>
+
+    <div class="filters-section">
+      <div class="filter-group">
+        <div class="filter-header">
+          <div class="filter-label">Tags</div>
+          <button class="clear-filters-btn" (click)="clearFilters()" *ngIf="searchQuery.trim().length > 0 || selectedTags.length > 0">
+            Clear Filters
+          </button>
+        </div>
+
+        <div class="filter-chips scrollable-container">
+          <span
+            class="filter-chip"
+            *ngFor="let tag of tags; trackBy: trackByString"
+            [class.active]="selectedTags.includes(tag)"
+            (click)="toggleTag(tag)"
+          >
+            {{ tag }}
+          </span>
+        </div>
+      </div>
+      <div
+        class="suggestions-list"
+        *ngIf="
+          (searchQuery.trim().length > 0 || selectedTags.length > 0) &&
+          filteredSuggestions.length > 0
+        "
+      >
+        <ng-container *ngFor="let item of filteredSuggestions; let i = index; trackBy: trackBySuggestionName">
+          <div
+            class="suggestion-item"
+            [class.selected]="selectedIndex === i"
+            *ngIf="item.name !== 'GLOBAL_VARIABLES'"
+            (click)="onSelectSuggestion(item)"
+          >
+            <div class="suggestion-left">
+              <span>{{ item.name }}</span>
+            </div>
+            <div class="suggestion-tags">
+              <span class="tag" *ngFor="let tag of item.Tags; trackBy: trackByString">{{ tag }}</span>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

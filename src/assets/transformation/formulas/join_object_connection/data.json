@@ -1,0 +1,55 @@
+{
+  "title": "JOIN_OBJECT_CONNECTION",
+  "description": "<p>Returns records from a specified object through a named connection or a related connection, filtered by joining field-value pairs, with an optional additional filtering clause.</p>",
+  "syntax": "JOIN_OBJECT_CONNECTION(connection_name, object_name, ...[joining_field_name, joining_field_value], additional_clause_optional)",
+  "parameters": [
+    {
+      "name": "connection_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the connection used to retrieve records, which can be either a named connection or a related connection."
+    },
+    {
+      "name": "object_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the object from which records are retrieved."
+    },
+    {
+      "name": "… joining_field_name",
+      "type": "String",
+      "required": "No",
+      "description": "The field name to match for filtering records. Multiple pairs allowed. Left Join if any pairs are included; Cross Join if all are omitted."
+    },
+    {
+      "name": "… joining_field_value",
+      "type": "Object",
+      "required": "No",
+      "description": "The field value used as a filter criterion."
+    },
+    {
+      "name": "additional_clause_optional",
+      "type": "String",
+      "required": "No",
+      "description": "An additional query clause for more specific filtering."
+    }
+  ],
+  "examples": [
+    "JOIN_OBJECT_CONNECTION(\n            \"Current\", \n            \"Opportunity\",\n            \"AccountId\", Id, \n            \"IsClosed = true\"\n)\n-- Fetches Opportunities from the \"Current\" connection where AccountId equals the current record’s Id, further filtered to IsClosed = true",
+    "JOIN_OBJECT_CONNECTION(\n            \"$Source\", \n            \"Opportunity\",\n            \"AccountId\", Id, \n            \"IsClosed = true\"\n)\n-- Fetches Opportunities from the $Source connection where AccountId equals the current record’s Id, further filtered to IsClosed = true",
+    "JOIN_OBJECT_CONNECTION(\n            \"$Target\", \n            \"Opportunity\", \n            \"AccountId\", Id, \n            \"OwnerId\", OwnerId, \n            \"FiscalYear = 2024\"\n)\n-- Fetches Opportunities from the $Target connection where AccountId and OwnerId equals the current record’s Id and OwnerId, further filtered to FiscalYear = 2024."
+  ],
+  "tips": [
+    {
+      "text": "<p>Defines this function during the Scoping stage to retrieve and prepare data for subsequent use in the Mapping stage.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Be careful to provide joining pairs when using this function. Omitting joining criteria can result in cross joins, creating excessively large record sets. Follow Salesforce best practices to prevent exceeding system limits.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": [
+    "$JOINER"
+  ]
+}

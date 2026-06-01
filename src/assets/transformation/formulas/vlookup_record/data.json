@@ -1,0 +1,50 @@
+{
+  "title": "VLOOKUP_RECORD",
+  "description": "<p>Performs a dynamic lookup on a Salesforce object and returns the full Object record from the first record that matches the provided field-value pairs.</p>",
+  "syntax": "VLOOKUP_RECORD(target_object_name, ...[matching_field_name, matching_field_value], additional_clause_optional) -> Object",
+  "parameters": [
+    {
+      "name": "target_object_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the object to look up."
+    },
+    {
+      "name": "...matching_field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the field used to match records."
+    },
+    {
+      "name": "...matching_field_value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The field value used as matching criteria."
+    },
+    {
+      "name": "additional_clause_optional",
+      "type": "String",
+      "required": "No",
+      "description": "Additional query conditions for more precise filtering."
+    }
+  ],
+  "examples": [
+    "VLOOKUP_RECORD(\"Opportunity\", \n               \"AccountId\", Id)\n-- Returns the Opportunity record where AccountId matches the current record’s Id.",
+    "VLOOKUP_RECORD(\"Opportunity\", \n               \"AccountId\", Id, \n               \"OwnerId\", OwnerId, \n               \"Probability > 90\")\n-- Returns the Opportunity record where:\n-- AccountId matches the current record's Id,\n-- OwnerId matches the current record's OwnerId,\n-- Probability > 90."
+  ],
+  "tips": [
+    {
+      "text": "<p>Use VLOOKUP_RECORD under the <strong>“Related”</strong> tab in the <strong>“Variables”</strong> section. You can also set the variable’s <strong>Scope</strong>—Executable, Pipeline, Connection, or Global.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>After the variable is created, reference it in the <strong>Mapping</strong> step (e.g., <code>#accountVar.Name</code>, <code>#accountVar.OwnerId</code>).</p>",
+      "children": []
+    },
+    {
+        "text": "<p>SOQL queries have a <strong>governor limit of 50,000</strong> rows per transaction. Optimize your filters or leverage indexing to ensure your lookup remains within this limit.</p>",
+        "children": []
+      }
+  ],
+  "relatedFormulas": []
+}

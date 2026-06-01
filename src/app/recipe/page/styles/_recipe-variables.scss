@@ -49,6 +49,37 @@ $color-border: #e1e5e9;             // Main border color
 $color-border-light: #dadce0;       // Light borders
 $color-border-lighter: #f1f3f4;     // Lighter borders, dividers
 $color-border-gray: #e0e0e0;        // Gray border for separators
+$color-border-divider: #dee2e6;     // Section divider border (8 hardcoded occurrences)
+
+// ==================== Recipe Brand Colors (Hardcoded hex match) ====================
+$color-primary-brand: #2253B2;             // Recipe main blue (38 hardcoded occurrences)
+$color-primary-brand-hover: #1a4490;       // Hover state
+$color-primary-brand-soft: #2252b248;      // Card hover border (semi-transparent)
+$color-primary-brand-translucent: #2253B2CC; // Border-left translucent variant
+
+// ==================== Form Control Colors ====================
+$color-input-text: #495057;                // Input text
+$color-input-border: #ced4da;              // Input border
+$color-input-border-hover: #adb5bd;        // Input hover border
+$color-input-focus: #667eea;               // Input focus border (purple-blue)
+$color-input-focus-shadow: rgba(102, 126, 234, 0.25);
+$color-input-disabled-bg: #e9ecef;         // Disabled background
+$color-input-disabled-text: #6c757d;       // Disabled text (28 hardcoded occurrences)
+
+// ==================== Button Colors (Bootstrap-derived) ====================
+$color-btn-primary: #007bff;
+$color-btn-primary-hover: #0056b3;
+$color-btn-secondary: #6c757d;
+$color-btn-secondary-hover: #545b62;
+$color-btn-success: #28a745;
+$color-btn-success-hover: #1e7e34;
+$color-btn-danger: #dc3545;
+$color-btn-danger-hover: #c82333;
+
+// ==================== Section Card Colors ====================
+$color-section-bg: #f8f9fa;                // Section container bg (18 hardcoded occurrences, alias of $color-bg-light)
+$color-section-border: #e9ecef;            // Section container border
+$color-section-divider: #667eea;           // h2 underline (same as input focus)
 
 // Scrollbar Colors
 $color-scrollbar: #dadce0;          // Scrollbar thumb
@@ -83,6 +114,7 @@ $radius-full: 9999px;               // Fully rounded (pills, badges)
 // ==================== Transitions ====================
 $transition-fast: all 0.15s ease;                           // Fast transitions
 $transition-normal: all 0.2s ease;                          // Normal transitions
+$transition-normal-in-out: all 0.2s ease-in-out;            // Normal with ease-in-out (form controls)
 $transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); // Smooth Material Design easing
 
 // ==================== Shadows ====================

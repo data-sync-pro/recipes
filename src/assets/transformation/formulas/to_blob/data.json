@@ -1,0 +1,18 @@
+{
+  "title": "TO_BLOB",
+  "description": "<p>Converts a string (String) into an Apex Blob type. If the input cannot be converted, the function throws an error.</p>",
+  "syntax": "TO_BLOB(string) -> Blob",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to convert into a Blob."
+    }
+  ],
+  "examples": [
+    "TO_BLOB(Document_Content__c)\n-- Converts Document_Content__c into a Blob."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

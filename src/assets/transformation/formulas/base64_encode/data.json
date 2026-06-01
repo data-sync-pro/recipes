@@ -1,0 +1,18 @@
+{
+  "title": "BASE64_ENCODE",
+  "description": "<p>Returns the Base64-encoded representation of the provided string.</p>",
+  "syntax": "BASE64_ENCODE(string) -> String",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to encode into Base64."
+    }
+  ],
+  "examples": [
+    "BASE64_ENCODE(\"Data Sync Pro\")\n-- Returns \"RGF0YSBTeW5jIFBybw==\"."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

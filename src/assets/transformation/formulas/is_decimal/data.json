@@ -1,0 +1,24 @@
+{
+  "title": "IS_DECIMAL",
+  "description": "<p>Returns TRUE if the string represents a valid decimal number; otherwise, returns FALSE.</p>",
+  "syntax": "IS_DECIMAL(string) -> Boolean",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The text to evaluate as a decimal number."
+    }
+  ],
+  "examples": [
+    "IS_DECIMAL(\"2500.75\")\n-- Returns TRUE.",
+    "IS_DECIMAL(\"$1,250.00\")\n-- Returns FALSE, only decimal numbers are accepted."
+  ],
+  "tips": [
+    {
+      "text": "<p>The function returns FALSE if the string is empty or contains any characters that do not form a valid decimal number.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}

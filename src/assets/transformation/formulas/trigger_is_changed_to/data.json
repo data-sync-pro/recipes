@@ -1,0 +1,24 @@
+{
+  "title": "TRIGGER_IS_CHANGED_TO",
+  "description": "<p>Returns TRUE if the specified field's value has changed to any of the provided new values in the current trigger context; otherwise, returns FALSE.</p>",
+  "syntax": "TRIGGER_IS_CHANGED_TO(field_name, ...new_values) -> Boolean",
+  "parameters": [
+    {
+      "name": "field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The API name of the field to evaluate."
+    },
+    {
+      "name": "… new_values",
+      "type": "Object",
+      "required": "Yes",
+      "description": "One or more values to compare against the field’s new value. If the field was previously different and now equals one of the specified values, the function returns TRUE."
+    }
+  ],
+  "examples": [
+    "TRIGGER_IS_CHANGED_TO(\"Type\", \"Vendor\", \"Partner\")\n-- Returns TRUE if Type is changed to \"Vendor\" or \"Partner\"; otherwise, FALSE."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

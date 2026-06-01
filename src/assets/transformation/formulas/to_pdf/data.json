@@ -1,0 +1,20 @@
+{
+  "title": "TO_PDF",
+  "description": "Converts a provided string or HTML input into PDF content.",
+  "syntax": "TO_PDF(string) -> Blob",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "String",
+      "required": "Yes",
+      "description": "A string or HTML content to convert into PDF content."
+    }
+  ],
+  "examples": [
+    "TO_PDF(\"\n  <h1>Welcome</h1>\n  <p>This PDF was generated from static HTML content.</p>\"\n)",
+    "TO_PDF(\n  FORMAT_STRING_TEMPLATE(\"\n\t<h1>Account Summary</h1>\n\t<p><strong>Account Name:</strong> {!Name}</p>\n\t<p><strong>Account Number:</strong> {!AccountNumber}</p>\n\t<p><strong>Phone:</strong> {!Phone}</p>\n\t<p><strong>Website:</strong> {!Website}</p>\n\t<p><strong>Industry:</strong> {!Industry}</p>\")\n)"
+  ],
+  "relatedFormulas": [
+    "FORMAT_STRING_TEMPLATE"
+  ]
+}

@@ -1,0 +1,202 @@
+<div class="doc-page" *ngIf="docContent">
+  <h1 class="doc-title" *ngIf="docContent.title">{{ docContent.title }}</h1>
+  <section class="doc-section" *ngIf="docContent.globalVariables">
+    <h1 class="doc-title">Global Variables</h1>
+    <table class="doc-tables">
+      <thead>
+        <tr>
+          <th>Variable</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let variable of docContent.globalVariables">
+          <td>
+            <a *ngIf="variable.variable === '$JOINER'; else plainText"
+              [routerLink]="['/transformation', 'joiner']">
+              {{ variable.variable }}
+            </a>
+          </td>
+
+          <ng-template #plainText>
+            {{ variable.variable }}
+          </ng-template>
+          <td>{{ variable.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section *ngIf="docContent.operators">
+    <div *ngFor="let group of docContent?.operators | keyvalue">
+      <h2>{{ group.key }}</h2>
+      <table class="doc-tables">
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let operator of group.value">
+            <td>{{ operator.operator }}</td>
+            <td>{{ operator.name }}</td>
+            <td>{{ operator.description }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="doc-section" *ngIf="docContent.description">
+    <h2>Description</h2>
+    <p [innerHTML]="docContent.description"></p>
+    <div class="doc-images" *ngIf="docContent.images?.length">
+      <img
+        *ngFor="let img of docContent.images"
+        [src]="img.src"
+        alt="{{ img.alt }}"
+        loading="lazy"
+        (click)="openImageViewer(img.src, img.alt)"
+        class="clickable-image"
+      />
+    </div>
+    <div class="doc-example" *ngIf="highlightedDescriptionCode">
+      <!-- no leading spaces before the code -->
+      <pre><code class="hljs language-sql"
+                 [innerHTML]="highlightedDescriptionCode"></code></pre>
+    </div>
+    <app-callout *ngFor="let callout of docContent.descriptionCallouts"
+      [type]="callout.type"
+      [title]="callout.title"
+      [content]="callout.content">
+    </app-callout>
+  </section>
+
+  <section class="doc-section" *ngIf="docContent.syntax">
+    <h2>Syntax</h2>
+    <pre class="doc-syntax">{{ docContent.syntax }}</pre>
+    <app-callout *ngFor="let callout of docContent.syntaxCallouts"
+      [type]="callout.type"
+      [title]="callout.title"
+      [content]="callout.content">
+    </app-callout>
+  </section>
+
+  <section class="doc-section" *ngIf="docContent.parameters?.length">
+    <h2>Parameters</h2>
+    <table class="doc-table">
+      <thead>
+        <tr>
+          <th>Parameter</th>
+          <th>Data Type</th>
+          <th>Required</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let param of docContent.parameters">
+          <td>{{ param.name }}</td>
+          <td>{{ param.type }}</td>
+          <td>{{ param.required }}</td>
+          <td>{{ param.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <app-callout *ngFor="let callout of docContent.parametersCallouts"
+      [type]="callout.type"
+      [title]="callout.title"
+      [content]="callout.content">
+    </app-callout>
+  </section>
+  <section class="doc-section" *ngIf="processedExamples.length">
+    <h2 *ngIf="processedExamples.length === 1">Example</h2>
+    <h2 *ngIf="processedExamples.length > 1">Examples</h2>
+  
+    <div class="example-item" *ngFor="let example of processedExamples">
+      <div class="doc-example" *ngIf="example.code">
+        <pre><code class="hljs language-sql" [innerHTML]="example.code"></code></pre>
+      </div>
+      <p class="example-description" *ngIf="example.description">{{ example.description }}</p>
+      <div class="doc-images" *ngIf="example.images?.length">
+        <img
+          *ngFor="let img of example.images"
+          [src]="img.src"
+          alt="{{ img.alt }}"
+          loading="lazy"
+          (click)="openImageViewer(img.src, img.alt)"
+          class="clickable-image"
+        />
+      </div>
+    </div>
+    <app-callout *ngFor="let callout of docContent.examplesCallouts"
+      [type]="callout.type"
+      [title]="callout.title"
+      [content]="callout.content">
+    </app-callout>
+  </section>
+
+  <section class="doc-section" *ngIf="docContent.tips?.length">
+    <h2>Tips</h2>
+    <ng-container *ngTemplateOutlet="recursiveList; context: { tips: docContent.tips }"></ng-container>
+    <app-callout *ngFor="let callout of docContent.tipsCallouts"
+      [type]="callout.type"
+      [title]="callout.title"
+      [content]="callout.content">
+    </app-callout>
+  </section>
+
+  <ng-template #recursiveList let-tips="tips">
+    <ul>
+      <li *ngFor="let tip of tips">
+        <ng-container *ngIf="tip.code; else normalTip">
+          <div [innerHTML]="tip.text"></div>
+          <div class="doc-example">
+            <pre><code class="language-sql">{{ tip.code }}</code></pre>
+          </div>
+        </ng-container>
+        <ng-template #normalTip>
+          <div [innerHTML]="tip.text"></div>
+        </ng-template>
+        <ng-container *ngIf="tip.children?.length">
+          <ng-container *ngTemplateOutlet="recursiveList; context: { tips: tip.children }"></ng-container>
+        </ng-container>
+      </li>
+    </ul>
+  </ng-template>
+
+  <section class="doc-section" *ngIf="docContent?.title?.startsWith('AGG_')">
+    <h2>Related information</h2>
+    <ul>
+      <li>
+        DSP handles AGG_ functions efficiently. See
+        <a [routerLink]="['/transformation', 'aggregate_general']">AGGREGATE GENERAL</a>
+        for details.
+      </li>
+    </ul>
+  </section>
+
+  <section class="doc-section" *ngIf="docContent.relatedFormulas?.length">
+    <h2 *ngIf="(docContent.relatedFormulas?.length || 0) === 1">
+      Related Formula
+    </h2>
+    <h2 *ngIf="(docContent.relatedFormulas?.length || 0) > 1">
+      Related Formulas
+    </h2>
+    <ul>
+      <li *ngFor="let formula of docContent.relatedFormulas">
+        <a [routerLink]="(getRelatedFormulaLink$(formula) | async) || ['/transformation', formula | lowercase]">
+          {{ formula }}
+        </a>
+      </li>
+    </ul>
+  </section>
+</div>
+
+<app-image-viewer 
+  *ngIf="showImageViewer"
+  [imageUrl]="selectedImageUrl"
+  [imageAlt]="selectedImageAlt"
+  (closeViewer)="closeImageViewer()"
+></app-image-viewer>

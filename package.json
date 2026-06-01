@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "node scripts/generate-version.js && ng build",
-    "build:github-pages": "node scripts/generate-version.js && ng build --configuration github-pages",
+    "start": "node scripts/gen-formulas-index.mjs && ng serve",
+    "build": "node scripts/gen-formulas-index.mjs && node scripts/generate-version.js && ng build",
+    "build:github-pages": "node scripts/gen-formulas-index.mjs && node scripts/generate-version.js && ng build --configuration github-pages",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "generate-version": "node scripts/generate-version.js"
+    "generate-version": "node scripts/generate-version.js",
+    "gen-formulas-index": "node scripts/gen-formulas-index.mjs"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +26,7 @@
     "@angular/service-worker": "^15.2.0",
     "@types/prismjs": "^1.26.6",
     "bootstrap": "^5.3.3",
+    "highlight.js": "^11.11.1",
     "js-beautify": "^1.15.4",
     "jszip": "^3.10.1",
     "prismjs": "^1.30.0",
