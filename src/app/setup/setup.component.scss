@@ -261,7 +261,7 @@ $hover-bg: #f1f5f9;
       .nav-children {
         margin-left: 17px;
         padding-left: 8px;
-        border-left: 1px solid $border-light;
+        //border-left: 1px solid $border-light;
         transition: border-color 0.2s ease;
 
         &.has-active {
@@ -347,6 +347,65 @@ $hover-bg: #f1f5f9;
     margin: 0.5rem 0 1.5rem;
     padding-bottom: 16px;
     border-bottom: 2px solid #e9ecef;
+  }
+}
+
+.setup-related {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #e9ecef;
+  .setup-related-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #333;
+    margin: 0 0 0.5rem;
+  }
+
+  .setup-related-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .setup-related-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0;
+    color: #2253B2;
+    text-decoration: none;
+    font-size: 1rem;
+    line-height: 1.4;
+
+    .setup-related-arrow {
+      font-size: 1rem;
+      width: 1rem;
+      height: 1rem;
+      color: #94a3b8;
+      transition: transform 120ms ease, color 120ms ease;
+    }
+
+    .setup-related-external {
+      font-size: 0.875rem;
+      width: 0.875rem;
+      height: 0.875rem;
+      color: #94a3b8;
+    }
+
+    &:hover {
+      text-decoration: underline;
+
+      .setup-related-arrow {
+        color: #2253B2;
+        transform: translateX(2px);
+      }
+
+      .setup-related-external {
+        color: #2253B2;
+      }
+    }
   }
 }
 

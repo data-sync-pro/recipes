@@ -114,10 +114,6 @@
   max-width: 100%;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  &:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  }
 }
 
 .block-video-container {
@@ -133,13 +129,12 @@
 .block-code {
   margin: 1rem 0;
   padding: 1rem;
-  background: #2d2d2d;
+  background: #f8f8f8;
   border-radius: 8px;
   overflow-x: auto;
 
   code {
-    font-family: 'Fira Code', 'Consolas', monospace;
-    font-size: 0.875rem;
+    font-size: 1rem;
     white-space: pre-wrap;
     word-break: break-word;
     background: transparent;
@@ -231,6 +226,7 @@
     line-height: 1.6;
     color: #333333;
   }
+
 
   // Normalize nested blocks (children) so they match callout typography
   .callout-body {
@@ -373,7 +369,8 @@
   th:first-child, td:first-child { width: 50%; }
 }
 
-a.setup-link {
+a.setup-link,
+a.setup-link-external {
   color: #2253B2;
   text-decoration: underline;
   cursor: pointer;

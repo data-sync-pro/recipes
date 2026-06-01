@@ -10,11 +10,7 @@
           "children": [
             {
               "type": "p",
-              "content": "Ensure both Source and Target Connections exist before proceeding. For setup instructions, see [[current-org]] or [[oauth]]."
-            },
-            {
-              "type": "p",
-              "content": "Requires the Data Sync Pro Administrator permission set."
+              "content": "Ensure both Source and Target Connections exist before proceeding. For setup instructions, see [[current-org]]^ or [[oauth]]^."
             }
           ]
         }

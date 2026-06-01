@@ -7,11 +7,9 @@
     <app-recipe-layout
         #recipeLayout
         [recipes]="currentRecipes"
+        [allRecipes]="recipes"
         [categories]="categories"
-        [selectedCategories]="currentFilter.categories"
-        [totalRecipeCount]="totalRecipeCount"
         [searchQuery]="search.query"
-        (categoryToggle)="toggleCategoryFilter($event)"
         (searchChange)="searchRecipes($event)"
         (recipeSelect)="goToRecipe($event)"
         (openSearchOverlay)="openSearchOverlay()">

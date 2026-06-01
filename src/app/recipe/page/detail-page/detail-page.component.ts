@@ -5,7 +5,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   ViewChild,
-  ElementRef,
   HostListener
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,12 +17,7 @@ import { CacheService } from '../../core/services/cache.service';
 import { SearchService } from '../../core/services/search.service';
 import { BreadcrumbItem } from '../detail-banner/detail-banner.component';
 import { categoryToSlug, slugToCategoryName } from '../../core/constants/recipe.constants';
-
-interface CategoryGroup {
-  category: Category;
-  recipes: Recipe[];
-  isExpanded: boolean;
-}
+import { RecipeNavSidebarComponent } from '../recipe-nav-sidebar/recipe-nav-sidebar.component';
 
 interface TocItem {
   id: string;
@@ -109,11 +103,11 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     return this.SECTION_CONFIG.filter(section => section.isVisible(this.currentRecipe!, this));
   }
 
-  // Sidebar category groups
-  categoryGroups: CategoryGroup[] = [];
-  filteredCategoryGroups: CategoryGroup[] = [];
+  // Sidebar data (passed to <app-recipe-nav-sidebar>)
   allRecipes: Recipe[] = [];
   allCategories: Category[] = [];
+  // Category the sidebar should auto-expand (the active recipe's category)
+  activeCategoryName: string | null = null;
 
   // Active TOC section
   activeTocSection: string = 'overview';
@@ -130,17 +124,14 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
   // Search overlay
   isSearchOverlayOpen: boolean = false;
 
-  // Mobile sidebar drawer
-  isSidebarOpen: boolean = false;
-
-  // YouTube URL cache to prevent flickering on scroll. Capped so the Map can't
-  // grow unbounded over a long session — Map keeps insertion order, so deleting
-  // the first key evicts the oldest entry (simple LRU).
+  // YouTube URL cache to prevent flickering on scroll
   private youtubeUrlCache = new Map<string, SafeResourceUrl>();
   private static readonly YOUTUBE_CACHE_MAX = 100;
 
   // Cached YouTube videos from generalImages to prevent re-rendering on scroll
   cachedYouTubeVideos: { url: string; alt: string }[] = [];
+
+  @ViewChild(RecipeNavSidebarComponent) navSidebar?: RecipeNavSidebarComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -166,9 +157,6 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
       this.allRecipes = recipes;
       this.allCategories = this.searchService.generateCategories(recipes);
 
-      // Build category groups
-      this.buildCategoryGroups();
-
       if (category && recipeName) {
         // Find the recipe by category and slug
         const recipe = recipes.find(r =>
@@ -176,14 +164,9 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
         );
 
         if (recipe) {
-          // Scroll to top when switching to a different recipe via an
-          // imperative navigation (sidebar click, search, etc.). On
-          // popstate (browser back/forward) we leave the scroll alone
-          // so the browser's native restoration can return the user to
-          // where they were.
-          const isDifferentRecipe = !!this.currentRecipe && this.currentRecipe.id !== recipe.id;
+          const isNewRecipe = this.currentRecipe?.id !== recipe.id;
           const isPopstate = this.router.getCurrentNavigation()?.trigger === 'popstate';
-          if (isDifferentRecipe && !isPopstate) {
+          if (isNewRecipe && !isPopstate) {
             window.scrollTo({ top: 0, behavior: 'auto' });
           }
 
@@ -199,8 +182,8 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
             { name: breadcrumbCategory, url: `/recipes/${categoryToSlug(breadcrumbCategory)}` }
           ];
 
-          // Expand the current category
-          this.expandCategory(breadcrumbCategory);
+          // Tell the sidebar which category to auto-expand
+          this.activeCategoryName = breadcrumbCategory;
 
           // Cache YouTube videos first (before building TOC which depends on it)
           this.buildYouTubeVideosCache();
@@ -220,38 +203,18 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  private buildCategoryGroups(): void {
-    this.categoryGroups = this.allCategories.map(category => ({
-      category,
-      recipes: this.allRecipes.filter(r => r.category.includes(category.name)),
-      isExpanded: false
-    }));
-    this.filteredCategoryGroups = [...this.categoryGroups];
-  }
-
-  private expandCategory(categoryName: string): void {
-    const group = this.categoryGroups.find(g => g.category.name === categoryName);
-    if (group) {
-      group.isExpanded = true;
-    }
-  }
-
-  categorySlug(categoryName: string): string {
-    return categoryToSlug(categoryName);
-  }
-
-  toggleCategory(categoryName: string): void {
-    const group = this.filteredCategoryGroups.find(g => g.category.name === categoryName);
-    if (group) {
-      group.isExpanded = !group.isExpanded;
-      this.cdr.markForCheck();
-    }
-  }
-
   @HostListener('document:keydown./', ['$event'])
-  onSlashKey(event: Event) {
+  onSlashKey(event: KeyboardEvent) {
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+    const target = event.target as HTMLElement | null;
+    const isEditable =
+      !!target &&
+      (target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable);
+    if (isEditable) return;
     event.preventDefault();
-    this.openSearchOverlay();
+    this.navSidebar?.focusFilter();
   }
 
   openSearchOverlay(): void {
@@ -261,16 +224,6 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
   closeSearchOverlay(): void {
     this.isSearchOverlayOpen = false;
-    this.cdr.markForCheck();
-  }
-
-  toggleSidebar(): void {
-    this.isSidebarOpen = !this.isSidebarOpen;
-    this.cdr.markForCheck();
-  }
-
-  closeSidebar(): void {
-    this.isSidebarOpen = false;
     this.cdr.markForCheck();
   }
 

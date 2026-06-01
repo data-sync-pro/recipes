@@ -1,0 +1,37 @@
+{
+  "title": "Bulk Job Status Syncer",
+  "blocks": [
+    {
+      "type": "p",
+      "content": "A built-in Apex class that keeps Execution records in sync with their asynchronous Bulk API jobs."
+    },
+    {
+      "type": "h2",
+      "content": "Why It's Needed"
+    },
+    {
+      "type": "p",
+      "content": "When an Executable Action runs through the Bulk API, Salesforce processes the job asynchronously. The action returns before the job finishes, so the Execution does not yet know the job's final outcome. <code>BulkJobStatusSyncer</code> checks the status of these Bulk API jobs and writes the results back to the corresponding <code>pushtopics__Execution__c</code> record, keeping its status and statistics accurate."
+    },
+    {
+      "type": "h2",
+      "content": "How to Use"
+    },
+    {
+      "type": "p",
+      "content": "Run <code>BulkJobStatusSyncer</code> on a Schedule. Create a Schedule, set <code>BulkJobStatusSyncer</code> as its Apex class, and configure the run frequency."
+    },
+    {
+      "type": "image",
+      "content": "image/apex/bulk-job-status-syncer.png",
+      "alt": "Schedule configured to run BulkJobStatusSyncer"
+    }
+  ],
+  "related": [
+    {
+      "label": "Schedule Job Management",
+      "url": "/recipes/general/schedule-job-management",
+      "newTab": true
+    }
+  ]
+}

@@ -4,7 +4,7 @@
     <h2 class="block-h2">{{ block.content }}</h2>
     <ng-container *ngIf="block.children">
       <app-setup-block
-        *ngFor="let child of block.children; trackBy: trackByIndex"
+        *ngFor="let child of block.children"
         [block]="child"
         [basePath]="basePath">
       </app-setup-block>
@@ -19,7 +19,7 @@
     </div>
     <div class="step-content" *ngIf="!isCollapsed && block.children">
       <app-setup-block
-        *ngFor="let child of block.children; trackBy: trackByIndex"
+        *ngFor="let child of block.children"
         [block]="child"
         [basePath]="basePath">
       </app-setup-block>
@@ -31,7 +31,7 @@
     <h4 class="block-h4">{{ block.content }}</h4>
     <ng-container *ngIf="block.children">
       <app-setup-block
-        *ngFor="let child of block.children; trackBy: trackByIndex"
+        *ngFor="let child of block.children"
         [block]="child"
         [basePath]="basePath">
       </app-setup-block>
@@ -43,7 +43,7 @@
     <p class="block-p" [innerHTML]="renderContent(block.content)"></p>
     <ng-container *ngIf="block.children">
       <app-setup-block
-        *ngFor="let child of block.children; trackBy: trackByIndex"
+        *ngFor="let child of block.children"
         [block]="child"
         [basePath]="basePath">
       </app-setup-block>
@@ -59,7 +59,7 @@
     </app-setup-block>
     <ng-template #multipleUl>
       <ul *ngIf="(block.children?.length || 0) > 1" class="block-list">
-        <li *ngFor="let child of block.children; trackBy: trackByIndex">
+        <li *ngFor="let child of block.children">
           <app-setup-block [block]="child" [basePath]="basePath"></app-setup-block>
         </li>
       </ul>
@@ -75,7 +75,7 @@
     </app-setup-block>
     <ng-template #multipleOl>
       <ol *ngIf="(block.children?.length || 0) > 1" class="block-list block-list-ordered">
-        <li *ngFor="let child of block.children; trackBy: trackByIndex">
+        <li *ngFor="let child of block.children">
           <app-setup-block [block]="child" [basePath]="basePath"></app-setup-block>
         </li>
       </ol>
@@ -127,7 +127,7 @@
         <div *ngIf="block.content" class="callout-content" [innerHTML]="renderContent(block.content)"></div>
         <ng-container *ngIf="block.children">
           <app-setup-block
-            *ngFor="let child of block.children; trackBy: trackByIndex"
+            *ngFor="let child of block.children"
             [block]="child"
             [basePath]="basePath">
           </app-setup-block>
@@ -149,7 +149,7 @@
         <div *ngIf="block.content" class="callout-content" [innerHTML]="renderContent(block.content)"></div>
         <ng-container *ngIf="block.children">
           <app-setup-block
-            *ngFor="let child of block.children; trackBy: trackByIndex"
+            *ngFor="let child of block.children"
             [block]="child"
             [basePath]="basePath">
           </app-setup-block>
@@ -189,7 +189,7 @@
     </div>
     <div class="tabs-panel" role="tabpanel" *ngIf="block.items && block.items[activeTabIndex] as activeItem">
       <app-setup-block
-        *ngFor="let child of activeItem.children; trackBy: trackByIndex"
+        *ngFor="let child of activeItem.children"
         [block]="child"
         [basePath]="basePath">
       </app-setup-block>

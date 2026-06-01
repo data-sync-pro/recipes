@@ -54,6 +54,7 @@
         "label": "Executable",
         "children": [
           { "id": "new-executable", "label": "New Executable", "slug": "new-executable" },
+          { "id": "executable-settings", "label": "Executable Settings", "slug": "executable-settings" },
           { "id": "batch-settings", "label": "#Batch Settings", "slug": "batch-settings" },
           { "id": "data-list-settings", "label": "#Data List Settings", "slug": "data-list-settings" },
           { "id": "apex-trigger-hookup", "label": "Apex Trigger Hookup", "slug": "apex-trigger-hookup" },
@@ -96,6 +97,16 @@
           { "id": "action-button", "label": "Executable Action Button", "slug": "action-button" }
         ]
       }
+    ]
+  },
+  {
+    "id": "apex-extensions",
+    "label": "Apex Extensions",
+    "children": [
+      { "id": "salesforce-data-transformer", "label": "Salesforce Data Transformer", "slug": "salesforce-data-transformer" },
+      { "id": "execution-finalizer", "label": "Execution Finalizer", "slug": "execution-finalizer" },
+      { "id": "action-result-processor", "label": "Action Result Processor", "slug": "action-result-processor" },
+      { "id": "bulk-job-status-syncer", "label": "Bulk Job Status Syncer", "slug": "bulk-job-status-syncer" }
     ]
   }
 ]

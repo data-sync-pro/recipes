@@ -1,0 +1,31 @@
+{
+  "title": "Action Result Processor",
+  "blocks": [
+    {
+      "type": "p",
+      "content": "An Apex extension point that DSP calls after an Executable Action completes, so you can perform custom logging or trigger follow-up processes."
+    },
+    {
+      "type": "h2",
+      "content": "Interface Definition"
+    },
+    {
+      "type": "code",
+      "content": "global interface pushtopic.ActionResultProcessor {\n    void process(List<pushtopics.ActionResult> actionResults);\n}",
+      "language": "apex"
+    },
+    {
+      "type": "h2",
+      "content": "How to Use"
+    },
+    {
+      "type": "p",
+      "content": "Implement <code>pushtopics.ActionResultProcessor</code>, then reference the class on the Executable:"
+    },
+    {
+      "type": "image",
+      "content": "image/apex/action-result-processor.png",
+      "alt": "Reference the ActionResultProcessor class on the Executable"
+    }
+  ]
+}

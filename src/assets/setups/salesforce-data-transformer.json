@@ -1,0 +1,39 @@
+{
+  "title": "Salesforce Data Transformer",
+  "blocks": [
+    {
+      "type": "p",
+      "content": "An Apex extension point that lets you embed custom transformation logic in a DSP formula when the built-in functions are not enough."
+    },
+    {
+      "type": "h2",
+      "content": "Interface Definition"
+    },
+    {
+      "type": "code",
+      "content": "global interface pushtopic.SalesforceDataTransformer {\n    /**\n     * Specifies an array of field API names to retrieve from the source records.\n     * This ensures DSP includes all required fields during the Retrieve step,\n     * making them available for the Scoping, Match, and Mapping steps.\n     */\n    String[] retrieveSourceFields();\n\n    Object transform(List<Map<String, Object>> contextSourceRecords,\n                     Map<String, Object> currentSourceRecord,\n                     String assignedToFieldName);\n}",
+      "language": "apex"
+    },
+    {
+      "type": "h2",
+      "content": "How to Use"
+    },
+    {
+      "type": "p",
+      "content": "Implement <code>pushtopics.SalesforceDataTransformer</code>, then reference the class in a target field's mapping with <code>$ClassName</code>."
+    },
+    {
+      "type": "image",
+      "content": "image/apex/salesforce-data-transformer.png",
+      "alt": "Reference the SalesforceDataTransformer class in a target field's mapping"
+    
+    }
+  ],
+  "related": [
+    {
+      "label": "Transformation - Apex Class",
+      "url": "https://transformation.pushtopic.com/apex_class",
+      "newTab": true
+    }
+  ]
+}

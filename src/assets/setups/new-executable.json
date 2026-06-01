@@ -4,21 +4,7 @@
     
     {
       "type": "p",
-      "content": "Create Executables from a Pipeline whenever possible. A Pipeline keeps related Executables together and controls their execution order. You can also create certain Executables from a Direction or Connection. This page focuses on the recommended Pipeline creation path."
-    },
-    {
-      "type": "callout",
-      "title": "Before You Start",
-      "children": [
-        {
-          "type": "p",
-          "content": "Requires the Data Sync Pro Administrator permission set."
-        }
-      ]
-    },
-    {
-      "type": "p",
-      "content": "Open the Pipeline that will contain the Executable, then select one of the create options:"
+      "content": "Executables can be created from a Pipeline, Direction, or Connection. This guide uses a Pipeline with a configured Template Direction as an example."
     },
     {
       "type": "tabs",
@@ -54,6 +40,13 @@
           ]
         }
       ]
+    }
+  ],
+  "related": [
+    {
+      "label": "Data Sync Pro Recipes",
+      "url": "/recipes",
+      "newTab": true
     }
   ]
 }
