@@ -7,6 +7,12 @@
 .left-sidebar {
   border-radius: 2px;
   background-color: white;
+  // Fill the (stretched) flex column so this element — the sticky child's
+  // containing block — is as tall as the page content. Without this the
+  // block collapses to its content height and .sidebar-sticky scrolls away
+  // instead of pinning (the detail-page TOC pins because its sticky child
+  // sits directly inside the full-height flex column, with no wrapper).
+  height: 100%;
 
   .sidebar-sticky {
     position: sticky;

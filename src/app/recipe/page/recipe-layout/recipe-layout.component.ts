@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { Recipe, Category } from '../../core/models/recipe.model';
 import { RecipeListComponent } from '../recipe-list/recipe-list.component';
+import { RecipeNavSidebarComponent } from '../recipe-nav-sidebar/recipe-nav-sidebar.component';
 
 @Component({
   selector: 'app-recipe-layout',
@@ -20,6 +21,7 @@ export class RecipeLayoutComponent {
   @Output() openSearchOverlay = new EventEmitter<void>();
 
   @ViewChild(RecipeListComponent) recipeListComponent!: RecipeListComponent;
+  @ViewChild(RecipeNavSidebarComponent) navSidebar?: RecipeNavSidebarComponent;
 
   onSearchChange(query: string): void {
     this.searchChange.emit(query);
@@ -34,8 +36,6 @@ export class RecipeLayoutComponent {
   }
 
   focusFilterInput(): void {
-    if (this.recipeListComponent) {
-      this.recipeListComponent.focusFilterInput();
-    }
+    this.navSidebar?.focusFilter();
   }
 }
