@@ -6,14 +6,14 @@ const routes: Routes = [
   {
     path: '',
     component: SetupComponent,
-    data: { title: 'Setup - Data Sync Pro' }
+    data: { title: 'User Manual - Data Sync Pro' }
   },
   {
     // Wildcard route to support any depth of nesting
-    // e.g., /setup/permissions, /setup/setup/connection/oauth, etc.
+    // e.g., /user-manual/permissions, /user-manual/connection/oauth, etc.
     path: '**',
     component: SetupComponent,
-    data: { title: 'Setup - Data Sync Pro' }
+    data: { title: 'User Manual - Data Sync Pro' }
   }
 ];
 

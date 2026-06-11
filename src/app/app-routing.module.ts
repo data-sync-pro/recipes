@@ -1,14 +1,25 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
+import { NgModule, inject } from '@angular/core';
+import { CanActivateFn, Router, RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { FaqEditorComponent } from './faq/editor/faq-editor.component';
+
+// Customers have bookmarked /setup/... links from before the rename to /user-manual
+const redirectSetupToUserManual: CanActivateFn = (_route, state) =>
+  inject(Router).parseUrl(state.url.replace(/^\/setup/, '/user-manual'));
 
 const routes: Routes = [
   {
     path: 'recipes',loadChildren: () => import('./recipe/page/page.module').then(m => m.RecipePageModule)
   },
   {
-    path: 'setup',
+    path: 'user-manual',
     loadChildren: () => import('./setup/setup.module').then(m => m.SetupModule)
+  },
+  {
+    path: 'setup',
+    canActivate: [redirectSetupToUserManual],
+    children: [
+      { path: '**', children: [] }
+    ]
   },
   { path: 'faq-editor', component: FaqEditorComponent },
   {

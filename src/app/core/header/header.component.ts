@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     transformation: 'Transformation',
     recipes: 'Recipes',
     faq: 'FAQs',
-    setup: 'User Manual'
+    'user-manual': 'User Manual'
   };
 
   private routerSubscription?: Subscription;
