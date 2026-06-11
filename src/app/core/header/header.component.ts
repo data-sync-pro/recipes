@@ -1,4 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 interface NavItem {
   label: string;
@@ -20,6 +23,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isMobile = false;
   isTablet = false;
   navOpen = false;
+  sectionName = '';
+
+  private readonly sectionLabels: Record<string, string> = {
+    transformation: 'Transformation',
+    recipes: 'Recipes',
+    faq: 'FAQs',
+    setup: 'User Manual'
+  };
+
+  private routerSubscription?: Subscription;
 
   navItems: NavItem[] = [
     //{ label: 'Home', link: '/home', isOpen: false },
@@ -39,16 +52,30 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private mobileChangeHandler!: () => void;
   private tabletChangeHandler!: () => void;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, private router: Router) {}
 
   ngOnInit(): void {
     this.setupResponsiveQueries();
     this.setupEventHandlers();
     this.attachEventListeners();
+
+    this.updateSectionName(this.router.url);
+    this.routerSubscription = this.router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe(event => {
+        this.updateSectionName(event.urlAfterRedirects);
+        this.cdr.markForCheck();
+      });
   }
 
   ngOnDestroy(): void {
     this.removeEventListeners();
+    this.routerSubscription?.unsubscribe();
+  }
+
+  private updateSectionName(url: string): void {
+    const firstSegment = url.split('?')[0].split('#')[0].split('/').filter(Boolean)[0] ?? '';
+    this.sectionName = this.sectionLabels[firstSegment] ?? '';
   }
 
   toggleNav(): void {

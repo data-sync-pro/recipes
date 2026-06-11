@@ -14,9 +14,22 @@ html, body { min-height: 100%; height: auto; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: #ffffff;
+   background: #FBFAF7;
+   color: #0B1019;   
 }
-
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;        /* 不挡鼠标点击 */
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(127,185,187,.14), transparent 60%),  /* 顶部光晕 */
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(127,185,187,.08), transparent 60%), /* 右下角光晕 */
+    radial-gradient(circle at 1px 1px, rgba(11,16,25,.10) 1px, transparent 1.5px) 0 0 / 22px 22px; /* 点状纹理 */
+  mask-image: linear-gradient(180deg, black, transparent 70%);
+  -webkit-mask-image: linear-gradient(180deg, black, transparent 70%);
+}
 html {
   scrollbar-width: none;
   -ms-overflow-style: none;
