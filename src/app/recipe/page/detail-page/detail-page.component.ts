@@ -17,6 +17,7 @@ import { CacheService } from '../../core/services/cache.service';
 import { SearchService } from '../../core/services/search.service';
 import { BreadcrumbItem } from '../detail-banner/detail-banner.component';
 import { categoryToSlug, slugToCategoryName } from '../../core/constants/recipe.constants';
+import { scrollToTopOnNavigation } from '../../core/utils/scroll.util';
 import { RecipeNavSidebarComponent } from '../recipe-nav-sidebar/recipe-nav-sidebar.component';
 
 interface TocItem {
@@ -165,10 +166,7 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
         if (recipe) {
           const isNewRecipe = this.currentRecipe?.id !== recipe.id;
-          const isPopstate = this.router.getCurrentNavigation()?.trigger === 'popstate';
-          if (isNewRecipe && !isPopstate) {
-            window.scrollTo({ top: 0, behavior: 'auto' });
-          }
+          scrollToTopOnNavigation(this.router, isNewRecipe);
 
           this.currentRecipe = recipe;
 

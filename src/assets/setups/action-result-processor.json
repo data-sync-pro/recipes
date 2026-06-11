@@ -3,7 +3,11 @@
   "blocks": [
     {
       "type": "p",
-      "content": "An Apex extension point that DSP calls after an Executable Action completes, so you can perform custom logging or trigger follow-up processes."
+      "content": "An Apex extension point that runs after the Action in each transaction. Implement it to react to action outcomes — custom logging, follow-up processes, or branching logic based on per-record success or failure."
+    },
+    {
+      "type": "p",
+      "content": "The <code>process()</code> method receives a <code>List&lt;pushtopics.ActionResult&gt;</code>, one entry per record processed in that transaction, so you can iterate and act on each row's status, errors, and resulting IDs."
     },
     {
       "type": "h2",
