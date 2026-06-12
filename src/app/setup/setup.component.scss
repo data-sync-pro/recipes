@@ -1,6 +1,6 @@
 .setup-page {
   min-height: 100vh;
-  background-color: #fff;
+  background-color: transparent;
 }
 
 .setup-banner {
@@ -456,7 +456,7 @@ $hover-bg: #f1f5f9;
   .toc-sticky {
     position: sticky;
     top: 95px;
-    background-color: white;
+    background-color: transparent;
 
     .toc-nav {
       display: flex;

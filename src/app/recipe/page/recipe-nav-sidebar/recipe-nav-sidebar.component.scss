@@ -6,7 +6,7 @@
 // Left Sidebar - Recipe List
 .left-sidebar {
   border-radius: 2px;
-  background-color: white;
+  background-color: #FAFBFC;
   // Fill the (stretched) flex column so this element — the sticky child's
   // containing block — is as tall as the page content. Without this the
   // block collapses to its content height and .sidebar-sticky scrolls away
@@ -105,7 +105,6 @@
     }
 
     .category-list {
-      background: #fff;
       border-radius: 0;
       flex: 1;
       min-height: 0;
@@ -122,7 +121,7 @@
           font-size: 0.875rem;
           color: #5c5c5c;
           user-select: none;
-          background-color: #fff;
+          background-color: #FAFBFC;
 
           .chevron-down-icon {
             width: 14px;
@@ -160,6 +159,9 @@
           position: sticky;
           top: 0;
           z-index: 10;
+          // Opaque while pinned so scrolling items don't show through;
+          // matches the global page background (body in styles.scss).
+          background-color: #FAFBFC;
         }
 
         .recipe-list {
@@ -216,7 +218,7 @@
     height: 40px;
     border-radius: 4px;
     border: none;
-    background: transparent;
+    background: #FAFBFC;
     color: #2253B2;
     cursor: pointer;
     z-index: 1001;

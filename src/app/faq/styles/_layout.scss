@@ -21,7 +21,7 @@ $toc-width: 320px;
 .faq-container {
   grid-area: main;
   padding: 20px 2vw;
-  background: #ffffff;
+  background: transparent;
   margin-bottom: 40px;
 }
 
@@ -32,7 +32,9 @@ $toc-width: 320px;
   z-index: 90;
   padding: 15px 0 10px 0;
   margin: 0;
-  background: rgba(255, 255, 255, 0.95);
+  // Tinted to the global page background (#FAFBFC, body in styles.scss) so
+  // the sticky bar blends in while still occluding content scrolling under it.
+  background: rgba(250, 251, 252, 0.95);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   isolation: isolate;
@@ -136,7 +138,7 @@ $toc-width: 320px;
   flex: 1;
   min-width: 0;
   padding: 0;
-  background: #ffffff;
+  background: transparent;
   min-height: auto;
 }
 
@@ -391,7 +393,10 @@ $toc-width: 320px;
   align-items: center;
   justify-content: center;
   z-index: 85; // Higher than TOC but lower than modals
-  
+  // The chevron is a lightning-icon (fill: currentColor) — without this it
+  // inherits the near-black body color and clashes with the brand-blue hover border.
+  color: $text-color-secondary;
+
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -414,6 +419,7 @@ $toc-width: 320px;
     opacity: 1;
     visibility: visible;
     background: $bg-light;
+    color: $primary-color;
     border-color: $primary-color;
     box-shadow: -4px 0 12px rgba(26, 115, 232, 0.15);
   }

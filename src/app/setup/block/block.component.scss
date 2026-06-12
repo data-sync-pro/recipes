@@ -33,7 +33,7 @@
     position: sticky;
     top: 60px;  // Adjust based on your header height
     z-index: 10;
-    background-color: white;
+    background-color: #FAFBFC;
 
     .step-toggle-icon {
       color: #64748b;
@@ -43,7 +43,7 @@
 
   &.collapsed {
     .step-header {
-      background-color: #fff;
+      background-color: #FAFBFC;
     }
   }
 }
@@ -129,7 +129,7 @@
 .block-code {
   margin: 1rem 0;
   padding: 1rem;
-  background: #f8f8f8;
+  background: #eff0f0c4;
   border-radius: 8px;
   overflow-x: auto;
 

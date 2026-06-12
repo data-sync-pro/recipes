@@ -6,7 +6,7 @@
   left: 0;
   height: calc(100vh - 64.7px);
   width: 290px;
-  background-color: white;
+  background-color: transparent;
   border-right: none;
   z-index: 0;
 }

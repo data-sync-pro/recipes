@@ -28,7 +28,7 @@
   margin-bottom: 15%;
 
   .content-sections {
-    background: #fff;
+    background: transparent;
 
     .content-section {
       margin-bottom: 34px;
@@ -383,7 +383,7 @@
   }
 
   .loading-state {
-    background: #fff;
+    background: transparent;
     padding: 60px 40px;
     border-radius: 8px;
     text-align: center;
@@ -404,7 +404,7 @@
     //padding: 25px;
     //border-left: 1px solid #E6E6E6;
     //border-radius: 2px;
-    background-color: white;
+    background-color: transparent;
 
     h3 {
       font-size: 1rem;

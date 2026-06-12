@@ -12,7 +12,7 @@
   width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
-  background: #fff;
+  background: #FAFBFC;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   overflow: hidden;
@@ -25,7 +25,7 @@ col.col-desc { width: 70%; }
 // Filter row inside thead — toolbar look, not a header look
 .filter-row > th {
   padding: 0.5rem 0 0.5rem 1rem;
-  background: #fff;
+  background: #FAFBFC;
   border-bottom: 1px solid #e2e8f0;
   font-weight: normal;
   text-align: left;
@@ -54,7 +54,7 @@ col.col-desc { width: 70%; }
     padding: 0.5rem 0.75rem 0.5rem 2.25rem;
     font-size: 0.9rem;
     color: #1f2937;
-    background: #fff;
+    background: #FAFBFC;
     border: 1px solid #d1d5db;
     border-radius: 6px;
     outline: none;
