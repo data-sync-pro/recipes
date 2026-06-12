@@ -3,6 +3,7 @@
   <app-sidebar
     [collapsed$]="collapsed$"
     [showSidebar]="showSidebar"
+    [class.collapsed]="collapsed$ | async"
     (toggleSidebar)="onToggleSidebar()"
     (searchOpen)="onSearchOpen()">
   </app-sidebar>

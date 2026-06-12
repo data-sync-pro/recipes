@@ -20,10 +20,12 @@
     }
   }
 
+  // Sticky geometry mirrors the user-manual baseline
+  // (.sidebar-sticky in setup.component.scss: top 95px, calc(100vh - 110px)).
   .faq-sidebar {
     position: sticky;
-    top: $header-height;
-    height: calc(100vh - $header-height);
+    top: 95px;
+    height: calc(100vh - 110px);
     overflow: hidden;
     transform: none;
     transition: $transition;
@@ -35,6 +37,11 @@
   .faq-layout-container {
     grid-template-areas: "main";
     grid-template-columns: 1fr;
+    // Undo the desktop centered-container geometry (from _layout.scss);
+    // mobile keeps its original full-bleed layout.
+    max-width: none;
+    margin: $header-height 0 0;
+    padding: 0;
 
     .faq-toc {
       display: none;

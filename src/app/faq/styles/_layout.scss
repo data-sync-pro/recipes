@@ -4,8 +4,10 @@
   scroll-behavior: smooth;
 }
 
-$header-height: 60px;
-$sidebar-width: 280px;
+$header-height: 64px; // global fixed header is 4rem (header.component.scss)
+// Sidebar column mirrors the user-manual baseline (setup.component.scss
+// .left-sidebar: flex 0 0 20%, min 220px / max 300px).
+$sidebar-width: clamp(220px, 20%, 300px);
 $toc-width: 320px;
 
 .faq-layout-container {
@@ -13,14 +15,20 @@ $toc-width: 320px;
   grid-template-areas:
     "sidebar main toc";
   grid-template-columns: $sidebar-width 1fr $toc-width;
-  margin-top: $header-height;
+  column-gap: 2.5vw;
+  // Centered page container matching the user-manual baseline
+  // (.setup-main-layout in setup.component.scss).
+  max-width: 1752px;
+  margin: 0 auto;
+  padding: 5.6rem 24px 0;
+  box-sizing: border-box;
   min-height: 0;
   transition: grid-template-columns 0s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 .faq-container {
   grid-area: main;
-  padding: 20px 2vw;
+  padding: 20px 0;
   background: transparent;
   margin-bottom: 40px;
 }

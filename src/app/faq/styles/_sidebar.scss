@@ -1,12 +1,9 @@
 // ==================== FAQ Sidebar Styles ====================
 // Shared tokens ($transition, $breakpoint-desktop, z-index scale) come from _variables.scss.
 
-$sidebar-width: 280px;
-
 .faq-sidebar {
   grid-area: sidebar;
   background: transparent;
-  border-right: 1px solid #e1e5e9;
   z-index: $z-sidebar-desktop;
 
   &.collapsed {
