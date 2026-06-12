@@ -8,10 +8,13 @@ const redirectSetupToUserManual: CanActivateFn = (_route, state) =>
 
 const routes: Routes = [
   {
-    path: 'recipes',loadChildren: () => import('./recipe/page/page.module').then(m => m.RecipePageModule)
+    path: 'recipes',
+    title: 'Recipes - Data Sync Pro',
+    loadChildren: () => import('./recipe/page/page.module').then(m => m.RecipePageModule)
   },
   {
     path: 'user-manual',
+    title: 'User Manual - Data Sync Pro',
     loadChildren: () => import('./setup/setup.module').then(m => m.SetupModule)
   },
   {
@@ -21,13 +24,15 @@ const routes: Routes = [
       { path: '**', children: [] }
     ]
   },
-  { path: 'faq-editor', component: FaqEditorComponent },
+  { path: 'faq-editor', component: FaqEditorComponent, title: 'FAQ Editor - Data Sync Pro' },
   {
     path: 'recipe-editor',
+    title: 'Recipe Editor - Data Sync Pro',
     loadChildren: () => import('./recipe/editor/editor.module').then(m => m.RecipeEditorModule)
   },
   {
     path: 'transformation',
+    title: 'Transformation - Data Sync Pro',
     loadChildren: () => import('./transformation/transformation.module').then(m => m.TransformationModule)
   },
   {
