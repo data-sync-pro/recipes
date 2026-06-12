@@ -94,7 +94,7 @@ $hover-bg: #f1f5f9;
   // Input box look comes from the shared 'search-filter' partial.
   .sidebar-filter {
     flex-shrink: 0;
-    padding: 4px 16px 12px;
+    padding: 4px 8px 12px 16px;
   }
 
   // -------- Nav list --------
@@ -132,6 +132,8 @@ $hover-bg: #f1f5f9;
         font-size: 13px;
         color: $text-secondary;
         border-radius: 2px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
         transition: background-color 0.15s ease, color 0.15s ease;
         user-select: none;
 
@@ -148,7 +150,6 @@ $hover-bg: #f1f5f9;
 
         &.has-children .chevron-slot:hover {
           background-color: rgba(0, 0, 0, 0.08);
-
           .expand-icon {
             color: $text-primary;
           }
@@ -180,6 +181,10 @@ $hover-bg: #f1f5f9;
           }
         }
 
+        // Border guide marks leaf pages only; parents stay flush.
+        &:not(.has-children):hover {
+          border-left: 3px solid rgba(34, 83, 178, 0.8);
+        }
       }
 
       // Branch guide for children. Tints brand-blue when this branch
@@ -211,6 +216,12 @@ $hover-bg: #f1f5f9;
         font-size: 12px;
       }
 
+      // Parents get a taller hit area (after level rules so it wins on equal specificity).
+      > .nav-item.has-children {
+        padding-top: 6px;
+        padding-bottom: 6px;
+      }
+
       // State rules — declared after level rules so they win at equal specificity.
       > .nav-item.in-path {
         color: $brand;
@@ -225,6 +236,10 @@ $hover-bg: #f1f5f9;
         background-color: $brand-bg;
         color: $brand;
         font-weight: 500;
+
+        &:not(.has-children) {
+          border-left: 3px solid rgba(34, 83, 178, 0.8);
+        }
 
         .expand-icon {
           color: $brand;

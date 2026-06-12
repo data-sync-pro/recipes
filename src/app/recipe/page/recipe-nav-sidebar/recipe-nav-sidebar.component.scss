@@ -35,8 +35,25 @@
       flex: 1;
       min-height: 0;
       overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: #dadce0 transparent;
+
+      // Webkit pseudo-elements rather than scrollbar-width/scrollbar-color:
+      // the standard properties make Chrome render native arrow buttons
+      // (triangles); the pseudo-element form drops them. Matches the
+      // user-manual sidebar scrollbar in setup.component.scss.
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #dadce0;
+        border-radius: 3px;
+
+        &:hover {
+          background: #bdc1c6;
+        }
+      }
 
       .category-group {
         .category-header {
