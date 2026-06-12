@@ -120,54 +120,12 @@ $sidebar-width: 280px;
     }
   }
 
+  // Input box look comes from the shared 'search-filter' partial
+  // (imported in faq.component.scss); only container spacing lives here.
   .sidebar-search {
     padding: 6px 8px;
     margin-bottom: .5rem;
     flex-shrink: 0;
-
-    .sidebar-search-input-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      border: 1px solid $border-color-strong;
-      border-radius: 8px;
-      background: $bg-light;
-      transition: $transition;
-
-      &:focus-within {
-        border-color: $primary-color;
-        background: #fff;
-      }
-    }
-
-    .sidebar-search-input {
-      flex: 1;
-      border: none;
-      background: transparent;
-      font-size: 1.1rem;
-      color: #333;
-      outline: none;
-      min-width: 0;
-
-      &::placeholder {
-        color: $text-color-secondary;
-      }
-    }
-
-    .search-clear-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: $text-color-secondary;
-      padding: 2px;
-      display: flex;
-      align-items: center;
-
-      &:hover {
-        color: #333;
-      }
-    }
   }
 
   .sidebar-nav {

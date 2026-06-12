@@ -44,20 +44,28 @@
 
           <!-- Search in sidebar -->
           <div class="sidebar-search" *ngIf="!ui.sidebarCollapsed">
-            <div class="sidebar-search-input-wrapper">
-              <lightning-icon iconName="utility:search" size="x-small" alternativeText="Search"></lightning-icon>
+            <div class="filter-input-wrap" [class.has-value]="!!search.query">
+              <mat-icon class="filter-icon">search</mat-icon>
               <input
                 type="text"
-                class="sidebar-search-input"
-                placeholder="Search..."
+                class="filter-input"
+                placeholder="Search…"
                 #searchInput
                 [(ngModel)]="search.query"
                 (input)="onSearchInput($event)"
                 (keydown.escape)="clearSearch()"
+                aria-label="Search FAQs"
               />
-              <button *ngIf="search.query" class="search-clear-btn" (click)="clearSearch()">
-                <lightning-icon iconName="utility:close" size="xx-small" alternativeText="Clear"></lightning-icon>
+              <button *ngIf="search.query; else kbdHint"
+                      class="filter-clear"
+                      type="button"
+                      (click)="clearSearch()"
+                      aria-label="Clear search">
+                <mat-icon>close</mat-icon>
               </button>
+              <ng-template #kbdHint>
+                <span class="filter-kbd" aria-hidden="true">/</span>
+              </ng-template>
             </div>
           </div>
 

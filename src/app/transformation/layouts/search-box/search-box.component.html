@@ -1,14 +1,11 @@
-<div class="search-shortcut-wrapper">
+<div class="filter-input-wrap">
+  <mat-icon class="filter-icon">search</mat-icon>
   <input
     type="text"
-    placeholder="Search..."
+    class="filter-input"
+    placeholder="Search…"
     (click)="onSearchClick()"
     readonly
-    class="search-input"
   />
-  <span
-    class="shortcut-hint shortcut-clickable"
-    (click)="onSearchClick()"
-    >/</span
-  >
+  <span class="filter-kbd" (click)="onSearchClick()">/</span>
 </div>
