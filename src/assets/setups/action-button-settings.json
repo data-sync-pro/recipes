@@ -60,6 +60,14 @@
             {
               "name": "Pre-Action: Edit Fields",
               "description": "Comma-separated API names of the target object fields that open in edit mode on the pre-action screen when the action button is clicked."
+            },
+            {
+              "name": "Pre-Action: File Upload?",
+              "description": "If enabled, clicking the Action Button opens a file uploader that lets users select and upload a file from the UI."
+            },
+            {
+              "name": "Source Object ContentDocument ID Field",
+              "description": "The text field on the Source Object used to store the ContentDocument ID for file uploads. When specified in a #Data List, a row action is automatically added—'Upload File' when the field is blank, or 'Preview File' when the field has a value."
             }
           ]
         },
@@ -96,8 +104,16 @@
               "description": "Data List used in Action Button's chained flow. When specified, clicking the Action Button opens the Data List for row selection. The selected rows become Context Records for the next Data List, if that Data List also has a Chained Data List defined. The sequence continues until no further Chained Data List is set. The rows selected in the final Data List become the input for the Action Button."
             },
             {
+              "name": "Last Chained Data List",
+              "description": "Read-only field automatically calculated to identify the last Data List in the Action Button’s chained flow."
+            },
+            {
               "name": "Chained Data Lists",
               "description": "Data List Pipeline used in Action Button's chained flow. When specified, clicking the Action Button opens the Data Lists in this Pipeline for row selection. Once this field is set, no further Chained Data Lists are evaluated in the flow. The rows selected in the Data Lists become the input for the Action Button."
+            }, 
+            {
+              "name": "Last Chained Data Lists",
+              "description": "Read-only field automatically calculated to identify the last Data List Pipeline in the Action Button's chained flow."
             }
           ]
         }
