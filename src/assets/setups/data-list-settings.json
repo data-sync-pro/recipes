@@ -66,6 +66,14 @@
               "description": "When enabled, the Pre-Action screen opens a single editor using the first transformed target record as the template when multiple target records exist. Any field changes are applied to all target records."
             },
             {
+              "name": "Pre-Action: File Upload?",
+              "description": "If enabled, clicking the Action Button opens a file uploader that lets users select and upload a file from the UI."
+            },
+            {
+              "name": "Source Object ContentDocument ID Field",
+              "description": "The text field on the Source Object used to store the ContentDocument ID for file uploads. When specified in a #Data List, a row action is automatically added—'Upload File' when the field is blank, or 'Preview File' when the field has a value."
+            },
+            {
               "name": "Pre-Action: Edit Fields",
               "description": "Comma-separated API names of the target object fields that open in edit mode on the pre-action screen when the action button is clicked."
             }
@@ -87,6 +95,14 @@
               "description": "Data List used in Action Button's chained flow. When specified, clicking the Action Button opens the Data List for row selection. The selected rows become Context Records for the next Data List, if that Data List also has a Chained Data List defined. The sequence continues until no further Chained Data List is set. The rows selected in the final Data List become the input for the Action Button."
             },
             {
+              "name": "Last Chained Data List",
+              "description": "Read-only field automatically calculated to identify the last Data List in the Action Button's chained flow."
+            },
+            {
+              "name": "Q: Show Row's Related Lists Below?",
+              "description": "When enabled, the related lists will appear below the current Data List when the \"Related Lists\" row action is clicked; otherwise, they will be shown in a modal pop-up."
+            },
+            {
               "name": "Q: New Record Process",
               "description": "The Executable that handles the New Record process from the Data List."
             },
@@ -97,6 +113,10 @@
             {
               "name": "Q: Data Loader",
               "description": "The Executable that handles the Data Loader process from the Data List."
+            },
+            {
+              "name": "Last Chained Data Lists",
+              "description": "Read-only field automatically calculated to identify the last Data List Pipeline in the Action Button's chained flow."
             }
           ]
         },
@@ -287,6 +307,14 @@
             {
               "name": "Q: Small Screen Viewport Width",
               "description": "Used to define the max width(in pixels) of a small screen so that if 'Show Results in Tiles on Small Screen' is checked, the Data List will be displayed in tiles instead of lightning datatable when the screen viewport is 'small'. If not defined, screen width '<= 500px' is considered as a 'small' screen."
+            },
+            {
+              "name": "Source Big Object Index Fields",
+              "description": "Comma-separated API names of the source Big Object's index fields, which Big Objects use (rather than the standard ID) to identify records."
+            },
+            {
+              "name": "Target Big Object Index Fields",
+              "description": "Comma-separated API names of the target Big Object's index fields, which Big Objects use (rather than the standard ID) to identify records."
             }
           ]
         }

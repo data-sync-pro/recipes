@@ -91,6 +91,10 @@
           "title": "Input / Output",
           "fields": [
             {
+              "name": "Resolved Input Object Name",
+              "description": "Represents the resolved input object for this Executable. It uses the Source Object Name when provided; otherwise, it derives the object name from the Last Chained Data List(s)."
+            },
+            {
               "name": "Source Object Name",
               "description": "Name of the Source Object."
             },

@@ -39,8 +39,16 @@
       "type": "fields",
       "fields": [
         {
+          "name": "Target Object Name",
+          "description": "Name of the Target Object."
+        },
+        {
           "name": "Target Matching Field",
           "description": "API name of the target field(case-sensitive) used to identify matching target records. If multiple matches are found for a source record and the Principal Selection Rule is defined, only the principal record is selected—otherwise, all matches are used. Actions then execute based on these results (e.g. Insert is skipped when matches exist, Update runs only for matched records, and Merge consolidates secondary matches into the principal record)."
+        },
+        {
+          "name": "Target Connection Name",
+          "description": "Name of the Target Connection."
         },
         {
           "name": "Additional Target Matching Criteria",

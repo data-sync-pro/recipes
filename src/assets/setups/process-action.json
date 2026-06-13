@@ -43,12 +43,44 @@
       "type": "fields",
       "fields": [
         {
+          "name": "Target Object Name",
+          "description": "Name of the Target Object."
+        },
+        {
+          "name": "Target Matching Field",
+          "description": "API name of the target field(case-sensitive) used to identify matching target records. If multiple matches are found for a source record and the Principal Selection Rule is defined, only the principal record is selected—otherwise, all matches are used. Actions then execute based on these results (e.g. Insert is skipped when matches exist, Update runs only for matched records, and Merge consolidates secondary matches into the principal record)."
+        },
+        {
+          "name": "Target Connection Name",
+          "description": "Name of the Target Connection."
+        },
+        {
           "name": "Skip Record Update if No Changes?",
           "description": "When checked, records without changes in the target data are excluded from the update operation, preventing unnecessary DML calls and downstream automation from executing."
         },
         {
           "name": "Use Salesforce Upsert API?",
           "description": "When enabled and the Action is Upsert, DSP will utilize the standard Salesforce Upsert API to execute the action in a single DML operation, without attempting to match the target and treating the Insert and Update as separate processes."
+        },
+        {
+          "name": "Use Default Assignment Rule?",
+          "description": "When enabled, DSP applies the default assignment rule on action."
+        },
+        {
+          "name": "Fill Missing Fields on Merge?",
+          "description": "If checked, when merging, blank fields on the principal record are filled with values from the losing records; existing master values are not overwritten."
+        },
+        {
+          "name": "Target Big Object Index Fields",
+          "description": "Comma-separated API names of the target Big Object's index fields, which Big Objects use (rather than the standard ID) to identify records."
+        },
+        {
+          "name": "Merge Trigger Action DML?",
+          "description": "When enabled, DSP consolidates and defers DML operations across multiple trigger Executables that have this setting enabled, targeting the same SObject type, and executes them together at the end of the trigger event to minimize total DML usage. Note that this enforces All-or-Nothing behavior — a single record failure will roll back the entire transaction."
+        },
+        {
+          "name": "Action in Future Method?",
+          "description": "When enabled — or when the target connection is remote — DSP runs this action asynchronously via @future. If the Executable is already running in a future context, the action is skipped, since @future cannot invoke @future. Applies to #Trigger only."
         },
         {
           "name": "Skip Fields if Target Value Exists?",
