@@ -43,6 +43,10 @@
           "description": "DSP expression that evaluates each source record for inclusion in processing; records for which it returns false or $SKIP_ASSIGNMENT are excluded from further processing."
         },
         {
+          "name": "Scope Filter(Pipeline)",
+          "description": "A concise (255-character) version of the \"Additional Scope Criteria\" specified in the associated Pipeline record."
+        },
+        {
           "name": "Scope Filter(Post Join)",
           "description": "DSP expression that evaluates each joined record after the Join process; records for which it returns false or $SKIP_ASSIGNMENT are excluded from further processing."
         },
@@ -73,6 +77,26 @@
         {
           "name": "Scope Filter(After Undelete Trigger)",
           "description": "Additional filter applied to evaluate the scoped records when being executed in the After Undelete trigger of the source object."
+        },
+        {
+          "name": "Data List Joiner",
+          "description": "Specifies a Data List Executable to act as a joiner. When set, clicking the Action Button opens the Data List for row selection; selected rows are cross-joined with the source data to enrich the scoped dataset."
+        },
+        {
+          "name": "Data Lists Joiner",
+          "description": "Specifies a Data List Pipeline to act as a joiner. When set, clicking the Action Button opens the Data Lists for row selection; selected rows are cross-joined with the source data to enrich the scoped dataset."
+        },
+        {
+          "name": "Joiner Last Chained Data List",
+          "description": "Read-only field automatically calculated to identify the last Data List in the Action Button’s Joiner chained flow."
+        },
+        {
+          "name": "Joiner Last Chained Data Lists",
+          "description": "Read-only field automatically calculated to identify the last Data List Pipeline in the Action Button’s Joiner chained flow."
+        },
+        {
+          "name": "Use Page Record as Joiner Context?",
+          "description": "Applies when a Data List(s) Joiner is configured for an Action Button Executable. By default, the Action Button input is used as the Context Record(s) for resolving dynamic filters in the Data List(s) Joiner. If enabled, the current page record is used as the Context Record instead."
         }
       ]
     }

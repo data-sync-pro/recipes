@@ -9,6 +9,10 @@
           "title": "#Trigger Events",
           "fields": [
             {
+              "name": "Do Not Track AGG Sources in Trigger?",
+              "description": "When enabled, DSP will not trigger the aggregation calculations while the aggregated source data is being modified. This is particularly useful when bulk changes to the aggregated source data are initiated by integrations or batch jobs, allowing the calculations to delay and resume separately once the bulk data changes are complete, by performing blank updates to the impacted aggregation target records in a separate batch job."
+            },
+            {
               "name": "Before Insert Trigger?",
               "description": "When enabled, the Executable runs on the Before Insert event, using the records in the 'Trigger.new' context as its input."
             },

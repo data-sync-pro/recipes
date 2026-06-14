@@ -29,12 +29,24 @@
               "description": "When enabled, upon the completion of the batch job execution, DSP will automatically retry the failed batches."
             },
             {
+              "name": "Use Salesforce Upsert API?",
+              "description": "When enabled and the Action is Upsert, DSP will utilize the standard Salesforce Upsert API to execute the action in a single DML operation, without attempting to match the target and treating the Insert and Update as separate processes."
+            },
+            {
               "name": "Serial Mode?",
               "description": "When enabled, DSP runs in serial mode. Note: serial mode executes slower since one batch has to wait for the previous one to complete before getting started. Check it if you need to guarantee the execution order or when you face the limitation - 'Future method cannot be called from a future or batch method'."
             },
             {
               "name": "Execution Finalizer",
               "description": "Apex class name that implements the ExecutionFinalizer interface and runs after the Execution is completed."
+            },
+            {
+              "name": "Source Big Object Index Fields",
+              "description": "Comma-separated API names of the source Big Object's index fields, which Big Objects use (rather than the standard ID) to identify records."
+            },
+            {
+              "name": "Record-Based Configuration Deployment?",
+              "description": "Specifies whether this Executable deploys record-based configuration. When enabled, the Data Sync Pro VS Code plugin can export the source data as JSON for local backup and metadata-driven version control in a code repository."
             },
             {
               "name": "Bypass Queueable Delegation?",
