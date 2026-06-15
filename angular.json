@@ -92,6 +92,29 @@
               "vendorChunk": false,
               "extractLicenses": true,
               "namedChunks": false
+            },
+            "firebase": {
+              "baseHref": "/",
+              "serviceWorker": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1.5mb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "60kb",
+                  "maximumError": "80kb"
+                }
+              ],
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "buildOptimizer": true,
+              "vendorChunk": false,
+              "extractLicenses": true,
+              "namedChunks": false
             }
           },
           "defaultConfiguration": "production"

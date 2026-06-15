@@ -2,7 +2,7 @@
 // Path prefix where the transformation feature is mounted in the host app.
 // All internal router links use this as their base so the module remains
 // portable: change this single constant to remount under a different URL.
-export const TRANSFORMATION_BASE = 'transformation';
+export const TRANSFORMATION_BASE = 'transformations';
 
 // $JOINER is the only pseudo-function whose URL slug doesn't fall out of the
 // lowercase-and-underscore rule: we strip the leading `$` so the address bar

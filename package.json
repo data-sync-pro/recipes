@@ -6,6 +6,7 @@
     "start": "node scripts/gen-formulas-index.mjs && ng serve",
     "build": "node scripts/gen-formulas-index.mjs && node scripts/generate-version.js && ng build",
     "build:github-pages": "node scripts/gen-formulas-index.mjs && node scripts/generate-version.js && ng build --configuration github-pages",
+    "build:firebase": "node scripts/gen-formulas-index.mjs && node scripts/generate-version.js && ng build --configuration firebase",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "generate-version": "node scripts/generate-version.js",

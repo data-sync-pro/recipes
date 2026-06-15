@@ -165,7 +165,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     if (target) {
       this.sidebarService.setActiveCategory('');
       category.expanded = true;
-      this.router.navigate(['/transformation', target]);
+      this.router.navigate(['/transformations', target]);
       return;
     }
     category.expanded = !category.expanded;

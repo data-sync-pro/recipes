@@ -99,16 +99,16 @@ export class SearchOverlayComponent implements OnInit, OnChanges, OnDestroy {
     if (isGlobalVariableItem) {
       if (item.name.toUpperCase() === '$JOINER') {
         this.sidebarService.setActiveCategory('Global Variables');
-        this.router.navigate(['/transformation', 'joiner']);
+        this.router.navigate(['/transformations', 'joiner']);
       } else {
         this.sidebarService.setActiveCategory('');
-        this.router.navigate(['/transformation', 'global_variables']);
+        this.router.navigate(['/transformations', 'global_variables']);
       }
     } else if (isSpecialName) {
       this.sidebarService.setActiveCategory('');
-      this.router.navigate(['/transformation', item.route]);
+      this.router.navigate(['/transformations', item.route]);
     } else {
-      this.router.navigate(['/transformation', categorySlug(item.Tags[0]), item.route]);
+      this.router.navigate(['/transformations', categorySlug(item.Tags[0]), item.route]);
     }
 
     this.close();

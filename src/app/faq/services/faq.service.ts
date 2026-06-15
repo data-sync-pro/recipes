@@ -748,8 +748,8 @@ export class FAQService implements OnDestroy {
             }
           }
 
-          // Normalize hand-authored internal hrefs onto the /faq mount point.
-          const normalizedHref = href.startsWith('/faq') ? href : `/faq${href}`;
+          // Normalize hand-authored internal hrefs onto the /faqs mount point.
+          const normalizedHref = href.startsWith('/faqs') ? href : `/faqs${href}`;
 
           // Only add faq-internal-link class if no existing class is present
           const hasClass = beforeHref.includes('class=') || afterHref.includes('class=');

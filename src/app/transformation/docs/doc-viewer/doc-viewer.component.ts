@@ -45,7 +45,7 @@ export class DocViewerComponent implements OnInit {
     if (legacyCategory && !hasCategoryParam && legacyDocName) {
       const slug = categorySlug(legacyCategory);
       if (slug) {
-        this.router.navigate(['/transformation', slug, legacyDocName], { replaceUrl: true });
+        this.router.navigate(['/transformations', slug, legacyDocName], { replaceUrl: true });
         return;
       }
     }
@@ -73,7 +73,7 @@ export class DocViewerComponent implements OnInit {
       )
       .subscribe((doc) => {
         if (!doc && this.currentDocName && this.currentDocName !== 'global_variables') {
-          this.router.navigateByUrl('/transformation/home', { replaceUrl: true });
+          this.router.navigateByUrl('/transformations/home', { replaceUrl: true });
           return;
         }
 
@@ -137,7 +137,7 @@ export class DocViewerComponent implements OnInit {
   getRelatedFormulaLink$(formula: string) {
     const docName = formula.toLowerCase();
     return this.docsService.getPrimaryCategory(formula).pipe(
-      map((name) => (name ? ['/transformation', categorySlug(name), docName] : ['/transformation', docName]))
+      map((name) => (name ? ['/transformations', categorySlug(name), docName] : ['/transformations', docName]))
     );
   }
 

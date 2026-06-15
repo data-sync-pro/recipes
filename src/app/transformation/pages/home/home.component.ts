@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
       const section = params.get('section');
       if (!section) return;
       if (!/^[a-z0-9_]+$/.test(section)) {
-        this.router.navigate(['/transformation/home'], { replaceUrl: true });
+        this.router.navigate(['/transformations/home'], { replaceUrl: true });
         return;
       }
       this.pendingFragment = section;
@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     // links with fragments still work without leaving '#' in the address bar.
     this.route.fragment.subscribe((fragment) => {
       if (!fragment) return;
-      this.router.navigate(['/transformation/home', fragment], { replaceUrl: true });
+      this.router.navigate(['/transformations/home', fragment], { replaceUrl: true });
     });
 
     this.loadTags();
@@ -223,9 +223,9 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     this.docsService.getPrimaryCategory(funcName).subscribe(category => {
       const routeName = funcName.toLowerCase();
       if (category) {
-        this.router.navigate(['/transformation', categorySlug(category), routeName]);
+        this.router.navigate(['/transformations', categorySlug(category), routeName]);
       } else {
-        this.router.navigate(['/transformation', routeName]);
+        this.router.navigate(['/transformations', routeName]);
       }
     });
   }
