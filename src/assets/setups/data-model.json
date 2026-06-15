@@ -4,64 +4,60 @@
   "blocks": [
     {
       "type": "p",
-      "content": "Data Sync Pro uses a structured set of custom objects to support its core functionality and track activity throughout the data management process. This design separates configuration metadata from execution logs, making the application easier to manage, monitor, and maintain."
-    },
-    {
-      "type": "p",
-      "content": "The metadata that drives Data Sync Pro's operations includes:"
+      "content": "Data Sync Pro employs a sophisticated set of custom objects designed to support its core functionalities and log activities throughout the data management process. This structured approach facilitates the app's operation by segregating metadata and logging information into distinct categories for enhanced clarity and efficiency. The metadata that governs the operational aspects of Data Sync Pro includes:"
     },
     {
       "type": "ul",
       "children": [
         {
           "type": "p",
-          "content": "<strong>Connections</strong>, which define links to source and target"
+          "content": "<strong>Connections</strong>, establishing links to data sources and targets;"
         },
         {
           "type": "p",
-          "content": "<strong>Directions</strong>, which determine the path of data flow"
+          "content": "<strong>Directions</strong>, defining the pathways for data flow;"
         },
         {
           "type": "p",
-          "content": "<strong>Pipelines</strong>, which organize multiple Executables into a sequence"
+          "content": "<strong>Pipelines</strong>, organizing multiple Executables in a sequence;"
         },
         {
           "type": "p",
-          "content": "<strong>Executables</strong>, which represent individual data operations"
+          "content": "<strong>Executables</strong>, representing individual data manipulation tasks;"
         },
         {
           "type": "p",
-          "content": "<strong>Field Mappings</strong>, which define how source fields map to target fields"
+          "content": "<strong>Field Mappings</strong>, specifying how fields from source to target are aligned;"
         },
         {
           "type": "p",
-          "content": "<strong>Schedules</strong>, which control when and how often processes run"
+          "content": "<strong>Schedules</strong>, managing when and how often these tasks are executed."
         }
       ]
     },
     {
       "type": "p",
-      "content": "On the logging side, Data Sync Pro records operational activity through objects such as <strong>Pipeline Execution</strong>, <strong>Execution</strong>, and <strong>Batch Execution</strong>. These logs provide visibility into system activity, support troubleshooting, and help assess how data is processed during execution. By organizing configuration and logging data in this way, Data Sync Pro supports strong data integrity, operational visibility, and ongoing performance optimization within Salesforce."
+      "content": "On the logging side, Data Sync Pro maintains detailed records of its operations through objects like <strong>Pipeline Execution</strong>, <strong>Execution</strong>, and <strong>Batch Execution</strong>. These logs are crucial for monitoring the app's performance, debugging issues, and understanding the data flow's effectiveness and efficiency during execution. By carefully organizing this information, Data Sync Pro ensures a high level of data integrity, operational transparency, and the ability to fine-tune processes for optimal performance in the complex Salesforce data management landscape."
     },
     {
       "type": "p",
-      "content": "Data Sync Pro provides two main types of Executables to support a wide range of data management scenarios in Salesforce: <strong>Direction-Based Executables</strong> and <strong>Connection-Based Executables</strong>."
+      "content": "Data Sync Pro offers two primary types of Executables, tailored to address diverse data management needs within the Salesforce ecosystem: <strong>Direction-Based Executables</strong> and <strong>Connection-Based Executables</strong>."
     },
     {
       "type": "h2",
-      "content": "Direction-Based Executables"
+      "content": "Direction-Based Executable"
     },
     {
       "type": "p",
-      "content": "Direction-Based Executables are designed for processes that move data between two different connections, typically a source and a target. They are well suited for complex data synchronization scenarios, including retrieving data from the source, applying transformations and field mappings, and performing Data Manipulation Language (DML) operations such as <strong>insert</strong>, <strong>update</strong>, <strong>upsert</strong>, <strong>delete</strong>, <strong>undelete</strong>, and <strong>merge</strong> on the target connection."
+      "content": "Direction-Based Executables are structured for operations that involve data flow between two different connections, typically a source and a target. These Executables are adept at handling complex data synchronization tasks, including data retrieval from the source, applying necessary transformations and mappings, and performing various Data Manipulation Language (DML) operations such as <strong>insert</strong>, <strong>update</strong>, <strong>upsert</strong>, <strong>delete</strong>, <strong>undelete</strong>, and <strong>merge</strong> on the target connection."
     },
     {
       "type": "h2",
-      "content": "Connection-Based Executables"
+      "content": "Connection-Based Executable"
     },
     {
       "type": "p",
-      "content": "Connection-Based Executables are designed for operations within a single connection. They complement Direction-Based Executables by providing focused control over queries and DML actions such as <strong>insert</strong>, <strong>update</strong>, <strong>upsert</strong>, and <strong>delete</strong> within the same system. These Executables support specific data management tasks within a single connection, including advanced capabilities for filtering, matching, and transforming data. They can also be used to create Query-Based Data Lists, which improve data access and usability directly on Salesforce Lightning pages."
+      "content": "Connection-Based Executables, while focused on actions within a singular connection, complement the functionality provided by Direction-Based Executables by offering precise control over data queries and DML operations such as <strong>insert</strong>, <strong>update</strong>, <strong>upsert</strong>, and <strong>delete</strong> within the same system. These Executables are adept at handling specific, targeted data management tasks, providing advanced capabilities for filtering, matching, and transforming data. Additionally, they enable the creation of sophisticated query-based data lists, further enhancing data access and manipulation directly within Salesforce Lightning pages."
     }
   ]
 }
