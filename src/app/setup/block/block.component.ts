@@ -55,7 +55,7 @@ export class SetupBlockComponent implements OnInit, AfterViewChecked {
         return `<span class="setup-link-broken" title="Unknown setup slug: ${slug}">${text}</span>`;
       }
       const path = node.slug ? this.setupService.getPathToNode(tree, node.slug) : null;
-      const href = path ? '/setup/' + path.map(n => n.slug).filter((s): s is string => !!s).join('/') : '#';
+      const href = path ? '/user-manual/' + path.map(n => n.slug).filter((s): s is string => !!s).join('/') : '#';
       const targetAttrs = newTab ? ' target="_blank" rel="noopener noreferrer"' : '';
       return `<a class="setup-link" href="${href}" data-slug="${node.slug ?? ''}"${targetAttrs}>${text}</a>`;
     });
@@ -80,7 +80,7 @@ export class SetupBlockComponent implements OnInit, AfterViewChecked {
     const path = this.setupService.getPathToNode(tree, slug);
     if (!path) return;
     event.preventDefault();
-    this.router.navigate(['/setup', ...path.map(n => n.slug)]);
+    this.router.navigate(['/user-manual', ...path.map(n => n.slug)]);
   }
 
   ngAfterViewChecked(): void {
