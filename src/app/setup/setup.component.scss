@@ -62,7 +62,11 @@ $hover-bg: #f1f5f9;
   .sidebar-sticky {
     position: sticky;
     top: 95px;
-    max-height: calc(100vh - 110px);
+    // Fixed height (not max-height) so the column always fills the viewport
+    // gap; otherwise the flex:1 .category-list shrinks to content height and
+    // its right-border divider changes length. Matches the faq/transformation
+    // sidebars (height: calc(100vh - 110px)).
+    height: calc(100vh - 110px);
     display: flex;
     flex-direction: column;
   }
@@ -151,7 +155,6 @@ $hover-bg: #f1f5f9;
         }
 
         &.has-children .chevron-slot:hover {
-          background-color: rgba(0, 0, 0, 0.08);
           .expand-icon {
             color: $text-primary;
           }
@@ -231,7 +234,7 @@ $hover-bg: #f1f5f9;
       // Level-specific sizing/weight (defaults only; state rules below win on equal specificity)
       &.level-0 > .nav-item {
         font-size: 13.5px;
-        padding: 3px 8px;
+        padding: 3px 8px 3px 0;
       }
 
       &.level-1 > .nav-item {
