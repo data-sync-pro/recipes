@@ -19,37 +19,18 @@
       *ngFor="let category of functionCategories; trackBy: trackByCategoryName"
       class="nav-category"
     >
-      <div class="category-header" (click)="toggleCategory(category)">
-        <span
-          class="arrow"
-          [class.expanded]="
-            category.name === 'Operators'
-              ? operatorExpand
-              : category.name === 'Global Variables'
-              ? globalVariableExpand
-              : category.name === 'Apex Class'
-              ? apexClassExpand
-              : category.expanded
-          "
-        >
+      <div
+        class="category-header"
+        [class.active]="isCategoryActive(category)"
+        (click)="toggleCategory(category)"
+      >
+        <mat-icon class="arrow" [class.expanded]="isCategoryExpanded(category)">
           {{
-            category.name === "Operators"
-              ? operatorExpand
-                ? "−"
-                : "+"
-              : category.name === "Global Variables"
-              ? globalVariableExpand
-                ? "−"
-                : "+"
-              : category.name === "Apex Class"
-              ? apexClassExpand
-                ? "−"
-                : "+"
-              : category.expanded
-              ? "−"
-              : "+"
+            categoryHasChildren(category) && isCategoryExpanded(category)
+              ? "expand_more"
+              : "chevron_right"
           }}
-        </span>
+        </mat-icon>
         {{ category.name
         }}{{
           category.name !== "Operators" &&

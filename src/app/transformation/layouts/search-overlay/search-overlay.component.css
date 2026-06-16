@@ -85,7 +85,7 @@
   gap: 0.5rem;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  color: #333;
+  color: #2C2C2D;
   flex-wrap: wrap;
 }
 .suggestion-left {
@@ -108,7 +108,7 @@
 
 .tag {
   background-color: #d9e4e8;
-  color: #333;
+  color: #2C2C2D;
   padding: 3px 8px;
   font-size: 0.9rem;
   border-radius: 12px;
@@ -191,7 +191,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.9rem;
-  color: #333;
+  color: #2C2C2D;
   transition: background-color 0.2s ease;
 }
 

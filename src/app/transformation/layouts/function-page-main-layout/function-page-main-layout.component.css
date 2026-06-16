@@ -60,7 +60,7 @@
 }
 
 .developer-guide-link {
-  color: #333;
+  color: #2C2C2D;
 }
 
 
@@ -86,7 +86,7 @@
   gap: 2.5vw;
   max-width: 1752px;
   margin: 0 auto;
-  padding: 5.6rem 24px 0;
+  padding: 4rem 24px 0;
   height: 100vh;
 }
 
@@ -106,12 +106,14 @@ app-sidebar.collapsed {
 }
 
 .content {
+  margin: 1.4rem auto 40px auto;
   padding-top: 0.5px;
   transition: margin-left 0.3s ease;
-  flex: 1;
+  flex: 0 1 70%;
   min-width: 0;
   overflow-y: auto;
   height: 100%;
+  scrollbar-width: none;
 }
 
 
@@ -178,7 +180,7 @@ li {
   font-weight: 500;
   font-size: 0.9rem;
   cursor: pointer;
-  color: #333;
+  color: #2C2C2D;
   transition: background 0.2s;
   border-radius: 6px;
   position: sticky;

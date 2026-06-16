@@ -5,6 +5,7 @@
    (function-page-main-layout.component.css); the wrapper just fills it. */
 .sidebar-wrapper {
   position: relative;
+  margin-top: 2.4rem;
   left: 0;
   height: 100%;
   width: 100%;
@@ -26,14 +27,25 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  overflow-y: scroll;
+  /* The search box is a fixed header; only the nav list below it scrolls
+     (see .nav-section in navigation.component.css), so the scrollbar no
+     longer runs behind the search box. Matches the user-manual sidebar
+     in setup.component.scss. */
+  overflow: hidden;
   opacity: 1;
-  scrollbar-width: none;
-  overflow-x: hidden;
 }
 
 .sidebar.collapsed {
   width: 0px;
+}
+
+/* Fill the sidebar so app-navigation can establish its own flex column,
+   keeping the search box fixed and scrolling only the list. */
+.sidebar-scroll-content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ===========================
@@ -47,7 +59,7 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #333;
+  color: #2C2C2D;
   transition: color 0.2s ease;
   z-index: 10;
   padding: 8px;
@@ -56,7 +68,7 @@
 }
 
 .sidebar-collapse-button:hover {
-  color: #418796;
+  color: #2253B2;
 }
 
 /* ===========================
@@ -69,7 +81,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #333;
+  color: #2C2C2D;
   z-index: 10;
   padding: 8px;
   border-radius: 4px;
@@ -79,7 +91,7 @@
 }
 
 .sidebar-float-search:hover {
-  color: #418796;
+  color: #2253B2;
 }
 
 .sidebar-float-search .icon-search {

@@ -14,6 +14,7 @@
     grid-area: toc;
     position: sticky;
     top: $header-height;
+    margin-top: -6.4rem; 
     height: calc(100vh - $header-height);
     z-index: 80;
     border-radius: 0;
@@ -44,7 +45,7 @@
       transition: opacity 0.3s ease;
 
       .toc-header {
-        background: linear-gradient(135deg, #f5f6f7, #fafbfc);
+        background: #F1F6FB;
         opacity: 0.9;
       }
 
@@ -78,7 +79,7 @@
 .toc-header {
   padding: 20px 24px 16px;
   border-bottom: 1px solid #f1f3f4;
-  background: linear-gradient(135deg, $bg-light, #ffffff);
+  background: #F1F6FB;
   flex-shrink: 0;
   position: relative;
   transition: opacity 0.3s ease, background 0.3s ease;
@@ -103,7 +104,7 @@
 .toc-title {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #202124;
+  color: #2C2C2D;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -174,16 +175,16 @@
   -ms-user-select: none;
 
   &:hover {
-    background: $bg-light;
-    border-left-color: $border-color-strong;
+    background: #F1F6FB; // unified sidebar highlight
+    border-left-color: rgba(34, 83, 178, 0.8); // brand accent
   }
 
   &.active {
     background: linear-gradient(90deg, rgba(26, 115, 232, 0.08), transparent);
-    border-left-color: $primary-color;
     transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     scroll-margin-top: 20px;
     scroll-margin-bottom: 20px;
+    border-left-color: rgba(34, 83, 178, 0.8);
 
     .toc-item-title {
       color: $primary-color;
@@ -195,7 +196,7 @@
 .toc-item-title {
   font-size: 1.1rem;
   font-weight: 400;
-  color: #202124;
+  color: #2C2C2D;
   line-height: 1.4;
   margin: 0;
   word-break: break-word;

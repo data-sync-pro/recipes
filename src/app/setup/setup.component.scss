@@ -41,7 +41,7 @@
   gap: 2.5vw;
   max-width: 1752px;
   margin: 0 auto;
-  padding: 5.6rem 24px 0 24px;
+  padding: 6.4rem 24px 0 24px;
   box-sizing: border-box;
 }
 
@@ -94,7 +94,7 @@ $hover-bg: #f1f5f9;
   // Input box look comes from the shared 'search-filter' partial.
   .sidebar-filter {
     flex-shrink: 0;
-    padding: 4px 8px 12px 16px;
+    padding: 0 0 16px 0;
   }
 
   // -------- Nav list --------
@@ -103,7 +103,7 @@ $hover-bg: #f1f5f9;
     min-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 0 8px 8px;
+    padding: 0 0 8px 0;
 
     // Custom scrollbar
     &::-webkit-scrollbar {
@@ -172,17 +172,43 @@ $hover-bg: #f1f5f9;
           padding-left: 4px;
         }
 
+        // Page-count badge on outermost (level-0) sections.
+        // Mirrors the recipe nav sidebar's <app-recipe-count> pill.
+        .nav-count {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          box-sizing: border-box;
+          flex-shrink: 0;
+          height: 18px;
+          min-width: 18px;
+          margin-left: 6px;
+          padding: 0 5px;
+          border-radius: 999px;
+          background: #f1f5f9;
+          color: #5c5c5c;
+          font-size: 0.6875rem;
+          font-weight: 400;
+          line-height: 1;
+          font-variant-numeric: tabular-nums;
+        }
+
         &:hover {
           background-color: $hover-bg;
-          color: $brand;
 
           .expand-icon {
             color: $text-secondary;
           }
         }
 
-        // Border guide marks leaf pages only; parents stay flush.
+        // Parent hover bolds its text — no brand color (recipe-style).
+        &.has-children:hover {
+          font-weight: 500;
+        }
+
+        // Leaf hover turns brand-blue with the left guide; parents stay flush.
         &:not(.has-children):hover {
+          color: $brand;
           border-left: 3px solid rgba(34, 83, 178, 0.8);
         }
       }
@@ -203,7 +229,6 @@ $hover-bg: #f1f5f9;
       // Level-specific sizing/weight (defaults only; state rules below win on equal specificity)
       &.level-0 > .nav-item {
         font-size: 13.5px;
-        font-weight: 500;
         padding: 3px 8px;
       }
 
@@ -223,13 +248,10 @@ $hover-bg: #f1f5f9;
       }
 
       // State rules — declared after level rules so they win at equal specificity.
+      // Parent of the active page: bold text only — no brand color, no icon
+      // recolor — matching the recipe sidebar's expanded category-name.
       > .nav-item.in-path {
-        color: $brand;
         font-weight: 500;
-
-        .expand-icon {
-          color: $brand;
-        }
       }
 
       > .nav-item.active {
@@ -241,9 +263,7 @@ $hover-bg: #f1f5f9;
           border-left: 3px solid rgba(34, 83, 178, 0.8);
         }
 
-        .expand-icon {
-          color: $brand;
-        }
+        // No expand-icon recolor — the active parent only bolds its text.
 
         &:hover {
           background-color: $brand-bg;
@@ -279,9 +299,10 @@ $hover-bg: #f1f5f9;
   flex: 0 1 70%;
   min-width: 0;
   margin-bottom: 20%;
+  margin-left: 2rem;
 
   .page-title {
-    font-size: 1.75rem;
+    font-size: 2.25rem;
     font-weight: 500;
     color: #2253B2;
     margin: 0.5rem 0 1.5rem;
@@ -299,7 +320,7 @@ $hover-bg: #f1f5f9;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: #333;
+    color: #2C2C2D;
     margin: 0 0 0.5rem;
   }
 

@@ -346,6 +346,11 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
     return node.id;
   }
 
+  /** Number of leaf pages contained in this node's subtree (incl. itself). */
+  nodePageCount(node: NavNode): number {
+    return this.setupService.flattenSlugs([node]).length;
+  }
+
   // ==================== Filter ====================
 
   get totalPageCount(): number {

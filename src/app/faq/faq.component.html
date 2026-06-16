@@ -38,48 +38,44 @@
           </button>
         </div>
 
+        <!-- Search in sidebar — kept out of the scrollable .sidebar-body so it
+             stays pinned above the nav tree (matches the recipe nav sidebar). -->
+        <div class="sidebar-search" *ngIf="!ui.sidebarCollapsed">
+          <div class="filter-input-wrap" [class.has-value]="!!search.query">
+            <mat-icon class="filter-icon">search</mat-icon>
+            <input
+              type="text"
+              class="filter-input"
+              placeholder="Search…"
+              #searchInput
+              [(ngModel)]="search.query"
+              (input)="onSearchInput($event)"
+              (keydown.escape)="clearSearch()"
+              aria-label="Search FAQs"
+            />
+            <button *ngIf="search.query; else kbdHint"
+                    class="filter-clear"
+                    type="button"
+                    (click)="clearSearch()"
+                    aria-label="Clear search">
+              <mat-icon>close</mat-icon>
+            </button>
+            <ng-template #kbdHint>
+              <span class="filter-kbd" aria-hidden="true">/</span>
+            </ng-template>
+          </div>
+        </div>
+
         <div class="sidebar-body">
           <!-- Navigation Tree -->
           <div class="sidebar-nav">
-
-          <!-- Search in sidebar -->
-          <div class="sidebar-search" *ngIf="!ui.sidebarCollapsed">
-            <div class="filter-input-wrap" [class.has-value]="!!search.query">
-              <mat-icon class="filter-icon">search</mat-icon>
-              <input
-                type="text"
-                class="filter-input"
-                placeholder="Search…"
-                #searchInput
-                [(ngModel)]="search.query"
-                (input)="onSearchInput($event)"
-                (keydown.escape)="clearSearch()"
-                aria-label="Search FAQs"
-              />
-              <button *ngIf="search.query; else kbdHint"
-                      class="filter-clear"
-                      type="button"
-                      (click)="clearSearch()"
-                      aria-label="Clear search">
-                <mat-icon>close</mat-icon>
-              </button>
-              <ng-template #kbdHint>
-                <span class="filter-kbd" aria-hidden="true">/</span>
-              </ng-template>
-            </div>
-          </div>
 
             <!-- Home -->
             <div class="nav-item home-nav" [class.active]="showHome"
                  (click)="goHome()"
                  (touchstart)="handleTouchStart()">
               <div class="nav-content">
-                <lightning-icon
-                  iconName="utility:home"
-                  size="x-small"
-                  alternativeText="Home"
-                  class="nav-icon"
-                ></lightning-icon>
+                <mat-icon class="nav-icon">chevron_right</mat-icon>
                 <span class="nav-text" *ngIf="!ui.sidebarCollapsed">All FAQs</span>
               </div>
               <span class="nav-count" *ngIf="!ui.sidebarCollapsed">{{ faqList.length }}</span>
@@ -95,18 +91,16 @@
                 <div
                   class="nav-item category-nav"
                   [class.active]="current.category === category.name && !current.subCategory"
-                  [class.expanded]="current.category === category.name"
+                  [class.expanded]="isCategoryExpanded(category.name)"
                   (click)="selectCategory(category.name, $event)"
                   (touchstart)="handleTouchStart()"
                   *ngIf="!ui.sidebarCollapsed"
                 >
                   <div class="nav-content">
-                    <lightning-icon
-                      iconName="utility:folder"
-                      size="xx-small"
-                      [alternativeText]="category.name + ' category'"
+                    <mat-icon
                       class="nav-icon"
-                    ></lightning-icon>
+                      (click)="toggleCategoryExpand(category.name, $event)"
+                    >{{ isCategoryExpanded(category.name) ? 'expand_more' : 'chevron_right' }}</mat-icon>
                     <span class="nav-text">{{ category.name }}</span>
                   </div>
                   <span class="nav-count">{{ category.count }}</span>
@@ -115,23 +109,17 @@
                 <!-- Subcategories -->
                 <div
                   class="subcategory-container"
-                  *ngIf="current.category === category.name && category.subCategories.length > 0 && !ui.sidebarCollapsed"
+                  *ngIf="isCategoryExpanded(category.name) && category.subCategories.length > 0 && !ui.sidebarCollapsed"
                 >
                   <div
                     *ngFor="let subCategory of category.subCategories"
                     class="nav-item subcategory-nav"
-                    [class.active]="current.subCategory === subCategory.name"
-                    (click)="selectSubCategory(subCategory.name, $event)"
+                    [class.active]="current.category === category.name && current.subCategory === subCategory.name"
+                    (click)="selectSubCategory(category.name, subCategory.name, $event)"
                     (touchstart)="handleTouchStart()"
                   >
                     <div class="nav-content">
                       <span class="nav-indent"></span>
-                      <lightning-icon
-                        iconName="utility:folder"
-                        size="xx-small"
-                        [alternativeText]="subCategory.name + ' subcategory'"
-                        class="nav-icon"
-                      ></lightning-icon>
                       <span class="nav-text">{{ subCategory.name }}</span>
                     </div>
                      <span class="nav-count">{{ subCategory.count }}</span>
@@ -205,7 +193,7 @@
 
 
       <div *ngIf="showHome && !ui.isLoadingRouteData && !current.faqItem" class="all-faqs">
-        <h2 class="section-title" *ngIf="!search.query.trim()">All FAQs</h2>
+        <!-- <h2 class="section-title" *ngIf="!search.query.trim()">All FAQs</h2> -->
         <h2 class="section-title" *ngIf="search.query.trim()">Search: "{{ search.query }}"</h2>
 
         <!-- Loading skeleton for initial load -->

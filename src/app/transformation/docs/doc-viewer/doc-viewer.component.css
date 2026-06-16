@@ -1,11 +1,11 @@
 .doc-page {
-  width: 75%; 
-  margin: 5rem auto;
+  width: 100%; 
+  margin: 0 auto;
   padding-bottom: 5rem;
 }
 
 .doc-title {
-  margin-top: 5rem;
+  margin-top: 1rem;
   margin-bottom: 2rem;
 }
 

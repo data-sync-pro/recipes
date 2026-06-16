@@ -44,6 +44,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
   operatorExpand = false;
   globalVariableExpand = false;
   apexClassExpand = false;
+  // Name of the category that contains the active page; drives the brand
+  // highlight on its header (setup's .in-path state). Distinct from
+  // category.expanded, which the user can also toggle manually.
+  activeCategoryName = '';
   functionCategories: FunctionCategory[] = [];
   routerSubscription!: Subscription;
 
@@ -100,6 +104,33 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   trackByCategoryName(_: number, category: FunctionCategory): string {
     return category.name;
+  }
+
+  // Special categories (Home, Operators, Global Variables, Apex Class) navigate
+  // directly instead of expanding a function list, so they have no children.
+  categoryHasChildren(category: FunctionCategory): boolean {
+    return !SPECIAL_ROUTES[category.name];
+  }
+
+  // True for the category holding the active page — drives the brand-colored
+  // header highlight (setup's .in-path state).
+  isCategoryActive(category: FunctionCategory): boolean {
+    return category.name === this.activeCategoryName;
+  }
+
+  // Special categories track their expand state in dedicated flags rather than
+  // on category.expanded; centralize the lookup so the template stays simple.
+  isCategoryExpanded(category: FunctionCategory): boolean {
+    switch (category.name) {
+      case 'Operators':
+        return this.operatorExpand;
+      case 'Global Variables':
+        return this.globalVariableExpand;
+      case 'Apex Class':
+        return this.apexClassExpand;
+      default:
+        return category.expanded;
+    }
   }
 
   trackByFunctionRoute(_: number, fn: { route: string }): string {
@@ -186,19 +217,24 @@ export class NavigationComponent implements OnInit, OnDestroy {
     const activeRoute = second ?? first;
 
     const activeCategory = this.currentActiveCategory;
+    let activeName = '';
     this.functionCategories.forEach((category) => {
       if (category.name === 'Home') {
         category.expanded = activeRoute === '' || activeRoute === 'home';
+        if (category.expanded) activeName = category.name;
       } else if (category.name === 'Operators') {
         this.operatorExpand = activeRoute === 'operators';
+        if (this.operatorExpand) activeName = category.name;
       } else if (category.name === 'Global Variables') {
         this.globalVariableExpand = activeRoute === 'global_variables' ||
           activeRoute === 'joiner' ||
           explicitCategory === 'Global Variables' ||
           activeCategory === 'Global Variables';
+        if (this.globalVariableExpand) activeName = category.name;
       } else if (category.name === 'Apex Class') {
         this.apexClassExpand = activeRoute === 'apex_class' ||
           explicitCategory === 'Apex Class';
+        if (this.apexClassExpand) activeName = category.name;
       } else {
         if (explicitCategory) {
           category.expanded = category.name === explicitCategory;
@@ -209,7 +245,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
             (fn) => fn.route === activeRoute
           );
         }
+        if (category.expanded) activeName = category.name;
       }
     });
+    this.activeCategoryName = activeName;
   }
 }

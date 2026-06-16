@@ -109,6 +109,10 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   faqList: FAQItem[] = [];
   categories: FAQCategory[] = [];
 
+  // Sidebar categories that are expanded. Independent of `current.category`
+  // (navigation/active state) so several categories can stay open at once.
+  expandedCategories = new Set<string>();
+
   private destroy$ = new Subject<void>();
   private previewUpdateInterval: ReturnType<typeof setInterval> | null = null;
   private previewStorageHandler: ((event: StorageEvent) => void) | null = null;
@@ -1047,7 +1051,14 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     // Map lowercase URL back to original category name
     const originalCategory = this.categoryMapping[catParam] || catParam;
     this.current.category = originalCategory;
-    
+    // Landing on a subcategory (or an answer within one) must keep the parent
+    // category's branch open — otherwise the list the user just clicked into
+    // would collapse. A bare category URL is left alone so the row toggle can
+    // still collapse it.
+    if (subCatParam && originalCategory) {
+      this.expandedCategories.add(originalCategory);
+    }
+
     const decodedSubCat = subCatParam ? this.safeDecodeURIComponent(subCatParam) : '';
     // For subcategories, convert to title case (capitalize each word)
     if (decodedSubCat) {
@@ -1263,30 +1274,47 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   // Sidebar navigation methods
+  isCategoryExpanded(categoryName: string): boolean {
+    return this.expandedCategories.has(categoryName);
+  }
+
+  // Toggle a single category open/closed without affecting the others.
+  toggleCategoryExpand(categoryName: string, event?: Event): void {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    // Childless categories have nothing to reveal; leave them alone.
+    const category = this.categories.find(c => c.name === categoryName);
+    if (!category || category.subCategories.length === 0) {
+      return;
+    }
+    if (this.expandedCategories.has(categoryName)) {
+      this.expandedCategories.delete(categoryName);
+    } else {
+      this.expandedCategories.add(categoryName);
+    }
+    this.cdr.markForCheck();
+  }
+
   selectCategory(categoryName: string, event?: Event): void {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
     }
-    
-    
-    if (this.ui.isMobile) {
-      const category = this.categories.find(c => c.name === categoryName);
-      
-      
-      if (category && category.subCategories.length > 0) {
-        
-        if (this.current.category !== categoryName) {
-          this.current.category = categoryName;
-          this.current.subCategory = '';
-          this.cdr.markForCheck();
-          return; 
-        }
-        
+
+    const category = this.categories.find(c => c.name === categoryName);
+
+    // Categories with subcategories act as an accordion: one click opens,
+    // the next collapses. On mobile we stop here so the revealed subcategories
+    // stay visible instead of closing the sidebar.
+    if (category && category.subCategories.length > 0) {
+      this.toggleCategoryExpand(categoryName);
+      if (this.ui.isMobile) {
+        return;
       }
     }
-    
-    
+
     this.resetState();
     this.router.navigate(['/faq', this.encode(categoryName)]);
 
@@ -1295,15 +1323,16 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  selectSubCategory(subCategoryName: string, event?: Event): void {
+  selectSubCategory(categoryName: string, subCategoryName: string, event?: Event): void {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
     }
     this.resetState();
 
-    if (this.current.category) {
-      this.router.navigate(['/faq', this.encode(this.current.category), this.encode(subCategoryName)]);
+    const parentCategory = categoryName || this.current.category;
+    if (parentCategory) {
+      this.router.navigate(['/faq', this.encode(parentCategory), this.encode(subCategoryName)]);
     }
     
     if (this.ui.isMobile) {

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of, throwError, forkJoin } from 'rxjs';
 import { map, catchError, shareReplay, tap, finalize, filter, take, switchMap } from 'rxjs/operators';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import hljs from 'highlight.js';
 import { PerformanceService } from './performance.service';
 import { AutoLinkService } from './auto-link.service';
 import { FaqUrlService } from './faq-url.service';
@@ -801,12 +802,68 @@ export class FAQService implements OnDestroy {
 
     // Apply auto-link terms after all other processing
     processedContent = this.autoLinkService.applyAutoLinkTerms(processedContent);
-    
+
     // Clean up extra whitespace but preserve line breaks in content
     // Be careful not to break HTML attributes
-    return processedContent
+    processedContent = processedContent
       .replace(/\n\s*\n/g, '\n')
       .trim();
+
+    // Syntax-highlight fenced code blocks last, so the hljs spans aren't
+    // touched by the regex passes above.
+    return this.highlightCodeBlocks(processedContent);
+  }
+
+  /**
+   * Run highlight.js over every <pre><code> block so FAQ answers get the same
+   * syntax colouring as the transformation docs. The hljs token theme lives in
+   * faq/styles/_layout.scss (scoped to .faq-answer). Inline <code> is left
+   * untouched — only block code is highlighted.
+   */
+  private highlightCodeBlocks(html: string): string {
+    if (typeof document === 'undefined' || !html.includes('<pre')) {
+      return html;
+    }
+
+    const container = document.createElement('div');
+    container.innerHTML = html;
+
+    const blocks = container.querySelectorAll('pre code');
+    if (blocks.length === 0) {
+      return html;
+    }
+
+    blocks.forEach(block => {
+      const el = block as HTMLElement;
+      const code = el.textContent ?? '';
+      if (!code.trim()) {
+        return;
+      }
+
+      // Pick a concrete grammar instead of auto-detecting. Apex isn't a hljs
+      // language and auto-detect mis-tokenises it (e.g. never treating // as a
+      // comment). Apex/JSON map cleanly onto JavaScript (single-quote strings,
+      // // comments); SOQL/SQL is recognised by its leading statement keyword.
+      // An explicit language-/lang- class still wins when present.
+      const langMatch = el.className.match(/(?:language|lang)-([\w-]+)/);
+      let language: string;
+      if (langMatch && hljs.getLanguage(langMatch[1])) {
+        language = langMatch[1];
+      } else if (/^\s*(SELECT|INSERT|UPSERT|UPDATE|DELETE|WITH)\b/i.test(code)) {
+        language = 'sql';
+      } else {
+        language = 'javascript';
+      }
+
+      try {
+        el.innerHTML = hljs.highlight(code, { language }).value;
+        el.classList.add('hljs');
+      } catch {
+        // Leave the block as-is if highlighting fails.
+      }
+    });
+
+    return container.innerHTML;
   }
 
 

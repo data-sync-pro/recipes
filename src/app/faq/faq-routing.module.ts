@@ -9,33 +9,46 @@ import {
 const CATEGORIES: ReadonlySet<string> = new Set(VALID_CATEGORIES);
 const SUBCATEGORIES: ReadonlySet<string> = new Set(VALID_SUBCATEGORIES);
 
-// /<category>
-function categoryMatcher(segments: UrlSegment[]): UrlMatchResult | null {
-  if (segments.length !== 1) return null;
-  const cat = segments[0].path.toLowerCase();
-  if (!CATEGORIES.has(cat)) return null;
-  return { consumed: segments, posParams: { cat: segments[0] } };
-}
-
-// 2 segments: either /<category>/<subcategory> (TOC) or /<category>/<slug> (answer w/o sub).
-// Disambiguated by whether segment[1] is a known subcategory.
-function categorySubOrSlugMatcher(segments: UrlSegment[]): UrlMatchResult | null {
-  if (segments.length !== 2) return null;
-  const cat = segments[0].path.toLowerCase();
-  if (!CATEGORIES.has(cat)) return null;
-  const second = segments[1].path.toLowerCase();
-  if (SUBCATEGORIES.has(second)) {
-    return { consumed: segments, posParams: { cat: segments[0], subCat: segments[1] } };
+// One matcher for every FAQ URL shape: home (no segments), /<category>,
+// /<category>/<subcategory>, /<category>/<slug>, /<category>/<subcategory>/<slug>.
+//
+// This used to be three separate matcher functions (one per segment count),
+// which made them three distinct Route config nodes. Angular's default route
+// reuse keys on `future.routeConfig === curr.routeConfig`, so navigating across
+// them (e.g. category → subcategory) destroyed and recreated FaqComponent,
+// wiping its in-memory state (sidebar expansion, scroll position, …). Folding
+// them into a single route node — the same shape the User Manual sidebar uses —
+// lets the router reuse one FaqComponent for all FAQ navigation, so that state
+// survives without any external store.
+function faqUrlMatcher(segments: UrlSegment[]): UrlMatchResult | null {
+  // Home (/faq) — match the empty URL so it shares this one route node too.
+  if (segments.length === 0) {
+    return { consumed: segments, posParams: {} };
   }
-  return { consumed: segments, posParams: { cat: segments[0], slug: segments[1] } };
-}
 
-// /<category>/<subcategory>/<slug>
-function categorySubSlugMatcher(segments: UrlSegment[]): UrlMatchResult | null {
-  if (segments.length !== 3) return null;
+  if (segments.length > 3) return null;
+
   const cat = segments[0].path.toLowerCase();
+  if (!CATEGORIES.has(cat)) return null;
+
+  // /<category>
+  if (segments.length === 1) {
+    return { consumed: segments, posParams: { cat: segments[0] } };
+  }
+
+  // /<category>/<subcategory> (TOC) or /<category>/<slug> (answer w/o sub),
+  // disambiguated by whether segment[1] is a known subcategory.
+  if (segments.length === 2) {
+    const second = segments[1].path.toLowerCase();
+    if (SUBCATEGORIES.has(second)) {
+      return { consumed: segments, posParams: { cat: segments[0], subCat: segments[1] } };
+    }
+    return { consumed: segments, posParams: { cat: segments[0], slug: segments[1] } };
+  }
+
+  // /<category>/<subcategory>/<slug>
   const sub = segments[1].path.toLowerCase();
-  if (!CATEGORIES.has(cat) || !SUBCATEGORIES.has(sub)) return null;
+  if (!SUBCATEGORIES.has(sub)) return null;
   return {
     consumed: segments,
     posParams: { cat: segments[0], subCat: segments[1], slug: segments[2] },
@@ -43,10 +56,7 @@ function categorySubSlugMatcher(segments: UrlSegment[]): UrlMatchResult | null {
 }
 
 const routes: Routes = [
-  { path: '', component: FaqComponent },
-  { matcher: categoryMatcher, component: FaqComponent },
-  { matcher: categorySubOrSlugMatcher, component: FaqComponent },
-  { matcher: categorySubSlugMatcher, component: FaqComponent },
+  { matcher: faqUrlMatcher, component: FaqComponent },
   // Anything else (including legacy bare /<slug> bookmarks) lands on home.
   { path: '**', redirectTo: '' },
 ];
