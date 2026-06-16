@@ -21,7 +21,7 @@ const SUBCATEGORIES: ReadonlySet<string> = new Set(VALID_SUBCATEGORIES);
 // lets the router reuse one FaqComponent for all FAQ navigation, so that state
 // survives without any external store.
 function faqUrlMatcher(segments: UrlSegment[]): UrlMatchResult | null {
-  // Home (/faq) — match the empty URL so it shares this one route node too.
+  // Home (/faqs) — match the empty URL so it shares this one route node too.
   if (segments.length === 0) {
     return { consumed: segments, posParams: {} };
   }

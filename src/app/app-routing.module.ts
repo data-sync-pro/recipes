@@ -36,16 +36,16 @@ const routes: Routes = [
     loadChildren: () => import('./transformation/transformation.module').then(m => m.TransformationModule)
   },
   {
-    path: 'faq',
+    path: 'faqs',
     loadChildren: () => import('./faq/faq.module').then(m => m.FaqModule)
   },
-  { path: '', redirectTo: 'faq', pathMatch: 'full' },
+  { path: '', redirectTo: 'faqs', pathMatch: 'full' },
   // Exclude assets from Angular routing - let the browser handle them directly
   {
     path: 'assets',
     children: [] // Empty children means Angular won't handle routes starting with 'assets'
   },
-  { path: '**', redirectTo: 'faq' },
+  { path: '**', redirectTo: 'faqs' },
 ];
 
 @NgModule({

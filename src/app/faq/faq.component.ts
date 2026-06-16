@@ -362,17 +362,17 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   
   goHome(): void {
     this.resetState();
-    this.router.navigate(['/faq']);
+    this.router.navigate(['/faqs']);
   }
 
   goCategory(cat: string): void {
     this.resetState();
-    this.router.navigate(['/faq', this.encode(cat)]);
+    this.router.navigate(['/faqs', this.encode(cat)]);
   }
 
   goSubCategory(categoryName: string, subCategoryName: string): void {
     this.resetState();
-    this.router.navigate(['/faq', this.encode(categoryName), this.encode(subCategoryName)]);
+    this.router.navigate(['/faqs', this.encode(categoryName), this.encode(subCategoryName)]);
   }
 
   private navLinkHandler = (event: MouseEvent) => {
@@ -908,9 +908,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(this.buildAnswerUrlSegments(item));
   }
 
-  // Build router segments for an answer URL. Shape is /faq/<cat>/<sub?>/<slug>.
+  // Build router segments for an answer URL. Shape is /faqs/<cat>/<sub?>/<slug>.
   private buildAnswerUrlSegments(item: FAQItem): string[] {
-    const segs = ['/faq', this.encode(item.category)];
+    const segs = ['/faqs', this.encode(item.category)];
     if (item.subCategory) {
       segs.push(this.encode(item.subCategory));
     }
@@ -950,14 +950,14 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
         if (faqs.length > 0) {
           cb();
         } else {
-          this.router.navigate(['/faq']);
+          this.router.navigate(['/faqs']);
         }
         this.updateUIState({ isLoadingRouteData: false });
       },
       error: (error) => {
         console.error('Failed to load FAQ data:', error);
         this.updateUIState({ isLoadingRouteData: false });
-        this.router.navigate(['/faq']);
+        this.router.navigate(['/faqs']);
       }
     });
   }
@@ -1040,7 +1040,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       this.isProcessingAnswerPath = false;
 
       // If FAQ not found, redirect to home to avoid broken state
-      this.router.navigate(['/faq']);
+      this.router.navigate(['/faqs']);
     }
   }
 
@@ -1172,7 +1172,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.current.category !== faqItem.category ||
         (faqItem.subCategory && this.current.subCategory !== faqItem.subCategory)) {
       const answerSlug = this.getAnswerSlug(faqItem.folderId);
-      this.router.navigate(['/faq', answerSlug]);
+      this.router.navigate(['/faqs', answerSlug]);
       return;
     }
 
@@ -1316,7 +1316,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.resetState();
-    this.router.navigate(['/faq', this.encode(categoryName)]);
+    this.router.navigate(['/faqs', this.encode(categoryName)]);
 
     if (this.ui.isMobile) {
       this.closeMobileSidebar();
@@ -1332,7 +1332,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
     const parentCategory = categoryName || this.current.category;
     if (parentCategory) {
-      this.router.navigate(['/faq', this.encode(parentCategory), this.encode(subCategoryName)]);
+      this.router.navigate(['/faqs', this.encode(parentCategory), this.encode(subCategoryName)]);
     }
     
     if (this.ui.isMobile) {

@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private readonly sectionLabels: Record<string, string> = {
     transformation: 'Transformation',
     recipes: 'Recipes',
-    faq: 'FAQs',
+    faqs: 'FAQs',
     'user-manual': 'User Manual'
   };
 
