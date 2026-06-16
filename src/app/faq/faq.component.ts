@@ -190,13 +190,22 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
         this.ensureFaqsLoaded(() =>
           this.handleAnswerPathNavigation(decodedSlug, urlCat, urlSubCat, true)
         );
-      } else if (catParam) {
-        const decodedCat = this.safeDecodeURIComponent(catParam);
-        this.ensureFaqsLoaded(() => this.setCategoryFromRoute(decodedCat, subCatParam));
       } else {
-        // Root path
-        this.current.category = '';
-        this.current.subCategory = '';
+        // No slug in the URL → not an answer view. Clear any FAQ left open by a
+        // previous detail view so back-navigation reveals the category list
+        // instead of the stale detail. Sidebar clicks reset via resetState(),
+        // but the browser/system back button routes straight here and skips it.
+        this.current.faqItem = null;
+        this.current.faqTitle = '';
+
+        if (catParam) {
+          const decodedCat = this.safeDecodeURIComponent(catParam);
+          this.ensureFaqsLoaded(() => this.setCategoryFromRoute(decodedCat, subCatParam));
+        } else {
+          // Root path
+          this.current.category = '';
+          this.current.subCategory = '';
+        }
       }
 
       // Update TOC pagination when navigation changes
