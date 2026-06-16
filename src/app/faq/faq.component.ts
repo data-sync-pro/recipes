@@ -1133,7 +1133,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
 
-    this.title.setTitle(pageTitle);
+    // Keep the browser tab title fixed at 'FAQs - Data Sync Pro' regardless of
+    // category/subcategory; og:title stays descriptive for sharing/SEO.
+    this.title.setTitle('FAQs - Data Sync Pro');
     this.meta.updateTag({ name: 'description', content: pageDescription });
     this.meta.updateTag({ property: 'og:title', content: pageTitle });
     this.meta.updateTag({ property: 'og:description', content: pageDescription });
@@ -1206,7 +1208,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     const pageTitle = `${faqItem.question} - FAQs - Data Sync Pro`;
     const pageDescription = faqItem.answer.substring(0, 160) + '...';
 
-    this.title.setTitle(pageTitle);
+    // Keep the browser tab title fixed at 'FAQs - Data Sync Pro' even when a
+    // specific FAQ is open; og:title stays descriptive for sharing/SEO.
+    this.title.setTitle('FAQs - Data Sync Pro');
     this.meta.updateTag({ name: 'description', content: pageDescription });
     this.meta.updateTag({ property: 'og:title', content: pageTitle });
     this.meta.updateTag({ property: 'og:description', content: pageDescription });
