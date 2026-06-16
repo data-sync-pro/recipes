@@ -70,32 +70,3 @@
 .sidebar-collapse-button:hover {
   color: #2253B2;
 }
-
-/* ===========================
-   Sidebar Floating Buttons (Collapse & Search)
-   =========================== */
-.sidebar-float-search {
-  position: fixed;
-  top: 115px;
-  left: 11px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: #2C2C2D;
-  z-index: 10;
-  padding: 8px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sidebar-float-search:hover {
-  color: #2253B2;
-}
-
-.sidebar-float-search .icon-search {
-  width: 1.5rem;
-  height: 1.5rem;
-  stroke: currentColor;
-}

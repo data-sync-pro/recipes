@@ -7,22 +7,3 @@
   display: block;
   width: 100%;
 }
-
-// Unlike the other sidebars, this box is a read-only trigger that opens the
-// search overlay, so everything inside reads as clickable.
-.filter-input-wrap {
-  cursor: pointer;
-
-  .filter-input {
-    cursor: pointer;
-  }
-
-  .filter-kbd {
-    cursor: pointer;
-    transition: background-color 0.15s ease;
-
-    &:hover {
-      background-color: #e5e7eb;
-    }
-  }
-}

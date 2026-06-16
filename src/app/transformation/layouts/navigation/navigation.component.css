@@ -275,3 +275,23 @@ ul li {
   background-color: #F1F6FB;
   border-left-color: rgba(34, 83, 178, 0.8);
 }
+
+/* Flat search results sit directly under .nav-section with no category header,
+   so they use a shallower indent than the in-tree .nav-item (2rem). */
+.nav-search-results {
+  padding-top: 0.25rem;
+}
+
+.nav-search-results .nav-item {
+  margin: 1px 0;
+}
+
+.nav-search-results .nav-item a {
+  padding-left: 0.75rem;
+}
+
+.nav-empty {
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}

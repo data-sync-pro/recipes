@@ -11,13 +11,8 @@ export class SidebarComponent {
   @Input() showSidebar = false;
   
   @Output() toggleSidebar = new EventEmitter<void>();
-  @Output() searchOpen = new EventEmitter<void>();
 
   onToggleSidebar(): void {
     this.toggleSidebar.emit();
-  }
-
-  onSearchOpen(): void {
-    this.searchOpen.emit();
   }
 }

@@ -2,7 +2,10 @@
   <div class="nav-header">
     <!-- Expanded state: search box + collapse button -->
     <div class="nav-header-expanded" *ngIf="!(collapsed$ | async)">
-      <app-search-box (searchClick)="onSearchClick()"></app-search-box>
+      <app-search-box
+        [query]="searchQuery"
+        (queryChange)="onSearchInput($event)"
+      ></app-search-box>
       <!-- <button
         class="nav-collapse-button"
         (click)="onToggleSidebar()"
@@ -14,7 +17,20 @@
 
     <!-- Collapsed state: navigation header hidden, using sidebar floating buttons -->
   </div>
-  <ul class="nav-section">
+  <!-- Flat, deduped results while searching: a multi-tag function shows once -->
+  <ul class="nav-section nav-search-results" *ngIf="isSearching">
+    <li
+      class="nav-item"
+      *ngFor="let result of searchResults; trackBy: trackBySearchResult"
+      routerLinkActive="active"
+    >
+      <a [routerLink]="result.link">{{ result.name }}</a>
+    </li>
+    <li class="nav-empty" *ngIf="searchResults.length === 0">No matches found</li>
+  </ul>
+
+  <!-- Category tree when not searching -->
+  <ul class="nav-section" *ngIf="!isSearching">
     <li
       *ngFor="let category of functionCategories; trackBy: trackByCategoryName"
       class="nav-category"

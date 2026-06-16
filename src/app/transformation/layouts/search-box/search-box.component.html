@@ -1,11 +1,22 @@
-<div class="filter-input-wrap">
+<div class="filter-input-wrap" [class.has-value]="!!query">
   <mat-icon class="filter-icon">search</mat-icon>
   <input
+    #searchInput
     type="text"
     class="filter-input"
     placeholder="Search…"
-    (click)="onSearchClick()"
-    readonly
-  />
-  <span class="filter-kbd" (click)="onSearchClick()">/</span>
+    [value]="query"
+    (input)="onInput($any($event.target).value)"
+    (keydown.escape)="clear()"
+    aria-label="Filter functions" />
+  <button *ngIf="query; else kbdHint"
+          class="filter-clear"
+          type="button"
+          (click)="clear()"
+          aria-label="Clear filter">
+    <mat-icon>close</mat-icon>
+  </button>
+  <ng-template #kbdHint>
+    <span class="filter-kbd" aria-hidden="true">/</span>
+  </ng-template>
 </div>
