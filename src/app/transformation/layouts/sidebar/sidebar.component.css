@@ -1,11 +1,13 @@
 /* ===========================
    Sidebar Wrapper and Collapse
    =========================== */
-/* The host element (app-sidebar) is sized by the parent layout
-   (function-page-main-layout.component.css); the wrapper just fills it. */
+/* The host element (app-sidebar) is stretched to full page height by the
+   parent flex row (function-page-main-layout.component.css). The wrapper
+   fills that height so it is the tall containing block the sticky .sidebar
+   pins within — same arrangement as the recipe sidebar's .left-sidebar
+   wrapping .sidebar-sticky. */
 .sidebar-wrapper {
   position: relative;
-  margin-top: 2.4rem;
   left: 0;
   height: 100%;
   width: 100%;
@@ -26,7 +28,13 @@
   transition: width 0s ease, opacity 0s ease;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  /* Pin below the fixed 4rem global header with a gap, exactly like the
+     user-manual sidebar (.sidebar-sticky: top 95px, height calc(100vh-110px)
+     in setup.component.scss) and the recipe / FAQ sidebars. The page scrolls
+     underneath; this column stays put. */
+  position: sticky;
+  top: 95px;
+  height: calc(100vh - 110px);
   /* The search box is a fixed header; only the nav list below it scrolls
      (see .nav-section in navigation.component.css), so the scrollbar no
      longer runs behind the search box. Matches the user-manual sidebar

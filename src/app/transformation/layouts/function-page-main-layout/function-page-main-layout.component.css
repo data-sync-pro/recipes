@@ -77,17 +77,19 @@
    Main Content Layout
    =========================== */
 /* Centered page container matching the user-manual baseline
-   (.setup-main-layout in setup.component.scss). The top padding (5.6rem)
-   covers the fixed 4rem header; box-sizing is border-box (see top of file),
-   so the inner row spans the remaining viewport height. */
+   (.setup-main-layout in setup.component.scss). The page scrolls naturally
+   (the window) — NOT an internal 100vh scroll region; the top padding (6.4rem)
+   clears the fixed 4rem global header with a gap. The sidebar pins via
+   position: sticky (sidebar.component.css), exactly like the recipe / FAQ /
+   user-manual sidebars, so there is a single page scroll instead of three
+   competing scroll containers. */
 .container {
   display: flex;
   flex-direction: row;
   gap: 2.5vw;
   max-width: 1752px;
   margin: 0 auto;
-  padding: 4rem 24px 0;
-  height: 100vh;
+  padding: 6.4rem 24px 0;
 }
 
 /* Sidebar width mirrors the user-manual baseline (.left-sidebar in
@@ -105,15 +107,15 @@ app-sidebar.collapsed {
   min-width: 0;
 }
 
+/* A normal in-flow column — the page (window) owns the scroll, so no
+   overflow / fixed height here. Bottom margin gives breathing room above the
+   page end; left/right auto centres within the flex track. */
 .content {
-  margin: 1.4rem auto 40px auto;
+  margin: 0 auto 40px auto;
   padding-top: 0.5px;
   transition: margin-left 0.3s ease;
   flex: 0 1 70%;
   min-width: 0;
-  overflow-y: auto;
-  height: 100%;
-  scrollbar-width: none;
 }
 
 
