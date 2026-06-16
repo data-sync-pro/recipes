@@ -8,11 +8,11 @@
     },
     {
       "type": "p",
-      "content": "On the installation screen, select only <strong>\"Install for Admins Only\"</strong> or <strong>\"Install for Specific Profiles...\"</strong>."
+      "content": "On the installation screen, select <strong>\"Install for Admins Only\"</strong>."
     },
     {
       "type": "p",
-      "content": "After the installation completes, assign the appropriate permission set(s) to each user. See [[permissions|Permission Sets]]^ for details."
+      "content": "After the installation completes, assign the appropriate permission set(s) to different users. See [[permissions|Permission Sets]]^ for details."
     },
     {
       "type": "image",

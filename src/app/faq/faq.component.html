@@ -25,7 +25,7 @@
 
 
 <div class="faq-layout-container"
-     [class.toc-hidden]="ui.tocHidden"
+     [class.toc-hidden]="ui.tocHidden || !shouldShowTOC"
      [class.sidebar-collapsed]="ui.sidebarCollapsed">
 
   <aside
@@ -228,15 +228,13 @@
       <!-- Page title — reflects the current sidebar selection: "All FAQs" on the
            home view, otherwise the selected sub-category / category name. Hidden
            on the single-FAQ detail view (which renders its own question title)
-           and while searching (the "Search: …" label takes over). -->
+           and while searching. -->
       <h1 class="faq-page-title"
           *ngIf="!current.faqItem && !ui.isLoadingRouteData && !search.query.trim()">
         {{ showHome ? 'All FAQs' : (current.subCategory || current.category) }}
       </h1>
 
       <div *ngIf="showHome && !ui.isLoadingRouteData && !current.faqItem" class="all-faqs">
-        <h2 class="section-title" *ngIf="search.query.trim()">Search: "{{ search.query }}"</h2>
-
         <!-- Loading skeleton for initial load -->
         <app-faq-skeleton
           *ngIf="isLoadingState && !ui.isLoadingRouteData"
@@ -251,8 +249,9 @@
           [ngTemplateOutletContext]="{ faqItems: search.query.trim() ? filteredFAQ : allFaqList }">
         </ng-container>
 
-        <div class="no-results" *ngIf="search.query.trim() && filteredFAQ.length === 0 && !isLoadingState">
-          <h3>No results found</h3>
+        <div class="no-results search-empty" *ngIf="search.query.trim() && filteredFAQ.length === 0 && !isLoadingState">
+          <mat-icon>search_off</mat-icon>
+          <p>No matches found</p>
         </div>
       </div>
       <div *ngIf="!showHome && !current.faqItem && !search.isActive && !ui.isLoadingRouteData" class="category-intro">
@@ -399,8 +398,9 @@
         </ng-container>
 
         <div class="no-results" *ngIf="filteredFAQ.length === 0">
-          <div *ngIf="search.query.trim() || categorySearchQuery.trim(); else noSearchResults" class="search-no-results">
-            <h3>No results found</h3>
+          <div *ngIf="search.query.trim() || categorySearchQuery.trim(); else noSearchResults" class="search-empty">
+            <mat-icon>search_off</mat-icon>
+            <p>No matches found</p>
           </div>
 
           <ng-template #noSearchResults>
@@ -468,7 +468,7 @@
         <div class="toc-header">
           <div class="toc-header-content">
             <div class="toc-title-section">
-              <h3 class="toc-title">{{ (current.subCategory || current.category) + ' FAQs' }}</h3>
+              <h3 class="toc-title">{{ (current.subCategory || current.category) }}</h3>
             </div>
             <div class="toc-pagination-controls" *ngIf="tocPagination.totalPages > 1">
               <div class="pagination-info">{{ tocPaginationInfo }}</div>
@@ -527,9 +527,13 @@
 <ng-template #faqListTemplate let-faqItems="faqItems">
   <div class="faq-list">
 
-    <cdk-virtual-scroll-viewport 
-      *ngIf="faqItems.length > 20 && !ui.isMobile" 
-      itemSize="35" 
+    <!-- Virtual-scroll viewport disabled: its fixed-height inner scroller pinned the
+         category title in place. The regular list (below) now always renders so the
+         title + list scroll together with the page. Re-enable for very large lists if
+         render perf becomes an issue.
+    <cdk-virtual-scroll-viewport
+      *ngIf="faqItems.length > 20 && !ui.isMobile"
+      itemSize="35"
       class="faq-virtual-viewport"
     >
       <div
@@ -555,9 +559,10 @@
         </div>
       </div>
     </cdk-virtual-scroll-viewport>
+    -->
 
-    <!-- Regular scrolling for smaller lists or mobile -->
-    <div *ngIf="faqItems.length <= 20 || ui.isMobile" class="faq-regular-list">
+    <!-- Regular list for all sizes — scrolls with the page (window scroll) -->
+    <div class="faq-regular-list">
       <div
         class="faq-item"
         *ngFor="let item of faqItems; let i = index; trackBy: trackByFAQ"

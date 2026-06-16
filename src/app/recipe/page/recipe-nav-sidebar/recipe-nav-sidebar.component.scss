@@ -55,6 +55,69 @@
         }
       }
 
+      // "All Recipes" landing entry — mirrors the FAQ sidebar's "All FAQs"
+      // home row. Styled like a category header, carrying the same chevron in
+      // the collapsed (right-pointing) orientation — static, since the row is a
+      // link rather than a collapsible group. Brand active state borrowed from
+      // .recipe-list-item.active.
+      .all-recipes-link {
+        display: flex;
+        align-items: center;
+        padding: 6px 8px 6px 0;
+        margin-bottom: 4px;
+        border-bottom: 1px solid #f1f3f4;
+        text-decoration: none;
+        font-size: 0.875rem;
+        color: #5c5c5c;
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.2s ease;
+
+        // Same chevron asset as .category-header, pinned right-pointing.
+        .all-recipes-icon {
+          width: 14px;
+          height: 14px;
+          margin-right: 8px;
+          transform: rotate(-90deg);
+        }
+
+        .category-name {
+          flex: 1;
+        }
+
+        &:hover {
+          font-weight: 500;
+          background-color: #F1F6FB;
+        }
+
+        &.active {
+          color: #2253B2;
+          font-weight: 500;
+          background-color: #F1F6FB;
+        }
+      }
+
+      // Empty filter result — matches the user manual (setup .filter-empty).
+      .sidebar-filter-empty {
+        text-align: center;
+        padding: 32px 12px 16px;
+        color: #94a3b8;
+
+        mat-icon {
+          font-size: 32px;
+          width: 32px;
+          height: 32px;
+          opacity: 0.6;
+        }
+
+        span {
+          display: block;
+          margin: 8px 0 0;
+          font-size: 13px;
+          line-height: 1.4;
+        }
+      }
+
       .category-group {
         .category-header {
           display: flex;

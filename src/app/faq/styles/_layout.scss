@@ -20,7 +20,7 @@ $toc-width: 320px;
   // (.setup-main-layout in setup.component.scss).
   max-width: 1752px;
   margin: 0 auto;
-  padding: 5.7rem 0 0 24px;
+  padding: 4rem 0 0 24px;
   box-sizing: border-box;
   min-height: 0;
   transition: grid-template-columns 0s cubic-bezier(0.4, 0.0, 0.2, 1);
@@ -31,6 +31,7 @@ $toc-width: 320px;
   padding: 0;
   background: transparent;
   margin-bottom: 40px;
+  margin-top: 1.7rem;
   // Fill the 1fr track so the (intrinsically width-less) virtual-scroll list
   // always has a definite width. The reading-width cap and left/centre
   // positioning live on .faq-main — a normal block child where auto margins
@@ -182,17 +183,6 @@ $toc-width: 320px;
   @media (max-width: 480px) {
     font-size: 1.5rem;
   }
-}
-
-.section-title {
-  font-size: 2.1rem !important;
-  font-weight: 400 !important;
-  color: #2C2C2D;
-  padding-bottom: 16px;
-  margin: 0 0 8px 0 !important;
-  line-height: 1.2;
-  text-align: center;
-  border-bottom: 2px solid $border-color;
 }
 
 .all-faqs,
@@ -389,6 +379,29 @@ $toc-width: 320px;
   text-align: center;
   padding: 40px 20px;
   color: #666;
+}
+
+// Empty search-result state — icon + muted text, matching the user manual (setup .filter-empty)
+.search-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 20px;
+  color: #94a3b8;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    opacity: 0.7;
+  }
+
+  p {
+    margin: 14px 0 0;
+    font-size: 1.0625rem;
+    line-height: 1.4;
+  }
 }
 
 

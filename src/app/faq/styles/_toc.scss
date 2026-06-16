@@ -14,7 +14,7 @@
     grid-area: toc;
     position: sticky;
     top: $header-height;
-    margin-top: -6.4rem; 
+    margin-top: 0; 
     height: calc(100vh - $header-height);
     z-index: 80;
     border-radius: 0;

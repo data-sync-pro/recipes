@@ -26,7 +26,10 @@
     >
       <a [routerLink]="result.link" (click)="linkClick.emit()">{{ result.name }}</a>
     </li>
-    <li class="nav-empty" *ngIf="searchResults.length === 0">No matches found</li>
+    <li class="nav-empty" *ngIf="searchResults.length === 0">
+      <mat-icon>search_off</mat-icon>
+      <span>No matches found</span>
+    </li>
   </ul>
 
   <!-- Category tree when not searching -->
@@ -40,13 +43,14 @@
         [class.active]="isCategoryActive(category)"
         (click)="toggleCategory(category)"
       >
-        <mat-icon class="arrow" [class.expanded]="isCategoryExpanded(category)">
-          {{
-            categoryHasChildren(category) && isCategoryExpanded(category)
-              ? "expand_more"
-              : "chevron_right"
-          }}
+        <mat-icon
+          class="arrow"
+          *ngIf="categoryHasChildren(category); else arrowSpacer"
+          [class.expanded]="isCategoryExpanded(category)"
+        >
+          {{ isCategoryExpanded(category) ? "expand_more" : "chevron_right" }}
         </mat-icon>
+        <ng-template #arrowSpacer><span class="arrow-spacer"></span></ng-template>
         {{ category.name
         }}{{
           category.name !== "Operators" &&

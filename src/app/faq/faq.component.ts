@@ -648,11 +648,11 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       return false;
     }
 
-    if (this.showHome) {
-      return this.trendingQuestions.length > 0;
-    }
-
-    return (!!this.current.category || !!this.current.subCategory) &&
+    // Only show the TOC on the single-FAQ detail view, where it lists the
+    // other questions in the same category alongside the open one. The home
+    // and category-list views don't show it.
+    return !!this.current.faqItem &&
+           (!!this.current.category || !!this.current.subCategory) &&
            this.currentFAQList.length > 1;
   }
 

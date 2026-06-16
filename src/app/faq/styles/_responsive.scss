@@ -37,11 +37,12 @@
   // (.sidebar-sticky in setup.component.scss: top 95px, calc(100vh - 110px)).
   .faq-sidebar {
     position: sticky;
-    top: 95px;
+    top: $header-height; // pin below the fixed header, matching the right-rail TOC
     height: calc(100vh - 110px);
     overflow: hidden;
     transform: none;
     transition: $transition;
+    padding-top: 1.7rem;
   }
 }
 
@@ -182,11 +183,6 @@
   .faq-feedback-section {
     right: 1rem;
     bottom: 1rem;
-  }
-
-  .section-title {
-    font-size: 2rem !important;
-    padding-bottom: 32px;
   }
 
   .faq-list .faq-item {

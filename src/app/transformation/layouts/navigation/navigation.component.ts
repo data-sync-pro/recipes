@@ -313,8 +313,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
     }));
 
     const TAG_ORDER = [
-      'Text', 'Logical', 'Number', 'Date & Time', 'Operators',
-      'Global Variables', 'Randomization', 'Type Processing', 'Trigger', 'Advanced',
+      'Operators', 'Global Variables', 'Text', 'Logical', 'Number', 'Date & Time',
+      'Randomization', 'Type Processing', 'Trigger', 'Advanced',
     ];
 
     this.functionCategories.sort((a, b) => {
