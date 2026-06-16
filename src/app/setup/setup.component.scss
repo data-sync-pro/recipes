@@ -41,7 +41,7 @@
   gap: 3vw;
   max-width: 1752px;
   margin: 0 auto;
-  padding: 6.4rem 24px 0 24px;
+  padding: 5.7rem 24px 0 24px;
   box-sizing: border-box;
 }
 
@@ -496,7 +496,7 @@ $hover-bg: #f1f5f9;
 @media (max-width: 1200px) {
   .setup-main-layout {
     // Keep the top padding clearing the fixed 4rem header; only tighten sides.
-    padding: 6.4rem 16px 0 16px;
+    padding: 5.7rem 16px 0 16px;
     gap: 24px;
   }
 
@@ -516,7 +516,7 @@ $hover-bg: #f1f5f9;
   .setup-main-layout {
     flex-direction: column;
     // Keep the top padding clearing the fixed 4rem header; only tighten sides.
-    padding: 6.4rem 16px 0 16px;
+    padding: 5.7rem 16px 0 16px;
   }
 
   // Hamburger toggle — fixed top-right (recipe .sidebar-toggle-btn).
@@ -617,7 +617,7 @@ $hover-bg: #f1f5f9;
 
   .setup-main-layout {
     // Keep the top padding clearing the fixed 4rem header; only tighten sides.
-    padding: 6.4rem 16px 0 16px;
+    padding: 5.7rem 16px 0 16px;
     gap: 16px;
   }
 }

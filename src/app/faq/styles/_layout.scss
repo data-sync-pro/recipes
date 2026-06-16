@@ -20,7 +20,7 @@ $toc-width: 320px;
   // (.setup-main-layout in setup.component.scss).
   max-width: 1752px;
   margin: 0 auto;
-  padding: 6.4rem 0 0 24px;
+  padding: 5.7rem 0 0 24px;
   box-sizing: border-box;
   min-height: 0;
   transition: grid-template-columns 0s cubic-bezier(0.4, 0.0, 0.2, 1);
@@ -156,7 +156,7 @@ $toc-width: 320px;
   min-height: auto;
   // Reading-width cap; left/centre positioning is set per TOC state in
   // _responsive.scss (desktop only, so mobile stays full-bleed).
-  max-width: 960px;
+  max-width: auto;
 }
 
 // FAQ page title — mirrors the recipe detail-banner title exactly
@@ -173,7 +173,7 @@ $toc-width: 320px;
   font-weight: 500;
   color: $primary-color;
   text-align: center;
-  margin: 24px 0 16px 0;
+  margin: 8px 0 16px 0;
 
   @media (max-width: 768px) {
     font-size: 1.75rem;
