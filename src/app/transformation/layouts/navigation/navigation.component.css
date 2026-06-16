@@ -189,6 +189,28 @@ ul li {
   line-height: 1.3;
 }
 
+/* Function-count badge — mirrors the user-manual sidebar's .nav-count pill
+   (setup.component.scss) and the FAQ sidebar's .nav-count. margin-left:auto
+   pushes it to the far right of the header row. */
+.category-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  height: 18px;
+  min-width: 18px;
+  margin-left: auto;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #5c5c5c;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
 /* Parent hover bolds its text — no brand color (recipe-style). */
 .category-header:hover {
   background-color: #f1f5f9;
@@ -223,7 +245,7 @@ ul li {
   list-style: none !important;
   /* 8px top gap mirrors the recipe sidebar's expanded category-header
      margin-bottom, separating the header from its items. */
-  margin: 8px 0 0.5rem 0.8rem !important;
+  margin: 0 0 0.5rem 0.8rem !important;
   padding-left: 0.5rem !important;
 }
 

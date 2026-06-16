@@ -52,10 +52,13 @@
           category.name !== "Operators" &&
           category.name !== "Global Variables" &&
           category.name !== "Apex Class" &&
-          category.name !== 'Home'            
+          category.name !== 'Home'
             ? ' Functions'
             : ''
         }}
+        <span class="category-count" *ngIf="categoryHasChildren(category)">{{
+          category.functions.length
+        }}</span>
       </div>
       <ul
         class="function-list"
