@@ -363,6 +363,10 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   goHome(): void {
     this.resetState();
     this.router.navigate(['/faqs']);
+
+    if (this.ui.isMobile) {
+      this.closeMobileSidebar();
+    }
   }
 
   goCategory(cat: string): void {
@@ -1365,7 +1369,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Mobile functionality
   private checkMobileView(): void {
-    this.updateUIState({ isMobile: window.innerWidth <= 768 });
+    // 1024px matches the recipe sidebar drawer breakpoint ($breakpoint-desktop
+    // in _variables.scss); keep JS and CSS in sync.
+    this.updateUIState({ isMobile: window.innerWidth <= 1024 });
   }
 
   toggleMobileSidebar(event?: Event): void {

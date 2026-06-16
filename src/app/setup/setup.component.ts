@@ -41,6 +41,9 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading = true;
   activeBlockId: string | null = null;
 
+  // Mobile sidebar drawer (≤1024px) — mirrors the recipe details sidebar.
+  isSidebarOpen = false;
+
   private recipeCache: Recipe[] = [];
   private recipeLoadKicked = false;
 
@@ -308,7 +311,20 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     if (node.slug) {
       this.selectSetup(node.slug);
+      // Navigating to a page closes the mobile drawer (no-op on desktop).
+      this.closeSidebar();
     }
+  }
+
+  // --- Mobile sidebar drawer (≤1024px) ---
+  toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
+    this.cdr.markForCheck();
+  }
+
+  closeSidebar(): void {
+    this.isSidebarOpen = false;
+    this.cdr.markForCheck();
   }
 
   // Toggle expand/collapse for a node

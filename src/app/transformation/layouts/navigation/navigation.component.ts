@@ -59,6 +59,8 @@ const SPECIAL_TAGS = new Set(['Operators', 'Global Variables', 'Apex Class']);
 export class NavigationComponent implements OnInit, OnDestroy {
   @Input() collapsed$!: Observable<boolean>;
   @Output() toggleSidebar = new EventEmitter<void>();
+  // Fired whenever a nav entry navigates, so the host can close the mobile drawer.
+  @Output() linkClick = new EventEmitter<void>();
 
   // Undefined while the sidebar is collapsed (the search box is *ngIf'd out),
   // so the `/` shortcut is a no-op until the sidebar is expanded.
@@ -361,6 +363,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
       this.sidebarService.setActiveCategory('');
       category.expanded = true;
       this.router.navigate(['/transformation', target]);
+      this.linkClick.emit();
       return;
     }
     category.expanded = !category.expanded;

@@ -54,6 +54,13 @@ $text-muted: #94a3b8;
 $border-light: #e5e7eb;
 $hover-bg: #f1f5f9;
 
+// Mobile drawer chrome — hidden on desktop, shown at ≤1024px (see media query
+// below). Mirrors the recipe details sidebar (recipe-nav-sidebar.component.scss).
+.sidebar-toggle-btn,
+.sidebar-backdrop {
+  display: none;
+}
+
 .left-sidebar {
   flex: 0 0 20%;
   min-width: 220px;
@@ -488,7 +495,8 @@ $hover-bg: #f1f5f9;
 // Responsive - Tablets
 @media (max-width: 1200px) {
   .setup-main-layout {
-    padding: 24px 16px 0 16px;
+    // Keep the top padding clearing the fixed 4rem header; only tighten sides.
+    padding: 6.4rem 16px 0 16px;
     gap: 24px;
   }
 
@@ -501,33 +509,87 @@ $hover-bg: #f1f5f9;
   }
 }
 
-// Responsive - Mobile
+// Responsive - Tablet + Mobile (≤1024px): the sidebar becomes an off-canvas
+// drawer that slides in from the left over a dark backdrop, opened by a fixed
+// top-right hamburger — identical to the recipe details sidebar.
 @media (max-width: 1024px) {
   .setup-main-layout {
     flex-direction: column;
-    padding: 24px 16px 0 16px;
+    // Keep the top padding clearing the fixed 4rem header; only tighten sides.
+    padding: 6.4rem 16px 0 16px;
   }
 
+  // Hamburger toggle — fixed top-right (recipe .sidebar-toggle-btn).
+  .sidebar-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 10px;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    border: none;
+    background: #FAFBFC;
+    color: $brand;
+    cursor: pointer;
+    z-index: 1001;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    &:focus {
+      outline: 2px solid $brand;
+      outline-offset: 2px;
+    }
+  }
+
+  // Dark backdrop behind the open drawer.
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+  }
+
+  // Off-canvas drawer.
   .left-sidebar {
-    flex: 0 0 auto;
-    width: 100%;
-    max-width: none;
-    order: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 320px;
+    max-width: 85vw;
+    flex: none;
+    min-width: 0;
+    background: #FAFBFC;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+    padding: 40px 16px 16px 16px;
+    overflow-y: auto;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+
+    &.open {
+      transform: translateX(0);
+    }
 
     .sidebar-sticky {
       position: static;
-      max-height: none;
+      height: auto;
       display: block;
     }
 
     .category-list {
       overflow: visible;
-      max-height: none;
     }
   }
 
   .setup-content {
-    order: 2;
     width: 100%;
   }
 
@@ -543,6 +605,7 @@ $hover-bg: #f1f5f9;
 }
 
 @media (max-width: 768px) {
+
   .setup-banner {
     height: auto;
     padding: 24px 0;
@@ -553,7 +616,8 @@ $hover-bg: #f1f5f9;
   }
 
   .setup-main-layout {
-    padding: 16px;
+    // Keep the top padding clearing the fixed 4rem header; only tighten sides.
+    padding: 6.4rem 16px 0 16px;
     gap: 16px;
   }
 }

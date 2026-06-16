@@ -1,77 +1,77 @@
 // ==================== iOS Mobile Optimizations ====================
 
 // Global iOS-specific touch optimizations
-@media (pointer: coarse) {
+// @media (pointer: coarse) {
   
-  button,
-  [role="button"],
-  .nav-item,
-  .faq-item,
-  .breadcrumb-item,
-  .toc-item {
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    -webkit-touch-callout: none;
-    user-select: none;
+//   button,
+//   [role="button"],
+//   .nav-item,
+//   .faq-item,
+//   .breadcrumb-item,
+//   .toc-item {
+//     -webkit-tap-highlight-color: transparent;
+//     touch-action: manipulation;
+//     -webkit-touch-callout: none;
+//     user-select: none;
     
-    // Ensure minimum touch target size for real devices
-    min-height: 44px;
-    min-width: 44px;
+//     // Ensure minimum touch target size for real devices
+//     min-height: 44px;
+//     min-width: 44px;
     
-    // Add padding for better touch targets
-    &:not(button) {
-      padding: 12px;
-    }
+//     // Add padding for better touch targets
+//     &:not(button) {
+//       padding: 12px;
+//     }
     
     
-    position: relative;
-    z-index: 1;
-    pointer-events: auto;
-  }
+//     position: relative;
+//     z-index: 1;
+//     pointer-events: auto;
+//   }
   
   
-  .faq-sidebar.mobile-open .nav-item {
+//   .faq-sidebar.mobile-open .nav-item {
     
-    position: relative;
-    z-index: 10; 
-    pointer-events: auto;
-    touch-action: manipulation;
+//     position: relative;
+//     z-index: 10; 
+//     pointer-events: auto;
+//     touch-action: manipulation;
     
     
-    &::before {
-      content: '';
-      position: absolute;
-      top: -5px;
-      left: -10px;
-      right: -10px;
-      bottom: -5px;
-      z-index: -1;
-    }
-  }
+//     &::before {
+//       content: '';
+//       position: absolute;
+//       top: -5px;
+//       left: -10px;
+//       right: -10px;
+//       bottom: -5px;
+//       z-index: -1;
+//     }
+//   }
   
-  // Prevent text selection on interactive elements
-  .faq-header,
-  .nav-content {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
+//   // Prevent text selection on interactive elements
+//   .faq-header,
+//   .nav-content {
+//     -webkit-user-select: none;
+//     -moz-user-select: none;
+//     -ms-user-select: none;
+//     user-select: none;
+//   }
   
-  // Improve scroll performance
-  .sidebar-body,
-  .faq-container,
-  .faq-virtual-viewport,
-  .toc-content {
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-  }
+//   // Improve scroll performance
+//   .sidebar-body,
+//   .faq-container,
+//   .faq-virtual-viewport,
+//   .toc-content {
+//     -webkit-overflow-scrolling: touch;
+//     scroll-behavior: smooth;
+//   }
   
-  // Disable momentum scrolling on modals
-  .sidebar-overlay {
-    -webkit-overflow-scrolling: auto;
-  }
-}
+//   // Disable momentum scrolling on modals
+//   .sidebar-overlay {
+//     -webkit-overflow-scrolling: auto;
+//   }
+// }
 
 // iOS-specific fixes
 @supports (-webkit-touch-callout: none) {

@@ -195,11 +195,11 @@
     max-width: 85vw;
     flex: none;
     min-width: 0;
-    background: #fff;
+    background: #FAFBFC;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 1001;
-    padding: 70px 16px 16px 16px;
+    padding: 40px 16px 16px 16px;
     overflow-y: auto;
     box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
 
@@ -213,6 +213,23 @@
 
       .recipe-list {
         max-height: none;
+      }
+
+      // In the drawer (touch / small screen) the category header must never
+      // show the brand-blue tint: on touch a tap leaves :hover stuck, so the
+      // #F1F6FB hover background lingers. Pin every state to the drawer surface
+      // (#FAFBFC) instead. These selectors match the base rules' depth, so the
+      // later source order wins (no !important). Opaque so the sticky active
+      // header still hides items that scroll beneath it.
+      .category-list .category-group .category-header,
+      .category-list .category-group .category-header:hover {
+        background-color: #FAFBFC;
+      }
+
+      // Active category header (its own higher-specificity :has rule above):
+      // re-assert the drawer surface at matching specificity, later in source.
+      .category-list .category-group:has(.recipe-list-item.active) .category-header {
+        background-color: #FAFBFC;
       }
     }
   }

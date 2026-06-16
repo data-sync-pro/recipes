@@ -318,3 +318,17 @@ ul li {
   font-size: 0.75rem;
   color: #94a3b8;
 }
+
+/* ===========================
+   Mobile drawer (≤1024px)
+   ===========================
+   In the off-canvas drawer the category header must never show the tinted
+   hover background: on touch a tap leaves :hover stuck, so the #f1f5f9 tint
+   lingers. Force it flush in the drawer (matches the recipe sidebar). The
+   active function leaf link keeps its brand highlight. */
+@media (max-width: 1024px) {
+  .category-header,
+  .category-header:hover {
+    background-color: #FAFBFC;
+  }
+}

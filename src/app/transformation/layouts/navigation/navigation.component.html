@@ -24,7 +24,7 @@
       *ngFor="let result of searchResults; trackBy: trackBySearchResult"
       routerLinkActive="active"
     >
-      <a [routerLink]="result.link">{{ result.name }}</a>
+      <a [routerLink]="result.link" (click)="linkClick.emit()">{{ result.name }}</a>
     </li>
     <li class="nav-empty" *ngIf="searchResults.length === 0">No matches found</li>
   </ul>
@@ -77,6 +77,7 @@
         >
           <a
             [routerLink]="['/transformation', categorySlug(category.name), func.route]"
+            (click)="linkClick.emit()"
             >{{ func.name }}</a
           >
         </li>

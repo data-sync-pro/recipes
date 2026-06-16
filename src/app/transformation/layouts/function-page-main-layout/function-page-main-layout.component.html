@@ -2,9 +2,11 @@
   <!-- Sidebar Component -->
   <app-sidebar
     [collapsed$]="collapsed$"
-    [showSidebar]="showSidebar"
+    [mobileOpen]="mobileOpen"
     [class.collapsed]="collapsed$ | async"
-    (toggleSidebar)="onToggleSidebar()">
+    (toggleSidebar)="onToggleSidebar()"
+    (toggleMobile)="toggleMobile()"
+    (closeMobile)="closeMobile()">
   </app-sidebar>
 
   <main class="content" [class.sidebar-collapsed]="collapsed$ | async">

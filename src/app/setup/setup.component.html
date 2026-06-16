@@ -5,9 +5,25 @@
     </div>
   </div> -->
 
+  <!-- Mobile sidebar toggle button (≤1024px) — mirrors the recipe details sidebar -->
+  <button
+    type="button"
+    class="sidebar-toggle-btn"
+    (click)="toggleSidebar()"
+    [attr.aria-expanded]="isSidebarOpen"
+    aria-label="Toggle setup navigation">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </button>
+
+  <div class="sidebar-backdrop" *ngIf="isSidebarOpen" (click)="closeSidebar()"></div>
+
   <div class="setup-main-layout">
     <!-- Left Sidebar - Setup Titles -->
-    <aside class="left-sidebar">
+    <aside class="left-sidebar" [class.open]="isSidebarOpen">
       <div class="sidebar-sticky">
         <div class="sidebar-filter">
           <div class="filter-input-wrap" [class.has-value]="!!filterQuery">

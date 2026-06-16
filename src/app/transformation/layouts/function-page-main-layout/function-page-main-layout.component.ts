@@ -8,15 +8,23 @@ import { LayoutService } from '../../services/layout.service';
 })
 export class FunctionPageMainLayoutComponent {
   collapsed$ = this.layout.collapsed$;
-  showSidebar = false;
+  // Mobile sidebar drawer open state (≤1024px) — distinct from the desktop
+  // `collapsed$` width-collapse; mirrors the recipe details sidebar.
+  mobileOpen = false;
 
   constructor(private layout: LayoutService) {}
 
+  // Desktop collapse/expand (the floating ☰ button).
   onToggleSidebar(): void {
     this.layout.toggle();
   }
 
-  closeSidebar(): void {
-    this.showSidebar = false;
+  // Mobile drawer open/close.
+  toggleMobile(): void {
+    this.mobileOpen = !this.mobileOpen;
+  }
+
+  closeMobile(): void {
+    this.mobileOpen = false;
   }
 }

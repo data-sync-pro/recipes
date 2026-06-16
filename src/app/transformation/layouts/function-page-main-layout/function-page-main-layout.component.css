@@ -118,6 +118,23 @@ app-sidebar.collapsed {
   min-width: 0;
 }
 
+/* Tablet + Mobile (≤1024px): the sidebar becomes a fixed off-canvas drawer
+   (sidebar.component.css), so its flex slot must collapse and the content
+   takes the full width — matching the recipe / user-manual drawers. */
+@media (max-width: 1024px) {
+  app-sidebar,
+  app-sidebar.collapsed {
+    flex: 0 0 0;
+    min-width: 0;
+    max-width: none;
+    width: 0;
+  }
+
+  .content {
+    margin: 0 auto 40px auto;
+  }
+}
+
 
 /* ===========================
    Breadcrumb Wrapper
