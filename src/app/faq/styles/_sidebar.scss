@@ -92,11 +92,13 @@
   }
 
   .sidebar-body {
-    flex: 1 1 auto; 
+    flex: 1 1 auto;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 0px 0px 8px 0px;
-    min-height: 0; 
+    min-height: 0;
+    // Divider runs alongside the nav list only — not the search box above.
+    border-right: 1px solid $border-color;
 
     &::-webkit-scrollbar {
       width: 6px;

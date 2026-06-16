@@ -86,7 +86,7 @@
 .container {
   display: flex;
   flex-direction: row;
-  gap: 2.5vw;
+  gap: 3vw;
   max-width: 1752px;
   margin: 0 auto;
   padding: 6.4rem 24px 0;
@@ -111,10 +111,10 @@ app-sidebar.collapsed {
    overflow / fixed height here. Bottom margin gives breathing room above the
    page end; left/right auto centres within the flex track. */
 .content {
-  margin: 0 auto 40px auto;
+  margin: 0 4rem 40px auto;
   padding-top: 0.5px;
   transition: margin-left 0.3s ease;
-  flex: 0 1 70%;
+  flex: 0 1 100%;
   min-width: 0;
 }
 

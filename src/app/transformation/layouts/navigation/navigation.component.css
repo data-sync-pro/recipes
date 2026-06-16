@@ -40,6 +40,8 @@ ul li {
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  /* Divider runs alongside the list only — not the search header above. */
+  border-right: 1px solid #e5e7eb;
 }
 
 /* Webkit pseudo-elements rather than scrollbar-width/scrollbar-color: the

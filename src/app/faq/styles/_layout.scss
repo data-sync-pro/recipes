@@ -159,6 +159,31 @@ $toc-width: 320px;
   max-width: 960px;
 }
 
+// FAQ page title — mirrors the recipe detail-banner title exactly
+// (.recipe-title: 2.25rem, weight 500, brand blue, centered) so the FAQ and
+// recipe sections read as one design system. Responsive steps match too.
+//
+// Scoped under .faq-main to clear Angular Material's global `.mat-typography h1`
+// rule (specificity 0,1,1 — 24px/400). The FAQ uses ViewEncapsulation.None so a
+// bare `.faq-page-title` (0,1,0) loses to it; `.faq-main .faq-page-title` (0,2,0)
+// wins without needing !important (recipe's title wins the same battle via its
+// emulated-encapsulation attribute selector).
+.faq-main .faq-page-title {
+  font-size: 2.25rem;
+  font-weight: 400;
+  color: $primary-color;
+  text-align: center;
+  margin: 0 0 8px 0;
+
+  @media (max-width: 768px) {
+    font-size: 1.75rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
+}
+
 .section-title {
   font-size: 2.1rem !important;
   font-weight: 400 !important;

@@ -38,7 +38,7 @@
 // Three Column Layout
 .setup-main-layout {
   display: flex;
-  gap: 2.5vw;
+  gap: 3vw;
   max-width: 1752px;
   margin: 0 auto;
   padding: 6.4rem 24px 0 24px;
@@ -104,6 +104,8 @@ $hover-bg: #f1f5f9;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 0 0 8px 0;
+    // Divider runs alongside the nav list only — not the filter box above.
+    border-right: 1px solid $border-light;
 
     // Custom scrollbar
     &::-webkit-scrollbar {
@@ -296,10 +298,10 @@ $hover-bg: #f1f5f9;
 
 // Middle Content Area
 .setup-content {
-  flex: 0 1 70%;
+  flex: 0 1 100%;
   min-width: 0;
   margin-bottom: 20%;
-  margin-left: 2rem;
+  margin-right: 4rem;
 
   .page-title {
     font-size: 2.25rem;

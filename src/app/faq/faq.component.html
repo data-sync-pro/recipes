@@ -191,9 +191,16 @@
       <div *ngIf="ui.isLoadingRouteData" class="route-loading">
       </div>
 
+      <!-- Page title — reflects the current sidebar selection: "All FAQs" on the
+           home view, otherwise the selected sub-category / category name. Hidden
+           on the single-FAQ detail view (which renders its own question title)
+           and while searching (the "Search: …" label takes over). -->
+      <h1 class="faq-page-title"
+          *ngIf="!current.faqItem && !ui.isLoadingRouteData && !search.query.trim()">
+        {{ showHome ? 'All FAQs' : (current.subCategory || current.category) }}
+      </h1>
 
       <div *ngIf="showHome && !ui.isLoadingRouteData && !current.faqItem" class="all-faqs">
-        <!-- <h2 class="section-title" *ngIf="!search.query.trim()">All FAQs</h2> -->
         <h2 class="section-title" *ngIf="search.query.trim()">Search: "{{ search.query }}"</h2>
 
         <!-- Loading skeleton for initial load -->
