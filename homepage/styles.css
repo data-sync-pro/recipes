@@ -452,7 +452,7 @@ p { margin: 0; }
    Hero
    ========================================================= */
 .hero {
-  padding: 0;
+  padding: 0px 0px 24px 0px;
   position: relative;
   overflow: hidden;
   min-height: calc(100vh - 64px);

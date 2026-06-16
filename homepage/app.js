@@ -1827,10 +1827,10 @@ window.SubmissionLimiter = (() => {
 })();
 
 // #UI hero — faithful "actionable data list" demo (anchored on the screenshot).
-// Guided tour of the surface: select rows → custom actions enable → open the
-// Priority column filter and drop "Low" → inline-edit a cell and push the value
-// to all selected rows → success toast. Pagination, search, built-in actions and
-// the record count are all present so the capability reads at a glance.
+// Guided tour of the surface: open the Priority column filter and drop "Low" →
+// select the matching rows → custom actions enable → run the bulk "Accept" action,
+// pushing the new status to every selected row → success toast. Pagination, search,
+// built-in actions and the record count are all present so the capability reads at a glance.
 (() => {
   const card = document.getElementById('uiListHero');
   if (!card) return;
@@ -1850,10 +1850,7 @@ window.SubmissionLimiter = (() => {
   const highChk   = card.querySelector('[data-al-high]');
   const medChk    = card.querySelector('[data-al-med]');
   const lowChk    = card.querySelector('[data-al-low]');
-  const edit     = card.querySelector('[data-al-edit]');
-  const editVal  = card.querySelector('[data-al-editval]');
-  const editBox  = card.querySelector('[data-al-editbox]');
-  const applyBtn = card.querySelector('[data-al-apply]');
+  const acceptBtn = cacts.querySelector('[data-al-accept]');   // bulk "Accept" custom action
   const toast    = card.querySelector('[data-al-toast]');
 
   const SEL = [0, 2, 4, 5];        // selected rows (all High/Medium)
@@ -1886,15 +1883,6 @@ window.SubmissionLimiter = (() => {
   const at = (ms, fn) => timers.push(setTimeout(fn, ms));
   const rowEls = () => [...rowsWrap.querySelectorAll('[data-al-row]')];
 
-  function placeEdit(cell) {
-    const top = cell.offsetTop + cell.offsetHeight + 6;
-    let left = cell.offsetLeft - 6;
-    const cardW = card.clientWidth;
-    if (left + 206 > cardW - 8) left = cardW - 8 - 206;
-    if (left < 8) left = 8;
-    edit.style.top = top + 'px';
-    edit.style.left = left + 'px';
-  }
   function setStat(cell, val) {
     cell.textContent = val;
   }
@@ -1906,7 +1894,7 @@ window.SubmissionLimiter = (() => {
     selnote.textContent = 'Updated just now';
     selnote.classList.remove('sel');
     cacts.classList.remove('on');
-    cacts.querySelectorAll('.al-cbtn').forEach(b => b.classList.remove('flash'));
+    cacts.querySelectorAll('.al-cbtn').forEach(b => b.classList.remove('flash', 'press'));
     ckall.classList.remove('some');
     if (rc) rc.textContent = baseRc;
     filter.classList.remove('open');
@@ -1916,10 +1904,6 @@ window.SubmissionLimiter = (() => {
     filterVal.textContent = 'Filter…';
     filterBox.classList.remove('has');
     if (lastPg) lastPg.textContent = '15';
-    edit.classList.remove('on');
-    editVal.textContent = 'High';
-    editBox.classList.remove('on');
-    applyBtn.classList.remove('press');
     toast.classList.remove('on');
   }
 
@@ -1976,25 +1960,18 @@ window.SubmissionLimiter = (() => {
     at(tSelDone + 60,  () => { cacts.classList.add('on'); cacts.querySelectorAll('.al-cbtn').forEach(b => b.classList.add('flash')); });
     at(tSelDone + 760, () => cacts.querySelectorAll('.al-cbtn').forEach(b => b.classList.remove('flash')));
 
-    // Phase C — ACTION: inline-edit a Status cell, push to all selected rows
-    const statCell = rows[SEL[0]].querySelector('[data-al-stat]');
-    const startStat = statCell.textContent;
-    const tEdit = tSelDone + 520;
-    at(tEdit,       () => { placeEdit(statCell); statCell.classList.add('editing'); edit.classList.add('on'); editVal.textContent = startStat; });
-    at(tEdit + 520, () => editVal.textContent = NEW_STATUS);   // pick a new value
-    at(tEdit + 950, () => editBox.classList.add('on'));        // "Update 4 selected items"
-
-    // Phase D — apply → all selected rows update + toast
-    const tApply = tEdit + 1400;
-    at(tApply,       () => applyBtn.classList.add('press'));
-    at(tApply + 150, () => applyBtn.classList.remove('press'));
-    at(tApply + 240, () => { edit.classList.remove('on'); statCell.classList.remove('editing'); });
-    SEL.forEach((ri, k) => at(tApply + 420 + k * 110, () => {
+    // Phase C — ACTION: run the bulk "Accept" custom action; selected rows move to the new status
+    const tAct = tSelDone + 900;
+    at(tAct,       () => { if (acceptBtn) acceptBtn.classList.add('press'); });
+    at(tAct + 160, () => { if (acceptBtn) acceptBtn.classList.remove('press'); });
+    SEL.forEach((ri, k) => at(tAct + 280 + k * 110, () => {
       const c = rows[ri].querySelector('[data-al-stat]');
       setStat(c, NEW_STATUS);
       c.classList.add('lit');
     }));
-    const tToast = tApply + 420 + SEL.length * 110 + 60;
+
+    // Phase D — success toast + de-select
+    const tToast = tAct + 280 + SEL.length * 110 + 60;
     at(tToast, () => {
       toast.classList.add('on');
       // de-select at the same instant the success message pops
