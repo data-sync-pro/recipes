@@ -369,20 +369,8 @@
   th:first-child, td:first-child { width: 50%; }
 }
 
-a.setup-link,
-a.setup-link-external {
-  color: #2253B2;
-  text-decoration: underline;
-  cursor: pointer;
-
-  &:hover {
-    color: #163a82;
-  }
-}
-
-.setup-link-broken {
-  color: #b91c1c;
-  text-decoration: underline wavy;
-  cursor: help;
-}
+// NOTE: setup-link / setup-link-external / setup-link-broken styles live in the
+// global styles.scss, not here. renderContent() injects these <a> tags via
+// [innerHTML], which bypasses this component's emulated view encapsulation, so a
+// component-scoped rule would never match them.
 

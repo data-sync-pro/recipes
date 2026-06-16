@@ -81,6 +81,33 @@ html {
   word-break: break-word;
 }
 
+// Single source of truth for inline content links. Both the setup block
+// (a.setup-link[-external], built by renderContent() in block.component.ts) and
+// the recipe detail page (.content-section, overview/use-cases) reach the DOM via
+// [innerHTML], which bypasses Angular's view encapsulation — so a component-scoped
+// rule never matches them. They must be styled globally, same reason as the setup
+// <strong>/<code> rules above. Keep the brand color defined here only.
+a.setup-link,
+a.setup-link-external,
+.content-section a {
+  color: #2253B2;
+  text-decoration: underline;
+  text-decoration-color: #2253B2;
+  cursor: pointer;
+
+  &:hover {
+    color: #1a4490;
+    text-decoration-color: #1a4490;
+  }
+}
+
+// Unresolved [[slug]] setup link — rendered as a visible broken-link marker.
+.setup-link-broken {
+  color: #b91c1c;
+  text-decoration: underline wavy;
+  cursor: help;
+}
+
 // Global table styles (used by setup/block, faq-editor, designer-guide)
 // Note: FAQ has its own scoped table style under .faq-answer table to stay isolated.
 table {
