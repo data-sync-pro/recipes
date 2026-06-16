@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Block } from '../models/setup.model';
 import { SetupService } from '../services/setup.service';
-import hljs from 'highlight.js';
+import { hljs } from 'src/app/shared/highlight';
 
 @Component({
   selector: 'app-setup-block',

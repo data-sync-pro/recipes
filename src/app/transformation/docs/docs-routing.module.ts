@@ -4,12 +4,10 @@ import { DocViewerComponent } from './doc-viewer/doc-viewer.component';
 import { HomeComponent } from '../pages/home/home.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  // In-page sections (formerly /home#text, /home#formula_elements ...) now
-  // live as path segments so URLs don't carry a fragment. HomeComponent reads
-  // :section and scrolls the matching anchor.
-  { path: 'home/:section', component: HomeComponent },
+  // Home lives at the transformation root; in-page sections are addressed by
+  // URL fragment (e.g. /transformation#formula_elements). HomeComponent reads
+  // the fragment and scrolls the matching anchor.
+  { path: '', component: HomeComponent },
   // Backward-compat redirects: $joiner was the original $-prefixed slug; the
   // three kebab forms (global-variables, apex-class, aggregate-general) were
   // a brief intermediate naming. Canonical is now snake_case throughout.

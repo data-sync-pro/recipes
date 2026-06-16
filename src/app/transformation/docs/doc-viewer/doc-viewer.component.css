@@ -51,6 +51,14 @@
   margin-top: 1rem;
 }
 
+/* Fix the first column (Parameter name) to a stable width so the Description
+   column gets consistent remaining space across different functions. The other
+   columns keep auto sizing under table-layout: auto. */
+.doc-table th:first-child,
+.doc-table td:first-child {
+  width: 180px;
+}
+
 .doc-tables{
   width: 100%;
   border-collapse: collapse;

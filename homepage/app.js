@@ -901,7 +901,16 @@ window.SubmissionLimiter = (() => {
       }
     });
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-  els.forEach(el => io.observe(el));
+  els.forEach(el => {
+    // Reveal above-the-fold elements immediately on load. The hero's lowest
+    // items (e.g. the trust pip, data-d="4") sit inside the observer's bottom
+    // -8% dead zone and would otherwise only appear after a small scroll.
+    if (el.getBoundingClientRect().top < window.innerHeight) {
+      el.classList.add('in');
+    } else {
+      io.observe(el);
+    }
+  });
 })();
 
 // Executable Anatomy stage walker

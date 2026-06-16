@@ -20,6 +20,7 @@ import {
   SearchState
 } from '../core/models/recipe.model';
 import { CacheService } from '../core/services/cache.service';
+import { OrchestrationService } from '../core/services/orchestration.service';
 import { SearchService as CoreSearchService } from '../core/services/search.service';
 import { LoggerService } from '../core/services/logger.service';
 import { sortRecipesByCategoryAndTitle } from '../core/utils';
@@ -73,6 +74,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private cacheService: CacheService,
+    private orchestrationService: OrchestrationService,
     private coreSearchService: CoreSearchService,
     private cdr: ChangeDetectorRef,
     public recipeTocService: TocService,
@@ -85,6 +87,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    // Recipes load only when this section is opened (not at app bootstrap).
+    this.orchestrationService.ensureRecipesLoaded();
 
     this.store.ui$
       .pipe(takeUntil(this.destroy$))

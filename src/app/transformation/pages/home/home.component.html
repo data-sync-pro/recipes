@@ -3,10 +3,10 @@
   <nav class="tag-nav">
     <ul>
       <li>
-        <a [routerLink]="['/transformations/home', getAnchorId('Formula Elements')]">Elements of a Formula</a>
+        <a [routerLink]="['/transformation']" [fragment]="getAnchorId('Formula Elements')">Elements of a Formula</a>
       </li>
       <li *ngFor="let tag of displayTags; trackBy: trackByString">
-        <a [routerLink]="['/transformations/home', getAnchorId(tag)]">
+        <a [routerLink]="['/transformation']" [fragment]="getAnchorId(tag)">
           {{ tag }}
           <ng-container *ngIf="tag !== 'Operators' && tag !== 'Global Variables'">
             Functions
@@ -58,7 +58,7 @@
               <tr *ngFor="let variable of globalVariables; trackBy: trackByVariable">
                 <td>
                   <a *ngIf="variable.variable === '$JOINER'; else plainText"
-                    [routerLink]="['/transformations', 'joiner']">
+                    [routerLink]="['/transformation', 'joiner']">
                     {{ variable.variable }}
                   </a>
                 </td>

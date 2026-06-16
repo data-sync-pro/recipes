@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
         // Hide header and footer on editor pages
         this.showHeaderFooter = !event.url.includes('/faq-editor')
           && !event.url.includes('/recipe-editor')
-          && !event.url.startsWith('/transformations/editor');
+          && !event.url.startsWith('/transformation/editor');
 
         // Show scroll-to-top button only on recipe pages
         // (transformation pages have their own internal scroll-to-top tied to the content scroll container)

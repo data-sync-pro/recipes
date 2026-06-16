@@ -15,10 +15,10 @@
       { "source": "/recipes/**", "destination": "/app.html" },
       { "source": "/faqs", "destination": "/app.html" },
       { "source": "/faqs/**", "destination": "/app.html" },
-      { "source": "/transformations", "destination": "/app.html" },
-      { "source": "/transformations/**", "destination": "/app.html" },
-      { "source": "/setup", "destination": "/app.html" },
-      { "source": "/setup/**", "destination": "/app.html" }
+      { "source": "/transformation", "destination": "/app.html" },
+      { "source": "/transformation/**", "destination": "/app.html" },
+      { "source": "/user-manual", "destination": "/app.html" },
+      { "source": "/user-manual/**", "destination": "/app.html" }
     ],
     "headers": [
       {

@@ -18,7 +18,6 @@ interface FunctionCategory {
 }
 
 const SPECIAL_ROUTES: Record<string, string> = {
-  Home: 'home',
   Operators: 'operators',
   'Global Variables': 'global_variables',
   'Apex Class': 'apex_class',
@@ -161,11 +160,17 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   toggleCategory(category: FunctionCategory): void {
+    if (category.name === 'Home') {
+      this.sidebarService.setActiveCategory('');
+      category.expanded = true;
+      this.router.navigate(['/transformation']);
+      return;
+    }
     const target = SPECIAL_ROUTES[category.name];
     if (target) {
       this.sidebarService.setActiveCategory('');
       category.expanded = true;
-      this.router.navigate(['/transformations', target]);
+      this.router.navigate(['/transformation', target]);
       return;
     }
     category.expanded = !category.expanded;

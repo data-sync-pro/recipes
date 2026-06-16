@@ -67,8 +67,13 @@ body::before {
   -webkit-mask-image: linear-gradient(180deg, black, transparent 70%);
 }
 body > * { position: relative; z-index: 1; }
-html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-padding-top: 76px; }
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-padding-top: 76px; overflow-x: clip; }
 body {
+  /* clip the ~scrollbar-width overhang from full-bleed 100vw backgrounds
+     (e.g. .surfaces-sticky::before) so the page never scrolls horizontally.
+     `clip` (not `hidden`) avoids creating a scroll container, so the sticky
+     capability shelf keeps working. */
+  overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--f-sans);
@@ -447,9 +452,16 @@ p { margin: 0; }
    Hero
    ========================================================= */
 .hero {
-  padding: 36px 0 24px;
+  padding: 0;
   position: relative;
   overflow: hidden;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+}
+.hero > .container { width: 100%; }
+@media (max-width: 940px) {
+  .hero { min-height: 0; display: block; }
 }
 .hero-grid {
   display: grid;
@@ -2852,6 +2864,10 @@ section.section {
   font-weight: 600;
   letter-spacing: -.005em;
 }
+.cs-grid .cell.solution p b {
+  color: var(--ink);
+  font-weight: 600;
+}
 
 /* --- Query Manager: 5 tools strip --- */
 .qm-tools {
@@ -5117,6 +5133,15 @@ footer {
   color: var(--ink);
 }
 .ps-row .mute { color: var(--mute); }
+.ps-ext {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--brand-ink);
+}
 
 /* Enterprise (future) column treatment */
 .ps-future-head {
@@ -5356,11 +5381,12 @@ footer {
 .al-selnote.sel { color: var(--brand-ink); font-weight: 500; }
 .al-spacer { flex: 1; }
 .al-cacts { display: flex; gap: 7px; flex: 0 0 auto; }
-.al-cbtn { display: inline-flex; align-items: center; gap: 5px; height: 28px; padding: 0 12px; border-radius: var(--r-sm); border: 1px solid var(--brand-ink); background: var(--brand-ink); color: #fff; font-size: 12px; font-weight: 500; cursor: default; opacity: .42; transition: opacity .25s ease, box-shadow .2s ease; }
+.al-cbtn { display: inline-flex; align-items: center; gap: 5px; height: 28px; padding: 0 12px; border-radius: var(--r-sm); border: 1px solid var(--brand-ink); background: var(--brand-ink); color: #fff; font-size: 12px; font-weight: 500; cursor: default; opacity: .42; transition: opacity .25s ease, box-shadow .2s ease, transform .12s ease; }
 .al-cbtn svg { width: 14px; height: 14px; }
 .al-cbtn.ghost { background: var(--card); color: var(--brand-ink); border-color: var(--brand-pure); }
 .al-cacts.on .al-cbtn { opacity: 1; }
 .al-cacts.on .al-cbtn.flash { box-shadow: 0 0 0 3px var(--brand-soft); }
+.al-cbtn.press { transform: translateY(1px); }
 
 /* toolbar: column filter · search · built-in actions */
 .al-toolbar { display: flex; align-items: center; gap: 8px; padding: 9px 16px; border-bottom: 1px solid var(--rule); background: var(--paper); }

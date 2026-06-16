@@ -22,6 +22,22 @@
   white-space: nowrap;
 }
 
+/* Two-column tables (Elements / Global Variables / Functions): give the name
+   column a stable width and let long names (e.g. multi-word function names)
+   wrap within it instead of overflowing, so the description column stays
+   consistent across sections. */
+.doc-tables.two-columns td:first-child {
+  width: 220px;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+/* Operators table: the first column holds short symbols (+, >=, ...), keep it
+   narrow; the name and description columns auto-size. */
+.doc-tables.three-columns td:first-child {
+  width: 90px;
+}
+
 .doc-tables th {
   background-color: #f4f4f4;
 }

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DocsService, DocData, ExampleItem, DocImage } from '../../services/docs.service';
 import { SidebarService } from '../../services/sidebar.service';
 import { categoryNameFromSlug, categorySlug } from '../../utils/route.util';
-import hljs from 'highlight.js';
+import { hljs } from 'src/app/shared/highlight';
 
 import { map, switchMap } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -45,7 +45,7 @@ export class DocViewerComponent implements OnInit {
     if (legacyCategory && !hasCategoryParam && legacyDocName) {
       const slug = categorySlug(legacyCategory);
       if (slug) {
-        this.router.navigate(['/transformations', slug, legacyDocName], { replaceUrl: true });
+        this.router.navigate(['/transformation', slug, legacyDocName], { replaceUrl: true });
         return;
       }
     }
@@ -73,7 +73,7 @@ export class DocViewerComponent implements OnInit {
       )
       .subscribe((doc) => {
         if (!doc && this.currentDocName && this.currentDocName !== 'global_variables') {
-          this.router.navigateByUrl('/transformations/home', { replaceUrl: true });
+          this.router.navigateByUrl('/transformation', { replaceUrl: true });
           return;
         }
 
@@ -137,7 +137,7 @@ export class DocViewerComponent implements OnInit {
   getRelatedFormulaLink$(formula: string) {
     const docName = formula.toLowerCase();
     return this.docsService.getPrimaryCategory(formula).pipe(
-      map((name) => (name ? ['/transformations', categorySlug(name), docName] : ['/transformations', docName]))
+      map((name) => (name ? ['/transformation', categorySlug(name), docName] : ['/transformation', docName]))
     );
   }
 

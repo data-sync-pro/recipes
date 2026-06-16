@@ -1,10 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, isDevMode, APP_INITIALIZER } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { NgModule, isDevMode } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { OrchestrationService } from './recipe/core/services/orchestration.service';
 
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
@@ -15,14 +13,6 @@ import { ScrollToTopComponent } from './core/scroll-to-top/scroll-to-top.compone
 import { SharedModule } from './shared/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { FaqEditorComponent } from './faq/editor/faq-editor.component';
-
-/**
- * Recipe initialization factory function
- * Called during app bootstrap to load recipe data before app starts
- */
-export function initializeRecipes(recipeOrchestration: OrchestrationService) {
-  return () => firstValueFrom(recipeOrchestration.initializeRecipes());
-}
 
 @NgModule({
   declarations: [
@@ -47,14 +37,7 @@ export function initializeRecipes(recipeOrchestration: OrchestrationService) {
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeRecipes,
-      deps: [OrchestrationService],
-      multi: true
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
