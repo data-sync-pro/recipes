@@ -1,23 +1,5 @@
 <div class="recipe-detail-banner">
   <div class="banner-container">
-    <!-- Breadcrumb Navigation -->
-    <nav class="breadcrumb" *ngIf="breadcrumbs.length > 0">
-      <ng-container *ngFor="let crumb of breadcrumbs; let last = last">
-        <a
-          *ngIf="!last"
-          [routerLink]="crumb.url"
-          class="breadcrumb-item clickable">
-          {{ crumb.name }}
-        </a>
-        <span
-          *ngIf="last"
-          class="breadcrumb-item current">
-          {{ crumb.name }}
-        </span>
-        <span class="separator" *ngIf="!last">&gt;</span>
-      </ng-container>
-    </nav>
-
     <!-- Recipe Title -->
     <h1 class="recipe-title">{{ title }}</h1>
   </div>

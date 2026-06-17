@@ -10,11 +10,11 @@
 .breadcrumb-item + .breadcrumb-item::before {
   content: "/";
   padding-left: 0.25rem;
-  color: #333;
+  color: #2C2C2D;
 }
 
 .breadcrumb-item a {
-  color: #333;
+  color: #2C2C2D;
   text-decoration: none;
 }
 

@@ -27,7 +27,6 @@
               "jszip"
             ],
             "assets": [
-              "src/pushtopic-logo.png",
               "src/assets",
               "src/404.html",
               "src/.nojekyll",
@@ -121,7 +120,6 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/pushtopic-logo.png",
               "src/assets",
               "src/manifest.webmanifest"
             ],

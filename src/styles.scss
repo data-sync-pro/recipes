@@ -14,9 +14,16 @@ html, body { min-height: 100%; height: auto; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: #ffffff;
+  background: #FAFBFC;
+  color: #0B1019;   
 }
-
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;        /* 不挡鼠标点击 */
+  z-index: 0;
+  }
 html {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -27,7 +34,7 @@ html {
 }
 
 .rules-engine-link {
-  color: #333;
+  color: #2C2C2D;
   text-decoration: none;
 }
 
@@ -66,7 +73,7 @@ html {
 .block-table code,
 .block-caption code {
   padding: 0.1em 0.4em;
-  background: #f5f5f5;
+  background: #eff0f0c4;
   border-radius: 4px;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
   font-size: 0.9em;

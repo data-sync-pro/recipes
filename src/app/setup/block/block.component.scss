@@ -15,7 +15,7 @@
   font-size: 1rem;
   font-weight: 500;
   margin: 0;
-  color: #333333;
+  color: #2C2C2D;
 }
 
 // Collapsible Step
@@ -33,7 +33,7 @@
     position: sticky;
     top: 60px;  // Adjust based on your header height
     z-index: 10;
-    background-color: white;
+    background-color: #FAFBFC;
 
     .step-toggle-icon {
       color: #64748b;
@@ -43,7 +43,7 @@
 
   &.collapsed {
     .step-header {
-      background-color: #fff;
+      background-color: #FAFBFC;
     }
   }
 }
@@ -52,7 +52,7 @@
   font-size: 1rem;
   margin: 0.75rem 0;
   line-height: 1.7;
-  color: #333333;
+  color: #2C2C2D;
 }
 
 .block-list {
@@ -103,7 +103,7 @@
 
     li {
       font-size: 1rem;
-      color: #333333;
+      color: #2C2C2D;
       line-height: 1.5;
       margin: 0.25rem 0;
     }
@@ -129,7 +129,7 @@
 .block-code {
   margin: 1rem 0;
   padding: 1rem;
-  background: #f8f8f8;
+  background: #eff0f0c4;
   border-radius: 8px;
   overflow-x: auto;
 
@@ -224,7 +224,7 @@
   .callout-content {
     font-size: 14px;
     line-height: 1.6;
-    color: #333333;
+    color: #2C2C2D;
   }
 
 
@@ -266,7 +266,7 @@
 
     li {
       font-size: 1rem;
-      color: #333333;
+      color: #2C2C2D;
       line-height: 1.6;
       margin: 0.5rem 0;
     }
@@ -341,7 +341,7 @@
       padding: 0.75rem 1rem;
       font-weight: 600;
       font-size: 0.875rem;
-      color: #333333;
+      color: #2C2C2D;
       border-bottom: 2px solid #e2e8f0;
     }
   }
@@ -356,7 +356,7 @@
     td {
       padding: 0.75rem 1rem;
       font-size: 1rem;
-      color: #333333;
+      color: #2C2C2D;
       border-bottom: 1px solid #e2e8f0;
       line-height: 1.5;
       word-wrap: break-word;

@@ -1,0 +1,9 @@
+// Shared sidebar search box look (.filter-input-wrap and children)
+@import 'search-filter';
+
+// Parent (.nav-header-expanded in navigation.component.css) sizes this
+// component via flex; the host just needs to be a block.
+:host {
+  display: block;
+  width: 100%;
+}

@@ -41,6 +41,9 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading = true;
   activeBlockId: string | null = null;
 
+  // Mobile sidebar drawer (≤1024px) — mirrors the recipe details sidebar.
+  isSidebarOpen = false;
+
   private recipeCache: Recipe[] = [];
   private recipeLoadKicked = false;
 
@@ -167,7 +170,7 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private handleRouteChange(): void {
     const url = this.router.url;
-    const match = url.match(/\/setup\/(.+)/);
+    const match = url.match(/\/user-manual\/(.+)/);
     const slug = match ? match[1].split('/').pop() : null;
 
     if (slug && slug !== this.currentSlug) {
@@ -289,9 +292,9 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
     const path = this.setupService.getPathToNode(this.navTree, slug);
     if (path && path.length > 0) {
       const slugPath = path.map(n => n.slug).filter((s): s is string => !!s);
-      this.router.navigate(['/setup', ...slugPath]);
+      this.router.navigate(['/user-manual', ...slugPath]);
     } else {
-      this.router.navigate(['/setup', slug]);
+      this.router.navigate(['/user-manual', slug]);
     }
   }
 
@@ -308,7 +311,20 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     if (node.slug) {
       this.selectSetup(node.slug);
+      // Navigating to a page closes the mobile drawer (no-op on desktop).
+      this.closeSidebar();
     }
+  }
+
+  // --- Mobile sidebar drawer (≤1024px) ---
+  toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
+    this.cdr.markForCheck();
+  }
+
+  closeSidebar(): void {
+    this.isSidebarOpen = false;
+    this.cdr.markForCheck();
   }
 
   // Toggle expand/collapse for a node
@@ -526,7 +542,7 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
         if (!node?.slug) continue;
         const path = this.setupService.getPathToNode(this.navTree, node.slug);
         const segments = path?.map(n => n.slug).filter((s): s is string => !!s) ?? [node.slug];
-        items.push({ key: node.slug, label: node.label, routerLink: ['/setup', ...segments] });
+        items.push({ key: node.slug, label: node.label, routerLink: ['/user-manual', ...segments] });
       } else {
         items.push({ key: entry.url, label: entry.label, href: entry.url, newTab: entry.newTab });
       }

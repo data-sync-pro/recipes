@@ -1,7 +1,6 @@
 
 .home-content {
-  margin: 5rem auto; 
-  width: 81%; 
+  margin: 0 auto 5rem auto; 
   padding-bottom: 5rem;
 }
 .doc-tables {
@@ -33,7 +32,7 @@ h2[id] {
 .tag-nav {
   margin: 2rem 0;
   padding: 1rem;
-  background-color: #f9f9f9;
+  background-color: #F1F6FB;
   border-radius: 8px;
 }
 

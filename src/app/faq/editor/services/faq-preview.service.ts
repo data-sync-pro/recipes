@@ -94,7 +94,7 @@ export class FAQPreviewService {
     this.savePreviewData(data);
     
     // Create preview URL
-    const url = `/faq?preview=true&faqId=${faqId}`;
+    const url = `/faqs?preview=true&faqId=${faqId}`;
     
     try {
       // Try to open with minimal parameters to avoid popup blocking
