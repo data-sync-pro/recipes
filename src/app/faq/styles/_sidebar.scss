@@ -102,7 +102,7 @@
       display: flex;
       align-items: center;
       padding: 6px 8px 6px 0;
-      color: $text-color-secondary;
+      color: #5c5c5c;
       font-size: 13.5px;
       font-weight: 400;
       transition: $transition;
@@ -132,12 +132,17 @@
         transform: scale(0.98);
       }
 
-      // Outermost parent (category / Home): the parent of the active item is
-      // shown by bold text only — no background, no brand color, no icon
-      // recolor — matching the recipe sidebar's expanded category-name.
-      &.active,
-      &.expanded {
+      // Active state mirrors the user-manual sidebar (setup.component.scss):
+      // only a leaf (a category WITHOUT children, like Home) gets the highlight
+      // background. A parent category (has-children) is just a container — no
+      // background and no bold, whether expanded or merely selected. Expanding
+      // a category never bolds it on its own.
+      &.active {
         font-weight: 500;
+      }
+
+      &.active:not(.has-children) {
+        background-color: #F1F6FB; // unified sidebar highlight ($brand-bg)
       }
 
       .nav-content {

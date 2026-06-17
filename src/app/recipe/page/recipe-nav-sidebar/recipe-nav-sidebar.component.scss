@@ -66,6 +66,7 @@
         padding: 6px 8px 6px 0;
         margin-bottom: 4px;
         border-bottom: 1px solid #f1f3f4;
+        border-radius: 3px;
         text-decoration: none;
         font-size: 0.875rem;
         color: #5c5c5c;
@@ -91,7 +92,6 @@
         }
 
         &.active {
-          color: #2253B2;
           font-weight: 500;
           background-color: #F1F6FB;
         }
@@ -129,6 +129,7 @@
           color: #5c5c5c;
           user-select: none;
           background-color: #FAFBFC;
+          border-radius: 3px;
 
           .chevron-down-icon {
             width: 14px;
