@@ -14,7 +14,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ScrollToTopComponent } from './core/scroll-to-top/scroll-to-top.component';
 import { SharedModule } from './shared/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { FaqEditorComponent } from './faq/editor/faq-editor.component';
 
 /**
  * Recipe initialization factory function
@@ -29,8 +28,7 @@ export function initializeRecipes(recipeOrchestration: OrchestrationService) {
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ScrollToTopComponent,
-    FaqEditorComponent
+    ScrollToTopComponent
   ],
   imports: [
     BrowserModule,

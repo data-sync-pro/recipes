@@ -1,6 +1,5 @@
 import { NgModule, inject } from '@angular/core';
 import { CanActivateFn, Router, RouterModule, Routes, PreloadAllModules } from '@angular/router';
-import { FaqEditorComponent } from './faq/editor/faq-editor.component';
 
 // Customers have bookmarked /setup/... links from before the rename to /user-manual
 const redirectSetupToUserManual: CanActivateFn = (_route, state) =>
@@ -24,7 +23,11 @@ const routes: Routes = [
       { path: '**', children: [] }
     ]
   },
-  { path: 'faq-editor', component: FaqEditorComponent, title: 'FAQ Editor - Data Sync Pro' },
+  {
+    path: 'faq-editor',
+    title: 'FAQ Editor - Data Sync Pro',
+    loadChildren: () => import('./faq/editor/faq-editor.module').then(m => m.FaqEditorModule)
+  },
   {
     path: 'recipe-editor',
     title: 'Recipe Editor - Data Sync Pro',
