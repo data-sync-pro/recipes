@@ -6,7 +6,10 @@
     margin-right: auto;
     padding: 0 24px;
     box-sizing: border-box;
-    margin-top: 12.5vh;
+    // Fixed top offset so the page title's distance from the header stays
+    // constant across window heights (was 12.5vh, which scaled with the
+    // viewport). ~128px ≈ the old 12.5vh on a typical laptop height.
+    margin-top: 5.8rem;
 }
 
 
