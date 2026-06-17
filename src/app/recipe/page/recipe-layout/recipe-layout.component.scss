@@ -1,7 +1,7 @@
 @import '../styles/recipe-variables';
 
 .recipe-layout {
-    margin: 36px 0 0 0;
+    margin: 4rem 0 0 0;
     display: flex;
     align-items: flex-start;
     gap: 2.5vw;
@@ -15,5 +15,15 @@
     app-recipe-list {
         flex: 1;
         min-width: 0;
+    }
+}
+
+// Responsive - Mobile: the sidebar becomes a fixed off-canvas drawer (styled
+// inside the component at the same breakpoint). Drop its element out of flow so
+// the recipe list takes the full width instead of reserving the 22% column.
+// Mirrors the detail-page layout.
+@media (max-width: 1024px) {
+    .recipe-layout app-recipe-nav-sidebar {
+        display: contents;
     }
 }

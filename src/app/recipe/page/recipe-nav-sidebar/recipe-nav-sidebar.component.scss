@@ -19,8 +19,13 @@
 
   .sidebar-sticky {
     position: sticky;
-    top: 80px;
-    height: calc(100vh - 80px);
+    // Pin line matches the page's top whitespace (.outter-container margin-top
+    // 5.8rem on the list page / .detail-main-layout padding-top 5.7rem on the
+    // detail page) so the sidebar is already at its sticky position at scroll 0.
+    // Using top: 80px (< 5.8rem ≈ 93px) made it drift up ~13px before catching
+    // the pin line at the start of the scroll.
+    top: 5.8rem;
+    height: calc(100vh - 5.8rem);
     display: flex;
     flex-direction: column;
 
