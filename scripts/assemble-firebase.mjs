@@ -19,9 +19,6 @@ const NG_OUT = join(ROOT, 'dist', 'website');
 const DEPLOY = join(ROOT, 'dist', 'deploy');
 const HOMEPAGE = join(ROOT, 'homepage');
 
-// GitHub Pages-only files: meaningless (CNAME/.nojekyll) or harmful (404.html is
-// the GH SPA redirect hack) on Firebase, where rewrites handle routing.
-const GH_ONLY = ['404.html', 'CNAME', '.nojekyll'];
 // Homepage entries kept out of the public deploy.
 const HOMEPAGE_EXCLUDE = new Set(['internal']);
 
@@ -44,10 +41,7 @@ cpSync(NG_OUT, DEPLOY, { recursive: true });
 // 2) Free up /index.html for the homepage; the SPA shell becomes /app.html
 renameSync(join(DEPLOY, 'index.html'), join(DEPLOY, 'app.html'));
 
-// 3) Drop GitHub Pages-only files
-for (const f of GH_ONLY) rmSync(join(DEPLOY, f), { force: true });
-
-// 4) Collision guard: warn if a homepage file would overwrite Angular output
+// 3) Collision guard: warn if a homepage file would overwrite Angular output
 const listFiles = (dir, base = dir) =>
   readdirSync(dir).flatMap((e) => {
     const p = join(dir, e);
@@ -59,7 +53,7 @@ if (clashes.length) {
   console.warn('[assemble] WARNING: homepage files overwrite Angular build output:\n  ' + clashes.join('\n  '));
 }
 
-// 5) Overlay the marketing homepage at root (excluding internal-only pages)
+// 4) Overlay the marketing homepage at root (excluding internal-only pages)
 for (const entry of readdirSync(HOMEPAGE)) {
   if (HOMEPAGE_EXCLUDE.has(entry)) continue;
   cpSync(join(HOMEPAGE, entry), join(DEPLOY, entry), { recursive: true });

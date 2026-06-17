@@ -28,9 +28,6 @@
             ],
             "assets": [
               "src/assets",
-              "src/404.html",
-              "src/.nojekyll",
-              "src/CNAME",
               "src/manifest.webmanifest"
             ],
             "styles": [
@@ -42,9 +39,7 @@
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": ["src/app/shared/styles"]
-            },
-            "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json"
+            }
           },
           "configurations": {
             "production": {
@@ -70,31 +65,8 @@
               "sourceMap": true,
               "namedChunks": true
             },
-            "github-pages": {
-              "baseHref": "/",
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "1.5mb",
-                  "maximumError": "2mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "60kb",
-                  "maximumError": "80kb"
-                }
-              ],
-              "outputHashing": "all",
-              "optimization": true,
-              "sourceMap": false,
-              "buildOptimizer": true,
-              "vendorChunk": false,
-              "extractLicenses": true,
-              "namedChunks": false
-            },
             "firebase": {
               "baseHref": "/",
-              "serviceWorker": false,
               "budgets": [
                 {
                   "type": "initial",
