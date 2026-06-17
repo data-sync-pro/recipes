@@ -181,10 +181,13 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
       this.loadSetup(slug);
       this.expandParentsOfSlug(slug);
     } else if (!slug && this.navTree.length > 0) {
-      // Navigate to first item
+      // Landing page (/user-manual with no slug) auto-redirects to the first
+      // page. Replace the history entry instead of pushing one, otherwise the
+      // bare /user-manual URL stays on the back stack and bounces forward again
+      // on every "back" — making the user click back twice to leave.
       const firstSlug = this.getFirstPageSlug(this.navTree);
       if (firstSlug) {
-        this.selectSetup(firstSlug);
+        this.selectSetup(firstSlug, { replaceUrl: true });
       }
     } else if (!slug) {
       this.isLoading = false;
@@ -287,14 +290,14 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
       || topLevelH3Items.length > 1;
   }
 
-  selectSetup(slug: string): void {
+  selectSetup(slug: string, extras?: { replaceUrl?: boolean }): void {
     // Build the full path for the URL (skip grouping nodes with no slug)
     const path = this.setupService.getPathToNode(this.navTree, slug);
     if (path && path.length > 0) {
       const slugPath = path.map(n => n.slug).filter((s): s is string => !!s);
-      this.router.navigate(['/user-manual', ...slugPath]);
+      this.router.navigate(['/user-manual', ...slugPath], extras);
     } else {
-      this.router.navigate(['/user-manual', slug]);
+      this.router.navigate(['/user-manual', slug], extras);
     }
   }
 
