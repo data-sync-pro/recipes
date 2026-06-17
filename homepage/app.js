@@ -1925,7 +1925,7 @@ window.SubmissionLimiter = (() => {
     selnote.classList.add('sel');
     cacts.classList.add('on');
     ckall.classList.add('some');
-    if (rc) rc.textContent = '(112)';
+    if (rc) rc.textContent = '112';
     toast.classList.add('on');
   }
 
@@ -1941,7 +1941,7 @@ window.SubmissionLimiter = (() => {
     at(1700, () => filter.classList.remove('open'));
     at(1880, () => {
       applyFilter(rows, true);   // page stays full — matches replace the dropped rows
-      if (rc) rc.textContent = '(112)';
+      if (rc) rc.textContent = '112';
       filterVal.textContent = 'High, Medium';
       filterBox.classList.add('has');
       if (lastPg) lastPg.textContent = '12';
