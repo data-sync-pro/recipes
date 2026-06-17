@@ -1,22 +1,38 @@
+<!-- Mobile sidebar toggle button (≤1024px) — mirrors the recipe details sidebar -->
+<button
+  type="button"
+  class="sidebar-toggle-btn"
+  (click)="onToggleMobile()"
+  [attr.aria-expanded]="mobileOpen"
+  aria-label="Toggle function navigation">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <line x1="3" y1="6" x2="21" y2="6"></line>
+    <line x1="3" y1="12" x2="21" y2="12"></line>
+    <line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</button>
+
+<div class="sidebar-backdrop" *ngIf="mobileOpen" (click)="onCloseMobile()"></div>
+
 <div
   class="sidebar-wrapper"
   [class.collapsed]="collapsed$ | async"
-  [class.show-sidebar]="showSidebar"
+  [class.show-sidebar]="mobileOpen"
 >
   <aside
     class="sidebar"
-    [class.collapsed]="(collapsed$ | async) && !showSidebar"
+    [class.collapsed]="(collapsed$ | async) && !mobileOpen"
   >
     <div class="sidebar-scroll-content">
       <app-navigation
         [collapsed$]="collapsed$"
-        (searchOpen)="onSearchOpen()"
-        (toggleSidebar)="onToggleSidebar()">
+        (toggleSidebar)="onToggleSidebar()"
+        (linkClick)="onCloseMobile()">
       </app-navigation>
     </div>
   </aside>
 
-  <!-- Floating buttons for collapsed state -->
+  <!-- Floating button for collapsed state -->
   <button
     class="sidebar-collapse-button"
     *ngIf="collapsed$ | async"
@@ -24,16 +40,5 @@
     title="Expand Sidebar"
   >
     <span>☰</span>
-  </button>
-
-  <button
-    class="sidebar-float-search"
-    *ngIf="collapsed$ | async"
-    (click)="onSearchOpen()"
-    title="Search"
-  >
-    <svg class="icon-search" width="20" height="20" aria-hidden="true">
-      <use href="assets/icons/transformation/search.svg#search-icon"></use>
-    </svg>
   </button>
 </div>

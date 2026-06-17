@@ -1,12 +1,19 @@
-<!-- Mobile sidebar toggle button -->
+<!-- Mobile sidebar toggle button (stays visible while open, doubling as close —
+     matches the recipe details sidebar) -->
 <button
+  type="button"
   class="mobile-sidebar-toggle"
   (click)="toggleMobileSidebar($event)"
   (touchstart)="handleTouchStart()"
-  *ngIf="ui.isMobile && !ui.mobileSidebarOpen"
+  *ngIf="ui.isMobile"
+  [attr.aria-expanded]="ui.mobileSidebarOpen"
   aria-label="Toggle sidebar menu"
 >
-  ☰
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <line x1="3" y1="6" x2="21" y2="6"></line>
+    <line x1="3" y1="12" x2="21" y2="12"></line>
+    <line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
 </button>
 
 <!-- Mobile sidebar overlay -->
@@ -18,7 +25,7 @@
 
 
 <div class="faq-layout-container"
-     [class.toc-hidden]="ui.tocHidden"
+     [class.toc-hidden]="ui.tocHidden || !shouldShowTOC"
      [class.sidebar-collapsed]="ui.sidebarCollapsed">
 
   <aside
@@ -27,51 +34,44 @@
     [class.collapsed]="ui.sidebarCollapsed"
   >
       <div class="sidebar-content">
-        <!-- Sidebar Header -->
-        <div class="sidebar-header" *ngIf="ui.isMobile && ui.mobileSidebarOpen">
-          <button
-            class="mobile-sidebar-close"
-            (click)="closeMobileSidebar()"
-            title="Close sidebar"
-          >
-            ✕
-          </button>
+        <!-- Search in sidebar — kept out of the scrollable .sidebar-body so it
+             stays pinned above the nav tree (matches the recipe nav sidebar). -->
+        <div class="sidebar-search" *ngIf="!ui.sidebarCollapsed">
+          <div class="filter-input-wrap" [class.has-value]="!!search.query">
+            <mat-icon class="filter-icon">search</mat-icon>
+            <input
+              type="text"
+              class="filter-input"
+              placeholder="Search…"
+              #searchInput
+              [(ngModel)]="search.query"
+              (input)="onSearchInput($event)"
+              (keydown.escape)="clearSearch()"
+              aria-label="Search FAQs"
+            />
+            <button *ngIf="search.query; else kbdHint"
+                    class="filter-clear"
+                    type="button"
+                    (click)="clearSearch()"
+                    aria-label="Clear search">
+              <mat-icon>close</mat-icon>
+            </button>
+            <ng-template #kbdHint>
+              <span class="filter-kbd" aria-hidden="true">/</span>
+            </ng-template>
+          </div>
         </div>
 
         <div class="sidebar-body">
           <!-- Navigation Tree -->
           <div class="sidebar-nav">
 
-          <!-- Search in sidebar -->
-          <div class="sidebar-search" *ngIf="!ui.sidebarCollapsed">
-            <div class="sidebar-search-input-wrapper">
-              <lightning-icon iconName="utility:search" size="x-small" alternativeText="Search"></lightning-icon>
-              <input
-                type="text"
-                class="sidebar-search-input"
-                placeholder="Search..."
-                #searchInput
-                [(ngModel)]="search.query"
-                (input)="onSearchInput($event)"
-                (keydown.escape)="clearSearch()"
-              />
-              <button *ngIf="search.query" class="search-clear-btn" (click)="clearSearch()">
-                <lightning-icon iconName="utility:close" size="xx-small" alternativeText="Clear"></lightning-icon>
-              </button>
-            </div>
-          </div>
-
             <!-- Home -->
             <div class="nav-item home-nav" [class.active]="showHome"
                  (click)="goHome()"
                  (touchstart)="handleTouchStart()">
               <div class="nav-content">
-                <lightning-icon
-                  iconName="utility:home"
-                  size="x-small"
-                  alternativeText="Home"
-                  class="nav-icon"
-                ></lightning-icon>
+                <mat-icon class="nav-icon">chevron_right</mat-icon>
                 <span class="nav-text" *ngIf="!ui.sidebarCollapsed">All FAQs</span>
               </div>
               <span class="nav-count" *ngIf="!ui.sidebarCollapsed">{{ faqList.length }}</span>
@@ -87,18 +87,17 @@
                 <div
                   class="nav-item category-nav"
                   [class.active]="current.category === category.name && !current.subCategory"
-                  [class.expanded]="current.category === category.name"
+                  [class.expanded]="isCategoryExpanded(category.name)"
+                  [class.has-children]="category.subCategories.length > 0"
                   (click)="selectCategory(category.name, $event)"
                   (touchstart)="handleTouchStart()"
                   *ngIf="!ui.sidebarCollapsed"
                 >
                   <div class="nav-content">
-                    <lightning-icon
-                      iconName="utility:folder"
-                      size="xx-small"
-                      [alternativeText]="category.name + ' category'"
+                    <mat-icon
                       class="nav-icon"
-                    ></lightning-icon>
+                      (click)="toggleCategoryExpand(category.name, $event)"
+                    >{{ isCategoryExpanded(category.name) ? 'expand_more' : 'chevron_right' }}</mat-icon>
                     <span class="nav-text">{{ category.name }}</span>
                   </div>
                   <span class="nav-count">{{ category.count }}</span>
@@ -107,23 +106,17 @@
                 <!-- Subcategories -->
                 <div
                   class="subcategory-container"
-                  *ngIf="current.category === category.name && category.subCategories.length > 0 && !ui.sidebarCollapsed"
+                  *ngIf="isCategoryExpanded(category.name) && category.subCategories.length > 0 && !ui.sidebarCollapsed"
                 >
                   <div
                     *ngFor="let subCategory of category.subCategories"
                     class="nav-item subcategory-nav"
-                    [class.active]="current.subCategory === subCategory.name"
-                    (click)="selectSubCategory(subCategory.name, $event)"
+                    [class.active]="current.category === category.name && current.subCategory === subCategory.name"
+                    (click)="selectSubCategory(category.name, subCategory.name, $event)"
                     (touchstart)="handleTouchStart()"
                   >
                     <div class="nav-content">
                       <span class="nav-indent"></span>
-                      <lightning-icon
-                        iconName="utility:folder"
-                        size="xx-small"
-                        [alternativeText]="subCategory.name + ' subcategory'"
-                        class="nav-icon"
-                      ></lightning-icon>
                       <span class="nav-text">{{ subCategory.name }}</span>
                     </div>
                      <span class="nav-count">{{ subCategory.count }}</span>
@@ -140,7 +133,7 @@
   <div class="faq-container" [class.toc-hidden]="ui.tocHidden">
   
   <!-- Breadcrumb Navigation -->
-  <nav class="breadcrumb-nav" *ngIf="current.category || current.subCategory">
+  <!-- <nav class="breadcrumb-nav" *ngIf="current.category || current.subCategory">
     <div class="breadcrumb">
       <button class="breadcrumb-item" (click)="goHome()" title="Go to Home">
         <span>All FAQs</span>
@@ -188,6 +181,44 @@
         </button>
       </div>
     </div>
+  </nav> -->
+
+  <!-- Mobile breadcrumb — restores the location context the off-canvas sidebar
+       hides on small screens (desktop relies on the page title + TOC instead).
+       Ancestors stay clickable so the user can navigate back up the tree. -->
+  <nav class="faq-mobile-breadcrumb"
+       *ngIf="ui.isMobile && (current.category || current.subCategory)">
+    <div class="breadcrumb">
+      <button class="breadcrumb-item" type="button" (click)="goHome()" title="All FAQs">
+        <span>All FAQs</span>
+      </button>
+
+      <ng-container *ngIf="current.category">
+        <span class="breadcrumb-separator">
+          <lightning-icon iconName="utility:chevronright" size="xx-small" alternativeText="Next"></lightning-icon>
+        </span>
+        <button class="breadcrumb-item"
+                type="button"
+                [class.active]="!current.subCategory && !current.faqItem"
+                (click)="goCategory(current.category)"
+                [title]="current.category">
+          <span>{{ current.category }}</span>
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="current.subCategory">
+        <span class="breadcrumb-separator">
+          <lightning-icon iconName="utility:chevronright" size="xx-small" alternativeText="Next"></lightning-icon>
+        </span>
+        <button class="breadcrumb-item"
+                type="button"
+                [class.active]="!current.faqItem"
+                (click)="goSubCategory(current.category, current.subCategory)"
+                [title]="current.subCategory">
+          <span>{{ current.subCategory }}</span>
+        </button>
+      </ng-container>
+    </div>
   </nav>
 
   <main class="faq-main">
@@ -195,11 +226,16 @@
       <div *ngIf="ui.isLoadingRouteData" class="route-loading">
       </div>
 
+      <!-- Page title — reflects the current sidebar selection: "All FAQs" on the
+           home view, otherwise the selected sub-category / category name. Hidden
+           on the single-FAQ detail view (which renders its own question title)
+           and while searching. -->
+      <h1 class="faq-page-title"
+          *ngIf="!current.faqItem && !ui.isLoadingRouteData && !search.query.trim()">
+        {{ showHome ? 'All FAQs' : (current.subCategory || current.category) }}
+      </h1>
 
       <div *ngIf="showHome && !ui.isLoadingRouteData && !current.faqItem" class="all-faqs">
-        <h2 class="section-title" *ngIf="!search.query.trim()">All FAQs</h2>
-        <h2 class="section-title" *ngIf="search.query.trim()">Search: "{{ search.query }}"</h2>
-
         <!-- Loading skeleton for initial load -->
         <app-faq-skeleton
           *ngIf="isLoadingState && !ui.isLoadingRouteData"
@@ -214,8 +250,9 @@
           [ngTemplateOutletContext]="{ faqItems: search.query.trim() ? filteredFAQ : allFaqList }">
         </ng-container>
 
-        <div class="no-results" *ngIf="search.query.trim() && filteredFAQ.length === 0 && !isLoadingState">
-          <h3>No results found</h3>
+        <div class="no-results search-empty" *ngIf="search.query.trim() && filteredFAQ.length === 0 && !isLoadingState">
+          <mat-icon>search_off</mat-icon>
+          <p>No matches found</p>
         </div>
       </div>
       <div *ngIf="!showHome && !current.faqItem && !search.isActive && !ui.isLoadingRouteData" class="category-intro">
@@ -362,8 +399,9 @@
         </ng-container>
 
         <div class="no-results" *ngIf="filteredFAQ.length === 0">
-          <div *ngIf="search.query.trim() || categorySearchQuery.trim(); else noSearchResults" class="search-no-results">
-            <h3>No results found</h3>
+          <div *ngIf="search.query.trim() || categorySearchQuery.trim(); else noSearchResults" class="search-empty">
+            <mat-icon>search_off</mat-icon>
+            <p>No matches found</p>
           </div>
 
           <ng-template #noSearchResults>
@@ -431,7 +469,7 @@
         <div class="toc-header">
           <div class="toc-header-content">
             <div class="toc-title-section">
-              <h3 class="toc-title">{{ (current.subCategory || current.category) + ' FAQs' }}</h3>
+              <h3 class="toc-title">{{ (current.subCategory || current.category) }}</h3>
             </div>
             <div class="toc-pagination-controls" *ngIf="tocPagination.totalPages > 1">
               <div class="pagination-info">{{ tocPaginationInfo }}</div>
@@ -490,9 +528,13 @@
 <ng-template #faqListTemplate let-faqItems="faqItems">
   <div class="faq-list">
 
-    <cdk-virtual-scroll-viewport 
-      *ngIf="faqItems.length > 20 && !ui.isMobile" 
-      itemSize="35" 
+    <!-- Virtual-scroll viewport disabled: its fixed-height inner scroller pinned the
+         category title in place. The regular list (below) now always renders so the
+         title + list scroll together with the page. Re-enable for very large lists if
+         render perf becomes an issue.
+    <cdk-virtual-scroll-viewport
+      *ngIf="faqItems.length > 20 && !ui.isMobile"
+      itemSize="35"
       class="faq-virtual-viewport"
     >
       <div
@@ -518,9 +560,10 @@
         </div>
       </div>
     </cdk-virtual-scroll-viewport>
+    -->
 
-    <!-- Regular scrolling for smaller lists or mobile -->
-    <div *ngIf="faqItems.length <= 20 || ui.isMobile" class="faq-regular-list">
+    <!-- Regular list for all sizes — scrolls with the page (window scroll) -->
+    <div class="faq-regular-list">
       <div
         class="faq-item"
         *ngFor="let item of faqItems; let i = index; trackBy: trackByFAQ"

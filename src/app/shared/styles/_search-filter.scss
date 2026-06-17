@@ -1,0 +1,94 @@
+// ==================== Shared Sidebar Search Filter ====================
+// Single source of truth for the sidebar search box used by the Recipe,
+// User Manual (setup), FAQ, and Transformation sidebars. Import with
+// `@import 'search-filter';` (resolved via angular.json
+// stylePreprocessorOptions.includePaths, same as 'typography').
+//
+// Expected markup:
+//   <div class="filter-input-wrap" [class.has-value]="...">
+//     <mat-icon class="filter-icon">search</mat-icon>
+//     <input class="filter-input" placeholder="Search…" />
+//     <button class="filter-clear"><mat-icon>close</mat-icon></button>  <!-- when query -->
+//     <span class="filter-kbd">/</span>                                 <!-- when empty -->
+//   </div>
+//
+// Container spacing (.sidebar-filter / .sidebar-search) stays per-component;
+// this partial only owns the look of the input box itself.
+
+.filter-input-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e5e7eb;
+  height: 36px;
+  padding: 0 8px 0 10px;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  border-radius: 2px;
+
+  &:focus-within {
+    background: #ffffff;
+    border-color: #2253B2;
+  }
+
+  .filter-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: #94a3b8;
+    flex-shrink: 0;
+    margin-right: 6px;
+  }
+
+  .filter-input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13px;
+    color: #1f2937;
+    padding: 0;
+    font-family: inherit;
+
+    &::placeholder {
+      color: #94a3b8;
+    }
+  }
+
+  .filter-kbd {
+    background: #F5F5F6;
+    border: 1px solid #d1d5db;
+    border-radius: 2px;
+    padding: 1px 6px;
+    font-size: 11px;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    color: #5c5c5c;
+    line-height: 1.3;
+    flex-shrink: 0;
+  }
+
+  .filter-clear {
+    background: transparent;
+    border: none;
+    padding: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+
+    &:hover {
+      background: #e5e7eb;
+      color: #1f2937;
+    }
+  }
+}

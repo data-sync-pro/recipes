@@ -14,9 +14,16 @@ html, body { min-height: 100%; height: auto; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: #ffffff;
+  background: #FAFBFC;
+  color: #0B1019;   
 }
-
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;        /* 不挡鼠标点击 */
+  z-index: 0;
+  }
 html {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -27,7 +34,7 @@ html {
 }
 
 .rules-engine-link {
-  color: #333;
+  color: #2C2C2D;
   text-decoration: none;
 }
 
@@ -66,12 +73,39 @@ html {
 .block-table code,
 .block-caption code {
   padding: 0.1em 0.4em;
-  background: #f5f5f5;
+  background: #eff0f0c4;
   border-radius: 4px;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
   font-size: 0.9em;
   color: #800000;
   word-break: break-word;
+}
+
+// Single source of truth for inline content links. Both the setup block
+// (a.setup-link[-external], built by renderContent() in block.component.ts) and
+// the recipe detail page (.content-section, overview/use-cases) reach the DOM via
+// [innerHTML], which bypasses Angular's view encapsulation — so a component-scoped
+// rule never matches them. They must be styled globally, same reason as the setup
+// <strong>/<code> rules above. Keep the brand color defined here only.
+a.setup-link,
+a.setup-link-external,
+.content-section a {
+  color: #2253B2;
+  text-decoration: underline;
+  text-decoration-color: #2253B2;
+  cursor: pointer;
+
+  &:hover {
+    color: #1a4490;
+    text-decoration-color: #1a4490;
+  }
+}
+
+// Unresolved [[slug]] setup link — rendered as a visible broken-link marker.
+.setup-link-broken {
+  color: #b91c1c;
+  text-decoration: underline wavy;
+  cursor: help;
 }
 
 // Global table styles (used by setup/block, faq-editor, designer-guide)

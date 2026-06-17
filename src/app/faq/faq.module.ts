@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -23,6 +24,7 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     MatExpansionModule,
     MatButtonModule,
+    MatIconModule,
     ScrollingModule,
     SharedModule,
   ],

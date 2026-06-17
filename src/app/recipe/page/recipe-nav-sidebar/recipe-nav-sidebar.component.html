@@ -42,6 +42,30 @@
       </div>
     </div>
     <div class="category-list">
+      <!-- "All Recipes" — landing-page entry, mirrors the FAQ sidebar's
+           "All FAQs" home item. Active only on the bare /recipes route. Hidden
+           while filtering, since the filter narrows the list to matches. -->
+      <a
+        *ngIf="!sidebarSearchQuery.trim()"
+        class="all-recipes-link"
+        [routerLink]="['/recipes']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="closeSidebar()">
+        <img
+          class="all-recipes-icon"
+          src="assets/icons/recipe/chevron-down.svg"
+          aria-hidden="true">
+        <span class="category-name">All Recipes</span>
+        <app-recipe-count [count]="recipes.length"></app-recipe-count>
+      </a>
+
+      <!-- Empty filter result — matches the transformation sidebar (setup .filter-empty). -->
+      <div *ngIf="sidebarSearchQuery.trim() && filteredCategoryGroups.length === 0" class="sidebar-filter-empty">
+        <mat-icon>search_off</mat-icon>
+        <span>No matches found</span>
+      </div>
+
       <div *ngFor="let group of filteredCategoryGroups" class="category-group">
         <!-- Category Header -->
         <div

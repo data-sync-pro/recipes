@@ -109,6 +109,10 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   faqList: FAQItem[] = [];
   categories: FAQCategory[] = [];
 
+  // Sidebar categories that are expanded. Independent of `current.category`
+  // (navigation/active state) so several categories can stay open at once.
+  expandedCategories = new Set<string>();
+
   private destroy$ = new Subject<void>();
   private previewUpdateInterval: ReturnType<typeof setInterval> | null = null;
   private previewStorageHandler: ((event: StorageEvent) => void) | null = null;
@@ -186,13 +190,22 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
         this.ensureFaqsLoaded(() =>
           this.handleAnswerPathNavigation(decodedSlug, urlCat, urlSubCat, true)
         );
-      } else if (catParam) {
-        const decodedCat = this.safeDecodeURIComponent(catParam);
-        this.ensureFaqsLoaded(() => this.setCategoryFromRoute(decodedCat, subCatParam));
       } else {
-        // Root path
-        this.current.category = '';
-        this.current.subCategory = '';
+        // No slug in the URL → not an answer view. Clear any FAQ left open by a
+        // previous detail view so back-navigation reveals the category list
+        // instead of the stale detail. Sidebar clicks reset via resetState(),
+        // but the browser/system back button routes straight here and skips it.
+        this.current.faqItem = null;
+        this.current.faqTitle = '';
+
+        if (catParam) {
+          const decodedCat = this.safeDecodeURIComponent(catParam);
+          this.ensureFaqsLoaded(() => this.setCategoryFromRoute(decodedCat, subCatParam));
+        } else {
+          // Root path
+          this.current.category = '';
+          this.current.subCategory = '';
+        }
       }
 
       // Update TOC pagination when navigation changes
@@ -359,6 +372,10 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   goHome(): void {
     this.resetState();
     this.router.navigate(['/faqs']);
+
+    if (this.ui.isMobile) {
+      this.closeMobileSidebar();
+    }
   }
 
   goCategory(cat: string): void {
@@ -631,11 +648,11 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       return false;
     }
 
-    if (this.showHome) {
-      return this.trendingQuestions.length > 0;
-    }
-
-    return (!!this.current.category || !!this.current.subCategory) &&
+    // Only show the TOC on the single-FAQ detail view, where it lists the
+    // other questions in the same category alongside the open one. The home
+    // and category-list views don't show it.
+    return !!this.current.faqItem &&
+           (!!this.current.category || !!this.current.subCategory) &&
            this.currentFAQList.length > 1;
   }
 
@@ -904,7 +921,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(this.buildAnswerUrlSegments(item));
   }
 
-  // Build router segments for an answer URL. Shape is /faq/<cat>/<sub?>/<slug>.
+  // Build router segments for an answer URL. Shape is /faqs/<cat>/<sub?>/<slug>.
   private buildAnswerUrlSegments(item: FAQItem): string[] {
     const segs = ['/faqs', this.encode(item.category)];
     if (item.subCategory) {
@@ -1047,7 +1064,14 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     // Map lowercase URL back to original category name
     const originalCategory = this.categoryMapping[catParam] || catParam;
     this.current.category = originalCategory;
-    
+    // Landing on a subcategory (or an answer within one) must keep the parent
+    // category's branch open — otherwise the list the user just clicked into
+    // would collapse. A bare category URL is left alone so the row toggle can
+    // still collapse it.
+    if (subCatParam && originalCategory) {
+      this.expandedCategories.add(originalCategory);
+    }
+
     const decodedSubCat = subCatParam ? this.safeDecodeURIComponent(subCatParam) : '';
     // For subcategories, convert to title case (capitalize each word)
     if (decodedSubCat) {
@@ -1109,7 +1133,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
 
-    this.title.setTitle(pageTitle);
+    // Keep the browser tab title fixed at 'FAQs - Data Sync Pro' regardless of
+    // category/subcategory; og:title stays descriptive for sharing/SEO.
+    this.title.setTitle('FAQs - Data Sync Pro');
     this.meta.updateTag({ name: 'description', content: pageDescription });
     this.meta.updateTag({ property: 'og:title', content: pageTitle });
     this.meta.updateTag({ property: 'og:description', content: pageDescription });
@@ -1182,7 +1208,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     const pageTitle = `${faqItem.question} - FAQs - Data Sync Pro`;
     const pageDescription = faqItem.answer.substring(0, 160) + '...';
 
-    this.title.setTitle(pageTitle);
+    // Keep the browser tab title fixed at 'FAQs - Data Sync Pro' even when a
+    // specific FAQ is open; og:title stays descriptive for sharing/SEO.
+    this.title.setTitle('FAQs - Data Sync Pro');
     this.meta.updateTag({ name: 'description', content: pageDescription });
     this.meta.updateTag({ property: 'og:title', content: pageTitle });
     this.meta.updateTag({ property: 'og:description', content: pageDescription });
@@ -1263,30 +1291,47 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   // Sidebar navigation methods
+  isCategoryExpanded(categoryName: string): boolean {
+    return this.expandedCategories.has(categoryName);
+  }
+
+  // Toggle a single category open/closed without affecting the others.
+  toggleCategoryExpand(categoryName: string, event?: Event): void {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    // Childless categories have nothing to reveal; leave them alone.
+    const category = this.categories.find(c => c.name === categoryName);
+    if (!category || category.subCategories.length === 0) {
+      return;
+    }
+    if (this.expandedCategories.has(categoryName)) {
+      this.expandedCategories.delete(categoryName);
+    } else {
+      this.expandedCategories.add(categoryName);
+    }
+    this.cdr.markForCheck();
+  }
+
   selectCategory(categoryName: string, event?: Event): void {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
     }
-    
-    
-    if (this.ui.isMobile) {
-      const category = this.categories.find(c => c.name === categoryName);
-      
-      
-      if (category && category.subCategories.length > 0) {
-        
-        if (this.current.category !== categoryName) {
-          this.current.category = categoryName;
-          this.current.subCategory = '';
-          this.cdr.markForCheck();
-          return; 
-        }
-        
+
+    const category = this.categories.find(c => c.name === categoryName);
+
+    // Categories with subcategories act as an accordion: one click opens,
+    // the next collapses. On mobile we stop here so the revealed subcategories
+    // stay visible instead of closing the sidebar.
+    if (category && category.subCategories.length > 0) {
+      this.toggleCategoryExpand(categoryName);
+      if (this.ui.isMobile) {
+        return;
       }
     }
-    
-    
+
     this.resetState();
     this.router.navigate(['/faqs', this.encode(categoryName)]);
 
@@ -1295,15 +1340,16 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  selectSubCategory(subCategoryName: string, event?: Event): void {
+  selectSubCategory(categoryName: string, subCategoryName: string, event?: Event): void {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
     }
     this.resetState();
 
-    if (this.current.category) {
-      this.router.navigate(['/faqs', this.encode(this.current.category), this.encode(subCategoryName)]);
+    const parentCategory = categoryName || this.current.category;
+    if (parentCategory) {
+      this.router.navigate(['/faqs', this.encode(parentCategory), this.encode(subCategoryName)]);
     }
     
     if (this.ui.isMobile) {
@@ -1336,7 +1382,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Mobile functionality
   private checkMobileView(): void {
-    this.updateUIState({ isMobile: window.innerWidth <= 768 });
+    // 1024px matches the recipe sidebar drawer breakpoint ($breakpoint-desktop
+    // in _variables.scss); keep JS and CSS in sync.
+    this.updateUIState({ isMobile: window.innerWidth <= 1024 });
   }
 
   toggleMobileSidebar(event?: Event): void {

@@ -12,7 +12,7 @@
 .detail-main-layout {
   display: flex;
   gap: 2.5vw;
-  padding: 5.6rem 0 0 0;
+  padding: 5.7rem 0 0 0;
 
   // Left Sidebar - Recipe List (its own styles live in the component)
   app-recipe-nav-sidebar {
@@ -28,7 +28,7 @@
   margin-bottom: 15%;
 
   .content-sections {
-    background: #fff;
+    background: transparent;
 
     .content-section {
       margin-bottom: 34px;
@@ -383,7 +383,7 @@
   }
 
   .loading-state {
-    background: #fff;
+    background: transparent;
     padding: 60px 40px;
     border-radius: 8px;
     text-align: center;
@@ -404,7 +404,7 @@
     //padding: 25px;
     //border-left: 1px solid #E6E6E6;
     //border-radius: 2px;
-    background-color: white;
+    background-color: transparent;
 
     h3 {
       font-size: 1rem;
@@ -508,7 +508,7 @@
 // content takes the full width.
 @media (max-width: 1024px) {
   .detail-main-layout {
-    padding: 80px 16px 0 16px;
+    padding: 6rem 16px 0 16px;
   }
 
   // Sidebar becomes a fixed off-canvas drawer (styled inside the component);

@@ -1,49 +1,22 @@
 <div class="recipe-list">
-    <!-- Recipe Cards List -->
+    <!-- Landing title — mirrors the FAQ "All FAQs" page heading and the recipe
+         detail-banner title (2.25rem, weight 500, brand blue, centered). Hidden
+         while searching, matching the FAQ page-title behavior. -->
+    <h1 class="recipe-page-title" *ngIf="!searchQuery.trim()">All Recipes</h1>
+
+    <!-- Flat title-only list, matching the FAQ "All FAQs" list rows. -->
     <div class="result-list">
-        <app-recipe-card *ngFor="let recipe of paginatedRecipes; trackBy: trackByRecipeId" [recipe]="recipe"
-            [categories]="categories" (recipeSelect)="onRecipeClick($event)" class="result-item">
-        </app-recipe-card>
+        <a *ngFor="let recipe of recipes; trackBy: trackByRecipeId"
+            class="recipe-row"
+            [routerLink]="recipeLink(recipe)"
+            (click)="onRecipeClick(recipe)">
+            <h3 class="recipe-row-title">{{ recipe.title }}</h3>
+        </a>
 
         <!-- Empty State -->
         <div *ngIf="recipes.length === 0" class="empty-state">
+            <mat-icon>search_off</mat-icon>
             <p>No recipes found</p>
         </div>
-    </div>
-
-    <!-- Pagination -->
-    <div *ngIf="recipes.length > itemsPerPage" class="pagination">
-        <!-- First Page -->
-        <button class="pagination-btn" [disabled]="currentPage === 1" (click)="goToFirstPage()"
-            aria-label="Go to first page">
-            &laquo;
-        </button>
-
-        <!-- Previous Page -->
-        <button class="pagination-btn" [disabled]="currentPage === 1" (click)="goToPreviousPage()"
-            aria-label="Go to previous page">
-            &lsaquo;
-        </button>
-
-        <!-- Page Numbers -->
-        <ng-container *ngFor="let page of pageNumbers">
-            <button *ngIf="page > 0" class="pagination-btn" [class.active]="currentPage === page"
-                (click)="goToPage(page)">
-                {{ page }}
-            </button>
-            <span *ngIf="page === -1" class="pagination-ellipsis">...</span>
-        </ng-container>
-
-        <!-- Next Page -->
-        <button class="pagination-btn" [disabled]="currentPage === totalPages" (click)="goToNextPage()"
-            aria-label="Go to next page">
-            &rsaquo;
-        </button>
-
-        <!-- Last Page -->
-        <button class="pagination-btn" [disabled]="currentPage === totalPages" (click)="goToLastPage()"
-            aria-label="Go to last page">
-            &raquo;
-        </button>
     </div>
 </div>

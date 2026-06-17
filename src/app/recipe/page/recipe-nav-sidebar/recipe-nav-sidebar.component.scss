@@ -3,10 +3,13 @@
 // by each parent layout (.detail-main-layout / .recipe-layout), matching the
 // existing pattern where parents size their child component selectors.
 
+// Shared sidebar search box look (.filter-input-wrap and children)
+@import 'search-filter';
+
 // Left Sidebar - Recipe List
 .left-sidebar {
   border-radius: 2px;
-  background-color: white;
+  background-color: #FAFBFC;
   // Fill the (stretched) flex column so this element — the sticky child's
   // containing block — is as tall as the page content. Without this the
   // block collapses to its content height and .sidebar-sticky scrolls away
@@ -21,108 +24,112 @@
     display: flex;
     flex-direction: column;
 
+    // Input box look comes from the shared 'search-filter' partial.
     .sidebar-filter {
       flex-shrink: 0;
       margin-bottom: 16px;
-
-      .filter-input-wrap {
-        display: flex;
-        align-items: center;
-        border: 1px solid #e5e7eb;
-        height: 36px;
-        padding: 0 8px 0 10px;
-        transition: background-color 0.15s ease, border-color 0.15s ease,
-          box-shadow 0.15s ease;
-        border-radius: 2px;
-
-        &:focus-within {
-          background: #ffffff;
-          border-color: #2253B2;
-        }
-
-        .filter-icon {
-          font-size: 16px;
-          width: 16px;
-          height: 16px;
-          color: #94a3b8;
-          flex-shrink: 0;
-          margin-right: 6px;
-        }
-
-        .filter-input {
-          flex: 1;
-          min-width: 0;
-          border: none;
-          outline: none;
-          background: transparent;
-          font-size: 13px;
-          color: #1f2937;
-          padding: 0;
-          font-family: inherit;
-
-          &::placeholder {
-            color: #94a3b8;
-          }
-        }
-
-        .filter-kbd {
-          background: #F5F5F6;
-          border: 1px solid #d1d5db;
-          border-radius: 2px;
-          padding: 1px 6px;
-          font-size: 11px;
-          font-family: ui-monospace, Menlo, Consolas, monospace;
-          color: #5c5c5c;
-          line-height: 1.3;
-          flex-shrink: 0;
-        }
-
-        .filter-clear {
-          background: transparent;
-          border: none;
-          padding: 2px;
-          border-radius: 2px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #94a3b8;
-          flex-shrink: 0;
-          transition: background-color 0.15s ease, color 0.15s ease;
-
-          mat-icon {
-            font-size: 16px;
-            width: 16px;
-            height: 16px;
-          }
-
-          &:hover {
-            background: #e5e7eb;
-            color: #1f2937;
-          }
-        }
-      }
     }
 
     .category-list {
-      background: #fff;
       border-radius: 0;
       flex: 1;
       min-height: 0;
       overflow-y: auto;
-      scrollbar-width: thin;
+
+      // Webkit pseudo-elements rather than scrollbar-width/scrollbar-color:
+      // the standard properties make Chrome render native arrow buttons
+      // (triangles); the pseudo-element form drops them. Matches the
+      // user-manual sidebar scrollbar in setup.component.scss.
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #dadce0;
+        border-radius: 3px;
+
+        &:hover {
+          background: #bdc1c6;
+        }
+      }
+
+      // "All Recipes" landing entry — mirrors the FAQ sidebar's "All FAQs"
+      // home row. Styled like a category header, carrying the same chevron in
+      // the collapsed (right-pointing) orientation — static, since the row is a
+      // link rather than a collapsible group. Brand active state borrowed from
+      // .recipe-list-item.active.
+      .all-recipes-link {
+        display: flex;
+        align-items: center;
+        padding: 6px 8px 6px 0;
+        margin-bottom: 4px;
+        border-bottom: 1px solid #f1f3f4;
+        border-radius: 3px;
+        text-decoration: none;
+        font-size: 0.875rem;
+        color: #5c5c5c;
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.2s ease;
+
+        // Same chevron asset as .category-header, pinned right-pointing.
+        .all-recipes-icon {
+          width: 14px;
+          height: 14px;
+          margin-right: 8px;
+          transform: rotate(-90deg);
+        }
+
+        .category-name {
+          flex: 1;
+        }
+
+        &:hover {
+          font-weight: 500;
+          background-color: #F1F6FB;
+        }
+
+        &.active {
+          font-weight: 500;
+          background-color: #F1F6FB;
+        }
+      }
+
+      // Empty filter result — matches the user manual (setup .filter-empty).
+      .sidebar-filter-empty {
+        text-align: center;
+        padding: 32px 12px 16px;
+        color: #94a3b8;
+
+        mat-icon {
+          font-size: 32px;
+          width: 32px;
+          height: 32px;
+          opacity: 0.6;
+        }
+
+        span {
+          display: block;
+          margin: 8px 0 0;
+          font-size: 13px;
+          line-height: 1.4;
+        }
+      }
 
       .category-group {
         .category-header {
           display: flex;
           align-items: center;
-          padding: 6px 8px 6px 8px;
+          padding: 6px 8px 6px 0;
           cursor: pointer;
           transition: background 0.2s ease;
           font-size: 0.875rem;
           color: #5c5c5c;
           user-select: none;
-          background-color: #fff;
+          background-color: #FAFBFC;
+          border-radius: 3px;
 
           .chevron-down-icon {
             width: 14px;
@@ -160,6 +167,9 @@
           position: sticky;
           top: 0;
           z-index: 10;
+          // Opaque while pinned so scrolling items don't show through;
+          // matches the global page background (body in styles.scss).
+          background-color: #FAFBFC;
         }
 
         .recipe-list {
@@ -174,7 +184,7 @@
             cursor: pointer;
             border-bottom: none;
             line-height: 1.5;
-            margin: 4px 0 4px 0px;
+            margin: 1px 0 1px 0px;
             display: block;
 
             &:hover {
@@ -216,7 +226,7 @@
     height: 40px;
     border-radius: 4px;
     border: none;
-    background: transparent;
+    background: #FAFBFC;
     color: #2253B2;
     cursor: pointer;
     z-index: 1001;
@@ -249,11 +259,11 @@
     max-width: 85vw;
     flex: none;
     min-width: 0;
-    background: #fff;
+    background: #FAFBFC;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 1001;
-    padding: 70px 16px 16px 16px;
+    padding: 40px 16px 16px 16px;
     overflow-y: auto;
     box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
 
@@ -267,6 +277,23 @@
 
       .recipe-list {
         max-height: none;
+      }
+
+      // In the drawer (touch / small screen) the category header must never
+      // show the brand-blue tint: on touch a tap leaves :hover stuck, so the
+      // #F1F6FB hover background lingers. Pin every state to the drawer surface
+      // (#FAFBFC) instead. These selectors match the base rules' depth, so the
+      // later source order wins (no !important). Opaque so the sticky active
+      // header still hides items that scroll beneath it.
+      .category-list .category-group .category-header,
+      .category-list .category-group .category-header:hover {
+        background-color: #FAFBFC;
+      }
+
+      // Active category header (its own higher-specificity :has rule above):
+      // re-assert the drawer surface at matching specificity, later in source.
+      .category-list .category-group:has(.recipe-list-item.active) .category-header {
+        background-color: #FAFBFC;
       }
     }
   }

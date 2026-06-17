@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { LayoutService } from '../../services/layout.service';
 
 @Component({
@@ -7,39 +7,24 @@ import { LayoutService } from '../../services/layout.service';
   styleUrls: ['./function-page-main-layout.component.css'],
 })
 export class FunctionPageMainLayoutComponent {
-  isSearchOpen = false;
   collapsed$ = this.layout.collapsed$;
-  showSidebar = false;
+  // Mobile sidebar drawer open state (≤1024px) — distinct from the desktop
+  // `collapsed$` width-collapse; mirrors the recipe details sidebar.
+  mobileOpen = false;
 
   constructor(private layout: LayoutService) {}
 
-
-
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    const isInputFocused = ['INPUT', 'TEXTAREA'].includes(
-      document.activeElement?.tagName || ''
-    );
-
-    if (event.key === '/' && !isInputFocused) {
-      event.preventDefault();
-      this.isSearchOpen = true;
-    }
-
-    if (event.key === 'Escape') {
-      this.isSearchOpen = false;
-    }
-  }
-
-  onSearchOpen(): void {
-    this.isSearchOpen = true;
-  }
-
+  // Desktop collapse/expand (the floating ☰ button).
   onToggleSidebar(): void {
     this.layout.toggle();
   }
 
-  closeSidebar(): void {
-    this.showSidebar = false;
+  // Mobile drawer open/close.
+  toggleMobile(): void {
+    this.mobileOpen = !this.mobileOpen;
+  }
+
+  closeMobile(): void {
+    this.mobileOpen = false;
   }
 }

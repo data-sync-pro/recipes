@@ -2,19 +2,14 @@
   <!-- Sidebar Component -->
   <app-sidebar
     [collapsed$]="collapsed$"
-    [showSidebar]="showSidebar"
+    [mobileOpen]="mobileOpen"
+    [class.collapsed]="collapsed$ | async"
     (toggleSidebar)="onToggleSidebar()"
-    (searchOpen)="onSearchOpen()">
+    (toggleMobile)="toggleMobile()"
+    (closeMobile)="closeMobile()">
   </app-sidebar>
 
-  <main class="content" #contentRef [class.sidebar-collapsed]="collapsed$ | async">
+  <main class="content" [class.sidebar-collapsed]="collapsed$ | async">
     <router-outlet></router-outlet>
-    <app-scroll-to-top [scrollContainer]="contentRef"></app-scroll-to-top>
   </main>
-
-  <app-search-overlay
-    *ngIf="isSearchOpen"
-    [isOpen]="isSearchOpen"
-    (closed)="isSearchOpen = false"
-  ></app-search-overlay>
 </div>

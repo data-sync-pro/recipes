@@ -3,7 +3,7 @@ import { FAQItem } from '../models/faq.model';
 import { FAQService } from './faq.service';
 
 // Static mappings for category-level navigation. URLs are absolute and
-// prefixed with /faq to match the FAQ module's mount point.
+// prefixed with /faqs to match the FAQ module's mount point.
 const CATEGORY_URL_MAPPINGS: { readonly [key: string]: string } = {
   'batch': '/faqs/rules-engines/batch',
   'trigger': '/faqs/rules-engines/trigger',

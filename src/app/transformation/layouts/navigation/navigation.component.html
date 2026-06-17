@@ -2,63 +2,67 @@
   <div class="nav-header">
     <!-- Expanded state: search box + collapse button -->
     <div class="nav-header-expanded" *ngIf="!(collapsed$ | async)">
-      <app-search-box (searchClick)="onSearchClick()"></app-search-box>
-      <button
+      <app-search-box
+        [query]="searchQuery"
+        (queryChange)="onSearchInput($event)"
+      ></app-search-box>
+      <!-- <button
         class="nav-collapse-button"
         (click)="onToggleSidebar()"
         title="Collapse Sidebar"
       >
         <span>☰</span>
-      </button>
+      </button> -->
     </div>
 
     <!-- Collapsed state: navigation header hidden, using sidebar floating buttons -->
   </div>
-  <ul class="nav-section">
+  <!-- Flat, deduped results while searching: a multi-tag function shows once -->
+  <ul class="nav-section nav-search-results" *ngIf="isSearching">
+    <li
+      class="nav-item"
+      *ngFor="let result of searchResults; trackBy: trackBySearchResult"
+      routerLinkActive="active"
+    >
+      <a [routerLink]="result.link" (click)="linkClick.emit()">{{ result.name }}</a>
+    </li>
+    <li class="nav-empty" *ngIf="searchResults.length === 0">
+      <mat-icon>search_off</mat-icon>
+      <span>No matches found</span>
+    </li>
+  </ul>
+
+  <!-- Category tree when not searching -->
+  <ul class="nav-section" *ngIf="!isSearching">
     <li
       *ngFor="let category of functionCategories; trackBy: trackByCategoryName"
       class="nav-category"
     >
-      <div class="category-header" (click)="toggleCategory(category)">
-        <span
+      <div
+        class="category-header"
+        [class.active]="isCategoryActive(category)"
+        (click)="toggleCategory(category)"
+      >
+        <mat-icon
           class="arrow"
-          [class.expanded]="
-            category.name === 'Operators'
-              ? operatorExpand
-              : category.name === 'Global Variables'
-              ? globalVariableExpand
-              : category.name === 'Apex Class'
-              ? apexClassExpand
-              : category.expanded
-          "
+          *ngIf="categoryHasChildren(category); else arrowSpacer"
+          [class.expanded]="isCategoryExpanded(category)"
         >
-          {{
-            category.name === "Operators"
-              ? operatorExpand
-                ? "−"
-                : "+"
-              : category.name === "Global Variables"
-              ? globalVariableExpand
-                ? "−"
-                : "+"
-              : category.name === "Apex Class"
-              ? apexClassExpand
-                ? "−"
-                : "+"
-              : category.expanded
-              ? "−"
-              : "+"
-          }}
-        </span>
+          {{ isCategoryExpanded(category) ? "expand_more" : "chevron_right" }}
+        </mat-icon>
+        <ng-template #arrowSpacer><span class="arrow-spacer"></span></ng-template>
         {{ category.name
         }}{{
           category.name !== "Operators" &&
           category.name !== "Global Variables" &&
           category.name !== "Apex Class" &&
-          category.name !== 'Home'            
+          category.name !== 'Home'
             ? ' Functions'
             : ''
         }}
+        <span class="category-count" *ngIf="categoryHasChildren(category)">{{
+          category.functions.length
+        }}</span>
       </div>
       <ul
         class="function-list"
@@ -77,6 +81,7 @@
         >
           <a
             [routerLink]="['/transformation', categorySlug(category.name), func.route]"
+            (click)="linkClick.emit()"
             >{{ func.name }}</a
           >
         </li>
