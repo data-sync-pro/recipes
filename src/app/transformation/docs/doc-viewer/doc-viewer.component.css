@@ -36,6 +36,28 @@
   color: #e35f5f;
 }
 
+.doc-notes h2 {
+  color: #2253B2;
+}
+
+.doc-note {
+  margin-bottom: 1.5rem;
+}
+
+.doc-note:last-child {
+  margin-bottom: 0;
+}
+
+.doc-note-title {
+  color: #2253B2;
+  font-weight: 700;
+  margin: 1.25rem 0 0.5rem;
+}
+
+/* .doc-note-highlight (and the <strong>/<code> inside note bodies) are injected
+   via [innerHTML] in the template, which bypasses emulated view encapsulation —
+   so those rules can't live here. They are defined globally in styles.scss. */
+
 .doc-syntax {
   background-color: #eff0f0c4;
   padding: 1rem;
