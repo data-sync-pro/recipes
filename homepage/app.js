@@ -829,7 +829,7 @@ window.SubmissionLimiter = (() => {
   window.addEventListener('scroll', onScroll, { passive: true });
 })();
 
-// Section routes — clean URLs (/surface, /why-dsp, …) in place of "#section".
+// Section routes — clean URLs (/capabilities, /why-dsp, …) in place of "#section".
 // Firebase Hosting rewrites each path back to /index.html (see firebase.json),
 // and the router below scrolls to the matching element. path → section id; they
 // differ where the element id isn't a friendly URL slug.
@@ -837,7 +837,7 @@ window.SubmissionLimiter = (() => {
 // (deployed, or `firebase emulators:start` / `firebase serve`). A plain static
 // server / file:// will 404 on these paths when refreshed or opened directly.
 const DSP_SECTION_ROUTES = {
-  '/surface':  'surfaces',
+  '/capabilities':  'surfaces',
   '/why-dsp':  'shift',
   '/security': 'security',
   '/pricing':  'pricing',
@@ -955,7 +955,7 @@ const DSP_SECTION_ROUTES = {
     location.pathname === '/' ||
     location.pathname === '/index.html' ||
     Object.prototype.hasOwnProperty.call(DSP_SECTION_ROUTES, location.pathname) ||
-    /^\/surface\//.test(location.pathname); // /surface/<panel> deep-links
+    /^\/capabilities\//.test(location.pathname); // /capabilities/<panel> deep-links
   document.querySelectorAll('a.brand-mark').forEach(a => {
     a.addEventListener('click', (e) => {
       if (!onHomepage()) return; // real sub-pages: let the browser navigate to "/"
@@ -1134,8 +1134,8 @@ const DSP_SECTION_ROUTES = {
       counter.textContent = active.dataset.num || String(tabList.indexOf(active) + 1).padStart(2, '0');
     }
     placeFin(active);
-    // Reflect the active surface in the URL as a clean path (/surface/<key>).
-    const path = '/surface/' + key;
+    // Reflect the active surface in the URL as a clean path (/capabilities/<key>).
+    const path = '/capabilities/' + key;
     if (urlMode === 'none') { /* URL already matches — leave history untouched */ }
     else if (urlMode === 'push') {
       if (history.pushState && location.pathname !== path) history.pushState(null, '', path);
@@ -1153,10 +1153,10 @@ const DSP_SECTION_ROUTES = {
   prev && prev.addEventListener('click', () => step(-1));
   next && next.addEventListener('click', () => step(1));
 
-  // Each surface is reachable at a clean path /surface/<panel>. These aren't real
+  // Each surface is reachable at a clean path /capabilities/<panel>. These aren't real
   // element ids, so the browser won't scroll on its own — switch to that surface
   // and bring the section into view ourselves.
-  const PANEL_PATH = /^\/surface\/(batch|trigger|loader|ui|query)\/?$/;
+  const PANEL_PATH = /^\/capabilities\/(batch|trigger|loader|ui|query)\/?$/;
   function scrollToSurfaces(behavior) {
     const surfacesEl = document.getElementById('surfaces');
     if (!surfacesEl) return;
@@ -1175,11 +1175,11 @@ const DSP_SECTION_ROUTES = {
   applyPath('auto');
   window.addEventListener('popstate', () => applyPath('smooth'));
 
-  // Footer "Capabilities" links (/surface/<panel>) — intercept so they switch
+  // Footer "Capabilities" links (/capabilities/<panel>) — intercept so they switch
   // the surface in place (no reload) and push a history entry, instead of doing
   // a full navigation. Runs even when the page is already open.
   document.addEventListener('click', (e) => {
-    const a = e.target.closest ? e.target.closest('a[href^="/surface/"]') : null;
+    const a = e.target.closest ? e.target.closest('a[href^="/capabilities/"]') : null;
     if (!a) return;
     const m = a.getAttribute('href').match(PANEL_PATH);
     if (!m) return;
