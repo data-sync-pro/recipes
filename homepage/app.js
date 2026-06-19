@@ -340,9 +340,15 @@ window.SubmissionLimiter = (() => {
   _openObserver.observe(modal, { attributes: true, attributeFilter: ['hidden'] });
 
   // -------- live submit gating --------
-  // Enable the button only when every required field is filled and the email
-  // is valid (correct format AND a work-email domain).
+  // Enable the button only when every required field is filled, the email is
+  // valid (correct format AND a work-email domain), and the reCAPTCHA is solved.
   const submitBtn = form.querySelector('button[type="submit"]');
+  // reCAPTCHA v2 injects a hidden <textarea name="g-recaptcha-response"> into
+  // the widget once solved; its value clears on expiry. Non-empty == solved.
+  const captchaSolved = () => {
+    const t = form.querySelector('[name="g-recaptcha-response"]');
+    return !!(t && t.value);
+  };
   const isFormValid = () => {
     for (const el of form.querySelectorAll('[required]')) {
       if (!el.value || !String(el.value).trim()) return false;
@@ -352,11 +358,16 @@ window.SubmissionLimiter = (() => {
       const v = emailInp.value.trim();
       if (!DSP_isValidEmail(v) || isPersonalEmail(v)) return false;
     }
+    if (!captchaSolved()) return false;
     return true;
   };
   const refreshSubmit = () => { if (submitBtn) submitBtn.disabled = !isFormValid(); };
   form.addEventListener('input', refreshSubmit);
   form.addEventListener('change', refreshSubmit);
+  // reCAPTCHA fires no input/change event, so its data-callback /
+  // data-expired-callback (wired on the widget) re-run the gate when the
+  // challenge is solved or expires.
+  window.DSP_pcmCaptchaChange = refreshSubmit;
   refreshSubmit();
 
   form.addEventListener('submit', (e) => {
@@ -398,6 +409,14 @@ window.SubmissionLimiter = (() => {
       e.preventDefault();
       const firstBad = form.querySelector('[aria-invalid="true"]');
       if (firstBad) firstBad.focus();
+      return;
+    }
+
+    // reCAPTCHA guard — the button stays disabled until the challenge is
+    // solved, so this is a belt-and-braces check (the token may expire
+    // between solving and submitting).
+    if (!captchaSolved()) {
+      e.preventDefault();
       return;
     }
 
@@ -560,9 +579,15 @@ window.SubmissionLimiter = (() => {
   _drmOpenObserver.observe(modal, { attributes: true, attributeFilter: ['hidden'] });
 
   // -------- live submit gating --------
-  // Enable the button only when every required field is filled and the email
-  // is valid (correct format AND a work-email domain).
+  // Enable the button only when every required field is filled, the email is
+  // valid (correct format AND a work-email domain), and the reCAPTCHA is solved.
   const submitBtn = form.querySelector('button[type="submit"]');
+  // reCAPTCHA v2 injects a hidden <textarea name="g-recaptcha-response"> into
+  // the widget once solved; its value clears on expiry. Non-empty == solved.
+  const captchaSolved = () => {
+    const t = form.querySelector('[name="g-recaptcha-response"]');
+    return !!(t && t.value);
+  };
   const isFormValid = () => {
     for (const el of form.querySelectorAll('[required]')) {
       if (!el.value || !String(el.value).trim()) return false;
@@ -572,11 +597,16 @@ window.SubmissionLimiter = (() => {
       const v = emailInp.value.trim();
       if (!DSP_isValidEmail(v) || isPersonalEmail(v)) return false;
     }
+    if (!captchaSolved()) return false;
     return true;
   };
   const refreshSubmit = () => { if (submitBtn) submitBtn.disabled = !isFormValid(); };
   form.addEventListener('input', refreshSubmit);
   form.addEventListener('change', refreshSubmit);
+  // reCAPTCHA fires no input/change event, so its data-callback /
+  // data-expired-callback (wired on the widget) re-run the gate when the
+  // challenge is solved or expires.
+  window.DSP_drmCaptchaChange = refreshSubmit;
   refreshSubmit();
 
   form.addEventListener('submit', (e) => {
@@ -620,6 +650,14 @@ window.SubmissionLimiter = (() => {
       return;
     }
 
+    // reCAPTCHA guard — the button stays disabled until the challenge is
+    // solved, so this is a belt-and-braces check (the token may expire
+    // between solving and submitting).
+    if (!captchaSolved()) {
+      e.preventDefault();
+      return;
+    }
+
     // Every field maps to an exact Lead field by name: standard fields
     // (first_name, last_name, email, company, title, country, description)
     // plus Managed Orgs (00NQl000009hX5B) and Primary Interest
@@ -651,6 +689,8 @@ window.SubmissionLimiter = (() => {
   const trap    = form.querySelector('#prm-trap');
   const emailInp = document.getElementById('prm-email');
   const emailErr = form.querySelector('[data-error-for="prm-email"]');
+  const websiteInp = document.getElementById('prm-website');
+  const websiteErr = form.querySelector('[data-error-for="prm-website"]');
   let lastFocus = null;
 
   // Shared blocklist as the other modals — duplicated locally to keep this
@@ -700,6 +740,35 @@ window.SubmissionLimiter = (() => {
     });
     emailInp.addEventListener('input', () => {
       if (emailInp.getAttribute('aria-invalid') === 'true') setEmailError('');
+    });
+  }
+
+  // -------- website (URL) validation --------
+  // type="url" requires a scheme, so flag a missing/typo'd one inline (mirrors
+  // the email-error pattern) — otherwise the submit button just sits disabled
+  // with no explanation.
+  const setWebsiteError = (msg) => {
+    if (!websiteInp) return;
+    if (msg) {
+      websiteInp.setAttribute('aria-invalid', 'true');
+      if (websiteErr) { websiteErr.textContent = msg; websiteErr.hidden = false; }
+    } else {
+      websiteInp.removeAttribute('aria-invalid');
+      if (websiteErr) websiteErr.hidden = true;
+    }
+  };
+  if (websiteInp) {
+    websiteInp.addEventListener('blur', () => {
+      const v = websiteInp.value.trim();
+      if (v && websiteInp.validity.typeMismatch) {
+        setWebsiteError("Please include https://");
+      } else {
+        setWebsiteError('');
+      }
+    });
+    websiteInp.addEventListener('input', () => {
+      // Clear as soon as the user edits; re-validates on next blur.
+      if (websiteInp.getAttribute('aria-invalid') === 'true') setWebsiteError('');
     });
   }
 
@@ -755,20 +824,32 @@ window.SubmissionLimiter = (() => {
   _prmOpenObserver.observe(modal, { attributes: true, attributeFilter: ['hidden'] });
 
   // -------- live submit gating --------
-  // Enable the button only when every required field is filled and the email
-  // is a valid format. Partners may use personal emails, so no domain block.
+  // Enable the button only when every required field is filled, the email is
+  // a valid format, and the reCAPTCHA is solved. Partners may use personal
+  // emails, so no domain block.
   const submitBtn = form.querySelector('button[type="submit"]');
+  // reCAPTCHA v2 injects a hidden <textarea name="g-recaptcha-response"> into
+  // the widget once solved; its value clears on expiry. Non-empty == solved.
+  const captchaSolved = () => {
+    const t = form.querySelector('[name="g-recaptcha-response"]');
+    return !!(t && t.value);
+  };
   const isFormValid = () => {
     for (const el of form.querySelectorAll('[required]')) {
       if (!el.value || !String(el.value).trim()) return false;
       if (el.type === 'url' && !el.checkValidity()) return false;
     }
     if (emailInp && !DSP_isValidEmail(emailInp.value.trim())) return false;
+    if (!captchaSolved()) return false;
     return true;
   };
   const refreshSubmit = () => { if (submitBtn) submitBtn.disabled = !isFormValid(); };
   form.addEventListener('input', refreshSubmit);
   form.addEventListener('change', refreshSubmit);
+  // reCAPTCHA fires no input/change event, so its data-callback /
+  // data-expired-callback (wired on the widget) re-run the gate when the
+  // challenge is solved or expires.
+  window.DSP_prmCaptchaChange = refreshSubmit;
   refreshSubmit();
 
   form.addEventListener('submit', (e) => {
@@ -789,6 +870,15 @@ window.SubmissionLimiter = (() => {
       return;
     }
 
+    // Website (URL) format guard — surfaces the same inline hint if a submit
+    // slips through with a scheme-less URL.
+    if (websiteInp && websiteInp.value.trim() && websiteInp.validity.typeMismatch) {
+      e.preventDefault();
+      setWebsiteError("Please include https://");
+      websiteInp.focus();
+      return;
+    }
+
     // Required-field check
     const required = form.querySelectorAll('input[required], select[required], textarea[required]');
     let ok = true;
@@ -804,6 +894,14 @@ window.SubmissionLimiter = (() => {
       e.preventDefault();
       const firstBad = form.querySelector('[aria-invalid="true"]');
       if (firstBad) firstBad.focus();
+      return;
+    }
+
+    // reCAPTCHA guard — the button stays disabled until the challenge is
+    // solved, so this is a belt-and-braces check (the token may expire
+    // between solving and submitting).
+    if (!captchaSolved()) {
+      e.preventDefault();
       return;
     }
 

@@ -2410,7 +2410,8 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
       <div class="pcm-submit-row">
         <p class="pcm-rate-limit" id="drm-rate-limit" hidden role="alert"></p>
         <div class="pcm-captcha">
-          <div class="g-recaptcha" data-sitekey="6LeoLSUtAAAAAM_Pl211dwgnDQSVq4gFCL8V5sNK"></div>
+          <div class="g-recaptcha" data-sitekey="6LeoLSUtAAAAAM_Pl211dwgnDQSVq4gFCL8V5sNK"
+               data-callback="DSP_drmCaptchaChange" data-expired-callback="DSP_drmCaptchaChange"></div>
         </div>
         <button type="submit" class="btn pcm-submit">
           Request demo
@@ -2466,8 +2467,7 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
       <input type="hidden" name="oid" value="00D4x000004wmrR" />
       <input type="hidden" name="retURL" value="https://www.datasyncpro.io" />
       <input type="hidden" name="lead_source" value="Web" />
-      <!-- IsPartner__c — flags this Lead as a partner inquiry -->
-      <input type="hidden" name="00NQl000009gheT" value="1" />
+
       <input type="hidden" name="captcha_settings" value='{"keyname":"datasyncproio","fallback":"true","orgId":"00D4x000004wmrR","ts":""}' />
 
       <!-- honeypot -->
@@ -2512,6 +2512,7 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
           <div class="lf-field">
             <label for="prm-website">Website</label>
             <input id="prm-website" name="url" type="url" required maxlength="80" placeholder="https://" autocomplete="url" />
+            <small class="lf-error" data-error-for="prm-website" hidden>Please include https://</small>
           </div>
           <div class="lf-field">
             <label for="prm-country">Country</label>
@@ -2613,7 +2614,8 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
       <div class="pcm-submit-row">
         <p class="pcm-rate-limit" id="prm-rate-limit" hidden role="alert"></p>
         <div class="pcm-captcha">
-          <div class="g-recaptcha" data-sitekey="6LeoLSUtAAAAAM_Pl211dwgnDQSVq4gFCL8V5sNK"></div>
+          <div class="g-recaptcha" data-sitekey="6LeoLSUtAAAAAM_Pl211dwgnDQSVq4gFCL8V5sNK"
+               data-callback="DSP_prmCaptchaChange" data-expired-callback="DSP_prmCaptchaChange"></div>
         </div>
         <button type="submit" class="btn pcm-submit">
           Apply
@@ -2879,7 +2881,8 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
       <div class="pcm-submit-row">
         <p class="pcm-rate-limit" id="pcm-rate-limit" hidden role="alert"></p>
         <div class="pcm-captcha">
-          <div class="g-recaptcha" data-sitekey="6LeoLSUtAAAAAM_Pl211dwgnDQSVq4gFCL8V5sNK"></div>
+          <div class="g-recaptcha" data-sitekey="6LeoLSUtAAAAAM_Pl211dwgnDQSVq4gFCL8V5sNK"
+               data-callback="DSP_pcmCaptchaChange" data-expired-callback="DSP_pcmCaptchaChange"></div>
         </div>
         <button type="submit" class="btn pcm-submit">
           Submit plan request
