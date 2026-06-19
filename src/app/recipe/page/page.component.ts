@@ -66,6 +66,11 @@ export class RecipesComponent implements OnInit, OnDestroy {
   filteredRecipes: Recipe[] = [];
   totalRecipeCount: number = 0;
 
+  // Initial-load spinner (mirrors the user manual's `setup-loading`). Recipe
+  // data is normally preloaded by the APP_INITIALIZER, so this only shows while
+  // the recipe fetch is genuinely still in flight (e.g. a slow cold load).
+  isLoading: boolean = true;
+
   currentFilter: Filter = {
     categories: []
   };
@@ -90,6 +95,13 @@ export class RecipesComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(state => {
         this.ui = state;
+        this.cdr.markForCheck();
+      });
+
+    this.store.data$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
+        this.isLoading = data.isLoadingRecipes;
         this.cdr.markForCheck();
       });
 

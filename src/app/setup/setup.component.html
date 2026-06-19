@@ -100,9 +100,7 @@
 
     <!-- Main Content -->
     <main class="setup-content">
-      <div *ngIf="isLoading" class="setup-loading">
-        <mat-spinner diameter="40"></mat-spinner>
-      </div>
+      <app-content-skeleton *ngIf="isLoading" [blocks]="3"></app-content-skeleton>
 
       <ng-container *ngIf="!isLoading && currentSetup">
         <h1 class="page-title">{{ currentSetup.title }}</h1>

@@ -23,6 +23,8 @@ export class DocViewerComponent implements OnInit {
   docContent: DocData | null = null;
   processedExamples: ProcessedExample[] = [];
   highlightedDescriptionCode: SafeHtml | null = null;
+  // First-load skeleton state — true while the function's JSON is being fetched.
+  isLoading = true;
   
   showImageViewer = false;
   selectedImageUrl = '';
@@ -63,8 +65,10 @@ export class DocViewerComponent implements OnInit {
           }
 
           if (!docName) {
+            this.isLoading = false;
             return [];
           }
+          this.isLoading = true;
           if (docName === 'global_variables') {
             return this.docsService.getGlobalVariables();
           }
@@ -72,6 +76,8 @@ export class DocViewerComponent implements OnInit {
         })
       )
       .subscribe((doc) => {
+        this.isLoading = false;
+
         if (!doc && this.currentDocName && this.currentDocName !== 'global_variables') {
           this.router.navigateByUrl('/transformation/home', { replaceUrl: true });
           return;

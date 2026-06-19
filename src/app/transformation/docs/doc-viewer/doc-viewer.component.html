@@ -1,3 +1,5 @@
+<app-content-skeleton *ngIf="isLoading && !docContent" [blocks]="3"></app-content-skeleton>
+
 <div class="doc-page" *ngIf="docContent">
   <h1 class="doc-title" *ngIf="docContent.title">{{ docContent.title }}</h1>
   <section class="doc-section" *ngIf="docContent.globalVariables">
