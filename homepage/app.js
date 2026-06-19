@@ -639,8 +639,9 @@ window.SubmissionLimiter = (() => {
 // Mirrors the demo-modal plumbing (W2L iframe POST, rate limiter, work-
 // email guard, reCAPTCHA). Maps to exact Lead fields: Website (url),
 // Current Client Base (00NQl000009iNmv), Description, IsPartner__c
-// (00NQl000009gheT, hidden=1). Qualifiers with no dedicated field
-// (partner type, company size, SF years, certs) are appended to Description.
+// (00NQl000009gheT, hidden=1), Partner type (00NQl000009q31R), Company size
+// (00NQl000009pxLq), Years with Salesforce (00NQl000009q3iz), and
+// Certifications (00NQl000009q3mD).
 // =========================================================
 (() => {
   const modal   = document.getElementById('partner-request');
@@ -806,26 +807,11 @@ window.SubmissionLimiter = (() => {
       return;
     }
 
-    // Qualifiers with no dedicated Lead field (partner type, company size,
-    // SF experience, certifications) get appended to the standard Description
-    // so nothing is lost. Website → url, Current client base → 00NQl000009iNmv,
-    // and the pitch is already the Description field's typed content.
-    const descInp = document.getElementById('prm-pitch');
-    if (descInp && descInp.value.indexOf('— Partner profile —') === -1) {
-      const profile = [];
-      const add = (label, sel) => {
-        const el = form.querySelector(sel);
-        const v = el ? String(el.value || '').trim() : '';
-        if (v) profile.push(label + ': ' + v);
-      };
-      add('Partner type', '[data-prm-field="partnerType"]');
-      add('Company size', '[data-prm-field="companySize"]');
-      add('Years with Salesforce', '[data-prm-field="sfYears"]');
-      add('Certifications', '[data-prm-field="certifications"]');
-      if (profile.length) {
-        descInp.value = (descInp.value.trim() + '\n\n— Partner profile —\n' + profile.join('\n')).trim();
-      }
-    }
+    // Every field now maps to an exact Lead field by name (see the field
+    // mapping note above the modal init): the four qualifiers — Partner type
+    // (00NQl000009q31R), Company size (00NQl000009pxLq), Years with Salesforce
+    // (00NQl000009q3iz), Certifications (00NQl000009q3mD) — POST directly, and
+    // the pitch is the Description field's typed content. Nothing to serialize.
 
     // Let the POST proceed to the hidden iframe; swap UI to success
     setTimeout(() => {
