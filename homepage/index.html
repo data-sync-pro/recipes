@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Salesforce Automation & Data Processing | Data Sync Pro</title>
 <meta name="description" content="Salesforce automation, data processing & data quality on one rules-driven engine. Data Sync Pro replaces custom Apex and flows — modular, bulk-safe, and native." />
-<link rel="icon" type="image/png" href="favicon.png" />
-<link rel="apple-touch-icon" href="favicon-180.png" />
+<link rel="icon" type="image/png" href="logo.png" />
+<link rel="apple-touch-icon" href="logo.png" />
 <!-- Open Graph / Twitter sharing -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Data Sync Pro" />
@@ -2280,7 +2280,7 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
       <input type="hidden" name="00NQl000009gXs2" value="1" />
       <!-- Salesforce W2L reCAPTCHA — captcha_settings.ts is refreshed every
            500ms by the global ticker in app.js so the token stays fresh. -->
-      <input type="hidden" name="captcha_settings" value='{"keyname":"datasyncpro","fallback":"true","orgId":"00D4x000004wmrR","ts":""}' />
+      <input type="hidden" name="captcha_settings" value='{"keyname":"datasyncproio","fallback":"true","orgId":"00D4x000004wmrR","ts":""}' />
 
       <!-- honeypot -->
       <div class="lf-honeypot" aria-hidden="true">
@@ -2462,7 +2462,7 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
       <input type="hidden" name="lead_source" value="Web" />
       <!-- IsPartner__c — flags this Lead as a partner inquiry -->
       <input type="hidden" name="00NQl000009gheT" value="1" />
-      <input type="hidden" name="captcha_settings" value='{"keyname":"datasyncpro","fallback":"true","orgId":"00D4x000004wmrR","ts":""}' />
+      <input type="hidden" name="captcha_settings" value='{"keyname":"datasyncproio","fallback":"true","orgId":"00D4x000004wmrR","ts":""}' />
 
       <!-- honeypot -->
       <div class="lf-honeypot" aria-hidden="true">
@@ -2648,7 +2648,7 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
 
     <form id="plan-config-form" class="pcm-form"
           action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000004wmrR"
-          method="POST" target="dsp_pcm_iframe" novalidate>
+          method="POST" target="_blank" novalidate><!-- TEMP DEBUG: was target="dsp_pcm_iframe" — restore before production -->
 
       <!--
         Custom Salesforce field used: 00NQl000009RvD7 (Requested License Info).
@@ -2660,7 +2660,11 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
       <input type="hidden" name="oid" value="00D4x000004wmrR" />
       <input type="hidden" name="retURL" value="https://www.datasyncpro.io" />
       <input type="hidden" name="lead_source" value="Web" />
-      <input type="hidden" name="captcha_settings" value='{"keyname":"datasyncpro","fallback":"true","orgId":"00D4x000004wmrR","ts":""}' />
+      <input type="hidden" name="captcha_settings" value='{"keyname":"datasyncproio","fallback":"true","orgId":"00D4x000004wmrR","ts":""}' />
+      <!-- TEMP DEBUG — remove before production. Salesforce emails a diagnostic
+           report (what it received, why no Lead was created) to debugEmail. -->
+      <input type="hidden" name="debug" value="1" />
+      <input type="hidden" name="debugEmail" value="xuehang.xu@pushtopic.com" />
       <input type="hidden" name="00NQl000009RvD7" id="pcm-hidden-licenseinfo" value="" />
       <!-- Internal-only refs (no name attr — not POSTed; JS reads from these
            when assembling the 00NQl000009RvD7 JSON payload). -->
