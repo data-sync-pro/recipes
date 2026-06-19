@@ -67,7 +67,7 @@ body::before {
   -webkit-mask-image: linear-gradient(180deg, black, transparent 70%);
 }
 body > * { position: relative; z-index: 1; }
-html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-padding-top: 76px; overflow-x: clip; }
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: smooth; scroll-padding-top: 76px; overflow-x: clip; }
 body {
   /* clip the ~scrollbar-width overhang from full-bleed 100vw backgrounds
      (e.g. .surfaces-sticky::before) so the page never scrolls horizontally.
@@ -4528,6 +4528,7 @@ footer {
 .reveal[data-d="4"] { transition-delay: .24s; }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .ribbon-track { animation: none; }
 }

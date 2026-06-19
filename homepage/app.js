@@ -829,15 +829,30 @@ window.SubmissionLimiter = (() => {
   window.addEventListener('scroll', onScroll, { passive: true });
 })();
 
+// Section routes — clean URLs (/surface, /why-dsp, …) in place of "#section".
+// Firebase Hosting rewrites each path back to /index.html (see firebase.json),
+// and the router below scrolls to the matching element. path → section id; they
+// differ where the element id isn't a friendly URL slug.
+// NOTE: the rewrites only apply when the site is served by Firebase Hosting
+// (deployed, or `firebase emulators:start` / `firebase serve`). A plain static
+// server / file:// will 404 on these paths when refreshed or opened directly.
+const DSP_SECTION_ROUTES = {
+  '/surface':  'surfaces',
+  '/why-dsp':  'shift',
+  '/security': 'security',
+  '/pricing':  'pricing',
+};
+
 // Scroll-spy: highlight nav link for the section currently in view
 (() => {
-  const links = Array.from(document.querySelectorAll('#nav .nav-links a[href^="#"]'));
+  const links = Array.from(document.querySelectorAll('#nav .nav-links a'))
+    .filter(a => DSP_SECTION_ROUTES[a.getAttribute('href')]);
   if (!links.length || !('IntersectionObserver' in window)) return;
 
-  // nav link by section id
+  // nav link by section id (resolved through the path → id route table)
   const linkById = new Map();
   links.forEach(a => {
-    const id = a.getAttribute('href').slice(1);
+    const id = DSP_SECTION_ROUTES[a.getAttribute('href')];
     if (id) linkById.set(id, a);
   });
 
@@ -886,18 +901,67 @@ window.SubmissionLimiter = (() => {
   sectionToLink.forEach((link, el) => io.observe(el));
 })();
 
-// Brand-mark (logo) → scroll to top without leaving a "#" in the URL.
-// The nav and footer logos use href="#", which would otherwise append a bare
-// "#" to the address bar on click. Intercept, smooth-scroll to top, and strip
-// the hash via replaceState so the URL stays clean.
+// Section router — intercept clicks on the section nav links so they scroll in
+// place and swap the URL to the clean path via pushState (no reload), and jump
+// to the right spot when the page opens at a section path directly or via
+// browser back/forward.
 (() => {
-  document.querySelectorAll('a.brand-mark[href="#"]').forEach(a => {
+  const scrollToId = (id, behavior) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const nav = document.getElementById('nav');
+    const navH = nav ? nav.offsetHeight : 0;
+    const y = el.getBoundingClientRect().top + window.scrollY - navH - 8;
+    window.scrollTo({ top: Math.max(0, y), behavior: behavior || 'smooth' });
+  };
+
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest ? e.target.closest('a') : null;
+    if (!a) return;
+    const path = a.getAttribute('href');
+    const id = path && DSP_SECTION_ROUTES[path];
+    if (!id) return;
+    // Leave new-tab / modified clicks to the browser.
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey ||
+        e.shiftKey || e.altKey || a.target === '_blank') return;
+    e.preventDefault();
+    scrollToId(id, 'smooth');
+    if (history.pushState && location.pathname !== path) {
+      history.pushState(null, '', path);
+    }
+  });
+
+  // Direct visit / refresh at a section path → jump straight to the section.
+  if (DSP_SECTION_ROUTES[location.pathname]) {
+    requestAnimationFrame(() => scrollToId(DSP_SECTION_ROUTES[location.pathname], 'auto'));
+  }
+
+  // Back/forward between section paths and the homepage root.
+  window.addEventListener('popstate', () => {
+    const id = DSP_SECTION_ROUTES[location.pathname];
+    if (id) scrollToId(id, 'smooth');
+    else if (location.pathname === '/' || location.pathname === '/index.html') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+})();
+
+// Logo → home. The nav and footer logos link to "/", so on a real sub-page
+// (e.g. /recipes) the click just navigates home. On the homepage document —
+// including the section paths above — we intercept: smooth-scroll to the top
+// and reset the URL to "/", instead of a full reload.
+(() => {
+  const onHomepage = () =>
+    location.pathname === '/' ||
+    location.pathname === '/index.html' ||
+    Object.prototype.hasOwnProperty.call(DSP_SECTION_ROUTES, location.pathname) ||
+    /^\/surface\//.test(location.pathname); // /surface/<panel> deep-links
+  document.querySelectorAll('a.brand-mark').forEach(a => {
     a.addEventListener('click', (e) => {
+      if (!onHomepage()) return; // real sub-pages: let the browser navigate to "/"
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      if (history.replaceState) {
-        history.replaceState(null, '', location.pathname + location.search);
-      }
+      if (history.replaceState) history.replaceState(null, '', '/');
     });
   });
 })();
@@ -1047,7 +1111,10 @@ window.SubmissionLimiter = (() => {
     fin.style.width = box.width + 'px';
   }
 
-  function show(key) {
+  // urlMode: 'replace' (default — in-place tab switch), 'push' (footer-link
+  // navigation, gets its own history entry), or 'none' (URL already correct,
+  // e.g. applied from the current path on load / popstate).
+  function show(key, urlMode) {
     let active = null;
     tabs.forEach(t => {
       const on = t.dataset.panel === key;
@@ -1067,7 +1134,14 @@ window.SubmissionLimiter = (() => {
       counter.textContent = active.dataset.num || String(tabList.indexOf(active) + 1).padStart(2, '0');
     }
     placeFin(active);
-    if (history.replaceState) history.replaceState(null, '', '#' + key);
+    // Reflect the active surface in the URL as a clean path (/surface/<key>).
+    const path = '/surface/' + key;
+    if (urlMode === 'none') { /* URL already matches — leave history untouched */ }
+    else if (urlMode === 'push') {
+      if (history.pushState && location.pathname !== path) history.pushState(null, '', path);
+    } else if (history.replaceState) {
+      history.replaceState(null, '', path);
+    }
   }
   tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.panel)));
 
@@ -1079,26 +1153,42 @@ window.SubmissionLimiter = (() => {
   prev && prev.addEventListener('click', () => step(-1));
   next && next.addEventListener('click', () => step(1));
 
-  // Apply a #batch/#trigger/#loader/#ui/#query hash: switch to that surface and
-  // scroll the section into view. The hash isn't a real element id, so the
-  // browser won't scroll on its own. Runs on load AND on hashchange so the
-  // footer "Capabilities" links work even when the page is already open.
-  function applyHash(behavior) {
-    const m = (location.hash || '').match(/^#(batch|trigger|loader|ui|query)$/);
-    if (!m) return;
-    show(m[1]);
+  // Each surface is reachable at a clean path /surface/<panel>. These aren't real
+  // element ids, so the browser won't scroll on its own — switch to that surface
+  // and bring the section into view ourselves.
+  const PANEL_PATH = /^\/surface\/(batch|trigger|loader|ui|query)\/?$/;
+  function scrollToSurfaces(behavior) {
     const surfacesEl = document.getElementById('surfaces');
-    if (surfacesEl) {
-      requestAnimationFrame(() => {
-        const nav = document.getElementById('nav');
-        const navH = nav ? nav.offsetHeight : 0;
-        const y = surfacesEl.getBoundingClientRect().top + window.pageYOffset - navH - 8;
-        window.scrollTo({ top: y, behavior: behavior || 'auto' });
-      });
-    }
+    if (!surfacesEl) return;
+    const nav = document.getElementById('nav');
+    const navH = nav ? nav.offsetHeight : 0;
+    const y = surfacesEl.getBoundingClientRect().top + window.scrollY - navH - 8;
+    window.scrollTo({ top: Math.max(0, y), behavior: behavior || 'auto' });
   }
-  applyHash('auto');
-  window.addEventListener('hashchange', () => applyHash('smooth'));
+  // Apply the current path on load and on browser back/forward.
+  function applyPath(behavior) {
+    const m = location.pathname.match(PANEL_PATH);
+    if (!m) return;
+    show(m[1], 'none');
+    requestAnimationFrame(() => scrollToSurfaces(behavior));
+  }
+  applyPath('auto');
+  window.addEventListener('popstate', () => applyPath('smooth'));
+
+  // Footer "Capabilities" links (/surface/<panel>) — intercept so they switch
+  // the surface in place (no reload) and push a history entry, instead of doing
+  // a full navigation. Runs even when the page is already open.
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest ? e.target.closest('a[href^="/surface/"]') : null;
+    if (!a) return;
+    const m = a.getAttribute('href').match(PANEL_PATH);
+    if (!m) return;
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey ||
+        e.shiftKey || e.altKey || a.target === '_blank') return;
+    e.preventDefault();
+    show(m[1], 'push');
+    scrollToSurfaces('smooth');
+  });
 
   // Reposition fin on resize / load
   const initial = tabList.find(t => t.classList.contains('active')) || tabList[0];
