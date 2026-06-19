@@ -886,6 +886,22 @@ window.SubmissionLimiter = (() => {
   sectionToLink.forEach((link, el) => io.observe(el));
 })();
 
+// Brand-mark (logo) → scroll to top without leaving a "#" in the URL.
+// The nav and footer logos use href="#", which would otherwise append a bare
+// "#" to the address bar on click. Intercept, smooth-scroll to top, and strip
+// the hash via replaceState so the URL stays clean.
+(() => {
+  document.querySelectorAll('a.brand-mark[href="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (history.replaceState) {
+        history.replaceState(null, '', location.pathname + location.search);
+      }
+    });
+  });
+})();
+
 // Reveal on scroll
 (() => {
   const els = document.querySelectorAll('.reveal');
@@ -1019,10 +1035,15 @@ window.SubmissionLimiter = (() => {
     if (!fin || !tab) return;
     const wrap = fin.parentElement;
     if (!wrap) return;
+    const tabsEl = tab.closest('.surface-tabs') || tab.parentElement;
     const wbox = wrap.getBoundingClientRect();
     const box = tab.getBoundingClientRect();
+    // Anchor the arrow to the BOTTOM OF THE WHOLE TAB GRID (the tab/panel
+    // boundary), not the active tab's own row — when the tabs wrap to multiple
+    // rows the arrow would otherwise land mid-grid instead of at the panel edge.
+    const gridBottom = tabsEl ? tabsEl.getBoundingClientRect().bottom : box.bottom;
     fin.style.left = (box.left - wbox.left) + 'px';
-    fin.style.top = (box.bottom - wbox.top - 1) + 'px';
+    fin.style.top = (gridBottom - wbox.top - 1) + 'px';
     fin.style.width = box.width + 'px';
   }
 
@@ -1089,6 +1110,35 @@ window.SubmissionLimiter = (() => {
   // Initial place after fonts/layout settle
   requestAnimationFrame(() => placeFin(initial));
   setTimeout(() => placeFin(tabList.find(t => t.classList.contains('active')) || tabList[0]), 250);
+
+  const activeOrFirst = () => tabList.find(t => t.classList.contains('active')) || tabList[0];
+  // Re-place once web fonts finish loading — font swap reflows the tab strip
+  // and would otherwise leave the arrow at a stale (misplaced) position.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => placeFin(activeOrFirst()));
+  }
+  // Keep the arrow locked to the active tab through ANY layout change of the
+  // tab strip (font swap, OS/browser zoom, container reflow) — covers cases the
+  // load/resize/timeout triggers miss.
+  if (window.ResizeObserver) {
+    const tabsEl = tabList[0] && (tabList[0].closest('.surface-tabs') || tabList[0].parentElement);
+    if (tabsEl) new ResizeObserver(() => placeFin(activeOrFirst())).observe(tabsEl);
+  }
+
+  // The tab strip animates in with a `.reveal` (translateY) entrance. placeFin
+  // measures via getBoundingClientRect, which INCLUDES that transform — so any
+  // placement that runs during the 0.7s reveal pins the arrow to the mid-
+  // animation spot and it ends up detached. Re-place when the reveal transition
+  // finishes (ResizeObserver can't see transforms), with a timer backstop.
+  {
+    const stripEl = tabList[0] && (tabList[0].closest('.surface-tabs') || tabList[0].parentElement);
+    if (stripEl) {
+      stripEl.addEventListener('transitionend', (e) => {
+        if (e.propertyName === 'transform') placeFin(activeOrFirst());
+      });
+    }
+    setTimeout(() => placeFin(activeOrFirst()), 900);
+  }
 
   // First-visit auto-cycle when section enters viewport
   const surfacesSection = document.getElementById('surfaces');
