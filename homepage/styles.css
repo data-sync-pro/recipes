@@ -372,6 +372,15 @@ p { margin: 0; }
 }
 .nav-dd-menu a:hover { background: var(--paper-2); color: var(--ink); }
 .nav-dd-menu .dd-ext { width: 13px; height: 13px; color: var(--mute); flex: 0 0 auto; }
+.nav-dd-divider { height: 1px; background: var(--rule); margin: 6px 8px; }
+.nav-dd-label {
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute);
+  padding: 6px 12px 4px;
+}
 
 /* ---------- Nav: mobile toggle + panel ---------- */
 .nav-toggle {
