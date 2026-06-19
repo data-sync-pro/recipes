@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, map, shareReplay } from 'rxjs';
+import { Observable, of, map, shareReplay, switchMap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 interface Parameter {
@@ -27,6 +27,11 @@ export interface Callout {
   content: string;
 }
 
+export interface DocNote {
+  title?: string;
+  content: string;
+}
+
 export interface DocData {
   title: string;
   description?: string;
@@ -41,6 +46,11 @@ export interface DocData {
   examplesCallouts?: Callout[];
   tips?: string[];
   tipsCallouts?: Callout[];
+  // Inline notes referenced from a shared file (single source of truth).
+  // `notesRef` is a path relative to assets/transformation/formulas/ (without
+  // the .json extension); DocsService resolves it into `notes` at load time.
+  notesRef?: string;
+  notes?: DocNote[];
   relatedFormulas?: string[];
   operators?: {
     [category: string]: {
@@ -71,9 +81,26 @@ export class DocsService {
     const url = `${baseUrl}data.json`;
     return this.http.get<DocData>(url).pipe(
       map((doc) => this.resolveImagePaths(doc, baseUrl)),
+      switchMap((doc) => this.resolveNotes(doc)),
       catchError((error) => {
         console.error(`Error loading ${url}:`, error);
         return of(null);
+      })
+    );
+  }
+
+  // Resolves a doc's `notesRef` into its `notes` array by fetching the shared
+  // notes file. A missing/broken notes file degrades gracefully to the doc as-is.
+  private resolveNotes(doc: DocData): Observable<DocData> {
+    if (!doc?.notesRef) {
+      return of(doc);
+    }
+    const url = `assets/transformation/formulas/${doc.notesRef}.json`;
+    return this.http.get<DocNote[]>(url).pipe(
+      map((notes) => ({ ...doc, notes })),
+      catchError((error) => {
+        console.error(`Error loading ${url}:`, error);
+        return of(doc);
       })
     );
   }
