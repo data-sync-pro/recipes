@@ -103,6 +103,7 @@ window.SubmissionLimiter = (() => {
   const orgCountHidden = document.getElementById('pcm-hidden-orgcount');
   const connHidden = document.getElementById('pcm-hidden-conn');
   const execHidden = document.getElementById('pcm-hidden-exec');
+  const successPlanHidden = document.getElementById('pcm-hidden-successplan');
   const detailsHidden = document.getElementById('pcm-hidden-orgdetails');
   const licenseInfoHidden = document.getElementById('pcm-hidden-licenseinfo');
   const orgsHost = document.getElementById('pcm-orgs');
@@ -161,6 +162,20 @@ window.SubmissionLimiter = (() => {
     btn.addEventListener('click', () => setPlan(btn.dataset.pcmPlan));
   });
 
+  // -------- success-plan switcher --------
+  // Standard is included with every paid plan; Premium is a paid add-on
+  // (25% of license). The choice rides along in the License Info JSON.
+  const setSuccessPlan = (plan) => {
+    if (!plan) return;
+    successPlanHidden.value = plan;
+    modal.querySelectorAll('[data-pcm-success]').forEach(b => {
+      b.classList.toggle('is-active', b.dataset.pcmSuccess === plan);
+    });
+  };
+  modal.querySelectorAll('[data-pcm-success]').forEach(btn => {
+    btn.addEventListener('click', () => setSuccessPlan(btn.dataset.pcmSuccess));
+  });
+
   // -------- org rows --------
   const renumberOrgs = () => {
     const rows = orgsHost.querySelectorAll('.pcm-org');
@@ -212,6 +227,7 @@ window.SubmissionLimiter = (() => {
   const open = (plan) => {
     if (orgsHost.children.length === 0) addOrgRow(false);
     setPlan(plan || planHidden.value || 'Business');
+    setSuccessPlan(successPlanHidden.value || 'Standard');
     lastFocus = document.activeElement;
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
@@ -404,11 +420,15 @@ window.SubmissionLimiter = (() => {
         `Org ${i+1}: ${o.name} — ${o.connections} connection(s), ${o.executables} executable(s), ${o.daily_batch} daily batch`
       ).join('\n');
     }
-    // Requested License Info (00NQl000009RvD7) holds the orgs list as a
-    // JSON array string — one object per org (name, connections,
-    // executables, daily batch).
+    // Requested License Info (00NQl000009RvD7) holds a JSON object string:
+    //   successPlan — Standard (included) or Premium (25% of license)
+    //   orgs        — one object per org (name, connections, executables,
+    //                 daily batch)
     if (licenseInfoHidden) {
-      licenseInfoHidden.value = JSON.stringify(orgs);
+      licenseInfoHidden.value = JSON.stringify({
+        successPlan: successPlanHidden.value,
+        orgs,
+      });
     }
 
     // Let the POST proceed to the hidden iframe; swap UI to success

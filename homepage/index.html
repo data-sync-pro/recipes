@@ -2660,7 +2660,7 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
       <!--
         Custom Salesforce field used: 00NQl000009RvD7 (Requested License Info).
         It receives a single JSON blob built on submit containing:
-          { intent, plan, orgCount, totalConnections, totalExecutables, orgs: [...] }
+          { successPlan, orgs: [...] }
         Standard Lead fields (first_name, last_name, email, company, title)
         come straight from the visible inputs by name.
       -->
@@ -2675,6 +2675,7 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
       <input type="hidden" id="pcm-hidden-orgcount" value="" />
       <input type="hidden" id="pcm-hidden-conn" value="" />
       <input type="hidden" id="pcm-hidden-exec" value="" />
+      <input type="hidden" id="pcm-hidden-successplan" value="Standard" />
 
       <!-- honeypot -->
       <div class="lf-honeypot" aria-hidden="true">
@@ -2851,6 +2852,18 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
           </div>
         </div>
       </template>
+
+      <div class="pcm-rule"></div>
+
+      <!-- Success-plan switcher — Standard is included with every paid plan;
+           Premium is a paid add-on (25% of license). -->
+      <div class="pcm-row">
+        <span class="pcm-row-label">Success plan</span>
+        <div class="pcm-seg" role="radiogroup" aria-label="Success plan">
+          <button type="button" class="pcm-seg-btn is-active" data-pcm-success="Standard">Standard</button>
+          <button type="button" class="pcm-seg-btn" data-pcm-success="Premium">Premium</button>
+        </div>
+      </div>
 
       <div class="pcm-rule"></div>
 
