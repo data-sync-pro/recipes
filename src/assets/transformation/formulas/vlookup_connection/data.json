@@ -45,5 +45,6 @@
     "VLOOKUP_CONNECTION(\"Salesforce_Prod\", \n                   \"Opportunity\", \n                   \"Amount\", \n                   \"AccountId\", Id, \n                   \"OwnerId\", $User.Id, \n                   \"FiscalYear = 2024\")\n-- Returns the Amount from the first Opportunity in the \"Salesforce_Prod\" org where:\n-- AccountId matches the current record’s Id,\n-- OwnerId matches the current user’s Id,\n-- and FiscalYear = 2024."
   ],
   "tips": [],
+  "notesRef": "shared/lookup-notes",
   "relatedFormulas": []
 }

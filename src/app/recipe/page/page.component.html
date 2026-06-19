@@ -1,5 +1,7 @@
 <div class="outter-container">
+    <app-content-skeleton *ngIf="isLoading" [blocks]="4"></app-content-skeleton>
     <app-recipe-layout
+        *ngIf="!isLoading"
         #recipeLayout
         [recipes]="currentRecipes"
         [allRecipes]="recipes"

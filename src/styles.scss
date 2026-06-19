@@ -108,6 +108,26 @@ a.setup-link-external,
   cursor: help;
 }
 
+// Transformation doc Notes section. Note bodies are injected via [innerHTML] in
+// doc-viewer, which bypasses emulated view encapsulation, so these must live
+// globally — same reason as the setup/recipe rules above. The Notes heading and
+// sub-titles are real template elements and stay component-scoped.
+.doc-note-highlight {
+  background-color: #F1F6FB;
+  border: 1px solid #D6E3F3;
+  padding: 1rem 1.25rem;
+  border-radius: 4px;
+  margin: 0.75rem 0;
+}
+
+.doc-note-highlight strong {
+  color: #2C2C2D;
+}
+
+// Inline <code> inside note bodies intentionally has no rule here — it inherits
+// the transformation-wide `.app-transformation code` style (transformation.styles.css),
+// so Notes code matches Tips/description code. One source of truth.
+
 // Global table styles (used by setup/block, faq-editor, designer-guide)
 // Note: FAQ has its own scoped table style under .faq-answer table to stay isolated.
 table {

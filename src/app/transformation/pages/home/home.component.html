@@ -1,4 +1,7 @@
 <div class="home-content">
+  <app-content-skeleton *ngIf="isLoading" [blocks]="4"></app-content-skeleton>
+
+  <ng-container *ngIf="!isLoading">
   <h1>Formula</h1>
   <nav class="tag-nav">
     <ul>
@@ -88,4 +91,5 @@
       </section>
     </ng-container>
   </div>
+  </ng-container>
 </div>

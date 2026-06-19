@@ -39,5 +39,6 @@
     "VLOOKUP(\"Opportunity\", \n        \"Amount\", \n        \"AccountId\", Id, \n        \"OwnerId\", OwnerId, \n        \"Probability > 50\")\n-- Returns the Amount from the first Opportunity where:\n-- AccountId matches the current record's Id,\n-- OwnerId matches the current record's OwnerId,\n-- and Probability > 50."
   ],
   "tips": [],
+  "notesRef": "shared/lookup-notes",
   "relatedFormulas": []
 }

@@ -169,6 +169,13 @@ export class HomeComponent implements OnInit, AfterViewChecked {
       });
     }
 
+  // Initial-load spinner state (mirrors the user manual's loading screen).
+  // The index page is built from several parallel HTTP loads; show the spinner
+  // until the core content — the formula elements and the tag list — is ready.
+  get isLoading(): boolean {
+    return !this.formulaElements || this.displayTags.length === 0;
+  }
+
   // Utility to get object keys for use in the template (for operators grouping)
   objectKeys(obj: any): string[] {
     return obj ? Object.keys(obj) : [];

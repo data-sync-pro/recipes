@@ -1,3 +1,5 @@
+<app-content-skeleton *ngIf="isLoading && !docContent" [blocks]="3"></app-content-skeleton>
+
 <div class="doc-page" *ngIf="docContent">
   <h1 class="doc-title" *ngIf="docContent.title">{{ docContent.title }}</h1>
   <section class="doc-section" *ngIf="docContent.globalVariables">
@@ -145,6 +147,15 @@
       [title]="callout.title"
       [content]="callout.content">
     </app-callout>
+  </section>
+
+  <section class="doc-section doc-notes" *ngIf="docContent.notes?.length">
+    <h2 *ngIf="(docContent.notes?.length || 0) === 1">Note</h2>
+    <h2 *ngIf="(docContent.notes?.length || 0) > 1">Notes</h2>
+    <div class="doc-note" *ngFor="let note of docContent.notes">
+      <h3 class="doc-note-title" *ngIf="note.title">{{ note.title }}</h3>
+      <div class="doc-note-body" [innerHTML]="note.content"></div>
+    </div>
   </section>
 
   <ng-template #recursiveList let-tips="tips">

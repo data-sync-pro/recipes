@@ -7,6 +7,7 @@ import { DocsRoutingModule } from './docs-routing.module';
 import { DocViewerComponent } from './doc-viewer/doc-viewer.component';
 import { HomeComponent } from '../pages/home/home.component';
 import { SharedModule } from '../shared/shared.module';
+import { SharedModule as AppSharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     RouterModule,
     DocsRoutingModule,
-    SharedModule
+    SharedModule,
+    AppSharedModule
   ]
 })
 export class DocsModule { }
