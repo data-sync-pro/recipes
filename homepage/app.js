@@ -690,7 +690,6 @@ window.SubmissionLimiter = (() => {
   const emailInp = document.getElementById('prm-email');
   const emailErr = form.querySelector('[data-error-for="prm-email"]');
   const websiteInp = document.getElementById('prm-website');
-  const websiteErr = form.querySelector('[data-error-for="prm-website"]');
   let lastFocus = null;
 
   // Shared blocklist as the other modals — duplicated locally to keep this
@@ -743,32 +742,24 @@ window.SubmissionLimiter = (() => {
     });
   }
 
-  // -------- website (URL) validation --------
-  // type="url" requires a scheme, so flag a missing/typo'd one inline (mirrors
-  // the email-error pattern) — otherwise the submit button just sits disabled
-  // with no explanation.
-  const setWebsiteError = (msg) => {
-    if (!websiteInp) return;
-    if (msg) {
-      websiteInp.setAttribute('aria-invalid', 'true');
-      if (websiteErr) { websiteErr.textContent = msg; websiteErr.hidden = false; }
-    } else {
-      websiteInp.removeAttribute('aria-invalid');
-      if (websiteErr) websiteErr.hidden = true;
-    }
+  // -------- website (URL) normalization --------
+  // type="url" needs a scheme, so a bare host ("example.com") would otherwise
+  // leave the submit button stuck disabled. Auto-prepend https:// on blur.
+  // Returns whether the field holds a valid URL afterwards (empty is fine —
+  // the "required" check covers that). No inline message by design.
+  const normalizeWebsite = () => {
+    if (!websiteInp) return true;
+    const v = websiteInp.value.trim();
+    if (!v) return true;
+    const withScheme = /^[a-z][a-z0-9+.-]*:\/\//i.test(v) ? v : 'https://' + v;
+    if (withScheme !== websiteInp.value) websiteInp.value = withScheme;
+    return !websiteInp.validity.typeMismatch;
   };
   if (websiteInp) {
     websiteInp.addEventListener('blur', () => {
-      const v = websiteInp.value.trim();
-      if (v && websiteInp.validity.typeMismatch) {
-        setWebsiteError("Please include https://");
-      } else {
-        setWebsiteError('');
-      }
-    });
-    websiteInp.addEventListener('input', () => {
-      // Clear as soon as the user edits; re-validates on next blur.
-      if (websiteInp.getAttribute('aria-invalid') === 'true') setWebsiteError('');
+      normalizeWebsite();
+      // Value may have changed programmatically, so re-run the submit gate.
+      refreshSubmit();
     });
   }
 
@@ -870,11 +861,10 @@ window.SubmissionLimiter = (() => {
       return;
     }
 
-    // Website (URL) format guard — surfaces the same inline hint if a submit
-    // slips through with a scheme-less URL.
-    if (websiteInp && websiteInp.value.trim() && websiteInp.validity.typeMismatch) {
+    // Website (URL) guard — normalize (add https://) then block only if the
+    // value still isn't a valid URL after that.
+    if (websiteInp && websiteInp.value.trim() && !normalizeWebsite()) {
       e.preventDefault();
-      setWebsiteError("Please include https://");
       websiteInp.focus();
       return;
     }
