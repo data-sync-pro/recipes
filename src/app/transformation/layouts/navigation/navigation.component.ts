@@ -231,7 +231,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   // Special categories (Home, Operators, Global Variables, Apex Class) navigate
   // directly instead of expanding a function list, so they have no children.
   categoryHasChildren(category: FunctionCategory): boolean {
-    return !SPECIAL_ROUTES[category.name];
+    return !SPECIAL_ROUTES[category.name] && category.name !== 'Home';
   }
 
   // True for the category holding the active page — drives the brand-colored
