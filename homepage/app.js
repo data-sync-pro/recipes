@@ -202,6 +202,20 @@ window.SubmissionLimiter = (() => {
     totalExecEl.textContent = exec;
   };
 
+  // Executables are licensed in blocks of 100. If the user types an off-step
+  // value (e.g. 101), round it UP to the next 100 on blur (→ 200), clamped to
+  // the field's 100–2000 range.
+  const roundExecUp = (inp) => {
+    const n = Number(inp.value);
+    if (!Number.isFinite(n) || n <= 0) return;   // empty/invalid → leave for the required check
+    const stepped = Math.ceil(n / 100) * 100;
+    const clamped = Math.min(Math.max(stepped, 100), 2000);
+    if (clamped !== n) {
+      inp.value = clamped;
+      recalcTotals();
+    }
+  };
+
   const addOrgRow = (focus = true) => {
     const clone = tpl.content.firstElementChild.cloneNode(true);
     orgsHost.appendChild(clone);
@@ -214,6 +228,9 @@ window.SubmissionLimiter = (() => {
     clone.querySelectorAll('[data-org-field="conn"], [data-org-field="exec"]').forEach(inp => {
       inp.addEventListener('input', recalcTotals);
     });
+    // Snap a manually-typed Executables value up to the next 100 on blur.
+    const execInp = clone.querySelector('[data-org-field="exec"]');
+    if (execInp) execInp.addEventListener('blur', () => roundExecUp(execInp));
     renumberOrgs();
     if (focus && nameInp) {
       nameInp.focus();
