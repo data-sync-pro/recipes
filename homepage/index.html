@@ -612,7 +612,7 @@
       <button class="surface-tab is-free" role="tab" aria-selected="false" data-panel="query" data-num="05">
         <span class="hash">#Query<span class="free-badge">FREE</span></span>
         <span class="label">Point-and-Click Queries</span>
-        <span class="sub">Visual Builder · Editable Results · Dynamic Filters · Auto Pagination</span>
+        <span class="sub">Visual Builder · Full CRUD · Metadata-Aware · Auto Pagination</span>
       </button>
     </div>
     <div class="surface-fin-wrap" aria-hidden="true"><span class="surface-fin" id="surfaceFin"></span></div>
@@ -638,8 +638,9 @@
             <h3>Bulk processing,<br/><span class="it">without the batch class.</span></h3>
             <p class="panel-lead">Configure batch jobs as records — run on demand, schedule, chain, and monitor large-volume processing without writing batch Apex, up to <b>20× faster</b> than hand-built code.</p>
           </div>
-          <div class="panel-aside">Replaces
-Apex Batch classes · Custom logging frameworks · Home-grown chaining scripts · Schedule job management · ETL tools for cross-org sync · DevOps for record-based configuration</div>
+          <div class="panel-aside">
+            <b>Replaces</b>
+            Apex Batch classes · Custom logging frameworks · Home-grown chaining scripts · Schedule job management · ETL tools for cross-org sync · External deduplication tools · DevOps for record-based configuration</div>
         </div>
 
         
@@ -1329,10 +1330,11 @@ Apex Batch classes · Custom logging frameworks · Home-grown chaining scripts �
           <div>
             <span class="hash-big">#Query <span class="free-tag">FREE</span></span>
             <h3>Anyone can master Salesforce data, <span class="it">no SOQL, no code — point, click, done.</span></h3>
-            <p class="panel-lead">Query Manager is a single Lightning surface for building, saving, and running SOQL — without writing a line of it, all inside your org. Free on AgentExchange.</p>
+            <p class="panel-lead">Query Manager is a single Lightning surface for building, saving, and running SOQL — without writing a line of it — then acting on the results with full CRUD, all inside your org. Free on AgentExchange.</p>
           </div>
-          <div class="panel-aside">Replaces
-Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc reports</div>
+          <div class="panel-aside">
+            <b>Replaces</b>
+            Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc reports</div>
         </div>
 
         <article class="cap reveal">
@@ -1381,7 +1383,7 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
               <span class="fh-label">Data List rendered from a query</span>
               <span class="fh-tag">#Query</span>
             </div>
-            <img src="/assets/data-list.png" alt="Query Manager Data List with annotations: Icon, Title &amp; Record Count, Column Filter, Built-in Actions, Field Label &amp; Sorting, Inline Editing, Pagination, Row Actions" />
+            <img src="assets/data-list.png" alt="Query Manager Data List with annotations: Icon, Title &amp; Record Count, Column Filter, Built-in Actions, Field Label &amp; Sorting, Inline Editing, Pagination, Row Actions" />
           </div>
         </div>
 
@@ -2041,11 +2043,13 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
         <p class="pc-tagline">Query Manager + 3 Executables. Real product, not a trial.</p>
         <ul class="pc-features">
           <li><span class="v">✓</span>Query Manager</li>
+          <li>✓
+Schedule Job Management</li>
           <li><span class="v">✓</span>Formulas as Configurable Rules</li>
           <li><span class="v">✓</span><b>3 Executables</b> · any combination of #Batch / #Trigger / #Data List / #Action Button / #Data Loader</li>
-          <li><span class="v">✓</span>20,000 records / day batch limit</li>
+          <li><span class="v">✓</span><b>2,000 records / day</b> batch limit</li>
           <li><span class="v">✓</span>Unlimited users</li>
-          <li><span class="mute">—</span>No org-to-org Connections</li>
+
         </ul>
         <a class="pc-cta secondary" href="https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3u00000MSLUzEAP" target="_blank" rel="noopener">Install free on AgentExchange</a>
       </article>
@@ -2063,8 +2067,9 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
         <ul class="pc-features">
           <li><span class="v">✓</span>1 Connection (current org)</li>
           <li><span class="v">✓</span><b>100 Executables</b> across all surfaces</li>
-          <li><span class="v">✓</span>20,000 records / day batch limit</li>
+          <li><span class="v">✓</span><b>20,000 records / day</b> batch limit</li>
           <li><span class="v">✓</span>Everything in Free</li>
+          <li><span class="mute">—</span>No org-to-org Connections</li>
           <li><span class="mute">—</span>Manual deployment for configuration</li>
         </ul>
         <a class="pc-cta secondary" href="#plan-config" data-plan="Growth">Request a quote</a>
@@ -2084,8 +2089,7 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
         <ul class="pc-features">
           <li><span class="v">✓</span><b>5 Connections</b> (4 sandbox + 1 production)</li>
           <li><span class="v">✓</span><b>200 Executables</b> across all surfaces</li>
-          <li><span class="v">✓</span>20,000 records / day batch limit</li>
-          <li><span class="v">✓</span>Everything in Growth</li>
+          <li><span class="v">✓</span>Everything in Growth, plus:</li>
           <li><span class="v">✓</span><b>DevOps</b> for record-based configuration</li>
           <li><span class="v">✓</span><b>Sandbox seeding</b></li>
           <li><span class="v">✓</span><b>Cross-org data migration / sync / mashups</b></li>
@@ -2144,7 +2148,7 @@ Workbench · Developer Console · Browser add-ons · Hand-written SOQL · Ad-hoc
       <div class="ps-head">
         <span class="eyebrow"><span class="dot"></span>Success plans</span>
         <h3>Support that matches the surface area.</h3>
-        <p class="ps-note">Premium is a standalone success plan, contracted and invoiced separately as a professional-services engagement — priced at 25% of your purchased Data Sync Pro license. Standard support is included with all paid plans.</p>
+        <p class="ps-note">Premium is a standalone success plan, available on the Business plan and up — a professional-services engagement priced at 25% of your purchased Data Sync Pro license. Standard support is included with all paid plans.</p>
       </div>
       <div class="ps-table" role="table">
         <div class="ps-row ps-header" role="row">
