@@ -456,12 +456,11 @@ window.SubmissionLimiter = (() => {
         `Org ${i+1}: ${o.name} — ${o.connections} connection(s), ${o.executables} executable(s), ${o.daily_batch} daily batch`
       ).join('\n');
     }
-    // Requested License Info (00NQl000009RvD7) holds a JSON object string:
-    //   orgs — one object per org (name, connections, executables,
-    //          daily batch)
+    // Requested License Info (00NQl000009RvD7) holds a JSON array string:
+    //   one object per org (name, connections, executables, daily batch).
     // Success plan posts separately to its own field (00NQl000009qgNm).
     if (licenseInfoHidden) {
-      licenseInfoHidden.value = JSON.stringify({ orgs });
+      licenseInfoHidden.value = JSON.stringify(orgs);
     }
 
     // Let the POST proceed to the hidden iframe; swap UI to success
