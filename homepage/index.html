@@ -2664,7 +2664,9 @@ Schedule Job Management</li>
       <!--
         Custom Salesforce field used: 00NQl000009RvD7 (Requested License Info).
         It receives a single JSON blob built on submit containing:
-          { successPlan, orgs: [...] }
+          { orgs: [...] }
+        Success plan (Standard / Premium) posts to its own field
+        00NQl000009qgNm — not packed into the JSON.
         Standard Lead fields (first_name, last_name, email, company, title)
         come straight from the visible inputs by name.
       -->
@@ -2673,13 +2675,14 @@ Schedule Job Management</li>
       <input type="hidden" name="lead_source" value="Web" />
       <input type="hidden" name="captcha_settings" value='{"keyname":"datasyncproio","fallback":"true","orgId":"00D4x000004wmrR","ts":""}' />
       <input type="hidden" name="00NQl000009RvD7" id="pcm-hidden-licenseinfo" value="" />
+      <!-- Success plan (Standard / Premium) → its own dedicated Lead field. -->
+      <input type="hidden" name="00NQl000009qgNm" id="pcm-hidden-successplan" value="Standard" />
       <!-- Internal-only refs (no name attr — not POSTed; JS reads from these
            when assembling the 00NQl000009RvD7 JSON payload). -->
       <input type="hidden" id="pcm-hidden-plan" value="" />
       <input type="hidden" id="pcm-hidden-orgcount" value="" />
       <input type="hidden" id="pcm-hidden-conn" value="" />
       <input type="hidden" id="pcm-hidden-exec" value="" />
-      <input type="hidden" id="pcm-hidden-successplan" value="Standard" />
 
       <!-- honeypot -->
       <div class="lf-honeypot" aria-hidden="true">

@@ -164,7 +164,7 @@ window.SubmissionLimiter = (() => {
 
   // -------- success-plan switcher --------
   // Standard is included with every paid plan; Premium is a paid add-on
-  // (25% of license). The choice rides along in the License Info JSON.
+  // (25% of license). The choice posts to its own Lead field (00NQl000009qgNm).
   const setSuccessPlan = (plan) => {
     if (!plan) return;
     successPlanHidden.value = plan;
@@ -457,14 +457,11 @@ window.SubmissionLimiter = (() => {
       ).join('\n');
     }
     // Requested License Info (00NQl000009RvD7) holds a JSON object string:
-    //   successPlan — Standard (included) or Premium (25% of license)
-    //   orgs        — one object per org (name, connections, executables,
-    //                 daily batch)
+    //   orgs — one object per org (name, connections, executables,
+    //          daily batch)
+    // Success plan posts separately to its own field (00NQl000009qgNm).
     if (licenseInfoHidden) {
-      licenseInfoHidden.value = JSON.stringify({
-        successPlan: successPlanHidden.value,
-        orgs,
-      });
+      licenseInfoHidden.value = JSON.stringify({ orgs });
     }
 
     // Let the POST proceed to the hidden iframe; swap UI to success
