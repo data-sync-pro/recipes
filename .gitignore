@@ -49,3 +49,5 @@ nul
 .claude/settings.local.json
 .claude/settings.local.json
 .sfdx/
+src/assets/data/version.json
+firebase-debug.log
