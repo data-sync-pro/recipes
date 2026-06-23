@@ -87,7 +87,7 @@
   display: flex;
   flex-direction: row;
   gap: 3vw;
-  max-width: 1752px;
+  /*max-width: 1752px;*/
   margin: 0 auto;
   padding: 5.7rem 24px 0;
 }

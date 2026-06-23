@@ -25,9 +25,6 @@
   // margins centre it without collapsing the virtual-scroll list.
   //   TOC hidden  → pinned 2rem from the sidebar.
   //   TOC visible → centred in the main track, slack split both sides.
-  .faq-main {
-    margin-left: 2rem;
-  }
   .faq-layout-container:not(.toc-hidden) .faq-main {
     margin-left: auto;
     margin-right: auto;
