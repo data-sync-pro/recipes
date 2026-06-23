@@ -114,11 +114,12 @@
     <ng-container *ngIf="block.title">
       <div class="callout-header">
         <span class="callout-icon">
+          <!-- Filled circular badges (glyph reads white against the accent disc) -->
           <ng-container [ngSwitch]="block.variant">
-            <mat-icon *ngSwitchCase="'warning'">warning</mat-icon>
-            <mat-icon *ngSwitchCase="'error'">error</mat-icon>
+            <mat-icon *ngSwitchCase="'warning'">error</mat-icon>
+            <mat-icon *ngSwitchCase="'error'">cancel</mat-icon>
             <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
-            <mat-icon *ngSwitchDefault>info_outline</mat-icon>
+            <mat-icon *ngSwitchDefault>info</mat-icon>
           </ng-container>
         </span>
         <div class="callout-title">{{ block.title }}</div>
@@ -138,10 +139,11 @@
     <!-- Without title: icon + content inline (original layout, preserves existing callouts) -->
     <ng-container *ngIf="!block.title">
       <span class="callout-icon">
+        <!-- Bare glyphs for the compact (no-title) variant -->
         <ng-container [ngSwitch]="block.variant">
-          <mat-icon *ngSwitchCase="'warning'">warning</mat-icon>
-          <mat-icon *ngSwitchCase="'error'">error</mat-icon>
-          <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
+          <mat-icon *ngSwitchCase="'warning'">priority_high</mat-icon>
+          <mat-icon *ngSwitchCase="'error'">close</mat-icon>
+          <mat-icon *ngSwitchCase="'success'">check</mat-icon>
           <mat-icon *ngSwitchDefault>info_outline</mat-icon>
         </ng-container>
       </span>

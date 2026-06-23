@@ -76,6 +76,18 @@
         {
           "type": "video",
           "src": "video/connection/OAuth-2/2.mp4"
+        },
+        {
+          "type": "callout",
+          "variant": "info",
+          "title": "Using Open ID Connect as Provider Type",
+          "children": [
+            {
+              "type": "image",
+              "content": "image/connection/oauth/openId.png",
+              "alt": "OpenID Connect Auth. Provider settings"
+            }
+          ]
         }
       ]
     },
