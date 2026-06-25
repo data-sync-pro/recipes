@@ -34,7 +34,7 @@
   ],
   "tips": [
     {
-      "text": "<p>Use VLOOKUP_RECORD under the <strong>“Related”</strong> tab in the <strong>“Variables”</strong> section. You can also set the variable’s <strong>Scope</strong>—Executable, Pipeline, Connection, or Global.</p>",
+      "text": "<p>Use VLOOKUP_RECORD under the <strong>“Related”</strong> tab in the <strong>“Variables”</strong> section. You can also set the variable's <strong>Scope</strong>—Executable, Pipeline, Connection, or Global.</p>",
       "children": []
     },
     {
