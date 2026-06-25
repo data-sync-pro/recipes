@@ -1,0 +1,47 @@
+{
+  "title": "VLOOKUP_ALL",
+  "description": "<p>Queries the specified object and returns the designated fields (plus the record Id and lookup field) from all records that match one or more field-value pairs, with an optional additional filtering clause.</p>",
+  "syntax": "VLOOKUP_ALL(target_object_name, return_field_names, ...[matching_field_name, matching_field_value], additional_clause_optional) -> List<Map<String, ANY>>",
+  "parameters": [
+    {
+      "name": "target_object_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The API name of the object to query."
+    },
+    {
+      "name": "return_field_names",
+      "type": "String",
+      "required": "Yes",
+      "description": "A comma-separated string of field API names to return from each matching record."
+    },
+    {
+      "name": "…matching_field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the field used to match records."
+    },
+    {
+      "name": "…matching_field_value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The field value used as matching criteria."
+    },
+    {
+      "name": "additional_clause_optional",
+      "type": "String",
+      "required": "No",
+      "description": "Additional SOQL criteria for restricting or ordering the matching results."
+    }
+  ],
+  "examples": [
+    "VLOOKUP_ALL(\"Opportunity\", \n            \"Name, Amount\", \n            \"AccountId\", Id)\n-- Returns the Name and Amount from every Opportunity where AccountId matches the current record's Id. \n-- Each record also includes Id and the lookup field (AccountId)."
+  ],
+  "tips": [
+    {
+      "text": "<p>SOQL queries have a <strong>governor limit of 50,000</strong> rows per transaction. Because VLOOKUP_ALL returns every matching record, refine your matching criteria or <code>additional_clause_optional</code> to keep the result set within this limit.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": []
+}
