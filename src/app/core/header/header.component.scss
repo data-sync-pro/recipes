@@ -11,6 +11,17 @@
   border-bottom: 1px solid #e5e7eb;
   transition: all 0.3s ease;
 
+  // Centered inner track matching the page-content cap (--page-max-width in
+  // styles.scss). The bar background stays full-bleed (fixed, 100% wide), but
+  // the absolutely-positioned brand/nav anchor to this centered box so the
+  // logo lines up with the centered page content instead of the viewport edge.
+  .header-inner {
+    position: relative;
+    height: 100%;
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+  }
+
   // Left brand cluster: logo + wordmark + divider + section name flow
   // naturally in a flex row, so adding/removing the wordmark never requires
   // re-tuning the absolute offsets the section name used to depend on.

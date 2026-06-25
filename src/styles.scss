@@ -10,12 +10,20 @@
 // Setup/block code blocks use highlight.js, which the app loads globally via
 // highlight.js/styles/vs.min.css (see angular.json). No per-block theme needed.
 
+// Single source of truth for the centered page-content cap. A CSS custom
+// property (not a SCSS var) so it pierces Angular view encapsulation and works
+// in both .scss and plain .css component styles — each centered container just
+// uses `max-width: var(--page-max-width)`.
+:root {
+  --page-max-width: 1752px;
+}
+
 html, body { min-height: 100%; height: auto; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background: #FAFBFC;
-  color: #0B1019;   
+  color: #0B1019;  
 }
 body::before {
   content: '';
