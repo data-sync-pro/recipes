@@ -164,7 +164,7 @@ window.SubmissionLimiter = (() => {
 
   // -------- success-plan switcher --------
   // Standard is included with every paid plan; Premium is a paid add-on
-  // (25% of license). The choice rides along in the License Info JSON.
+  // (25% of license). The choice posts to its own Lead field (00NQl000009qgNm).
   const setSuccessPlan = (plan) => {
     if (!plan) return;
     successPlanHidden.value = plan;
@@ -456,15 +456,11 @@ window.SubmissionLimiter = (() => {
         `Org ${i+1}: ${o.name} — ${o.connections} connection(s), ${o.executables} executable(s), ${o.daily_batch} daily batch`
       ).join('\n');
     }
-    // Requested License Info (00NQl000009RvD7) holds a JSON object string:
-    //   successPlan — Standard (included) or Premium (25% of license)
-    //   orgs        — one object per org (name, connections, executables,
-    //                 daily batch)
+    // Requested License Info (00NQl000009RvD7) holds a JSON array string:
+    //   one object per org (name, connections, executables, daily batch).
+    // Success plan posts separately to its own field (00NQl000009qgNm).
     if (licenseInfoHidden) {
-      licenseInfoHidden.value = JSON.stringify({
-        successPlan: successPlanHidden.value,
-        orgs,
-      });
+      licenseInfoHidden.value = JSON.stringify(orgs);
     }
 
     // Let the POST proceed to the hidden iframe; swap UI to success
@@ -1116,7 +1112,7 @@ const DSP_SECTION_ROUTES = {
     scope: 'Scoping refines the input — filter rows, or join with another data set.',
     match: 'Match identifies the target records to act on — by field, formula, or duplicate rule.',
     map:   'Mapping transforms field values — pick from 170+ functions, or extend with Apex.',
-    action:'Insert, Update, Upsert, Delete, Merge, Lead Convert, Approval, Notify, Publish, and more.'
+    action:'Action commits the result — Insert, Update, Upsert, Delete, Merge, Lead Convert, Approval, Notify, Publish, and more.'
   };
   const order = ['event','scope','match','map','action'];
 
@@ -1152,7 +1148,7 @@ const DSP_SECTION_ROUTES = {
           const tick = () => {
             setStage(order[i]);
             i++;
-            if (i < order.length) setTimeout(tick, 2000);
+            if (i < order.length) setTimeout(tick, 1100);
           };
           setTimeout(tick, 350);
           io2.disconnect();
