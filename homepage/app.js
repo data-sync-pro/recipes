@@ -92,6 +92,29 @@ window.SubmissionLimiter = (() => {
 })();
 
 // =========================================================
+// Lazy reCAPTCHA loader
+// ---------------------------------------------------------
+// Google's api.js used to load in <head> on every visit, pulling a large
+// bundle up front just to pre-render captcha widgets that live inside three
+// hidden modals. We now inject it only when a visitor first opens one of
+// those modals. api.js auto-renders every .g-recaptcha div present in the
+// DOM when it loads (visibility is irrelevant), so a single injection wires
+// up all three widgets and their data-callback gates.
+// =========================================================
+window.DSP_loadRecaptcha = (() => {
+  let started = false;
+  return () => {
+    if (started) return;
+    started = true;
+    const sc = document.createElement('script');
+    sc.src = 'https://www.google.com/recaptcha/api.js';
+    sc.async = true;
+    sc.defer = true;
+    document.head.appendChild(sc);
+  };
+})();
+
+// =========================================================
 // Plan-config modal — opened by pricing-card CTAs
 // =========================================================
 (() => {
@@ -119,13 +142,13 @@ window.SubmissionLimiter = (() => {
   // Default per-plan allowances — mirrors the pricing cards.
   //   conn:  Growth = 1 (current org only)
   //          Business = 5 (4 sandbox + 1 prod)
-  //          Enterprise = 5 (Business baseline; scales on request)
-  //   exec:  Growth = 100; Business/Enterprise = 200
-  //   batch: Growth/Business = 20k; Enterprise = 1M (matches <select> option value)
+  //          Enterprise = 7 (scales on request)
+  //   exec:  Growth = 100; Business = 200; Enterprise = 500
+  //   batch: Growth/Business = 20k; Enterprise = Unlimited (matches <select> option value)
   const PLAN_DEFAULTS = {
     Growth:     { conn: 1, exec: 100, batch: '20k' },
     Business:   { conn: 5, exec: 200, batch: '20k' },
-    Enterprise: { conn: 5, exec: 200, batch: '1M'  },
+    Enterprise: { conn: 7, exec: 500, batch: 'Unlimited' },
   };
   const setPlan = (plan) => {
     if (!plan) return;
@@ -246,6 +269,7 @@ window.SubmissionLimiter = (() => {
     setPlan(plan || planHidden.value || 'Business');
     setSuccessPlan(successPlanHidden.value || 'Standard');
     lastFocus = document.activeElement;
+    if (window.DSP_loadRecaptcha) window.DSP_loadRecaptcha();
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
     // focus first contact input
@@ -546,6 +570,7 @@ window.SubmissionLimiter = (() => {
   // -------- open / close --------
   const open = () => {
     lastFocus = document.activeElement;
+    if (window.DSP_loadRecaptcha) window.DSP_loadRecaptcha();
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
     setTimeout(() => {
@@ -783,6 +808,7 @@ window.SubmissionLimiter = (() => {
   // -------- open / close --------
   const open = () => {
     lastFocus = document.activeElement;
+    if (window.DSP_loadRecaptcha) window.DSP_loadRecaptcha();
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
     setTimeout(() => {
@@ -2072,8 +2098,8 @@ const DSP_SECTION_ROUTES = {
   rot.addEventListener('mouseenter', () => { paused = true; clearTimers(); });
   rot.addEventListener('mouseleave', () => { paused = false; armScene(); });
 
-  // Start on a random capability each load, then advance as each demo completes.
-  go(Math.floor(Math.random() * scenes.length));
+  // Start on the first capability (#UI), then advance as each demo completes.
+  go(0);
   armScene();
 })();
 
@@ -2475,4 +2501,30 @@ const DSP_SECTION_ROUTES = {
   };
   new MutationObserver(sync).observe(scene, { attributes: true, attributeFilter: ['class'] });
   sync();
+})();
+
+
+// Challenges/Solutions rows — click to pin a row open or folded (hover still
+// previews after a delay; clicking toggles a persistent .open state).
+(() => {
+  document.addEventListener('click', (e) => {
+    const row = e.target.closest ? e.target.closest('.cs-row') : null;
+    if (!row) return;
+    if (e.target.closest('a, button')) return; // don't hijack links/buttons inside
+    row.classList.toggle('open');
+  });
+})();
+
+
+// Keep --nav-h in sync with the sticky nav's real height so the hero fills
+// exactly to the viewport bottom (the outcome ribbon's border lands on the fold).
+(() => {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  const setNavH = () => {
+    document.documentElement.style.setProperty('--nav-h', Math.round(nav.getBoundingClientRect().height) + 'px');
+  };
+  setNavH();
+  window.addEventListener('resize', setNavH);
+  if (window.ResizeObserver) { new ResizeObserver(setNavH).observe(nav); }
 })();

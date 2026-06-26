@@ -20,11 +20,10 @@
 <meta name="twitter:image" content="https://datasyncpro.io/logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Figtree:wght@600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/styles.css?v=156" />
-<!-- Google reCAPTCHA — required by Salesforce Web-to-Lead. The script
-     auto-renders any .g-recaptcha divs in the page when it loads. -->
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600;700&family=Figtree:wght@600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css?v=199" />
+<!-- Google reCAPTCHA (Salesforce Web-to-Lead) is loaded lazily by app.js the
+     first time a visitor opens a form modal — see window.DSP_loadRecaptcha. -->
 </head>
 <body class="sn-hero" style="--sn-hero-bg: #395B58; --sn-btn: #28E07A;">
 
@@ -33,6 +32,7 @@
   <div class="nav-inner">
     <a class="brand-mark" href="/" aria-label="Data Sync Pro home">
       <img class="logo" src="/logo.png?v=24" alt="" width="32" height="32" />
+      <img class="logo" src="/logo_spaced_4.png?v=24" alt="" width="32" height="32" />
       <span>Data Sync Pro</span>
     </a>
     <div class="nav-links">
@@ -105,34 +105,12 @@
       <div>
         <div class="eyebrow reveal"><span class="dot"></span>Data Sync Pro · Salesforce-native</div>
         <h1 class="reveal" data-d="1" style="margin-top:18px;">
-          <span class="slogan"><span class="brand-word">Rules-driven</span> <span class="it">Executables</span>.</span>
-          <span class="slogan"><span class="mute-it">Ship</span> much more, faster.</span>
-          <span class="slogan"><span class="good-it">Significantly less</span> tech debt.</span>
+          <span class="slogan">Your business runs</span>
+          <span class="slogan">in <span class="good-it" style="color: var(--sn-btn, #28E07A);">composable modules</span>.</span>
+          <span class="slogan">Your Salesforce should too.</span>
         </h1>
-        <div class="hero-replaces reveal" data-d="2" aria-label="Replaces Apex, Flow, LWC, Data Loader, Workbench with rule records">
-          <span class="hr-items">
-            <span class="hr-tag">Apex</span>
-            <span class="hr-tag">Flow</span>
-            <span class="hr-tag">LWC</span>
-            <span class="hr-tag">Data Loader</span>
-            <span class="hr-tag">Org-to-Org ETL</span>
-          </span>
-          <span class="hr-arrow" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M4 12h16m0 0l-6-6m6 6l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-          <span class="hr-target">rule records</span>
-        </div>
-        <div class="results-block reveal" data-d="2">
-          <div class="results-head">Transformational Results</div>
-          <ol class="results">
-            <li><span class="n">01</span><span class="r">Empowers <b>business &amp; IT</b> with rapid, powerful capabilities</span></li>
-            <li><span class="n">02</span><span class="r">Replaces up to <b>95%</b> of the custom code and flows you’d need</span></li>
-            <li><span class="n">03</span><span class="r"><b>Builds in days, not sprints</b>, freeing teams from boilerplate</span></li>
-            <li><span class="n">04</span><span class="r"><b>Rules, not code</b> — the shortest path from business intent to working function</span></li>
-            <li><span class="n">05</span><span class="r">Drives <b>tech debt toward zero</b> and scales through enforced modularity</span></li>
-          </ol>
-        </div>
-        <p class="results-note">Figures reflect typical results from internal benchmarks and real-world customer deployments; actual results vary by org and workload.</p>
+        <p class="hero-sub reveal" data-d="2">The same power you’d build with <b>custom code</b> — delivered as <b style="color: #FFFFFF;">modular</b>, rules-driven <b>Executables</b>.</p>
+        
         <div class="hero-cta reveal" data-d="3">
           <a class="btn" href="#cta">
             Request a demo
@@ -151,83 +129,8 @@
       <!-- Hero capability rotator — cycles across surfaces -->
       <div class="reveal hero-rotator" data-d="3" id="heroRotator">
         <div class="hero-stage">
-        <!-- Scene 1 · #Batch (live animation) -->
-        <div class="hero-scene is-active" data-surface="batch">
-        <div class="bw-annotate">
-          <span class="anno tl">live batch run</span>
-          <span class="anno tr">1,039,809 records · 0 failed</span>
-          <article class="batch-widget" id="batchWidget">
-            <div class="bw-head">
-              <span class="icn">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/></svg>
-              </span>
-              <div class="titles">
-                <span class="obj-tag">EXECUTABLE · #Batch · Account</span>
-                <span class="obj-name">Account.Rollups.BulkAPI</span>
-              </div>
-              <span class="spacer"></span>
-              <button class="run-btn" type="button"><span class="pulse"></span>Running</button>
-            </div>
-            <div class="bw-progress-head">
-              <span class="title">Progress</span>
-              <button class="x" aria-label="Close">
-                <svg viewBox="0 0 16 16" width="14" height="14" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-              </button>
-            </div>
-            <table class="bw-table">
-              <colgroup><col/><col/><col/><col/></colgroup>
-              <thead>
-                <tr><th>Execution</th><th class="num">Retrieved</th><th class="num">Actioned</th><th class="num">Failed</th></tr>
-              </thead>
-              <tbody>
-                <tr class="total" data-bw-row="total">
-                  <td><span class="row-name"><span class="spin"></span><span class="row-link">Account.Rollups.BulkAPI · 2026-05-16T10:09…</span></span></td>
-                  <td class="num" data-bw-target="1039809" data-bw-pace="3000">0</td>
-                  <td class="num" data-bw-target="1039809" data-bw-pace="3000">0</td>
-                  <td class="num">0</td>
-                </tr>
-                <tr data-bw-row="1" data-bw-delay="200">
-                  <td><span class="row-name"><span class="ck"><svg viewBox="0 0 16 16" fill="none"><path d="M4 8l2.5 2.5L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="row-link">Batch-0001692988</span></span></td>
-                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
-                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
-                  <td class="num">0</td>
-                </tr>
-                <tr data-bw-row="2" data-bw-delay="500">
-                  <td><span class="row-name"><span class="ck"><svg viewBox="0 0 16 16" fill="none"><path d="M4 8l2.5 2.5L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="row-link">Batch-0001692986</span></span></td>
-                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
-                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
-                  <td class="num">0</td>
-                </tr>
-                <tr data-bw-row="3" data-bw-delay="800">
-                  <td><span class="row-name"><span class="ck"><svg viewBox="0 0 16 16" fill="none"><path d="M4 8l2.5 2.5L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="row-link">Batch-0001692985</span></span></td>
-                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
-                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
-                  <td class="num">0</td>
-                </tr>
-                <tr data-bw-row="4" data-bw-delay="1100">
-                  <td><span class="row-name"><span class="ck"><svg viewBox="0 0 16 16" fill="none"><path d="M4 8l2.5 2.5L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="row-link">Batch-0001692983</span></span></td>
-                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
-                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
-                  <td class="num">0</td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="bw-progress-foot">
-              <span>Started by <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="59383d34303719362b3e773a3634">[email&#160;protected]</a> · 10:09 AM
-</span>
-              <span class="actions">
-                <button class="stop">Stop Execution</button>
-                <button>Close</button>
-              </span>
-            </div>
-            <div class="bw-toast" id="bwToast">Success! Execution submitted. 1,039,809 records actioned · 7 minutes.</div>
-          </article>
-          <span class="anno br">0 lines of apex</span>
-        </div>
-        </div><!-- /scene #Batch -->
-
         <!-- Scene 2 · #UI (live: custom action button runs a rule → records appear, values computed) -->
-        <div class="hero-scene" data-surface="ui">
+        <div class="hero-scene is-active" data-surface="ui">
           <div class="bw-annotate">
             <span class="anno tl">actionable data list</span>
             <span class="anno tr">filter · select · act</span>
@@ -309,6 +212,81 @@
             <span class="anno br">0 lines of code</span>
           </div>
         </div><!-- /scene #UI -->
+
+        <!-- Scene 1 · #Batch (live animation) -->
+        <div class="hero-scene" data-surface="batch">
+        <div class="bw-annotate">
+          <span class="anno tl">live batch run</span>
+          <span class="anno tr">1,039,809 records · 0 failed</span>
+          <article class="batch-widget" id="batchWidget">
+            <div class="bw-head">
+              <span class="icn">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/></svg>
+              </span>
+              <div class="titles">
+                <span class="obj-tag">EXECUTABLE · #Batch · Account</span>
+                <span class="obj-name">Account.Rollups.BulkAPI</span>
+              </div>
+              <span class="spacer"></span>
+              <button class="run-btn" type="button"><span class="pulse"></span>Running</button>
+            </div>
+            <div class="bw-progress-head">
+              <span class="title">Progress</span>
+              <button class="x" aria-label="Close">
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+            <table class="bw-table">
+              <colgroup><col/><col/><col/><col/></colgroup>
+              <thead>
+                <tr><th>Execution</th><th class="num">Retrieved</th><th class="num">Actioned</th><th class="num">Failed</th></tr>
+              </thead>
+              <tbody>
+                <tr class="total" data-bw-row="total">
+                  <td><span class="row-name"><span class="spin"></span><span class="row-link">Account.Rollups.BulkAPI · 2026-05-16T10:09…</span></span></td>
+                  <td class="num" data-bw-target="1039809" data-bw-pace="3000">0</td>
+                  <td class="num" data-bw-target="1039809" data-bw-pace="3000">0</td>
+                  <td class="num">0</td>
+                </tr>
+                <tr data-bw-row="1" data-bw-delay="200">
+                  <td><span class="row-name"><span class="ck"><svg viewBox="0 0 16 16" fill="none"><path d="M4 8l2.5 2.5L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="row-link">Batch-0001692988</span></span></td>
+                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
+                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
+                  <td class="num">0</td>
+                </tr>
+                <tr data-bw-row="2" data-bw-delay="500">
+                  <td><span class="row-name"><span class="ck"><svg viewBox="0 0 16 16" fill="none"><path d="M4 8l2.5 2.5L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="row-link">Batch-0001692986</span></span></td>
+                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
+                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
+                  <td class="num">0</td>
+                </tr>
+                <tr data-bw-row="3" data-bw-delay="800">
+                  <td><span class="row-name"><span class="ck"><svg viewBox="0 0 16 16" fill="none"><path d="M4 8l2.5 2.5L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="row-link">Batch-0001692985</span></span></td>
+                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
+                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
+                  <td class="num">0</td>
+                </tr>
+                <tr data-bw-row="4" data-bw-delay="1100">
+                  <td><span class="row-name"><span class="ck"><svg viewBox="0 0 16 16" fill="none"><path d="M4 8l2.5 2.5L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="row-link">Batch-0001692983</span></span></td>
+                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
+                  <td class="num" data-bw-target="2000" data-bw-pace="600">0</td>
+                  <td class="num">0</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="bw-progress-foot">
+              <span>Started by <a href="mailto:hello@datasyncpro.io">hello@datasyncpro.io</a> · 10:09 AM
+</span>
+              <span class="actions">
+                <button class="stop">Stop Execution</button>
+                <button>Close</button>
+              </span>
+            </div>
+            <div class="bw-toast" id="bwToast">Success! Execution submitted. 1,039,809 records actioned · 7 minutes.</div>
+          </article>
+          <span class="anno br">0 lines of apex</span>
+        </div>
+        </div><!-- /scene #Batch -->
 
         <!-- Scene 3 · #Trigger (reuses the #Trigger section trace animation) -->
         <div class="hero-scene" data-surface="trigger">
@@ -506,8 +484,8 @@
         </div><!-- /hero-stage -->
 
         <div class="hero-dots" role="tablist" aria-label="Capability previews">
-          <button class="hero-dot on" type="button" data-go="batch" role="tab" aria-selected="true">#Batch</button>
-          <button class="hero-dot" type="button" data-go="ui" role="tab" aria-selected="false">#UI</button>
+          <button class="hero-dot on" type="button" data-go="ui" role="tab" aria-selected="true">#UI</button>
+          <button class="hero-dot" type="button" data-go="batch" role="tab" aria-selected="false">#Batch</button>
           <button class="hero-dot" type="button" data-go="trigger" role="tab" aria-selected="false">#Trigger</button>
           <button class="hero-dot" type="button" data-go="loader" role="tab" aria-selected="false">#Data Loader</button>
           <button class="hero-dot" type="button" data-go="query" role="tab" aria-selected="false">#Query</button>
@@ -515,60 +493,25 @@
       </div><!-- /hero-rotator -->
     </div>
   </div>
-</header>
-
-<!-- =========== PROBLEM RIBBON =========== -->
-<section class="ribbon" aria-label="Today's Salesforce automation">
+  <!-- =========== OUTCOME RIBBON =========== -->
+<section class="ribbon ribbon--win" aria-label="What changes with DSP">
   <div class="ribbon-track">
-    <span class="item"><span class="x">×</span>Slow, Manual Job Creation</span>
-    <span class="item"><span class="x">×</span>Poor Batch Performance</span>
-    <span class="item"><span class="x">×</span>No Native Job Chaining</span>
-    <span class="item"><span class="x">×</span>Opaque Job Scheduling</span>
-    <span class="item"><span class="x">×</span>Limited Transformations</span>
-    <span class="item"><span class="x">×</span>No Granular Logging</span>
-    <span class="item"><span class="x">×</span>Rigid Related Lists</span>
-    <span class="item"><span class="x">×</span>Actions Disconnected From Data</span>
-    <span class="item"><span class="x">×</span>Fragmented Workflows</span>
-    <span class="item"><span class="x">×</span>Heavy Custom Builds</span>
-    <span class="item"><span class="x">×</span>Business Logic Locked with Code</span>
-    <span class="item"><span class="x">×</span>Logic Goes Deep and Sprawls</span>
-    <span class="item"><span class="x">×</span>Bulk &amp; Performance Traps</span>
-    <span class="item"><span class="x">×</span>Coupled, Not Contained</span>
-    <span class="item"><span class="x">×</span>Scattered, Not Governed</span>
-    <span class="item"><span class="x">×</span>Code Complexity Snowballs</span>
-    <span class="item"><span class="x">×</span>Tech Debt Compounds</span>
-    <span class="item"><span class="x">×</span>Data Leaves the Platform</span>
-    <span class="item"><span class="x">×</span>No Real Transformation</span>
-    <span class="item"><span class="x">×</span>Same Wizard, Every Time</span>
-    <span class="item"><span class="x">×</span>Hand-Managed Log Files</span>
-    <span class="item"><span class="x">×</span>No Lightning Integration</span>
-    <span class="item"><span class="x">×</span>Not for Business Users</span>
+    <span class="item"><span class="ok">✓</span>Both Business &amp; IT, Empowered</span>
+    <span class="item"><span class="ok">✓</span>Up to 95% Less Custom Code</span>
+    <span class="item"><span class="ok">✓</span>Build in Days, Not Sprints</span>
+    <span class="item"><span class="ok">✓</span>Rules, Not Code</span>
+    <span class="item"><span class="ok">✓</span>Tech Debt Toward Zero</span>
+    <span class="item"><span class="ok">✓</span>Automation · Data Processing · Data Lists · Mass Actions · Cross-Org Sync · More</span>
     <!-- duplicate for seamless marquee -->
-    <span class="item"><span class="x">×</span>Slow, Manual Job Creation</span>
-    <span class="item"><span class="x">×</span>Poor Batch Performance</span>
-    <span class="item"><span class="x">×</span>No Native Job Chaining</span>
-    <span class="item"><span class="x">×</span>Opaque Job Scheduling</span>
-    <span class="item"><span class="x">×</span>Limited Transformations</span>
-    <span class="item"><span class="x">×</span>No Granular Logging</span>
-    <span class="item"><span class="x">×</span>Rigid Related Lists</span>
-    <span class="item"><span class="x">×</span>Actions Disconnected From Data</span>
-    <span class="item"><span class="x">×</span>Fragmented Workflows</span>
-    <span class="item"><span class="x">×</span>Heavy Custom Builds</span>
-    <span class="item"><span class="x">×</span>Business Logic Locked with Code</span>
-    <span class="item"><span class="x">×</span>Logic Goes Deep and Sprawls</span>
-    <span class="item"><span class="x">×</span>Bulk &amp; Performance Traps</span>
-    <span class="item"><span class="x">×</span>Coupled, Not Contained</span>
-    <span class="item"><span class="x">×</span>Scattered, Not Governed</span>
-    <span class="item"><span class="x">×</span>Code Complexity Snowballs</span>
-    <span class="item"><span class="x">×</span>Tech Debt Compounds</span>
-    <span class="item"><span class="x">×</span>Data Leaves the Platform</span>
-    <span class="item"><span class="x">×</span>No Real Transformation</span>
-    <span class="item"><span class="x">×</span>Same Wizard, Every Time</span>
-    <span class="item"><span class="x">×</span>Hand-Managed Log Files</span>
-    <span class="item"><span class="x">×</span>No Lightning Integration</span>
-    <span class="item"><span class="x">×</span>Not for Business Users</span>
+    <span class="item"><span class="ok">✓</span>Both Business &amp; IT, Empowered</span>
+    <span class="item"><span class="ok">✓</span>Up to 95% Less Custom Code</span>
+    <span class="item"><span class="ok">✓</span>Build in Days, Not Sprints</span>
+    <span class="item"><span class="ok">✓</span>Rules, Not Code</span>
+    <span class="item"><span class="ok">✓</span>Tech Debt Toward Zero</span>
+    <span class="item"><span class="ok">✓</span>Automation · Data Processing · Data Lists · Mass Actions · Cross-Org Sync · More</span>
   </div>
 </section>
+</header>
 
 <!-- =========== FOUR SURFACES (TABBED) =========== -->
 <section class="section surfaces" id="surfaces" data-screen-label="Capabilities">
@@ -591,15 +534,15 @@
     </div>
 
     <div class="surface-tabs reveal" role="tablist" aria-label="Product surfaces" id="surfaceTabs">
-      <button class="surface-tab active" role="tab" aria-selected="true" data-panel="batch" data-num="01">
-        <span class="hash">#Batch</span>
-        <span class="label">Bulk Data Processing</span>
-        <span class="sub">Apex-free Batches · Cross-Org Sync · Chained Execution · Scheduling</span>
-      </button>
-      <button class="surface-tab" role="tab" aria-selected="false" data-panel="ui" data-num="02">
+      <button class="surface-tab active" role="tab" aria-selected="true" data-panel="ui" data-num="01">
         <span class="hash">#UI</span>
         <span class="label">Data List &amp; Action Button</span>
         <span class="sub">Editable Lists · Rules-driven Action Buttons · 360° Workspaces</span>
+      </button>
+      <button class="surface-tab" role="tab" aria-selected="false" data-panel="batch" data-num="02">
+        <span class="hash">#Batch</span>
+        <span class="label">Bulk Data Processing</span>
+        <span class="sub">Apex-free Batches · Cross-Org Sync · Chained Execution · Scheduling</span>
       </button>
       <button class="surface-tab" role="tab" aria-selected="false" data-panel="trigger" data-num="03">
         <span class="hash">#Trigger</span>
@@ -623,8 +566,8 @@
 
     <div class="subbar-sentinel" id="subbarSentinel" aria-hidden="true"></div>
     <div class="surface-subbar" id="surfaceSubbar" role="tablist" aria-label="Surfaces" aria-hidden="true">
-      <button class="subbar-tab active" type="button" role="tab" aria-selected="true" data-panel="batch"><span class="sb-hash">#Batch</span><span class="sb-label">Bulk Data Processing</span></button>
-      <button class="subbar-tab" type="button" role="tab" aria-selected="false" data-panel="ui"><span class="sb-hash">#UI</span><span class="sb-label">Data List &amp; Action Button</span></button>
+      <button class="subbar-tab active" type="button" role="tab" aria-selected="true" data-panel="ui"><span class="sb-hash">#UI</span><span class="sb-label">Data List &amp; Action Button</span></button>
+      <button class="subbar-tab" type="button" role="tab" aria-selected="false" data-panel="batch"><span class="sb-hash">#Batch</span><span class="sb-label">Bulk Data Processing</span></button>
       <button class="subbar-tab" type="button" role="tab" aria-selected="false" data-panel="trigger"><span class="sb-hash">#Trigger</span><span class="sb-label">Automation &amp; Validation</span></button>
       <button class="subbar-tab" type="button" role="tab" aria-selected="false" data-panel="loader"><span class="sb-hash">#Data Loader</span><span class="sb-label">Self-Serve Imports</span></button>
       <button class="subbar-tab is-free" type="button" role="tab" aria-selected="false" data-panel="query"><span class="sb-hash">#Query</span><span class="sb-label">Point-and-Click Queries</span></button>
@@ -633,7 +576,7 @@
     <div class="surface-panels" id="surfacePanels">
 
       <!-- ============== #BATCH ============== -->
-      <div class="surface-panel active" id="panel-batch" role="tabpanel">
+      <div class="surface-panel" id="panel-batch" role="tabpanel">
         <div class="panel-head">
           <div>
             <span class="hash-big">#Batch</span>
@@ -649,11 +592,10 @@
         <article class="cap reveal">
         <div class="cap-text">
           <ul class="cap-points">
-            <li><span class="t">Configure batches as Executable records</span><span class="d">Declarative rules · modular by design · no custom Apex</span></li>
-            <li><span class="t">Preview transformed values before execution</span><span class="d">170+ built-in functions · extend with Apex</span></li>
             <li><span class="t">Built for high data volumes</span><span class="d">Bulk API · Incremental Retrieve · Delta Update — process only what changed</span></li>
+            <li><span class="t">Preview transformed values before execution</span><span class="d">170+ built-in functions · extend with Apex</span></li>
             <li><span class="t">Every run logged</span><span class="d">Drill in · validate · retry on failure · revert</span></li>
-            <li><span class="t">Chain Executables into Pipelines</span><span class="d">Sequenced execution · beyond Salesforce's 100-job limit</span></li>
+            <li><span class="t">Chained Executables</span><span class="d">Sequenced into Pipelines · beyond Salesforce’s 100-job limit</span></li>
             <li><span class="t">Manage schedule jobs as records</span><span class="d">Pause · reschedule · reassign · schedule reports · no cron expressions</span></li>
             <li><span class="t">Move data between Salesforce orgs</span><span class="d">Migrate · consolidate · scheduled sync</span></li>
           </ul>
@@ -771,18 +713,6 @@
         </div>
       </article>
 
-        <div class="surface-viz">
-          <div class="v-title">Batch Execution Engine · six rules-driven stages</div>
-          <div class="engine-strip" aria-hidden="true">
-            <div class="engine-step"><span class="num">01</span><span class="name">Retrieve</span><span class="desc">SOQL with filters — query source records into scope.</span></div>
-            <div class="engine-step"><span class="num">02</span><span class="name">Scoping</span><span class="desc">Apply scope filters beyond SOQL; join with another data set.</span></div>
-            <div class="engine-step"><span class="num">03</span><span class="name">Match</span><span class="desc">Match target records by field, formula, or duplicate matching rule.</span></div>
-            <div class="engine-step"><span class="num">04</span><span class="name">Mapping</span><span class="desc">Transform with 170+ functions, formulas, or Apex.</span></div>
-            <div class="engine-step action"><span class="num">05</span><span class="name">Action</span><span class="desc">Any DML · Notify · Approval · Lead Convert</span></div>
-            <div class="engine-step"><span class="num">06</span><span class="name">Verify</span><span class="desc">Query target records; the specified fields show the actioned data in execution logs.</span></div>
-          </div>
-        </div>
-
         <div class="cs-header">
           <div class="signal">The challenges</div>
           <div class="cs-divider"></div>
@@ -821,6 +751,18 @@
           </div>
         </div>
 
+        <div class="surface-viz">
+          <div class="v-title">Batch Execution Engine · six rules-driven stages</div>
+          <div class="engine-strip" aria-hidden="true">
+            <div class="engine-step"><span class="num">01</span><span class="name">Retrieve</span><span class="desc">SOQL with filters — query source records into scope.</span></div>
+            <div class="engine-step"><span class="num">02</span><span class="name">Scoping</span><span class="desc">Apply scope filters beyond SOQL; join with another data set.</span></div>
+            <div class="engine-step"><span class="num">03</span><span class="name">Match</span><span class="desc">Match target records by field, formula, or duplicate matching rule.</span></div>
+            <div class="engine-step"><span class="num">04</span><span class="name">Mapping</span><span class="desc">Transform with 170+ functions, formulas, or Apex.</span></div>
+            <div class="engine-step action"><span class="num">05</span><span class="name">Action</span><span class="desc">Any DML · Merge · Notify · Approval · Lead Convert</span></div>
+            <div class="engine-step"><span class="num">06</span><span class="name">Verify</span><span class="desc">Query target records; the specified fields show the actioned data in execution logs.</span></div>
+          </div>
+        </div>
+
         <div class="surface-metrics">
           <div class="m"><span class="big">95<span class="it">%</span></span><span class="lbl">Less build effort</span></div>
           <div class="m"><span class="pre">up&nbsp;to</span><span class="big">20<span class="it">×</span></span><span class="lbl">Faster batch execution</span></div>
@@ -830,12 +772,12 @@
       </div>
 
       <!-- ============== #UI ============== -->
-      <div class="surface-panel" id="panel-ui" role="tabpanel">
+      <div class="surface-panel active" id="panel-ui" role="tabpanel">
         <div class="panel-head">
           <div>
             <span class="hash-big">#UI</span>
             <h3>Data List &amp; Action Button,<br/><span class="it">composed by admins.</span></h3>
-            <p class="panel-lead">Declared as records, not code — dropped onto any Lightning page, no developers required. Prototype in minutes.</p>
+            <p class="panel-lead">Drop actionable Data Lists &amp; Action Buttons onto any Lightning page to compose a 360° workspace — no developers required. Prototype in minutes.</p>
           </div>
           <div class="panel-aside">
             <b>Replaces</b>
@@ -846,7 +788,6 @@
         <article class="cap reverse reveal">
         <div class="cap-text">
           <ul class="cap-points">
-            <li><span class="t">Compose 360° workspaces</span><span class="d">Actionable Data List &amp; Action Button groups on any Lightning page — composed by admins</span></li>
             <li class="grp"><span class="grp-label">Data List</span></li>
             <li><span class="t">All from one SOQL query</span><span class="d">Pagination · column filters · sorting · inline &amp; mass edits · download · create · delete · dynamic filters · Query Builder</span></li>
             <li><span class="t">Linked processes</span><span class="d">Action Button groups · chained Data Lists · row-related lists · custom New Record · Data Loader — wired declaratively</span></li>
@@ -972,18 +913,6 @@
           </div>
         </div>
 
-        <div class="surface-viz">
-          <div class="v-title">USER CLICK → FIVE RULES-DRIVEN STAGES</div>
-          <div class="engine-strip cols-5" aria-hidden="true">
-            <div class="engine-step"><span class="num">01</span><span class="name">Input</span><span class="desc">SOQL for the Data List or the rows behind an Action Button.</span></div>
-            <div class="engine-step"><span class="num">02</span><span class="name">Scoping</span><span class="desc">Refine input — filter, or join with another data set or Data List.</span></div>
-            <div class="engine-step"><span class="num">03</span><span class="name">Match</span><span class="desc">Match target records by field, formula, or duplicate matching rule.</span></div>
-            <div class="engine-step"><span class="num">04</span><span class="name">Mapping</span><span class="desc">Transform fields with 170+ functions, formulas, or Apex.</span></div>
-            <div class="engine-step action"><span class="num">05</span><span class="name">Action</span><span class="desc">Any DML · Notify · Approval · Lead Convert</span></div>
-          </div>
-        </div>
-
-
         <div class="cs-header">
           <div class="signal">The challenges</div>
           <div class="cs-divider"></div>
@@ -1017,6 +946,17 @@
           </div>
         </div>
 
+        <div class="surface-viz">
+          <div class="v-title">USER CLICK → FIVE RULES-DRIVEN STAGES</div>
+          <div class="engine-strip cols-5" aria-hidden="true">
+            <div class="engine-step"><span class="num">01</span><span class="name">Input</span><span class="desc">SOQL for the Data List or the rows behind an Action Button.</span></div>
+            <div class="engine-step"><span class="num">02</span><span class="name">Scoping</span><span class="desc">Refine input — filter, or join with another data set or Data List.</span></div>
+            <div class="engine-step"><span class="num">03</span><span class="name">Match</span><span class="desc">Match target records by field, formula, or duplicate matching rule.</span></div>
+            <div class="engine-step"><span class="num">04</span><span class="name">Mapping</span><span class="desc">Transform fields with 170+ functions, formulas, or Apex.</span></div>
+            <div class="engine-step action"><span class="num">05</span><span class="name">Action</span><span class="desc">Any DML · Merge · Notify · Approval · Lead Convert</span></div>
+          </div>
+        </div>
+
         <div class="surface-metrics">
           <div class="m"><span class="big">360<span class="it">°</span></span><span class="lbl">Data &amp; actions in view</span></div>
           <div class="m"><span class="big">95<span class="it">%</span></span><span class="lbl">Less build effort</span></div>
@@ -1047,7 +987,6 @@
             <li><span class="t">Bulk-safe by default</span><span class="d">Write rules as if for one record · engine bulkifies queries, aggregations &amp; DMLs automatically</span></li>
             <li><span class="t">Modularity enforced</span><span class="d">Bounded input, transformation &amp; output — structure, not team discipline</span></li>
             <li><span class="t">Grouped &amp; governed</span><span class="d">Group related rules into Pipelines by object or domain, then reorder and manage them together — all automation that fires on a record in one place</span></li>
-            <li><span class="t">170+ built-in functions</span><span class="d">Logic · strings · dates · math · lookups · regex · rollups · joins — cover the most common needs, extend with Apex for the rest</span></li>
             <li><span class="t">Recursion prevention built in</span><span class="d">Runaway re-execution blocked automatically — no manual guards or static flags</span></li>
           </ul>
         </div>
@@ -1138,17 +1077,6 @@
         </div>
       </article>
 
-        <div class="surface-viz">
-          <div class="v-title">DML Event → five rules-driven stages</div>
-          <div class="engine-strip cols-5" aria-hidden="true">
-            <div class="engine-step"><span class="num">01</span><span class="name">Trigger Event</span><span class="desc">Before / after · Insert · Update · Delete · Undelete · Upsert.</span></div>
-            <div class="engine-step"><span class="num">02</span><span class="name">Scoping</span><span class="desc">Filter rows from the DML event; join with another data set.</span></div>
-            <div class="engine-step"><span class="num">03</span><span class="name">Match</span><span class="desc">Match target records by field, formula, or duplicate matching rule.</span></div>
-            <div class="engine-step"><span class="num">04</span><span class="name">Mapping</span><span class="desc">Transform fields with 170+ functions, formulas, or Apex.</span></div>
-            <div class="engine-step action"><span class="num">05</span><span class="name">Action</span><span class="desc">Any DML · Notify · Approval · Lead Convert</span></div>
-          </div>
-        </div>
-
         <div class="cs-header">
           <div class="signal">The challenges</div>
           <div class="cs-divider"></div>
@@ -1182,6 +1110,17 @@
           </div>
         </div>
 
+        <div class="surface-viz">
+          <div class="v-title">DML Event → five rules-driven stages</div>
+          <div class="engine-strip cols-5" aria-hidden="true">
+            <div class="engine-step"><span class="num">01</span><span class="name">Trigger Event</span><span class="desc">Before / after · Insert · Update · Delete · Undelete · Upsert.</span></div>
+            <div class="engine-step"><span class="num">02</span><span class="name">Scoping</span><span class="desc">Filter rows from the DML event; join with another data set.</span></div>
+            <div class="engine-step"><span class="num">03</span><span class="name">Match</span><span class="desc">Match target records by field, formula, or duplicate matching rule.</span></div>
+            <div class="engine-step"><span class="num">04</span><span class="name">Mapping</span><span class="desc">Transform fields with 170+ functions, formulas, or Apex.</span></div>
+            <div class="engine-step action"><span class="num">05</span><span class="name">Action</span><span class="desc">Any DML · Merge · Notify · Approval · Lead Convert</span></div>
+          </div>
+        </div>
+
         <div class="surface-metrics">
           <div class="m"><span class="big">100<span class="it">%</span></span><span class="lbl">Bulk-safe</span></div>
           <div class="m"><span class="big">10<span class="it">×</span></span><span class="lbl">Faster changes</span></div>
@@ -1208,12 +1147,11 @@
         <article class="cap reveal">
         <div class="cap-text">
           <ul class="cap-points">
-            <li><span class="t">Upload through Lightning component</span><span class="d">No third-party services · no separate desktop tools</span></li>
+            <li><span class="t">Upload inside Salesforce</span><span class="d">No third-party services · no separate desktop tools</span></li>
             <li><span class="t">Match by field or formula</span><span class="d">Field, formula, or duplicate rule · scope rows at load time</span></li>
             <li><span class="t">Apply 170+ transformations in flight</span><span class="d">Logic · strings · dates · math · lookups · regex · joins · extend with Apex</span></li>
             <li><span class="t">Every load logged as records</span><span class="d">Replay failed rows · revert from the audit file (on by default)</span></li>
             <li><span class="t">Admin configures once</span><span class="d">Anyone with access runs with one click</span></li>
-            <li><span class="t">Embed in any Lightning page</span><span class="d">Load the data relevant to the current page record</span></li>
           </ul>
         </div>
         <div class="cap-viz">
@@ -1269,17 +1207,6 @@
         </div>
       </article>
 
-        <div class="surface-viz">
-          <div class="v-title">CSV upload → five rules-driven stages</div>
-          <div class="engine-strip cols-5" aria-hidden="true">
-            <div class="engine-step"><span class="num">01</span><span class="name">Input</span><span class="desc">CSV uploaded to the LWC loader, parsed in-org.</span></div>
-            <div class="engine-step"><span class="num">02</span><span class="name">Scoping</span><span class="desc">Filter rows — skip blanks, duplicates, or inactive records.</span></div>
-            <div class="engine-step"><span class="num">03</span><span class="name">Match</span><span class="desc">Match target records by field, formula, or duplicate matching rule.</span></div>
-            <div class="engine-step"><span class="num">04</span><span class="name">Mapping</span><span class="desc">Transform fields with 170+ functions, formulas, or Apex.</span></div>
-            <div class="engine-step action"><span class="num">05</span><span class="name">Action</span><span class="desc">Insert · Update · Upsert · Delete · Undelete · Publish · Notify</span></div>
-          </div>
-        </div>
-
         <div class="cs-header">
           <div class="signal">The challenges</div>
           <div class="cs-divider"></div>
@@ -1318,6 +1245,17 @@
           </div>
         </div>
 
+        <div class="surface-viz">
+          <div class="v-title">CSV upload → five rules-driven stages</div>
+          <div class="engine-strip cols-5" aria-hidden="true">
+            <div class="engine-step"><span class="num">01</span><span class="name">Input</span><span class="desc">CSV uploaded to the LWC loader, parsed in-org.</span></div>
+            <div class="engine-step"><span class="num">02</span><span class="name">Scoping</span><span class="desc">Filter rows — skip blanks, duplicates, or inactive records.</span></div>
+            <div class="engine-step"><span class="num">03</span><span class="name">Match</span><span class="desc">Match target records by field, formula, or duplicate matching rule.</span></div>
+            <div class="engine-step"><span class="num">04</span><span class="name">Mapping</span><span class="desc">Transform fields with 170+ functions, formulas, or Apex.</span></div>
+            <div class="engine-step action"><span class="num">05</span><span class="name">Action</span><span class="desc">Insert · Update · Upsert · Delete · Undelete · Publish · Notify</span></div>
+          </div>
+        </div>
+
         <div class="surface-metrics">
           <div class="m"><span class="big">100<span class="it">%</span></span><span class="lbl">Stays in Salesforce</span></div>
           <div class="m"><span class="big">170<span class="it">+</span></span><span class="lbl">Transformation functions</span></div>
@@ -1344,8 +1282,8 @@
             <ul class="cap-points">
               <li><span class="t">Query Builder</span><span class="d">Guided UI · auto-complete hints · point-and-click, no syntax to memorize</span></li>
               <li><span class="t">Metadata-aware results</span><span class="d">Real field labels, not API names · recognizes each field type and renders it accordingly — clickable references, formatted dates &amp; currency, and more</span></li>
-              <li><span class="t">Auto pagination &amp; record count</span><span class="d">Results paginate automatically · live total record count · adjustable page size</span></li>
-              <li><span class="t">Editable Data List</span><span class="d">Query results as Data List · pagination · column filters · sorting · inline &amp; mass edits · create · delete · download · row actions</span></li>
+              <li><span class="t">Auto pagination</span><span class="d">Results paginate automatically · live total record count · adjustable page size</span></li>
+              <li><span class="t">Editable Data List — full CRUD</span><span class="d">Query results as Data List · pagination · column filters · sorting · inline &amp; mass edits · create · delete · download · row actions</span></li>
               <li><span class="t">Manage saved queries</span><span class="d">Save · re-run common queries · label, organize · no rebuilding</span></li>
             </ul>
             </ul>
@@ -1669,9 +1607,6 @@
             <svg class="chev" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
-        <p style="margin-top: 24px; font-family: var(--f-mono); font-size: 13px; color: var(--ink-3); letter-spacing:.02em;">
-          One shape across <span style="color: #FFFFFF;">#Batch</span>, <span style="color: #FFFFFF;">#Data List, #Action Button</span>, <span style="color: #FFFFFF;">#Trigger</span>, and <span style="color: #FFFFFF;">#Data Loader</span>.
-        </p>
       </div>
 
       <div class="reveal" data-d="1">
@@ -1707,6 +1642,9 @@
         </div>
       </div>
     </div>
+    <p class="anatomy-note" style="margin-top: 28px; font-family: var(--f-mono); font-size: 13px; color: var(--ink-3); letter-spacing:.02em; text-align: center;">
+      One shape across <span style="color: #FFFFFF;">#Batch</span>, <span style="color: #FFFFFF;">#Data List, #Action Button</span>, <span style="color: #FFFFFF;">#Trigger</span>, and <span style="color: #FFFFFF;">#Data Loader</span>.
+    </p>
   </div>
 </section>
 
@@ -1899,28 +1837,31 @@
         <h3>Call the engine from your own Apex.</h3>
         <p>Store any business rule as a formula string and evaluate it at runtime from your own Apex. Change the logic in a record — no redeploy, no rebuild.</p>
         <ul class="fx-points">
-          <li>The same 170+ functions your Executables use</li>
-          <li>Evaluate against any SObject or JSON object</li>
-          <li>Rules live as data, not hardcoded branches</li>
+          <li>
+            <span class="fx-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="fx-pt"><span class="fx-pt-t">The same 170+ functions</span><span class="fx-pt-d">Identical library your Executables run on — nothing to re-learn.</span></span>
+          </li>
+          <li>
+            <span class="fx-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="fx-pt"><span class="fx-pt-t">Evaluate any SObject or JSON</span><span class="fx-pt-d">Point it at a record or a parsed payload — same call.</span></span>
+          </li>
+          <li>
+            <span class="fx-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="fx-pt"><span class="fx-pt-t">Rules live as data</span><span class="fx-pt-d">Logic sits in records, not hardcoded branches you redeploy.</span></span>
+          </li>
         </ul>
       </div>
       <div class="fx-code" role="img" aria-label="Apex example evaluating a Data Sync Pro formula string at runtime">
         <div class="fx-code-head">
-          <span class="fx-dot"></span>
-          <span class="fx-code-title">Apex</span>
+          <span class="fx-traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="fx-code-title">EmailValidation.apex</span>
           <span class="fx-code-tag">EVALUATE</span>
         </div>
-        <pre class="fx-code-body"><code><span class="t-c">// A rule, stored as a string — editable as data</span>
-<span class="t-t">String</span> formula =
-  <span class="t-s">'IS_BLANK(Email) || NOT(IS_EMAIL_ADDRESS(Email))'</span>;
-
-<span class="t-c">// Compile once, then evaluate against a record</span>
-<span class="t-t">pushtopics.Expression</span> expr = <span class="t-t">pushtopics.Expression</span>.<span class="t-f">compile</span>(formula);
-
-<span class="t-t">Object</span> invalid = expr.<span class="t-f">evaluate</span>(account);
-<span class="t-k">if</span> (invalid == <span class="t-k">true</span>) {
-  account.<span class="t-f">addError</span>(<span class="t-s">'A valid email is required.'</span>);
-}</code></pre>
+        <pre class="fx-code-body"><code><span class="cl"><span class="t-c">// A rule, stored as a string — editable as data</span></span><span class="cl"><span class="t-t">String</span> formula =</span><span class="cl">  <span class="t-s">'IS_BLANK(Email) || NOT(IS_EMAIL_ADDRESS(Email))'</span>;</span><span class="cl"> </span><span class="cl"><span class="t-c">// Compile once, then evaluate against a record</span></span><span class="cl"><span class="t-t">pushtopics.Expression</span> expr = <span class="t-t">pushtopics.Expression</span>.<span class="t-f">compile</span>(formula);</span><span class="cl"> </span><span class="cl"><span class="t-t">Object</span> invalid = expr.<span class="t-f">evaluate</span>(account);</span><span class="cl"><span class="t-k">if</span> (invalid == <span class="t-k">true</span>) {</span><span class="cl">  account.<span class="t-f">addError</span>(<span class="t-s">'A valid email is required.'</span>);</span><span class="cl">}</span></code></pre>
+        <div class="fx-code-foot">
+          <span class="fx-out-dot" aria-hidden="true"></span>
+          <span class="fx-out-text"><span class="t-f">evaluate()</span> → <span class="t-k">true</span> · validation error added to the record</span>
+        </div>
       </div>
     </div>
   </div>
@@ -2914,6 +2855,6 @@
   </div>
 </div>
 
-</script><script src="/app.js?v=22"></script>
+</script><script src="/app.js?v=30"></script>
 </body>
 </html>
