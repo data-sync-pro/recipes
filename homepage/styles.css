@@ -2482,7 +2482,10 @@ section.section {
 
 .shift-grid {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  /* minmax(0,1fr), not 1fr: plain 1fr resolves to minmax(auto,1fr), whose auto floor
+     lets the right card's long monospace strings inflate that column past 50%. The 0
+     floor forces both sides to split the row exactly in half. */
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   gap: 32px;
   align-items: stretch;
 }

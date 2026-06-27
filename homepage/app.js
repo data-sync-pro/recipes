@@ -1546,7 +1546,9 @@ const DSP_SECTION_ROUTES = {
 
     const s = {
       widget, tbody, totalRow,
-      totalCells: totalRow.querySelectorAll('td.num'),
+      // Only the Retrieved/Actioned cells carry data-bw-target — Failed stays at its
+      // static 0 (a successful run has no failures), so it must NOT be driven by the counter.
+      totalCells: totalRow.querySelectorAll('td.num[data-bw-target]'),
       toast: widget.querySelector('.bw-toast'),
       total: 0,
       batchesDone: 0,
