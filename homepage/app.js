@@ -1802,6 +1802,8 @@ const DSP_SECTION_ROUTES = {
     });
     const toast = w.querySelector('.pw-toast');
     if (toast) toast.classList.remove('on');
+    const runBtn = w.querySelector('.run-btn');
+    if (runBtn) { runBtn.classList.remove('done'); runBtn.innerHTML = '<span class="pulse"></span>Running'; }
 
     if (reduce) {
       rows.forEach(r => {
@@ -1812,13 +1814,17 @@ const DSP_SECTION_ROUTES = {
         r.querySelectorAll('.pw-retrieved, .pw-actioned').forEach(c => c.textContent = fmt(tgt));
       });
       if (toast) toast.classList.add('on');
+      if (runBtn) { runBtn.classList.add('done'); runBtn.innerHTML = '<span class="pulse"></span>Done'; }
       return;
     }
 
     const rowList = [...rows];
     function next() {
       if (!rowList.length) {
-        ts(w, () => { if (toast) toast.classList.add('on'); }, 250);
+        ts(w, () => {
+          if (toast) toast.classList.add('on');
+          if (runBtn) { runBtn.classList.add('done'); runBtn.innerHTML = '<span class="pulse"></span>Done'; }
+        }, 250);
         return;
       }
       const row = rowList.shift();
@@ -2405,12 +2411,9 @@ const DSP_SECTION_ROUTES = {
 // status goes Running, progress bar fills while the audit row counts up → Done +
 // success toast. Tells the self-serve import story end to end.
 (() => {
-  const card = document.getElementById('loaderHero');
-  if (!card) return;
-  const scene = card.closest('.hero-scene');
-  if (!scene) return;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  function build(card) {
   const statusEl = card.querySelector('[data-hl-status]');
   const drop     = card.querySelector('[data-hl-drop]');
   const meta     = card.querySelector('[data-hl-meta]');
@@ -2459,9 +2462,10 @@ const DSP_SECTION_ROUTES = {
     toast.classList.add('on');
   }
 
-  function play() {
+  function play(onDone) {
+    const done = typeof onDone === 'function' ? onDone : () => {};
     reset();
-    if (reduce) { paintFinal(); setTimeout(fireDone, 1800); return; }
+    if (reduce) { paintFinal(); setTimeout(done, 1800); return; }
 
     // 1 — file drops & parses
     at(500,  () => { drop.classList.add('parsed'); meta.textContent = 'parsing…'; });
@@ -2503,20 +2507,49 @@ const DSP_SECTION_ROUTES = {
       audit.classList.add('done');
       audit.innerHTML = '<b>' + fmt(TOTAL) + '</b> upserted · 0 failed · 45s';
       toast.classList.add('on');
-      fireDone();
+      done();
     });
   }
 
-  const fireDone = () => scene.dispatchEvent(new CustomEvent('demodone', { bubbles: true }));
-  let active = false;
-  const sync = () => {
-    const now = scene.classList.contains('is-active');
-    if (now && !active) play();
-    else if (!now && active) reset();
-    active = now;
-  };
-  new MutationObserver(sync).observe(scene, { attributes: true, attributeFilter: ['class'] });
-  sync();
+    return { reset, play };
+  }
+
+  // Hero scene 4 — plays when its capability scene becomes active.
+  const heroCard = document.getElementById('loaderHero');
+  if (heroCard) {
+    const scene = heroCard.closest('.hero-scene');
+    if (scene) {
+      const demo = build(heroCard);
+      const fireDone = () => scene.dispatchEvent(new CustomEvent('demodone', { bubbles: true }));
+      let active = false;
+      const sync = () => {
+        const now = scene.classList.contains('is-active');
+        if (now && !active) demo.play(fireDone);
+        else if (!now && active) demo.reset();
+        active = now;
+      };
+      new MutationObserver(sync).observe(scene, { attributes: true, attributeFilter: ['class'] });
+      sync();
+    }
+  }
+
+  // Capabilities · #Data Loader panel — same demo, replays on scroll into view.
+  const capCard = document.getElementById('loaderCap');
+  if (capCard) {
+    const demo = build(capCard);
+    if (!('IntersectionObserver' in window)) {
+      demo.play();
+    } else {
+      let playing = false;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && !playing) { playing = true; demo.play(); }
+          else if (!e.isIntersecting && playing) { playing = false; demo.reset(); }
+        });
+      }, { threshold: [0, 0.25], rootMargin: '0px 0px -10% 0px' });
+      io.observe(capCard);
+    }
+  }
 })();
 
 
