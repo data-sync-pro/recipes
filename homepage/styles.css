@@ -805,6 +805,12 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   display: inline-block;
   animation: pulse 1.4s ease-in-out infinite;
 }
+.bw-head .run-btn.done .pulse {
+  animation: none;
+  opacity: 1;
+  transform: none;
+  background: var(--sn-btn, #28E07A);
+}
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: .4; transform: scale(1.4); }
@@ -1136,7 +1142,7 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   align-items: center;
   gap: 8px;
   font-family: var(--f-mono);
-  font-size: 11.5px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -2574,6 +2580,8 @@ section.section {
   width: 600px;
   height: 430px;
   margin: 0 auto;
+  flex: 0 0 auto;
+  transform-origin: center center;
 }
 .sprawl-node {
   position: absolute;
@@ -6128,6 +6136,9 @@ body.sn-hero .surface-tab.active {
 body.sn-hero .surface-tab.active .hash,
 body.sn-hero .surface-tab.active[data-num]::before { color: var(--sn-btn, #0FD49E); }
 body.sn-hero .surface-tab.active::after { background: var(--sn-btn, #0FD49E); box-shadow: 0 0 14px rgba(15,212,158,.45); }
+/* Round the active highlight's outer corners so the green ring follows the container's rounded corners */
+body.sn-hero .surface-tab.active:first-child { border-radius: calc(var(--r-lg) - 1px) 0 0 calc(var(--r-lg) - 1px); }
+body.sn-hero .surface-tab.active:last-child { border-radius: 0 calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0; }
 /* Hover (non-active): show the brand green — outline, tint and hash */
 body.sn-hero .surface-tab:not(.active):hover {
   background: linear-gradient(180deg, rgba(15,212,158,.10), rgba(15,212,158,0)), var(--paper);

@@ -1536,6 +1536,7 @@ const DSP_SECTION_ROUTES = {
     s.totalCells.forEach(td => { td.textContent = '0'; });
     setTotalSpinner(s.totalRow);
     if (s.toast) s.toast.classList.remove('on');
+    if (s.runBtn) { s.runBtn.classList.remove('done'); s.runBtn.lastChild.nodeValue = 'Running'; }
   }
 
   function init(widget) {
@@ -1550,6 +1551,7 @@ const DSP_SECTION_ROUTES = {
       // static 0 (a successful run has no failures), so it must NOT be driven by the counter.
       totalCells: totalRow.querySelectorAll('td.num[data-bw-target]'),
       toast: widget.querySelector('.bw-toast'),
+      runBtn: widget.querySelector('.run-btn'),
       total: 0,
       batchesDone: 0,
       nextId: 1692960 + Math.floor(Math.random() * 25),
@@ -1631,6 +1633,7 @@ const DSP_SECTION_ROUTES = {
         s.totalCells.forEach(td => { td.textContent = fmt(TARGET_TOTAL); });
         setTotalCheck(s.totalRow);
         if (s.toast) s.toast.classList.add('on');
+        if (s.runBtn) { s.runBtn.classList.add('done'); s.runBtn.lastChild.nodeValue = 'Done'; }
         clearTimeout(s.timer);
         if (s.rafId) { cancelAnimationFrame(s.rafId); s.rafId = 0; }
         // Hero: run once and hold the finished state, then tell the rotator the
@@ -1668,6 +1671,7 @@ const DSP_SECTION_ROUTES = {
       s.totalCells.forEach(td => { td.textContent = fmt(TARGET_TOTAL); });
       setTotalCheck(s.totalRow);
       if (s.toast) s.toast.classList.add('on');
+        if (s.runBtn) { s.runBtn.classList.add('done'); s.runBtn.lastChild.nodeValue = 'Done'; }
       if (s.isHero) {
         const sc = w.closest('.hero-scene');
         if (sc) setTimeout(() => sc.dispatchEvent(new CustomEvent('demodone', { bubbles: true })), 1800);
@@ -1890,10 +1894,18 @@ const DSP_SECTION_ROUTES = {
     widget._ttTimers = [];
   }
 
+  function setRunBtn(widget, label, done) {
+    const b = widget.querySelector('.run-btn');
+    if (!b) return;
+    b.classList.toggle('done', !!done);
+    if (b.lastChild) b.lastChild.nodeValue = label;
+  }
+
   function animateTrace(widget, replay = true, onDone = null) {
     const rules = [...widget.querySelectorAll('.tt-rule')];
     if (!rules.length) return;
     cancel(widget);
+    setRunBtn(widget, 'Firing', false);
     const push = (fn, ms) => { widget._ttTimers.push(setTimeout(fn, ms)); };
     // Reset
     rules.forEach(r => {
@@ -1910,6 +1922,7 @@ const DSP_SECTION_ROUTES = {
         const fill = r.querySelector('.tt-bar-fill');
         if (fill) fill.style.width = '100%';
       });
+      setRunBtn(widget, 'Fired', true);
       if (onDone) push(onDone, 1800);
       return;
     }
@@ -1933,6 +1946,7 @@ const DSP_SECTION_ROUTES = {
       lastEnd = delay + dur;
       delay += dur + 180;
     });
+    push(() => setRunBtn(widget, 'Fired', true), lastEnd + 100);
     // Replay 5s after the trace finishes (in-page section only)
     if (replay) {
       widget._ttReplay = setTimeout(() => animateTrace(widget, true), lastEnd + 5000);

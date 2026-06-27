@@ -1338,6 +1338,7 @@
                 <path d="M158 337 C 184 337, 190 252, 210 252"/>
                 <path d="M158 371 C 184 371, 190 176, 210 176"/>
                 <path d="M158 405 C 184 405, 190 290, 210 290"/>
+                <path d="M158 133 C 184 133, 190 328, 210 328"/>
               </g>
               <!-- Flow (right edge ~326) → Sub (left edge 330) -->
               <g stroke="#D08A33" stroke-width="1.8" fill="none" opacity=".9">
@@ -2822,6 +2823,43 @@
   (mq.addEventListener ? mq.addEventListener('change', align) : mq.addListener(align));
   align();
   [120,350,800].forEach(function(t){ setTimeout(align,t); });
+})();
+</script>
+
+
+<!-- Shift "before" diagram: the node canvas is a fixed 600px design. On
+     narrower desktops (13"/14" MacBook Pro) the BEFORE column is < 600px, so
+     scale the canvas down to fit its card instead of letting nodes spill out.
+     Keeps both panels as clean, equal-width cards. -->
+<script>
+(function(){
+  var CW = 600, CH = 430;
+  function fit(){
+    document.querySelectorAll('.sprawl').forEach(function(sp){
+      var cv = sp.querySelector('.sprawl-canvas');
+      if(!cv) return;
+      var cs = getComputedStyle(sp);
+      var avail = sp.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      if(!avail) return;
+      var scale = Math.min(1, avail / CW);
+      if(scale >= 0.999){
+        cv.style.transform = '';
+        cv.style.margin = '';
+        return;
+      }
+      cv.style.transform = 'scale(' + scale.toFixed(4) + ')';
+      cv.style.margin = (-CH*(1-scale)/2).toFixed(1) + 'px ' + (-CW*(1-scale)/2).toFixed(1) + 'px';
+    });
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fit); }
+  if('ResizeObserver' in window){
+    var ro = new ResizeObserver(fit);
+    document.querySelectorAll('.sprawl').forEach(function(sp){ ro.observe(sp); });
+  }
+  fit();
+  [120,350,800].forEach(function(t){ setTimeout(fit,t); });
 })();
 </script>
 
