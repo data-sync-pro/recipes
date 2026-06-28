@@ -21,6 +21,31 @@ export const CATEGORY_ORDER: ReadonlyArray<CategoryDefinition> = CATEGORY_DISPLA
   slug: generateSlug(name)
 }));
 
+/**
+ * Aggregate (virtual) categories. These are NOT stored on any recipe and never
+ * appear in the sidebar; they exist only to back a dedicated landing URL that
+ * groups several real categories. Example: /recipes/ui shows every
+ * Data List + Action Button recipe.
+ */
+export interface AggregateCategoryDefinition {
+  readonly displayName: string;
+  readonly slug: string;
+  readonly members: readonly string[];
+}
+
+export const AGGREGATE_CATEGORIES: ReadonlyArray<AggregateCategoryDefinition> = [
+  { displayName: 'UI', slug: 'ui', members: ['Data List', 'Action Button'] }
+];
+
+/**
+ * Slug aliases that redirect to a canonical category slug. The homepage links to
+ * short slugs (e.g. /recipes/loader) that don't match the generated canonical
+ * slug (data-loader); the routing guard redirects them.
+ */
+export const SLUG_ALIASES: Readonly<Record<string, string>> = {
+  loader: 'data-loader'
+};
+
 export function categoryToSlug(displayName: string): string {
   const match = CATEGORY_ORDER.find(c => c.displayName === displayName);
   return match ? match.slug : generateSlug(displayName);
@@ -30,7 +55,19 @@ export function slugToCategoryName(slug: string): string | null {
   if (!slug) return null;
   const normalized = slug.toLowerCase();
   const match = CATEGORY_ORDER.find(c => c.slug === normalized);
-  return match ? match.displayName : null;
+  if (match) return match.displayName;
+  const aggregate = AGGREGATE_CATEGORIES.find(a => a.slug === normalized);
+  return aggregate ? aggregate.displayName : null;
+}
+
+/**
+ * Expand a category display name to the concrete recipe categories it covers.
+ * Aggregate categories (e.g. UI) expand to their members; a normal category
+ * returns itself. Used when filtering recipes by category.
+ */
+export function expandCategory(displayName: string): string[] {
+  const aggregate = AGGREGATE_CATEGORIES.find(a => a.displayName === displayName);
+  return aggregate ? [...aggregate.members] : [displayName];
 }
 
 export const RECIPE_PATHS = {

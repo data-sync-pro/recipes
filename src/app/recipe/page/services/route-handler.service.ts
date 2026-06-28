@@ -10,7 +10,7 @@ import { PreviewSyncService } from './preview-sync.service';
 import { TocService } from './toc.service';
 import { PreviewService } from '../../core/services/preview.service';
 import { LoggerService } from '../../core/services/logger.service';
-import { RECIPE_MESSAGES, RECIPE_SECTIONS, categoryToSlug, slugToCategoryName } from '../../core/constants/recipe.constants';
+import { RECIPE_MESSAGES, RECIPE_SECTIONS, categoryToSlug, slugToCategoryName, expandCategory } from '../../core/constants/recipe.constants';
 import { sortRecipesByCategoryAndTitle } from '../../core/utils';
 
 export interface RecipeLoadResult {
@@ -126,8 +126,11 @@ export class RouteHandlerService implements OnDestroy {
     this.loadWithErrorHandling(
       this.cacheService.getRecipes$().pipe(
         map(recipes => {
+          // Expand aggregate categories (e.g. UI) so deep links like
+          // /recipes/ui/<slug> still resolve to the underlying recipe.
+          const categories = expandCategory(category);
           return recipes.find(r =>
-            r.category.includes(category) &&
+            r.category.some(c => categories.includes(c)) &&
             r.slug === recipeSlug
           ) || null;
         })
