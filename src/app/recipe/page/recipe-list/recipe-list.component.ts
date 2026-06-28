@@ -11,6 +11,8 @@ import { categoryToSlug } from '../../core/constants/recipe.constants';
 export class RecipeListComponent {
   @Input() recipes: Recipe[] = [];
   @Input() categories: Category[] = [];
+  /** Current category display name (empty on the home view). Drives the page title. */
+  @Input() category: string = '';
   @Input() searchQuery: string = '';
   @Output() searchChange = new EventEmitter<string>();
   @Output() recipeSelect = new EventEmitter<Recipe>();

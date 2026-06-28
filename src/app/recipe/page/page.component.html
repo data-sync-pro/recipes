@@ -4,8 +4,9 @@
         *ngIf="!isLoading"
         #recipeLayout
         [recipes]="currentRecipes"
-        [allRecipes]="recipes"
+        [allRecipes]="allRecipes"
         [categories]="categories"
+        [category]="navigation.category"
         [searchQuery]="search.query"
         (searchChange)="searchRecipes($event)"
         (recipeSelect)="goToRecipe($event)"

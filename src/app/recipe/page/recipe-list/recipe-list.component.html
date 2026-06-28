@@ -1,8 +1,8 @@
 <div class="recipe-list">
-    <!-- Landing title — mirrors the FAQ "All FAQs" page heading and the recipe
-         detail-banner title (2.25rem, weight 500, brand blue, centered). Hidden
-         while searching, matching the FAQ page-title behavior. -->
-    <h1 class="recipe-page-title" *ngIf="!searchQuery.trim()">All Recipes</h1>
+    <!-- Page title — reflects the current sidebar selection: "All Recipes" on the
+         home view, otherwise the selected category name. Mirrors the FAQ page-title
+         behavior (2.25rem, weight 500, brand blue, centered). Hidden while searching. -->
+    <h1 class="recipe-page-title" *ngIf="!searchQuery.trim()">{{ category || 'All Recipes' }}</h1>
 
     <!-- Flat title-only list, matching the FAQ "All FAQs" list rows. -->
     <div class="result-list">

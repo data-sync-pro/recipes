@@ -108,7 +108,7 @@
           <span class="slogan">in <span class="good-it" style="color: var(--sn-btn, #28E07A);">composable modules</span>.</span>
           <span class="slogan">Your Salesforce should too.</span>
         </h1>
-        <p class="hero-sub reveal" data-d="2">The same power you’d build with <b>custom code</b> — delivered as <b style="color: #FFFFFF;">modular</b>, rules-driven <b>Executables</b>.</p>
+        <p class="hero-sub reveal" data-d="2">The same power you’d build with <b>custom code</b> — delivered as <b style="color: #FFFFFF;">modular</b>, rules-driven <b>Executable records</b>.</p>
         
         <div class="hero-cta reveal" data-d="3">
           <a class="btn" href="#cta">
@@ -439,7 +439,7 @@
               <!-- visual builder: object + fields, point-and-click -->
               <div class="qh-builder">
                 <span class="qh-tok obj"><i>FROM</i>Opportunity</span>
-                <span class="qh-tok"><i>SELECT</i>Name · Stage · Amount · CloseDate</span>
+                <span class="qh-tok"><i>SELECT</i>Name · Stage · Probability · Amount · CloseDate</span>
               </div>
               <!-- filters built by clicking — incl. a dynamic filter -->
               <div class="qh-filters" data-qh-filters>
@@ -452,14 +452,14 @@
               </div>
 
               <!-- editable results (manipulate inline) -->
-              <div class="qh-listhead"><span>Opportunity</span><span>Stage</span><span class="num">Amount</span><span>Close</span></div>
+              <div class="qh-listhead"><span>Opportunity</span><span>Stage</span><span>Prob.</span><span class="num">Amount</span><span>Close</span></div>
               <div class="qh-rows" data-qh-rows>
-                <div class="qh-row" data-qh-row><span class="nm">Acme – Renewal</span><span class="rate" data-qh-rate>Proposal</span><span class="num">$1.24M</span><span>Jun 30</span></div>
-                <div class="qh-row" data-qh-row><span class="nm">Hooli – Expansion</span><span class="rate">Negotiation</span><span class="num">$0.98M</span><span>Jul 12</span></div>
-                <div class="qh-row" data-qh-row><span class="nm">Globex – Platform</span><span class="rate">Qualification</span><span class="num">$0.64M</span><span>Jun 18</span></div>
-                <div class="qh-row" data-qh-row><span class="nm">Initech – New Logo</span><span class="rate">Proposal</span><span class="num">$0.41M</span><span>Aug 02</span></div>
-                <div class="qh-row" data-qh-row><span class="nm">Umbrella – Upsell</span><span class="rate">Negotiation</span><span class="num">$0.33M</span><span>Aug 19</span></div>
-                <div class="qh-row" data-qh-row><span class="nm">Stark – Renewal</span><span class="rate">Proposal</span><span class="num">$0.28M</span><span>Sep 05</span></div>
+                <div class="qh-row" data-qh-row><span class="nm">Acme – Renewal</span><span class="rate" data-qh-rate>Proposal</span><span>70%</span><span class="num">$1.24M</span><span>Jun 30</span></div>
+                <div class="qh-row" data-qh-row><span class="nm">Hooli – Expansion</span><span class="rate">Negotiation</span><span>90%</span><span class="num">$0.98M</span><span>Jul 12</span></div>
+                <div class="qh-row" data-qh-row><span class="nm">Globex – Platform</span><span class="rate">Qualification</span><span>20%</span><span class="num">$0.64M</span><span>Jun 18</span></div>
+                <div class="qh-row" data-qh-row><span class="nm">Initech – New Logo</span><span class="rate">Proposal</span><span>65%</span><span class="num">$0.41M</span><span>Aug 02</span></div>
+                <div class="qh-row" data-qh-row><span class="nm">Umbrella – Upsell</span><span class="rate">Negotiation</span><span>85%</span><span class="num">$0.33M</span><span>Aug 19</span></div>
+                <div class="qh-row" data-qh-row><span class="nm">Stark – Renewal</span><span class="rate">Proposal</span><span>60%</span><span class="num">$0.28M</span><span>Sep 05</span></div>
               </div>
               <div class="qh-foot"><span><b data-qh-count>0</b> records</span><span>0.12s · no SOQL written</span></div>
 
@@ -566,11 +566,11 @@
         <div class="panel-head">
           <div>
             <h3>Bulk processing,<br/><span class="it">without the batch class.</span></h3>
-            <p class="panel-lead">Configure batch jobs as records — run on demand, schedule, chain, and monitor large-volume processing without writing batch Apex, up to <b>20× faster</b> than hand-built code.</p>
+            <p class="panel-lead">Configure batch jobs as records — run on demand, schedule, chain, and monitor large-volume processing without writing batch Apex, up to <b>20× faster</b> than hand-built code.</p><a class="panel-recipe" href="/recipes/batch">View the #Batch recipes <svg class="arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
           <div class="panel-aside">
             <b>Replaces</b>
-            Apex Batch classes · Custom logging frameworks · Home-grown chaining scripts · Schedule job management · ETL tools for cross-org sync · External deduplication tools · DevOps for record-based configuration</div>
+            Apex Batch classes · Custom logging frameworks · Home-grown chaining scripts · Schedule job management · ETL tools for cross-org sync · External deduplication tools · DevOps for record-based configuration · Data backup</div>
         </div>
 
         
@@ -748,11 +748,11 @@
         <div class="panel-head">
           <div>
             <h3>Data List &amp; Action Button,<br/><span class="it">composed by admins.</span></h3>
-            <p class="panel-lead">Configure Data Lists &amp; Action Buttons as Executables, then drop them onto any Lightning page — no developer required. Prototype in minutes.</p>
+            <p class="panel-lead">Configure Data Lists &amp; Action Buttons as Executables, then drop them onto any Lightning page — no developer required. Prototype in minutes.</p><a class="panel-recipe" href="/recipes/ui">View the #UI recipes <svg class="arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
           <div class="panel-aside">
             <b>Replaces</b>
-            Custom LWCs + Apex controllers · Screen Flows · Quick Actions · Standard related lists · Hand-built editable tables
+            Custom LWCs + Apex controllers · Screen Flows · Quick Actions · Standard related lists · Hand-built editable tables · Data mashup
           </div>
         </div>
         
@@ -798,11 +798,11 @@
                     <span class="ws-dl-search"><svg class="mag" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="q">Proposal, Verbal</span></span>
                   </div>
                   <div class="ws-dl-acts">
-                  <span class="ws-ic" title="Edit"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20l.6-3.2L15.4 6a1.9 1.9 0 012.7 2.7L7.2 19.4 4 20z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.6 7.8l2.6 2.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-                  <span class="ws-ic" title="Delete"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M9.5 7V5.4a1 1 0 011-1h3a1 1 0 011 1V7M6.6 7l.85 12.1a1 1 0 001 .9h7.1a1 1 0 001-.9L18.4 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <span class="ws-ic" title="Download"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v10m0 0l-3.5-3.5M12 14l3.5-3.5M5 19h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <span class="ws-ic" title="Add"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <span class="ws-ic" title="Refresh"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19.6 12a7.6 7.6 0 11-2.3-5.4M19.6 4.4V8H16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span class="ws-ic" title="Edit"><svg viewBox="0 0 16 16" fill="none"><path d="M10.5 3.5l2 2M3 11.5l7.4-7.4a1.2 1.2 0 011.7 0l.8.8a1.2 1.2 0 010 1.7L5.5 14H3v-2.5z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span class="ws-ic" title="Delete"><svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 11v5M14 11v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+                  <span class="ws-ic" title="Import"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2.5v7m0 0l-2.5-2.5M8 9.5l2.5-2.5M3 12.5h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span class="ws-ic" title="New"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+                  <span class="ws-ic" title="Refresh"><svg viewBox="0 0 24 24" fill="none"><path d="M21 12a9 9 0 1 1-3-6.7L21 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 3v5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                   <span class="ws-dl-sep"></span>
                     <span class="ws-btn primary">New</span>
                     <span class="ws-btn good">Close Won</span>
@@ -852,11 +852,11 @@
                     <span class="ws-dl-search"><svg class="mag" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="q">High, Medium</span></span>
                   </div>
                   <div class="ws-dl-acts">
-                  <span class="ws-ic" title="Edit"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20l.6-3.2L15.4 6a1.9 1.9 0 012.7 2.7L7.2 19.4 4 20z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.6 7.8l2.6 2.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-                  <span class="ws-ic" title="Delete"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M9.5 7V5.4a1 1 0 011-1h3a1 1 0 011 1V7M6.6 7l.85 12.1a1 1 0 001 .9h7.1a1 1 0 001-.9L18.4 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <span class="ws-ic" title="Download"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v10m0 0l-3.5-3.5M12 14l3.5-3.5M5 19h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <span class="ws-ic" title="Add"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <span class="ws-ic" title="Refresh"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19.6 12a7.6 7.6 0 11-2.3-5.4M19.6 4.4V8H16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span class="ws-ic" title="Edit"><svg viewBox="0 0 16 16" fill="none"><path d="M10.5 3.5l2 2M3 11.5l7.4-7.4a1.2 1.2 0 011.7 0l.8.8a1.2 1.2 0 010 1.7L5.5 14H3v-2.5z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span class="ws-ic" title="Delete"><svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 11v5M14 11v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+                  <span class="ws-ic" title="Import"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2.5v7m0 0l-2.5-2.5M8 9.5l2.5-2.5M3 12.5h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span class="ws-ic" title="New"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+                  <span class="ws-ic" title="Refresh"><svg viewBox="0 0 24 24" fill="none"><path d="M21 12a9 9 0 1 1-3-6.7L21 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 3v5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                   <span class="ws-dl-sep"></span>
                     <span class="ws-btn signal">Escalate</span>
                     <span class="ws-btn primary">Close</span>
@@ -954,7 +954,7 @@
         <div class="panel-head">
           <div>
             <h3>Automation &amp; validation,<br/><span class="it">as records — not code.</span></h3>
-            <p class="panel-lead">Every automation and validation rule lives as a Salesforce record — flat, bulk-safe, and modular by design.</p>
+            <p class="panel-lead">Every automation and validation rule lives as a Salesforce record — flat, bulk-safe, and modular by design.</p><a class="panel-recipe" href="/recipes/trigger">View the #Trigger recipes <svg class="arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
           <div class="panel-aside">
             <b>Replaces</b>
@@ -1105,7 +1105,7 @@
         <div class="panel-head">
           <div>
             <h3>Loaders that<br/><span class="it">stay on the platform.</span></h3>
-            <p class="panel-lead">Native, reusable loaders configured as Executables — upload a CSV into a Lightning component and process it inside Salesforce, so your data and credentials never leave the org.</p>
+            <p class="panel-lead">Native, reusable loaders configured as Executables — upload a CSV into a Lightning component and process it inside Salesforce, so your data and credentials never leave the org.</p><a class="panel-recipe" href="/recipes/loader">View the #Data Loader recipes <svg class="arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
           <div class="panel-aside">
             <b>Replaces</b>
@@ -1222,7 +1222,7 @@
           <div>
             <span class="hash-big free-only"><span class="free-tag">FREE</span></span>
             <h3>Anyone can master Salesforce data, <span class="it">no SOQL, no code — point, click, done.</span></h3>
-            <p class="panel-lead">Query Manager is a single Lightning surface for building, saving, and running SOQL — without writing a line of it — then acting on the results with full CRUD, all inside your org. Free on AgentExchange.</p>
+            <p class="panel-lead">Query Manager is a single Lightning surface for building, saving, and running SOQL — without writing a line of it — then acting on the results with full CRUD, all inside your org. Free on AgentExchange.</p><a class="panel-recipe" href="/recipes/query">View the #Query recipes <svg class="arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
           <div class="panel-aside">
             <b>Replaces</b>
@@ -1924,7 +1924,7 @@
     <div class="section-head reveal">
       <span class="eyebrow"><span class="dot"></span>Pricing</span>
       <h2>Priced per org.<br/><span class="it">Never per seat.</span></h2>
-      <p class="lead">Adding people never raises the bill. What you pay scales with the complexity you hand us: the Executables (rules), Connections (orgs), and data volume DSP takes off your plate. You pay for the problem solved — not for headcount.</p>
+      <p class="lead">Adding people never raises the bill. What you pay scales with the complexity you hand us: the Executables (rules), Connections (orgs), and data volume DSP takes off your plate. You pay for the problem solved — not for headcount. <a href="/license-explained" style="color: var(--brand-ink); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap;">See how a license is sized →</a></p>
     </div>
 
     <div class="price-grid reveal">
@@ -1956,7 +1956,7 @@
           <span class="pc-name">Growth</span>
         </header>
         <div class="pc-price">
-          <span class="pc-amount">$2,100</span>
+          <span class="pc-amount">$1,800</span>
           <span class="pc-period">/ month</span>
         </div>
         <p class="pc-tagline">For teams that have outgrown the free tier and need the full surface area.</p>
@@ -1977,7 +1977,7 @@
           <span class="pc-name">Business</span>
         </header>
         <div class="pc-price">
-          <span class="pc-amount">$6,000</span>
+          <span class="pc-amount">$5,400</span>
           <span class="pc-period">/ month</span>
         </div>
         <p class="pc-tagline">For orgs with sandbox lifecycles, DevOps needs, and multi-org data flows.</p>
@@ -1997,7 +1997,7 @@
         <header class="pc-head">
           <span class="pc-name">Enterprise</span>
         </header>
-        <div class="pc-price">
+        <div class="pc-price pc-price-custom">
           <span class="pc-amount">Custom</span>
           <span class="pc-period">tailored to your org</span>
         </div>
@@ -2025,7 +2025,7 @@
         </div>
         <div class="pa-item">
           <span class="pa-label">Extra Executables</span>
-          <span class="pa-price">$1,500<span class="pa-unit"> / 100 / month</span></span>
+          <span class="pa-price">$1,200 / 100 / month</span>
           <span class="pa-desc">When your included Executables aren't enough — buy in blocks of 100.</span>
         </div>
         <div class="pa-item">

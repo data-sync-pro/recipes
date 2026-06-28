@@ -14,6 +14,8 @@ export class RecipeLayoutComponent {
   /** Full recipe list for the navigation sidebar (recipes is the filtered grid view). */
   @Input() allRecipes: Recipe[] = [];
   @Input() categories: Category[] = [];
+  /** Current category display name (empty on the home view). Forwarded to the list title. */
+  @Input() category: string = '';
   @Input() searchQuery: string = '';
 
   @Output() searchChange = new EventEmitter<string>();

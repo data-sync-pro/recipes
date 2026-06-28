@@ -62,7 +62,10 @@ export class RecipesComponent implements OnInit, OnDestroy {
     recipeName: ''
   };
 
-  recipes: Recipe[] = [];
+  // Full, unfiltered recipe list. Feeds the navigation sidebar (every category's
+  // children) and the global search/filter base. The category-filtered view the
+  // grid renders lives in `filteredRecipes`, not here.
+  allRecipes: Recipe[] = [];
   categories: Category[] = [];
   filteredRecipes: Recipe[] = [];
   totalRecipeCount: number = 0;
@@ -133,7 +136,6 @@ export class RecipesComponent implements OnInit, OnDestroy {
     this.routeHandlerService.getDataLoadedEvents()
       .pipe(takeUntil(this.destroy$))
       .subscribe(result => {
-        this.recipes = result.recipes;
         this.filteredRecipes = result.filteredRecipes;
         this.totalRecipeCount = result.totalRecipeCount;
         this.cdr.markForCheck();
@@ -217,6 +219,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe({
       next: (recipes) => {
+        this.allRecipes = recipes;
         this.categories = this.coreSearchService.generateCategories(recipes);
         this.cdr.markForCheck();
       },
@@ -232,7 +235,9 @@ export class RecipesComponent implements OnInit, OnDestroy {
   }
 
   searchRecipes(query: string): void {
-    this.searchService.searchRecipes(query, this.currentFilter, this.recipes);
+    // Search the full catalog, not the category-filtered `recipes` subset, so
+    // search on /recipes/:category still spans every category.
+    this.searchService.searchRecipes(query, this.currentFilter, this.allRecipes);
   }
 
   openSearchOverlay(initialQuery = ''): void {
@@ -263,8 +268,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
   }
 
   private applyFilters(): void {
-    // Start with all recipes
-    let filtered = [...this.recipes];
+    // Start with the full catalog (not the category-filtered `recipes` subset).
+    let filtered = [...this.allRecipes];
 
     // Apply category filter - recipe matches if any of its categories is in the filter
     if (this.currentFilter.categories.length > 0) {
