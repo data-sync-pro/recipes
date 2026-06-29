@@ -2,7 +2,7 @@
   "id": "0e504b2e-1911-434b-8fdd-2f18eab914a4",
   "title": "List Action with Template Record Editor",
   "category": [
-    "Action Button"
+    "Action Button", "Data List"
   ],
   "DSPVersions": [],
   "overview": "An #Action Button is added to the Case data list to close selected Cases, with Pre-Action (Template Record Editor) enabled. When clicked, it opens the editor using the first transformed target record; any field changes are applied to all target records. Users then proceed to execute the action on the full target set.",

@@ -1,0 +1,61 @@
+{
+  "Batch": [
+    "bulk-merge-records-from-duplicate-job-results",
+    "scheduled-retention-cleanup",
+    "schedule-job-management",
+    "mass-recalculation-with-batch-blank-updates",
+    "cross-org-data-migration",
+    "migrate-salesforce-files-between-orgs",
+    "incremental-data-backup-to-big-objects",
+    "restore-records-from-recycle-bin",
+    "mask-sensitive-data-in-sandboxes"
+    
+  ],
+  "Trigger": [
+    "self-adaptive-trigger-for-rollup-summary-calculations",
+    "centralized-validation-rules-with-self-adaptive-trigger",
+    "auto-copy-child-records-from-a-source-reference",
+    "maintain-child-records-from-parent-field-changes",
+    "auto-create-a-child-record-on-parent-change",
+    "record-snapshot-history-with-a-big-object",
+    "joiner-scope-filter-post-join",
+    "the-trigger-flipper-pattern"
+  ],
+  "Data List": [
+    "bulk-add-records-to-a-data-list",
+    "dynamic-filters",
+    "list-action-with-line-editor",
+    "list-action-with-template-record-editor",
+    "pinned-column-filters",
+    "restore-a-record-from-snapshot-history",
+    "add-multiple-actions-to-a-data-list",
+    "row-related-lists",
+    "one-file-per-record-file-management",
+    "mashup-related-data-from-a-remote-org"
+  ],
+  "Action Button": [
+    "record-action-with-pre-action-review",
+    "merge-duplicate-records",
+    "list-action-with-line-editor",
+    "list-action-with-template-record-editor",
+    "restore-a-record-from-snapshot-history"
+  ],
+  "Data Loader": [
+    "transformable-record-based-data-loader",
+    "context-aware-data-loader-from-lightning-record-page"
+    
+  ],
+  "Query": [
+    "build-and-run-a-query",
+    "column-filter",
+    "dynamic-filters",
+    "inline-edit",
+    "manage-saved-queries",
+    "mass-edit"
+  ],
+  "General": [
+    "skip-no-op-updates",
+    "variables-for-named-expressions",
+    "export-import-pipelines-as-templates"
+  ]
+}

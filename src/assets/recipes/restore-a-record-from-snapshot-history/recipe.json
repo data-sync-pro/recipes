@@ -2,7 +2,7 @@
   "id": "0e87a74a-4ea3-4be8-905b-850c3216057f",
   "title": "Restore a Record From Snapshot History",
   "category": [
-    "Data List"
+    "Data List","Action Button"
   ],
   "DSPVersions": [],
   "overview": "A #Data List on the Quote record page queries Quote history stored in a Big Object using a dynamic filter, and provides an action to restore the Quote from a selected version.",

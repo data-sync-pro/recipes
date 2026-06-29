@@ -1,6 +1,6 @@
 {
   "id": "3a0aba6f-2b44-45f6-acf2-aaa0afe528fe",
-  "title": "Execute an Action with Trigger",
+  "title": "Auto-Create a Child Record on Parent Change",
   "category": [
     "Trigger"
   ],

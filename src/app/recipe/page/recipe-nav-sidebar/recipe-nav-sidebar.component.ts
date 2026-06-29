@@ -1,16 +1,22 @@
 import {
   Component,
   Input,
+  OnInit,
   OnChanges,
+  OnDestroy,
   SimpleChanges,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   ViewChild,
   ElementRef
 } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Recipe, Category } from '../../core/models/recipe.model';
 import { SearchService } from '../../core/services/search.service';
+import { CategoryOrderService } from '../../core/services/category-order.service';
 import { categoryToSlug } from '../../core/constants/recipe.constants';
+import { orderRecipesWithinCategory, CategoryOrderMap } from '../../core/utils';
 
 interface CategoryGroup {
   category: Category;
@@ -30,7 +36,7 @@ interface CategoryGroup {
   styleUrls: ['./recipe-nav-sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RecipeNavSidebarComponent implements OnChanges {
+export class RecipeNavSidebarComponent implements OnInit, OnChanges, OnDestroy {
   /** Full recipe list used to build the category groups (not a filtered view). */
   @Input() recipes: Recipe[] = [];
 
@@ -54,12 +60,40 @@ export class RecipeNavSidebarComponent implements OnChanges {
   // Mobile sidebar drawer
   isSidebarOpen: boolean = false;
 
+  // Manual per-category recipe order (assets/recipes/category-order.json).
+  private orderMap: CategoryOrderMap = {};
+  private destroy$ = new Subject<void>();
+
   @ViewChild('sidebarSearchInput') sidebarSearchInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     private searchService: SearchService,
+    private categoryOrderService: CategoryOrderService,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {
+    // Seed synchronously so the first build (initial ngOnChanges) is already
+    // ordered when the map happens to be loaded; the subscription below rebuilds
+    // once it arrives.
+    this.orderMap = this.categoryOrderService.getOrderMapSync();
+  }
+
+  ngOnInit(): void {
+    this.categoryOrderService.getOrderMap$()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(orderMap => {
+        this.orderMap = orderMap;
+        if (this.recipes.length) {
+          this.buildCategoryGroups();
+          if (this.expandCategoryName) {
+            this.expandCategory(this.expandCategoryName);
+          }
+          if (this.sidebarSearchQuery.trim()) {
+            this.onSidebarSearchInput();
+          }
+          this.cdr.markForCheck();
+        }
+      });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['recipes'] || changes['categories']) {
@@ -73,11 +107,26 @@ export class RecipeNavSidebarComponent implements OnChanges {
     this.cdr.markForCheck();
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   private buildCategoryGroups(): void {
+    // Preserve which categories are expanded across rebuilds (e.g. when the
+    // order map loads after the recipes).
+    const expandedNames = new Set(
+      this.categoryGroups.filter(g => g.isExpanded).map(g => g.category.name)
+    );
+
     this.categoryGroups = this.categories.map(category => ({
       category,
-      recipes: this.recipes.filter(r => r.category.includes(category.name)),
-      isExpanded: false
+      recipes: orderRecipesWithinCategory(
+        category.name,
+        this.recipes.filter(r => r.category.includes(category.name)),
+        this.orderMap
+      ),
+      isExpanded: expandedNames.has(category.name)
     }));
     this.filteredCategoryGroups = [...this.categoryGroups];
   }
