@@ -37,15 +37,6 @@ export const AGGREGATE_CATEGORIES: ReadonlyArray<AggregateCategoryDefinition> = 
   { displayName: 'UI', slug: 'ui', members: ['Data List', 'Action Button'] }
 ];
 
-/**
- * Slug aliases that redirect to a canonical category slug. The homepage links to
- * short slugs (e.g. /recipes/loader) that don't match the generated canonical
- * slug (data-loader); the routing guard redirects them.
- */
-export const SLUG_ALIASES: Readonly<Record<string, string>> = {
-  loader: 'data-loader'
-};
-
 export function categoryToSlug(displayName: string): string {
   const match = CATEGORY_ORDER.find(c => c.displayName === displayName);
   return match ? match.slug : generateSlug(displayName);
