@@ -4,19 +4,40 @@
          behavior (2.25rem, weight 500, brand blue, centered). Hidden while searching. -->
     <h1 class="recipe-page-title" *ngIf="!searchQuery.trim()">{{ category || 'All Recipes' }}</h1>
 
-    <!-- Flat title-only list, matching the FAQ "All FAQs" list rows. -->
-    <div class="result-list">
-        <a *ngFor="let recipe of recipes; trackBy: trackByRecipeId"
-            class="recipe-row"
-            [routerLink]="recipeLink(recipe)"
-            (click)="onRecipeClick(recipe)">
-            <h3 class="recipe-row-title">{{ recipe.title }}</h3>
-        </a>
+    <!-- Aggregate category page (e.g. UI): split into subcategory sections, each
+         with its own heading. A recipe in multiple members appears under each. -->
+    <ng-container *ngIf="isSubcategorized; else flatList">
+        <section
+            *ngFor="let group of subcategoryGroups; trackBy: trackBySubcategoryName"
+            class="subcategory-section">
+            <h2 class="subcategory-title">{{ group.name }}</h2>
+            <div class="result-list">
+                <a *ngFor="let recipe of group.recipes; trackBy: trackByRecipeId"
+                    class="recipe-row"
+                    [routerLink]="recipeLink(recipe, group.name)"
+                    (click)="onRecipeClick(recipe)">
+                    <h3 class="recipe-row-title">{{ recipe.title }}</h3>
+                </a>
+            </div>
+        </section>
+    </ng-container>
 
-        <!-- Empty State -->
-        <div *ngIf="recipes.length === 0" class="empty-state">
-            <mat-icon>search_off</mat-icon>
-            <p>No recipes found</p>
+    <!-- Flat title-only list, matching the FAQ "All FAQs" list rows. Used for
+         All Recipes, normal categories, and search results. -->
+    <ng-template #flatList>
+        <div class="result-list">
+            <a *ngFor="let recipe of recipes; trackBy: trackByRecipeId"
+                class="recipe-row"
+                [routerLink]="recipeLink(recipe)"
+                (click)="onRecipeClick(recipe)">
+                <h3 class="recipe-row-title">{{ recipe.title }}</h3>
+            </a>
+
+            <!-- Empty State -->
+            <div *ngIf="recipes.length === 0" class="empty-state">
+                <mat-icon>search_off</mat-icon>
+                <p>No recipes found</p>
+            </div>
         </div>
-    </div>
+    </ng-template>
 </div>
