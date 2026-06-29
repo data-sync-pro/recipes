@@ -70,6 +70,7 @@
         <!-- Category Header -->
         <div
           class="category-header"
+          [class.active]="group.category.name === activeCategoryName"
           (click)="toggleCategory(group.category.name)">
           <img
             class="chevron-down-icon"

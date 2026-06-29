@@ -162,6 +162,18 @@
             background-color: #F1F6FB;
           }
 
+          // Active category — the one whose slug is in the /recipes/:category
+          // URL. Brand-blue + bold to distinguish it from the plain hover tint.
+          &.active {
+            color: #2253B2;
+            font-weight: 500;
+            background-color: #F1F6FB;
+
+            .category-name {
+              font-weight: 500;
+            }
+          }
+
           &:has(.chevron-down-icon:not(.collapsed)) {
             margin-bottom: 8px;
           }

@@ -1,6 +1,5 @@
 <div class="recipe-detail-page">
   <div class="detail-main-layout">
-    <!-- Left Sidebar - Recipe List -->
     <app-recipe-nav-sidebar
       [recipes]="allRecipes"
       [categories]="allCategories"
@@ -8,39 +7,32 @@
       [expandCategoryName]="activeCategoryName">
     </app-recipe-nav-sidebar>
 
-    <!-- Middle Content Area -->
     <main class="detail-content">
       <app-recipe-detail-banner
         [title]="currentRecipe?.title || 'Recipe Details'"
         [breadcrumbs]="breadcrumbs">
       </app-recipe-detail-banner>
 
-      <!-- Section order is controlled by SECTION_CONFIG in the component -->
       <div class="content-sections" *ngIf="currentRecipe">
         <ng-container *ngFor="let section of visibleSections">
           <section [id]="section.id" class="content-section">
             <h2 class="recipe-section-title">{{ section.label }}</h2>
 
             <ng-container [ngSwitch]="section.templateRef">
-              <!-- Overview Section -->
               <ng-container *ngSwitchCase="'overview'">
                 <div class="section-content">
                   <div [innerHTML]="currentRecipe.overview | codeBlock"></div>
                 </div>
               </ng-container>
 
-              <!-- General Use Case Section -->
               <ng-container *ngSwitchCase="'useCase'">
-                <!-- Single item: display as paragraph -->
                 <div class="section-content" *ngIf="getGeneralUseCaseItems().length === 1" [innerHTML]="getGeneralUseCaseItems()[0] | codeBlock">
                 </div>
-                <!-- Multiple items: display as list -->
                 <ul class="use-case-list" *ngIf="getGeneralUseCaseItems().length > 1">
                   <li *ngFor="let item of getGeneralUseCaseItems()" [innerHTML]="item | codeBlock"></li>
                 </ul>
               </ng-container>
 
-              <!-- Download Executable File Section -->
               <ng-container *ngSwitchCase="'downloadFile'">
                 <a
                   *ngFor="let file of currentRecipe.downloadableExecutables"
@@ -52,7 +44,6 @@
                 </a>
               </ng-container>
 
-              <!-- Prerequisites Section -->
               <ng-container *ngSwitchCase="'prerequisites'">
                 <app-recipe-prereqs
                   [callouts]="currentRecipe.downloadFileCallout"
@@ -60,7 +51,6 @@
                 </app-recipe-prereqs>
               </ng-container>
 
-              <!-- Video Demo Section -->
               <ng-container *ngSwitchCase="'videoDemo'">
                 <div class="section-content">
                   <div class="videos">
@@ -77,19 +67,15 @@
                 </div>
               </ng-container>
 
-              <!-- Direction Section -->
               <ng-container *ngSwitchCase="'direction'">
                 <div class="section-content">{{ currentRecipe.direction }}</div>
               </ng-container>
 
-              <!-- Pipeline Section -->
               <ng-container *ngSwitchCase="'pipeline'">
                 <div class="section-content">{{ currentRecipe.pipeline }}</div>
               </ng-container>
 
-              <!-- Walkthrough Section (tab-grouped) -->
               <ng-container *ngSwitchCase="'walkthrough'">
-                <!-- Tab buttons; only render if more than one tab to keep single-tab recipes visually unchanged -->
                 <div class="walkthrough-tabs"
                      *ngIf="currentRecipe.walkthrough.length > 1"
                      role="tablist">
@@ -123,7 +109,6 @@
                         <h3 class="step-title">{{ step.step }}</h3>
                       </div>
 
-                      <!-- Step Media -->
                       <div class="step-media" *ngIf="step.media && step.media.length > 0">
                         <div *ngFor="let media of step.media" class="media-item">
                           <img
@@ -152,55 +137,12 @@
           </section>
         </ng-container>
 
-        <!-- Verification GIF Section (temporarily hidden - videos moved to overview) -->
-        <!-- <section id="verification-gif" class="content-section" *ngIf="(currentRecipe.verificationGIF && currentRecipe.verificationGIF.length > 0) || getYouTubeVideosFromGeneralImages().length > 0">
-          <h2 class="recipe-section-title">Verification</h2>
-
-          <div class="verification-media">
-            <div *ngFor="let video of getYouTubeVideosFromGeneralImages()" class="verification-item">
-              <iframe
-                [src]="getYouTubeEmbedUrl(video.url)"
-                class="verification-video youtube-embed"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-            </div>
-
-            <div *ngFor="let media of currentRecipe.verificationGIF; let i = index" class="verification-item">
-              <img
-                *ngIf="media.type === 'gif'"
-                [src]="media.displayUrl || media.url"
-                [alt]="media.alt"
-                class="verification-image">
-              <iframe
-                *ngIf="media.type === 'video' && isYouTubeUrl(media.url)"
-                [src]="getYouTubeEmbedUrl(media.url)"
-                class="verification-video youtube-embed"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-              <video
-                *ngIf="media.type === 'video' && !isYouTubeUrl(media.url)"
-                [src]="media.displayUrl || media.url"
-                controls
-                class="verification-video clickable"
-                (click)="openMediaPreview(media)">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-        </section> -->
       </div>
 
-      <!-- Loading State -->
       <div class="loading-state" *ngIf="!currentRecipe">
         <p>Loading recipe...</p>
       </div>
     </main>
-
-    <!-- Right Sidebar - TOC -->
     <aside class="right-toc">
       <div class="toc-sticky">
         <nav class="toc-nav" *ngIf="tocItems.length > 0">
@@ -211,11 +153,6 @@
                (click)="scrollToSection($event, item.id)">
               {{ item.label }}
             </a>
-            <!-- Sub-items: a child may itself have children (multi-tab
-                 walkthrough → parent group + its substeps), in which case
-                 we wrap the parent + its substeps in a .toc-group so the
-                 whole block can be highlighted as a card when something
-                 inside it is active. -->
             <ng-container *ngIf="item.children && item.children.length > 0">
               <ng-container *ngFor="let child of item.children">
                 <ng-container *ngIf="child.children && child.children.length > 0; else flatChild">
@@ -252,7 +189,6 @@
     </aside>
   </div>
 
-  <!-- Media Preview Modal -->
   <div class="media-modal-overlay" *ngIf="isMediaModalOpen" (click)="closeMediaPreview()">
     <div class="media-modal-container">
       <button class="modal-close-btn" (click)="closeMediaPreview()" aria-label="Close preview">
@@ -280,7 +216,6 @@
     </div>
   </div>
 
-  <!-- Search Overlay -->
   <app-recipe-search-overlay
     *ngIf="isSearchOverlayOpen"
     [isOpen]="isSearchOverlayOpen"

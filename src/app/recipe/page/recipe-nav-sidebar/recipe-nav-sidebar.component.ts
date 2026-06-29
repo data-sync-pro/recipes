@@ -43,6 +43,9 @@ export class RecipeNavSidebarComponent implements OnChanges {
   /** Category to auto-expand on load (e.g. the active recipe's category). */
   @Input() expandCategoryName: string | null = null;
 
+  /** Category name to highlight as active (driven by the /recipes/:category URL). */
+  @Input() activeCategoryName: string | null = null;
+
   // --- Sidebar state (extracted from RecipeDetailPageComponent) ---
   categoryGroups: CategoryGroup[] = [];
   filteredCategoryGroups: CategoryGroup[] = [];

@@ -13,13 +13,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css?v=36" />
 <style>
-  /* Page-specific: naming-conventions reference — reuses the site tokens,
-     mirrors the legal pages so docs read as a set. nc- prefix throughout. */
   .legal-hero {
     padding: clamp(56px, 8vw, 104px) 0 clamp(28px, 4vw, 44px);
     border-bottom: 1px solid var(--rule);
   }
-  /* Recipes-style breadcrumb top bar */
   .nav-doc .nav-inner { gap: 14px; }
   .nav-crumb-sep { width: 1px; height: 20px; background: var(--rule); flex: 0 0 auto; }
   .nav-crumb { color: var(--ink-3); font-size: 14.5px; font-weight: 500; letter-spacing: -0.01em; }
@@ -72,7 +69,6 @@
     color: var(--ink);
   }
 
-  /* Callout */
   .legal-callout {
     margin: 22px 0;
     padding: 18px 22px;
@@ -85,7 +81,6 @@
   }
   .legal-callout code { background: rgba(255,255,255,.5); border-color: color-mix(in oklab, var(--brand) 24%, transparent); }
 
-  /* TOC */
   .legal-toc { margin: 32px 0 0; padding: 20px 22px; background: var(--paper-2); border: 1px solid var(--rule); border-radius: 14px; }
   .legal-toc h2 { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 12px; }
   .legal-toc ol { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: 28px; counter-reset: toc; }
@@ -95,7 +90,6 @@
   .legal-toc a:hover { color: var(--brand-ink); }
   @media (max-width: 560px) { .legal-toc ol { columns: 1; } }
 
-  /* ---- Anatomy diagram ---- */
   .nc-anatomy {
     margin: 26px 0 10px;
     padding: clamp(22px, 3vw, 34px) clamp(20px, 3vw, 30px) 26px;
@@ -133,7 +127,6 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
-  /* role colours */
   .role-object .nc-seg-tok { background: var(--brand-soft); border-color: color-mix(in oklab, var(--brand) 28%, transparent); color: var(--brand-ink); }
   .role-object .nc-seg-tag { color: var(--brand-ink); }
   .role-context .nc-seg-tok { background: var(--paper-2); border-color: var(--rule-2); color: var(--ink); }
@@ -145,7 +138,6 @@
   .nc-anatomy-read { margin: 20px 0 0; font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
   .nc-anatomy-read b { color: var(--ink); font-weight: 600; }
 
-  /* ---- Rule cards (purpose per surface) ---- */
   .nc-rules { margin: 22px 0 6px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   @media (max-width: 720px) { .nc-rules { grid-template-columns: 1fr; } }
   .nc-rule {
@@ -172,7 +164,6 @@
   }
   .nc-rule .nc-eg code b { color: var(--signal); font-weight: 500; }
 
-  /* ---- Surface badges ---- */
   .nc-badge {
     display: inline-flex; align-items: center; gap: 6px;
     font-family: var(--f-mono);
@@ -185,6 +176,8 @@
     white-space: nowrap;
     line-height: 1.4;
   }
+
+  #executable .nc-table td.nc-surface .nc-badge { font-size: 14px; padding: 4px 11px 4px 10px; }
   .nc-badge::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--mute); }
   .nc-badge.s-trigger { color: var(--brand-ink); border-color: color-mix(in oklab, var(--brand) 30%, transparent); background: var(--brand-soft); }
   .nc-badge.s-trigger::before { background: var(--brand); }
@@ -205,9 +198,7 @@
 
   .nc-badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 4px; }
 
-  /* ---- Tables ---- */
   .nc-table-wrap { margin: 16px 0 8px; overflow-x: auto; border: 1px solid var(--rule); border-radius: 14px; }
-  /* Catalog tables break out of the 820px prose column so the description fits. */
   #catalog-pipelines .nc-table-wrap,
   #catalog-execs .nc-table-wrap,
   #catalog-variables .nc-table-wrap { width: 100%; }
@@ -237,7 +228,6 @@
   .nc-count { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); margin-left: auto; }
   .nc-table-head { display: flex; align-items: baseline; gap: 12px; }
 
-  /* ---- Do / Don't ---- */
   .nc-dd { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0 4px; }
   @media (max-width: 640px) { .nc-dd { grid-template-columns: 1fr; } }
   .nc-dd-col { border: 1px solid var(--rule); border-radius: 14px; padding: 18px 20px; background: var(--card); }
@@ -250,7 +240,6 @@
   .nc-dd-col.do li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--good); font-size: 13px; }
   .nc-dd-col.dont li::before { content: "✕"; position: absolute; left: 0; top: 1px; color: var(--signal); font-size: 12px; }
 
-  /* ---- cb: concept page extras ---- */
   .legal-section ul.cb-list { list-style: none; margin: 6px 0 14px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
   .legal-section ul.cb-list li { position: relative; padding-left: 22px; font-size: 20px; line-height: 1.6; color: var(--ink-2); }
   .legal-section ul.cb-list li::before { content: ""; position: absolute; left: 2px; top: 9px; width: 7px; height: 7px; border-radius: 2px; background: var(--brand); }
@@ -276,7 +265,6 @@
 </head>
 <body>
 
-<!-- =========== NAV =========== -->
 <nav class="nav nav-doc" id="nav">
   <div class="nav-inner">
     <a class="brand-mark" href="/" aria-label="Data Sync Pro home">
@@ -288,7 +276,6 @@
   </div>
 </nav>
 
-<!-- =========== HERO =========== -->
 <header class="legal-hero">
   <div class="container">
     <div class="eyebrow"><span class="dot"></span>Reference</div>
@@ -296,13 +283,11 @@
   </div>
 </header>
 
-<!-- =========== BODY =========== -->
 <main class="legal-body">
   <div class="container">
     <div class="legal-wrap">
       <p class="legal-lead">Data Sync Pro is licensed on three things: the <strong>Executables</strong> (rules) you configure, the <strong>Connections</strong> (Salesforce instances) you link, and your <strong>Daily Batch Limit</strong>. Executables are usually the figure that matters most when sizing — and because each Executable is a complete functional unit (one rule that delivers a whole job end to end), most Salesforce instances need far fewer than they expect.</p>
 
-      <!-- 01 EXECUTABLE -->
       <section class="legal-section" id="executable">
         <h2><span class="num">01</span>Executables</h2>
 
@@ -353,13 +338,11 @@
         </div>
       </section>
 
-      <!-- 03 CONNECTIONS -->
       <section class="legal-section" id="connections">
         <h2><span class="num">02</span>Connections</h2>
         <p>A saved, reusable link to a Salesforce org — either a sandbox of your current org or a separate Salesforce org. Executables point at a Connection by name, and many rules share one, so you size by the number of Salesforce instances you connect. Every Executable needs at least one Connection to run — most commonly pointing it at the current org.</p>
       </section>
 
-      <!-- 04 DAILY BATCH LIMIT -->
       <section class="legal-section" id="batch-limit">
         <h2><span class="num">03</span>Daily Batch Limit</h2>
         <p>The most records that can be processed in a single day — counted over a UTC calendar day, midnight to midnight (00:00–00:00 UTC). Two engines count against it — <span class="nc-badge s-batch" style="vertical-align:middle;">#Batch</span> and <span class="nc-badge s-loader" style="vertical-align:middle;">#Data Loader</span> — so size it to your batch volume. A job already running always finishes; once the limit is reached, it's the <em>next</em> job that's blocked when it tries to start. This is a DSP-enforced limit — Salesforce's own platform governor limits still apply on top of it.</p>
@@ -369,7 +352,6 @@
   </div>
 </main>
 
-<!-- =========== FOOTER (removed) =========== -->
 
 <script src="app.js?v=36" defer></script>
 </body>
