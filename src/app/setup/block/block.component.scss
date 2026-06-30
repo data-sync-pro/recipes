@@ -18,6 +18,15 @@
   color: #2C2C2D;
 }
 
+// Sub-heading (e.g. "Pipeline Example" above a code block). No page used h4
+// before, so this defines its look from scratch rather than overriding one.
+.block-h4 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 1.5rem 0 0.75rem;
+  color: #2253B2;
+}
+
 // Collapsible Step
 .block-step {
   margin: 1rem 0 0 ;
@@ -148,8 +157,9 @@
   margin: 1.5rem 0;
   padding: 0.6rem 1rem;
   border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--callout-accent) 22%, transparent);
   border-left: 3px solid var(--callout-accent);
-  background: linear-gradient(90deg, var(--callout-tint), #ffffff);
+  background: var(--callout-tint);
   color: #2C2C2D;
 
   // Variant palette: --callout-accent drives border/icon/title, --callout-tint the surface
@@ -370,6 +380,155 @@
 
   // First column wider, others equal width
   th:first-child, td:first-child { width: 50%; }
+}
+
+$mono: 'Consolas', 'Monaco', 'Courier New', monospace;
+
+// Eyebrow label (REQUEST BODY / RETURNS) — used inside endpoint bodies.
+.block-label {
+  font-family: $mono;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  margin: 0 0 9px;
+
+  &.has-divider {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f1;
+  }
+}
+
+// Numbered steps with square chips (e.g. the Postman walkthrough).
+.block-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 1.25rem 0;
+
+  .step-item {
+    display: flex;
+    gap: 13px;
+    align-items: flex-start;
+  }
+
+  .step-chip {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    background: #eef3fb;
+    color: #2253B2;
+    font-family: $mono;
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+
+  .step-body {
+    flex: 1;
+    min-width: 0;
+    padding-top: 2px;
+  }
+
+  .step-text {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: #3f3f46;
+  }
+}
+
+// Card — bordered panel grouping related blocks under a tag pill (e.g. the
+// Pipeline vs Executable request bodies). Tag palette mirrors .endpoint-tag.
+.block-card {
+  margin: 0.75rem 0;
+  border: 1px solid #e7e7ea;
+  border-radius: 11px;
+  padding: 13px 16px 15px;
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 8px;
+  }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #18181b;
+  }
+
+  .card-tag {
+    font-family: $mono;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    padding: 3px 7px;
+    border-radius: 5px;
+
+    &[data-variant='batch'] { color: #2563a8; background: #eef4fc; }
+    &[data-variant='sync']  { color: #9a5a16; background: #fbf0e3; }
+  }
+
+  // Nested blocks render through child SetupBlockComponent instances (same
+  // component → these scoped rules still match). Tighten their spacing so the
+  // card reads as one compact group.
+  .block-p {
+    margin: 0 0 2px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #52525b;
+  }
+
+  .block-code { margin: 8px 0 0; }
+}
+
+// Key/value reference grid (OAuth config / Replace tables).
+.block-keyvalue {
+  margin: 0.75rem 0;
+  border: 1px solid #e7e7ea;
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: $mono;
+  font-size: 12.5px;
+
+  .kv-row {
+    display: grid;
+    grid-template-columns: minmax(120px, auto) 1fr;
+
+    &:not(:last-child) {
+      .kv-key,
+      .kv-value { border-bottom: 1px solid #efeff1; }
+    }
+  }
+
+  .kv-key {
+    padding: 9px 13px;
+    background: #fafafb;
+    color: #71717a;
+    white-space: nowrap;
+  }
+
+  .kv-value {
+    padding: 9px 13px;
+    border-left: 1px solid #efeff1;
+    color: #27272a;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    // {placeholder} segments tinted in the site brand blue
+    .ph { color: #2253B2; }
+  }
+
+  // 'code' key style: keys read as code tokens (matches site inline-code maroon).
+  &[data-keystyle='code'] .kv-key {
+    color: #800000;
+  }
 }
 
 // NOTE: setup-link / setup-link-external / setup-link-broken styles live in the
