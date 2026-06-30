@@ -1,0 +1,9 @@
+<div class="code-panel">
+  <div class="code-panel-header">
+    <span class="code-lang">{{ block.language || 'code' }}</span>
+    <button type="button" class="code-copy" [class.copied]="copied" (click)="copy()">
+      {{ copied ? 'Copied' : 'Copy' }}
+    </button>
+  </div>
+  <pre class="block-code"><code #codeBlock [class]="'language-' + getHljsLanguage(block.language)">{{ block.content }}</code></pre>
+</div>

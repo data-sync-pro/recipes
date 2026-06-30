@@ -68,7 +68,8 @@ html {
 .block-p strong,
 .block-list strong,
 .callout-content strong,
-.block-table strong {
+.block-table strong,
+.step-text strong {
   font-weight: 500;
 }
 
@@ -79,7 +80,8 @@ html {
 .block-list code,
 .callout-content code,
 .block-table code,
-.block-caption code {
+.block-caption code,
+.step-text code {
   padding: 0.1em 0.4em;
   background: #eff0f0c4;
   border-radius: 4px;
@@ -87,6 +89,23 @@ html {
   font-size: 0.9em;
   color: #800000;
   word-break: break-word;
+}
+
+// REST API endpoint panel: its body renders child blocks through a nested
+// app-setup-block, so their typography can't be reached by the endpoint's own
+// (encapsulated) component styles — tune them here, globally. Compact panel text
+// is smaller than the page default.
+// The `app-setup-block` element is included so these win the specificity tie
+// against the child component's own encapsulated .block-p / .code-panel rules.
+.endpoint-body app-setup-block .block-p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #52525b;
+  margin: 0.5rem 0;
+}
+
+.endpoint-body app-setup-block .code-panel {
+  margin-top: 4px;
 }
 
 // Single source of truth for inline content links. Both the setup block

@@ -11,6 +11,8 @@ import { SetupComponent } from './setup.component';
 import { SetupBlockComponent } from './block/block.component';
 import { SetupCardComponent } from './card/card.component';
 import { SetupFieldsComponent } from './fields/fields.component';
+import { SetupCodeBlockComponent } from './code-block/code-block.component';
+import { SetupEndpointComponent } from './endpoint/endpoint.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -18,7 +20,9 @@ import { SharedModule } from '../shared/shared.module';
     SetupComponent,
     SetupBlockComponent,
     SetupCardComponent,
-    SetupFieldsComponent
+    SetupFieldsComponent,
+    SetupCodeBlockComponent,
+    SetupEndpointComponent
   ],
   imports: [
     CommonModule,
