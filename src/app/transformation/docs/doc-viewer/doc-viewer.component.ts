@@ -4,12 +4,16 @@ import { DocsService, DocData, ExampleItem, DocImage } from '../../services/docs
 import { SidebarService } from '../../services/sidebar.service';
 import { categoryNameFromSlug, categorySlug } from '../../utils/route.util';
 import { hljs } from 'src/app/shared/highlight';
+import { ClipboardUtil } from 'src/app/recipe/core/utils/clipboard.util';
 
 import { map, switchMap } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 interface ProcessedExample {
   code?: SafeHtml;
+  // Original, un-highlighted source used by the copy button so users copy
+  // clean text instead of the syntax-highlighted markup.
+  rawCode?: string;
   description?: string;
   images?: DocImage[];
 }
@@ -29,7 +33,10 @@ export class DocViewerComponent implements OnInit {
   showImageViewer = false;
   selectedImageUrl = '';
   selectedImageAlt = '';
-  private currentDocName: string | null = null; 
+  // Id of the example whose copy button is currently in its "Copied" state.
+  copiedId: string | null = null;
+  private copyResetTimer: ReturnType<typeof setTimeout> | undefined;
+  private currentDocName: string | null = null;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -98,16 +105,34 @@ export class DocViewerComponent implements OnInit {
     return examples.map(example => {
       if (typeof example === 'string') {
         return {
-          code: this.highlightExamples(example)
+          code: this.highlightExamples(example),
+          rawCode: this.toRawCode(example)
         };
       } else {
         return {
           code: example.code ? this.highlightExamples(example.code) : undefined,
+          rawCode: example.code ? this.toRawCode(example.code) : undefined,
           description: example.description,
           images: example.images
         };
       }
     });
+  }
+
+  // Clean text for the clipboard: drop the <shadow> display markers (they wrap
+  // the annotation comments shown in the code block, not part of the formula).
+  private toRawCode(raw: string): string {
+    return raw.replace(/<\/?shadow>/g, '');
+  }
+
+  async copyExample(text: string | undefined, id: string): Promise<void> {
+    const ok = await ClipboardUtil.copyToClipboard(text ?? '');
+    if (!ok) return;
+    this.copiedId = id;
+    clearTimeout(this.copyResetTimer);
+    this.copyResetTimer = setTimeout(() => {
+      this.copiedId = null;
+    }, 1400);
   }
 
   private highlightExamples(raw: string): SafeHtml {

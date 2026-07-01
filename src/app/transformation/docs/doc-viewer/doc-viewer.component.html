@@ -116,8 +116,13 @@
     <h2 *ngIf="processedExamples.length === 1">Example</h2>
     <h2 *ngIf="processedExamples.length > 1">Examples</h2>
   
-    <div class="example-item" *ngFor="let example of processedExamples">
+    <div class="example-item" *ngFor="let example of processedExamples; let i = index">
       <div class="doc-example" *ngIf="example.code">
+        <button type="button" class="code-copy"
+                [class.copied]="copiedId === 'example-' + i"
+                (click)="copyExample(example.rawCode, 'example-' + i)">
+          {{ copiedId === 'example-' + i ? 'Copied' : 'Copy' }}
+        </button>
         <pre><code class="hljs language-sql" [innerHTML]="example.code"></code></pre>
       </div>
       <p class="example-description" *ngIf="example.description">{{ example.description }}</p>
