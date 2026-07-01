@@ -14,6 +14,9 @@ interface ProcessedExample {
   // Original, un-highlighted source used by the copy button so users copy
   // clean text instead of the syntax-highlighted markup.
   rawCode?: string;
+  // True when the code block is tall enough to warrant a collapse/expand
+  // toggle; short examples render fully without one.
+  isLong?: boolean;
   description?: string;
   images?: DocImage[];
 }
@@ -35,8 +38,14 @@ export class DocViewerComponent implements OnInit {
   selectedImageAlt = '';
   // Id of the example whose copy button is currently in its "Copied" state.
   copiedId: string | null = null;
+  // Indices of example code blocks the user has expanded past the collapsed
+  // preview height.
+  expandedExamples = new Set<number>();
   private copyResetTimer: ReturnType<typeof setTimeout> | undefined;
   private currentDocName: string | null = null;
+
+  // A code block taller than this many lines starts collapsed with a toggle.
+  private static readonly LONG_EXAMPLE_LINES = 30;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -92,6 +101,7 @@ export class DocViewerComponent implements OnInit {
 
         this.docContent = doc;
 
+        this.expandedExamples.clear();
         this.processedExamples = this.processExamples(doc?.examples ?? []);
 
         this.highlightedDescriptionCode = doc?.descriptionCode
@@ -106,12 +116,14 @@ export class DocViewerComponent implements OnInit {
       if (typeof example === 'string') {
         return {
           code: this.highlightExamples(example),
-          rawCode: this.toRawCode(example)
+          rawCode: this.toRawCode(example),
+          isLong: this.isLongCode(example)
         };
       } else {
         return {
           code: example.code ? this.highlightExamples(example.code) : undefined,
           rawCode: example.code ? this.toRawCode(example.code) : undefined,
+          isLong: example.code ? this.isLongCode(example.code) : false,
           description: example.description,
           images: example.images
         };
@@ -119,10 +131,35 @@ export class DocViewerComponent implements OnInit {
     });
   }
 
-  // Clean text for the clipboard: drop the <shadow> display markers (they wrap
-  // the annotation comments shown in the code block, not part of the formula).
+  // Clean text for the clipboard: users should copy only the formula, not the
+  // annotations shown alongside it. Strips the /* ... */ rendered-output block
+  // and the -- / // explanatory lines, then removes the <shadow> display
+  // markers (keeping the formula text they wrap, e.g. {!Name}).
   private toRawCode(raw: string): string {
-    return raw.replace(/<\/?shadow>/g, '');
+    const lineComment = this.currentDocName === 'apex_class' ? '//' : '--';
+    return raw
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(new RegExp(`[ \\t]*${lineComment}.*$`, 'gm'), '')
+      .replace(/<\/?shadow>/g, '')
+      .replace(/[ \t]+$/gm, '')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  }
+
+  // A code block is "long" once the displayed source exceeds the line
+  // threshold, at which point it renders collapsed with a Show more/less
+  // toggle. Measured on the full source (comments included) since that is what
+  // determines the rendered height.
+  private isLongCode(displaySource: string): boolean {
+    return displaySource.split('\n').length > DocViewerComponent.LONG_EXAMPLE_LINES;
+  }
+
+  toggleExpand(index: number): void {
+    if (this.expandedExamples.has(index)) {
+      this.expandedExamples.delete(index);
+    } else {
+      this.expandedExamples.add(index);
+    }
   }
 
   async copyExample(text: string | undefined, id: string): Promise<void> {

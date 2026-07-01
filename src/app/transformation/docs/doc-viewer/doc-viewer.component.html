@@ -117,13 +117,22 @@
     <h2 *ngIf="processedExamples.length > 1">Examples</h2>
   
     <div class="example-item" *ngFor="let example of processedExamples; let i = index">
-      <div class="doc-example" *ngIf="example.code">
-        <button type="button" class="code-copy"
-                [class.copied]="copiedId === 'example-' + i"
-                (click)="copyExample(example.rawCode, 'example-' + i)">
-          {{ copiedId === 'example-' + i ? 'Copied' : 'Copy' }}
+      <div class="doc-example" *ngIf="example.code"
+           [class.collapsible]="example.isLong"
+           [class.collapsed]="example.isLong && !expandedExamples.has(i)"
+           [class.expanded]="example.isLong && expandedExamples.has(i)">
+        <div class="code-scroll">
+          <button type="button" class="code-copy"
+                  [class.copied]="copiedId === 'example-' + i"
+                  (click)="copyExample(example.rawCode, 'example-' + i)">
+            {{ copiedId === 'example-' + i ? 'Copied' : 'Copy' }}
+          </button>
+          <pre><code class="hljs language-sql" [innerHTML]="example.code"></code></pre>
+        </div>
+        <button type="button" class="code-expand" *ngIf="example.isLong"
+                (click)="toggleExpand(i)">
+          {{ expandedExamples.has(i) ? 'Show less' : 'Show more' }}
         </button>
-        <pre><code class="hljs language-sql" [innerHTML]="example.code"></code></pre>
       </div>
       <p class="example-description" *ngIf="example.description">{{ example.description }}</p>
       <div class="doc-images" *ngIf="example.images?.length">
