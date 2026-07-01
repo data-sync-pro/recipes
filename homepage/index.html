@@ -22,16 +22,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600;700&family=Figtree:wght@600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/styles.css?v=199" />
-<!-- Google reCAPTCHA (Salesforce Web-to-Lead) is loaded lazily by app.js the
-     first time a visitor opens a form modal — see window.DSP_loadRecaptcha. -->
 </head>
 <body class="sn-hero" style="--sn-hero-bg: #395B58; --sn-btn: #28E07A;">
 
-<!-- =========== NAV =========== -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a class="brand-mark" href="/" aria-label="Data Sync Pro home">
-      <img class="logo" src="/logo.png?v=24" alt="" width="32" height="32" />
+      <img class="logo" src="/logo.svg?v=2" alt="" width="32" height="32" />
+      <img class="logo" src="/logo-line12px.svg?v=2" alt="" width="32" height="32" />
+      
       <span>Data Sync Pro</span>
     </a>
     <div class="nav-links">
@@ -97,7 +96,6 @@
   </div>
 </nav>
 
-<!-- =========== HERO =========== -->
 <header class="hero">
   <div class="container hero-main">
     <div class="hero-grid">
@@ -108,7 +106,7 @@
           <span class="slogan">in <span class="good-it" style="color: var(--sn-btn, #28E07A);">composable modules</span>.</span>
           <span class="slogan">Your Salesforce should too.</span>
         </h1>
-        <p class="hero-sub reveal" data-d="2">The same power you’d build with <b>custom code</b> — delivered as <b style="color: #FFFFFF;">modular</b>, rules-driven <b>Executable records</b>.</p>
+        <p class="hero-sub reveal" data-d="2">The same power you’d build with <b>custom code</b> or <b>cross-org sync</b> — delivered as <b style="color: #FFFFFF;">modular</b>, rules-driven <b>Executable records</b>.</p>
         
         <div class="hero-cta reveal" data-d="3">
           <a class="btn" href="#cta">
@@ -119,16 +117,13 @@
         </div>
       </div>
 
-      <!-- Hero capability rotator — cycles across surfaces -->
       <div class="reveal hero-rotator" data-d="3" id="heroRotator">
         <div class="hero-stage">
-        <!-- Scene 2 · #UI (live: custom action button runs a rule → records appear, values computed) -->
         <div class="hero-scene is-active" data-surface="ui">
           <div class="bw-annotate">
             <span class="anno tl">actionable data list</span>
             <span class="anno tr">filter · select · act</span>
             <article class="al-card" id="uiListHero">
-              <!-- title · record count · selection · custom action buttons -->
               <div class="al-titlebar">
                 <span class="al-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="4" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="10" width="18" height="4" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="16" width="18" height="4" rx="1" stroke="currentColor" stroke-width="1.6"/></svg></span>
                 <div class="al-titles">
@@ -143,7 +138,6 @@
                 </div>
               </div>
 
-              <!-- toolbar: filter field selector + filter value box + built-in actions -->
               <div class="al-toolbar">
                 <button class="al-fieldsel" type="button" tabindex="-1" data-al-field>Priority<svg class="cv" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
                 <div class="al-filter" data-al-filter>
@@ -164,7 +158,6 @@
                 </div>
               </div>
 
-              <!-- column header: select-all · sort · column menus -->
               <div class="al-head">
                 <span class="al-ck al-ckall" data-al-ckall><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <span class="al-hcell">Case Number<svg class="cv" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -175,7 +168,6 @@
                 <span class="al-hend"></span>
               </div>
 
-              <!-- rows -->
               <div class="al-rows" data-al-rows>
                 <div class="al-row" data-al-row data-pri="High"><span class="al-ck" data-al-ck><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="al-cnum">03266936</span><span class="al-subj">Request for Real-Time Analytics</span><span class="al-ctype">Feature Request</span><span class="al-pri" data-al-pri>High</span><span class="al-stat" data-al-stat>Escalated</span><span class="al-rcaret"><svg viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
                 <div class="al-row" data-al-row data-pri="Low"><span class="al-ck" data-al-ck><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="al-cnum">03266977</span><span class="al-subj">New Reporting Feature Request</span><span class="al-ctype">Feature Request</span><span class="al-pri" data-al-pri>Low</span><span class="al-stat" data-al-stat>On Hold</span><span class="al-rcaret"><svg viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
@@ -187,7 +179,6 @@
                 <div class="al-row" data-al-row data-pri="Medium"><span class="al-ck" data-al-ck><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="al-cnum">03276740</span><span class="al-subj">Bulk Export Improvements</span><span class="al-ctype">Problem</span><span class="al-pri" data-al-pri>Medium</span><span class="al-stat" data-al-stat>Escalated</span><span class="al-rcaret"><svg viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
               </div>
 
-              <!-- pagination -->
               <div class="al-pager">
                 <span class="al-psize">10<svg class="cv" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <span class="al-pgap"></span>
@@ -204,9 +195,8 @@
             </article>
             <span class="anno br">0 lines of code</span>
           </div>
-        </div><!-- /scene #UI -->
+        </div>
 
-        <!-- Scene 1 · #Batch (live animation) -->
         <div class="hero-scene" data-surface="batch">
         <div class="bw-annotate">
           <span class="anno tl">live batch run</span>
@@ -279,9 +269,8 @@
           </article>
           <span class="anno br">0 lines of apex</span>
         </div>
-        </div><!-- /scene #Batch -->
+        </div>
 
-        <!-- Scene 3 · #Trigger (reuses the #Trigger section trace animation) -->
         <div class="hero-scene" data-surface="trigger">
           <div class="bw-annotate">
             <span class="anno tl">DML → rules fire</span>

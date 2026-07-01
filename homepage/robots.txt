@@ -1,0 +1,12 @@
+# Data Sync Pro — robots.txt
+# Served at https://www.datasyncpro.io/robots.txt
+# (homepage/ is overlaid onto the Firebase deploy root by scripts/assemble-firebase.mjs)
+
+User-agent: *
+Allow: /
+
+# Note: partnership/* and the Master Subscription Agreement pages are excluded from
+# search via a page-level <meta name="robots" content="noindex"> — intentionally NOT
+# Disallow-ed here, so crawlers can still read the page and honor the noindex.
+
+Sitemap: https://www.datasyncpro.io/sitemap.xml
