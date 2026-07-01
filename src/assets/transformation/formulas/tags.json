@@ -133,6 +133,7 @@
     { "Item Name": "TO_DECIMAL", "Tags": ["Number", "Text", "Type Processing"] },
     { "Item Name": "TO_INTEGER", "Tags": ["Number", "Text", "Type Processing"] },
     { "Item Name": "TO_LOWER_CASE", "Tags": ["Text"] },
+    { "Item Name": "TO_PDF", "Tags": ["Advanced"] },
     { "Item Name": "TO_STRING", "Tags": ["Text", "Type Processing"] },
     { "Item Name": "TO_START_OF_MONTH", "Tags": ["Date & Time"] },
     { "Item Name": "TO_START_OF_WEEK", "Tags": ["Date & Time"] },

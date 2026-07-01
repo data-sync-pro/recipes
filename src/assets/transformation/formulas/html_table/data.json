@@ -37,7 +37,7 @@
   "examples": [
     {
       "code": "HTML_TABLE(\n        \"Opportunity\", \n        \"Name, Amount, StageName, CloseDate\", \n        \"AccountId\", Id, \n        \"Amount > 5000 ORDER BY CloseDate DESC\"\n    )\n-- Returns an HTML table string of Opportunity records related to the Account, filtered by Amount and sorted by CloseDate.",
-      "description": "Rendered table example：",
+      "description": "Rendered table example:",
       "images": [
         {
           "src": "images/figure_1.png",
