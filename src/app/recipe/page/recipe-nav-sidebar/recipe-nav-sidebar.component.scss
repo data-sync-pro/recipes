@@ -40,7 +40,7 @@
       flex: 1;
       min-height: 0;
       overflow-y: auto;
-
+      padding-bottom: 60px;
       // Webkit pseudo-elements rather than scrollbar-width/scrollbar-color:
       // the standard properties make Chrome render native arrow buttons
       // (triangles); the pseudo-element form drops them. Matches the
