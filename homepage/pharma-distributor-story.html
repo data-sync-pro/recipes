@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Cencora — Customer Story · Data Sync Pro</title>
-<meta name="description" content="How Cencora is paying down years of Salesforce tech debt with Data Sync Pro — turning slow Apex batch jobs into configuration and cutting run times by up to 95%, including an 18-hour job brought down to under two hours." />
+<title>Pharmaceutical Distributor — Customer Story · Data Sync Pro</title>
+<meta name="description" content="How a leading global pharmaceutical distributor is paying down years of Salesforce tech debt with Data Sync Pro — turning slow Apex batch jobs into configuration and cutting run times by up to 95%, including an 18-hour job brought down to under two hours." />
 <meta name="robots" content="index,follow" />
 <link rel="icon" href="/logo.png" />
 <link rel="apple-touch-icon" href="/logo.png" />
@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/styles.css?v=36" />
 <style>
   /* =========================================================
-     Cencora customer story — page-specific. cs- prefix throughout.
+     Customer story — page-specific. cs- prefix throughout.
      Reuses site tokens (styles.css). Light body with a dark hero
      and dark closing, mirroring the marketing pages.
      ========================================================= */
@@ -27,9 +27,9 @@
     display: flex;
     align-items: center;
     background:
-      radial-gradient(70% 60% at 16% -10%, rgba(139,92,246,.26), transparent 60%),
-      radial-gradient(60% 55% at 100% 0%, rgba(102,51,178,.40), transparent 62%),
-      linear-gradient(168deg, #3D1C86 0%, #2B1568 55%, #1E0F4D 100%);
+      radial-gradient(75% 60% at 50% -12%, rgba(43,227,229,.10), transparent 62%),
+      radial-gradient(45% 55% at 96% -5%, rgba(15,212,158,.07), transparent 65%),
+      var(--sn-hero-bg, #395B58);
     color: var(--ink-on-dark);
     border-bottom: 1px solid rgba(255,255,255,.08);
   }
@@ -51,10 +51,15 @@
   .cs-cobrand .dsp { width: 46px; height: 46px; border-radius: 11px; }
   .cs-cobrand .x { font-family: var(--f-serif); font-style: italic; font-size: 20px; color: var(--ink-3-on-dark); }
   .cs-cobrand .cen {
-    background: #fff; border-radius: 9px; padding: 9px 16px;
-    display: flex; align-items: center; box-shadow: 0 2px 14px rgba(0,0,0,.22);
+    background: rgba(6,35,28,.55); border: 1px solid rgba(15,212,158,.4);
+    border-radius: 999px; padding: 10px 22px;
+    display: flex; align-items: center; backdrop-filter: blur(6px);
   }
   .cs-cobrand .cen img { height: 24px; width: auto; }
+  .cs-cobrand .cen.label {
+    font-family: var(--f-mono); font-weight: 600; font-size: 15px;
+    letter-spacing: .04em; text-transform: uppercase; color: var(--brand-bright); white-space: nowrap;
+  }
   .cs-hero .eyebrow { color: var(--brand-bright); }
   .cs-hero .eyebrow .dot { background: var(--brand-bright); }
   .cs-hero h1 {
@@ -299,11 +304,11 @@
       <div class="cs-cobrand reveal" data-d="1">
         <img class="dsp" src="/logo.png" alt="Data Sync Pro" />
         <span class="x">at</span>
-        <span class="cen"><img src="/cencora-logo.png" alt="Cencora" /></span>
+        <span class="cen label">a leading global pharmaceutical distributor</span>
       </div>
       <span class="eyebrow reveal" data-d="1"><span class="dot"></span>Customer Story · Batch Optimization</span>
       <h1 class="reveal" data-d="2">18 hours of batch processing,<br/><span class="it">down to under two.</span></h1>
-      <p class="cs-lead reveal" data-d="3">Cencora is paying down years of accumulated Salesforce tech debt with Data Sync Pro — replacing slow, hard-to-maintain Apex batch jobs with <b>configuration</b>. The result: run times cut by up to <b>95%</b>, errors eliminated, and full audit logging out of the box.</p>
+      <p class="cs-lead reveal" data-d="3">A leading global pharmaceutical distributor is paying down years of accumulated Salesforce tech debt with Data Sync Pro — replacing slow, hard-to-maintain Apex batch jobs with <b>configuration</b>. The result: run times cut by up to <b>95%</b>, errors eliminated, and full audit logging out of the box.</p>
 
       <div class="cs-statstrip reveal" data-d="3">
         <div class="cs-stat">
@@ -338,18 +343,18 @@
     <div class="section-head reveal">
       <span class="eyebrow"><span class="dot"></span>The challenge</span>
       <h2>Years of tech debt, <span class="it">hitting governor limits.</span></h2>
-      <p class="lead">Cencora's Salesforce org had accumulated significant technical debt, and batch jobs were among the top contributors. Long-running Apex batches strained the platform, consumed scheduled-job capacity, and — in production — began failing outright against governor limits.</p>
+      <p class="lead">The distributor's Salesforce org had accumulated significant technical debt, and batch jobs were among the top contributors. Long-running Apex batches strained the platform, consumed scheduled-job capacity, and — in production — began failing outright against governor limits.</p>
     </div>
     <div class="cs-chal-grid">
       <div class="cs-chal reveal" data-d="1">
         <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
         <h3>Hours-long runs</h3>
-        <p>Core data-management batches ran for hours — one account job took <b>18 hours</b> to complete — pushing nightly windows and eating into scheduled-job slots before they hit the limit.</p>
+        <p>Core data-management batches ran for hours — one job took <b>18 hours</b> to complete — pushing nightly windows and eating into scheduled-job slots before they hit the limit.</p>
       </div>
       <div class="cs-chal reveal" data-d="2">
         <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3l9 16H3L12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 10v4M12 16.5v.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
         <h3>Failing in production</h3>
-        <p>The credit-data sync to Accounts was erroring out in prod — hitting platform ceilings on CPU and query count with no clean way to recover the failed run.</p>
+        <p>A large data-sync job was erroring out in production — hitting platform ceilings on CPU and query count with no clean way to recover the failed run.</p>
         <div class="err"><code>CPU Timeout</code><code>Too Many SOQL</code></div>
       </div>
       <div class="cs-chal reveal" data-d="3">
@@ -367,12 +372,12 @@
     <div class="section-head reveal">
       <span class="eyebrow"><span class="dot"></span>The approach</span>
       <h2>Replace Apex batch classes with <span class="it">DSP Executables.</span></h2>
-      <p class="lead">Rather than incrementally tuning Apex, Cencora rebuilt each batch job as a Data Sync Pro Executable record — configured through a guided interface, no custom code. The same logic, delivered as configuration, with capabilities that took custom engineering before now available as a checkbox.</p>
+      <p class="lead">Rather than incrementally tuning Apex, the team rebuilt each batch job as a Data Sync Pro Executable record — configured through a guided interface, no custom code. The same logic, delivered as configuration, with capabilities that took custom engineering before now available as a checkbox.</p>
     </div>
     <div class="cs-appr-grid">
       <div class="cs-appr reveal" data-d="1">
         <div class="k"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13l0-8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><h4>Bulk API throughput</h4></div>
-        <p><span class="was">Apex: no Bulk API, slow.</span> DSP supports Bulk API — 10×+ faster when configured properly.</p>
+        <p><span class="was">Apex: no Bulk API, slow.</span> DSP supports Bulk API — up to 10× faster with larger batch sizes.</p>
       </div>
       <div class="cs-appr reveal" data-d="1">
         <div class="k"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h10M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><h4>Delta retrieve &amp; action</h4></div>
@@ -402,9 +407,9 @@
 <section class="cs-sec" id="results">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow"><span class="dot"></span>The results · production</span>
+      <span class="eyebrow"><span class="dot"></span>The results · benchmarked</span>
       <h2>Same jobs. <span class="it">A different order of magnitude.</span></h2>
-      <p class="lead">Measured in Cencora's production org across the first four optimization waves — prioritizing the slowest, highest-impact jobs. Every job below does exactly what it did before, just rebuilt on DSP.</p>
+      <p class="lead">Measured on the distributor's own data across the first four optimization waves — prioritizing the slowest, highest-impact jobs. Every job below does exactly what it did before, just rebuilt on DSP.</p>
     </div>
     <div class="cs-levers reveal" data-d="1">
       <div class="cs-lever">
@@ -438,50 +443,50 @@
         <span class="imp">Faster</span>
       </div>
       <div class="cs-bench-row">
-        <div class="job"><span class="nm">PopulateLastMonthlyRevenue&bull;&bull;&bull;</span><span class="pp">Sale date, status &amp; source flags per account, aggregated to top segment level</span></div>
-        <div class="recs">920,907</div>
+        <div class="job"><span class="nm">AggregateFields&bull;&bull;&bull;</span><span class="pp">Aggregate field values onto parent records</span></div>
+        <div class="recs">~900K</div>
         <div class="t-before">18:00:00</div>
-        <div class="t-after">1:48:42</div>
+        <div class="t-after">1:50:00</div>
         <div class="imp"><span class="v">90<span class="pct">%</span></span></div>
       </div>
       <div class="cs-bench-row">
-        <div class="job"><span class="nm">PopulateLookUpsAccount&bull;&bull;&bull;</span><span class="pp">Update account &amp; opportunity hierarchy from ERP data</span></div>
-        <div class="recs">667,789</div>
-        <div class="t-before">8:54:00</div>
-        <div class="t-after">0:05:38</div>
+        <div class="job"><span class="nm">UpdateHierarchy&bull;&bull;&bull;</span><span class="pp">Update related-record hierarchy</span></div>
+        <div class="recs">~700K</div>
+        <div class="t-before">9:00:00</div>
+        <div class="t-after">0:06:00</div>
         <div class="imp"><span class="v">99<span class="pct">%</span></span></div>
       </div><div class="cs-bench-row">
-        <div class="job"><span class="nm">ARtoAccount&bull;&bull;&bull;</span><span class="pp">Sync Accounts Receivable data back onto Accounts</span></div>
-        <div class="recs">574,300</div>
+        <div class="job"><span class="nm">SyncExternal&bull;&bull;&bull;</span><span class="pp">Sync external data back onto records</span></div>
+        <div class="recs">~600K</div>
         <div class="t-before">6:00:00</div>
-        <div class="t-after">0:22:30</div>
+        <div class="t-after">0:20:00</div>
         <div class="imp"><span class="v">95<span class="pct">%</span></span></div>
       </div>
       <div class="cs-bench-row">
-        <div class="job"><span class="nm">RollupRevenue&bull;&bull;&bull;</span><span class="pp">Aggregate related-account revenue at segment-account level</span></div>
-        <div class="recs">11,529</div>
+        <div class="job"><span class="nm">RollupValues&bull;&bull;&bull;</span><span class="pp">Roll up child-record revenue values to parent</span></div>
+        <div class="recs">~10K</div>
         <div class="t-before">2:15:00</div>
-        <div class="t-after">0:06:20</div>
+        <div class="t-after">0:06:00</div>
         <div class="imp"><span class="v">95<span class="pct">%</span></span></div>
       </div>
       <div class="cs-bench-row">
-        <div class="job"><span class="nm">UpdateAccountPrimary&bull;&bull;&bull;</span><span class="pp">Set primary sold-to on top-segment Accounts by associated revenue</span></div>
-        <div class="recs">97,477</div>
+        <div class="job"><span class="nm">SetReferences&bull;&bull;&bull;</span><span class="pp">Set reference fields from related records</span></div>
+        <div class="recs">~100K</div>
         <div class="t-before">0:50:00</div>
-        <div class="t-after">0:07:50</div>
+        <div class="t-after">0:08:00</div>
         <div class="imp"><span class="v">85<span class="pct">%</span></span></div>
       </div>
       <div class="cs-bench-row">
-        <div class="job"><span class="nm">IntegrationStaging&bull;&bull;&bull;</span><span class="pp">Sync data from a staging table into Accounts</span></div>
-        <div class="recs">57,486</div>
+        <div class="job"><span class="nm">StagingLoad&bull;&bull;&bull;</span><span class="pp">Load processed data from a staging table</span></div>
+        <div class="recs">~60K</div>
         <div class="t-before">0:30:00</div>
         <div class="t-after">0:05:00</div>
         <div class="imp"><span class="v">83<span class="pct">%</span></span></div>
       </div>
       <div class="cs-bench-row">
-        <div class="job"><span class="nm">VisualizeBuyingGroup&bull;&bull;&bull;</span><span class="pp">Create Account Affiliations from buying-group data</span></div>
-        <div class="recs">21,638</div>
-        <div class="t-before">0:04:45</div>
+        <div class="job"><span class="nm">GenerateRecords&bull;&bull;&bull;</span><span class="pp">Generate related records from source data</span></div>
+        <div class="recs">~20K</div>
+        <div class="t-before">0:05:00</div>
         <div class="t-after">0:01:30</div>
         <div class="imp"><span class="v">70<span class="pct">%</span></span></div>
       </div>
@@ -511,7 +516,12 @@
       <div class="cs-cmp-row">
         <div class="crit">Performance</div>
         <div class="trad">Slow; no Bulk API support.</div>
-        <div class="dsp">Bulk API supported — <b>10×+ faster</b> when configured properly.</div>
+        <div class="dsp">Bulk API supported — <b>up to 10× faster</b> with larger batch sizes.</div>
+      </div>
+      <div class="cs-cmp-row">
+        <div class="crit">Incremental processing</div>
+        <div class="trad">Re-reads the whole object and re-writes every row each run — incremental logic is a custom build.</div>
+        <div class="dsp">Retrieve only changed records &amp; write back only differing rows — <b>enabled by checkbox</b>, skipping wasted DML.</div>
       </div>
       <div class="cs-cmp-row">
         <div class="crit">Logging</div>

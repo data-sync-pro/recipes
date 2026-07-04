@@ -1,14 +1,14 @@
 {
   "Batch": [
+    "mass-recalculation-with-batch-blank-updates",
     "bulk-merge-records-from-duplicate-job-results",
     "scheduled-retention-cleanup",
-    "schedule-job-management",
-    "mass-recalculation-with-batch-blank-updates",
     "cross-org-data-migration",
     "migrate-salesforce-files-between-orgs",
     "incremental-data-backup-to-big-objects",
     "restore-records-from-recycle-bin",
-    "mask-sensitive-data-in-sandboxes"
+    "mask-sensitive-data-in-sandboxes",
+    "schedule-job-management"
     
   ],
   "Trigger": [
@@ -55,6 +55,7 @@
   ],
   "General": [
     "skip-no-op-updates",
+    "joiner-scope-filter-post-join",
     "variables-for-named-expressions",
     "export-import-pipelines-as-templates"
   ]
