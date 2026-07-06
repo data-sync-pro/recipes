@@ -3,7 +3,7 @@
   "blocks": [
     {
       "type": "p",
-      "content": "Data Sync Pro exposes two REST API endpoints that allow you to trigger pipeline and executable runs outside of the DSP UI. Any tool or system that can send an HTTP request can call them."
+      "content": "Data Sync Pro exposes REST API endpoints that allow you to trigger pipeline and executable runs outside of the DSP UI. Any tool or system that can send an HTTP request can call them."
     },
     {
       "type": "h2",
@@ -19,14 +19,15 @@
           "stepItems": [
             { "content": "Open Postman and set the request method to **POST**." },
             {
-              "content": "Enter the endpoint URL:",
+              "content": "Enter one endpoint URL from below:",
               "children": [
                 {
                   "type": "keyvalue",
                   "keyStyle": "plain",
                   "pairs": [
-                    { "key": "Pipeline", "value": "{org_base_url}/services/apexrest/pushtopics/execution/batch/pipeline/{pipelineApiName}" },
-                    { "key": "Executable", "value": "{org_base_url}/services/apexrest/pushtopics/execution/sync/executable/{executableApiName}" }
+                    { "key": "Pipeline (Batch)", "value": "{org_base_url}/services/apexrest/pushtopics/execution/batch/pipeline/{pipelineApiName}" },
+                    { "key": "Executable (Batch)", "value": "{org_base_url}/services/apexrest/pushtopics/execution/batch/executable/{executableApiName}" },
+                    { "key": "Executable (Sync)", "value": "{org_base_url}/services/apexrest/pushtopics/execution/sync/executable/{executableApiName}" }
                   ]
                 }
               ]
@@ -72,7 +73,6 @@
                 {
                   "type": "card",
                   "title": "Executable",
-                  "tagVariant": "sync",
                   "children": [
                     {
                       "type": "p",
@@ -96,11 +96,11 @@
           "children": [
             {
               "type": "p",
-              "content": "**Pipeline** returns a pipeline execution record ID (e.g. `\"a0CDC000003DPrY2AW\"`). This means the batch job has been **submitted**, not that the pipeline has finished. Check status under the Pipeline's related **Pipeline Executions**."
+              "content": "**Batch (Pipeline and Executable)** returns an execution record ID (e.g. `\"a0CDC000003DPrY2AW\"`).This means the batch job has been submitted, not that the run has finished. Check status under the **Executions** related list on the Pipeline or Executable record."
             },
             {
               "type": "p",
-              "content": "**Executable** returns the sync result for each record. Example response:"
+              "content": "**Sync (Executable)** returns the sync result for each record directly in the response body. No execution records are generated. Example response:"
             },
             {
               "type": "code",
@@ -131,6 +131,10 @@
           "type": "code",
           "language": "apex",
           "content": "HttpRequest request = new HttpRequest();\nrequest.setEndpoint('callout:Your_Named_Credential/services/apexrest/pushtopics/execution/sync/executable/YOUR_EXECUTABLE_API_NAME');\nrequest.setMethod('POST');\nrequest.setHeader('Content-Type', 'application/json');\nrequest.setTimeout(60000);\nrequest.setBody('{\"sourceRecordIds\": [\"001XXXXXXXXXXXX\"]}');\nHttp http = new Http();\nHttpResponse response = http.send(request);\nSystem.debug('status: ' + response.getStatusCode());\nSystem.debug('response: ' + response.getBody());"
+        },
+        {
+              "type": "p",
+              "content": "To run an executable asynchronously with execution logs, use the /batch/executable/ path with the same request body."
         },
         { "type": "label", "content": "Replace" },
         {

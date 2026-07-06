@@ -25,6 +25,10 @@
               "description": "When enabled, DSP stores the matched target records and the pre-action request and response payloads in a ContentDocument linked to each Batch Execution. These logs provide an audit trail and allow data restoration if required. Note: File logging increases runtime overhead and consumes additional storage."
             },
             {
+              "name": "Log All Target Fields?",
+              "description": "When enabled, the log captures all accessible fields on the target object, rather than only the mapped target fields. Only fields the running user has read access to are included. Has no effect unless \"Log to File\" is enabled."
+            },
+            {
               "name": "Auto Retry Failed Batches?",
               "description": "When enabled, upon the completion of the batch job execution, DSP will automatically retry the failed batches."
             },
