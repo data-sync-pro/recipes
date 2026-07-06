@@ -7,7 +7,7 @@
 <meta name="description" content="Salesforce automation, data processing & data quality on one rules-driven engine. Data Sync Pro replaces custom Apex and flows — modular, bulk-safe, and native." />
 <link rel="icon" type="image/png" href="/logo.png" />
 <link rel="apple-touch-icon" href="/logo.png" />
-<!-- Open Graph / Twitter sharing -->
+
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Data Sync Pro" />
 <meta property="og:title" content="Salesforce Automation & Data Processing | Data Sync Pro" />
@@ -25,7 +25,6 @@
 </head>
 <body class="sn-hero" style="--sn-hero-bg: #395B58; --sn-btn: #28E07A;">
 
-<!-- =========== NAV =========== -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a class="brand-mark" href="/" aria-label="Data Sync Pro home">
@@ -33,7 +32,7 @@
       <span>Data Sync Pro</span>
     </a>
     <div class="nav-links">
-      <a href="/capabilities">Capabilities</a>
+      <a href="/surfaces">Surfaces</a>
       <a href="/why-dsp">Why DSP</a>
       <a href="/security">Security</a>
       <a href="/pricing">Pricing</a>
@@ -72,7 +71,7 @@
   </div>
   <div class="nav-mobile" id="navMobile" hidden>
     <div class="nav-mobile-inner">
-      <a href="/capabilities" data-nav-link>Capabilities</a>
+      <a href="/surfaces" data-nav-link>Surfaces</a>
       <a href="/why-dsp" data-nav-link>Why DSP</a>
       <a href="/security" data-nav-link>Security</a>
       <a href="/pricing" data-nav-link>Pricing</a>
@@ -95,7 +94,6 @@
   </div>
 </nav>
 
-<!-- =========== HERO =========== -->
 <header class="hero">
   <div class="container hero-main">
     <div class="hero-grid">
@@ -117,16 +115,15 @@
         </div>
       </div>
 
-      <!-- Hero capability rotator — cycles across surfaces -->
       <div class="reveal hero-rotator" data-d="3" id="heroRotator">
         <div class="hero-stage">
-        <!-- Scene 2 · #UI (live: custom action button runs a rule → records appear, values computed) -->
+        
         <div class="hero-scene is-active" data-surface="ui">
           <div class="bw-annotate">
             <span class="anno tl">actionable data list</span>
             <span class="anno tr">filter · select · act</span>
             <article class="al-card" id="uiListHero">
-              <!-- title · record count · selection · custom action buttons -->
+              
               <div class="al-titlebar">
                 <span class="al-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="4" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="10" width="18" height="4" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="16" width="18" height="4" rx="1" stroke="currentColor" stroke-width="1.6"/></svg></span>
                 <div class="al-titles">
@@ -141,7 +138,6 @@
                 </div>
               </div>
 
-              <!-- toolbar: filter field selector + filter value box + built-in actions -->
               <div class="al-toolbar">
                 <button class="al-fieldsel" type="button" tabindex="-1" data-al-field>Priority<svg class="cv" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
                 <div class="al-filter" data-al-filter>
@@ -162,7 +158,6 @@
                 </div>
               </div>
 
-              <!-- column header: select-all · sort · column menus -->
               <div class="al-head">
                 <span class="al-ck al-ckall" data-al-ckall><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <span class="al-hcell">Case Number<svg class="cv" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -173,7 +168,6 @@
                 <span class="al-hend"></span>
               </div>
 
-              <!-- rows -->
               <div class="al-rows" data-al-rows>
                 <div class="al-row" data-al-row data-pri="High"><span class="al-ck" data-al-ck><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="al-cnum">03266936</span><span class="al-subj">Request for Real-Time Analytics</span><span class="al-ctype">Feature Request</span><span class="al-pri" data-al-pri>High</span><span class="al-stat" data-al-stat>Escalated</span><span class="al-rcaret"><svg viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
                 <div class="al-row" data-al-row data-pri="Low"><span class="al-ck" data-al-ck><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="al-cnum">03266977</span><span class="al-subj">New Reporting Feature Request</span><span class="al-ctype">Feature Request</span><span class="al-pri" data-al-pri>Low</span><span class="al-stat" data-al-stat>On Hold</span><span class="al-rcaret"><svg viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
@@ -185,7 +179,6 @@
                 <div class="al-row" data-al-row data-pri="Medium"><span class="al-ck" data-al-ck><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="al-cnum">03276740</span><span class="al-subj">Bulk Export Improvements</span><span class="al-ctype">Problem</span><span class="al-pri" data-al-pri>Medium</span><span class="al-stat" data-al-stat>Escalated</span><span class="al-rcaret"><svg viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
               </div>
 
-              <!-- pagination -->
               <div class="al-pager">
                 <span class="al-psize">10<svg class="cv" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <span class="al-pgap"></span>
@@ -202,9 +195,8 @@
             </article>
             <span class="anno br">0 lines of code</span>
           </div>
-        </div><!-- /scene #UI -->
+        </div>
 
-        <!-- Scene 1 · #Batch (live animation) -->
         <div class="hero-scene" data-surface="batch">
         <div class="bw-annotate">
           <span class="anno tl">live batch run</span>
@@ -277,9 +269,8 @@
           </article>
           <span class="anno br">0 lines of apex</span>
         </div>
-        </div><!-- /scene #Batch -->
+        </div>
 
-        <!-- Scene 3 · #Trigger (reuses the #Trigger section trace animation) -->
         <div class="hero-scene" data-surface="trigger">
           <div class="bw-annotate">
             <span class="anno tl">DML → rules fire</span>
@@ -359,9 +350,8 @@
             </article>
             <span class="anno br">rules as records, not Apex</span>
           </div>
-        </div><!-- /scene #Trigger -->
+        </div>
 
-        <!-- Scene 4 · #Data Loader (live: CSV upload → rule transforms → run upsert) -->
         <div class="hero-scene" data-surface="loader">
           <div class="bw-annotate">
             <span class="anno tl">self-serve import</span>
@@ -377,7 +367,6 @@
                 <button class="hl-status" type="button" tabindex="-1" data-hl-status>Ready</button>
               </div>
 
-              <!-- dropzone -->
               <div class="hl-drop" data-hl-drop>
                 <span class="hl-fileicon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 2h8l4 4v16H6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 2v4h4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.5 13h7M8.5 16h7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span>
                 <div class="hl-fileinfo">
@@ -387,7 +376,6 @@
                 <span class="hl-parsed" data-hl-parsed><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Parsed</span>
               </div>
 
-              <!-- field mapping with transformations applied at load -->
               <div class="hl-maptitle">Field mapping · transformed at load</div>
               <div class="hl-map" data-hl-map>
                 <div class="hl-mrow" data-hl-mrow><span class="src">email_raw</span><span class="arr">→</span><span class="field">Email</span><span class="fn"><b>LOWER</b>(email_raw)</span></div>
@@ -408,9 +396,8 @@
             </article>
             <span class="anno br">0 rows leave the org</span>
           </div>
-        </div><!-- /scene #Data Loader -->
+        </div>
 
-        <!-- Scene 5 · #Query -->
         <div class="hero-scene" data-surface="query">
           <div class="bw-annotate">
             <span class="anno tl">no SOQL · point &amp; click</span>
@@ -434,12 +421,11 @@
                 <button class="qh-run" type="button" tabindex="-1" data-qh-run><svg viewBox="0 0 16 16" fill="none"><path d="M5 3l8 5-8 5V3z" fill="currentColor"/></svg>Query</button>
               </div>
 
-              <!-- visual builder: object + fields, point-and-click -->
               <div class="qh-builder">
                 <span class="qh-tok obj"><i>FROM</i>Opportunity</span>
                 <span class="qh-tok"><i>SELECT</i>Name · Stage · Probability · Amount · CloseDate</span>
               </div>
-              <!-- filters built by clicking — incl. a dynamic filter -->
+              
               <div class="qh-filters" data-qh-filters>
                 <span class="qh-flabel">WHERE</span>
                 <span class="qh-chip" data-qh-c1>Amount &gt; <b>100K</b></span>
@@ -449,7 +435,6 @@
                 <span class="qh-addf" data-qh-addf>+ filter</span>
               </div>
 
-              <!-- editable results (manipulate inline) -->
               <div class="qh-listhead"><span>Opportunity</span><span>Stage</span><span>Prob.</span><span class="num">Amount</span><span>Close</span></div>
               <div class="qh-rows" data-qh-rows>
                 <div class="qh-row" data-qh-row><span class="nm">Acme – Renewal</span><span class="rate" data-qh-rate>Proposal</span><span>70%</span><span class="num">$1.24M</span><span>Jun 30</span></div>
@@ -464,8 +449,8 @@
               <div class="qh-toast" data-qh-toast>Inline-edited · saved to Salesforce</div>
             </article>
           </div>
-        </div><!-- /scene #Query -->
-        </div><!-- /hero-stage -->
+        </div>
+        </div>
 
         <div class="hero-dots" role="tablist" aria-label="Capability previews">
           <button class="hero-dot on" type="button" data-go="ui" role="tab" aria-selected="true">#UI</button>
@@ -474,10 +459,10 @@
           <button class="hero-dot" type="button" data-go="loader" role="tab" aria-selected="false">#Data Loader</button>
           <button class="hero-dot" type="button" data-go="query" role="tab" aria-selected="false">#Query</button>
         </div>
-      </div><!-- /hero-rotator -->
+      </div>
     </div>
   </div>
-  <!-- =========== OUTCOME RIBBON =========== -->
+  
 <section class="ribbon ribbon--win" aria-label="What changes with DSP">
   <div class="ribbon-track">
     <span class="item"><span class="ok">✓</span>Both Business &amp; IT, Empowered</span>
@@ -486,7 +471,7 @@
     <span class="item"><span class="ok">✓</span>Rules, Not Code</span>
     <span class="item"><span class="ok">✓</span>Tech Debt Toward Zero</span>
     <span class="item"><span class="ok">✓</span>Automation · Data Processing · Data Lists · Mass Actions · Cross-Org Sync · More</span>
-    <!-- duplicate for seamless marquee -->
+    
     <span class="item"><span class="ok">✓</span>Both Business &amp; IT, Empowered</span>
     <span class="item"><span class="ok">✓</span>Up to 95% Less Custom Code</span>
     <span class="item"><span class="ok">✓</span>Build in Days, Not Sprints</span>
@@ -497,12 +482,11 @@
 </section>
 </header>
 
-<!-- =========== FOUR SURFACES (TABBED) =========== -->
 <section class="section surfaces" id="surfaces" data-screen-label="Capabilities">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow"><span class="dot"></span>What DSP does</span>
-      <h2>Capabilities.</h2>
+      <h2>Surfaces.</h2>
       <p class="lead">Five surfaces, one consistent foundation. Pick one to see the capability, the architecture behind it, and the challenges it solves.</p>
     </div>
 
@@ -521,7 +505,7 @@
       <button class="surface-tab active" role="tab" aria-selected="true" data-panel="ui" data-num="01">
         <span class="hash">#UI</span>
         <span class="label">Data List &amp; Action Button</span>
-        <span class="sub">360° Workspaces · Editable Lists · Rules-driven Action Buttons</span>
+        <span class="sub">360° Workspaces · Editable Lists · Powerful Action Buttons</span>
       </button>
       <button class="surface-tab" role="tab" aria-selected="false" data-panel="batch" data-num="02">
         <span class="hash">#Batch</span>
@@ -559,7 +543,6 @@
 
     <div class="surface-panels" id="surfacePanels">
 
-      <!-- ============== #BATCH ============== -->
       <div class="surface-panel" id="panel-batch" role="tabpanel">
         <div class="panel-head">
           <div>
@@ -571,7 +554,6 @@
             Apex Batch classes · Custom logging frameworks · Home-grown chaining scripts · Schedule job management · ETL tools for cross-org sync · External deduplication tools · DevOps for record-based configuration · Data backup</div>
         </div>
 
-        
         <article class="cap reveal">
         <div class="cap-text">
           <ul class="cap-points">
@@ -741,7 +723,6 @@
         </div>
       </div>
 
-      <!-- ============== #UI ============== -->
       <div class="surface-panel active" id="panel-ui" role="tabpanel">
         <div class="panel-head">
           <div>
@@ -947,7 +928,6 @@
         </div>
       </div>
 
-      <!-- ============== #TRIGGER ============== -->
       <div class="surface-panel" id="panel-trigger" role="tabpanel">
         <div class="panel-head">
           <div>
@@ -960,7 +940,6 @@
           </div>
         </div>
 
-        
         <article class="cap reverse reveal">
         <div class="cap-text">
           <ul class="cap-points">
@@ -1098,7 +1077,6 @@
         </div>
       </div>
 
-      <!-- ============== #DATA LOADER ============== -->
       <div class="surface-panel" id="panel-loader" role="tabpanel">
         <div class="panel-head">
           <div>
@@ -1111,7 +1089,6 @@
           </div>
         </div>
 
-        
         <article class="cap reveal">
         <div class="cap-text">
           <ul class="cap-points">
@@ -1136,7 +1113,6 @@
                 <button class="hl-status" type="button" tabindex="-1" data-hl-status>Ready</button>
               </div>
 
-              <!-- dropzone -->
               <div class="hl-drop" data-hl-drop>
                 <span class="hl-fileicon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 2h8l4 4v16H6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 2v4h4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.5 13h7M8.5 16h7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span>
                 <div class="hl-fileinfo">
@@ -1146,7 +1122,6 @@
                 <span class="hl-parsed" data-hl-parsed><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Parsed</span>
               </div>
 
-              <!-- field mapping with transformations applied at load -->
               <div class="hl-maptitle">Field mapping · transformed at load</div>
               <div class="hl-map" data-hl-map>
                 <div class="hl-mrow" data-hl-mrow><span class="src">email_raw</span><span class="arr">→</span><span class="field">Email</span><span class="fn"><b>LOWER</b>(email_raw)</span></div>
@@ -1214,7 +1189,6 @@
         </div>
       </div>
 
-      <!-- ============== #QUERY (FREE) ============== -->
       <div class="surface-panel" id="panel-query" role="tabpanel">
         <div class="panel-head">
           <div>
@@ -1324,7 +1298,6 @@
   </div>
 </section>
 
-<!-- =========== THE SHIFT =========== -->
 <section class="section shift" id="shift" data-screen-label="The Shift">
   <div class="container">
     <div class="section-head reveal">
@@ -1334,13 +1307,13 @@
     </div>
 
     <div class="shift-grid">
-      <!-- BEFORE -->
+      
       <div class="shift-side before reveal" data-d="1">
         <div class="label"><span class="badge">×</span>Before · scattered across code &amp; canvas</div>
         <div class="sprawl">
           <div class="sprawl-canvas" aria-hidden="true">
             <svg class="wires" width="600" height="430" viewBox="0 0 600 430" preserveAspectRatio="xMinYMin meet" style="width:600px;height:430px;">
-              <!-- Apex (right edge ~160) → Flow (left edge 178). Node vertical center = top + 14 -->
+              
               <g stroke="#F2691E" stroke-width="1.8" fill="none" opacity=".9">
                 <path d="M158 31 C 184 31, 190 62, 210 62"/>
                 <path d="M158 65 C 184 65, 190 100, 210 100"/>
@@ -1356,7 +1329,7 @@
                 <path d="M158 405 C 184 405, 190 290, 210 290"/>
                 <path d="M158 133 C 184 133, 190 328, 210 328"/>
               </g>
-              <!-- Flow (right edge ~326) → Sub (left edge 330) -->
+              
               <g stroke="#D08A33" stroke-width="1.8" fill="none" opacity=".9">
                 <path d="M360 62 C 386 62, 386 82, 410 82"/>
                 <path d="M360 100 C 386 100, 386 122, 410 122"/>
@@ -1411,7 +1384,6 @@
         </div>
       </div>
 
-      <!-- AFTER -->
       <div class="shift-side after reveal" data-d="3">
         <div class="label"><span class="badge">✓</span>AFTER · ONE RECORD · ONE SOURCE OF TRUTH</div>
         <article class="pipeline-records">
@@ -1505,7 +1477,6 @@
   </div>
 </section>
 
-<!-- =========== EXECUTABLE ANATOMY =========== -->
 <section class="section anatomy" id="anatomy" data-screen-label="Anatomy">
   <div class="container">
     <div class="section-head reveal">
@@ -1600,7 +1571,6 @@
   </div>
 </section>
 
-<!-- =========== FUNCTION LIBRARY =========== -->
 <section class="section functions" id="engine" data-screen-label="Functions">
   <div class="container">
     <div class="section-head reveal">
@@ -1624,7 +1594,7 @@
     </div>
 
     <div class="fn-grid" id="fnGrid">
-      <!-- Logic -->
+      
       <div data-featured="1" class="chip" data-cat="logic"><span>IF</span><span class="cat">logic</span></div>
       <div data-featured="1" class="chip brand" data-cat="logic"><span>CASE</span><span class="cat">logic</span></div>
       <div data-featured="1" class="chip" data-cat="logic"><span>AND</span><span class="cat">logic</span></div>
@@ -1644,7 +1614,6 @@
       <div data-featured="1" class="chip" data-cat="text"><span>TO_LOWER_CASE</span><span class="cat">text</span></div>
       <div class="chip" data-cat="text"><span>TO_UPPER_CASE</span><span class="cat">text</span></div>
 
-      <!-- Text -->
       <div class="chip" data-cat="text"><span>LEFT</span><span class="cat">text</span></div>
       <div class="chip" data-cat="text"><span>RIGHT</span><span class="cat">text</span></div>
       <div class="chip brand" data-cat="logic"><span>MAP_VALUE_CONTAINS</span><span class="cat">logic</span></div>
@@ -1671,7 +1640,6 @@
       <div data-featured="1" class="chip" data-cat="text"><span>HTML_TABLE</span><span class="cat">text</span></div>
       <div class="chip" data-cat="text"><span>FORMAT_JSON_TEMPLATE</span><span class="cat">text</span></div>
 
-      <!-- Date -->
       <div data-featured="1" class="chip" data-cat="date"><span>TODAY</span><span class="cat">date</span></div>
       <div data-featured="1" class="chip" data-cat="date"><span>NOW</span><span class="cat">date</span></div>
       <div class="chip" data-cat="date"><span>YESTERDAY</span><span class="cat">date</span></div>
@@ -1690,7 +1658,6 @@
       <div class="chip" data-cat="date"><span>TO_START_OF_MONTH</span><span class="cat">date</span></div>
       <div data-featured="1" class="chip" data-cat="date"><span>FORMAT_DATETIME</span><span class="cat">date</span></div>
 
-      <!-- Number -->
       <div data-featured="1" class="chip brand" data-cat="lookup"><span>VLOOKUP</span><span class="cat">lookup</span></div>
       <div data-featured="1" class="chip" data-cat="number"><span>ABS</span><span class="cat">number</span></div>
       <div data-featured="1" class="chip" data-cat="number"><span>ROUND</span><span class="cat">number</span></div>
@@ -1705,7 +1672,6 @@
       <div class="chip" data-cat="number"><span>TAN</span><span class="cat">number</span></div>
       <div class="chip" data-cat="number"><span>SET_SCALE</span><span class="cat">number</span></div>
 
-      <!-- Lookup -->
       <div class="chip" data-cat="number"><span>DISTANCE</span><span class="cat">number</span></div>
       <div data-featured="1" class="chip brand" data-cat="rollup"><span>AGG_SUM</span><span class="cat">roll-up</span></div>
       <div data-featured="1" class="chip" data-cat="lookup"><span>VLOOKUP_CONNECTION</span><span class="cat">lookup</span></div>
@@ -1717,7 +1683,6 @@
       <div class="chip" data-cat="lookup"><span>JOIN_OBJECT_SOURCE</span><span class="cat">lookup</span></div>
       <div data-featured="1" class="chip" data-cat="lookup"><span>JOIN_OBJECT_TARGET</span><span class="cat">lookup</span></div>
 
-      <!-- Roll-up -->
       <div class="chip" data-cat="lookup"><span>JOIN_OBJECT_CONNECTION</span><span class="cat">lookup</span></div>
       <div data-featured="1" class="chip" data-cat="rollup"><span>AGG_COUNT</span><span class="cat">roll-up</span></div>
       <div class="chip" data-cat="rollup"><span>AGG_COUNT_DISTINCT</span><span class="cat">roll-up</span></div>
@@ -1725,7 +1690,6 @@
       <div data-featured="1" class="chip brand" data-cat="trigger"><span>TRIGGER_IS_CHANGED</span><span class="cat">trigger</span></div>
       <div class="chip" data-cat="rollup"><span>AGG_MIN</span><span class="cat">roll-up</span></div>
 
-      <!-- Trigger -->
       <div class="chip" data-cat="rollup"><span>AGG_AVG</span><span class="cat">roll-up</span></div>
       <div class="chip" data-cat="trigger"><span>TRIGGER_IS_BEFORE</span><span class="cat">trigger</span></div>
       <div class="chip" data-cat="trigger"><span>TRIGGER_IS_AFTER</span><span class="cat">trigger</span></div>
@@ -1739,7 +1703,6 @@
       <div class="chip" data-cat="trigger"><span>TRIGGER_FLIPPER</span><span class="cat">trigger</span></div>
       <div class="chip" data-cat="trigger"><span>TRIGGER_IS_FLIPPED</span><span class="cat">trigger</span></div>
 
-      <!-- Validate -->
       <div data-featured="1" data-no-all-brand="1" class="chip brand" data-cat="validate"><span>IS_EMAIL_ADDRESS</span><span class="cat">validate</span></div>
       <div class="chip" data-cat="validate"><span>IS_PHONE_NUMBER</span><span class="cat">validate</span></div>
       <div class="chip" data-cat="validate"><span>IS_NUMERIC</span><span class="cat">validate</span></div>
@@ -1754,13 +1717,11 @@
       <div class="chip" data-cat="validate"><span>IS_UPDATE</span><span class="cat">validate</span></div>
       <div class="chip" data-cat="validate"><span>IS_PRODUCTION</span><span class="cat">validate</span></div>
 
-      <!-- Business Hours -->
       <div data-featured="1" class="chip brand" data-cat="date"><span>BUSINESS_HOURS_ADD</span><span class="cat">date</span></div>
       <div class="chip" data-cat="date"><span>BUSINESS_HOURS_DIFF</span><span class="cat">date</span></div>
       <div class="chip" data-cat="date"><span>BUSINESS_HOURS_IS_WITHIN</span><span class="cat">date</span></div>
       <div class="chip" data-cat="date"><span>BUSINESS_HOURS_NEXT_START_DATE</span><span class="cat">date</span></div>
 
-      <!-- Convert -->
       <div class="chip" data-cat="convert"><span>TO_STRING</span><span class="cat">convert</span></div>
       <div data-featured="1" class="chip" data-cat="convert"><span>TO_INTEGER</span><span class="cat">convert</span></div>
       <div class="chip" data-cat="convert"><span>TO_DECIMAL</span><span class="cat">convert</span></div>
@@ -1775,14 +1736,12 @@
       <div class="chip" data-cat="convert"><span>BASE64_DECODE</span><span class="cat">convert</span></div>
       <div class="chip" data-cat="convert"><span>ESCAPE_HTML4</span><span class="cat">convert</span></div>
 
-      <!-- Mask -->
       <div class="chip" data-cat="convert"><span>ESCAPE_XML</span><span class="cat">convert</span></div>
       <div class="chip" data-cat="mask"><span>SCRAMBLE</span><span class="cat">mask</span></div>
       <div class="chip" data-cat="mask"><span>RANDOM_ITEM</span><span class="cat">mask</span></div>
       <a class="chip more" href="/transformation" target="_blank" rel="noopener"><span>+ 140 more →</span></a>
     </div>
 
-    <!-- Embeddable: call the formula engine from the client's own Apex -->
     <div class="fx-embed reveal">
       <div class="fx-embed-text">
         <span class="eyebrow"><span class="dot"></span>Developer API</span>
@@ -1819,7 +1778,6 @@
   </div>
 </section>
 
-<!-- =========== ACTIONS =========== -->
 <section class="section functions actions" id="actions" data-screen-label="Actions">
   <div class="container">
     <div class="section-head reveal">
@@ -1865,7 +1823,6 @@
   </div>
 </section>
 
-<!-- =========== BY THE NUMBERS =========== -->
 <section class="section numbers" id="numbers" data-screen-label="Numbers">
   <div class="container">
     <div class="section-head reveal">
@@ -1897,7 +1854,6 @@
   </div>
 </section>
 
-<!-- =========== SECURITY =========== -->
 <section class="section security" id="security" data-screen-label="Security">
   <div class="container">
     <div class="sec-grid">
@@ -1962,7 +1918,6 @@
   </div>
 </section>
 
-<!-- =========== PRICING =========== -->
 <section class="section pricing" id="pricing" data-screen-label="Pricing">
   <div class="container">
     <div class="section-head reveal">
@@ -1972,7 +1927,7 @@
     </div>
 
     <div class="price-grid reveal">
-      <!-- FREE -->
+      
       <article class="price-card">
         <header class="pc-head">
           <span class="pc-name">Free</span>
@@ -1994,7 +1949,6 @@
         <a class="pc-cta secondary" href="https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3u00000MSLUzEAP" target="_blank" rel="noopener">Install free on AgentExchange</a>
       </article>
 
-      <!-- GROWTH -->
       <article class="price-card">
         <header class="pc-head">
           <span class="pc-name">Growth</span>
@@ -2014,7 +1968,6 @@
         <a class="pc-cta secondary" href="#plan-config" data-plan="Growth">Request a quote</a>
       </article>
 
-      <!-- BUSINESS -->
       <article class="price-card featured">
         <span class="pc-badge">Best for most teams</span>
         <header class="pc-head">
@@ -2036,7 +1989,6 @@
         <a class="pc-cta primary" href="#plan-config" data-plan="Business">Request a quote</a>
       </article>
 
-      <!-- ENTERPRISE -->
       <article class="price-card">
         <header class="pc-head">
           <span class="pc-name">Enterprise</span>
@@ -2055,7 +2007,6 @@
       </article>
     </div>
 
-    <!-- Scaling with complexity -->
     <div class="price-addons reveal">
       <div class="pa-head">
         <span class="eyebrow"><span class="dot"></span>Scaling with your org</span>
@@ -2082,7 +2033,6 @@
 
     <p class="price-foot reveal">Prices shown per month, billed annually in USD.</p>
 
-    <!-- Support tiers -->
     <div class="price-support reveal">
       <div class="ps-head">
         <span class="eyebrow"><span class="dot"></span>Success plans</span>
@@ -2130,7 +2080,6 @@
   </div>
 </section>
 
-<!-- =========== CLOSING CTA =========== -->
 <section class="closing" id="cta" data-screen-label="CTA">
   <div class="container">
     <div class="closing-inner reveal">
@@ -2150,7 +2099,6 @@
   </div>
 </section>
 
-<!-- =========== FOOTER =========== -->
 <footer>
   <div class="container">
     <div class="foot-grid">
@@ -2162,13 +2110,13 @@
         <p style="margin-top: 14px; color: #FFFFFF; font-size: 13px; max-width: 32ch;">Rules-driven Executables for Salesforce. Quick. Simple. Powerful. Modular. Scalable.</p>
       </div>
       <div class="foot-col">
-        <h5>Capabilities</h5>
+        <h5>Surfaces</h5>
         <ul>
-          <li><a href="/capabilities/batch">#Batch</a></li>
-          <li><a href="/capabilities/trigger">#Trigger</a></li>
-          <li><a href="/capabilities/loader">#Data Loader</a></li>
-          <li><a href="/capabilities/ui">#UI</a></li>
-          <li><a href="/capabilities/query">#Query</a></li>
+          <li><a href="/surfaces/batch">#Batch</a></li>
+          <li><a href="/surfaces/trigger">#Trigger</a></li>
+          <li><a href="/surfaces/loader">#Data Loader</a></li>
+          <li><a href="/surfaces/ui">#UI</a></li>
+          <li><a href="/surfaces/query">#Query</a></li>
         </ul>
       </div>
       <div class="foot-col">
@@ -2200,12 +2148,6 @@
   </div>
 </footer>
 
-<!-- =========== DEMO REQUEST MODAL =========== -->
-<!--
-  Lighter form than the plan-config modal — no plan/org-config questions.
-  Opened from the closing CTA "Request a demo" button. Posts to Salesforce
-  Web-to-Lead via the same hidden-iframe pattern.
--->
 <div class="pcm" id="demo-request" hidden role="dialog" aria-modal="true" aria-labelledby="drm-title">
   <div class="pcm-backdrop" data-drm-dismiss></div>
   <div class="pcm-card-wrap">
@@ -2227,13 +2169,11 @@
       <input type="hidden" name="oid" value="00D4x000004wmrR" />
       <input type="hidden" name="retURL" value="https://www.datasyncpro.io" />
       <input type="hidden" name="lead_source" value="Web" />
-      <!-- Demo-request flag (custom checkbox field) — defaults to true -->
+      
       <input type="hidden" name="00NQl000009gXs2" value="1" />
-      <!-- Salesforce W2L reCAPTCHA — captcha_settings.ts is refreshed every
-           500ms by the global ticker in app.js so the token stays fresh. -->
+      
       <input type="hidden" name="captcha_settings" value='{"keyname":"datasyncproio","fallback":"true","orgId":"00D4x000004wmrR","ts":""}' />
 
-      <!-- honeypot -->
       <div class="lf-honeypot" aria-hidden="true">
         <label for="drm-trap">Don't fill this in
           <input id="drm-trap" name="company_url" type="text" tabindex="-1" autocomplete="off" />
@@ -2368,7 +2308,6 @@
     <iframe name="dsp_drm_iframe" id="dsp_drm_iframe" title="Demo request submission" aria-hidden="true" tabindex="-1"
             style="position:absolute; width:0; height:0; border:0; visibility:hidden;"></iframe>
 
-    <!-- Success state -->
     <div class="pcm-success" id="drm-success" hidden>
       <div class="lf-check" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4.5 4.5L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2380,17 +2319,6 @@
   </div>
 </div>
 
-<!-- =========== PARTNER REQUEST MODAL =========== -->
-<!--
-  Partner-program intake form. Opened from the footer "Partners" link.
-  Same Salesforce W2L plumbing as the demo modal:
-    • Posts to https://webto.salesforce.com/servlet/servlet.WebToLead
-    • Standard Lead fields (first_name, last_name, email, company, title,
-      country) ride along by name.
-    • Everything partner-specific gets packed into 00NQl000009RvD7
-      (Requested License Info) as JSON with intent: "Partner Inquiry".
-  Rate limiter + work-email validation + reCAPTCHA all wired the same way.
--->
 <div class="pcm" id="partner-request" hidden role="dialog" aria-modal="true" aria-labelledby="prm-title">
   <div class="pcm-backdrop" data-prm-dismiss></div>
   <div class="pcm-card-wrap">
@@ -2415,7 +2343,6 @@
 
       <input type="hidden" name="captcha_settings" value='{"keyname":"datasyncproio","fallback":"true","orgId":"00D4x000004wmrR","ts":""}' />
 
-      <!-- honeypot -->
       <div class="lf-honeypot" aria-hidden="true">
         <label for="prm-trap">Don't fill this in
           <input id="prm-trap" name="company_url" type="text" tabindex="-1" autocomplete="off" />
@@ -2571,7 +2498,6 @@
     <iframe name="dsp_prm_iframe" id="dsp_prm_iframe" title="Partner inquiry submission" aria-hidden="true" tabindex="-1"
             style="position:absolute; width:0; height:0; border:0; visibility:hidden;"></iframe>
 
-    <!-- Success state -->
     <div class="pcm-success" id="prm-success" hidden>
       <div class="lf-check" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4.5 4.5L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2583,7 +2509,6 @@
   </div>
 </div>
 
-<!-- =========== PLAN CONFIG MODAL =========== -->
 <div class="pcm" id="plan-config" hidden role="dialog" aria-modal="true" aria-labelledby="pcm-title">
   <div class="pcm-backdrop" data-pcm-dismiss></div>
   <div class="pcm-card-wrap">
@@ -2602,37 +2527,25 @@
           action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000004wmrR"
           method="POST" target="dsp_pcm_iframe" novalidate>
 
-      <!--
-        Custom Salesforce field used: 00NQl000009RvD7 (Requested License Info).
-        It receives a single JSON blob built on submit containing:
-          { orgs: [...] }
-        Success plan (Standard / Premium) posts to its own field
-        00NQl000009qgNm — not packed into the JSON.
-        Standard Lead fields (first_name, last_name, email, company, title)
-        come straight from the visible inputs by name.
-      -->
       <input type="hidden" name="oid" value="00D4x000004wmrR" />
       <input type="hidden" name="retURL" value="https://www.datasyncpro.io" />
       <input type="hidden" name="lead_source" value="Web" />
       <input type="hidden" name="captcha_settings" value='{"keyname":"datasyncproio","fallback":"true","orgId":"00D4x000004wmrR","ts":""}' />
       <input type="hidden" name="00NQl000009RvD7" id="pcm-hidden-licenseinfo" value="" />
-      <!-- Success plan (Standard / Premium) → its own dedicated Lead field. -->
+      
       <input type="hidden" name="00NQl000009qgNm" id="pcm-hidden-successplan" value="Standard" />
-      <!-- Internal-only refs (no name attr — not POSTed; JS reads from these
-           when assembling the 00NQl000009RvD7 JSON payload). -->
+      
       <input type="hidden" id="pcm-hidden-plan" value="" />
       <input type="hidden" id="pcm-hidden-orgcount" value="" />
       <input type="hidden" id="pcm-hidden-conn" value="" />
       <input type="hidden" id="pcm-hidden-exec" value="" />
 
-      <!-- honeypot -->
       <div class="lf-honeypot" aria-hidden="true">
         <label for="pcm-trap">Don't fill this in
           <input id="pcm-trap" name="company_url" type="text" tabindex="-1" autocomplete="off" />
         </label>
       </div>
 
-      <!-- Plan switcher -->
       <div class="pcm-row">
         <span class="pcm-row-label">Plan</span>
         <div class="pcm-seg" role="radiogroup" aria-label="Plan">
@@ -2644,7 +2557,6 @@
 
       <div class="pcm-rule"></div>
 
-      <!-- Contact -->
       <section class="pcm-section">
         <h3 class="pcm-section-title"><span class="pcm-num">01</span>About you</h3>
         <div class="lf-grid pcm-contact">
@@ -2741,7 +2653,6 @@
 
       <div class="pcm-rule"></div>
 
-      <!-- Orgs -->
       <section class="pcm-section">
         <h3 class="pcm-section-title">
           <span class="pcm-num">02</span>Your Salesforce orgs
@@ -2750,7 +2661,7 @@
         <p class="pcm-hint">Add each org you'd like to license. Per-org limits help us confirm you're on the right plan and provision in the right shape.</p>
 
         <div class="pcm-orgs" id="pcm-orgs">
-          <!-- rows inserted by JS; first row rendered on modal open -->
+          
         </div>
 
         <div class="pcm-orgs-foot">
@@ -2766,7 +2677,6 @@
         </div>
       </section>
 
-      <!-- Row template (hidden, cloned by JS) -->
       <template id="pcm-org-template">
         <div class="pcm-org">
           <div class="pcm-org-head">
@@ -2803,8 +2713,6 @@
 
       <div class="pcm-rule"></div>
 
-      <!-- Success-plan switcher — Standard is included with every paid plan;
-           Premium is a paid add-on (25% of license). -->
       <div class="pcm-row">
         <span class="pcm-row-label">Success plan</span>
         <div class="pcm-seg" role="radiogroup" aria-label="Success plan">
@@ -2815,7 +2723,6 @@
 
       <div class="pcm-rule"></div>
 
-      <!-- Free-form notes — final field before submit -->
       <section class="pcm-section">
         <div class="lf-grid pcm-contact">
           <div class="lf-field lf-span-2">
@@ -2841,7 +2748,6 @@
     <iframe name="dsp_pcm_iframe" id="dsp_pcm_iframe" title="Plan request submission" aria-hidden="true" tabindex="-1"
             style="position:absolute; width:0; height:0; border:0; visibility:hidden;"></iframe>
 
-    <!-- Success state -->
     <div class="pcm-success" id="pcm-success" hidden>
       <div class="lf-check" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4.5 4.5L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2855,15 +2761,13 @@
 
 </script><script src="/app.js?v=30"></script>
 
-<!-- Hero: align left text column's vertical center to the active product card -->
 <script>
 (function(){
   var mq = window.matchMedia('(min-width: 941px)');
   var left = document.querySelector('.hero-grid > div:first-child');
   var rotator = document.querySelector('.hero-rotator');
   if(!left || !rotator) return;
-  // Center the headline-through-buttons group (NOT the eyebrow) on the stage.
-  // The stage center is constant across scenes, so the text never shakes.
+
   function align(){
     if(!mq.matches){ left.style.transform=''; return; }
     left.style.transform='';
@@ -2888,11 +2792,6 @@
 })();
 </script>
 
-
-<!-- Shift "before" diagram: the node canvas is a fixed 600px design. On
-     narrower desktops (13"/14" MacBook Pro) the BEFORE column is < 600px, so
-     scale the canvas down to fit its card instead of letting nodes spill out.
-     Keeps both panels as clean, equal-width cards. -->
 <script>
 (function(){
   var CW = 600, CH = 430;

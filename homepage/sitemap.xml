@@ -4,13 +4,13 @@
   Canonical host is www (apex 301-redirects to www).
 
   Excluded on purpose:
-    /capabilities, /why-dsp, /security, /pricing  -> all rewrite to index.html
+    /surfaces, /why-dsp, /security, /pricing  -> all rewrite to index.html
                                                      (same HTML as "/", duplicate content)
     /partnership/*, Master Subscription Agreement  -> page-level noindex
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Marketing homepage (also reachable via /capabilities, /why-dsp, /security, /pricing) -->
+  <!-- Marketing homepage (also reachable via /surfaces, /why-dsp, /security, /pricing) -->
   <url>
     <loc>https://www.datasyncpro.io/</loc>
     <lastmod>2026-06-30</lastmod>

@@ -1,27 +1,25 @@
-/* =========================================================
-   Data Sync Pro · home
-   ========================================================= */
+
 
 :root {
-  /* LIGHT / hi-tech palette */
+  
   --paper: #FAFBFC;
   --paper-2: #F2F4F8;
   --paper-3: #EAEEF3;
-  --paper-deep: #0B1019;       /* dark accent band — ribbon / functions / closing */
+  --paper-deep: #0B1019;       
   --card: #FFFFFF;
   --card-2: #FAFBFC;
   --ink: #0E141C;
-  --ink-head: #0B2227;        /* deep teal-navy — branded heading ink */
+  --ink-head: #0B2227;        
   --ink-2: #2D3340;
   --ink-3: #5E6878;
   --mute: #8A93A1;
   --rule: #E3E7EE;
   --rule-2: #C9D0DA;
-  --brand: #07A6A8;            /* vivid teal — brighter, ServiceNow-style pop */
-  --brand-ink: #0B5E60;        /* darker brand text */
-  --brand-soft: #E0EFEF;       /* pale teal wash */
-  --brand-pure: #7FB9BB;       /* logo elephant teal */
-  --brand-bright: #0FD49E;     /* brand green — bright on dark accent bands */
+  --brand: #07A6A8;            
+  --brand-ink: #0B5E60;        
+  --brand-soft: #E0EFEF;       
+  --brand-pure: #7FB9BB;       
+  --brand-bright: #0FD49E;     
   --signal: #C84A1A;
   --signal-soft: #FBE7DC;
   --good: #117D4F;
@@ -30,7 +28,6 @@
   --code-fg: #E8EDF3;
   --code-mute: #8A93A1;
 
-  /* On-dark text — used inside .ribbon / .functions / .closing */
   --ink-on-dark: #E8EDF3;
   --ink-2-on-dark: #B6BDC8;
   --ink-3-on-dark: #7C8493;
@@ -71,10 +68,7 @@ body::before {
 body > * { position: relative; z-index: 1; }
 html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: smooth; scroll-padding-top: 76px; overflow-x: clip; }
 body {
-  /* clip the ~scrollbar-width overhang from full-bleed 100vw backgrounds
-     (e.g. .surfaces-sticky::before) so the page never scrolls horizontally.
-     `clip` (not `hidden`) avoids creating a scroll container, so the sticky
-     capability shelf keeps working. */
+  
   overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
@@ -96,7 +90,6 @@ button { font: inherit; cursor: pointer; }
   padding: 0 var(--gutter);
 }
 
-/* ---------- Type ---------- */
 .eyebrow {
   font-family: var(--f-mono);
   font-size: 15px;
@@ -206,7 +199,6 @@ p { margin: 0; }
 .tag.signal { background: var(--signal-soft); border-color: rgba(200,74,26,.22); color: var(--signal); }
 .tag.good { background: var(--good-soft); border-color: rgba(14,110,71,.2); color: var(--good); }
 
-/* ---------- Buttons ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -236,7 +228,6 @@ p { margin: 0; }
 }
 .btn:hover .arrow { transform: translateX(2px); }
 
-/* ---------- Nav ---------- */
 .nav {
   position: sticky;
   top: 0;
@@ -315,7 +306,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
 }
 .nav-cta .btn { padding: 8px 14px; font-size: 14px; }
 
-/* ---------- Nav: Resources dropdown ---------- */
 .nav-dd { position: relative; }
 .nav-dd-trigger {
   display: inline-flex;
@@ -357,7 +347,7 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   transition: opacity .14s ease, transform .14s ease, visibility .14s;
   z-index: 60;
 }
-/* Invisible bridge across the 8px gap so hover doesn't drop. */
+
 .nav-dd-menu::before {
   content: '';
   position: absolute;
@@ -392,7 +382,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   padding: 6px 12px 4px;
 }
 
-/* ---------- Nav: mobile toggle + panel ---------- */
 .nav-toggle {
   display: none;
   width: 40px;
@@ -467,9 +456,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   .nav.menu-open .nav-mobile { display: block; }
 }
 
-/* =========================================================
-   Hero
-   ========================================================= */
 .hero {
   padding: 0;
   position: relative;
@@ -533,7 +519,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   font-weight: 500;
 }
 .hero .lead { margin-top: 24px; }
-
 
 .results-block {
   margin-top: 48px;
@@ -633,7 +618,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
 .hero-trust .pip-strong svg { width: 16px; height: 16px; color: var(--brand); }
 .hero-trust .pip-strong b { font-weight: 700; color: var(--brand-ink); }
 
-/* ----- Executable Card (hero visual) ----- */
 .exec-card {
   background: var(--card);
   border: 1px solid var(--rule);
@@ -731,11 +715,8 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
 .exec-row .v .arrow-asn { color: var(--brand); margin: 0 6px; }
 
 .exec-card.hero-card { transform-origin: center; }
-.exec-card.hero-card:hover { /* subtle */ }
+.exec-card.hero-card:hover {  }
 
-/* =========================================================
-   Batch Execution Widget (hero + capability viz)
-   ========================================================= */
 .batch-widget {
   background: var(--card);
   border: 1px solid var(--rule);
@@ -958,7 +939,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
 }
 .bw-toast .ck-mini svg { width: 10px; height: 10px; }
 
-/* annotations around the batch widget */
 .bw-annotate { position: relative; }
 .bw-annotate .anno {
   position: absolute;
@@ -984,12 +964,8 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   letter-spacing: .1em;
 }
 
-/* =========================================================
-   Capabilities section
-   ========================================================= */
 .capabilities { background: var(--paper); }
 
-/* Pill-style tabs for capabilities */
 .cap-tabs {
   display: inline-flex;
   gap: 4px;
@@ -1165,7 +1141,7 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   height: 1px;
   background: linear-gradient(90deg, var(--rule), transparent);
 }
-/* first point under a group header ties to the label (no divider) */
+
 .cap-text .cap-points li.grp + li { border-top: 0; padding-top: 6px; }
 
 .cap-text .cap-meta {
@@ -1180,12 +1156,11 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
 .cap-viz {
   position: relative;
 }
-/* Full-bleed capability visual (spans full panel width) */
+
 .cap-fullbleed {
   margin: 32px 0 40px;
 }
 
-/* Decorative separators between stacked diagrams in #panel-ui & #panel-query (per GUIHUA) */
 #panel-ui .cap-fullbleed,
 #panel-ui .surface-viz,
 #panel-query .cap-fullbleed,
@@ -1205,7 +1180,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   content: none;
 }
 
-/* Real in-flow divider between stacked diagrams — copies the cs-header rule that works on dark panels */
 .cap-sep {
   height: 0;
   margin: 48px 0;
@@ -1283,7 +1257,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   margin-top: 8px;
 }
 
-/* Full-bleed capability visual (spans full panel width) — END */
 .cap-viz .frame {
   background: var(--card);
   border: 1px solid var(--rule);
@@ -1310,9 +1283,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   background: var(--brand);
 }
 
-/* =========================================================
-   Pipeline Records (Shift "after" view)
-   ========================================================= */
 .pipeline-records {
   background: var(--card);
   border: 1px solid var(--rule);
@@ -1458,9 +1428,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
 }
 .pr-foot b { color: var(--ink); font-family: var(--f-sans); font-weight: 500; letter-spacing: -.005em; }
 
-/* =========================================================
-   Pipeline Execution Widget (capability viz)
-   ========================================================= */
 .pipeline-widget {
   background: var(--card);
   border: 1px solid var(--rule);
@@ -1665,7 +1632,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
 .pw-toast .toast-body b { font-weight: 600; font-size: 14px; }
 .pw-toast .toast-body span { opacity: .92; font-size: 12.5px; font-weight: 400; }
 
-/* annotation pills for pipeline-widget */
 .pw-annotate { position: relative; }
 .pw-annotate .anno {
   position: absolute;
@@ -1684,9 +1650,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
 .pw-annotate .anno.tr { top: -10px; right: 24px; background: var(--brand-soft); color: var(--brand-ink); border-color: rgba(63,133,135,.26); }
 .pw-annotate .anno.br { bottom: -10px; right: 24px; }
 
-/* =========================================================
-   Trigger Execution Trace (capability viz · NEW)
-   ========================================================= */
 .trigger-trace {
   background: var(--card);
   border: 1px solid var(--rule);
@@ -1892,9 +1855,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   letter-spacing: -.005em;
 }
 
-/* =========================================================
-   Trigger Pipeline (legacy)
-   ========================================================= */
 .trigger-pipeline {
   background: var(--card);
   border: 1px solid var(--rule);
@@ -1981,9 +1941,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
 }
 .tp-foot .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--good); display: inline-block; }
 
-/* =========================================================
-   Data Loader Widget (capability viz)
-   ========================================================= */
 .dl-widget {
   background: var(--card);
   border: 1px solid var(--rule);
@@ -2138,7 +2095,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
 .dl-foot .audit { color: var(--ink); }
 .dl-foot .audit b { color: var(--good); font-weight: 500; }
 
-/* Workspace inset (within UI cap) */
 .cap-inset {
   margin-top: 18px;
   padding: 18px;
@@ -2166,7 +2122,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   padding: 14px;
 }
 
-/* Rich Composed Workspace (Account record + multiple Data Lists) */
 .ws-rich {
   background: var(--card);
   border: 1px solid var(--rule);
@@ -2276,7 +2231,7 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   background: var(--card);
   border-bottom: 1px solid var(--rule);
 }
-/* column filter (left) */
+
 .ws-dl-filter { display: flex; align-items: center; gap: 6px; min-width: 0; }
 .ws-dl-col, .ws-dl-search {
   display: inline-flex; align-items: center; gap: 6px;
@@ -2289,7 +2244,7 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
 .ws-dl-search { background: var(--paper); color: var(--ink-3); min-width: 0; }
 .ws-dl-search .mag { width: 13px; height: 13px; color: var(--ink-3); flex: 0 0 auto; }
 .ws-dl-search .q { width: 150px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-/* action buttons + function tools (right) */
+
 .ws-dl-acts { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 3px; }
 .ws-dl-sep { width: 1px; height: 18px; background: var(--rule); margin: 0 4px; flex: 0 0 auto; }
 .ws-ic {
@@ -2387,7 +2342,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
   .ws-dl-row > *:nth-child(n+4) { display: none; }
 }
 
-/* annotations around the card */
 .exec-annotate {
   position: relative;
 }
@@ -2407,9 +2361,6 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover { filter: brightness(1.08); }
 .exec-annotate .anno.tr { top: -10px; right: 24px; background: var(--brand-soft); color: var(--brand-ink); border-color: rgba(63,133,135,.26); }
 .exec-annotate .anno.br { bottom: -10px; right: 32px; }
 
-/* =========================================================
-   Section base
-   ========================================================= */
 section.section {
   padding: clamp(72px, 9vw, 120px) 0;
   position: relative;
@@ -2429,9 +2380,6 @@ section.section {
   margin: 0;
 }
 
-/* =========================================================
-   Problem ribbon
-   ========================================================= */
 .ribbon {
   background: var(--paper-deep);
   color: var(--ink-2-on-dark);
@@ -2475,16 +2423,12 @@ section.section {
   font-size: 18px;
 }
 
-/* =========================================================
-   The Shift (before / after)
-   ========================================================= */
 .shift {
   background: var(--paper-2);
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
 }
 
-/* "sprawl" word emphasis in shift headline */
 .sprawl-word {
   font-family: var(--f-serif);
   font-style: italic;
@@ -2510,14 +2454,12 @@ section.section {
   opacity: .35;
   pointer-events: none;
 }
-/* "rule records" headline emphasis → brand green */
+
 .rule-green { color: var(--sn-btn, #0FD49E); }
 
 .shift-grid {
   display: grid;
-  /* minmax(0,1fr), not 1fr: plain 1fr resolves to minmax(auto,1fr), whose auto floor
-     lets the right card's long monospace strings inflate that column past 50%. The 0
-     floor forces both sides to split the row exactly in half. */
+  
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   gap: 32px;
   align-items: stretch;
@@ -2549,7 +2491,7 @@ section.section {
   font-size: 0;
   color: transparent;
 }
-/* BEFORE: coral disc with a drawn × (matches the capability rows) */
+
 .shift-side.before .label .badge {
   background: rgba(240,130,75,.16);
   box-shadow: inset 0 0 0 1px rgba(240,130,75,.30);
@@ -2565,7 +2507,7 @@ section.section {
 }
 .shift-side.before .label .badge::before { transform: translate(-50%,-50%) rotate(45deg); }
 .shift-side.before .label .badge::after  { transform: translate(-50%,-50%) rotate(-45deg); }
-/* AFTER: green disc with a drawn ✓ */
+
 .shift-side.after .label .badge {
   background: rgba(40,224,122,.16);
   box-shadow: inset 0 0 0 1px rgba(40,224,122,.34);
@@ -2583,7 +2525,6 @@ section.section {
 .shift-side h3 { color: var(--ink); }
 .shift-side h3 .mute { color: var(--ink-3); }
 
-/* BEFORE: sprawl visualization */
 .sprawl {
   flex: 1;
   background: var(--card);
@@ -2596,8 +2537,7 @@ section.section {
   position: relative;
   min-height: 480px;
   box-shadow: var(--sh-1);
-  /* Center the fixed-size canvas inside the (taller) sprawl container so
-     the nodes sit visually in the middle, not pinned to the top. */
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2688,9 +2628,6 @@ body.sn-hero .arrow-col .arrow-big {
 }
 .arrow-col .arrow-big svg { width: 28px; height: 28px; }
 
-/* =========================================================
-   Executable anatomy (interactive)
-   ========================================================= */
 .anatomy {
   background: var(--paper-2);
   border-top: 1px solid var(--rule);
@@ -2836,15 +2773,12 @@ body.sn-hero .arrow-col .arrow-big {
 }
 .stage-card-foot .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--good); display: inline-block; margin-right: 8px;}
 
-/* =========================================================
-   Four surfaces — tabbed
-   ========================================================= */
 .surfaces {
   background: var(--paper);
   padding-top: clamp(108px, 13.5vw, 180px);
   padding-bottom: clamp(108px, 13.5vw, 180px);
 }
-/* breathing room above the surfaces nav line (per comment) */
+
 .surfaces .section-head {
   margin-bottom: clamp(40px, 5vw, 64px);
 }
@@ -2904,7 +2838,7 @@ body.sn-hero .arrow-col .arrow-big {
 .surface-tab:hover::after { opacity: 1; transform: translateX(2px); }
 .surface-tab.active::after { opacity: 0; }
 .surface-tab:last-child { border-right: 0; }
-/* --- FREE tier badges (Query tab) --- */
+
 .surface-tab .free-badge {
   display: inline-flex;
   align-items: center;
@@ -2943,7 +2877,6 @@ body.sn-hero .arrow-col .arrow-big {
   content: none;
 }
 
-/* --- Query Manager widget --- */
 .qm-widget {
   background: var(--card);
   border: 1px solid var(--rule);
@@ -2987,7 +2920,6 @@ body.sn-hero .arrow-col .arrow-big {
   font-weight: 600;
 }
 
-/* --- Query Manager: 5 tools strip --- */
 .qm-tools {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -3089,7 +3021,6 @@ body.sn-hero .arrow-col .arrow-big {
   box-shadow: 0 0 14px rgba(22,138,140,.4);
 }
 
-/* Panels */
 .surface-panels {
   margin-top: 32px;
 }
@@ -3179,7 +3110,6 @@ body.sn-hero .arrow-col .arrow-big {
   margin-bottom: 8px;
 }
 
-/* Surface key viz strip */
 .surface-viz {
   background: var(--card);
   border: 1px solid var(--rule);
@@ -3204,7 +3134,6 @@ body.sn-hero .arrow-col .arrow-big {
   background: var(--brand);
 }
 
-/* Batch 6-stage engine viz */
 .engine-strip {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -3255,7 +3184,6 @@ body.sn-hero .arrow-col .arrow-big {
 .engine-step.action .name { color: var(--brand-ink); }
 .engine-step.action .desc { color: var(--ink-2); }
 
-/* Data Loader viz */
 .loader-flow {
   display: grid;
   grid-template-columns: 220px 1fr 180px;
@@ -3335,7 +3263,6 @@ body.sn-hero .arrow-col .arrow-big {
 }
 .loader-flow .log-out .ok { color: #6BE0A0; }
 
-/* Trigger viz */
 .trigger-flow {
   display: grid;
   grid-template-columns: 220px 1fr;
@@ -3383,7 +3310,6 @@ body.sn-hero .arrow-col .arrow-big {
   letter-spacing: .04em;
 }
 
-/* UI workspace viz */
 .ws-mock {
   background: var(--paper);
   border: 1px solid var(--rule);
@@ -3431,7 +3357,6 @@ body.sn-hero .arrow-col .arrow-big {
   background: transparent; color: var(--ink); border: 1px solid var(--rule);
 }
 
-/* Challenges → Solutions paired grid */
 .cs-grid {
   display: flex;
   flex-direction: column;
@@ -3540,7 +3465,7 @@ body.sn-hero .cs-row.open > .cell.problem::after { border-color: var(--sn-btn, #
   margin-top: 0;
   transition: max-height .32s ease, opacity .25s ease, margin-top .32s ease;
 }
-/* Reveal a row's descriptions on hover; keep the first row open as an affordance */
+
 .cs-row.open > .cell p {
   max-height: 220px;
   opacity: 1;
@@ -3574,7 +3499,7 @@ body.sn-hero .cs-row.open > .cell h4 { color: #FFFFFF; }
   background: rgba(240,130,75,.16);
   box-shadow: inset 0 0 0 1px rgba(240,130,75,.30);
 }
-/* Draw the × as two centered bars so it's pixel-identical and dead-centered everywhere */
+
 .cs-row > .cell.problem h4 .x::before,
 .cs-row > .cell.problem h4 .x::after {
   content: "";
@@ -3595,7 +3520,7 @@ body.sn-hero .cs-row.open > .cell h4 { color: #FFFFFF; }
   background: rgba(40,224,122,.16);
   box-shadow: inset 0 0 0 1px rgba(40,224,122,.34);
 }
-/* Draw the ✓ as a 2px stroke so it matches the × exactly */
+
 .cs-row > .cell.solution h4 .v::before {
   content: "";
   position: absolute;
@@ -3632,7 +3557,6 @@ body.sn-hero .cs-divider .arrow-mini {
 .cs-divider .arrow-mini svg { width: 14px; height: 14px; }
 .cs-row:last-child > .cell { border-bottom: 1px solid var(--rule); }
 
-/* Surface metrics row at bottom */
 .surface-metrics {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -3679,11 +3603,6 @@ body.sn-hero .cs-divider .arrow-mini {
   color: var(--mute);
 }
 
-
-
-/* =========================================================
-   Function library
-   ========================================================= */
 .functions {
   background: var(--paper-deep);
   color: var(--ink-on-dark);
@@ -3763,10 +3682,7 @@ body.sn-hero .cs-divider .arrow-mini {
 }
 .fn-grid .chip.brand .cat { color: var(--brand-bright); opacity: .7; }
 
-/* =========================================================
-   Actions library — companion to the Functions section
-   ========================================================= */
-.actions .act-groups { margin-top: 52px; display: grid; gap: 40px; }
+.actions .act-groups { margin-top: 36px; display: grid; gap: 26px; }
 .actions .act-ghead {
   display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
   padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,.08);
@@ -3779,12 +3695,11 @@ body.sn-hero .cs-divider .arrow-mini {
   font-family: var(--f-mono); font-size: 12px; letter-spacing: .02em;
   color: var(--ink-2-on-dark);
 }
-.actions .act-grid { margin-top: 20px; }
+.actions .act-grid { margin-top: 14px; }
 
-/* Make the action chips read louder than the function chips */
 .actions .fn-grid { gap: 10px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
 .actions .chip {
-  font-size: 16px; padding: 16px 19px; gap: 11px;
+  font-size: 15px; padding: 12px 16px; gap: 10px;
   font-weight: 500;
   -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
   justify-content: flex-start;
@@ -3832,7 +3747,6 @@ body.sn-hero .cs-divider .arrow-mini {
 .fn-cats .fc:hover { color: var(--ink-on-dark); border-color: rgba(255,255,255,.4); }
 .fn-cats .fc.on { background: var(--brand-bright); color: var(--paper-deep); border-color: var(--brand-bright); box-shadow: 0 0 28px -10px var(--brand-bright); }
 
-/* Embeddable formula-engine band (within Functions) */
 .fx-embed {
   margin-top: 80px;
   padding-top: 56px;
@@ -3843,8 +3757,7 @@ body.sn-hero .cs-divider .arrow-mini {
   align-items: center;
 }
 @media (max-width: 860px) { .fx-embed { grid-template-columns: 1fr; gap: 36px; } }
-/* Align the code card's middle to the text block (heading→list), not the full
-   column — the eyebrow adds height up top that otherwise pulls the card high. */
+
 @media (min-width: 861px) { .fx-embed .fx-code { transform: translateY(21px); } }
 .fx-embed-text .eyebrow { color: var(--ink-3-on-dark); }
 .fx-embed-text .eyebrow .dot { background: var(--brand-bright); }
@@ -3989,9 +3902,6 @@ body.sn-hero .cs-divider .arrow-mini {
 }
 .fx-out-text { letter-spacing: .01em; }
 
-/* =========================================================
-   By the numbers
-   ========================================================= */
 .numbers {
   background: var(--paper);
 }
@@ -4040,9 +3950,6 @@ body.sn-hero .cs-divider .arrow-mini {
   max-width: 32ch;
 }
 
-/* =========================================================
-   Security
-   ========================================================= */
 .security {
   background: var(--paper-2);
   border-top: 1px solid var(--rule);
@@ -4116,9 +4023,6 @@ body.sn-hero .cs-divider .arrow-mini {
 .sec-badge .txt b { display: block; font-size: 16px; font-weight: 600; color: var(--ink); letter-spacing: -.01em; }
 .sec-badge .txt span { font-size: 13.5px; color: var(--ink-2-on-dark); letter-spacing: 0; }
 
-/* =========================================================
-   Closing CTA
-   ========================================================= */
 .closing {
   background: var(--paper-deep);
   color: var(--ink-on-dark);
@@ -4159,9 +4063,6 @@ body.sn-hero .cs-divider .arrow-mini {
   gap: 12px;
 }
 
-/* =========================================================
-   Lead form (Web-to-Lead) — sits inside .closing on dark bg
-   ========================================================= */
 .lead-plan-pill {
   margin: 28px auto 0;
   max-width: 720px;
@@ -4311,7 +4212,7 @@ body.sn-hero .cs-divider .arrow-mini {
   flex-wrap: wrap;
 }
 .lf-submit {
-  /* inherits .btn + .closing .btn styling already (brand-bright) */
+  
 }
 .lf-meta {
   margin: 0;
@@ -4346,7 +4247,6 @@ body.sn-hero .cs-divider .arrow-mini {
 }
 .lf-alt a:hover { border-bottom-color: var(--brand-bright); }
 
-/* Success state */
 .lead-success {
   margin: 44px auto 0;
   max-width: 560px;
@@ -4398,10 +4298,6 @@ body.sn-hero .cs-divider .arrow-mini {
   .lf-meta { justify-content: center; }
 }
 
-/* =========================================================
-   PLAN CONFIG MODAL
-   Opened by pricing-card CTAs. Light card on dark backdrop.
-   ========================================================= */
 .pcm {
   position: fixed;
   inset: 0;
@@ -4440,15 +4336,14 @@ body.sn-hero .cs-divider .arrow-mini {
   animation: pcmRise .28s cubic-bezier(.2,.7,.2,1.05);
   max-height: calc(100vh - 64px);
   overflow-y: auto;
-  /* Keep the rounded right edge intact even when content scrolls — a flush
-     native scrollbar visually flattens the top/bottom-right corners. */
+  
   scrollbar-width: thin;
   scrollbar-color: rgba(11,16,25,.22) transparent;
 }
 .pcm-card::-webkit-scrollbar { width: 10px; }
 .pcm-card::-webkit-scrollbar-track {
   background: transparent;
-  margin: 14px 0; /* keep the thumb away from the rounded corners */
+  margin: 14px 0; 
 }
 .pcm-card::-webkit-scrollbar-thumb {
   background-color: rgba(11,16,25,.22);
@@ -4459,8 +4354,7 @@ body.sn-hero .cs-divider .arrow-mini {
 .pcm-card::-webkit-scrollbar-thumb:hover {
   background-color: rgba(11,16,25,.36);
 }
-/* Wrapper around the card so the close button can sit outside the card's
-   border-radius without being clipped by its overflow:auto. */
+
 .pcm-card-wrap {
   position: relative;
   width: 100%;
@@ -4470,8 +4364,7 @@ body.sn-hero .cs-divider .arrow-mini {
 .pcm-close {
   position: absolute;
   top: 0;
-  /* Sits just outside the card's right edge, so the visual chrome reads
-     "card + dismiss" as a single unit. */
+  
   left: calc(100% + 12px);
   z-index: 9001;
   width: 40px; height: 40px;
@@ -4493,8 +4386,6 @@ body.sn-hero .cs-divider .arrow-mini {
 }
 .pcm-close svg { width: 16px; height: 16px; }
 
-/* On narrow viewports there's no room outside the card — fall back to
-   in-corner placement on a translucent pill so it still reads cleanly. */
 @media (max-width: 999px) {
   .pcm-close {
     left: auto;
@@ -4503,7 +4394,6 @@ body.sn-hero .cs-divider .arrow-mini {
   }
 }
 
-/* Head */
 .pcm-head { margin-bottom: 24px; }
 .pcm-head h2 {
   font-family: var(--f-sans);
@@ -4527,10 +4417,8 @@ body.sn-hero .cs-divider .arrow-mini {
   max-width: 56ch;
 }
 
-/* Rule */
 .pcm-rule { height: 1px; background: var(--rule); margin: 20px 0; }
 
-/* Plan switcher row */
 .pcm-row {
   display: flex; align-items: center; gap: 16px;
   flex-wrap: wrap;
@@ -4567,7 +4455,6 @@ body.sn-hero .cs-divider .arrow-mini {
   box-shadow: 0 1px 2px rgba(11,16,25,.08), 0 0 0 1px var(--rule);
 }
 
-/* Section */
 .pcm-section { }
 .pcm-section-title {
   display: flex; align-items: baseline; gap: 14px;
@@ -4598,7 +4485,6 @@ body.sn-hero .cs-divider .arrow-mini {
   max-width: 60ch;
 }
 
-/* Light-context form-field overrides (page form is on dark; modal is on light) */
 .pcm-form .lf-field label { color: var(--ink-2); }
 .pcm-form .lf-field input,
 .pcm-form .lf-field select,
@@ -4631,7 +4517,6 @@ body.sn-hero .cs-divider .arrow-mini {
   background-color: var(--signal-soft);
 }
 
-/* Inline field-level error message (e.g. "use a work email") */
 .lf-field .lf-error {
   display: block;
   margin-top: 6px;
@@ -4642,9 +4527,6 @@ body.sn-hero .cs-divider .arrow-mini {
 }
 .lf-field .lf-error[hidden] { display: none; }
 
-/* Rate-limit banner shown near the submit button when the user has hit
-   the daily submission cap (3 / 24h). Calmer than a field error — this
-   isn't user error, it's a soft block we want them to understand. */
 .pcm-rate-limit {
   margin: 0 0 12px;
   padding: 12px 14px;
@@ -4659,9 +4541,6 @@ body.sn-hero .cs-divider .arrow-mini {
 .pcm-rate-limit b { color: var(--signal); font-weight: 600; }
 .pcm-rate-limit[hidden] { display: none; }
 
-/* Google reCAPTCHA widget container — sits above the submit button.
-   The widget itself is a fixed 304x78 iframe; we just give it breathing
-   room and a left-alignment so it doesn't look floated. */
 .pcm-captcha {
   margin: 0 0 14px;
   min-height: 78px;
@@ -4670,13 +4549,12 @@ body.sn-hero .cs-divider .arrow-mini {
   transform-origin: left center;
 }
 @media (max-width: 360px) {
-  /* On very narrow screens the 304px widget overflows; shrink slightly. */
+  
   .pcm-captcha .g-recaptcha { transform: scale(0.85); }
 }
 
 .pcm-contact { grid-template-columns: 1fr 1fr; }
 
-/* Org rows */
 .pcm-orgs { display: flex; flex-direction: column; gap: 12px; }
 .pcm-org {
   background: var(--paper-2);
@@ -4717,7 +4595,6 @@ body.sn-hero .cs-divider .arrow-mini {
 }
 .pcm-org-grid .pcm-org-name { grid-column: span 1; }
 
-/* Add row + totals */
 .pcm-orgs-foot {
   display: flex; align-items: center; justify-content: space-between;
   margin-top: 14px;
@@ -4745,14 +4622,13 @@ body.sn-hero .cs-divider .arrow-mini {
 .pcm-totals b { color: var(--ink); font-weight: 600; }
 .pcm-totals .pcm-dot { margin: 0 6px; color: var(--mute); }
 
-/* Submit row */
 .pcm-submit-row {
   margin-top: 24px;
   display: flex; align-items: center; gap: 18px;
   flex-wrap: wrap;
 }
 .pcm-submit {
-  /* inherits .btn primary styling from the page */
+  
   font-size: 14.5px;
   padding: 12px 22px;
 }
@@ -4778,7 +4654,6 @@ body.sn-hero .cs-divider .arrow-mini {
   box-shadow: 0 0 10px rgba(22,138,140,.5);
 }
 
-/* Success state */
 .pcm-success {
   text-align: center;
   padding: 32px 24px 12px;
@@ -4804,9 +4679,6 @@ body.sn-hero .cs-divider .arrow-mini {
   .pcm-meta { justify-content: center; }
 }
 
-/* =========================================================
-   Footer
-   ========================================================= */
 footer {
   background: var(--paper);
   padding: 48px 0 32px;
@@ -4861,9 +4733,6 @@ footer {
 }
 .foot-bottom .right { display: flex; gap: 18px; }
 
-/* =========================================================
-   Reveal animations
-   ========================================================= */
 .reveal {
   opacity: 0;
   transform: translateY(14px);
@@ -4881,11 +4750,9 @@ footer {
   .ribbon-track { animation: none; }
 }
 
-
-/* ========== Surface tabs — affordance enhancements ========== */
 .surfaces-sticky-region {
   position: relative;
-  /* JS sets height + negative margin-bottom for partial-sticky behavior */
+  
   pointer-events: none;
 }
 .surfaces-sticky-region > * { pointer-events: auto; }
@@ -4898,7 +4765,7 @@ footer {
   transition: box-shadow .2s ease;
 }
 .surfaces-sticky::before {
-  /* full-bleed paper background under the sticky shelf */
+  
   content: "";
   position: absolute;
   left: 50%;
@@ -4915,15 +4782,14 @@ footer {
   border-bottom: 1px solid var(--rule);
 }
 
-/* ===== Slim sticky sub-bar: takes over once the full cards scroll away ===== */
 .subbar-sentinel { height: 1px; pointer-events: none; }
 .surface-subbar {
   position: sticky;
-  top: 64px; /* JS overrides to match the live nav height */
+  top: 64px; 
   z-index: 21;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  /* Float wider than the page content — break out symmetrically past the container gutter */
+  
   width: min(96vw, 1920px);
   margin-inline: calc((100% - min(96vw, 1920px)) / 2);
   background: var(--card);
@@ -4931,7 +4797,7 @@ footer {
   border-radius: var(--r-lg);
   overflow: hidden;
   box-shadow: 0 10px 26px -18px rgba(14,20,28,.22);
-  margin-top: -64px; /* JS sets to -(bar height) so it has no resting footprint */
+  margin-top: -64px; 
   opacity: 0;
   transform: translateY(-6px);
   pointer-events: none;
@@ -5087,7 +4953,6 @@ footer {
   .surfaces-nav .sn-arrows { display: none; }
 }
 
-/* Number prefix on each tab */
 .surface-tab[data-num]::before {
   content: none;
   position: absolute;
@@ -5108,7 +4973,6 @@ footer {
 .surface-tab { padding-top: 22px; }
 .surface-tab:hover[data-num]::before { color: var(--ink-2); opacity: 1; }
 
-/* Stronger hover: tab lift + tint */
 .surface-tab {
   transition: background .18s ease, color .18s ease, transform .18s ease;
 }
@@ -5121,7 +4985,6 @@ footer {
 }
 .surface-tab:not(.active):hover .label { color: var(--ink); }
 
-/* Beefier chevron on hover */
 .surface-tab::after {
   width: 14px;
   height: 14px;
@@ -5133,7 +4996,6 @@ footer {
   transform: translateX(3px);
 }
 
-/* Fin: downward triangle pointing from active tab into the panel */
 .surface-fin-wrap {
   position: relative;
   height: 0;
@@ -5144,7 +5006,7 @@ footer {
   position: absolute;
   top: 0;
   left: 0;
-  width: 20%;        /* 1/5 default, JS overrides */
+  width: 20%;        
   height: 14px;
   display: flex;
   justify-content: center;
@@ -5160,7 +5022,6 @@ footer {
   filter: drop-shadow(0 4px 8px rgba(15,212,158,.45));
 }
 
-/* First-visit auto-cycle highlight */
 .surface-tab.is-cycling {
   background: linear-gradient(180deg, rgba(22,138,140,.18), rgba(22,138,140,0));
   animation: cyclePulse .42s ease-out;
@@ -5178,10 +5039,6 @@ footer {
   .surfaces-nav .sn-eyebrow { font-size: 10px; letter-spacing: 0.12em; }
 }
 
-
-/* =========================================================
-   Pricing section
-   ========================================================= */
 .pricing {
   background: var(--paper);
 }
@@ -5389,7 +5246,6 @@ footer {
   transform: translateY(-1px);
 }
 
-/* Add-ons */
 .price-addons {
   margin-top: 72px;
   padding-top: 56px;
@@ -5447,7 +5303,6 @@ footer {
 }
 .pa-desc b { color: var(--ink-2); font-weight: 500; }
 
-/* Support table */
 .price-support {
   margin-top: 72px;
   padding-top: 56px;
@@ -5509,7 +5364,6 @@ footer {
   color: var(--brand-ink);
 }
 
-/* Enterprise (future) column treatment */
 .ps-future-head {
   position: relative;
 }
@@ -5588,15 +5442,8 @@ footer {
 .price-foot a { color: var(--brand-ink); }
 .price-foot b { color: var(--ink-2); font-weight: 500; }
 
-/* =========================================================
-   Phone polish (<= 640px)
-   Fixes flagged by the mobile QA pass — wrap dense widget
-   tables, allow long formulas to wrap, collapse stat grids
-   to one column, and rein in oversized headlines.
-   ========================================================= */
 @media (max-width: 640px) {
-  /* Trigger trace — formulas would otherwise force horizontal
-     scroll because .tt-formula is nowrap + ellipsis by default. */
+  
   .tt-formula {
     white-space: normal;
     text-overflow: clip;
@@ -5608,8 +5455,6 @@ footer {
   .tt-rule { gap: 8px; }
   .tt-time { font-size: 9.5px; }
 
-  /* Pipeline widget — 6-col table is too wide for 375px; let it scroll
-     horizontally inside the card instead of forcing an overflow. */
   .pipeline-widget { overflow: hidden; }
   .pw-table {
     display: block;
@@ -5623,7 +5468,6 @@ footer {
   .pw-table colgroup col:nth-child(5),
   .pw-table colgroup col:nth-child(6) { width: 64px; }
 
-  /* Stat grids — 2-col still feels cramped on 375px; go full single column. */
   .num-grid { grid-template-columns: 1fr; }
   .num-cell {
     border-right: none !important;
@@ -5637,44 +5481,31 @@ footer {
   }
   .surface-metrics .m:last-child { border-bottom: none; }
 
-  /* Headlines — keep them confident but stop them blowing out of the viewport.
-     clamp floors at 42/40 push past the line; cap below 640. */
   h1 { font-size: clamp(32px, 9vw, 42px); }
   .closing h2 { font-size: clamp(30px, 8.5vw, 40px); }
 
-  /* Engine flow strip — already 1-col on phones, but the cells get tall and
-     awkward. Slightly tighter padding keeps them readable. */
   .engine-step { padding: 14px 16px; }
 
-  /* Code blocks in compare sections — let them scroll horizontally instead
-     of forcing the whole page to scroll. */
   pre, code { max-width: 100%; }
   pre { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
-  /* Pricing-detail rows — already stack 1-col at 880px, but cells are tight. */
   .ps-table { font-size: 12.5px; }
   .ps-row { padding: 14px 16px; }
 }
 
-
-/* =========================================================
-   Hero capability rotator — cycles #Batch → #UI → #Trigger → #Query
-   ========================================================= */
 .hero-rotator { position: relative; }
 @media (min-width: 941px) {
-  /* Float the surface dots below the card so the card (not card+dots) is what
-     the left text column vertically centers against. */
+  
   .hero-grid .hero-rotator > .hero-dots { position: absolute; top: 100%; left: 0; right: 0; }
 }
 .hero-stage { position: relative; transform: scale(0.92); transform-origin: center; }
 .hero-scene { transition: opacity .55s ease; }
-.hero-scene[data-surface="trigger"] { position: relative; }       /* tallest scene defines stage height */
+.hero-scene[data-surface="trigger"] { position: relative; }       
 .hero-scene:not([data-surface="trigger"]) { position: absolute; inset: 0; display: grid; place-items: center; }
 .hero-scene { opacity: 0; pointer-events: none; }
 .hero-scene.is-active { opacity: 1; pointer-events: auto; }
 .hero-scene .bw-annotate { width: 100%; }
 
-/* shared mini-card */
 .hs-card {
   width: 100%;
   background: var(--card);
@@ -5698,7 +5529,6 @@ footer {
 .hs-btn.run { background: var(--brand-ink); color: #fff; border-color: var(--brand-ink); }
 .hs-chip.ok { font-family: var(--f-mono); font-size: 11px; padding: 4px 10px; border-radius: 999px; background: var(--good-soft); color: var(--good); }
 
-/* list (UI + Query) */
 .hs-listhead { padding: 9px 20px; background: var(--paper-2); border-bottom: 1px solid var(--rule); font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); display: grid; gap: 10px; }
 .hs-rows { display: flex; flex-direction: column; }
 .hs-row { padding: 11px 20px; border-bottom: 1px solid var(--rule); font-size: 13px; color: var(--ink-2); display: grid; gap: 10px; align-items: center; }
@@ -5713,12 +5543,10 @@ footer {
 .hs-row.editing .cell-edit::after { content: ''; width: 1px; height: 13px; margin-left: 5px; background: var(--brand-ink); animation: hsCaret 1.05s steps(1) infinite; }
 @keyframes hsCaret { 50% { opacity: 0; } }
 
-/* chips (Query) */
 .hs-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 20px; border-bottom: 1px solid var(--rule); }
 .hs-fchip { font-family: var(--f-mono); font-size: 11.5px; padding: 5px 11px; border-radius: 999px; background: var(--paper-2); border: 1px solid var(--rule); color: var(--ink-2); }
 .hs-fchip.add { color: var(--brand-ink); border-style: dashed; border-color: var(--brand-pure); background: transparent; }
 
-/* steps (Trigger) */
 .hs-event { padding: 9px 20px 4px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; color: var(--ink-3); }
 .hs-steps { list-style: none; margin: 0; padding: 1px 0; }
 .hs-steps li { display: flex; align-items: center; gap: 12px; padding: 7px 20px; font-size: 13px; color: var(--ink-2); border-bottom: 1px solid var(--rule); }
@@ -5731,17 +5559,14 @@ footer {
 .hs-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 11px 20px; border-top: 1px solid var(--rule); background: var(--paper-3); font-family: var(--f-mono); font-size: 11px; letter-spacing: .04em; color: var(--ink-3); }
 .hs-count { color: var(--ink); font-weight: 500; }
 
-/* surface selector */
 .hero-dots { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
 .hero-dot { font-family: var(--f-mono); font-weight: 600; font-size: 14px; letter-spacing: .03em; padding: 9px 18px; border-radius: 999px; border: 1px solid var(--rule); background: var(--card); color: var(--ink-3); cursor: pointer; transition: color .18s ease, border-color .18s ease, background .18s ease; }
 .hero-dot:hover { color: var(--ink); border-color: var(--rule-2); }
 .hero-dot.on { background: var(--brand-soft); border-color: var(--brand-pure); color: var(--brand-ink); }
 
-/* === #UI · actionable data list (faithful recreation) === */
 .al-card { position: relative; width: 100%; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r-lg); box-shadow: var(--sh-2); overflow: hidden; font-family: var(--f-sans); color: var(--ink-2); }
 .hero-scene.is-active .al-card { animation: hsIn .5s ease both; }
 
-/* title · record count · selection · custom actions */
 .al-titlebar { display: flex; align-items: center; gap: 11px; padding: 12px 16px; border-bottom: 1px solid var(--rule); }
 .al-ico { flex: 0 0 auto; width: 30px; height: 30px; border-radius: var(--r-md); background: var(--brand-soft); color: var(--brand-ink); display: grid; place-items: center; }
 .al-ico svg { width: 17px; height: 17px; }
@@ -5759,7 +5584,6 @@ footer {
 .al-cacts.on .al-cbtn.flash { box-shadow: 0 0 0 3px var(--brand-soft); }
 .al-cbtn.press { transform: translateY(1px); }
 
-/* toolbar: column filter · search · built-in actions */
 .al-toolbar { display: flex; align-items: center; gap: 8px; padding: 9px 16px; border-bottom: 1px solid var(--rule); background: var(--paper); }
 .al-fieldsel { display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto; height: 28px; padding: 0 10px; border-radius: var(--r-sm); border: 1px solid var(--rule-2); background: var(--card); color: var(--ink-2); font-size: 12px; cursor: default; }
 .al-fieldsel .cv { width: 11px; height: 11px; color: var(--ink-3); }
@@ -5783,7 +5607,6 @@ footer {
 .al-bicons button { width: 27px; height: 27px; display: grid; place-items: center; border: 1px solid var(--rule); border-radius: var(--r-sm); background: var(--card); color: var(--ink-3); cursor: default; }
 .al-bicons svg { width: 14px; height: 14px; }
 
-/* column header + rows */
 .al-head, .al-row { display: grid; grid-template-columns: 18px 72px minmax(0,1.6fr) minmax(76px,1.05fr) minmax(60px,0.78fr) minmax(80px,1fr) 14px; gap: 9px; align-items: center; }
 .al-head { padding: 8px 16px; background: var(--paper-2); border-bottom: 1px solid var(--rule); font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); }
 .al-hcell { display: inline-flex; align-items: center; gap: 4px; min-width: 0; }
@@ -5805,7 +5628,6 @@ footer {
 .al-rcaret { display: grid; place-items: center; color: var(--mute); }
 .al-rcaret svg { width: 11px; height: 11px; }
 
-/* checkboxes */
 .al-ck { width: 15px; height: 15px; border: 1.5px solid var(--rule-2); border-radius: 3px; display: inline-grid; place-items: center; color: #fff; background: var(--card); transition: background .16s ease, border-color .16s ease; }
 .al-ck svg { width: 10px; height: 10px; opacity: 0; transform: scale(.5); transition: opacity .15s ease, transform .15s ease; }
 .al-ck.on { background: var(--brand); border-color: var(--brand); }
@@ -5813,12 +5635,10 @@ footer {
 .al-ckall.some { background: var(--brand); border-color: var(--brand); }
 .al-ckall.some svg { opacity: 1; transform: none; }
 
-/* filter row collapse / incoming */
 .al-row.gone { opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0; border-bottom: none; overflow: hidden; }
 .al-row.incoming { animation: alRowIn .4s ease both; }
 @keyframes alRowIn { 0% { opacity: 0; transform: translateY(-5px); } 100% { opacity: 1; transform: none; } }
 
-/* pagination */
 .al-pager { display: flex; align-items: center; justify-content: center; gap: 4px; padding: 9px 16px; border-top: 1px solid var(--rule); background: var(--paper-3); }
 .al-psize { display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 9px; border-radius: var(--r-sm); border: 1px solid var(--rule-2); background: var(--card); font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-2); }
 .al-psize .cv { width: 10px; height: 10px; color: var(--ink-3); }
@@ -5830,7 +5650,6 @@ footer {
 .al-pbtn.on { background: var(--brand-ink); border-color: var(--brand-ink); color: #fff; }
 .al-pdots { color: var(--mute); padding: 0 2px; font-family: var(--f-mono); }
 
-/* inline-edit popover (positioned over the Priority cell by JS) */
 .al-edit { position: absolute; width: 206px; background: var(--card); border: 1px solid var(--rule-2); border-radius: var(--r-md); box-shadow: 0 20px 44px -14px rgba(11,16,25,.34); padding: 13px 14px; opacity: 0; transform: translateY(-6px) scale(.985); transform-origin: top left; pointer-events: none; transition: opacity .18s ease, transform .18s ease; z-index: 10; }
 .al-edit.on { opacity: 1; transform: none; pointer-events: auto; }
 .al-edit-label { display: block; font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
@@ -5844,7 +5663,6 @@ footer {
 .al-applybtn { background: var(--brand-ink); border: 1px solid var(--brand-ink); color: #fff; }
 .al-applybtn.press { transform: translateY(1px); }
 
-/* toast */
 .al-toast { position: absolute; left: 50%; bottom: 52px; transform: translateX(-50%) translateY(8px); background: var(--good); color: #fff; font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .02em; padding: 8px 15px; border-radius: 999px; opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease; z-index: 11; white-space: nowrap; box-shadow: 0 8px 22px -8px rgba(17,125,79,.55); }
 .al-toast b { font-weight: 600; }
 .al-toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -5863,7 +5681,6 @@ footer {
   .qh-row .rate.editing::after { animation: none; }
 }
 
-/* === #Data Loader · hero demo (CSV upload → rule transforms → run upsert) === */
 .hl-card { position: relative; }
 .hl-status { font-family: var(--f-mono); font-size: 11px; letter-spacing: .02em; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--rule-2); background: var(--paper-2); color: var(--ink-3); cursor: default; display: inline-flex; align-items: center; gap: 6px; transition: color .25s ease, background .25s ease, border-color .25s ease; }
 .hl-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--mute); transition: background .25s ease; }
@@ -5872,7 +5689,6 @@ footer {
 .hl-status.done { color: var(--good); background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 40%, transparent); }
 .hl-status.done::before { background: var(--good); animation: none; }
 
-/* dropzone */
 .hl-drop { display: flex; align-items: center; gap: 12px; margin: 14px 18px 0; padding: 12px 14px; border: 1.5px dashed var(--rule-2); border-radius: var(--r-md); background: var(--paper); transition: border-color .3s ease, background .3s ease; }
 .hl-drop.parsed { border-style: solid; border-color: var(--brand-pure); background: color-mix(in srgb, var(--brand-soft) 40%, #fff); }
 .hl-fileicon { flex: 0 0 auto; width: 30px; height: 30px; display: grid; place-items: center; border-radius: var(--r-sm); background: var(--card); border: 1px solid var(--rule); color: var(--brand-ink); }
@@ -5884,7 +5700,6 @@ footer {
 .hl-parsed svg { width: 12px; height: 12px; }
 .hl-drop.parsed .hl-parsed { opacity: 1; transform: none; }
 
-/* field mapping */
 .hl-maptitle { padding: 14px 18px 8px; font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
 .hl-map { padding: 0 18px 14px; display: flex; flex-direction: column; gap: 6px; }
 .hl-mrow { display: grid; grid-template-columns: 70px 12px 72px minmax(0,1fr); gap: 8px; align-items: center; padding: 7px 11px; border: 1px solid var(--rule); border-radius: var(--r-sm); background: var(--paper); font-size: 11.5px; opacity: 0; transform: translateY(-5px); transition: opacity .3s ease, transform .3s ease, border-color .3s ease, background .3s ease; }
@@ -5896,7 +5711,6 @@ footer {
 .hl-mrow .fn { font-family: var(--f-mono); font-size: 11px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .hl-mrow .fn b { color: var(--brand-ink); font-weight: 500; }
 
-/* foot: audit + run */
 .hl-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px 16px; }
 .hl-audit { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .01em; color: var(--ink-3); min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .25s ease; }
 .hl-audit b { color: var(--ink-2); font-weight: 600; }
@@ -5907,18 +5721,15 @@ footer {
 .hl-run.press { transform: translateY(1px); }
 .hl-run.running { filter: saturate(.5) opacity(.7); }
 
-/* progress bar (pinned to card bottom) */
 .hl-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--paper-3); overflow: hidden; opacity: 0; transition: opacity .2s ease; }
 .hl-progress.on { opacity: 1; }
 .hl-bar { display: block; height: 100%; width: 0%; background: var(--brand); transition: width .25s linear; }
 .hl-bar.done { background: var(--good); }
 
-/* success toast */
 .hl-toast { position: absolute; left: 50%; bottom: 60px; transform: translateX(-50%) translateY(8px); background: var(--good); color: #fff; font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .02em; padding: 8px 15px; border-radius: 999px; opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease; z-index: 6; white-space: nowrap; box-shadow: 0 8px 22px -8px rgba(17,125,79,.55); }
 .hl-toast b { font-weight: 600; }
 .hl-toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* === #Query · hero demo (visual builder · dynamic filters · saved queries · editable results) === */
 .qh-card { position: relative; }
 .qh-saved { position: relative; flex: 0 0 auto; }
 .qh-savedbtn { display: inline-flex; align-items: center; gap: 5px; height: 28px; padding: 0 11px; border-radius: var(--r-sm); border: 1px solid var(--rule-2); background: var(--card); color: var(--ink-2); font-size: 12px; cursor: default; transition: border-color .2s ease, box-shadow .2s ease; }
@@ -5934,13 +5745,11 @@ footer {
 .qh-run svg { width: 12px; height: 12px; }
 .qh-run.press { transform: translateY(1px); }
 
-/* builder */
 .qh-builder { display: flex; flex-wrap: wrap; gap: 8px; padding: 13px 18px 0; }
 .qh-tok { display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px; border-radius: var(--r-sm); border: 1px solid var(--rule); background: var(--paper); font-size: 12px; color: var(--ink); }
 .qh-tok i { font-style: normal; font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .08em; color: var(--ink-3); }
 .qh-tok.obj { background: var(--paper-2); }
 
-/* filters (point-and-click, incl. dynamic) */
 .qh-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 18px 14px; }
 .qh-flabel { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .1em; color: var(--ink-3); }
 .qh-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--brand-pure); background: var(--brand-soft); font-size: 11.5px; color: var(--ink-2); opacity: 0; transform: scale(.92); transition: opacity .22s ease, transform .22s ease; }
@@ -5951,7 +5760,6 @@ footer {
 .qh-addf { display: inline-flex; align-items: center; padding: 5px 10px; border-radius: 999px; border: 1px dashed var(--rule-2); background: transparent; font-size: 11.5px; color: var(--ink-3); transition: border-color .2s ease, color .2s ease; }
 .qh-addf.armed { border-color: var(--brand-pure); color: var(--brand-ink); }
 
-/* results — editable data list */
 .qh-listhead, .qh-row { display: grid; grid-template-columns: 1.5fr 1.1fr .85fr .85fr .85fr; gap: 10px; align-items: center; }
 .qh-listhead { padding: 8px 18px; background: var(--paper-2); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
 .qh-listhead .num { text-align: left; }
@@ -5969,16 +5777,9 @@ footer {
 .qh-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 11px 18px; border-top: 1px solid var(--rule); background: var(--paper-3); font-family: var(--f-mono); font-size: 11px; letter-spacing: .04em; color: var(--ink-3); }
 .qh-foot b { color: var(--ink); font-weight: 600; }
 
-/* toast */
 .qh-toast { position: absolute; left: 50%; bottom: 60px; transform: translateX(-50%) translateY(8px); background: var(--good); color: #fff; font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .02em; padding: 8px 15px; border-radius: 999px; opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease; z-index: 6; white-space: nowrap; box-shadow: 0 8px 22px -8px rgba(17,125,79,.55); }
 .qh-toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-
-/* =========================================================
-   ServiceNow-style modes (toggleable via Tweaks) — revertible.
-   body.sn-hero  : dark hero band, bright-teal headline
-   body.sn-heads : bright-teal headlines on the dark sections
-   ========================================================= */
 body.sn-hero .hero {
   background:
     radial-gradient(75% 60% at 50% -12%, rgba(43,227,229,.10), transparent 62%),
@@ -6022,14 +5823,13 @@ body.sn-hero .hero-sub {
   color: var(--ink-2-on-dark);
 }
 body.sn-hero .hero-sub b { color: var(--ink-on-dark); font-weight: 600; }
-/* Decongest the hero left column */
+
 body.sn-hero .hero-replaces { margin-top: 38px; }
 body.sn-hero .results-block { margin-top: 56px; }
 body.sn-hero .results li { padding: 12px 0; }
 body.sn-hero .hero-cta { margin-top: 64px; }
 body.sn-hero .hero-trust { margin-top: 24px; }
 
-/* Transformational Results — bento grid */
 .results-bento {
   margin-top: 8px;
   display: grid;
@@ -6116,10 +5916,6 @@ body.sn-hero .hero .btn.secondary:hover { background: rgba(255,255,255,.06); bor
 body.sn-heads .functions h2 { color: var(--brand-bright); }
 body.sn-heads .closing h2 { color: var(--brand-bright); }
 
-/* =========================================================
-   Page harmony — carry the hero's softer dark tone + accents
-   into every dark band so the whole page reads as one piece.
-   ========================================================= */
 body.sn-hero .ribbon,
 body.sn-hero .functions,
 body.sn-hero .closing { background-color: #234A50; }
@@ -6177,7 +5973,6 @@ body.sn-hero .stage-preview .exec-row.lit > .v {
   background: rgba(15,212,158,.16);
 }
 
-/* Light Live Preview card (matches light walkthrough boxes) */
 body.sn-hero .stage-preview .exec-card {
   background: #FFFFFF;
   border-color: rgba(0,0,0,.08);
@@ -6213,8 +6008,7 @@ body.sn-hero .stage-preview .stage-card-foot {
   border-top: 1px solid rgba(0,0,0,.06);
   color: #5E7672;
 }
-/* Let the footer note grow to fill the card so its bottom aligns with the
-   left rail, while the table rows keep their natural height. */
+
 body.sn-hero .anatomy-grid > .reveal:last-child > .stage-preview { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
 body.sn-hero .stage-preview .exec-card { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
 body.sn-hero .stage-preview .exec-rows { flex: 0 0 auto; }
@@ -6235,10 +6029,10 @@ body.sn-hero .surface-tab.active {
 body.sn-hero .surface-tab.active .hash,
 body.sn-hero .surface-tab.active[data-num]::before { color: var(--sn-btn, #0FD49E); }
 body.sn-hero .surface-tab.active::after { background: var(--sn-btn, #0FD49E); box-shadow: 0 0 14px rgba(15,212,158,.45); }
-/* Round the active highlight's outer corners so the green ring follows the container's rounded corners */
+
 body.sn-hero .surface-tab.active:first-child { border-radius: calc(var(--r-lg) - 1px) 0 0 calc(var(--r-lg) - 1px); }
 body.sn-hero .surface-tab.active:last-child { border-radius: 0 calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0; }
-/* Hover (non-active): show the brand green — outline, tint and hash */
+
 body.sn-hero .surface-tab:not(.active):hover {
   background: linear-gradient(180deg, rgba(15,212,158,.10), rgba(15,212,158,0)), var(--paper);
   box-shadow: inset 0 0 0 2px rgba(15,212,158,.55);
@@ -6247,14 +6041,6 @@ body.sn-hero .surface-tab:not(.active):hover .hash { color: var(--sn-btn, #0FD49
 body.sn-hero .sec-badge .mark { background: var(--sn-btn, #0FD49E); color: #06231C; }
 body.sn-hero .sec-pillar .icn { background: rgba(15,212,158,.16); color: var(--sn-btn, #0FD49E); }
 
-
-/* =========================================================
-   FULL-PAGE DARK THEME (gated to body.sn-hero)
-   The whole page becomes the hero's teal-slate canvas by
-   re-toning the design tokens. Product mockups stay LIGHT
-   via island resets below, so they read like real app
-   screenshots floating on the dark surface.
-   ========================================================= */
 body.sn-hero {
   --paper: #234A50;
   --paper-2: #284E54;
@@ -6279,7 +6065,6 @@ body.sn-hero {
   --sh-3: 0 1px 0 rgba(0,0,0,.25), 0 24px 60px -24px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.06);
 }
 
-/* Light islands — product mockups keep the original light palette */
 body.sn-hero .hero-rotator,
 body.sn-hero .cap-viz,
 body.sn-hero .surface-viz,
@@ -6308,7 +6093,6 @@ body.sn-hero .cap-fullbleed {
   --sh-3: 0 1px 0 rgba(11,16,25,.04), 0 24px 60px -24px rgba(11,16,25,.22), 0 0 0 1px rgba(127,185,187,.08);
 }
 
-/* Make the stage-engine panels obvious across all capabilities (per comment) */
 body.sn-hero .surface-viz:has(.engine-strip) {
   border: 1px solid rgba(40,224,122,.45);
   box-shadow:
@@ -6342,9 +6126,6 @@ body.sn-hero .engine-step.action .num { color: #0B5E45; }
 body.sn-hero .engine-step.action .name { color: #0B7A4D; }
 body.sn-hero .engine-step.action .desc { color: var(--ink-2); }
 
-
-/* hero-dot redesign — refined dark chips (they live in the light hero island,
-   so colors are set explicitly to override the island's light tokens) */
 body.sn-hero .hero-dots { gap: 10px; margin-top: 10px; }
 body.sn-hero .hero-dot {
   font-family: var(--f-sans);
@@ -6372,7 +6153,6 @@ body.sn-hero .hero-dot.on {
 
 body.sn-hero .nav .brand-mark span { color: #FFFFFF; }
 
-/* Header sizing (dark theme) */
 body.sn-hero .nav-inner { padding-top: 18px; padding-bottom: 18px; }
 body.sn-hero .nav .brand-mark span { font-size: 18px; line-height: 1; }
 body.sn-hero .nav .brand-mark { align-items: center; }
@@ -6383,7 +6163,6 @@ body.sn-hero .nav-cta .btn { font-size: 15px; padding: 11px 20px; }
 
 body.sn-hero .nav-dd-trigger { font-size: 18px; color: var(--ink); font-weight: 500; padding: 9px 14px; }
 
-/* Larger footer (dark theme) */
 body.sn-hero .foot-col h5 {
   font-family: var(--f-sans);
   font-size: 12px;
@@ -6395,7 +6174,6 @@ body.sn-hero .foot-col h5 {
 body.sn-hero .foot-col a { font-size: 15px; color: #FFFFFF; }
 body.sn-hero .foot-col ul { gap: 12px; }
 
-/* Ambient page depth — keeps the dark canvas from reading as a flat slab */
 body.sn-hero {
   background-color: var(--paper);
   background-image:
@@ -6408,7 +6186,6 @@ body.sn-hero {
   background-repeat: no-repeat, no-repeat, no-repeat, repeat;
 }
 
-/* Enriched header background matching the hero */
 body.sn-hero .nav {
   background-color: var(--sn-hero-bg, #395B58);
   background-image:
@@ -6421,9 +6198,6 @@ body.sn-hero .nav {
 }
 body.sn-hero .nav.scrolled, body.sn-hero .nav.is-stuck { border-bottom-color: rgba(255,255,255,.14); }
 
-/* BEFORE sprawl panel — "legacy canvas" background: a fine graph-paper line
-   grid (the Flow/code canvas it describes), a depth vignette, and a faint warm
-   glow behind the orange file-chip cluster to signal the legacy sprawl. */
 body.sn-hero .sprawl {
   background-color: #3A656C;
   background-image:
@@ -6437,11 +6211,6 @@ body.sn-hero .sprawl {
   box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
 }
 
-/* ============================================================
-   THE SHIFT — only the two panels are light "islands"; the
-   section keeps the dark sn-hero background and the headline /
-   labels stay light. Scoped to .sprawl + .pipeline-records.
-   ============================================================ */
 body.sn-hero #shift .sprawl,
 body.sn-hero #shift .pipeline-records {
   --paper: #FFFFFF;
@@ -6467,7 +6236,6 @@ body.sn-hero #shift .pipeline-records {
   color: var(--ink);
 }
 
-/* BEFORE: light canvas with faint dot grid + the colored file chips */
 body.sn-hero #shift .sprawl {
   background-color: #F4F7F9;
   background-image:
@@ -6481,14 +6249,10 @@ body.sn-hero #shift .sprawl {
 body.sn-hero #shift .sprawl .footnote { color: #65757C; }
 body.sn-hero #shift .sprawl-node { box-shadow: 0 1px 2px rgba(16,32,40,.10); }
 
-/* AFTER: white record card */
 body.sn-hero #shift .pipeline-records { box-shadow: var(--sh-2); }
 body.sn-hero #shift .pipeline-records .pr-foot,
 body.sn-hero #shift .pipeline-records .pr-foot b { color: var(--ink); }
 
-/* Make the #UI and #Query hero cards as tall as the other rotator scenes.
-   min-height stays under the trigger scene (504px) so they never overflow into
-   the dots; the rows area grows so each card's footer anchors to the bottom. */
 @media (min-width: 941px) {
   .hero-scene[data-surface="ui"] .al-card,
   .hero-scene[data-surface="query"] .hs-card {
@@ -6500,8 +6264,7 @@ body.sn-hero #shift .pipeline-records .pr-foot b { color: var(--ink); }
   .hero-scene[data-surface="query"] .qh-rows {
     flex: 1 1 auto;
   }
-  /* spread the stretch evenly across the UI rows so the last row sits flush
-     at the bottom instead of leaving a single trailing gap */
+  
   .hero-scene[data-surface="ui"] .al-rows {
     display: flex;
     flex-direction: column;
@@ -6511,8 +6274,6 @@ body.sn-hero #shift .pipeline-records .pr-foot b { color: var(--ink); }
   }
 }
 
-/* All hero-scene card footers share one height. nowrap stops the Batch
-   footer wrapping to two lines; min-height levels the rest. */
 .hero-scene .bw-progress-foot,
 .hero-scene .hl-foot,
 .hero-scene .qh-foot,
@@ -6525,21 +6286,15 @@ body.sn-hero #shift .pipeline-records .pr-foot b { color: var(--ink); }
 .hero-scene .bw-progress-foot { padding-top: 7px; padding-bottom: 7px; }
 .hero-scene .bw-progress-foot .actions button { padding-top: 5px; padding-bottom: 5px; }
 
-/* Give the Data Loader footer the same top-rule + tinted background the other
-   hero footers have, so it reads as a footer strip rather than blending in. */
 .hero-scene .hl-foot {
   border-top: 1px solid var(--rule);
   background: var(--paper-3);
 }
 
-/* Remove the bottom-right corner pill across all hero scene cards. */
 .hero-scene .bw-annotate .anno.br {
   display: none;
 }
 
-
-/* #Data Loader capability panel reuses the animated hero loader card —
-   give its footer the same strip treatment the hero scene applies. */
 #loaderCap .hl-foot {
   min-height: 48px;
   box-sizing: border-box;

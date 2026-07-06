@@ -11,8 +11,8 @@
       "node scripts/assemble-firebase.mjs"
     ],
     "rewrites": [
-      { "source": "/capabilities", "destination": "/index.html" },
-      { "source": "/capabilities/**", "destination": "/index.html" },
+      { "source": "/surfaces", "destination": "/index.html" },
+      { "source": "/surfaces/**", "destination": "/index.html" },
       { "source": "/why-dsp", "destination": "/index.html" },
       { "source": "/security", "destination": "/index.html" },
       { "source": "/pricing", "destination": "/index.html" },
