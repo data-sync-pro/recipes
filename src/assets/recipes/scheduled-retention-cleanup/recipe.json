@@ -10,7 +10,7 @@
   "generalImages": [
     {
       "type": "video",
-      "url": "https://youtu.be/JCcrg-i2gl8",
+      "url": "https://youtu.be/yBwUA06i7xY",
       "alt": ""
     }
   ],
@@ -75,7 +75,7 @@
       ]
     },
     {
-      "step": "Pipeline Schedule",
+      "step": "Create Schedule for Pipeline",
       "config": [],
       "media": [
         {
