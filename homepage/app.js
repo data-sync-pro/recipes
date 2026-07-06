@@ -1862,28 +1862,27 @@ const DSP_SECTION_ROUTES = {
   }
 
   
-  const dd = document.getElementById('navResources');
-  if (dd) {
+  // All nav dropdowns (Resources, Customers, …) get click/tap toggle behavior.
+  document.querySelectorAll('.nav-dd').forEach((dd) => {
     const trigger = dd.querySelector('.nav-dd-trigger');
     const menu = dd.querySelector('.nav-dd-menu');
-    if (trigger && menu) {
-      const openDd = (open) => {
-        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
-        menu.classList.toggle('open', open);
-      };
-      trigger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        openDd(trigger.getAttribute('aria-expanded') !== 'true');
-      });
-      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => openDd(false)));
-      document.addEventListener('click', (e) => {
-        if (!dd.contains(e.target)) openDd(false);
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') openDd(false);
-      });
-    }
-  }
+    if (!trigger || !menu) return;
+    const openDd = (open) => {
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menu.classList.toggle('open', open);
+    };
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openDd(trigger.getAttribute('aria-expanded') !== 'true');
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => openDd(false)));
+    document.addEventListener('click', (e) => {
+      if (!dd.contains(e.target)) openDd(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') openDd(false);
+    });
+  });
 })();
 
 (() => {
