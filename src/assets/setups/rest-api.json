@@ -96,7 +96,7 @@
           "children": [
             {
               "type": "p",
-              "content": "**Batch (Pipeline and Executable)** returns an execution record ID (e.g. `\"a0CDC000003DPrY2AW\"`).This means the batch job has been submitted, not that the run has finished. To check the run status, go to the corresponding **Pipeline Execution** or **Execution** record."
+              "content": "**Batch (Pipeline and Executable)** returns an execution record ID (e.g. `\"a0CDC000003DPrY2AW\"`). This means the batch job has been submitted, not that the run has finished. To check the run status, go to the corresponding **Pipeline Execution** or **Execution** record."
             },
             {
               "type": "p",

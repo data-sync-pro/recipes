@@ -23,8 +23,8 @@
     }
   ],
   "examples": [
-    "JSON_GET_FIELD_VALUES(VLOOKUP_ALL(\"Account\", \"Name\", \"OwnerId\", OwnerId), \"Name\", true)\n-- Returns the Name from every matching Account, e.g. (Acme, Global).",
-    "JSON_GET_FIELD_VALUES(VLOOKUP_ALL(\"Contact\", \"Phone\", \"AccountId\", Id), \"Phone\", false)\n-- Returns the Phone value from every matching Contact, e.g. (null, (123)456-7890)."
+    "JSON_GET_FIELD_VALUES(VLOOKUP_ALL(\"Account\", \"Name, Industry, Phone\", \"OwnerId\", OwnerId), \"Name\", true)\n-- Returns the Name from every matching Account, e.g. (Acme, Global).",
+    "JSON_GET_FIELD_VALUES(VLOOKUP_ALL(\"Account\", \"Name, Industry, Phone\", \"OwnerId\", OwnerId), \"Phone\", false)\n-- Returns the Phone from every matching Account, keeping nulls, e.g. (null, (123)456-7890)."
   ],
   "tips": [],
   "relatedFormulas": [
