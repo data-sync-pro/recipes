@@ -1,13 +1,13 @@
 {
   "title": "TO_PDF",
-  "description": "Renders a string of HTML into a PDF.",
+  "description": "Creates a binary object out of the given string, encoding it as a PDF file.",
   "syntax": "TO_PDF(string) -> Blob",
   "parameters": [
     {
       "name": "string",
       "type": "String",
       "required": "Yes",
-      "description": "Well-formed HTML to render. Nest HTML_TABLE() inside for tabular data. "
+      "description": "String to convert."
     }
   ],
   "examples": [
