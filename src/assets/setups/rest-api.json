@@ -130,7 +130,7 @@
         {
           "type": "callout",
           "variant": "info",
-          "content": "**Note** — Sync is not available for org-to-org Apex callouts. Use the Batch endpoint to run an executable from another Salesforce org."
+          "content": "**Note** — The **Sync API** isn't available for org-to-org Apex callouts due to Salesforce's cross-org callout restrictions — use the **Batch API** instead. If synchronous execution is required, route the call through a proxy web service hosted outside Salesforce that relays the request and response to the DSP hosting service."
         },
         {
           "type": "code",
