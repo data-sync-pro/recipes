@@ -128,13 +128,14 @@
         },
         { "type": "h4", "content": "Executable Example" },
         {
-          "type": "code",
-          "language": "apex",
-          "content": "HttpRequest request = new HttpRequest();\nrequest.setEndpoint('callout:Your_Named_Credential/services/apexrest/pushtopics/execution/sync/executable/YOUR_EXECUTABLE_API_NAME');\nrequest.setMethod('POST');\nrequest.setHeader('Content-Type', 'application/json');\nrequest.setTimeout(60000);\nrequest.setBody('{\"sourceRecordIds\": [\"001XXXXXXXXXXXX\"]}');\nHttp http = new Http();\nHttpResponse response = http.send(request);\nSystem.debug('status: ' + response.getStatusCode());\nSystem.debug('response: ' + response.getBody());"
+          "type": "callout",
+          "variant": "info",
+          "content": "**Note** — Sync is not available for org-to-org Apex callouts. Use the Batch endpoint to run an executable from another Salesforce org."
         },
         {
-              "type": "p",
-              "content": "To run an executable asynchronously with execution logs, use the /batch/executable/ path with the same request body."
+          "type": "code",
+          "language": "apex",
+          "content": "HttpRequest request = new HttpRequest();\nrequest.setEndpoint('callout:Your_Named_Credential/services/apexrest/pushtopics/execution/batch/executable/YOUR_EXECUTABLE_API_NAME');\nrequest.setMethod('POST');\nrequest.setHeader('Content-Type', 'application/json');\nrequest.setTimeout(60000);\nrequest.setBody('{\"sourceRecordIds\": [\"001XXXXXXXXXXXX\"]}');\nHttp http = new Http();\nHttpResponse response = http.send(request);\nSystem.debug('status: ' + response.getStatusCode());\nSystem.debug('response: ' + response.getBody());"
         },
         { "type": "label", "content": "Replace" },
         {
