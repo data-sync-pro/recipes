@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { Recipe, RecipeData } from '../models/recipe.model';
@@ -14,10 +15,14 @@ export class CacheService {
 
   private recipesCache$ = new BehaviorSubject<Recipe[]>([]);
 
+  private readonly isBrowser: boolean;
+
   constructor(
     private storage: UnifiedStorageService,
-    private logger: LoggerService
+    private logger: LoggerService,
+    @Inject(PLATFORM_ID) platformId: Object
   ) {
+    this.isBrowser = isPlatformBrowser(platformId);
     this.loadFromStorage();
   }
 
@@ -69,6 +74,9 @@ export class CacheService {
   }
 
   private async saveToStorage(recipes: Recipe[]): Promise<void> {
+    // localStorage is unavailable during prerendering; skip persistence on the
+    // server to avoid noisy "not available" errors (data is re-cached client-side).
+    if (!this.isBrowser) return;
     try {
       const sourceRecipes: RecipeData[] = recipes.map(item => ({
         id: item.id,

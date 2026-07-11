@@ -5,6 +5,7 @@ import { SidebarService } from '../../services/sidebar.service';
 import { categoryNameFromSlug, categorySlug } from '../../utils/route.util';
 import { hljs } from 'src/app/shared/highlight';
 import { ClipboardUtil } from 'src/app/recipe/core/utils/clipboard.util';
+import { SeoService } from 'src/app/shared/services/seo.service';
 
 import { map, switchMap } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -51,7 +52,8 @@ export class DocViewerComponent implements OnInit {
     private router: Router,
     private docsService: DocsService,
     private sidebarService: SidebarService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private seo: SeoService
   ) {}
 
   ngOnInit(): void {
@@ -100,6 +102,9 @@ export class DocViewerComponent implements OnInit {
         }
 
         this.docContent = doc;
+        if (doc) {
+          this.seo.setPage({ title: doc.title, description: doc.description });
+        }
 
         this.expandedExamples.clear();
         this.processedExamples = this.processExamples(doc?.examples ?? []);

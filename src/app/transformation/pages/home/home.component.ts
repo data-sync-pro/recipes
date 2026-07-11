@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { DocsService, DocData } from '../../services/docs.service';
 import { categorySlug } from '../../utils/route.util';
+import { SeoService } from '../../../shared/services/seo.service';
 interface FunctionTag {
   "Item Name": string;
   Tags: string[];
@@ -37,10 +38,16 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     private router: Router,
     private route: ActivatedRoute,
     private http: HttpClient,
-    private docsService: DocsService
+    private docsService: DocsService,
+    private seo: SeoService
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.seo.setPage({
+      title: 'Transformation Formulas',
+      description:
+        'Reference for every Data Sync Pro transformation formula — text, date & time, logical, number, type processing and more, with syntax and examples.',
+    });
     // In-page sections are addressed by URL fragment, e.g.
     // /transformation#formula_elements. The scroll container is <main>, not the
     // window, so Angular's anchorScrolling is a no-op; stash the fragment and

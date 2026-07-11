@@ -9,7 +9,9 @@
     ],
     "predeploy": [
       "npm run build:firebase",
-      "node scripts/assemble-firebase.mjs"
+      "node scripts/assemble-firebase.mjs",
+      "node scripts/gen-sitemap.mjs",
+      "node scripts/gen-llms.mjs"
     ],
     "rewrites": [
       { "source": "/surfaces", "destination": "/index.html" },

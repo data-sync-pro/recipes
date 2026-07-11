@@ -40,8 +40,8 @@ export class FAQStorageService {
   }
 
   private async initDatabase(): Promise<void> {
-    if (!('indexedDB' in window)) {
-      console.error('IndexedDB is not supported in this browser');
+    // `window` is undefined during server-side prerendering; bail out quietly.
+    if (typeof window === 'undefined' || !('indexedDB' in window)) {
       return;
     }
 

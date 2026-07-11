@@ -10,6 +10,7 @@ import { OrchestrationService } from '../recipe/core/services/orchestration.serv
 import { Recipe } from '../recipe/core/models/recipe.model';
 import { categoryToSlug } from '../recipe/core/constants/recipe.constants';
 import { scrollToTopOnNavigation } from '../recipe/core/utils/scroll.util';
+import { SeoService } from '../shared/services/seo.service';
 
 @Component({
   selector: 'app-setup',
@@ -61,7 +62,8 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
     private setupService: SetupService,
     private cdr: ChangeDetectorRef,
     private cacheService: CacheService,
-    private orchestrationService: OrchestrationService
+    private orchestrationService: OrchestrationService,
+    private seo: SeoService
   ) {}
 
   ngOnInit(): void {
@@ -233,6 +235,10 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe({
         next: (setup) => {
           this.currentSetup = setup;
+          this.seo.setPage({
+            title: setup?.title ?? 'User Manual',
+            description: setup?.blocks?.find(b => b.type === 'p')?.content,
+          });
           this.isLoading = false;
           this.activeBlockId = null;
           this.cdr.markForCheck();

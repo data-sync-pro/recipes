@@ -20,6 +20,7 @@ import { BreadcrumbItem } from '../detail-banner/detail-banner.component';
 import { categoryToSlug, slugToCategoryName } from '../../core/constants/recipe.constants';
 import { scrollToTopOnNavigation } from '../../core/utils/scroll.util';
 import { RecipeNavSidebarComponent } from '../recipe-nav-sidebar/recipe-nav-sidebar.component';
+import { SeoService } from '../../../shared/services/seo.service';
 
 interface TocItem {
   id: string;
@@ -142,7 +143,8 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     private orchestrationService: OrchestrationService,
     private searchService: SearchService,
     private cdr: ChangeDetectorRef,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private seo: SeoService
   ) { }
 
   ngOnInit(): void {
@@ -174,6 +176,10 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
           scrollToTopOnNavigation(this.router, isNewRecipe);
 
           this.currentRecipe = recipe;
+          this.seo.setPage({
+            title: recipe.title,
+            description: recipe.overview || recipe.generalUseCase,
+          });
 
           // Reset to first walkthrough tab whenever the recipe changes
           this.activeWalkthroughTabIndex = 0;

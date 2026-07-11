@@ -11,6 +11,8 @@
     "generate-version": "node scripts/generate-version.js",
     "gen-formulas-index": "node scripts/gen-formulas-index.mjs",
     "gen-prerender-routes": "node scripts/gen-prerender-routes.mjs",
+    "gen-sitemap": "node scripts/gen-sitemap.mjs",
+    "gen-llms": "node scripts/gen-llms.mjs",
     "serve:ssr:website": "node dist/website/server/server.mjs"
   },
   "private": true,
