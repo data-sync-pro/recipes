@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -52,12 +53,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private mobileChangeHandler!: () => void;
   private tabletChangeHandler!: () => void;
 
-  constructor(private cdr: ChangeDetectorRef, private router: Router) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit(): void {
-    this.setupResponsiveQueries();
-    this.setupEventHandlers();
-    this.attachEventListeners();
+    // matchMedia and its listeners are browser-only; skip on the server so
+    // prerendering emits the desktop layout (isMobile/isTablet/isPortrait=false).
+    if (isPlatformBrowser(this.platformId)) {
+      this.setupResponsiveQueries();
+      this.setupEventHandlers();
+      this.attachEventListeners();
+    }
 
     this.updateSectionName(this.router.url);
     this.routerSubscription = this.router.events
@@ -69,7 +78,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.removeEventListeners();
+    if (isPlatformBrowser(this.platformId)) {
+      this.removeEventListeners();
+    }
     this.routerSubscription?.unsubscribe();
   }
 

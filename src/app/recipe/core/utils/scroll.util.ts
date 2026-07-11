@@ -21,6 +21,8 @@ import { Router } from '@angular/router';
  * @param isNewPage Whether navigation actually changed the displayed page.
  */
 export function scrollToTopOnNavigation(router: Router, isNewPage: boolean): void {
+  // No-op during server-side prerendering (window is undefined in Node).
+  if (typeof window === 'undefined') return;
   const isPopstate = router.getCurrentNavigation()?.trigger === 'popstate';
   if (isNewPage && !isPopstate) {
     window.scrollTo({ top: 0, behavior: 'auto' });

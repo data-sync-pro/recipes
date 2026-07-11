@@ -167,7 +167,9 @@ export class RecipesComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
       });
 
-    document.body.classList.add(RECIPE_CLASSES.BODY_PAGE);
+    if (typeof document !== 'undefined') {
+      document.body.classList.add(RECIPE_CLASSES.BODY_PAGE);
+    }
   }
 
   @HostListener('document:keydown./', ['$event'])
@@ -210,7 +212,9 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
     this.previewSyncService.cleanup();
 
-    document.body.classList.remove(RECIPE_CLASSES.BODY_PAGE);
+    if (typeof document !== 'undefined') {
+      document.body.classList.remove(RECIPE_CLASSES.BODY_PAGE);
+    }
   }
 
   private loadInitialData(): void {

@@ -8,8 +8,11 @@ import {
   AfterViewInit,
   ViewEncapsulation,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  Inject,
+  PLATFORM_ID
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Meta, Title } from '@angular/platform-browser';
@@ -122,6 +125,8 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   private userHasScrolled: boolean = false;
   private isProcessingAnswerPath = false;
 
+  private readonly isBrowser: boolean;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -130,8 +135,11 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     private meta: Meta,
     private title: Title,
     private cdr: ChangeDetectorRef,
-    private previewService: FAQPreviewService
-  ) {}
+    private previewService: FAQPreviewService,
+    @Inject(PLATFORM_ID) platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   
   handleTouchStart(): void {
@@ -222,8 +230,8 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
         this.pendingFragment = fragment;
         // Process fragment immediately, don't wait for router scroll
         this.handlePendingFragment();
-      } else {
-        // If no fragment, ensure page scrolls to top
+      } else if (this.isBrowser) {
+        // If no fragment, ensure page scrolls to top (browser only)
         setTimeout(() => {
           window.scrollTo({ top: 0, behavior: 'auto' });
         }, 50);
@@ -232,6 +240,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    if (!this.isBrowser) return;
     setTimeout(() => {
       this.refreshFaqElementsCache();
       
@@ -431,6 +440,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   private navLinkHandlerTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
   private setupNavLinkHandler(): void {
+    if (!this.isBrowser) return;
     if (this.navLinkHandlerAttached || this.navLinkHandlerTimeoutId !== null) {
       // Already scheduled or attached — avoid duplicate listeners
       return;
@@ -502,6 +512,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private setupPreloadingObservers(): void {
+    if (!this.isBrowser) return;
     // Wait for FAQ items to be rendered in the DOM
     setTimeout(() => {
       const faqElements = document.querySelectorAll('.faq-item');
@@ -908,6 +919,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private scrollToElement(elementId: string): void {
+    if (!this.isBrowser) return;
     setTimeout(() => {
       const element = document.getElementById(elementId);
       if (element) {
@@ -984,6 +996,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   private cleanupFavoriteData(): void {
+    if (!this.isBrowser) return;
     localStorage.removeItem('faqFavorites');
   }
 
@@ -1119,6 +1132,15 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
+  // Absolute URL for og:url. Uses the real location in the browser; during
+  // prerendering (no window) falls back to the production origin + route so the
+  // serialized SEO tag is correct.
+  private currentAbsoluteUrl(): string {
+    return this.isBrowser
+      ? window.location.href
+      : `https://www.datasyncpro.io${this.router.url}`;
+  }
+
   private updatePageMetadata(): void {
     let pageTitle = 'FAQs - Data Sync Pro';
     let pageDescription = 'Frequently Asked Questions about Data Sync Pro';
@@ -1139,7 +1161,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     this.meta.updateTag({ name: 'description', content: pageDescription });
     this.meta.updateTag({ property: 'og:title', content: pageTitle });
     this.meta.updateTag({ property: 'og:description', content: pageDescription });
-    this.meta.updateTag({ property: 'og:url', content: window.location.href });
+    this.meta.updateTag({ property: 'og:url', content: this.currentAbsoluteUrl() });
   }
 
   private handlePendingFragment(): void {
@@ -1214,7 +1236,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     this.meta.updateTag({ name: 'description', content: pageDescription });
     this.meta.updateTag({ property: 'og:title', content: pageTitle });
     this.meta.updateTag({ property: 'og:description', content: pageDescription });
-    this.meta.updateTag({ property: 'og:url', content: window.location.href });
+    this.meta.updateTag({ property: 'og:url', content: this.currentAbsoluteUrl() });
   }
 
   getFAQShareUrl(faqItem: FAQItem): string {
@@ -1369,6 +1391,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Load sidebar and TOC state from localStorage
   private loadSidebarState(): void {
+    if (!this.isBrowser) return;
     const savedState = localStorage.getItem('faq-sidebar-collapsed');
     if (savedState !== null) {
       this.updateUIState({ sidebarCollapsed: savedState === 'true' });
@@ -1382,6 +1405,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Mobile functionality
   private checkMobileView(): void {
+    if (!this.isBrowser) return;
     // 1024px matches the recipe sidebar drawer breakpoint ($breakpoint-desktop
     // in _variables.scss); keep JS and CSS in sync.
     this.updateUIState({ isMobile: window.innerWidth <= 1024 });
@@ -1624,6 +1648,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
    */
   private refreshFaqElementsCache(): void {
+    if (!this.isBrowser) return;
     this.cachedFaqElements = Array.from(document.querySelectorAll('.faq-item'));
     
     
@@ -1730,9 +1755,10 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
    */
   private scrollToTop(): void {
+    if (!this.isBrowser) return;
     window.scrollTo({
       top: 0,
-      behavior: 'auto' 
+      behavior: 'auto'
     });
   }
 
@@ -1935,7 +1961,9 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
 
    */
   private checkFooterProximity(): { inFooterZone: boolean; approaching: boolean; footerOffset: number } {
-    
+    if (!this.isBrowser) {
+      return { inFooterZone: false, approaching: false, footerOffset: 0 };
+    }
     const now = Date.now();
     if (this.lastFooterStatus && (now - this.footerCheckDebounce) < 50) {
       return this.lastFooterStatus;

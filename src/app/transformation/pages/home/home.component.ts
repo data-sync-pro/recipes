@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    if (!this.pendingFragment) return;
+    if (typeof document === 'undefined' || !this.pendingFragment) return;
     const el = document.getElementById(this.pendingFragment);
     if (el) {
       el.scrollIntoView({ block: 'start' });
@@ -140,8 +140,11 @@ export class HomeComponent implements OnInit, AfterViewChecked {
           const baseName = funcName.toLowerCase().replace(/\s/g, '_');
           let description = descriptions[baseName] ?? fallback;
           if (funcName.trim().toLowerCase() === 'apex class') {
-            const doc = new DOMParser().parseFromString(description, 'text/html');
-            description = doc.querySelector('p')?.textContent?.trim() || fallback;
+            // Extract the first paragraph's text without DOMParser (undefined in
+            // Node during prerendering) so server and client output stay identical.
+            const m = description.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+            const text = (m ? m[1] : description).replace(/<[^>]+>/g, '').trim();
+            description = text || fallback;
           }
           this.functionDescriptions[funcName] = description;
         });

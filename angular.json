@@ -15,16 +15,19 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/website",
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": ["zone.js"],
+            "browser": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "allowedCommonJsDependencies": [
-              "jszip"
+              "jszip",
+              "js-beautify"
             ],
             "assets": [
               "src/assets",
@@ -38,7 +41,17 @@
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/app/shared/styles"]
+              "includePaths": [
+                "src/app/shared/styles"
+              ]
+            },
+            "server": "src/main.server.ts",
+            "prerender": {
+              "routesFile": "prerender-routes.txt",
+              "discoverRoutes": false
+            },
+            "ssr": {
+              "entry": "server.ts"
             }
           },
           "configurations": {
@@ -58,12 +71,11 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "prerender": false,
+              "ssr": false
             },
             "firebase": {
               "baseHref": "/",
@@ -82,10 +94,7 @@
               "outputHashing": "all",
               "optimization": true,
               "sourceMap": false,
-              "buildOptimizer": true,
-              "vendorChunk": false,
-              "extractLicenses": true,
-              "namedChunks": false
+              "extractLicenses": true
             }
           },
           "defaultConfiguration": "production"

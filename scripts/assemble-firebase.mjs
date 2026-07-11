@@ -15,7 +15,9 @@ import { existsSync, rmSync, mkdirSync, cpSync, renameSync, readdirSync, statSyn
 import { join } from 'node:path';
 
 const ROOT = process.cwd();
-const NG_OUT = join(ROOT, 'dist', 'website');
+// The esbuild application builder nests client output under browser/ (server/
+// holds the prerender bundle and is intentionally not deployed).
+const NG_OUT = join(ROOT, 'dist', 'website', 'browser');
 const DEPLOY = join(ROOT, 'dist', 'deploy');
 const HOMEPAGE = join(ROOT, 'homepage');
 
@@ -38,8 +40,13 @@ mkdirSync(DEPLOY, { recursive: true });
 // 1) Angular build at root
 cpSync(NG_OUT, DEPLOY, { recursive: true });
 
-// 2) Free up /index.html for the homepage; the SPA shell becomes /app.html
-renameSync(join(DEPLOY, 'index.html'), join(DEPLOY, 'app.html'));
+// 2) Free up /index.html for the homepage; the SPA shell becomes /app.html.
+//    With prerendering, browser/index.html is the prerendered "/" route and
+//    browser/index.csr.html is the clean client-side-render shell. Use the shell
+//    as app.html (the rewrite fallback for non-prerendered routes, e.g. editors)
+//    and drop the prerendered root so the marketing homepage can own /index.html.
+renameSync(join(DEPLOY, 'index.csr.html'), join(DEPLOY, 'app.html'));
+rmSync(join(DEPLOY, 'index.html'), { force: true });
 
 // 3) Collision guard: warn if a homepage file would overwrite Angular output
 const listFiles = (dir, base = dir) =>

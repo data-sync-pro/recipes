@@ -1,4 +1,5 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of, throwError, forkJoin } from 'rxjs';
 import { map, catchError, shareReplay, tap, finalize, filter, take, switchMap } from 'rxjs/operators';
@@ -58,13 +59,17 @@ export class FAQService implements OnDestroy {
   private cacheCleanupInterval?: number;
   private readonly CLEANUP_INTERVAL = 60 * 60 * 1000; // Check every hour
 
+  private readonly isBrowser: boolean;
+
   constructor(
     private http: HttpClient,
     private sanitizer: DomSanitizer,
     private performanceService: PerformanceService,
     private autoLinkService: AutoLinkService,
-    private faqUrlService: FaqUrlService
+    private faqUrlService: FaqUrlService,
+    @Inject(PLATFORM_ID) platformId: Object
   ) {
+    this.isBrowser = isPlatformBrowser(platformId);
     this.initializeService();
     this.initializeIntersectionObserver();
     this.loadFromLocalStorage();
@@ -150,6 +155,7 @@ export class FAQService implements OnDestroy {
    * Load cached content from local storage
    */
   private loadFromLocalStorage(): void {
+    if (!this.isBrowser) return;
     try {
       const cachedContent = localStorage.getItem(this.STORAGE_KEY_FAQ_CONTENT);
       if (cachedContent) {
@@ -170,6 +176,7 @@ export class FAQService implements OnDestroy {
    * Save content to local storage
    */
   private saveToLocalStorage(folderId: string, content: string): void {
+    if (!this.isBrowser) return;
     try {
       const existingCache = localStorage.getItem(this.STORAGE_KEY_FAQ_CONTENT);
       const cache = existingCache ? JSON.parse(existingCache) : {};
@@ -196,6 +203,7 @@ export class FAQService implements OnDestroy {
    * Clean expired cache entries
    */
   private cleanExpiredCache(): void {
+    if (!this.isBrowser) return;
     try {
       const cachedContent = localStorage.getItem(this.STORAGE_KEY_FAQ_CONTENT);
       if (cachedContent) {
@@ -335,6 +343,11 @@ export class FAQService implements OnDestroy {
   // ranked search can match against answer bodies. Multicasted so the
   // FAQ page and the search overlay share one fetch pass.
   public loadAllAnswerTexts(): Observable<Map<string, string>> {
+    // Server-side prerendering: DOMParser is unavailable and fetching the whole
+    // answer corpus would block serialization. Search ranking is browser-only UX.
+    if (!this.isBrowser) {
+      return of(this.answerTexts);
+    }
     if (this.answerTextsLoad$) {
       return this.answerTextsLoad$;
     }
@@ -604,6 +617,7 @@ export class FAQService implements OnDestroy {
    */
   clearContentCache(): void {
     this.contentCache.clear();
+    if (!this.isBrowser) return;
     // Also clear localStorage cache
     try {
       localStorage.removeItem(this.STORAGE_KEY_FAQ_CONTENT);
@@ -871,6 +885,9 @@ export class FAQService implements OnDestroy {
    * Check version and clear cache if needed
    */
   public async checkAndUpdateVersion(): Promise<void> {
+    // Version check relies on localStorage + reload; browser-only. On the server
+    // skip it so loadFAQs() runs directly during prerendering.
+    if (!this.isBrowser) return;
     try {
       // Check if we need to skip this check due to interval
       const localVersionData = localStorage.getItem(this.STORAGE_KEY_APP_VERSION);

@@ -85,6 +85,9 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private setupScrollObserver(): void {
+    // IntersectionObserver + getElementById are browser-only; skip during
+    // prerendering (called from both ngAfterViewInit and the loadSetup subscribe).
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
     this.observer?.disconnect();
 
     this.observer = new IntersectionObserver(

@@ -196,8 +196,11 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
           this.cdr.markForCheck();
 
-          // Setup scroll listener for TOC after a short delay to ensure DOM is ready
-          setTimeout(() => this.setupScrollListener(), 100);
+          // Setup scroll listener for TOC after a short delay to ensure DOM is ready.
+          // Browser-only: window/scroll APIs don't exist during prerendering.
+          if (typeof window !== 'undefined') {
+            setTimeout(() => this.setupScrollListener(), 100);
+          }
         } else if (recipes.length > 0) {
           // Recipes are loaded but this slug doesn't exist — go to the list.
           // While recipes are still loading (empty array), wait for the next
