@@ -5,31 +5,25 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { FaqRoutingModule } from './faq-routing.module';
 import { FaqComponent } from './faq.component';
 import { FaqSkeletonComponent } from './components/faq-skeleton.component';
 import { SharedModule } from '../shared/shared.module';
-@NgModule({
-  declarations: [
-    FaqComponent,
-    FaqSkeletonComponent
-  ],
-  imports: [
-    CommonModule,
-    FaqRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    MatExpansionModule,
-    MatButtonModule,
-    MatIconModule,
-    ScrollingModule,
-    SharedModule,
-  ],
-  exports: [
-    FaqComponent
-  ]
-})
+@NgModule({ declarations: [
+        FaqComponent,
+        FaqSkeletonComponent
+    ],
+    exports: [
+        FaqComponent
+    ], imports: [CommonModule,
+        FaqRoutingModule,
+        FormsModule,
+        MatExpansionModule,
+        MatButtonModule,
+        MatIconModule,
+        ScrollingModule,
+        SharedModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class FaqModule {}
