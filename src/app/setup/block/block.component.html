@@ -152,9 +152,7 @@
   <div *ngSwitchCase="'keyvalue'" class="block-keyvalue" [attr.data-keystyle]="block.keyStyle || 'plain'">
     <div class="kv-row" *ngFor="let pair of block.pairs; trackBy: trackByIndex">
       <div class="kv-key">{{ pair.key }}</div>
-      <div class="kv-value"><span
-        *ngFor="let token of tokenize(pair.value)"
-        [class.ph]="token.isPlaceholder">{{ token.text }}</span></div>
+      <div class="kv-value">{{ pair.value }}</div>
     </div>
   </div>
 
@@ -272,6 +270,7 @@
       <tr *ngFor="let row of block.rows">
         <td *ngFor="let col of block.columns"
             [style.textAlign]="col.align || 'left'"
+            [class.col-mono]="col.mono"
             [innerHTML]="renderContent(row[col.key])">
         </td>
       </tr>

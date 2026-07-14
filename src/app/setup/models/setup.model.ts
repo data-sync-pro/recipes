@@ -27,6 +27,7 @@ export interface TableColumn {
   header: string;
   width?: string;
   align?: 'left' | 'center' | 'right';
+  mono?: boolean;  // render cells in this column as plain monospace (paths / placeholders)
 }
 
 export type ImageSize = "small" | "medium" | "large" | "full";
