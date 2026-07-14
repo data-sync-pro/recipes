@@ -10,6 +10,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 export class AppComponent implements OnInit, OnDestroy {
   showHeaderFooter = true;
   showScrollToTop = false;
+  readonly currentYear = new Date().getFullYear();
 
   private readonly destroy$ = new Subject<void>();
 

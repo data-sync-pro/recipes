@@ -24,6 +24,7 @@ import { FAQItem, FAQCategory, FAQSubCategory } from './models/faq.model';
 import { FAQService } from './services/faq.service';
 import { FAQPreviewService, PreviewData } from './editor/services/faq-preview.service';
 import { VALID_SUBCATEGORIES } from './config/faq-urls.config';
+import { SeoService } from '../shared/services/seo.service';
 
 interface SearchState {
   query: string;
@@ -136,6 +137,7 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     private title: Title,
     private cdr: ChangeDetectorRef,
     private previewService: FAQPreviewService,
+    private seo: SeoService,
     @Inject(PLATFORM_ID) platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -296,6 +298,15 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
     ).subscribe({
       next: (faqs) => {
         this.faqList = faqs;
+        if (faqs.length > 0) {
+          this.seo.setItemList(
+            'Data Sync Pro FAQs',
+            faqs.map(f => ({
+              name: f.question,
+              path: this.buildAnswerUrlSegments(f).join('/'),
+            }))
+          );
+        }
         this.updateUIState({ isLoading: false });
 
         // Warn if any folderId collides with a known subcategory name — the

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { DocsService, DocData } from '../../services/docs.service';
-import { categorySlug } from '../../utils/route.util';
+import { categorySlug, buildRoute } from '../../utils/route.util';
 import { SeoService } from '../../../shared/services/seo.service';
 interface FunctionTag {
   "Item Name": string;
@@ -79,6 +79,24 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     const excludedTags = new Set(['Global Variables', 'Operators']);
     this.http.get<FunctionTag[]>('assets/transformation/formulas/tags.json').subscribe((data) => {
       this.tagsData = data;
+
+      // ItemList JSON-LD with absolute doc URLs. Slug rules mirror
+      // scripts/gen-prerender-routes.mjs: a few special docs live at the top
+      // level; everything else is /<category>/<function>.
+      const topLevelSlugs = new Set(['global_variables', 'joiner', 'aggregate_general']);
+      this.seo.setItemList(
+        'Data Sync Pro Transformation Formulas',
+        data
+          .filter(item => item['Item Name'] && (topLevelSlugs.has(buildRoute(item['Item Name'])) || item.Tags?.length))
+          .map(item => {
+            const slug = buildRoute(item['Item Name']);
+            const path = topLevelSlugs.has(slug)
+              ? `/transformation/${slug}`
+              : `/transformation/${categorySlug(item.Tags[0])}/${slug}`;
+            return { name: item['Item Name'], path };
+          })
+      );
+
       const tagSet = new Set<string>();
 
       data.forEach((item) => {

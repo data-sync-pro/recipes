@@ -131,6 +131,24 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
           this.expandedIds = new Set(
             tree.flatMap(n => n.children?.length ? [n.id] : [])
           );
+
+          // ItemList JSON-LD with absolute doc URLs (grouping nodes without a
+          // slug contribute no path segment, matching selectSetup's URL shape).
+          const items: Array<{ name: string; path: string }> = [];
+          const walk = (nodes: NavNode[], parents: string[]): void => {
+            for (const node of nodes) {
+              const chain = node.slug ? [...parents, node.slug] : parents;
+              if (node.slug) {
+                items.push({ name: node.label, path: `/user-manual/${chain.join('/')}` });
+              }
+              if (node.children) walk(node.children, chain);
+            }
+          };
+          walk(tree, []);
+          if (items.length > 0) {
+            this.seo.setItemList('Data Sync Pro User Manual', items);
+          }
+
           this.watchRoute();
           this.prefetchContentIndex();
         },

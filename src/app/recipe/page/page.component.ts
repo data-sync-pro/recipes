@@ -24,7 +24,8 @@ import { OrchestrationService } from '../core/services/orchestration.service';
 import { SearchService as CoreSearchService } from '../core/services/search.service';
 import { LoggerService } from '../core/services/logger.service';
 import { sortRecipesByCategoryAndTitle } from '../core/utils';
-import { slugToCategoryName } from '../core/constants/recipe.constants';
+import { slugToCategoryName, categoryToSlug } from '../core/constants/recipe.constants';
+import { SeoService } from '../../shared/services/seo.service';
 import { TocService } from './services/toc.service';
 import { NavigationService } from './services/navigation.service';
 import { Store } from '../core/store/recipe.store';
@@ -91,7 +92,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
     private previewSyncService: PreviewSyncService,
     private routeHandlerService: RouteHandlerService,
     private searchService: SearchStateService,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private seo: SeoService
   ) { }
 
   ngOnInit(): void {
@@ -225,6 +227,15 @@ export class RecipesComponent implements OnInit, OnDestroy {
       next: (recipes) => {
         this.allRecipes = recipes;
         this.categories = this.coreSearchService.generateCategories(recipes);
+        if (recipes.length > 0) {
+          this.seo.setItemList(
+            'Data Sync Pro Recipes',
+            recipes.map(r => ({
+              name: r.title,
+              path: `/recipes/${categoryToSlug(r.category[0] || '')}/${r.slug || ''}`,
+            }))
+          );
+        }
         this.cdr.markForCheck();
       },
       error: (error) => {

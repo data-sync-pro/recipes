@@ -52,6 +52,35 @@ export class SeoService {
     this.setCanonical(url);
   }
 
+  /**
+   * Inject (or replace) a schema.org ItemList JSON-LD script listing the pages
+   * of the current section with ABSOLUTE urls. Besides being valid structured
+   * data, this puts full URLs into the prerendered HTML so AI fetchers whose
+   * tools only follow absolute URLs seen in a page can reach every detail page.
+   */
+  setItemList(name: string, items: Array<{ name: string; path: string }>): void {
+    const data = {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name,
+      numberOfItems: items.length,
+      itemListElement: items.map((it, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: it.name,
+        url: `${PROD_ORIGIN}${it.path}`,
+      })),
+    };
+    let script = this.doc.querySelector('script[data-seo="item-list"]') as HTMLScriptElement | null;
+    if (!script) {
+      script = this.doc.createElement('script');
+      script.setAttribute('type', 'application/ld+json');
+      script.setAttribute('data-seo', 'item-list');
+      this.doc.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(data);
+  }
+
   private absoluteUrl(path?: string): string {
     if (this.isBrowser && !path) return this.doc.location.href;
     const p = (path ?? this.router.url).split('#')[0].split('?')[0];
