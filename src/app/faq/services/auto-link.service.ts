@@ -21,7 +21,7 @@ interface AutoLinkTermsConfig {
 })
 export class AutoLinkService {
   private readonly AUTO_LINK_TERMS_URL = 'assets/data/auto-link-terms.json';
-  private readonly FUNCTION_DOC_BASE_URL = 'https://transformation.pushtopic.com/';
+  private readonly FUNCTION_DOC_BASE_URL = 'https://www.datasyncpro.io/transformation/';
   private autoLinkTerms: { [key: string]: AutoLinkTerm } = {};
   private autoLinkTermsLoaded = false;
   private loadingTerms$ = new BehaviorSubject<boolean>(false);
