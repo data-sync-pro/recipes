@@ -3682,7 +3682,7 @@ body.sn-hero .cs-divider .arrow-mini {
 }
 .fn-grid .chip.brand .cat { color: var(--brand-bright); opacity: .7; }
 
-.actions .act-groups { margin-top: 36px; display: grid; gap: 26px; }
+.actions .act-groups { margin-top: 36px; display: grid; gap: 50px; }
 .actions .act-ghead {
   display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
   padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,.08);
@@ -3723,7 +3723,7 @@ body.sn-hero .cs-divider .arrow-mini {
 .actions .chip .ns { color: var(--ink-2-on-dark); font-style: normal; }
 .actions .chip .q { color: var(--ink-2-on-dark); font-style: normal; }
 .actions .act-foot {
-  margin-top: 40px; font-family: var(--f-mono); font-size: 13px;
+  margin-top: 90px; font-family: var(--f-mono); font-size: 13px;
   letter-spacing: .02em; color: var(--ink-3-on-dark); text-align: center;
 }
 .actions .act-foot b { color: #FFFFFF; font-weight: 500; }

@@ -423,10 +423,9 @@ window.DSP_loadRecaptcha = (() => {
     
     
     if (licenseInfoHidden) {
-      licenseInfoHidden.value = JSON.stringify({
-        successPlan: successPlanHidden.value,
-        orgs,
-      });
+      licenseInfoHidden.value = JSON.stringify(
+        orgs.map(o => ({ ...o, successPlan: successPlanHidden.value }))
+      );
     }
 
     setTimeout(() => {
