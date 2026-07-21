@@ -37,6 +37,10 @@
               "description": "Update to this field will sync with the \"All Internal Users Have Read Access?\" field of the related Executables. \"All Internal Users Have Read Access?\" is used to share the Executables with All Internal Users for accessing Executables through the record page or the LWCs that are in reference to those Executables, such as the Executable Data List and Pipeline Data Lists."
             },
             {
+              "name": "Incremental Backup to File?",
+              "description": "Marks this Pipeline for incremental backup to file, which enables the backup and restore features and enforces backup-compliant settings on its Executables."
+            },
+            {
               "name": "Record-Based Configuration Deployment?",
               "description": "Specifies whether this Pipeline deploys record-based configuration. When enabled, the Data Sync Pro VS Code plugin exports the source data of all related Executables as JSON, supporting local backup and metadata-driven version control in a code repository."
             },
