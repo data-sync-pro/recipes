@@ -406,7 +406,7 @@ window.DSP_loadRecaptcha = (() => {
       name: row.querySelector('[data-org-field="name"]').value.trim(),
       connections: Number(row.querySelector('[data-org-field="conn"]').value) || 0,
       executables: Number(row.querySelector('[data-org-field="exec"]').value) || 0,
-      daily_batch: row.querySelector('[data-org-field="batch"]').value,
+      dailyBatchLimit: row.querySelector('[data-org-field="batch"]').value,
     }));
     const totalConn = orgs.reduce((s, o) => s + o.connections, 0);
     const totalExec = orgs.reduce((s, o) => s + o.executables, 0);
@@ -416,7 +416,7 @@ window.DSP_loadRecaptcha = (() => {
 
     if (detailsHidden) {
       detailsHidden.value = orgs.map((o, i) =>
-        `Org ${i+1}: ${o.name} — ${o.connections} connection(s), ${o.executables} executable(s), ${o.daily_batch} daily batch`
+        `Org ${i+1}: ${o.name} — ${o.connections} connection(s), ${o.executables} executable(s), ${o.dailyBatchLimit} daily batch`
       ).join('\n');
     }
 
