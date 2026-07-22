@@ -14,11 +14,13 @@ import { takeUntil, throttleTime } from 'rxjs/operators';
 
 import { Recipe, Category } from '../../core/models/recipe.model';
 import { CacheService } from '../../core/services/cache.service';
+import { OrchestrationService } from '../../core/services/orchestration.service';
 import { SearchService } from '../../core/services/search.service';
 import { BreadcrumbItem } from '../detail-banner/detail-banner.component';
 import { categoryToSlug, slugToCategoryName } from '../../core/constants/recipe.constants';
 import { scrollToTopOnNavigation } from '../../core/utils/scroll.util';
 import { RecipeNavSidebarComponent } from '../recipe-nav-sidebar/recipe-nav-sidebar.component';
+import { SeoService } from '../../../shared/services/seo.service';
 
 interface TocItem {
   id: string;
@@ -138,12 +140,17 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private cacheService: CacheService,
+    private orchestrationService: OrchestrationService,
     private searchService: SearchService,
     private cdr: ChangeDetectorRef,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private seo: SeoService
   ) { }
 
   ngOnInit(): void {
+    // Trigger recipe loading on demand (deep links land here directly).
+    this.orchestrationService.ensureRecipesLoaded();
+
     // Get route params and load recipe
     combineLatest([
       this.route.paramMap,
@@ -169,6 +176,10 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
           scrollToTopOnNavigation(this.router, isNewRecipe);
 
           this.currentRecipe = recipe;
+          this.seo.setPage({
+            title: recipe.title,
+            description: recipe.overview || recipe.generalUseCase,
+          });
 
           // Reset to first walkthrough tab whenever the recipe changes
           this.activeWalkthroughTabIndex = 0;
@@ -191,10 +202,15 @@ export class RecipeDetailPageComponent implements OnInit, OnDestroy {
 
           this.cdr.markForCheck();
 
-          // Setup scroll listener for TOC after a short delay to ensure DOM is ready
-          setTimeout(() => this.setupScrollListener(), 100);
-        } else {
-          // Recipe not found, redirect to recipes list
+          // Setup scroll listener for TOC after a short delay to ensure DOM is ready.
+          // Browser-only: window/scroll APIs don't exist during prerendering.
+          if (typeof window !== 'undefined') {
+            setTimeout(() => this.setupScrollListener(), 100);
+          }
+        } else if (recipes.length > 0) {
+          // Recipes are loaded but this slug doesn't exist — go to the list.
+          // While recipes are still loading (empty array), wait for the next
+          // emission instead of redirecting, or deep links bounce to /recipes.
           this.router.navigate(['/recipes']);
         }
       }

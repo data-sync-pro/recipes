@@ -1,12 +1,15 @@
 <div class="home-content">
+  <app-content-skeleton *ngIf="isLoading" [blocks]="4"></app-content-skeleton>
+
+  <ng-container *ngIf="!isLoading">
   <h1>Formula</h1>
   <nav class="tag-nav">
     <ul>
       <li>
-        <a [routerLink]="['/transformation/home', getAnchorId('Formula Elements')]">Elements of a Formula</a>
+        <a [routerLink]="['/transformation']" [fragment]="getAnchorId('Formula Elements')">Elements of a Formula</a>
       </li>
       <li *ngFor="let tag of displayTags; trackBy: trackByString">
-        <a [routerLink]="['/transformation/home', getAnchorId(tag)]">
+        <a [routerLink]="['/transformation']" [fragment]="getAnchorId(tag)">
           {{ tag }}
           <ng-container *ngIf="tag !== 'Operators' && tag !== 'Global Variables'">
             Functions
@@ -88,4 +91,5 @@
       </section>
     </ng-container>
   </div>
+  </ng-container>
 </div>

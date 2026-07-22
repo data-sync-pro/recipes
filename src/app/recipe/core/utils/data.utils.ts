@@ -1,5 +1,11 @@
 import { RecipeData, isLegacyWalkthrough, WalkthroughStep, WalkthroughTab } from '../models/recipe.model';
-import { RECIPE_PATHS, CATEGORY_ORDER } from '../constants/recipe.constants';
+import { RECIPE_PATHS, CATEGORY_ORDER, expandCategory } from '../constants/recipe.constants';
+
+/**
+ * Manual per-category recipe ordering. Maps a category display name to an
+ * ordered list of recipe slugs. Sourced from assets/recipes/category-order.json.
+ */
+export type CategoryOrderMap = Record<string, string[]>;
 
 // 2D map: customStepNames[tabIndex][stepIndex] → user-supplied name for Custom steps
 export type CleanRecipeCustomStepNames = { [tabIndex: number]: { [stepIndex: number]: string } };
@@ -162,6 +168,57 @@ export function sortRecipesByCategoryAndTitle<T extends { category: string | str
     if (rankA === Number.MAX_SAFE_INTEGER) {
       const catCompare = catA.localeCompare(catB);
       if (catCompare !== 0) return catCompare;
+    }
+    return a.title.localeCompare(b.title);
+  });
+}
+
+/**
+ * Pure alphabetical sort by title. Used for the "All Recipes" view, which is a
+ * flat list with no category grouping, so a straight A→Z reads most naturally.
+ */
+export function sortRecipesByTitle<T extends { title: string }>(recipes: T[]): T[] {
+  return [...recipes].sort((a, b) => a.title.localeCompare(b.title));
+}
+
+/**
+ * Order recipes within a single category using the manual order in
+ * `orderMap`. Recipes whose slug is listed appear first, in that order;
+ * any recipe not listed (e.g. a newly added one) falls back to the end,
+ * sorted alphabetically by title — so an incomplete order file never hides a
+ * recipe, it just appends it.
+ *
+ * Aggregate categories (e.g. "UI" → Data List + Action Button) are expanded
+ * and their member lists concatenated in category order.
+ */
+export function orderRecipesWithinCategory<T extends { slug?: string; title: string }>(
+  categoryName: string,
+  recipes: T[],
+  orderMap: CategoryOrderMap
+): T[] {
+  const orderedSlugs: string[] = [];
+  for (const key of expandCategory(categoryName)) {
+    const list = orderMap[key];
+    if (list) {
+      orderedSlugs.push(...list);
+    }
+  }
+
+  const rankBySlug = new Map<string, number>();
+  orderedSlugs.forEach((slug, index) => {
+    if (!rankBySlug.has(slug)) {
+      rankBySlug.set(slug, index);
+    }
+  });
+
+  const rankOf = (slug?: string): number =>
+    (slug && rankBySlug.has(slug)) ? rankBySlug.get(slug)! : Number.MAX_SAFE_INTEGER;
+
+  return [...recipes].sort((a, b) => {
+    const rankA = rankOf(a.slug);
+    const rankB = rankOf(b.slug);
+    if (rankA !== rankB) {
+      return rankA - rankB;
     }
     return a.title.localeCompare(b.title);
   });

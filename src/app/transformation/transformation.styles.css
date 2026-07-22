@@ -1,20 +1,19 @@
 .app-transformation {
-  color: #333;
+  color: #2C2C2D;
 }
 
 .app-transformation h1 {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 2.25rem;
+  font-weight: 500;
   line-height: 1.2;
-  margin: 0.67em 0;
 }
 
 .app-transformation h2 {
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.2;
   margin: 0.83em 0;
-  color: #217B95;
+  color: #2253B2;
 }
 
 .app-transformation h3 {
@@ -48,13 +47,13 @@
 }
 
 .app-transformation .hljs {
-  background-color: #f8f8f8 !important;
-  color: #333;
+  background-color: #eff0f0c4 !important;
+  color: #2C2C2D;
   line-height: 1.6;
 }
 
 .app-transformation a {
-  color: #418796;
+  color: #2253B2;
   text-decoration: none;
 }
 

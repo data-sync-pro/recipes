@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Naming Conventions — Data Sync Pro</title>
+<meta name="description" content="How to name Data Sync Pro Pipelines and Executables. A consistent, dot-delimited grammar — Object · Context · Purpose — with worked examples from a production org across the Trigger, Data List, and Action Button surfaces." />
+<meta name="robots" content="index,follow" />
+<link rel="icon" href="/logo.png" />
+<link rel="apple-touch-icon" href="/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css?v=36" />
+<style>
+  /* Page-specific: naming-conventions reference — reuses the site tokens,
+     mirrors the legal pages so docs read as a set. nc- prefix throughout. */
+  .legal-hero {
+    padding: clamp(56px, 8vw, 104px) 0 clamp(28px, 4vw, 44px);
+    border-bottom: 1px solid var(--rule);
+  }
+  /* Recipes-style breadcrumb top bar */
+  .nav-doc .nav-inner { gap: 14px; }
+  .nav-crumb-sep { width: 1px; height: 20px; background: var(--rule); flex: 0 0 auto; }
+  .nav-crumb { color: var(--ink-3); font-size: 14.5px; font-weight: 500; letter-spacing: -0.01em; }
+  .legal-hero .eyebrow { margin-bottom: 18px; }
+  .legal-hero h1 {
+    font-size: clamp(34px, 5.2vw, 58px);
+    letter-spacing: -0.03em;
+    line-height: 1.04;
+    margin: 0;
+  }
+  .legal-hero h1 .it { font-family: var(--f-serif); font-style: italic; font-weight: 400; color: var(--brand-ink); }
+  .legal-meta {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--ink-3);
+  }
+  .legal-body { padding: clamp(40px, 6vw, 72px) 0 clamp(64px, 9vw, 120px); }
+  .legal-wrap { max-width: 1060px; margin-inline: auto; }
+  .legal-lead { font-size: 18px; line-height: 1.6; color: var(--ink-2); margin: 0 0 8px; }
+  .legal-section { margin-top: 52px; scroll-margin-top: 88px; }
+  .legal-section > h2 {
+    font-size: 13px;
+    font-family: var(--f-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-ink);
+    margin: 0 0 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .legal-section > h2 .num { font-size: 12px; color: var(--ink-3); }
+  .legal-section h3 { font-size: 18px; letter-spacing: -0.01em; margin: 30px 0 8px; color: var(--ink); }
+  .legal-section p { font-size: 16px; line-height: 1.68; color: var(--ink-2); margin: 0 0 14px; text-wrap: pretty; }
+  .legal-section a:not(.nc-chip) { color: var(--brand-ink); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+  .legal-section a:not(.nc-chip):hover { color: var(--brand); }
+  .legal-section strong { color: var(--ink); font-weight: 600; }
+  code, .mono { font-family: var(--f-mono); }
+  .legal-section :not(pre) > code {
+    font-size: 0.86em;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-sm);
+    padding: 1px 6px;
+    color: var(--ink);
+  }
+
+  /* Callout */
+  .legal-callout {
+    margin: 22px 0;
+    padding: 18px 22px;
+    background: var(--brand-soft);
+    border: 1px solid color-mix(in oklab, var(--brand) 22%, transparent);
+    border-radius: 12px;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--brand-ink);
+  }
+  .legal-callout code { background: rgba(255,255,255,.5); border-color: color-mix(in oklab, var(--brand) 24%, transparent); }
+
+  /* TOC */
+  .legal-toc { margin: 32px 0 0; padding: 20px 22px; background: var(--paper-2); border: 1px solid var(--rule); border-radius: 14px; }
+  .legal-toc h2 { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 12px; }
+  .legal-toc ol { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: 28px; counter-reset: toc; }
+  .legal-toc li { counter-increment: toc; margin-bottom: 8px; break-inside: avoid; }
+  .legal-toc a { font-size: 14.5px; color: var(--ink-2); text-decoration: none; display: flex; gap: 10px; }
+  .legal-toc a::before { content: counter(toc, decimal-leading-zero); font-family: var(--f-mono); font-size: 11.5px; color: var(--brand); padding-top: 2px; }
+  .legal-toc a:hover { color: var(--brand-ink); }
+  @media (max-width: 560px) { .legal-toc ol { columns: 1; } }
+
+  /* ---- Anatomy diagram ---- */
+  .nc-anatomy {
+    margin: 26px 0 10px;
+    padding: clamp(22px, 3vw, 34px) clamp(20px, 3vw, 30px) 26px;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    box-shadow: var(--sh-2);
+  }
+  .nc-anatomy + .nc-anatomy { margin-top: 16px; }
+  .nc-anatomy-label {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 18px;
+  }
+  .nc-segments { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; }
+  .nc-seg { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .nc-seg-tok {
+    font-family: var(--f-mono);
+    font-size: clamp(15px, 2.4vw, 22px);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    padding: 8px 14px;
+    border-radius: 8px;
+    line-height: 1;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+  .nc-dot { align-self: flex-start; font-family: var(--f-mono); font-size: clamp(15px, 2.4vw, 22px); color: var(--mute); padding: 8px 0; line-height: 1; }
+  .nc-seg-tag {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  /* role colours */
+  .role-object .nc-seg-tok { background: var(--brand-soft); border-color: color-mix(in oklab, var(--brand) 28%, transparent); color: var(--brand-ink); }
+  .role-object .nc-seg-tag { color: var(--brand-ink); }
+  .role-context .nc-seg-tok { background: var(--paper-2); border-color: var(--rule-2); color: var(--ink); }
+  .role-context .nc-seg-tag { color: var(--ink-3); }
+  .role-purpose .nc-seg-tok { background: var(--signal-soft); border-color: color-mix(in oklab, var(--signal) 30%, transparent); color: var(--signal); }
+  .role-purpose .nc-seg-tag { color: var(--signal); }
+  .role-surface .nc-seg-tok { background: var(--good-soft); border-color: color-mix(in oklab, var(--good) 30%, transparent); color: var(--good); }
+  .role-surface .nc-seg-tag { color: var(--good); }
+  .nc-anatomy-read { margin: 20px 0 0; font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+  .nc-anatomy-read b { color: var(--ink); font-weight: 600; }
+
+  /* ---- Rule cards (purpose per surface) ---- */
+  .nc-rules { margin: 22px 0 6px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 720px) { .nc-rules { grid-template-columns: 1fr; } }
+  .nc-rule {
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 20px;
+    background: var(--card);
+    box-shadow: var(--sh-1);
+  }
+  .nc-rule-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .nc-rule-head .nc-badge { margin: 0; }
+  .nc-rule p { font-size: 14px; line-height: 1.55; margin: 0 0 12px; color: var(--ink-2); }
+  .nc-rule .nc-eg { display: flex; flex-direction: column; gap: 6px; }
+  .nc-rule .nc-eg code {
+    font-size: 12.5px;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-sm);
+    padding: 5px 9px;
+    color: var(--ink);
+    width: max-content;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  .nc-rule .nc-eg code b { color: var(--signal); font-weight: 500; }
+
+  /* ---- Surface badges ---- */
+  .nc-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    padding: 3px 9px 3px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--rule-2);
+    white-space: nowrap;
+    line-height: 1.4;
+  }
+  .nc-badge::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--mute); }
+  .nc-badge.s-trigger { color: var(--brand-ink); border-color: color-mix(in oklab, var(--brand) 30%, transparent); background: var(--brand-soft); }
+  .nc-badge.s-trigger::before { background: var(--brand); }
+  .nc-badge.s-datalist { color: var(--good); border-color: color-mix(in oklab, var(--good) 30%, transparent); background: var(--good-soft); }
+  .nc-badge.s-datalist::before { background: var(--good); }
+  .nc-badge.s-actionbutton { color: var(--signal); border-color: color-mix(in oklab, var(--signal) 30%, transparent); background: var(--signal-soft); }
+  .nc-badge.s-actionbutton::before { background: var(--signal); }
+  .nc-badge.s-batch { color: oklch(0.5 0.13 300); border-color: oklch(0.5 0.13 300 / 0.32); background: oklch(0.5 0.13 300 / 0.1); }
+  .nc-badge.s-batch::before { background: oklch(0.5 0.13 300); }
+  .nc-badge.s-loader { color: oklch(0.5 0.13 250); border-color: oklch(0.5 0.13 250 / 0.32); background: oklch(0.5 0.13 250 / 0.1); }
+  .nc-badge.s-loader::before { background: oklch(0.5 0.13 250); }
+  .nc-badge.s-sync { color: oklch(0.52 0.13 190); border-color: oklch(0.52 0.13 190 / 0.32); background: oklch(0.52 0.13 190 / 0.1); }
+  .nc-badge.s-sync::before { background: oklch(0.52 0.13 190); }
+  .nc-badge.s-logic { color: var(--ink-3); }
+  .nc-badge.s-logic::before { background: var(--mute); }
+  .nc-badge.s-variable { color: oklch(0.52 0.14 25); border-color: oklch(0.52 0.14 25 / 0.32); background: oklch(0.52 0.14 25 / 0.1); }
+  .nc-badge.s-variable::before { background: oklch(0.52 0.14 25); }
+
+  .nc-badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 4px; }
+
+  /* ---- Tables ---- */
+  .nc-table-wrap { margin: 16px 0 8px; overflow-x: auto; border: 1px solid var(--rule); border-radius: 14px; }
+  /* Catalog tables break out of the 820px prose column so the description fits. */
+  #catalog-pipelines .nc-table-wrap,
+  #catalog-execs .nc-table-wrap,
+  #catalog-variables .nc-table-wrap { width: 100%; }
+  table.nc-table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 560px; }
+  table.nc-table thead th {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-align: left;
+    padding: 12px 16px;
+    background: var(--paper-2);
+    border-bottom: 1px solid var(--rule-2);
+    position: sticky; top: 0;
+  }
+  table.nc-table tbody td { padding: 14px 18px; border-bottom: 1px solid var(--rule); color: var(--ink-2); vertical-align: top; }
+  table.nc-table tbody tr:last-child td { border-bottom: none; }
+  table.nc-table tbody tr:hover td { background: var(--card-2); }
+  table.nc-table td.nc-name { font-family: var(--f-mono); font-size: 13.5px; color: var(--ink); white-space: normal; overflow-wrap: anywhere; line-height: 1.45; }
+  table.nc-table td.nc-name .seg-obj { color: var(--brand-ink); }
+  table.nc-table td.nc-name .seg-end { color: var(--signal); }
+  table.nc-table td.nc-surface { white-space: nowrap; }
+  table.nc-table td.nc-note { font-size: 13.5px; color: var(--ink-3); }
+  table.nc-table td.nc-desc { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; text-wrap: pretty; overflow-wrap: anywhere; }
+  table.nc-table td.nc-desc code { font-family: var(--f-mono); font-size: 0.86em; background: var(--paper-2); border: 1px solid var(--rule); border-radius: var(--r-sm); padding: 0 5px; color: var(--ink); overflow-wrap: anywhere; }
+  .nc-count { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); margin-left: auto; }
+  .nc-table-head { display: flex; align-items: baseline; gap: 12px; }
+
+  /* ---- Do / Don't ---- */
+  .nc-dd { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0 4px; }
+  @media (max-width: 640px) { .nc-dd { grid-template-columns: 1fr; } }
+  .nc-dd-col { border: 1px solid var(--rule); border-radius: 14px; padding: 18px 20px; background: var(--card); }
+  .nc-dd-col h4 { font-size: 12px; font-family: var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 14px; display: flex; align-items: center; gap: 8px; }
+  .nc-dd-col.do h4 { color: var(--good); }
+  .nc-dd-col.dont h4 { color: var(--signal); }
+  .nc-dd-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .nc-dd-col li { font-size: 14px; line-height: 1.5; color: var(--ink-2); padding-left: 22px; position: relative; }
+  .nc-dd-col li code { font-size: 12px; background: var(--paper-2); border: 1px solid var(--rule); border-radius: var(--r-sm); padding: 1px 5px; color: var(--ink); }
+  .nc-dd-col.do li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--good); font-size: 13px; }
+  .nc-dd-col.dont li::before { content: "✕"; position: absolute; left: 0; top: 1px; color: var(--signal); font-size: 12px; }
+</style>
+</head>
+<body>
+
+<!-- =========== NAV =========== -->
+<nav class="nav nav-doc" id="nav">
+  <div class="nav-inner">
+    <a class="brand-mark" href="/" aria-label="Data Sync Pro home">
+      <img class="logo" src="logo.png?v=24" alt="" width="32" height="32" />
+      <span>Data Sync Pro</span>
+    </a>
+    <span class="nav-crumb-sep" aria-hidden="true"></span>
+    <span class="nav-crumb">Naming Conventions</span>
+  </div>
+</nav>
+
+<!-- =========== HERO =========== -->
+<header class="legal-hero">
+  <div class="container">
+    <div class="legal-wrap">
+      <div class="eyebrow"><span class="dot"></span>Reference</div>
+      <h1>Naming <span class="it">conventions</span>.</h1>
+    </div>
+  </div>
+</header>
+
+<!-- =========== BODY =========== -->
+<main class="legal-body">
+  <div class="container">
+    <div class="legal-wrap">
+      <p class="legal-lead">This is how we at Data Sync Pro tend to name things — a suggested convention, not a hard rule. Naming comes up most in three places: a <strong>Pipeline</strong> (the group that holds Executables together), the <strong>Executables</strong> inside it (the individual rules), and the <strong>Variables</strong> they read (named, reusable values). Follow as much of this as is useful; a consistent grammar simply tends to make systems easier to read, sort, maintain, and scale. Adapt it to whatever fits your org.</p>
+
+      <div class="legal-callout">
+        If one idea helps, it's this: names usually read best <strong>left&nbsp;→&nbsp;right, general&nbsp;→&nbsp;specific</strong>. We join Pipeline and Executable segments with dots in <code>PascalCase</code> — the first segment is the primary object, the last says what the record <em>does</em>. Variables are the one exception we make: a single <code>PascalCase</code> token, no dots, referenced as <code>#Name</code>.
+      </div>
+
+      <nav class="legal-toc" aria-label="Contents">
+        <h2>Contents</h2>
+        <ol>
+          <li><a href="#catalog-pipelines">Pipeline catalog</a></li>
+          <li><a href="#catalog-execs">Executable catalog</a></li>
+          <li><a href="#catalog-variables">Variable catalog</a></li>
+          <li><a href="#surfaces">Purpose by surface</a></li>
+          <li><a href="#do-dont">What tends to work</a></li>
+        </ol>
+      </nav>
+
+      <!-- 01 PIPELINE CATALOG -->
+      <section class="legal-section" id="catalog-pipelines">
+        <h2><span class="num">01</span>Pipeline catalog</h2>
+        <p>The Pipeline naming pattern for each surface, with worked examples. A Pipeline is the rules engine that runs its Executables; it typically groups Executables of one surface, and its name then ends in that surface's plural type — Batches, DataLists, Triggers, ActionButtons, DataLoaders — except the org-to-org sync pipeline, whose name leads with <code style="font-family:var(--f-mono);font-size:0.86em;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-sm);padding:0 5px;color:var(--ink);">DataMigration</code> and drops the surface suffix, since a <code style="font-family:var(--f-mono);font-size:0.86em;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-sm);padding:0 5px;color:var(--ink);">DataMigration</code> is always a <span class="tag brand">#Batch</span>.</p>
+        <p style="font-size:14.5px;color:var(--ink-3);"><code style="font-family:var(--f-mono);font-size:0.86em;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-sm);padding:0 5px;color:var(--ink);">&lt;Object&gt;</code> is a stand-in for the real object or role label — <code style="font-family:var(--f-mono);font-size:0.86em;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-sm);padding:0 5px;color:var(--ink);">CustomerAccount</code>, <code style="font-family:var(--f-mono);font-size:0.86em;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-sm);padding:0 5px;color:var(--ink);">PartnerAccount</code>, <code style="font-family:var(--f-mono);font-size:0.86em;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-sm);padding:0 5px;color:var(--ink);">Opportunity</code>, <code style="font-family:var(--f-mono);font-size:0.86em;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-sm);padding:0 5px;color:var(--ink);">Quote</code>, and so on. Likewise <code style="font-family:var(--f-mono);font-size:0.86em;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-sm);padding:0 5px;color:var(--ink);">&lt;Context&gt;</code> and <code style="font-family:var(--f-mono);font-size:0.86em;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-sm);padding:0 5px;color:var(--ink);">&lt;DataList&gt;</code> are filled in per use.</p>
+        <div class="nc-table-wrap">
+          <table class="nc-table">
+            <thead><tr><th style="width:26%;">Pipeline name</th><th style="width:15%;">Surface</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;Object&gt;</span>.<span class="seg-end">Batches</span></td><td class="nc-surface"><span class="nc-badge s-batch">#Batch</span></td><td class="nc-desc"><code>Opportunity.Batches</code>, or a custom object <code>Service_Order_Log__c</code> → <code>ServiceOrderLog.Batches</code> — local Apex batch jobs that run on that object's records.</td></tr>
+              <tr><td class="nc-name">DataMigration.&lt;SourceOrg&gt;.<span class="seg-end">&lt;TargetOrg&gt;</span></td><td class="nc-surface"><span class="nc-badge s-batch">#Batch</span></td><td class="nc-desc"><code>DataMigration.OrgA.OrgB</code> — an org-to-org data sync / migration pipeline, run as a batch job. The trailing segments name the <b>source</b> and <b>target</b> orgs (here, from <code>OrgA</code> to <code>OrgB</code>). The order is a choice: lead with the purpose (<code>DataMigration.OrgA.OrgB</code>) or with the direction (<code>OrgA.OrgB.DataMigration</code>) — pick one and apply it consistently.</td></tr>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;Object&gt;</span>.Related.<span class="seg-end">DataLists</span></td><td class="nc-surface"><span class="nc-badge s-datalist">#Data List</span></td><td class="nc-desc"><code>CustomerAccount.Related.DataLists</code>, <code>Opportunity.Related.DataLists</code>, or a custom object <code>Service_Order_Log__c</code> → <code>ServiceOrderLog.Related.DataLists</code> — Data Lists that query the <b>objects related</b> to the current record (its related lists), shown on that record's page.</td></tr>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;Object&gt;</span>.<span class="seg-end">DataLists</span></td><td class="nc-surface"><span class="nc-badge s-datalist">#Data List</span></td><td class="nc-desc"><code>Product.DataLists</code> — Data Lists that query the <b>object itself</b> (no <code>Related</code> segment).</td></tr>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;Object&gt;</span>.<span class="seg-end">Triggers</span></td><td class="nc-surface"><span class="nc-badge s-trigger">#Trigger</span></td><td class="nc-desc"><code>Opportunity.Triggers</code>, <code>PartnerAccount.Triggers</code> — the trigger rules that run on that object's records.</td></tr>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;Object&gt;</span>.<span class="seg-end">ActionButtons</span></td><td class="nc-surface"><span class="nc-badge s-actionbutton">#Action Button</span></td><td class="nc-desc"><code>OpenOpportunity.ActionButtons</code>, or a custom object <code>Service_Order_Log__c</code> → <code>ServiceOrderLog.ActionButtons</code> — buttons shown on the object's record page. </td></tr>
+              <tr><td class="nc-name">&lt;DataListName&gt;.<span class="seg-end">ActionButtons</span></td><td class="nc-surface"><span class="nc-badge s-actionbutton">#Action Button</span></td><td class="nc-desc"><code>Quote.LineItems.ActionButtons</code> — buttons shown on a Data List; the leading segment(s) are the <b>Data List's name</b> (here, the <code>Quote.LineItems</code> Data List Executable), not an object. Naming for Data List Executables is covered separately.</td></tr>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;Object&gt;</span>.<span class="seg-end">DataLoaders</span></td><td class="nc-surface"><span class="nc-badge s-loader">#Data Loader</span></td><td class="nc-desc"><code>Account.DataLoaders</code>, <code>ServiceOrderLog.DataLoaders</code> — the data-load definitions for that object.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 02 EXECUTABLE CATALOG -->
+      <section class="legal-section" id="catalog-execs">
+        <h2><span class="num">02</span>Executable catalog</h2>
+        <p>The Executable naming pattern for each surface, with worked examples. An Executable is a single rule inside a Pipeline, and its surface is set by checkbox fields on the Executable itself that mark which rules engines it runs on — that's what the badge shows. Because those fields already declare the surface — and because the Executable lives under a Pipeline whose own name ends in that surface — its name doesn't need to carry the rules engine's name the way a Pipeline's does (<code>Batches</code>, <code>DataLists</code>, <code>Triggers</code>…); it describes only what the rule does. The closing segment usually mirrors the surface (a plural noun for a Data List, a verb for an Action Button, a behavior for a Trigger; see <a href="#surfaces">Purpose by surface</a>).</p>
+        <div class="nc-table-wrap">
+          <table class="nc-table">
+            <thead><tr><th style="width:30%;">Executable pattern</th><th style="width:15%;">Surface</th><th>What it does &middot; examples</th></tr></thead>
+            <tbody>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;SourceObject&gt;</span>.&lt;TargetObject&gt;.<span class="seg-end">&lt;Operation&gt;</span></td><td class="nc-surface"><span class="nc-badge s-batch">#Batch</span></td><td class="nc-desc"><b>Local Apex processing — different objects.</b> A batch job that reads a source object and writes a different target object — name both. <code>ClosedOpportunity.FollowupTask.Insert</code> reads closed Opportunities and inserts a Followup Task for each.</td></tr>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;Object&gt;</span>.<span class="seg-end">&lt;Job&gt;</span></td><td class="nc-surface"><span class="nc-badge s-batch">#Batch</span></td><td class="nc-desc"><b>Local Apex processing — same object.</b> A batch job that reads and writes the <b>same</b> object, so source and target collapse into one segment. <code>Opportunity.RecalculateForecast</code>, <code>Account.BlankUpdate</code>, <code>ServiceOrder.PurgeArchived</code> (the custom object <code>Service_Order__c</code> drops its <code>__c</code> suffix and reads as <code>ServiceOrder</code>).</td></tr>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;SourceOrg&gt;</span>.&lt;TargetOrg&gt;.&lt;SourceObject&gt;.&lt;TargetObject&gt;.<span class="seg-end">&lt;Operation&gt;</span></td><td class="nc-surface"><span class="nc-badge s-batch">#Batch</span></td><td class="nc-desc"><b>Cross-org data migration.</b> One hop in an org-to-org sync — the segments name the source org, target org, source object, target object, and operation. <code>OrgA.OrgB.Account.Account.Upsert</code> upserts Accounts from OrgA into OrgB.</td></tr>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;Object&gt;</span>.<span class="seg-end">&lt;Collection&gt;</span></td><td class="nc-surface"><span class="nc-badge s-datalist">#Data List</span></td><td class="nc-desc">Lists a collection of related child records — the closing segment is a plural noun. <code>Opportunity.Products</code> lists an opportunity's products; <code>CustomerAccount.OpenOpportunities</code> narrows the same idea to a filtered subset (open only).</td></tr>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;Object&gt;</span>.&lt;Relationship&gt;.<span class="seg-end">&lt;Collection&gt;</span></td><td class="nc-surface"><span class="nc-badge s-datalist">#Data List</span></td><td class="nc-desc">A collection reached through a relationship hop. <code>Opportunity.PartnerAccount.Contacts</code> — from the opportunity, hop to its Partner Account, then list that account's Contacts. The middle segment names the lookup you traverse before the final collection.</td></tr>
+              <tr><td class="nc-name"><span class="seg-end">&lt;Collection&gt;</span></td><td class="nc-surface"><span class="nc-badge s-datalist">#Data List</span></td><td class="nc-desc">A standalone list with no object prefix. <code>CustomerAccounts</code>, <code>LicenseProducts</code>, <code>MyOpenCases</code>.</td></tr>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;Object&gt;</span>.SelfAdaptive.<span class="seg-end">&lt;Behavior&gt;</span></td><td class="nc-surface"><span class="nc-badge s-trigger">#Trigger</span></td><td class="nc-desc"><b>Self-Adaptive Trigger</b> — transforms or validates the same record. <code>Account.SelfAdaptive.Transformation</code>, <code>Opportunity.SelfAdaptive.Validation</code>.</td></tr>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;Object&gt;</span>.[&lt;Event&gt;].<span class="seg-end">&lt;Behavior&gt;</span></td><td class="nc-surface"><span class="nc-badge s-trigger">#Trigger</span></td><td class="nc-desc"><b>Trigger Action</b> — acts on other records; the <code>&lt;Event&gt;</code> segment is optional. <code>Quote.BeforeInsert.ClosePriorQuotes</code>, <code>Quote.Clone.QuoteLineItems.From.Opportunity</code>.</td></tr>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;Object&gt;</span>.<span class="seg-end">&lt;Verb&gt;</span></td><td class="nc-surface"><span class="nc-badge s-actionbutton">#Action Button</span></td><td class="nc-desc"><b>Record Action</b> — a record-level action that ends in a verb phrase. <code>OpenOpportunity.NewQuote</code>, <code>OpenOpportunity.CloseWon</code>.</td></tr>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;DataList&gt;</span>.<span class="seg-end">&lt;Verb&gt;</span></td><td class="nc-surface"><span class="nc-badge s-actionbutton">#Action Button</span></td><td class="nc-desc"><b>Data List Action</b> — an action scoped to a Data List; the leading segment(s) are the Data List's name, not a bare object. <code>Quote.Products.Edit</code>, <code>CustomerAccount.OpenOpportunities.CloseWon</code>, <code>CustomerAccount.OpenOpportunities.AddProducts</code>.</td></tr>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;Object&gt;</span>.<span class="seg-end">&lt;Operation&gt;</span></td><td class="nc-surface"><span class="nc-badge s-loader">#Data Loader</span></td><td class="nc-desc">A load definition that brings an external feed into the object — the closing segment names the operation. <code>Lead.Upsert</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="sp-note" style="font-size:13.5px;color:var(--ink-3);margin-top:14px;">Examples drawn from a live Data Sync Pro org. Names shown are display Names.</p>
+      </section>
+
+      <!-- 03 VARIABLE CATALOG -->
+      <section class="legal-section" id="catalog-variables">
+        <h2><span class="num">03</span>Variable catalog</h2>
+        <p>A <strong>Variable</strong> is a named, reusable value that Executables read by reference — written <code>#Name</code> wherever it's used. Unlike Pipelines and Executables, a Variable's name is <strong>not dot-delimited</strong>: it's a single <code>PascalCase</code> token that reads as a path — the source it draws from, then the value it holds. The <code>#</code> belongs to the reference, not the stored name.</p>
+        <div class="nc-table-wrap">
+          <table class="nc-table">
+            <thead><tr><th style="width:34%;">Variable pattern</th><th style="width:15%;">Kind</th><th>What it holds &middot; examples</th></tr></thead>
+            <tbody>
+              <tr><td class="nc-name"><span class="seg-obj">&lt;Object&gt;</span><span class="seg-end">&lt;Formula&gt;</span></td><td class="nc-surface"><span class="nc-badge s-variable">#Variable</span></td><td class="nc-desc">A value computed by a formula — the leading token(s) name the object, the trailing token names the formula. <code>#OpportunityLineItemSuccessPlanUnitPrice</code> holds the success-plan unit price on an opportunity line item; <code>#QuoteLineItemSuccessPlanUnitPrice</code> is its quote-side counterpart. A boolean formula reads as an <code>Is…</code> predicate — <code>#LineItemProductIsASuccessPlan</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="sp-note" style="font-size:13.5px;color:var(--ink-3);margin-top:14px;">Examples drawn from a live Data Sync Pro org. The <code>#</code> shown is the reference form; the stored Name omits it.</p>
+      </section>
+
+      <!-- GRAMMAR (removed) -->
+
+      <!-- SEGMENT ROLES (removed) -->
+
+      <!-- PIPELINES VS EXECUTABLES (removed) -->
+
+      <!-- 04 PURPOSE BY SURFACE -->
+      <section class="legal-section" id="surfaces">
+        <h2><span class="num">04</span>Purpose by surface</h2>
+        <p>Each DSP surface expects the closing segment in a different grammatical form. Match the form to the surface and the name tells the reader which engine runs it:</p>
+
+        <div class="nc-rules">
+          <div class="nc-rule">
+            <div class="nc-rule-head"><span class="nc-badge s-datalist">#Data List</span></div>
+            <p>Ends in a <strong>plural noun</strong> naming the collection it returns. No verb.</p>
+            <div class="nc-eg">
+              <code>Opportunity.<b>Products</b></code>
+              <code>Quote.<b>LineItems</b></code>
+              <code>CustomerAccount.<b>Orders</b></code>
+            </div>
+          </div>
+          <div class="nc-rule">
+            <div class="nc-rule-head"><span class="nc-badge s-actionbutton">#Action Button</span></div>
+            <p>Ends in a <strong>verb phrase</strong> — the action the button performs.</p>
+            <div class="nc-eg">
+              <code>Opportunity.<b>NewQuote</b></code>
+              <code>Quote.Products.<b>Edit</b></code>
+              <code>Quote.Email.<b>SendQuote</b></code>
+            </div>
+          </div>
+          <div class="nc-rule">
+            <div class="nc-rule-head"><span class="nc-badge s-trigger">#Trigger</span></div>
+            <p>Ends in a <strong>behavior</strong>. A <b>Self-Adaptive Trigger</b> transforms or validates the same record; a <b>Trigger Action</b> acts on other records.</p>
+            <div class="nc-eg">
+              <code>Account.SelfAdaptive.<b>Transformation</b></code>
+              <code>Opportunity.SelfAdaptive.<b>Validation</b></code>
+              <code>Quote.BeforeInsert.<b>ClosePriorQuotes</b></code>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top:20px;">Two more surfaces follow the same logic: <span class="nc-badge s-batch">#Batch</span> jobs name the source and target objects (or an org-to-org hop) plus the operation, and <span class="nc-badge s-loader">#Data&nbsp;Loader</span> executables end in the load operation. A single Executable can run on more than one surface — the name states intent, the surface flags decide where it runs. <span class="nc-badge s-variable">#Variable</span> values aren't a surface at all: they drop the dots and read as one <code>PascalCase</code> token — source first, value last (<code>#OpportunityLineItemSuccessPlanUnitPrice</code>).</p>
+      </section>
+
+      <!-- DO / DONT -->
+      <section class="legal-section" id="do-dont">
+        <h2><span class="num">05</span>What tends to work</h2>
+        <p style="margin-bottom:6px;">None of this is enforced — it's just what we've found reads well. Lean on whatever helps and leave the rest.</p>
+        <div class="nc-dd">
+          <div class="nc-dd-col do">
+            <h4>Tends to help</h4>
+            <ul>
+              <li>Lead with the primary object, in <code>PascalCase</code> joined by dots.</li>
+              <li>Match the closing segment to the surface — a plural noun for Data Lists, a verb for Action Buttons, a behavior for Triggers.</li>
+              <li>End a Pipeline in its surface's plural type — <code>Triggers</code>, <code>DataLists</code>, <code>Batches</code>.</li>
+              <li>Name a Variable source-first, value-last as one token; reference it as <code>#Name</code>.</li>
+              <li>Keep one label per concept — always <code>CustomerAccount</code>, never sometimes <code>Account</code>.</li>
+              <li>Pick one order for source → target (or purpose → direction) and apply it everywhere.</li>
+            </ul>
+          </div>
+          <div class="nc-dd-col dont">
+            <h4>Tends to trip people up</h4>
+            <ul>
+              <li>Use spaces or underscores — <code>Open Opportunities</code>, <code>close_won</code>.</li>
+              <li>Repeat the surface inside an Executable — it's already implied by its Pipeline.</li>
+              <li>Write a Variable value-first — <code>#UnitPriceOpportunityLineItem</code> instead of leading with the object.</li>
+              <li>Start with the action — <code>CloseWon.Opportunity</code>.</li>
+              <li>Mix orderings — <code>DataMigration.OrgA.OrgB</code> here, <code>OrgA.OrgB.DataMigration</code> there.</li>
+              <li>Pile on context the name doesn't need.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+
+
+    </div>
+  </div>
+</main>
+
+<!-- =========== FOOTER (removed) =========== -->
+
+<script src="app.js?v=36" defer></script>
+</body>
+</html>

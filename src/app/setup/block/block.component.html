@@ -105,8 +105,56 @@
     <video *ngIf="block.src && !isYouTubeUrl(block.src)" [src]="getVideoPath(block.src)" controls class="block-video"></video>
   </div>
 
-  <!-- Code -->
-  <pre *ngSwitchCase="'code'" class="block-code"><code #codeBlock [class]="'language-' + getHljsLanguage(block.language)">{{ block.content }}</code></pre>
+  <!-- Code (panel chrome + copy + hljs handled by the dedicated component) -->
+  <app-setup-code-block *ngSwitchCase="'code'" [block]="block"></app-setup-code-block>
+
+  <!-- Endpoint (boxed REST API panel) -->
+  <app-setup-endpoint *ngSwitchCase="'endpoint'" [block]="block" [basePath]="basePath"></app-setup-endpoint>
+
+  <!-- Card (bordered panel grouping related blocks, with an optional tag pill) -->
+  <div *ngSwitchCase="'card'" class="block-card">
+    <div class="card-header" *ngIf="block.title || block.tag">
+      <span class="card-title" *ngIf="block.title">{{ block.title }}</span>
+      <span class="card-tag"
+            *ngIf="block.tag"
+            [attr.data-variant]="block.tagVariant || 'batch'">{{ block.tag }}</span>
+    </div>
+    <ng-container *ngIf="block.children">
+      <app-setup-block
+        *ngFor="let child of block.children"
+        [block]="child"
+        [basePath]="basePath">
+      </app-setup-block>
+    </ng-container>
+  </div>
+
+  <!-- Eyebrow label (e.g. REQUEST BODY / RETURNS), optional top divider -->
+  <div *ngSwitchCase="'label'" class="block-label" [class.has-divider]="block.divider">{{ block.content }}</div>
+
+  <!-- Numbered steps with chips -->
+  <div *ngSwitchCase="'steps'" class="block-steps">
+    <div class="step-item" *ngFor="let step of block.stepItems; let i = index; trackBy: trackByIndex">
+      <span class="step-chip">{{ i + 1 }}</span>
+      <div class="step-body">
+        <div class="step-text" [innerHTML]="renderContent(step.content)"></div>
+        <ng-container *ngIf="step.children">
+          <app-setup-block
+            *ngFor="let child of step.children"
+            [block]="child"
+            [basePath]="basePath">
+          </app-setup-block>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key/value reference grid -->
+  <div *ngSwitchCase="'keyvalue'" class="block-keyvalue" [attr.data-keystyle]="block.keyStyle || 'plain'">
+    <div class="kv-row" *ngFor="let pair of block.pairs; trackBy: trackByIndex">
+      <div class="kv-key">{{ pair.key }}</div>
+      <div class="kv-value">{{ pair.value }}</div>
+    </div>
+  </div>
 
   <!-- Callout -->
   <div *ngSwitchCase="'callout'" class="block-callout" [attr.data-variant]="block.variant || 'info'" [class.has-title]="!!block.title">
@@ -114,11 +162,12 @@
     <ng-container *ngIf="block.title">
       <div class="callout-header">
         <span class="callout-icon">
+          <!-- Filled circular badges (glyph reads white against the accent disc) -->
           <ng-container [ngSwitch]="block.variant">
-            <mat-icon *ngSwitchCase="'warning'">warning</mat-icon>
-            <mat-icon *ngSwitchCase="'error'">error</mat-icon>
+            <mat-icon *ngSwitchCase="'warning'">error</mat-icon>
+            <mat-icon *ngSwitchCase="'error'">cancel</mat-icon>
             <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
-            <mat-icon *ngSwitchDefault>info_outline</mat-icon>
+            <mat-icon *ngSwitchDefault>info</mat-icon>
           </ng-container>
         </span>
         <div class="callout-title">{{ block.title }}</div>
@@ -138,10 +187,11 @@
     <!-- Without title: icon + content inline (original layout, preserves existing callouts) -->
     <ng-container *ngIf="!block.title">
       <span class="callout-icon">
+        <!-- Bare glyphs for the compact (no-title) variant -->
         <ng-container [ngSwitch]="block.variant">
-          <mat-icon *ngSwitchCase="'warning'">warning</mat-icon>
-          <mat-icon *ngSwitchCase="'error'">error</mat-icon>
-          <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
+          <mat-icon *ngSwitchCase="'warning'">priority_high</mat-icon>
+          <mat-icon *ngSwitchCase="'error'">close</mat-icon>
+          <mat-icon *ngSwitchCase="'success'">check</mat-icon>
           <mat-icon *ngSwitchDefault>info_outline</mat-icon>
         </ng-container>
       </span>
@@ -220,6 +270,7 @@
       <tr *ngFor="let row of block.rows">
         <td *ngFor="let col of block.columns"
             [style.textAlign]="col.align || 'left'"
+            [class.col-mono]="col.mono"
             [innerHTML]="renderContent(row[col.key])">
         </td>
       </tr>

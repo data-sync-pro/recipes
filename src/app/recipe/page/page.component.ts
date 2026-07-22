@@ -20,10 +20,12 @@ import {
   SearchState
 } from '../core/models/recipe.model';
 import { CacheService } from '../core/services/cache.service';
+import { OrchestrationService } from '../core/services/orchestration.service';
 import { SearchService as CoreSearchService } from '../core/services/search.service';
 import { LoggerService } from '../core/services/logger.service';
 import { sortRecipesByCategoryAndTitle } from '../core/utils';
-import { slugToCategoryName } from '../core/constants/recipe.constants';
+import { slugToCategoryName, categoryToSlug } from '../core/constants/recipe.constants';
+import { SeoService } from '../../shared/services/seo.service';
 import { TocService } from './services/toc.service';
 import { NavigationService } from './services/navigation.service';
 import { Store } from '../core/store/recipe.store';
@@ -61,10 +63,18 @@ export class RecipesComponent implements OnInit, OnDestroy {
     recipeName: ''
   };
 
-  recipes: Recipe[] = [];
+  // Full, unfiltered recipe list. Feeds the navigation sidebar (every category's
+  // children) and the global search/filter base. The category-filtered view the
+  // grid renders lives in `filteredRecipes`, not here.
+  allRecipes: Recipe[] = [];
   categories: Category[] = [];
   filteredRecipes: Recipe[] = [];
   totalRecipeCount: number = 0;
+
+  // Initial-load spinner (mirrors the user manual's `setup-loading`). Recipe
+  // data is normally preloaded by the APP_INITIALIZER, so this only shows while
+  // the recipe fetch is genuinely still in flight (e.g. a slow cold load).
+  isLoading: boolean = true;
 
   currentFilter: Filter = {
     categories: []
@@ -73,6 +83,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private cacheService: CacheService,
+    private orchestrationService: OrchestrationService,
     private coreSearchService: CoreSearchService,
     private cdr: ChangeDetectorRef,
     public recipeTocService: TocService,
@@ -81,15 +92,25 @@ export class RecipesComponent implements OnInit, OnDestroy {
     private previewSyncService: PreviewSyncService,
     private routeHandlerService: RouteHandlerService,
     private searchService: SearchStateService,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private seo: SeoService
   ) { }
 
   ngOnInit(): void {
+    // Recipes load only when this section is opened (not at app bootstrap).
+    this.orchestrationService.ensureRecipesLoaded();
 
     this.store.ui$
       .pipe(takeUntil(this.destroy$))
       .subscribe(state => {
         this.ui = state;
+        this.cdr.markForCheck();
+      });
+
+    this.store.data$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
+        this.isLoading = data.isLoadingRecipes;
         this.cdr.markForCheck();
       });
 
@@ -117,7 +138,6 @@ export class RecipesComponent implements OnInit, OnDestroy {
     this.routeHandlerService.getDataLoadedEvents()
       .pipe(takeUntil(this.destroy$))
       .subscribe(result => {
-        this.recipes = result.recipes;
         this.filteredRecipes = result.filteredRecipes;
         this.totalRecipeCount = result.totalRecipeCount;
         this.cdr.markForCheck();
@@ -149,7 +169,9 @@ export class RecipesComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
       });
 
-    document.body.classList.add(RECIPE_CLASSES.BODY_PAGE);
+    if (typeof document !== 'undefined') {
+      document.body.classList.add(RECIPE_CLASSES.BODY_PAGE);
+    }
   }
 
   @HostListener('document:keydown./', ['$event'])
@@ -192,7 +214,9 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
     this.previewSyncService.cleanup();
 
-    document.body.classList.remove(RECIPE_CLASSES.BODY_PAGE);
+    if (typeof document !== 'undefined') {
+      document.body.classList.remove(RECIPE_CLASSES.BODY_PAGE);
+    }
   }
 
   private loadInitialData(): void {
@@ -201,7 +225,17 @@ export class RecipesComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe({
       next: (recipes) => {
+        this.allRecipes = recipes;
         this.categories = this.coreSearchService.generateCategories(recipes);
+        if (recipes.length > 0) {
+          this.seo.setItemList(
+            'Data Sync Pro Recipes',
+            recipes.map(r => ({
+              name: r.title,
+              path: `/recipes/${categoryToSlug(r.category[0] || '')}/${r.slug || ''}`,
+            }))
+          );
+        }
         this.cdr.markForCheck();
       },
       error: (error) => {
@@ -216,7 +250,9 @@ export class RecipesComponent implements OnInit, OnDestroy {
   }
 
   searchRecipes(query: string): void {
-    this.searchService.searchRecipes(query, this.currentFilter, this.recipes);
+    // Search the full catalog, not the category-filtered `recipes` subset, so
+    // search on /recipes/:category still spans every category.
+    this.searchService.searchRecipes(query, this.currentFilter, this.allRecipes);
   }
 
   openSearchOverlay(initialQuery = ''): void {
@@ -247,8 +283,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
   }
 
   private applyFilters(): void {
-    // Start with all recipes
-    let filtered = [...this.recipes];
+    // Start with the full catalog (not the category-filtered `recipes` subset).
+    let filtered = [...this.allRecipes];
 
     // Apply category filter - recipe matches if any of its categories is in the filter
     if (this.currentFilter.categories.length > 0) {

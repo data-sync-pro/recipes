@@ -10,13 +10,28 @@
 // Setup/block code blocks use highlight.js, which the app loads globally via
 // highlight.js/styles/vs.min.css (see angular.json). No per-block theme needed.
 
+// Single source of truth for the centered page-content cap. A CSS custom
+// property (not a SCSS var) so it pierces Angular view encapsulation and works
+// in both .scss and plain .css component styles — each centered container just
+// uses `max-width: var(--page-max-width)`.
+:root {
+  --page-max-width: 1752px;
+}
+
 html, body { min-height: 100%; height: auto; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: #ffffff;
+  background: #FAFBFC;
+  color: #0B1019;  
 }
-
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;        /* 不挡鼠标点击 */
+  z-index: 0;
+  }
 html {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -27,7 +42,7 @@ html {
 }
 
 .rules-engine-link {
-  color: #333;
+  color: #2C2C2D;
   text-decoration: none;
 }
 
@@ -53,7 +68,8 @@ html {
 .block-p strong,
 .block-list strong,
 .callout-content strong,
-.block-table strong {
+.block-table strong,
+.step-text strong {
   font-weight: 500;
 }
 
@@ -64,15 +80,104 @@ html {
 .block-list code,
 .callout-content code,
 .block-table code,
-.block-caption code {
+.block-caption code,
+.step-text code {
   padding: 0.1em 0.4em;
-  background: #f5f5f5;
+  background: #eff0f0c4;
   border-radius: 4px;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
   font-size: 0.9em;
   color: #800000;
   word-break: break-word;
 }
+
+// REST API endpoint panel: its body renders child blocks through a nested
+// app-setup-block, so their typography can't be reached by the endpoint's own
+// (encapsulated) component styles — tune them here, globally. Compact panel text
+// is smaller than the page default.
+// The `app-setup-block` element is included so these win the specificity tie
+// against the child component's own encapsulated .block-p / .code-panel rules.
+.endpoint-body app-setup-block .block-p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #52525b;
+  margin: 0.5rem 0;
+}
+
+.endpoint-body app-setup-block .code-panel {
+  margin-top: 4px;
+}
+
+// Minimal one-line site footer (rendered by AppComponent on all non-editor
+// routes). Global because AppComponent has no stylesheet of its own.
+.mini-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 16px;
+  margin-top: 48px;
+  font-size: 13px;
+  color: #6b7280;
+  border-top: 1px solid #e7e9ee;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: #0B1019;
+      text-decoration: underline;
+    }
+  }
+}
+
+// Single source of truth for inline content links. Both the setup block
+// (a.setup-link[-external], built by renderContent() in block.component.ts) and
+// the recipe detail page (.content-section, overview/use-cases) reach the DOM via
+// [innerHTML], which bypasses Angular's view encapsulation — so a component-scoped
+// rule never matches them. They must be styled globally, same reason as the setup
+// <strong>/<code> rules above. Keep the brand color defined here only.
+a.setup-link,
+a.setup-link-external,
+.content-section a {
+  color: #2253B2;
+  text-decoration: underline;
+  text-decoration-color: #2253B2;
+  cursor: pointer;
+
+  &:hover {
+    color: #1a4490;
+    text-decoration-color: #1a4490;
+  }
+}
+
+// Unresolved [[slug]] setup link — rendered as a visible broken-link marker.
+.setup-link-broken {
+  color: #b91c1c;
+  text-decoration: underline wavy;
+  cursor: help;
+}
+
+// Transformation doc Notes section. Note bodies are injected via [innerHTML] in
+// doc-viewer, which bypasses emulated view encapsulation, so these must live
+// globally — same reason as the setup/recipe rules above. The Notes heading and
+// sub-titles are real template elements and stay component-scoped.
+.doc-note-highlight {
+  background-color: #F1F6FB;
+  border: 1px solid #D6E3F3;
+  padding: 1rem 1.25rem;
+  border-radius: 4px;
+  margin: 0.75rem 0;
+}
+
+.doc-note-highlight strong {
+  color: #2C2C2D;
+}
+
+// Inline <code> inside note bodies intentionally has no rule here — it inherits
+// the transformation-wide `.app-transformation code` style (transformation.styles.css),
+// so Notes code matches Tips/description code. One source of truth.
 
 // Global table styles (used by setup/block, faq-editor, designer-guide)
 // Note: FAQ has its own scoped table style under .faq-answer table to stay isolated.

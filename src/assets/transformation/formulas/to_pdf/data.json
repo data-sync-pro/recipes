@@ -1,20 +1,29 @@
 {
   "title": "TO_PDF",
-  "description": "Converts a provided string or HTML input into PDF content.",
+  "description": "Creates a binary object out of the given string, encoding it as a PDF file.",
   "syntax": "TO_PDF(string) -> Blob",
   "parameters": [
     {
       "name": "string",
       "type": "String",
       "required": "Yes",
-      "description": "A string or HTML content to convert into PDF content."
+      "description": "String to convert."
     }
   ],
   "examples": [
-    "TO_PDF(\"\n  <h1>Welcome</h1>\n  <p>This PDF was generated from static HTML content.</p>\"\n)",
-    "TO_PDF(\n  FORMAT_STRING_TEMPLATE(\"\n\t<h1>Account Summary</h1>\n\t<p><strong>Account Name:</strong> {!Name}</p>\n\t<p><strong>Account Number:</strong> {!AccountNumber}</p>\n\t<p><strong>Phone:</strong> {!Phone}</p>\n\t<p><strong>Website:</strong> {!Website}</p>\n\t<p><strong>Industry:</strong> {!Industry}</p>\")\n)"
+    {
+      "code": "TO_PDF(\n\tFORMAT_STRING_TEMPLATE(\n'<html><body style=\"font-family:Arial,sans-serif; font-size:12px; color:#333333;\">\n<table style=\"width:100%; border-collapse:collapse;\">\n<tr>\n<td style=\"width:58%; vertical-align:top;\">\n<div style=\"color:#9a9a9a; font-size:11px;\">FROM</div>\n<div style=\"font-weight:bold; font-size:13px;\">YOUR COMPANY</div>\n<div>Your Address 1234</div>\n<div>CA 12345</div>\n<div>company@email.com</div>\n</td>\n<td style=\"width:42%; vertical-align:top; text-align:right;\">\n<div style=\"font-size:32px; font-weight:bold; color:#2E75B6;\">QUOTE</div>\n</td>\n</tr>\n</table>\n<table style=\"width:100%; border-collapse:collapse; margin-top:26px;\">\n<tr>\n<td style=\"width:55%; vertical-align:top;\">\n<div style=\"color:#9a9a9a; font-size:11px;\">TO</div>\n<div>{!Account.Name}</div>\n<div>{!BillingStreet}</div>\n<div>{!BillingCity} {!BillingState} {!BillingPostalCode}</div>\n<div>{!Email}</div>\n</td>\n<td style=\"width:45%; vertical-align:top;\">\n<table style=\"width:100%; border-collapse:collapse;\">\n<tr><td style=\"color:#2E75B6; font-weight:bold; padding:2px 0;\">Quote #:</td><td style=\"text-align:right; padding:2px 0;\">{!QuoteNumber}</td></tr>\n<tr><td style=\"color:#2E75B6; font-weight:bold; padding:2px 0;\">Quote Date:</td><td style=\"text-align:right; padding:2px 0;\">{!FORMAT_DATETIME(CreatedDate, \"yyyy-MM-dd\")}</td></tr>\n<tr><td style=\"color:#2E75B6; font-weight:bold; padding:2px 0;\">Due Date:</td><td style=\"text-align:right; padding:2px 0;\">{!FORMAT_DATETIME(ExpirationDate, \"yyyy-MM-dd\")}</td></tr>\n</table>\n</td>\n</tr>\n</table>\n<div style=\"margin-top:24px;\">\n{!HTML_TABLE(\"QuoteLineItem\", \"Product2.Name, Quantity, UnitPrice, TotalPrice\", \"QuoteId\", Id, \"ORDER BY Product2.Name ASC\")}\n</div>\n<table style=\"width:100%; border-collapse:collapse; margin-top:16px;\">\n<tr>\n<td style=\"width:58%;\"></td>\n<td style=\"width:42%;\">\n<table style=\"width:100%; border-collapse:collapse;\">\n<tr><td style=\"padding:4px 8px;\">Subtotal</td><td style=\"text-align:right; padding:4px 8px;\">{!Subtotal}</td></tr>\n<tr><td style=\"padding:4px 8px;\">Sales Tax</td><td style=\"text-align:right; padding:4px 8px;\">{!Tax}</td></tr>\n<tr><td style=\"padding:6px 8px; color:#2E75B6; font-weight:bold; border-top:2px solid #2E75B6;\">Total</td><td style=\"text-align:right; padding:6px 8px; color:#2E75B6; font-weight:bold; border-top:2px solid #2E75B6;\">{!GrandTotal}</td></tr>\n</table>\n</td>\n</tr>\n</table>\n<div style=\"margin-top:10px;\">Thank you for your business!</div>\n</body></html>')\n)",
+      "description": "Rendered PDF example:",
+      "images": [
+        {
+          "src": "images/figure_1.png",
+          "alt": "TO_PDF Rendered Example"
+        }
+      ]
+    }
   ],
   "relatedFormulas": [
+    "HTML_TABLE",
     "FORMAT_STRING_TEMPLATE"
   ]
 }

@@ -1,12 +1,17 @@
 /* ===========================
    Sidebar Wrapper and Collapse
    =========================== */
+/* The host element (app-sidebar) is stretched to full page height by the
+   parent flex row (function-page-main-layout.component.css). The wrapper
+   fills that height so it is the tall containing block the sticky .sidebar
+   pins within — same arrangement as the recipe sidebar's .left-sidebar
+   wrapping .sidebar-sticky. */
 .sidebar-wrapper {
   position: relative;
   left: 0;
-  height: calc(100vh - 64.7px);
-  width: 290px;
-  background-color: white;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
   border-right: none;
   z-index: 0;
 }
@@ -19,20 +24,36 @@
    Sidebar Main Styles
    =========================== */
 .sidebar {
-  width: 290px;
+  width: 100%;
   transition: width 0s ease, opacity 0s ease;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 60px);
-  overflow-y: scroll;
+  /* Pin below the fixed 4rem global header with a gap, exactly like the
+     user-manual sidebar (.sidebar-sticky: top 95px, height calc(100vh-110px)
+     in setup.component.scss) and the recipe / FAQ sidebars. The page scrolls
+     underneath; this column stays put. */
+  position: sticky;
+  top: 95px;
+  height: calc(100vh - 110px);
+  /* The search box is a fixed header; only the nav list below it scrolls
+     (see .nav-section in navigation.component.css), so the scrollbar no
+     longer runs behind the search box. Matches the user-manual sidebar
+     in setup.component.scss. */
+  overflow: hidden;
   opacity: 1;
-  scrollbar-width: none;
-  border-right: 1px solid #e0e0e0;
-  overflow-x: hidden;
 }
 
 .sidebar.collapsed {
   width: 0px;
+}
+
+/* Fill the sidebar so app-navigation can establish its own flex column,
+   keeping the search box fixed and scrolling only the list. */
+.sidebar-scroll-content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ===========================
@@ -46,7 +67,7 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #333;
+  color: #2C2C2D;
   transition: color 0.2s ease;
   z-index: 10;
   padding: 8px;
@@ -55,34 +76,91 @@
 }
 
 .sidebar-collapse-button:hover {
-  color: #418796;
+  color: #2253B2;
 }
 
 /* ===========================
-   Sidebar Floating Buttons (Collapse & Search)
-   =========================== */
-.sidebar-float-search {
-  position: fixed;
-  top: 115px;
-  left: 11px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: #333;
-  z-index: 10;
-  padding: 8px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+   Mobile drawer (≤1024px)
+   ===========================
+   Mirrors the recipe details sidebar (recipe-nav-sidebar.component.scss): at
+   ≤1024px the sticky sidebar becomes an off-canvas drawer that slides in from
+   the left over a dark backdrop, opened by a fixed top-right hamburger. The
+   desktop collapse button and these drawer-only controls are hidden on the
+   opposite layout. */
+.sidebar-toggle-btn,
+.sidebar-backdrop {
+  display: none;
 }
 
-.sidebar-float-search:hover {
-  color: #418796;
-}
+@media (max-width: 1024px) {
+  /* Hamburger toggle — fixed top-right. */
+  .sidebar-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 10px;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    border: none;
+    background: #FAFBFC;
+    color: #2253B2;
+    cursor: pointer;
+    z-index: 1001;
+    transition: background-color 0.2s ease;
+  }
 
-.sidebar-float-search .icon-search {
-  width: 1.5rem;
-  height: 1.5rem;
-  stroke: currentColor;
+  .sidebar-toggle-btn:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+  }
+
+  /* Dark backdrop behind the open drawer. */
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+  }
+
+  /* The desktop floating collapse button has no role in drawer mode. */
+  .sidebar-collapse-button {
+    display: none;
+  }
+
+  /* Wrapper no longer establishes the sticky containing block. */
+  .sidebar-wrapper {
+    position: static;
+    height: auto;
+    width: auto;
+  }
+
+  .sidebar-wrapper.collapsed {
+    width: auto;
+  }
+
+  /* The sidebar itself becomes the fixed off-canvas drawer. The open class
+     (.show-sidebar on the wrapper) slides it in; only transform animates. */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 320px;
+    max-width: 85vw;
+    height: auto;
+    padding: 40px 16px 16px 16px;
+    background: #FAFBFC;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+  }
+
+  .sidebar-wrapper.show-sidebar .sidebar {
+    transform: translateX(0);
+  }
 }

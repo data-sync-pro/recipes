@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Recipe, SearchResult, Category } from '../models/recipe.model';
 import { LoggerService } from './logger.service';
-import { CATEGORY_ORDER } from '../constants/recipe.constants';
+import { CATEGORY_ORDER, expandCategory } from '../constants/recipe.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,10 @@ export class SearchService {
   }
 
   filterByCategory(recipes: Recipe[], category: string): Recipe[] {
-    return recipes.filter(recipe => recipe.category.includes(category));
+    // Expand aggregate categories (e.g. UI -> Data List + Action Button) so a
+    // virtual category page matches every member category's recipes.
+    const members = expandCategory(category);
+    return recipes.filter(recipe => recipe.category.some(c => members.includes(c)));
   }
 
   private calculateRelevanceScore(recipe: Recipe, query: string): number {

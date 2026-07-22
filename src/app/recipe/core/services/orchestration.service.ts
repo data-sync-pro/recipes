@@ -28,6 +28,20 @@ export class OrchestrationService {
     return this.loadFromServer();
   }
 
+  private loadKicked = false;
+
+  /**
+   * Idempotently kick off recipe loading in the background. Called by the recipe
+   * pages (list + detail) so recipes load only when that section is opened —
+   * not at app bootstrap, which made every page (FAQ, transformation, user
+   * manual) contend with ~40 recipe fetches on first load.
+   */
+  ensureRecipesLoaded(): void {
+    if (this.loadKicked) return;
+    this.loadKicked = true;
+    this.initializeRecipes().subscribe();
+  }
+
   private async loadFromCache(): Promise<void> {
     try {
       const cachedSources = await this.cacheService.getCachedSourceRecipes();

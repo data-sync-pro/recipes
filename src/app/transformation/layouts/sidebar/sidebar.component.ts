@@ -8,16 +8,24 @@ import { Observable } from 'rxjs';
 })
 export class SidebarComponent {
   @Input() collapsed$!: Observable<boolean>;
-  @Input() showSidebar = false;
-  
-  @Output() toggleSidebar = new EventEmitter<void>();
-  @Output() searchOpen = new EventEmitter<void>();
+  // Mobile drawer open state (≤1024px), owned by the layout.
+  @Input() mobileOpen = false;
 
+  @Output() toggleSidebar = new EventEmitter<void>();
+  @Output() toggleMobile = new EventEmitter<void>();
+  @Output() closeMobile = new EventEmitter<void>();
+
+  // Desktop collapse/expand.
   onToggleSidebar(): void {
     this.toggleSidebar.emit();
   }
 
-  onSearchOpen(): void {
-    this.searchOpen.emit();
+  // Mobile drawer open/close.
+  onToggleMobile(): void {
+    this.toggleMobile.emit();
+  }
+
+  onCloseMobile(): void {
+    this.closeMobile.emit();
   }
 }

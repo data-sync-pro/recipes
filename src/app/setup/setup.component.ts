@@ -10,6 +10,7 @@ import { OrchestrationService } from '../recipe/core/services/orchestration.serv
 import { Recipe } from '../recipe/core/models/recipe.model';
 import { categoryToSlug } from '../recipe/core/constants/recipe.constants';
 import { scrollToTopOnNavigation } from '../recipe/core/utils/scroll.util';
+import { SeoService } from '../shared/services/seo.service';
 
 @Component({
   selector: 'app-setup',
@@ -41,6 +42,9 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading = true;
   activeBlockId: string | null = null;
 
+  // Mobile sidebar drawer (≤1024px) — mirrors the recipe details sidebar.
+  isSidebarOpen = false;
+
   private recipeCache: Recipe[] = [];
   private recipeLoadKicked = false;
 
@@ -58,7 +62,8 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
     private setupService: SetupService,
     private cdr: ChangeDetectorRef,
     private cacheService: CacheService,
-    private orchestrationService: OrchestrationService
+    private orchestrationService: OrchestrationService,
+    private seo: SeoService
   ) {}
 
   ngOnInit(): void {
@@ -82,6 +87,9 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private setupScrollObserver(): void {
+    // IntersectionObserver + getElementById are browser-only; skip during
+    // prerendering (called from both ngAfterViewInit and the loadSetup subscribe).
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
     this.observer?.disconnect();
 
     this.observer = new IntersectionObserver(
@@ -123,6 +131,24 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
           this.expandedIds = new Set(
             tree.flatMap(n => n.children?.length ? [n.id] : [])
           );
+
+          // ItemList JSON-LD with absolute doc URLs (grouping nodes without a
+          // slug contribute no path segment, matching selectSetup's URL shape).
+          const items: Array<{ name: string; path: string }> = [];
+          const walk = (nodes: NavNode[], parents: string[]): void => {
+            for (const node of nodes) {
+              const chain = node.slug ? [...parents, node.slug] : parents;
+              if (node.slug) {
+                items.push({ name: node.label, path: `/user-manual/${chain.join('/')}` });
+              }
+              if (node.children) walk(node.children, chain);
+            }
+          };
+          walk(tree, []);
+          if (items.length > 0) {
+            this.seo.setItemList('Data Sync Pro User Manual', items);
+          }
+
           this.watchRoute();
           this.prefetchContentIndex();
         },
@@ -167,7 +193,7 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private handleRouteChange(): void {
     const url = this.router.url;
-    const match = url.match(/\/setup\/(.+)/);
+    const match = url.match(/\/user-manual\/(.+)/);
     const slug = match ? match[1].split('/').pop() : null;
 
     if (slug && slug !== this.currentSlug) {
@@ -178,10 +204,13 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
       this.loadSetup(slug);
       this.expandParentsOfSlug(slug);
     } else if (!slug && this.navTree.length > 0) {
-      // Navigate to first item
+      // Landing page (/user-manual with no slug) auto-redirects to the first
+      // page. Replace the history entry instead of pushing one, otherwise the
+      // bare /user-manual URL stays on the back stack and bounces forward again
+      // on every "back" — making the user click back twice to leave.
       const firstSlug = this.getFirstPageSlug(this.navTree);
       if (firstSlug) {
-        this.selectSetup(firstSlug);
+        this.selectSetup(firstSlug, { replaceUrl: true });
       }
     } else if (!slug) {
       this.isLoading = false;
@@ -224,6 +253,10 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe({
         next: (setup) => {
           this.currentSetup = setup;
+          this.seo.setPage({
+            title: setup?.title ?? 'User Manual',
+            description: setup?.blocks?.find(b => b.type === 'p')?.content,
+          });
           this.isLoading = false;
           this.activeBlockId = null;
           this.cdr.markForCheck();
@@ -284,14 +317,14 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
       || topLevelH3Items.length > 1;
   }
 
-  selectSetup(slug: string): void {
+  selectSetup(slug: string, extras?: { replaceUrl?: boolean }): void {
     // Build the full path for the URL (skip grouping nodes with no slug)
     const path = this.setupService.getPathToNode(this.navTree, slug);
     if (path && path.length > 0) {
       const slugPath = path.map(n => n.slug).filter((s): s is string => !!s);
-      this.router.navigate(['/setup', ...slugPath]);
+      this.router.navigate(['/user-manual', ...slugPath], extras);
     } else {
-      this.router.navigate(['/setup', slug]);
+      this.router.navigate(['/user-manual', slug], extras);
     }
   }
 
@@ -308,7 +341,20 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     if (node.slug) {
       this.selectSetup(node.slug);
+      // Navigating to a page closes the mobile drawer (no-op on desktop).
+      this.closeSidebar();
     }
+  }
+
+  // --- Mobile sidebar drawer (≤1024px) ---
+  toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
+    this.cdr.markForCheck();
+  }
+
+  closeSidebar(): void {
+    this.isSidebarOpen = false;
+    this.cdr.markForCheck();
   }
 
   // Toggle expand/collapse for a node
@@ -526,7 +572,7 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
         if (!node?.slug) continue;
         const path = this.setupService.getPathToNode(this.navTree, node.slug);
         const segments = path?.map(n => n.slug).filter((s): s is string => !!s) ?? [node.slug];
-        items.push({ key: node.slug, label: node.label, routerLink: ['/setup', ...segments] });
+        items.push({ key: node.slug, label: node.label, routerLink: ['/user-manual', ...segments] });
       } else {
         items.push({ key: entry.url, label: entry.label, href: entry.url, newTab: entry.newTab });
       }

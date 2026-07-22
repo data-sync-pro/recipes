@@ -1,3 +1,11 @@
 <app-header *ngIf="showHeaderFooter"></app-header>
 <router-outlet></router-outlet>
+<!-- Minimal one-line footer. The absolute llms.txt URL is deliberate: it gives
+     AI fetchers a full-URL entry point to the machine-readable site index from
+     every prerendered page (relative links get stripped by their extractors). -->
+<footer class="mini-footer" *ngIf="showHeaderFooter">
+  <span>&copy; {{ currentYear }} Data Sync Pro</span>
+  <a href="/privacy.html">Privacy</a>
+  <a href="https://www.datasyncpro.io/llms.txt" title="Site index for AI assistants">llms.txt</a>
+</footer>
 <app-scroll-to-top *ngIf="showScrollToTop"></app-scroll-to-top>

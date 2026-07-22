@@ -29,12 +29,12 @@
     }
   ],
   "examples": [
-    "VLOOKUP_RECORD(\"Opportunity\", \n               \"AccountId\", Id)\n-- Returns the Opportunity record where AccountId matches the current record’s Id.",
+    "VLOOKUP_RECORD(\"Opportunity\", \n               \"AccountId\", Id)\n-- Returns the Opportunity record where AccountId matches the current record's Id.",
     "VLOOKUP_RECORD(\"Opportunity\", \n               \"AccountId\", Id, \n               \"OwnerId\", OwnerId, \n               \"Probability > 90\")\n-- Returns the Opportunity record where:\n-- AccountId matches the current record's Id,\n-- OwnerId matches the current record's OwnerId,\n-- Probability > 90."
   ],
   "tips": [
     {
-      "text": "<p>Use VLOOKUP_RECORD under the <strong>“Related”</strong> tab in the <strong>“Variables”</strong> section. You can also set the variable’s <strong>Scope</strong>—Executable, Pipeline, Connection, or Global.</p>",
+      "text": "<p>Use VLOOKUP_RECORD under the <strong>“Related”</strong> tab in the <strong>“Variables”</strong> section. You can also set the variable's <strong>Scope</strong>—Executable, Pipeline, Connection, or Global.</p>",
       "children": []
     },
     {
@@ -46,5 +46,6 @@
         "children": []
       }
   ],
+  "notesRef": "shared/lookup-notes",
   "relatedFormulas": []
 }

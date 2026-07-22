@@ -1,10 +1,11 @@
 import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { forkJoin, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { DocsService, DocData } from '../../services/docs.service';
-import { categorySlug } from '../../utils/route.util';
+import { categorySlug, buildRoute } from '../../utils/route.util';
+import { SeoService } from '../../../shared/services/seo.service';
 interface FunctionTag {
   "Item Name": string;
   Tags: string[];
@@ -37,29 +38,25 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     private router: Router,
     private route: ActivatedRoute,
     private http: HttpClient,
-    private docsService: DocsService
+    private docsService: DocsService,
+    private seo: SeoService
   ) {}
 
   async ngOnInit(): Promise<void> {
-    // Canonical in-page section URL is /home/<section>. paramMap emits the
-    // section slug for both cold loads and in-page navigation between sections.
-    // Malformed sections (e.g. a percent-encoded legacy path stuffed into the
-    // section slot) fall through to /home so the user lands on the index.
-    this.route.paramMap.subscribe((params) => {
-      const section = params.get('section');
-      if (!section) return;
-      if (!/^[a-z0-9_]+$/.test(section)) {
-        this.router.navigate(['/transformation/home'], { replaceUrl: true });
-        return;
-      }
-      this.pendingFragment = section;
+    this.seo.setPage({
+      title: 'Transformation Formulas',
+      description:
+        'Reference for every Data Sync Pro transformation formula — text, date & time, logical, number, type processing and more, with syntax and examples.',
     });
-
-    // Legacy /home#<section> URLs auto-upgrade to /home/<section> so shared
-    // links with fragments still work without leaving '#' in the address bar.
+    // In-page sections are addressed by URL fragment, e.g.
+    // /transformation#formula_elements. The scroll container is <main>, not the
+    // window, so Angular's anchorScrolling is a no-op; stash the fragment and
+    // scroll manually once the async-loaded section is in the DOM (see
+    // ngAfterViewChecked).
     this.route.fragment.subscribe((fragment) => {
-      if (!fragment) return;
-      this.router.navigate(['/transformation/home', fragment], { replaceUrl: true });
+      if (fragment && /^[a-z0-9_]+$/.test(fragment)) {
+        this.pendingFragment = fragment;
+      }
     });
 
     this.loadTags();
@@ -70,7 +67,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    if (!this.pendingFragment) return;
+    if (typeof document === 'undefined' || !this.pendingFragment) return;
     const el = document.getElementById(this.pendingFragment);
     if (el) {
       el.scrollIntoView({ block: 'start' });
@@ -82,6 +79,24 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     const excludedTags = new Set(['Global Variables', 'Operators']);
     this.http.get<FunctionTag[]>('assets/transformation/formulas/tags.json').subscribe((data) => {
       this.tagsData = data;
+
+      // ItemList JSON-LD with absolute doc URLs. Slug rules mirror
+      // scripts/gen-prerender-routes.mjs: a few special docs live at the top
+      // level; everything else is /<category>/<function>.
+      const topLevelSlugs = new Set(['global_variables', 'joiner', 'aggregate_general']);
+      this.seo.setItemList(
+        'Data Sync Pro Transformation Formulas',
+        data
+          .filter(item => item['Item Name'] && (topLevelSlugs.has(buildRoute(item['Item Name'])) || item.Tags?.length))
+          .map(item => {
+            const slug = buildRoute(item['Item Name']);
+            const path = topLevelSlugs.has(slug)
+              ? `/transformation/${slug}`
+              : `/transformation/${categorySlug(item.Tags[0])}/${slug}`;
+            return { name: item['Item Name'], path };
+          })
+      );
+
       const tagSet = new Set<string>();
 
       data.forEach((item) => {
@@ -134,37 +149,30 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   }
 
 
-  // Dynamically load each function's description from its JSON file.
-  // Fire all requests in parallel (forkJoin) instead of one-at-a-time so the
-  // home page is not bottlenecked by N sequential round-trips.
+  // Load all function descriptions from ONE pre-generated file
+  // (assets/transformation/formulas/_descriptions.json, produced at build time
+  // by scripts/gen-formulas-index.mjs) instead of one HTTP request per function
+  // (~150 requests) — keeps the home page fast on first load.
   loadFunctionDescriptions() {
     const fallback = 'Description not available.';
-    const requests = this.tagsData
-      .filter(item => item["Item Name"].toUpperCase() !== 'GLOBAL_VARIABLES')
-      .map(item => {
-        const funcName = item["Item Name"];
-        const baseName = funcName.toLowerCase().replace(/\s/g, '_');
-        const filePath = `assets/transformation/formulas/${baseName}/data.json`;
-        return this.http.get<any>(filePath).pipe(
-          map(funcData => {
-            if (funcName.trim().toLowerCase() === 'apex class') {
-              const parser = new DOMParser();
-              const doc = parser.parseFromString(funcData.description ?? '', 'text/html');
-              const firstParagraph = doc.querySelector('p');
-              const text = firstParagraph?.textContent?.trim();
-              return { funcName, description: text || fallback };
-            }
-            return { funcName, description: funcData.description ?? fallback };
-          }),
-          catchError(() => of({ funcName, description: fallback }))
-        );
-      });
-
-    if (requests.length === 0) return;
-    forkJoin(requests).subscribe(results => {
-      results.forEach(({ funcName, description }) => {
-        this.functionDescriptions[funcName] = description;
-      });
+    this.http.get<Record<string, string>>('assets/transformation/formulas/_descriptions.json').pipe(
+      catchError(() => of({} as Record<string, string>))
+    ).subscribe(descriptions => {
+      this.tagsData
+        .filter(item => item["Item Name"].toUpperCase() !== 'GLOBAL_VARIABLES')
+        .forEach(item => {
+          const funcName = item["Item Name"];
+          const baseName = funcName.toLowerCase().replace(/\s/g, '_');
+          let description = descriptions[baseName] ?? fallback;
+          if (funcName.trim().toLowerCase() === 'apex class') {
+            // Extract the first paragraph's text without DOMParser (undefined in
+            // Node during prerendering) so server and client output stay identical.
+            const m = description.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+            const text = (m ? m[1] : description).replace(/<[^>]+>/g, '').trim();
+            description = text || fallback;
+          }
+          this.functionDescriptions[funcName] = description;
+        });
     });
   }
 
@@ -188,6 +196,13 @@ export class HomeComponent implements OnInit, AfterViewChecked {
         this.formulaElements = data;
       });
     }
+
+  // Initial-load spinner state (mirrors the user manual's loading screen).
+  // The index page is built from several parallel HTTP loads; show the spinner
+  // until the core content — the formula elements and the tag list — is ready.
+  get isLoading(): boolean {
+    return !this.formulaElements || this.displayTags.length === 0;
+  }
 
   // Utility to get object keys for use in the template (for operators grouping)
   objectKeys(obj: any): string[] {

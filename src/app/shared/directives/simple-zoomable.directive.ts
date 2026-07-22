@@ -1,4 +1,5 @@
-import { Directive, ElementRef, Renderer2, HostListener, AfterViewInit, OnDestroy, Input } from '@angular/core';
+import { Directive, ElementRef, Renderer2, HostListener, AfterViewInit, OnDestroy, Input, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
   selector: '[appSimpleZoomable]'
@@ -22,10 +23,15 @@ export class SimpleZoomableDirective implements AfterViewInit, OnDestroy {
 
   constructor(
     private el: ElementRef<HTMLElement>,
-    private rd: Renderer2
+    private rd: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngAfterViewInit(): void {
+    // Skip all DOM wiring (MutationObserver, click handlers, image styling)
+    // during server-side prerendering — these APIs don't exist in Node and the
+    // interactions are browser-only anyway.
+    if (!isPlatformBrowser(this.platformId)) return;
     this.setupImageClickHandlers();
     this.setupMutationObserver();
   }

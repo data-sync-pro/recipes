@@ -1,49 +1,43 @@
 <div class="recipe-list">
-    <!-- Recipe Cards List -->
-    <div class="result-list">
-        <app-recipe-card *ngFor="let recipe of paginatedRecipes; trackBy: trackByRecipeId" [recipe]="recipe"
-            [categories]="categories" (recipeSelect)="onRecipeClick($event)" class="result-item">
-        </app-recipe-card>
+    <!-- Page title — reflects the current sidebar selection: "All Recipes" on the
+         home view, otherwise the selected category name. Mirrors the FAQ page-title
+         behavior (2.25rem, weight 500, brand blue, centered). Hidden while searching. -->
+    <h1 class="recipe-page-title" *ngIf="!searchQuery.trim()">{{ category || 'All Recipes' }}</h1>
 
-        <!-- Empty State -->
-        <div *ngIf="recipes.length === 0" class="empty-state">
-            <p>No recipes found</p>
+    <!-- Aggregate category page (e.g. UI): split into subcategory sections, each
+         with its own heading. A recipe in multiple members appears under each. -->
+    <ng-container *ngIf="isSubcategorized; else flatList">
+        <section
+            *ngFor="let group of subcategoryGroups; trackBy: trackBySubcategoryName"
+            class="subcategory-section">
+            <h2 class="subcategory-title">{{ group.name }}</h2>
+            <div class="result-list">
+                <a *ngFor="let recipe of group.recipes; trackBy: trackByRecipeId"
+                    class="recipe-row"
+                    [routerLink]="recipeLink(recipe, group.name)"
+                    (click)="onRecipeClick(recipe)">
+                    <h3 class="recipe-row-title">{{ recipe.title }}</h3>
+                </a>
+            </div>
+        </section>
+    </ng-container>
+
+    <!-- Flat title-only list, matching the FAQ "All FAQs" list rows. Used for
+         All Recipes, normal categories, and search results. -->
+    <ng-template #flatList>
+        <div class="result-list">
+            <a *ngFor="let recipe of recipes; trackBy: trackByRecipeId"
+                class="recipe-row"
+                [routerLink]="recipeLink(recipe)"
+                (click)="onRecipeClick(recipe)">
+                <h3 class="recipe-row-title">{{ recipe.title }}</h3>
+            </a>
+
+            <!-- Empty State -->
+            <div *ngIf="recipes.length === 0" class="empty-state">
+                <mat-icon>search_off</mat-icon>
+                <p>No recipes found</p>
+            </div>
         </div>
-    </div>
-
-    <!-- Pagination -->
-    <div *ngIf="recipes.length > itemsPerPage" class="pagination">
-        <!-- First Page -->
-        <button class="pagination-btn" [disabled]="currentPage === 1" (click)="goToFirstPage()"
-            aria-label="Go to first page">
-            &laquo;
-        </button>
-
-        <!-- Previous Page -->
-        <button class="pagination-btn" [disabled]="currentPage === 1" (click)="goToPreviousPage()"
-            aria-label="Go to previous page">
-            &lsaquo;
-        </button>
-
-        <!-- Page Numbers -->
-        <ng-container *ngFor="let page of pageNumbers">
-            <button *ngIf="page > 0" class="pagination-btn" [class.active]="currentPage === page"
-                (click)="goToPage(page)">
-                {{ page }}
-            </button>
-            <span *ngIf="page === -1" class="pagination-ellipsis">...</span>
-        </ng-container>
-
-        <!-- Next Page -->
-        <button class="pagination-btn" [disabled]="currentPage === totalPages" (click)="goToNextPage()"
-            aria-label="Go to next page">
-            &rsaquo;
-        </button>
-
-        <!-- Last Page -->
-        <button class="pagination-btn" [disabled]="currentPage === totalPages" (click)="goToLastPage()"
-            aria-label="Go to last page">
-            &raquo;
-        </button>
-    </div>
+    </ng-template>
 </div>

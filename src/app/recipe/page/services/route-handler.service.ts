@@ -1,17 +1,18 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router, ParamMap } from '@angular/router';
-import { Observable, Subject, ReplaySubject } from 'rxjs';
+import { Observable, Subject, ReplaySubject, combineLatest } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 import { Recipe, Tab } from '../../core/models/recipe.model';
 import { CacheService } from '../../core/services/cache.service';
 import { SearchService } from '../../core/services/search.service';
+import { CategoryOrderService } from '../../core/services/category-order.service';
 import { Store } from '../../core/store/recipe.store';
 import { PreviewSyncService } from './preview-sync.service';
 import { TocService } from './toc.service';
 import { PreviewService } from '../../core/services/preview.service';
 import { LoggerService } from '../../core/services/logger.service';
-import { RECIPE_MESSAGES, RECIPE_SECTIONS, categoryToSlug, slugToCategoryName } from '../../core/constants/recipe.constants';
-import { sortRecipesByCategoryAndTitle } from '../../core/utils';
+import { RECIPE_MESSAGES, RECIPE_SECTIONS, categoryToSlug, slugToCategoryName, expandCategory } from '../../core/constants/recipe.constants';
+import { sortRecipesByTitle, orderRecipesWithinCategory } from '../../core/utils';
 
 export interface RecipeLoadResult {
   currentRecipe: Recipe | null;
@@ -39,6 +40,7 @@ export class RouteHandlerService implements OnDestroy {
     private previewSyncService: PreviewSyncService,
     private recipeTocService: TocService,
     private previewService: PreviewService,
+    private categoryOrderService: CategoryOrderService,
     private logger: LoggerService
   ) {
     this.initializeTotalCount();
@@ -86,7 +88,8 @@ export class RouteHandlerService implements OnDestroy {
       (recipes: Recipe[]) => {
         this.cachedTotalCount = recipes.length;
 
-        const sortedRecipes = sortRecipesByCategoryAndTitle(recipes);
+        // "All Recipes" is a flat, ungrouped list — sort straight A→Z by title.
+        const sortedRecipes = sortRecipesByTitle(recipes);
 
         this.dataLoaded$.next({
           currentRecipe: null,
@@ -103,16 +106,24 @@ export class RouteHandlerService implements OnDestroy {
 
   private loadCategoryRecipes(category: string): void {
     this.loadWithErrorHandling(
-      this.cacheService.getRecipes$().pipe(
-        map(recipes => this.searchService.filterByCategory(recipes, category))
+      combineLatest([
+        this.cacheService.getRecipes$(),
+        this.categoryOrderService.getOrderMap$()
+      ]).pipe(
+        map(([recipes, orderMap]) => ({
+          filtered: this.searchService.filterByCategory(recipes, category),
+          orderMap
+        }))
       ),
-      (recipes: Recipe[]) => {
-        const sortedRecipes = sortRecipesByCategoryAndTitle(recipes);
+      ({ filtered, orderMap }) => {
+        // A category page follows the manual per-category order; recipes not
+        // listed in category-order.json fall back to alphabetical at the end.
+        const sortedRecipes = orderRecipesWithinCategory(category, filtered, orderMap);
 
         this.dataLoaded$.next({
           currentRecipe: null,
           recipeTabs: [],
-          recipes: recipes,
+          recipes: filtered,
           filteredRecipes: sortedRecipes,
           needsObserverSetup: false,
           totalRecipeCount: this.cachedTotalCount
@@ -126,8 +137,11 @@ export class RouteHandlerService implements OnDestroy {
     this.loadWithErrorHandling(
       this.cacheService.getRecipes$().pipe(
         map(recipes => {
+          // Expand aggregate categories (e.g. UI) so deep links like
+          // /recipes/ui/<slug> still resolve to the underlying recipe.
+          const categories = expandCategory(category);
           return recipes.find(r =>
-            r.category.includes(category) &&
+            r.category.some(c => categories.includes(c)) &&
             r.slug === recipeSlug
           ) || null;
         })

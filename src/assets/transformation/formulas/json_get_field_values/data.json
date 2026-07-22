@@ -1,0 +1,33 @@
+{
+  "title": "JSON_GET_FIELD_VALUES",
+  "description": "<p>Returns a list containing the value of the specified field from each map in the provided list. Optionally excludes null values from the result.</p>",
+  "syntax": "JSON_GET_FIELD_VALUES(json_array, field_name, exclude_nulls) -> List<ANY>",
+  "parameters": [
+    {
+      "name": "json_array",
+      "type": "List<Map<String, ANY>>",
+      "required": "Yes",
+      "description": "The list of maps to extract values from."
+    },
+    {
+      "name": "field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The name of the field whose value is extracted from each map."
+    },
+    {
+      "name": "exclude_nulls",
+      "type": "Boolean",
+      "required": "Yes",
+      "description": "If TRUE, maps whose field value is null or missing are omitted from the result. If FALSE, their values are included as null."
+    }
+  ],
+  "examples": [
+    "JSON_GET_FIELD_VALUES(VLOOKUP_ALL(\"Account\", \"Name, Industry, Phone\", \"OwnerId\", OwnerId), \"Name\", true)\n-- Returns the Name from every matching Account, e.g. (Acme, Global).",
+    "JSON_GET_FIELD_VALUES(VLOOKUP_ALL(\"Account\", \"Name, Industry, Phone\", \"OwnerId\", OwnerId), \"Phone\", false)\n-- Returns the Phone from every matching Account, keeping nulls, e.g. (null, (123)456-7890)."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "VLOOKUP_ALL"
+  ]
+}

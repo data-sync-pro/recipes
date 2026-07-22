@@ -15,23 +15,22 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/website",
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": ["zone.js"],
+            "browser": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "allowedCommonJsDependencies": [
-              "jszip"
+              "jszip",
+              "js-beautify"
             ],
             "assets": [
-              "src/pushtopic-logo.png",
               "src/assets",
-              "src/404.html",
-              "src/.nojekyll",
-              "src/CNAME",
               "src/manifest.webmanifest"
             ],
             "styles": [
@@ -42,10 +41,18 @@
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/app/shared/styles"]
+              "includePaths": [
+                "src/app/shared/styles"
+              ]
             },
-            "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json"
+            "server": "src/main.server.ts",
+            "prerender": {
+              "routesFile": "prerender-routes.txt",
+              "discoverRoutes": false
+            },
+            "ssr": {
+              "entry": "server.ts"
+            }
           },
           "configurations": {
             "production": {
@@ -64,14 +71,13 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "prerender": false,
+              "ssr": false
             },
-            "github-pages": {
+            "firebase": {
               "baseHref": "/",
               "budgets": [
                 {
@@ -88,10 +94,7 @@
               "outputHashing": "all",
               "optimization": true,
               "sourceMap": false,
-              "buildOptimizer": true,
-              "vendorChunk": false,
-              "extractLicenses": true,
-              "namedChunks": false
+              "extractLicenses": true
             }
           },
           "defaultConfiguration": "production"
@@ -100,10 +103,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "website:build:production"
+              "buildTarget": "website:build:production"
             },
             "development": {
-              "browserTarget": "website:build:development"
+              "buildTarget": "website:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -111,7 +114,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "website:build"
+            "buildTarget": "website:build"
           }
         },
         "test": {
@@ -121,7 +124,6 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/pushtopic-logo.png",
               "src/assets",
               "src/manifest.webmanifest"
             ],

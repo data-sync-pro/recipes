@@ -2,7 +2,7 @@
   position: fixed;
   bottom: 20px;
   right: 36px;
-  background-color: #418796;
+  background-color: #2253B2;
   border: none;
   border-radius: 50%;
   width: 50px;
@@ -22,6 +22,5 @@
 }
 
 .scroll-to-top:hover {
-  opacity: 1;
   transform: translateY(-5px);
 }

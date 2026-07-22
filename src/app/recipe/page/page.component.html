@@ -1,14 +1,12 @@
-<app-banner
-    [title] = "'Recipes'"
-    [description] = "'Pre-configured recipes to speed up common Salesforce data tasks.'"
-></app-banner>
-
 <div class="outter-container">
+    <app-content-skeleton *ngIf="isLoading" [blocks]="4"></app-content-skeleton>
     <app-recipe-layout
+        *ngIf="!isLoading"
         #recipeLayout
         [recipes]="currentRecipes"
-        [allRecipes]="recipes"
+        [allRecipes]="allRecipes"
         [categories]="categories"
+        [category]="navigation.category"
         [searchQuery]="search.query"
         (searchChange)="searchRecipes($event)"
         (recipeSelect)="goToRecipe($event)"

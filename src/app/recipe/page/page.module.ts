@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 // Angular Material Modules
@@ -43,54 +43,45 @@ import { RecipeCountComponent } from './recipe-count/recipe-count.component';
 // Pipes
 import { CodeBlockPipe } from './pipes/code-block.pipe';
 
-@NgModule({
-  declarations: [
-    RecipesComponent,
-    RecipeCardComponent,
-    RecipeSearchOverlayComponent,
-    RecipeDetailPageComponent,
-    BannerComponent,
-    RecipeDetailBannerComponent,
-    RecipeLayoutComponent,
-    CategoryListComponent,
-    RecipeListComponent,
-    RecipePrereqsComponent,
-    RecipeNavSidebarComponent,
-    RecipeCountComponent,
-    CodeBlockPipe
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    ScrollingModule,
-    
-    // Angular Material
-    MatButtonModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatCardModule,
-    MatTabsModule,
-    MatChipsModule,
-    MatProgressBarModule,
-    MatStepperModule,
-    MatBadgeModule,
-    MatTooltipModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatCheckboxModule,
-    
-    // Routing
-    RecipePageRoutingModule,
-    
-    // Shared
-    SharedModule
-  ],
-  exports: [
-    RecipesComponent,
-    RecipeCardComponent
-  ]
-})
+@NgModule({ declarations: [
+        RecipesComponent,
+        RecipeCardComponent,
+        RecipeSearchOverlayComponent,
+        RecipeDetailPageComponent,
+        BannerComponent,
+        RecipeDetailBannerComponent,
+        RecipeLayoutComponent,
+        CategoryListComponent,
+        RecipeListComponent,
+        RecipePrereqsComponent,
+        RecipeNavSidebarComponent,
+        RecipeCountComponent,
+        CodeBlockPipe
+    ],
+    exports: [
+        RecipesComponent,
+        RecipeCardComponent
+    ], imports: [CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ScrollingModule,
+        // Angular Material
+        MatButtonModule,
+        MatExpansionModule,
+        MatIconModule,
+        MatCardModule,
+        MatTabsModule,
+        MatChipsModule,
+        MatProgressBarModule,
+        MatStepperModule,
+        MatBadgeModule,
+        MatTooltipModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatProgressSpinnerModule,
+        MatCheckboxModule,
+        // Routing
+        RecipePageRoutingModule,
+        // Shared
+        SharedModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class RecipePageModule { }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Data Sync Pro sitemap — served at https://www.datasyncpro.io/sitemap.xml
+  Canonical host is www (apex 301-redirects to www).
+
+  Excluded on purpose:
+    /surfaces, /why-dsp, /security, /pricing  -> all rewrite to index.html
+                                                     (same HTML as "/", duplicate content)
+    /partnership/*, Master Subscription Agreement  -> page-level noindex
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Marketing homepage (also reachable via /surfaces, /why-dsp, /security, /pricing) -->
+  <url>
+    <loc>https://www.datasyncpro.io/</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Standalone, server-rendered pages (reliably indexable) -->
+  <url>
+    <loc>https://www.datasyncpro.io/naming-conventions</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.datasyncpro.io/license-explained.html</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.datasyncpro.io/privacy.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.datasyncpro.io/support-policy.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Angular SPA sections (client-rendered — listed so Google discovers them,
+       but reliable indexing needs prerender/SSR; see follow-up below) -->
+  <url>
+    <loc>https://www.datasyncpro.io/recipes</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.datasyncpro.io/faqs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.datasyncpro.io/transformation</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.datasyncpro.io/user-manual</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

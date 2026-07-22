@@ -23,7 +23,7 @@
     "id": "setup",
     "label": "Setup",
     "children": [
-      { "id": "install-package", "label": "Install Package", "slug": "install-package" },
+      { "id": "install-package", "label": "Package Installation", "slug": "install-package" },
       { "id": "permissions", "label": "Permissions", "slug": "permissions" },
       {
         "id": "connection",
@@ -108,5 +108,10 @@
       { "id": "action-result-processor", "label": "Action Result Processor", "slug": "action-result-processor" },
       { "id": "bulk-job-status-syncer", "label": "Bulk Job Status Syncer", "slug": "bulk-job-status-syncer" }
     ]
+  },
+  {
+    "id": "rest-api",
+    "label": "REST API",
+    "slug": "rest-api"
   }
 ]

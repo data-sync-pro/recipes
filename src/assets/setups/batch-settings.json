@@ -25,8 +25,16 @@
               "description": "When enabled, DSP stores the matched target records and the pre-action request and response payloads in a ContentDocument linked to each Batch Execution. These logs provide an audit trail and allow data restoration if required. Note: File logging increases runtime overhead and consumes additional storage."
             },
             {
+              "name": "Log All Target Fields?",
+              "description": "When enabled, the log captures all accessible fields on the target object, rather than only the mapped target fields. Only fields the running user has read access to are included. Has no effect unless \"Log to File\" is enabled."
+            },
+            {
               "name": "Auto Retry Failed Batches?",
               "description": "When enabled, upon the completion of the batch job execution, DSP will automatically retry the failed batches."
+            },
+            {
+              "name": "Use Salesforce Upsert API?",
+              "description": "When enabled and the Action is Upsert, DSP will utilize the standard Salesforce Upsert API to execute the action in a single DML operation, without attempting to match the target and treating the Insert and Update as separate processes."
             },
             {
               "name": "Serial Mode?",
@@ -35,6 +43,14 @@
             {
               "name": "Execution Finalizer",
               "description": "Apex class name that implements the ExecutionFinalizer interface and runs after the Execution is completed."
+            },
+            {
+              "name": "Source Big Object Index Fields",
+              "description": "Comma-separated API names of the source Big Object's index fields, which Big Objects use (rather than the standard ID) to identify records."
+            },
+            {
+              "name": "Record-Based Configuration Deployment?",
+              "description": "Specifies whether this Executable deploys record-based configuration. When enabled, the Data Sync Pro VS Code plugin can export the source data as JSON for local backup and metadata-driven version control in a code repository."
             },
             {
               "name": "Bypass Queueable Delegation?",

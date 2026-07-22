@@ -1,0 +1,51 @@
+{
+  "hosting": {
+    "public": "dist/deploy",
+    "trailingSlash": false,
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "predeploy": [
+      "npm run build:firebase",
+      "node scripts/assemble-firebase.mjs",
+      "node scripts/gen-sitemap.mjs",
+      "node scripts/gen-llms.mjs"
+    ],
+    "rewrites": [
+      { "source": "/surfaces", "destination": "/index.html" },
+      { "source": "/surfaces/**", "destination": "/index.html" },
+      { "source": "/why-dsp", "destination": "/index.html" },
+      { "source": "/security", "destination": "/index.html" },
+      { "source": "/pricing", "destination": "/index.html" },
+      { "source": "/recipes", "destination": "/app.html" },
+      { "source": "/recipes/**", "destination": "/app.html" },
+      { "source": "/faqs", "destination": "/app.html" },
+      { "source": "/faqs/**", "destination": "/app.html" },
+      { "source": "/transformation", "destination": "/app.html" },
+      { "source": "/transformation/**", "destination": "/app.html" },
+      { "source": "/user-manual", "destination": "/app.html" },
+      { "source": "/user-manual/**", "destination": "/app.html" },
+      { "source": "/naming-conventions", "destination": "/naming-conventions.html" }
+    ],
+    "headers": [
+      {
+        "source": "**/*.html",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+      },
+      {
+        "source": "/@(recipes|faqs|transformation|user-manual)",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+      },
+      {
+        "source": "/@(recipes|faqs|transformation|user-manual)/**",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+      },
+      {
+        "source": "**/*.@(js|css|woff2|png|jpg|jpeg|gif|webp|svg|ico|pdf)",
+        "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      }
+    ]
+  }
+}

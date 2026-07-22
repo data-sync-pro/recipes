@@ -37,6 +37,9 @@ yarn-error.log
 testem.log
 /typings
 
+# Firebase (CLI local cache; firebase.json and .firebaserc ARE committed)
+.firebase/
+
 # System files
 .DS_Store
 Thumbs.db
@@ -46,3 +49,5 @@ nul
 .claude/settings.local.json
 .claude/settings.local.json
 .sfdx/
+src/assets/data/version.json
+firebase-debug.log

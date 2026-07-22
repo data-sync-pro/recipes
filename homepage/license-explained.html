@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>License, Explained — Data Sync Pro</title>
+<meta name="description" content="How Data Sync Pro is licensed — what an Executable is, how much a single one can do, and the two other units (Connections and the Daily Batch Limit) that shape your footprint." />
+<meta name="robots" content="index,follow" />
+<link rel="icon" href="/logo.png" />
+<link rel="apple-touch-icon" href="/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=36" />
+<style>
+  /* Page-specific: naming-conventions reference — reuses the site tokens,
+     mirrors the legal pages so docs read as a set. nc- prefix throughout. */
+  .legal-hero {
+    padding: clamp(56px, 8vw, 104px) 0 clamp(28px, 4vw, 44px);
+    border-bottom: 1px solid var(--rule);
+  }
+  /* Recipes-style breadcrumb top bar */
+  .nav-doc .nav-inner { gap: 14px; }
+  .nav-crumb-sep { width: 1px; height: 20px; background: var(--rule); flex: 0 0 auto; }
+  .nav-crumb { color: var(--ink-3); font-size: 14.5px; font-weight: 500; letter-spacing: -0.01em; }
+  .legal-hero .eyebrow { margin-bottom: 18px; }
+  .legal-hero h1 {
+    font-size: clamp(34px, 5.2vw, 58px);
+    letter-spacing: -0.03em;
+    line-height: 1.04;
+    margin: 0;
+  }
+  .legal-hero h1 .it { font-family: var(--f-serif); font-style: italic; font-weight: 400; color: var(--brand-ink); }
+  .legal-meta {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--ink-3);
+  }
+  .legal-body { padding: clamp(40px, 6vw, 72px) 0 clamp(64px, 9vw, 120px); }
+  .legal-wrap { max-width: none; }
+  .legal-lead { font-size: 24px; line-height: 1.6; color: var(--ink-2); margin: 0 0 8px; }
+  .legal-section { margin-top: 52px; scroll-margin-top: 88px; }
+  .legal-section > h2 {
+    font-size: 13px;
+    font-family: var(--f-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-ink);
+    margin: 0 0 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .legal-section > h2 .num { font-size: 12px; color: var(--ink-3); }
+  .legal-section h3 { font-size: 18px; letter-spacing: -0.01em; margin: 30px 0 8px; color: var(--ink); }
+  .legal-section p { font-size: 21px; line-height: 1.68; color: var(--ink-2); margin: 0 0 14px; text-wrap: pretty; }
+  .legal-section a:not(.nc-chip) { color: var(--brand-ink); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+  .legal-section a:not(.nc-chip):hover { color: var(--brand); }
+  .legal-section strong { color: var(--ink); font-weight: 600; }
+  code, .mono { font-family: var(--f-mono); }
+  .legal-section :not(pre) > code {
+    font-size: 0.86em;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-sm);
+    padding: 1px 6px;
+    color: var(--ink);
+  }
+
+  /* Callout */
+  .legal-callout {
+    margin: 22px 0;
+    padding: 18px 22px;
+    background: var(--brand-soft);
+    border: 1px solid color-mix(in oklab, var(--brand) 22%, transparent);
+    border-radius: 12px;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--brand-ink);
+  }
+  .legal-callout code { background: rgba(255,255,255,.5); border-color: color-mix(in oklab, var(--brand) 24%, transparent); }
+
+  /* TOC */
+  .legal-toc { margin: 32px 0 0; padding: 20px 22px; background: var(--paper-2); border: 1px solid var(--rule); border-radius: 14px; }
+  .legal-toc h2 { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 12px; }
+  .legal-toc ol { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: 28px; counter-reset: toc; }
+  .legal-toc li { counter-increment: toc; margin-bottom: 8px; break-inside: avoid; }
+  .legal-toc a { font-size: 14.5px; color: var(--ink-2); text-decoration: none; display: flex; gap: 10px; }
+  .legal-toc a::before { content: counter(toc, decimal-leading-zero); font-family: var(--f-mono); font-size: 11.5px; color: var(--brand); padding-top: 2px; }
+  .legal-toc a:hover { color: var(--brand-ink); }
+  @media (max-width: 560px) { .legal-toc ol { columns: 1; } }
+
+  /* ---- Anatomy diagram ---- */
+  .nc-anatomy {
+    margin: 26px 0 10px;
+    padding: clamp(22px, 3vw, 34px) clamp(20px, 3vw, 30px) 26px;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    box-shadow: var(--sh-2);
+  }
+  .nc-anatomy + .nc-anatomy { margin-top: 16px; }
+  .nc-anatomy-label {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 18px;
+  }
+  .nc-segments { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; }
+  .nc-seg { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .nc-seg-tok {
+    font-family: var(--f-mono);
+    font-size: clamp(15px, 2.4vw, 22px);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    padding: 8px 14px;
+    border-radius: 8px;
+    line-height: 1;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+  .nc-dot { align-self: flex-start; font-family: var(--f-mono); font-size: clamp(15px, 2.4vw, 22px); color: var(--mute); padding: 8px 0; line-height: 1; }
+  .nc-seg-tag {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  /* role colours */
+  .role-object .nc-seg-tok { background: var(--brand-soft); border-color: color-mix(in oklab, var(--brand) 28%, transparent); color: var(--brand-ink); }
+  .role-object .nc-seg-tag { color: var(--brand-ink); }
+  .role-context .nc-seg-tok { background: var(--paper-2); border-color: var(--rule-2); color: var(--ink); }
+  .role-context .nc-seg-tag { color: var(--ink-3); }
+  .role-purpose .nc-seg-tok { background: var(--signal-soft); border-color: color-mix(in oklab, var(--signal) 30%, transparent); color: var(--signal); }
+  .role-purpose .nc-seg-tag { color: var(--signal); }
+  .role-surface .nc-seg-tok { background: var(--good-soft); border-color: color-mix(in oklab, var(--good) 30%, transparent); color: var(--good); }
+  .role-surface .nc-seg-tag { color: var(--good); }
+  .nc-anatomy-read { margin: 20px 0 0; font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+  .nc-anatomy-read b { color: var(--ink); font-weight: 600; }
+
+  /* ---- Rule cards (purpose per surface) ---- */
+  .nc-rules { margin: 22px 0 6px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 720px) { .nc-rules { grid-template-columns: 1fr; } }
+  .nc-rule {
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 20px;
+    background: var(--card);
+    box-shadow: var(--sh-1);
+  }
+  .nc-rule-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .nc-rule-head .nc-badge { margin: 0; }
+  .nc-rule p { font-size: 14px; line-height: 1.55; margin: 0 0 12px; color: var(--ink-2); }
+  .nc-rule .nc-eg { display: flex; flex-direction: column; gap: 6px; }
+  .nc-rule .nc-eg code {
+    font-size: 12.5px;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-sm);
+    padding: 5px 9px;
+    color: var(--ink);
+    width: max-content;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  .nc-rule .nc-eg code b { color: var(--signal); font-weight: 500; }
+
+  /* ---- Surface badges ---- */
+  .nc-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    padding: 3px 9px 3px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--rule-2);
+    white-space: nowrap;
+    line-height: 1.4;
+  }
+  .nc-badge::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--mute); }
+  .nc-badge.s-trigger { color: var(--brand-ink); border-color: color-mix(in oklab, var(--brand) 30%, transparent); background: var(--brand-soft); }
+  .nc-badge.s-trigger::before { background: var(--brand); }
+  .nc-badge.s-datalist { color: var(--good); border-color: color-mix(in oklab, var(--good) 30%, transparent); background: var(--good-soft); }
+  .nc-badge.s-datalist::before { background: var(--good); }
+  .nc-badge.s-actionbutton { color: var(--signal); border-color: color-mix(in oklab, var(--signal) 30%, transparent); background: var(--signal-soft); }
+  .nc-badge.s-actionbutton::before { background: var(--signal); }
+  .nc-badge.s-batch { color: oklch(0.5 0.13 300); border-color: oklch(0.5 0.13 300 / 0.32); background: oklch(0.5 0.13 300 / 0.1); }
+  .nc-badge.s-batch::before { background: oklch(0.5 0.13 300); }
+  .nc-badge.s-loader { color: oklch(0.5 0.13 250); border-color: oklch(0.5 0.13 250 / 0.32); background: oklch(0.5 0.13 250 / 0.1); }
+  .nc-badge.s-loader::before { background: oklch(0.5 0.13 250); }
+  .nc-badge.s-sync { color: oklch(0.52 0.13 190); border-color: oklch(0.52 0.13 190 / 0.32); background: oklch(0.52 0.13 190 / 0.1); }
+  .nc-badge.s-sync::before { background: oklch(0.52 0.13 190); }
+  .nc-badge.s-logic { color: var(--ink-3); }
+  .nc-badge.s-logic::before { background: var(--mute); }
+  .nc-badge.s-variable { color: oklch(0.52 0.14 25); border-color: oklch(0.52 0.14 25 / 0.32); background: oklch(0.52 0.14 25 / 0.1); }
+  .nc-badge.s-variable::before { background: oklch(0.52 0.14 25); }
+
+  .nc-badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 4px; }
+
+  /* ---- Tables ---- */
+  .nc-table-wrap { margin: 16px 0 8px; overflow-x: auto; border: 1px solid var(--rule); border-radius: 14px; }
+  /* Catalog tables break out of the 820px prose column so the description fits. */
+  #catalog-pipelines .nc-table-wrap,
+  #catalog-execs .nc-table-wrap,
+  #catalog-variables .nc-table-wrap { width: 100%; }
+  table.nc-table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 560px; }
+  table.nc-table thead th {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-align: left;
+    padding: 12px 16px;
+    background: var(--paper-2);
+    border-bottom: 1px solid var(--rule-2);
+    position: sticky; top: 0;
+  }
+  table.nc-table tbody td { padding: 14px 18px; border-bottom: 1px solid var(--rule); color: var(--ink-2); vertical-align: top; }
+  table.nc-table tbody tr:last-child td { border-bottom: none; }
+  table.nc-table tbody tr:hover td { background: var(--card-2); }
+  table.nc-table td.nc-name { font-family: var(--f-mono); font-size: 13.5px; color: var(--ink); white-space: normal; overflow-wrap: anywhere; line-height: 1.45; }
+  table.nc-table td.nc-name .seg-obj { color: var(--brand-ink); }
+  table.nc-table td.nc-name .seg-end { color: var(--signal); }
+  table.nc-table td.nc-surface { white-space: nowrap; }
+  table.nc-table td.nc-note { font-size: 13.5px; color: var(--ink-3); }
+  table.nc-table td.nc-desc { font-size: 18.5px; color: var(--ink-2); line-height: 1.55; text-wrap: pretty; overflow-wrap: anywhere; }
+  table.nc-table td.nc-desc code { font-family: var(--f-mono); font-size: 0.86em; background: var(--paper-2); border: 1px solid var(--rule); border-radius: var(--r-sm); padding: 0 5px; color: var(--ink); overflow-wrap: anywhere; }
+  .nc-count { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); margin-left: auto; }
+  .nc-table-head { display: flex; align-items: baseline; gap: 12px; }
+
+  /* ---- Do / Don't ---- */
+  .nc-dd { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0 4px; }
+  @media (max-width: 640px) { .nc-dd { grid-template-columns: 1fr; } }
+  .nc-dd-col { border: 1px solid var(--rule); border-radius: 14px; padding: 18px 20px; background: var(--card); }
+  .nc-dd-col h4 { font-size: 12px; font-family: var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 14px; display: flex; align-items: center; gap: 8px; }
+  .nc-dd-col.do h4 { color: var(--good); }
+  .nc-dd-col.dont h4 { color: var(--signal); }
+  .nc-dd-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .nc-dd-col li { font-size: 14px; line-height: 1.5; color: var(--ink-2); padding-left: 22px; position: relative; }
+  .nc-dd-col li code { font-size: 12px; background: var(--paper-2); border: 1px solid var(--rule); border-radius: var(--r-sm); padding: 1px 5px; color: var(--ink); }
+  .nc-dd-col.do li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--good); font-size: 13px; }
+  .nc-dd-col.dont li::before { content: "✕"; position: absolute; left: 0; top: 1px; color: var(--signal); font-size: 12px; }
+
+  /* ---- cb: concept page extras ---- */
+  .legal-section ul.cb-list { list-style: none; margin: 6px 0 14px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .legal-section ul.cb-list li { position: relative; padding-left: 22px; font-size: 20px; line-height: 1.6; color: var(--ink-2); }
+  .legal-section ul.cb-list li::before { content: ""; position: absolute; left: 2px; top: 9px; width: 7px; height: 7px; border-radius: 2px; background: var(--brand); }
+  .legal-section ul.cb-list strong { color: var(--ink); font-weight: 600; }
+  .legal-section h3 { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin: 26px 0 8px; }
+  .legal-section h3.sub-divider { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--rule); }
+
+  .cb-flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 12px; margin: 22px 0 4px; }
+  .cb-flow-step { flex: 1 1 0; min-width: 150px; display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; background: var(--card); border: 1px solid var(--rule); border-radius: 14px; box-shadow: var(--sh-1); }
+  .cb-flow-k { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--brand-ink); }
+  .cb-flow-v { font-size: 15px; color: var(--ink-2); }
+  .cb-flow-arrow { align-self: center; font-family: var(--f-mono); color: var(--mute); font-size: 20px; }
+  @media (max-width: 640px) { .cb-flow { flex-direction: column; } .cb-flow-arrow { transform: rotate(90deg); } }
+  .cb-tag { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); border: 1px solid var(--rule-2); border-radius: 999px; padding: 2px 7px; }
+  .exec-stages { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 22px 0 6px; }
+  .exec-stage-card { border: 1px solid var(--rule); border-radius: 14px; padding: 18px 18px 20px; background: var(--card); box-shadow: var(--sh-1); display: flex; flex-direction: column; gap: 10px; }
+  .exec-stage-card .es-num { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--brand-ink); }
+  .exec-stage-card .es-title { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); }
+  .exec-stage-card .es-desc { font-size: 17px; line-height: 1.55; color: var(--ink-3); }
+  @media (max-width: 860px) { .exec-stages { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .exec-stages { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- =========== NAV =========== -->
+<nav class="nav nav-doc" id="nav">
+  <div class="nav-inner">
+    <a class="brand-mark" href="/" aria-label="Data Sync Pro home">
+      <img class="logo" src="logo.png?v=24" alt="" width="32" height="32" />
+      <span>Data Sync Pro</span>
+    </a>
+    <span class="nav-crumb-sep" aria-hidden="true"></span>
+    <span class="nav-crumb">License Explained</span>
+  </div>
+</nav>
+
+<!-- =========== HERO =========== -->
+<header class="legal-hero">
+  <div class="container">
+    <div class="eyebrow"><span class="dot"></span>Reference</div>
+    <h1>Your license, <span class="it">explained</span>.</h1>
+  </div>
+</header>
+
+<!-- =========== BODY =========== -->
+<main class="legal-body">
+  <div class="container">
+    <div class="legal-wrap">
+      <p class="legal-lead">Data Sync Pro is licensed on three things: the <strong>Executables</strong> (rules) you configure, the <strong>Connections</strong> (Salesforce instances) you link, and your <strong>Daily Batch Limit</strong>. Executables are usually the figure that matters most when sizing — and because each Executable is a complete functional unit (one rule that delivers a whole job end to end), most Salesforce instances need far fewer than they expect.</p>
+
+      <!-- 01 EXECUTABLE -->
+      <section class="legal-section" id="executable">
+        <h2><span class="num">01</span>Executables</h2>
+
+        <h3>What an Executable is</h3>
+        <p>A single, self-contained rule — a complete job, not a fragment of one. Whatever the job, it's built from the same core stages every time:</p>
+        <div class="exec-stages">
+          <div class="exec-stage-card"><span class="es-num">01</span><span class="es-title">Input</span><span class="es-desc">SOQL query · Data List row selection · Lightning record · DML event · CSV upload</span></div>
+          <div class="exec-stage-card"><span class="es-num">02</span><span class="es-title">Scoping</span><span class="es-desc">Filter rows · join with another data set</span></div>
+          <div class="exec-stage-card"><span class="es-num">03</span><span class="es-title">Match</span><span class="es-desc">Identify target records by field, formula, or duplicate rule</span></div>
+          <div class="exec-stage-card"><span class="es-num">04</span><span class="es-title">Mapping</span><span class="es-desc">Transform fields with 170+ functions · extend with Apex</span></div>
+          <div class="exec-stage-card"><span class="es-num">05</span><span class="es-title">Action</span><span class="es-desc">Insert · Update · Upsert · Delete · Undelete · Merge · Publish · Notify · Approval · Lead Convert</span></div>
+        </div>
+
+        <h3 class="sub-divider">What can one Executable do?</h3>
+        <p>A lot. Each row below is a job a single Executable can do — which is why most teams need only a handful:</p>
+        <div class="nc-table-wrap">
+          <table class="nc-table">
+            <thead><tr><th style="width:22%;">Engine</th><th>What it lets you achieve</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="nc-surface"><span class="nc-badge s-datalist">#Data List</span></td>
+                <td class="nc-desc"><b>Surface a live, editable list.</b> Present a filtered, cross-object collection from a single SOQL query — pagination, column filters, dynamic filters, sorting, inline and mass edits, and row-level actions — metadata-aware and dropped onto any Lightning page with no custom component to build. Pair it with <span class="nc-badge s-actionbutton" style="vertical-align:middle;">#Action Button</span> to run an action across the rows a user selects — what we call an <strong>Actionable Data List</strong>.</td>
+              </tr>
+              <tr>
+                <td class="nc-surface"><span class="nc-badge s-actionbutton">#Action Button</span></td>
+                <td class="nc-desc"><b>Run a multi-step operation on demand.</b> Give users a one-click action — on a record page, or across selected rows of a Data List — that previews and lets them edit computed values before commit.</td>
+              </tr>
+              <tr>
+                <td class="nc-surface"><span class="nc-badge s-batch">#Batch</span></td>
+                <td class="nc-desc"><b>Apply any bulk action.</b> Push a defined set of records through transformation and commit the result en masse — DMLs, emails, notifications, approvals, platform events, lead convert, data merge, and more — across millions of records, on demand or scheduled, cross-org included, chained beyond Salesforce's 100-job limit, with every run logged for retry or revert.</td>
+              </tr>
+              <tr>
+                <td class="nc-surface" rowspan="3"><span class="nc-badge s-trigger">#Trigger</span></td>
+                <td class="nc-desc"><span class="cb-tag">self-adaptive</span> <b>Calculate any field on save — no field cap.</b> On a self-adaptive Trigger, any field can take a mapping formula computed on save: rollup summaries, assignment rules, any calculation. </td>
+              </tr>
+              <tr>
+                <td class="nc-desc"><span class="cb-tag">self-adaptive</span> <b>Define all validations together — no field cap.</b> Hold an object's entire validation logic in a single self-adaptive Trigger — one place to read and maintain, instead of scattered standalone rules.</td>
+              </tr>
+              <tr>
+                <td class="nc-desc"><span class="cb-tag">trigger action</span> <b>Act on other records when one changes.</b> Cross-record DML, notifications, publishing platform events, and other side effects fired automatically on save.</td>
+              </tr>
+              <tr>
+                <td class="nc-surface"><span class="nc-badge s-loader">#Data Loader</span></td>
+                <td class="nc-desc"><b>Load a CSV without leaving Salesforce.</b> Upload a file straight from your own org and process it inside the platform at scale — with the same mapping and transformation logic. Embed it in your own Lightning pages so users load data right where they work.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 03 CONNECTIONS -->
+      <section class="legal-section" id="connections">
+        <h2><span class="num">02</span>Connections</h2>
+        <p>A saved, reusable link to a Salesforce org — either a sandbox of your current org or a separate Salesforce org. Executables point at a Connection by name, and many rules share one, so you size by the number of Salesforce instances you connect. Every Executable needs at least one Connection to run — most commonly pointing it at the current org.</p>
+      </section>
+
+      <!-- 04 DAILY BATCH LIMIT -->
+      <section class="legal-section" id="batch-limit">
+        <h2><span class="num">03</span>Daily Batch Limit</h2>
+        <p>The most records that can be processed in a single day — counted over a UTC calendar day, midnight to midnight (00:00–00:00 UTC). Two engines count against it — <span class="nc-badge s-batch" style="vertical-align:middle;">#Batch</span> and <span class="nc-badge s-loader" style="vertical-align:middle;">#Data Loader</span> — so size it to your batch volume. A job already running always finishes; once the limit is reached, it's the <em>next</em> job that's blocked when it tries to start. This is a DSP-enforced limit — Salesforce's own platform governor limits still apply on top of it.</p>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<!-- =========== FOOTER (removed) =========== -->
+
+<script src="app.js?v=36" defer></script>
+</body>
+</html>

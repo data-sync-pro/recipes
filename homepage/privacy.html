@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Privacy Policy — Data Sync Pro</title>
+<meta name="description" content="How Data Sync Pro collects, uses, and protects the information you share through our website and forms." />
+<meta name="robots" content="index,follow" />
+<link rel="icon" href="/logo.png" />
+<link rel="apple-touch-icon" href="/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=32" />
+<style>
+  /* Page-specific: legal document layout — reuses the site's tokens */
+  .legal-hero {
+    padding: clamp(56px, 8vw, 104px) 0 clamp(28px, 4vw, 44px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .legal-hero .eyebrow { margin-bottom: 18px; }
+  .legal-hero h1 {
+    font-size: clamp(34px, 5.2vw, 58px);
+    letter-spacing: -0.03em;
+    line-height: 1.04;
+    margin: 0;
+  }
+  .legal-hero h1 .it { font-family: var(--f-serif); font-style: italic; font-weight: 400; color: var(--brand-ink); }
+  .legal-meta {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--ink-3);
+  }
+  .legal-body {
+    padding: clamp(40px, 6vw, 72px) 0 clamp(64px, 9vw, 120px);
+  }
+  .legal-wrap {
+    max-width: 760px;
+    margin-inline: auto;
+  }
+  .legal-lead {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin: 0 0 8px;
+  }
+  .legal-section { margin-top: 44px; }
+  .legal-section > h2 {
+    font-size: 13px;
+    font-family: var(--f-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-ink);
+    margin: 0 0 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .legal-section > h2 .num {
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  .legal-section h3 {
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    margin: 26px 0 8px;
+    color: var(--ink);
+  }
+  .legal-section p {
+    font-size: 16px;
+    line-height: 1.68;
+    color: var(--ink-2);
+    margin: 0 0 14px;
+    text-wrap: pretty;
+  }
+  .legal-section ul {
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .legal-section ul li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .legal-section ul li::before {
+    content: "";
+    position: absolute;
+    left: 2px; top: 10px;
+    width: 6px; height: 6px;
+    border-radius: 2px;
+    background: var(--brand);
+  }
+  .legal-section a { color: var(--brand-ink); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+  .legal-section a:hover { color: var(--brand); }
+  .legal-section strong { color: var(--ink); font-weight: 600; }
+  .legal-callout {
+    margin: 22px 0;
+    padding: 18px 22px;
+    background: var(--brand-soft);
+    border: 1px solid color-mix(in oklab, var(--brand) 22%, transparent);
+    border-radius: 12px;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--brand-ink);
+  }
+  .legal-toc {
+    margin: 32px 0 0;
+    padding: 20px 22px;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+  }
+  .legal-toc h2 {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 12px;
+  }
+  .legal-toc ol {
+    margin: 0; padding: 0;
+    list-style: none;
+    columns: 2;
+    column-gap: 28px;
+    counter-reset: toc;
+  }
+  .legal-toc li { counter-increment: toc; margin-bottom: 8px; break-inside: avoid; }
+  .legal-toc a {
+    font-size: 14.5px;
+    color: var(--ink-2);
+    text-decoration: none;
+    display: flex;
+    gap: 10px;
+  }
+  .legal-toc a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    color: var(--brand);
+    padding-top: 2px;
+  }
+  .legal-toc a:hover { color: var(--brand-ink); }
+  @media (max-width: 560px) { .legal-toc ol { columns: 1; } }
+</style>
+</head>
+<body>
+
+<!-- =========== HERO =========== -->
+<header class="legal-hero">
+  <div class="container">
+    <div class="legal-wrap">
+      <div class="eyebrow"><span class="dot"></span>Legal</div>
+      <h1>Privacy <span class="it">Policy</span>.</h1>
+      <div class="legal-meta">
+        <span>Effective June 1, 2026</span>
+        <span>·</span>
+        <span>Data Sync Pro · datasyncpro.io</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- =========== BODY =========== -->
+<main class="legal-body">
+  <div class="container">
+    <div class="legal-wrap">
+      <p class="legal-lead">This policy explains what information Data Sync Pro collects when you visit our website or submit a form, how we use it, and the choices you have. We keep data collection to the minimum needed to respond to you and operate our business.</p>
+
+      <nav class="legal-toc" aria-label="Contents">
+        <h2>Contents</h2>
+        <ol>
+          <li><a href="#collect">Information we collect</a></li>
+          <li><a href="#use">How we use it</a></li>
+          <li><a href="#bases">Legal bases</a></li>
+          <li><a href="#sharing">How we share it</a></li>
+          <li><a href="#cookies">Cookies &amp; tracking</a></li>
+          <li><a href="#retention">Data retention</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#rights">Your rights</a></li>
+          <li><a href="#transfers">International transfers</a></li>
+          <li><a href="#children">Children</a></li>
+          <li><a href="#changes">Changes</a></li>
+          <li><a href="#contact">Contact us</a></li>
+        </ol>
+      </nav>
+
+      <section class="legal-section" id="collect">
+        <h2><span class="num">01</span>Information we collect</h2>
+        <p>We only collect information you choose to give us. We do not buy lists or build hidden profiles.</p>
+        <h3>Information you submit</h3>
+        <p>When you request a demo, ask for a quote, or apply to our partner program, we collect the details you enter into the form — typically your <strong>name, work email, company, role, and country</strong>, along with any context you provide (such as the Salesforce org details, areas of interest, or notes relevant to your request).</p>
+        <h3>Information collected automatically</h3>
+        <p>To protect our forms from spam and abuse, we use Google reCAPTCHA, which may collect device and usage signals as described in Google's own privacy policy. Our website does not run third-party advertising or analytics trackers.</p>
+      </section>
+
+      <section class="legal-section" id="use">
+        <h2><span class="num">02</span>How we use your information</h2>
+        <ul>
+          <li>To respond to your demo, quote, partner, or contact request.</li>
+          <li>To prepare and send you the information, pricing, or agreements you asked for.</li>
+          <li>To evaluate partner applications and arrange onboarding.</li>
+          <li>To protect our forms and systems against spam, fraud, and abuse.</li>
+          <li>To meet our legal, accounting, and security obligations.</li>
+        </ul>
+        <p>We do not use your information for automated decision-making that produces legal effects, and we do not sell your personal information.</p>
+      </section>
+
+      <section class="legal-section" id="bases">
+        <h2><span class="num">03</span>Legal bases for processing</h2>
+        <p>Where the GDPR or similar laws apply, we rely on these legal bases: your <strong>consent</strong> (which you give by submitting a form), our <strong>legitimate interests</strong> in responding to inquiries and running our business securely, and <strong>compliance with legal obligations</strong>.</p>
+      </section>
+
+      <section class="legal-section" id="sharing">
+        <h2><span class="num">04</span>How we share your information</h2>
+        <p>We share information only with service providers who help us operate, and only as needed:</p>
+        <ul>
+          <li><strong>Salesforce</strong> — our CRM. Form submissions are stored here so our team can follow up.</li>
+          <li><strong>Google reCAPTCHA</strong> — spam and abuse protection on our forms.</li>
+          <li><strong>Email and infrastructure providers</strong> — to deliver our responses and host this site.</li>
+        </ul>
+        <p>We may also disclose information if required by law, or to protect the rights, safety, and security of Data Sync Pro, our customers, or the public. <strong>We never sell your personal information.</strong></p>
+      </section>
+
+      <section class="legal-section" id="cookies">
+        <h2><span class="num">05</span>Cookies &amp; tracking</h2>
+        <p>We do not use advertising or analytics cookies, and we do not track you across other websites. The only cookies that may be set are strictly functional or security-related — for example, those used by Google reCAPTCHA to tell humans from bots.</p>
+      </section>
+
+      <section class="legal-section" id="retention">
+        <h2><span class="num">06</span>Data retention</h2>
+        <p>We keep the information you submit for as long as needed to respond to your request and to maintain a record of our business relationship, after which we delete or anonymize it. You can ask us to delete your information sooner at any time.</p>
+      </section>
+
+      <section class="legal-section" id="security">
+        <h2><span class="num">07</span>Security</h2>
+        <p>We use industry-standard safeguards — encryption in transit, access controls, and reputable processors like Salesforce — to protect your information. No method of transmission or storage is perfectly secure, but we work to protect your data and to address issues promptly if they arise.</p>
+      </section>
+
+      <section class="legal-section" id="rights">
+        <h2><span class="num">08</span>Your rights</h2>
+        <p>Depending on where you live, you may have the right to access, correct, delete, or port your personal information, to object to or restrict certain processing, and to withdraw consent. To exercise any of these rights, email us at <a href="mailto:hello@datasyncpro.io">hello@datasyncpro.io</a> and we will respond within the time required by applicable law. You also have the right to lodge a complaint with your local data protection authority.</p>
+      </section>
+
+      <section class="legal-section" id="transfers">
+        <h2><span class="num">09</span>International transfers</h2>
+        <p>We and our providers may process your information in countries other than your own, including the United States. Where required, we rely on appropriate safeguards (such as Standard Contractual Clauses) to protect your information when it is transferred.</p>
+      </section>
+
+      <section class="legal-section" id="children">
+        <h2><span class="num">10</span>Children's privacy</h2>
+        <p>Our website and services are intended for businesses and are not directed to children under 16. We do not knowingly collect personal information from children.</p>
+      </section>
+
+      <section class="legal-section" id="changes">
+        <h2><span class="num">11</span>Changes to this policy</h2>
+        <p>We may update this policy from time to time. When we do, we will revise the effective date above and, for material changes, take reasonable steps to notify you.</p>
+      </section>
+
+      <section class="legal-section" id="contact">
+        <h2><span class="num">12</span>Contact us</h2>
+        <p>Questions about this policy or your information? Email <a href="mailto:hello@datasyncpro.io">hello@datasyncpro.io</a> and we'll be glad to help.</p>
+        <div class="legal-callout">
+          This policy is provided for transparency about our data practices. Please have it reviewed by your own legal counsel before relying on it for compliance.
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

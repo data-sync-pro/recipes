@@ -30,7 +30,8 @@
 .top-header {
   width: 100%;
   height: 4rem;
-  background: white;
+  /* Matches the global page background (body in styles.scss) */
+  background: #FAFBFC;
   border-bottom: 1px solid #e5e7eb;
   display: flex;
   align-items: center;
@@ -59,42 +60,9 @@
 }
 
 .developer-guide-link {
-  color: #333;
+  color: #2C2C2D;
 }
 
-/* ===========================
-   Search Box Styles
-   =========================== */
-.search-shortcut-wrapper {
-  position: relative;
-  width: 88%;
-  left: 7px;
-}
-
-.search-input {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 0.95rem;
-}
-
-.search-input:focus {
-  outline: none;
-}
-
-.shortcut-hint {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #eee;
-  font-size: 0.9rem;
-  padding: 2px 6px;
-  border-radius: 4px;
-  color: #555;
-}
 
 .shortcut-clickable {
   cursor: pointer;
@@ -106,140 +74,65 @@
 }
 
 /* ===========================
-   Sidebar Wrapper and Collapse
-   =========================== */
-.sidebar-wrapper {
-  position: relative;
-  left: 0;
-  height: calc(100vh - 64.7px);
-  width: 290px;
-  background-color: white;
-  border-right: none;
-  z-index: 0;
-}
-
-.sidebar-wrapper.collapsed {
-  width: 0;
-}
-
-/* ===========================
-   Sidebar Main Styles
-   =========================== */
-.sidebar {
-  width: 290px;
-  transition: width 0s ease, opacity 0s ease;
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 60px);
-  overflow-y: scroll;
-  opacity: 1;
-  scrollbar-color: #c4c4c4 transparent;
-  border-right: 1px solid #e0e0e0;
-  overflow-x: hidden;
-}
-
-.sidebar.collapsed {
-  width: 0px;
-}
-
-/* ===========================
-   Sidebar Collapse Button
-   =========================== */
-.sidebar-collapse-button {
-  position: absolute;
-  top: 17px;
-  left: 250px;
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #333;
-  transition: color 0.2s ease;
-  z-index: 1;
-  padding: 4px 8px;
-  border-radius: 4px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.sidebar-collapse-button:hover {
-  color: #418796;
-}
-
-.sidebar-wrapper.collapsed .sidebar-collapse-button {
-  position: fixed;
-  top: 79.7px;
-  left: 10px;
-  z-index: 1000;
-}
-
-/* ===========================
-   Sidebar Floating Buttons (Collapse & Search)
-   =========================== */
-.sidebar-float-search {
-  position: fixed;
-  margin-top: 7px;
-  left: 9px;
-  background: transparent;
-  border: none;
-  font-size: 1.6rem;
-  cursor: pointer;
-  stroke: #333;
-  z-index: 2;
-}
-
-.sidebar-float-search:hover {
-  color: #418796;
-}
-
-.sidebar-float-search {
-  top: 108px;
-  color: #333;
-}
-
-.icon-search {
-  width: 1.5rem;
-  height: 1.5rem;
-  stroke: currentColor;
-}
-
-/* Firefox specific adjustment */
-@-moz-document url-prefix() {
-  .sidebar-collapse-button {
-    padding: 5px 8px;
-  }
-}
-
-/* ===========================
    Main Content Layout
    =========================== */
+/* Centered page container matching the user-manual baseline
+   (.setup-main-layout in setup.component.scss). The page scrolls naturally
+   (the window) — NOT an internal 100vh scroll region; the top padding (6.4rem)
+   clears the fixed 4rem global header with a gap. The sidebar pins via
+   position: sticky (sidebar.component.css), exactly like the recipe / FAQ /
+   user-manual sidebars, so there is a single page scroll instead of three
+   competing scroll containers. */
 .container {
   display: flex;
   flex-direction: row;
-  margin-top: 4rem;
-  height: calc(100vh - 4rem);
+  gap: 3vw;
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 5.7rem 24px 0;
 }
 
+/* Sidebar width mirrors the user-manual baseline (.left-sidebar in
+   setup.component.scss); the parent sizes the child component element,
+   matching the recipe-nav-sidebar pattern. Internal sidebar DOM is styled
+   in sidebar.component.css. */
+app-sidebar {
+  flex: 0 0 20%;
+  min-width: 220px;
+  max-width: 300px;
+}
+
+app-sidebar.collapsed {
+  flex-basis: 0;
+  min-width: 0;
+}
+
+/* A normal in-flow column — the page (window) owns the scroll, so no
+   overflow / fixed height here. Bottom margin gives breathing room above the
+   page end; left/right auto centres within the flex track. */
 .content {
+  margin: 0 4rem 40px auto;
   padding-top: 0.5px;
   transition: margin-left 0.3s ease;
-  justify-self: center;
-  width: calc(100% - 320px);
-  flex: 1;
-  overflow-y: auto;
-  height: 100%; 
+  flex: 0 1 100%;
+  min-width: 0;
 }
 
-.sidebar-wrapper.collapsed ~ .content {
-  margin-left: 0;
-  width: 80%;
+/* Tablet + Mobile (≤1024px): the sidebar becomes a fixed off-canvas drawer
+   (sidebar.component.css), so its flex slot must collapse and the content
+   takes the full width — matching the recipe / user-manual drawers. */
+@media (max-width: 1024px) {
+  app-sidebar,
+  app-sidebar.collapsed {
+    flex: 0 0 0;
+    min-width: 0;
+    max-width: none;
+    width: 0;
+  }
+
+  .content {
+    margin: 0 auto 40px auto;
+  }
 }
 
 
@@ -295,7 +188,7 @@ li {
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: white;
+  background-color: #FAFBFC;
   padding: 1rem 0.5rem;
 }
 
@@ -306,7 +199,7 @@ li {
   font-weight: 500;
   font-size: 0.9rem;
   cursor: pointer;
-  color: #333;
+  color: #2C2C2D;
   transition: background 0.2s;
   border-radius: 6px;
   position: sticky;

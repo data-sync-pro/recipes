@@ -37,6 +37,10 @@
               "description": "Update to this field will sync with the \"All Internal Users Have Read Access?\" field of the related Executables. \"All Internal Users Have Read Access?\" is used to share the Executables with All Internal Users for accessing Executables through the record page or the LWCs that are in reference to those Executables, such as the Executable Data List and Pipeline Data Lists."
             },
             {
+              "name": "Incremental Backup to File?",
+              "description": "Marks this Pipeline for incremental backup to file, which enables the backup and restore features and enforces backup-compliant settings on its Executables."
+            },
+            {
               "name": "Record-Based Configuration Deployment?",
               "description": "Specifies whether this Pipeline deploys record-based configuration. When enabled, the Data Sync Pro VS Code plugin exports the source data of all related Executables as JSON, supporting local backup and metadata-driven version control in a code repository."
             },
@@ -63,6 +67,35 @@
           ]
         },
         {
+          "title": "#Batch",
+          "fields": [
+            {
+              "name": "Next Pipeline (Scheduled or API)",
+              "description": "Specifies the next Pipeline to run automatically after this Pipeline completes. It runs on scheduled batch execution, and on API batch execution when the caller opts in."
+            },
+            {
+              "name": "Stop Remaining When an Executable Fails?",
+              "description": "If checked, when one of the Pipeline's Executables completes and fails the execution, the Pipeline Execution stops without executing the remaining Executables."
+            },
+            {
+              "name": "Notify When Execution Completes",
+              "description": "DSP sends a notification to the provided email addresses when the Pipeline Execution is completed. This also depends on the Email Deliverability setting if running in Sandbox."
+            },
+            {
+              "name": "Notify Email Addresses",
+              "description": "Comma separated email addresses."
+            },
+            {
+              "name": "Action Button Label",
+              "description": "Sets the label for the Pipeline level action button such as \"Pipeline Batch Execution Button\". Defaults to \"Execute Pipeline\" if left blank."
+            },
+            {
+              "name": "Notify Owner?",
+              "description": "If selected and \"Notify When Execution Completes\" is enabled, the Pipeline owner will be added to the list of email notification recipients."
+            }
+          ]
+        },
+        {
           "title": "#Action Button",
           "fields": [
             {
@@ -77,6 +110,10 @@
             {
               "name": "Variant",
               "description": "Specifies how Pipeline components are displayed. If not specified, ‘stack’ is used by default."
+            },
+            {
+              "name": "Tabset Variant",
+              "description": "Defines the visual style of tabs when the Data Lists Variant is set to 'tabs'. If not specified, 'scoped' is defaulted."
             }
           ]
         }

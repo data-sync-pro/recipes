@@ -18,7 +18,7 @@ export interface NavNode {
   visible?: boolean;             // default true, false = hidden from sidebar
 }
 
-export type BlockType = "h2" | "h3" | "h4" | "p" | "ul" | "ol" | "image" | "video" | "code" | "callout" | "instruction" | "table" | "tabs" | "fields";
+export type BlockType = "h2" | "h3" | "h4" | "p" | "ul" | "ol" | "image" | "video" | "code" | "callout" | "instruction" | "table" | "tabs" | "fields" | "endpoint" | "card" | "label" | "steps" | "keyvalue";
 
 export type CalloutVariant = "info" | "warning" | "error" | "success";
 
@@ -27,6 +27,7 @@ export interface TableColumn {
   header: string;
   width?: string;
   align?: 'left' | 'center' | 'right';
+  mono?: boolean;  // render cells in this column as plain monospace (paths / placeholders)
 }
 
 export type ImageSize = "small" | "medium" | "large" | "full";
@@ -47,6 +48,18 @@ export interface FieldGroup {
   fields: FieldItem[];
 }
 
+// steps - one numbered step: text plus optional nested blocks (e.g. a table)
+export interface StepItem {
+  content: string;
+  children?: Block[];
+}
+
+// keyvalue - one row of the 2-column reference grid
+export interface KeyValuePair {
+  key: string;
+  value: string;
+}
+
 
 export interface Block {
   type: BlockType;
@@ -58,7 +71,7 @@ export interface Block {
   src?: string;        // video
   language?: string;   // code
   variant?: CalloutVariant; // callout
-  title?: string;      // callout - optional bold heading rendered above content
+  title?: string;      // callout / card - optional bold heading rendered above content
   steps?: string[];    // instruction - list of steps before the image
   columns?: TableColumn[];  // table
   rows?: Record<string, string>[];  // table
@@ -67,6 +80,15 @@ export interface Block {
   groups?: FieldGroup[]; // fields - grouped variant
   filterPlaceholder?: string; // fields - when set, shows a filter input with this placeholder
   defaultExpanded?: boolean; // h3 - start expanded instead of collapsed
+  // endpoint - boxed API panel. Name -> title, description -> content, body -> children.
+  method?: string;          // HTTP verb shown in the method pill (e.g. "POST")
+  url?: string;             // endpoint URL; {placeholder} segments are tinted
+  tag?: string;             // endpoint / card - badge text (e.g. "BATCH" / "SYNC")
+  tagVariant?: string;      // endpoint / card - badge color variant, styled via [attr.data-variant]
+  divider?: boolean;        // label - draw a top hairline divider above the label
+  stepItems?: StepItem[];   // steps
+  pairs?: KeyValuePair[];   // keyvalue - rows of the 2-column grid
+  keyStyle?: 'code' | 'plain'; // keyvalue - 'code' renders keys as mono code tokens
 }
 
 export interface RelatedLink {

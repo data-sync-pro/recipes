@@ -9,6 +9,10 @@
       "active": true
     },
     {
+      "folderId": "auto-create-a-child-record-on-parent-change",
+      "active": true
+    },
+    {
       "folderId": "build-and-run-a-query",
       "active": true
     },
@@ -38,10 +42,6 @@
     },
     {
       "folderId": "dynamic-filters",
-      "active": true
-    },
-    {
-      "folderId": "execute-an-action-with-trigger",
       "active": true
     },
     {

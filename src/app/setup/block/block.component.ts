@@ -1,9 +1,9 @@
-import { Component, Input, ChangeDetectionStrategy, AfterViewChecked, OnInit, ElementRef, ViewChild, HostListener } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnInit, HostListener } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Block } from '../models/setup.model';
 import { SetupService } from '../services/setup.service';
-import hljs from 'highlight.js';
+import { splitPlaceholders, PlaceholderToken } from '../utils/placeholder.util';
 
 @Component({
   selector: 'app-setup-block',
@@ -11,12 +11,10 @@ import hljs from 'highlight.js';
   styleUrls: ['./block.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SetupBlockComponent implements OnInit, AfterViewChecked {
+export class SetupBlockComponent implements OnInit {
   @Input() block!: Block;
   @Input() basePath = 'assets/setups';
-  @ViewChild('codeBlock') codeBlock?: ElementRef<HTMLElement>;
 
-  private highlighted = false;
   isCollapsed = true;
   activeTabIndex = 0;
 
@@ -47,7 +45,14 @@ export class SetupBlockComponent implements OnInit, AfterViewChecked {
   // Unresolved [[slug]] renders as a visible broken-link span so authors notice.
   renderContent(content: string | undefined): string {
     if (!content) return '';
-    let result = content.replace(/\[\[([^|\]]+?)(?:\|([^\]]+?))?\]\](\^)?/g, (_match, slug: string, label: string | undefined, newTab: string | undefined) => {
+    // Inline markdown, applied before the link passes so a `code`/**bold** span
+    // can't swallow link syntax: backtick code first (inner text escaped so it
+    // can't break out into HTML), then bold.
+    let result = content
+      .replace(/`([^`\n]+)`/g, (_m, code: string) =>
+        `<code>${code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code>`)
+      .replace(/\*\*(\S(?:.*?\S)?)\*\*/g, '<strong>$1</strong>');
+    result = result.replace(/\[\[([^|\]]+?)(?:\|([^\]]+?))?\]\](\^)?/g, (_match, slug: string, label: string | undefined, newTab: string | undefined) => {
       const tree = this.setupService.getCachedNavTree();
       const node = this.setupService.findNodeBySlug(tree, slug.trim());
       const text = (label ?? node?.label ?? slug).trim();
@@ -55,7 +60,7 @@ export class SetupBlockComponent implements OnInit, AfterViewChecked {
         return `<span class="setup-link-broken" title="Unknown setup slug: ${slug}">${text}</span>`;
       }
       const path = node.slug ? this.setupService.getPathToNode(tree, node.slug) : null;
-      const href = path ? '/setup/' + path.map(n => n.slug).filter((s): s is string => !!s).join('/') : '#';
+      const href = path ? '/user-manual/' + path.map(n => n.slug).filter((s): s is string => !!s).join('/') : '#';
       const targetAttrs = newTab ? ' target="_blank" rel="noopener noreferrer"' : '';
       return `<a class="setup-link" href="${href}" data-slug="${node.slug ?? ''}"${targetAttrs}>${text}</a>`;
     });
@@ -80,18 +85,16 @@ export class SetupBlockComponent implements OnInit, AfterViewChecked {
     const path = this.setupService.getPathToNode(tree, slug);
     if (!path) return;
     event.preventDefault();
-    this.router.navigate(['/setup', ...path.map(n => n.slug)]);
-  }
-
-  ngAfterViewChecked(): void {
-    if (this.block.type === 'code' && this.codeBlock && !this.highlighted) {
-      hljs.highlightElement(this.codeBlock.nativeElement);
-      this.highlighted = true;
-    }
+    this.router.navigate(['/user-manual', ...path.map(n => n.slug)]);
   }
 
   trackByIndex(index: number): number {
     return index;
+  }
+
+  // keyvalue - split a value into literal / {placeholder} segments for tinting.
+  tokenize(value: string): PlaceholderToken[] {
+    return splitPlaceholders(value);
   }
 
   getImagePath(content: string): string {
@@ -131,13 +134,5 @@ export class SetupBlockComponent implements OnInit, AfterViewChecked {
       return this.sanitizer.bypassSecurityTrustResourceUrl('about:blank');
     }
     return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}?rel=0`);
-  }
-
-  getHljsLanguage(language: string | undefined): string {
-    const languageMap: Record<string, string> = {
-      'apex': 'java',
-      'soql': 'sql',
-    };
-    return languageMap[language || ''] || language || 'plaintext';
   }
 }

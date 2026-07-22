@@ -1,0 +1,21 @@
+{
+  "title": "JSON_SERIALIZE_PRETTY",
+  "description": "<p>Serializes the provided object into a JSON string with pretty-printed formatting.</p>",
+  "syntax": "JSON_SERIALIZE_PRETTY(json) -> String",
+  "parameters": [
+    {
+      "name": "json",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The value to serialize into a pretty-printed JSON string."
+    }
+  ],
+  "examples": [
+    "JSON_SERIALIZE_PRETTY(VLOOKUP_ALL(\"Contact\", \"FirstName, LastName\", \"AccountId\", Id))\n-- Returns the matching Contact field maps as an indented JSON string.\n/*[{\n  \"FirstName\" : \"Adriana\",\n  \"LastName\" : \"Cunningham\",\n  \"AccountId\" : \"001DC00000yTLiRYAW\",\n  \"Id\" : \"003DC00000cy97sYAA\"\n}]*/"
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "VLOOKUP_ALL",
+    "JSON_SERIALIZE"
+  ]
+}

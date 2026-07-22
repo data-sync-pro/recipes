@@ -1,7 +1,19 @@
 {
-  "title": "Install Package",
+  "title": "Package Installation",
   "order": 1,
   "blocks": [
+    {
+      "type": "p",
+      "content": "Install Data Sync Pro from the [Salesforce AppExchange](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N4V00000Gk6NRUAZ)."
+    },
+    {
+      "type": "p",
+      "content": "On the installation screen, select <strong>\"Install for Admins Only\"</strong>."
+    },
+    {
+      "type": "p",
+      "content": "After the installation completes, assign the appropriate permission set(s) to different users. See [[permissions|Permission Sets]]^ for details."
+    },
     {
       "type": "image",
       "content": "image/install-package/install-package.png"

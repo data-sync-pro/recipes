@@ -10,6 +10,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 export class AppComponent implements OnInit, OnDestroy {
   showHeaderFooter = true;
   showScrollToTop = false;
+  readonly currentYear = new Date().getFullYear();
 
   private readonly destroy$ = new Subject<void>();
 
@@ -27,9 +28,13 @@ export class AppComponent implements OnInit, OnDestroy {
           && !event.url.includes('/recipe-editor')
           && !event.url.startsWith('/transformation/editor');
 
-        // Show scroll-to-top button only on recipe pages
-        // (transformation pages have their own internal scroll-to-top tied to the content scroll container)
-        this.showScrollToTop = event.url.startsWith('/recipes');
+        // Show the global (window-scroll) scroll-to-top button on pages that
+        // scroll the page itself. Transformation docs now scroll the window
+        // (like recipes), so they use this shared button too — the editor keeps
+        // its own internal-scroll layout and is excluded.
+        this.showScrollToTop = event.url.startsWith('/recipes')
+          || (event.url.startsWith('/transformation')
+            && !event.url.startsWith('/transformation/editor'));
       });
   }
 

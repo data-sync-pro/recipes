@@ -1,11 +1,11 @@
 .doc-page {
-  width: 75%; 
-  margin: 5rem auto;
+  width: 100%; 
+  margin: 0 auto;
   padding-bottom: 5rem;
 }
 
 .doc-title {
-  margin-top: 5rem;
+  margin-top: 0;
   margin-bottom: 2rem;
 }
 
@@ -36,8 +36,30 @@
   color: #e35f5f;
 }
 
+.doc-notes h2 {
+  color: #2253B2;
+}
+
+.doc-note {
+  margin-bottom: 1.5rem;
+}
+
+.doc-note:last-child {
+  margin-bottom: 0;
+}
+
+.doc-note-title {
+  color: #2253B2;
+  font-weight: 700;
+  margin: 1.25rem 0 0.5rem;
+}
+
+/* .doc-note-highlight (and the <strong>/<code> inside note bodies) are injected
+   via [innerHTML] in the template, which bypasses emulated view encapsulation —
+   so those rules can't live here. They are defined globally in styles.scss. */
+
 .doc-syntax {
-  background-color: #f8f8f8;
+  background-color: #eff0f0c4;
   padding: 1rem;
   border-radius: 4px;
   white-space: pre-wrap;
@@ -49,6 +71,14 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
+}
+
+/* Fix the first column (Parameter name) to a stable width so the Description
+   column gets consistent remaining space across different functions. The other
+   columns keep auto sizing under table-layout: auto. */
+.doc-table th:first-child,
+.doc-table td:first-child {
+  width: 180px;
 }
 
 .doc-tables{
@@ -88,15 +118,131 @@
   margin: 1rem 0;
 }
 
+.example-item .doc-example {
+  position: relative;
+}
+
+/* The code panel. For long blocks this becomes the scroll container (see the
+   collapsed/expanded rules below), so the copy button can pin to *its* top-right
+   corner and stay clipped inside the code block — it never floats out onto the
+   page. position: relative also anchors the absolute copy button on short
+   blocks. */
+.code-scroll {
+  position: relative;
+}
+
+/* Copy button — visual style mirrors the User Manual's code-block button.
+   On short blocks it's absolutely pinned to the code panel's top-right corner.
+   Long blocks override this to sticky (below) so it follows the internal
+   scroll. */
+.example-item .code-copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  appearance: none;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #71717a;
+  background: #ffffff;
+  border: 1px solid #e7e7ea;
+  border-radius: 6px;
+  padding: 5px 9px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Expanded long blocks: the code panel is now full height (tall), so the copy
+   button sticks to the viewport and stays visible while scrolling through it.
+   Because it only sticks on expanded (tall) blocks, it's always overlaid on the
+   code panel — never floating in the whitespace below a short/collapsed block.
+   `top` clears the fixed 4rem global header. margin-left:auto right-aligns it;
+   the negative bottom margin lets the code slide up underneath so the button
+   overlays the corner instead of taking its own row. */
+.doc-example.expanded .code-copy {
+  position: sticky;
+  top: 4.75rem;
+  right: auto;
+  display: block;
+  width: fit-content;
+  margin: 8px 8px -30px auto;
+}
+
+.example-item .code-copy:hover {
+  background: #f4f4f5;
+  color: #27272a;
+}
+
+.example-item .code-copy.copied {
+  color: #16a34a;
+  border-color: rgba(22, 163, 74, 0.4);
+}
+
 .doc-example pre {
-  background-color: #f8f8f8;
+  background-color: #eff0f0c4;
   padding: 1rem;
   border-radius: 4px;
-  margin-bottom: 1rem;
+  /* Explicit margin-top: 0 — the pre's UA top margin would otherwise show as a
+     gap above the panel when .code-scroll is collapsed (overflow:hidden makes a
+     BFC that stops the margin collapsing), pushing the copy button off the
+     panel and onto the top edge. */
+  margin: 0 0 1rem;
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
   overflow-x: hidden;
+}
+
+/* Collapsible example code — long blocks either start clipped to a short
+   preview (collapsed) or scroll internally within a capped height (expanded).
+   The Show more/less toggle attaches flush to the bottom of the code panel, so
+   square off the pre's bottom corners and drop its bottom margin. */
+.doc-example.collapsible pre {
+  margin-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Collapsed preview: clip to a teaser height with no scroll. */
+.doc-example.collapsed .code-scroll {
+  max-height: 15rem;
+  overflow: hidden;
+}
+
+/* Fade the clipped edge into the code panel's background so it reads as
+   "there's more below". Matches the pre's #eff0f0 (~0.77 alpha) fill. */
+.doc-example.collapsed .code-scroll::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4rem;
+  background: linear-gradient(to bottom, rgba(239, 240, 240, 0), rgba(239, 240, 240, 0.9));
+  pointer-events: none;
+}
+
+.example-item .code-expand {
+  display: block;
+  width: 100%;
+  margin: 0 0 1rem;
+  padding: 7px 0;
+  appearance: none;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #2253B2;
+  background: #eff0f0c4;
+  border: none;
+  border-top: 1px solid #e0e2e2;
+  border-radius: 0 0 4px 4px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.example-item .code-expand:hover {
+  background: #e4e6e6;
 }
 
 .doc-images {
