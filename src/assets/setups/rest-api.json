@@ -1,185 +1,26 @@
 {
-  "title": "Execute Pipeline and Executable via REST API",
+  "title": "Overview",
   "blocks": [
     {
       "type": "p",
-      "content": "Data Sync Pro exposes REST API endpoints that allow you to trigger pipeline and executable runs outside of the DSP UI. Any tool or system that can send an HTTP request can call them."
+      "content": "Use the Data Sync Pro REST API to run Pipelines and Executables outside the DSP user interface. Any tool or system that can send an HTTP request can call these endpoints."
     },
     {
-      "type": "h2",
-      "content": "Endpoints",
-      "children": [
-        {
-          "type": "table",
-          "columns": [
-            { "key": "method", "header": "Method", "width": "6%" },
-            { "key": "resource", "header": "Resource", "width": "12%" },
-            { "key": "mode", "header": "Mode", "width": "6%" },
-            { "key": "endpoint", "header": "Endpoint", "width": "74%", "mono": true }
-          ],
-          "rows": [
-            {
-              "method": "POST",
-              "resource": "Pipeline",
-              "mode": "Batch",
-              "endpoint": "{orgBaseUrl}/services/apexrest/pushtopics/execution/batch/pipeline/{pipelineApiName}"
-            },
-            {
-              "method": "POST",
-              "resource": "Executable",
-              "mode": "Batch",
-              "endpoint": "{orgBaseUrl}/services/apexrest/pushtopics/execution/batch/executable/{executableApiName}"
-            },
-            {
-              "method": "POST",
-              "resource": "Executable",
-              "mode": "Sync",
-              "endpoint": "{orgBaseUrl}/services/apexrest/pushtopics/execution/sync/executable/{executableApiName}"
-            }
-          ]
-        }
+      "type": "table",
+      "columns": [
+        { "key": "operation", "header": "Operation", "width": "36%" },
+        { "key": "mode", "header": "Mode", "width": "16%" },
+        { "key": "response", "header": "Response", "width": "48%" }
+      ],
+      "rows": [
+        { "operation": "Run a Pipeline", "mode": "Batch", "response": "Pipeline Execution record ID" },
+        { "operation": "Run an Executable", "mode": "Batch", "response": "Execution record ID" },
+        { "operation": "Run an Executable", "mode": "Sync", "response": "Per-record processing results" }
       ]
     },
     {
-      "type": "h2",
-      "content": "Calling via Postman",
-      "children": [
-        {
-          "type": "callout",
-          "variant": "info",
-          "content": "**Prerequisites —** An **External Client App** in the target org with **OAuth enabled** and **Postman's callback URL** allowed."
-        },
-        {
-          "type": "steps",
-          "stepItems": [
-            { "content": "Open Postman and set the request method to **POST**." },
-            { "content": "Enter the endpoint URL." },
-            {
-              "content": "Under the **Authorization** tab, select **OAuth 2.0** and configure:",
-              "children": [
-                {
-                  "type": "keyvalue",
-                  "keyStyle": "plain",
-                  "pairs": [
-                    { "key": "Grant Type", "value": "Authorization Code (With PKCE)" },
-                    { "key": "Auth URL", "value": "{orgBaseUrl}/services/oauth2/authorize" },
-                    { "key": "Access Token URL", "value": "{orgBaseUrl}/services/oauth2/token" },
-                    { "key": "Client ID", "value": "Your External Client App's Consumer Key" },
-                    { "key": "Client Secret", "value": "Your External Client App's Consumer Secret" },
-                    { "key": "Code Challenge Method", "value": "SHA256" }
-                  ]
-                }
-              ]
-            },
-            { "content": "Click **Get New Access Token** and log in to Salesforce." },
-            { "content": "Once authentication is complete, click **Proceed** to save the token." },
-            { "content": "In **Manage Access Tokens**, click **Use Token**." },
-            {
-              "content": "Under the **Body** tab, select **raw › JSON**, and enter the request body if needed.",
-              "children": [
-                {
-                  "type": "card",
-                  "title": "Pipeline",
-                  "children": [
-                    {
-                      "type": "p",
-                      "content": "`additionalRetrieveParameters` is **optional**. Provide a condition string to filter the retrieved records, or omit it when no additional filter is needed."
-                    },
-                    {
-                      "type": "code",
-                      "language": "json",
-                      "content": "{\"additionalRetrieveParameters\": \"CreatedDate = TODAY\"}"
-                    },
-                    {
-                      "type": "p",
-                      "content": "`chainNextPipeline` is **optional**. Set it to `true` to run the configured Next Pipeline after the current pipeline completes, or `false` to skip it. The default value is `false`."
-                    },
-                    {
-                      "type": "code",
-                      "language": "json",
-                      "content": "{\"chainNextPipeline\": true}"
-                    }
-                  ]
-                },
-                {
-                  "type": "card",
-                  "title": "Executable",
-                  "children": [
-                    {
-                      "type": "p",
-                      "content": "`sourceRecordIds` - an array of record IDs from the executable's source object. **Required for Sync; optional for Batch**"
-                    },
-                    {
-                      "type": "code",
-                      "language": "json",
-                      "content": "{\"sourceRecordIds\": [\"001XXXXXXXXXXXX\"]}"
-                    }
-                  ]
-                }
-              ]
-            },
-            { "content": "Click **Send**." }
-          ]
-        },
-        {
-          "type": "h4",
-          "content": "Response",
-          "children": [
-            {
-              "type": "p",
-              "content": "**Batch** returns an execution record ID (e.g. `\"a0CDC000003DPrY2AW\"`). This means the batch job has been submitted, not that the run has finished. To check the run status, go to the corresponding **Pipeline Execution** or **Execution** record."
-            },
-            {
-              "type": "p",
-              "content": "**Sync** returns the sync result for each record directly in the response body. No execution records are generated. Example response:"
-            },
-            {
-              "type": "code",
-              "language": "json",
-              "content": "[\n    [\n        {\n            \"targetId\": \"001XXXXXXXXXXXX\",\n            \"success\": true,\n            \"sourceId\": \"001XXXXXXXXXXXX\",\n            \"skipped\": false,\n            \"requestData\": {\n                \"Name\": \"Sunrise West Wave Development Inc\",\n                \"Industry\": \"Insurance\",\n                \"...\": \"...\"\n            },\n            \"action\": \"insert\"\n        }\n    ]\n]"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "h2",
-      "content": "Calling via Apex",
-      "children": [
-        {
-          "type": "callout",
-          "variant": "info",
-          "content": "**Prerequisite —** A **Named Credential** pointing to the DSP org must be configured in the calling org."
-        },
-        { "type": "h4", "content": "Pipeline Example" },
-        {
-          "type": "code",
-          "language": "apex",
-          "content": "HttpRequest request = new HttpRequest();\nrequest.setEndpoint('callout:namedCredentialApiName/services/apexrest/pushtopics/execution/batch/pipeline/pipelineApiName');\nrequest.setMethod('POST');\nrequest.setHeader('Content-Type', 'application/json');\nrequest.setTimeout(60000);\nrequest.setBody('{\"additionalRetrieveParameters\": null}');\nHttp http = new Http();\nHttpResponse response = http.send(request);\nSystem.debug('status: ' + response.getStatusCode());\nSystem.debug('response: ' + response.getBody());"
-        },
-        { "type": "h4", "content": "Executable Example" },
-        {
-          "type": "callout",
-          "variant": "info",
-          "content": "**Note** — The **Sync API** isn't available for org-to-org Apex callouts due to Salesforce's cross-org callout restrictions — use the **Batch API** instead. If synchronous execution is required, route the call through a proxy web service hosted outside Salesforce that relays the request and response to the DSP hosting service."
-        },
-        {
-          "type": "code",
-          "language": "apex",
-          "content": "HttpRequest request = new HttpRequest();\nrequest.setEndpoint('callout:namedCredentialApiName/services/apexrest/pushtopics/execution/batch/executable/executableApiName');\nrequest.setMethod('POST');\nrequest.setHeader('Content-Type', 'application/json');\nrequest.setTimeout(60000);\nrequest.setBody('{\"sourceRecordIds\": [\"001XXXXXXXXXXXX\"]}');\nHttp http = new Http();\nHttpResponse response = http.send(request);\nSystem.debug('status: ' + response.getStatusCode());\nSystem.debug('response: ' + response.getBody());"
-        },
-        { "type": "label", "content": "Replace" },
-        {
-          "type": "keyvalue",
-          "keyStyle": "code",
-          "pairs": [
-            { "key": "namedCredentialApiName", "value": "Named Credential pointing to the DSP org" },
-            { "key": "pipelineApiName", "value": "The Pipeline's API name" },
-            { "key": "executableApiName", "value": "The Executable's API name" },
-            { "key": "001XXXXXXXXXXXX", "value": "Actual source record IDs in the DSP org" }
-          ]
-        }
-      ]
+      "type": "p",
+      "content": "**Batch** requests submit the execution for asynchronous processing. **Sync** requests process the records immediately and return the results in the response."
     }
   ]
 }

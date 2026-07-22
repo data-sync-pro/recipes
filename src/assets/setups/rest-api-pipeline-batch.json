@@ -1,0 +1,49 @@
+{
+  "title": "Run a Pipeline — Batch",
+  "blocks": [
+    {
+      "type": "endpoint",
+      "method": "POST",
+      "url": "{orgBaseUrl}/services/apexrest/pushtopics/execution/batch/pipeline/{pipelineApiName}"
+    },
+    { "type": "h2", "content": "Path Parameters" },
+    {
+      "type": "table",
+      "columns": [
+        { "key": "parameter", "header": "Parameter", "width": "28%", "mono": true },
+        { "key": "type", "header": "Type", "width": "14%" },
+        { "key": "required", "header": "Required", "width": "12%" },
+        { "key": "description", "header": "Description", "width": "46%" }
+      ],
+      "rows": [
+        { "parameter": "pipelineApiName", "type": "string", "required": "Yes", "description": "API name of the Pipeline to run." }
+      ]
+    },
+    { "type": "h2", "content": "Request Body" },
+    {
+      "type": "table",
+      "columns": [
+        { "key": "parameter", "header": "Parameter", "width": "28%", "mono": true },
+        { "key": "type", "header": "Type", "width": "14%" },
+        { "key": "required", "header": "Required", "width": "12%" },
+        { "key": "description", "header": "Description", "width": "46%" }
+      ],
+      "rows": [
+        { "parameter": "additionalRetrieveParameters", "type": "string", "required": "No", "description": "An additional condition used to filter the records retrieved by the Pipeline. Omit it when no additional filter is needed." },
+        { "parameter": "chainNextPipeline", "type": "boolean", "required": "No", "description": "Controls whether the Pipeline's configured Next Pipeline runs after the current Pipeline completes. Defaults to `false`." }
+      ]
+    },
+    { "type": "h2", "content": "Request Example" },
+    { "type": "p", "content": "Filter the retrieved records and run the configured Pipeline chain:" },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"additionalRetrieveParameters\": \"CreatedDate = TODAY\",\n  \"chainNextPipeline\": true\n}"
+    },
+    { "type": "h2", "content": "Returns" },
+    {
+      "type": "p",
+      "content": "Returns the ID of the submitted **Pipeline Execution** record. The returned ID confirms that the execution was submitted. It does not indicate that processing has finished."
+    }
+  ]
+}

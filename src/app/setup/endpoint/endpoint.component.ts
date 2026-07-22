@@ -3,9 +3,9 @@ import { Block } from '../models/setup.model';
 import { splitPlaceholders, PlaceholderToken } from '../utils/placeholder.util';
 
 /**
- * Boxed REST endpoint panel: method pill + URL header strip, then a body with
- * the endpoint name, a tag badge, a description, and arbitrary child blocks
- * (label / code / p) rendered through the recursive app-setup-block.
+ * Standalone REST endpoint header: a method pill + URL strip. The endpoint's
+ * name, description, and section content are authored as plain sibling blocks
+ * (h2 / p / table / code), not wrapped by this component.
  */
 @Component({
   selector: 'app-setup-endpoint',
