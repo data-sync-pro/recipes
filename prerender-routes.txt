@@ -93,6 +93,11 @@
 /user-manual/action-result-processor
 /user-manual/bulk-job-status-syncer
 /user-manual/rest-api
+/user-manual/rest-api-pipeline-batch
+/user-manual/rest-api-executable-batch
+/user-manual/rest-api-executable-sync
+/user-manual/rest-api-examples-postman
+/user-manual/rest-api-examples-apex
 /transformation
 /transformation/global_variables
 /transformation/joiner
