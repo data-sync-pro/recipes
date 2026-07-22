@@ -75,7 +75,7 @@
             { "content": "Once authentication is complete, click **Proceed** to save the token." },
             { "content": "In **Manage Access Tokens**, click **Use Token**." },
             {
-              "content": "Under the **Body** tab, select **raw › JSON**, and enter the request body:",
+              "content": "Under the **Body** tab, select **raw › JSON**, and enter the request body if needed.",
               "children": [
                 {
                   "type": "card",
@@ -83,7 +83,7 @@
                   "children": [
                     {
                       "type": "p",
-                      "content": "`additionalRetrieveParameters` is optional. Provide a condition string to filter the retrieved records, or omit it when no additional filter is needed."
+                      "content": "`additionalRetrieveParameters` is **optional**. Provide a condition string to filter the retrieved records, or omit it when no additional filter is needed."
                     },
                     {
                       "type": "code",
@@ -92,7 +92,7 @@
                     },
                     {
                       "type": "p",
-                      "content": "`chainNextPipeline` is optional. Set it to `true` to run the configured Next Pipeline after the current pipeline completes, or `false` to skip it. The default value is `false`."
+                      "content": "`chainNextPipeline` is **optional**. Set it to `true` to run the configured Next Pipeline after the current pipeline completes, or `false` to skip it. The default value is `false`."
                     },
                     {
                       "type": "code",
