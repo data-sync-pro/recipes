@@ -1,25 +1,6 @@
-<div class="endpoint-panel">
-  <div class="endpoint-header">
-    <span class="endpoint-method">{{ block.method || 'POST' }}</span>
-    <code class="endpoint-url"><span
-      *ngFor="let token of urlTokens"
-      [class.ph]="token.isPlaceholder">{{ token.text }}</span></code>
-  </div>
-
-  <div class="endpoint-body">
-    <div class="endpoint-name-row">
-      <span class="endpoint-name">{{ block.title }}</span>
-      <span class="endpoint-tag"
-            *ngIf="block.tag"
-            [attr.data-variant]="block.tagVariant || 'batch'">{{ block.tag }}</span>
-    </div>
-
-    <p class="endpoint-desc" *ngIf="block.content">{{ block.content }}</p>
-
-    <app-setup-block
-      *ngFor="let child of block.children"
-      [block]="child"
-      [basePath]="basePath">
-    </app-setup-block>
-  </div>
+<div class="endpoint-header">
+  <span class="endpoint-method">{{ block.method || 'POST' }}</span>
+  <code class="endpoint-url"><span
+    *ngFor="let token of urlTokens"
+    [class.ph]="token.isPlaceholder">{{ token.text }}</span></code>
 </div>

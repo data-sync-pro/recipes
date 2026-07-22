@@ -1,0 +1,48 @@
+{
+  "title": "Run an Executable — Batch",
+  "blocks": [
+    {
+      "type": "endpoint",
+      "method": "POST",
+      "url": "{orgBaseUrl}/services/apexrest/pushtopics/execution/batch/executable/{executableApiName}"
+    },
+    { "type": "h2", "content": "Path Parameters" },
+    {
+      "type": "table",
+      "columns": [
+        { "key": "parameter", "header": "Parameter", "width": "28%", "mono": true },
+        { "key": "type", "header": "Type", "width": "14%" },
+        { "key": "required", "header": "Required", "width": "12%" },
+        { "key": "description", "header": "Description", "width": "46%" }
+      ],
+      "rows": [
+        { "parameter": "executableApiName", "type": "string", "required": "Yes", "description": "API name of the Executable to run." }
+      ]
+    },
+    { "type": "h2", "content": "Request Body" },
+    {
+      "type": "table",
+      "columns": [
+        { "key": "parameter", "header": "Parameter", "width": "28%", "mono": true },
+        { "key": "type", "header": "Type", "width": "14%" },
+        { "key": "required", "header": "Required", "width": "12%" },
+        { "key": "description", "header": "Description", "width": "46%" }
+      ],
+      "rows": [
+        { "parameter": "sourceRecordIds", "type": "array of strings", "required": "No", "description": "IDs of records from the Executable's source object. Omit this parameter to let the Executable retrieve records using its configured criteria." }
+      ]
+    },
+    { "type": "h2", "content": "Request Example" },
+    { "type": "p", "content": "Run the Executable for specific source records:" },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"sourceRecordIds\": [\n    \"001XXXXXXXXXXXX\"\n  ]\n}"
+    },
+    { "type": "h2", "content": "Returns" },
+    {
+      "type": "p",
+      "content": "Returns the ID of the submitted **Execution** record. The returned ID confirms that the execution was submitted. It does not indicate that processing has finished."
+    }
+  ]
+}

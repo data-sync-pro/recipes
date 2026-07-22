@@ -112,6 +112,19 @@
   {
     "id": "rest-api",
     "label": "REST API",
-    "slug": "rest-api"
+    "children": [
+      { "id": "rest-api-overview", "label": "Overview", "slug": "rest-api" },
+      { "id": "rest-api-pipeline-batch", "label": "Run a Pipeline — Batch", "slug": "rest-api-pipeline-batch" },
+      { "id": "rest-api-executable-batch", "label": "Run an Executable — Batch", "slug": "rest-api-executable-batch" },
+      { "id": "rest-api-executable-sync", "label": "Run an Executable — Sync", "slug": "rest-api-executable-sync" },
+      {
+        "id": "rest-api-examples",
+        "label": "Examples",
+        "children": [
+          { "id": "rest-api-examples-postman", "label": "Postman", "slug": "rest-api-examples-postman" },
+          { "id": "rest-api-examples-apex", "label": "Apex", "slug": "rest-api-examples-apex" }
+        ]
+      }
+    ]
   }
 ]

@@ -1,0 +1,41 @@
+{
+  "title": "Postman",
+  "blocks": [
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Prerequisite —** An **External Client App** in the target Salesforce org with **OAuth enabled** and **Postman's callback URL** added to the allowed callback URLs."
+    },
+    {
+      "type": "steps",
+      "stepItems": [
+        { "content": "Create a request in Postman and set the method to **POST**." },
+        { "content": "Enter the complete URL for the Pipeline or Executable operation." },
+        { "content": "Open the **Authorization** tab." },
+        { "content": "Select **OAuth 2.0**." },
+        {
+          "content": "Configure the following values:",
+          "children": [
+            {
+              "type": "keyvalue",
+              "keyStyle": "plain",
+              "pairs": [
+                { "key": "Grant Type", "value": "Authorization Code with PKCE" },
+                { "key": "Auth URL", "value": "{orgBaseUrl}/services/oauth2/authorize" },
+                { "key": "Access Token URL", "value": "{orgBaseUrl}/services/oauth2/token" },
+                { "key": "Client ID", "value": "External Client App Consumer Key" },
+                { "key": "Client Secret", "value": "External Client App Consumer Secret" },
+                { "key": "Code Challenge Method", "value": "SHA-256" }
+              ]
+            }
+          ]
+        },
+        { "content": "Select **Get New Access Token** and log in to Salesforce." },
+        { "content": "After authentication is complete, save and use the token." },
+        { "content": "Open the **Headers** tab and add `Content-Type: application/json`." },
+        { "content": "Open the **Body** tab, select **raw › JSON**, and enter the request body if needed." },
+        { "content": "Select **Send**." }
+      ]
+    }
+  ]
+}
