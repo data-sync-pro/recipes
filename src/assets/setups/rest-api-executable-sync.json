@@ -51,7 +51,7 @@
     {
       "type": "code",
       "language": "json",
-      "content": "[\n    [\n        {\n            \"targetId\": \"001XXXXXXXXXXXX\",\n            \"success\": true,\n            \"sourceId\": \"001XXXXXXXXXXXX\",\n            \"skipped\": false,\n            \"requestData\": {\n                \"Name\": \"Sunrise West Wave Development Inc\",\n                \"Industry\": \"Insurance\",\n                \"...\": \"...\"\n            },\n            \"action\": \"insert\"\n        }\n    ]\n]"
+      "content": "[\n    [\n        {\n            \"targetId\": \"001XXXXXXXXXXXX\",\n            \"success\": true,\n            \"sourceId\": \"001XXXXXXXXXXXX\",\n            \"skipped\": false,\n            \"action\": \"insert\"\n        }\n    ]\n]"
     },
     {
       "type": "table",
@@ -65,7 +65,6 @@
         { "field": "targetId", "type": "string", "description": "ID of the resulting target record." },
         { "field": "success", "type": "boolean", "description": "Indicates whether the record was processed successfully." },
         { "field": "skipped", "type": "boolean", "description": "Indicates whether the record was skipped." },
-        { "field": "requestData", "type": "object", "description": "Data submitted for the record operation." },
         { "field": "action", "type": "string", "description": "Operation performed, such as `insert` or `update`." }
       ]
     }
