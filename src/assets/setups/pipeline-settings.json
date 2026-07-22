@@ -70,8 +70,8 @@
           "title": "#Batch",
           "fields": [
             {
-              "name": "Chained Pipeline (Scheduled)",
-              "description": "Specifies the next Pipeline to run automatically after this Pipeline completes during scheduled batch execution."
+              "name": "Next Pipeline (Scheduled or API)",
+              "description": "Specifies the next Pipeline to run automatically after this Pipeline completes. It runs on scheduled batch execution, and on API batch execution when the caller opts in."
             },
             {
               "name": "Stop Remaining When an Executable Fails?",
