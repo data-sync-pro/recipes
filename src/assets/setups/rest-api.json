@@ -83,12 +83,21 @@
                   "children": [
                     {
                       "type": "p",
-                      "content": "`additionalRetrieveParameters` is optional. Use `null` for no additional filtering, or a condition string (e.g. `\"CreatedDate = TODAY\"`) to filter retrieved records."
+                      "content": "`additionalRetrieveParameters` is optional. Provide a condition string to filter the retrieved records, or omit it when no additional filter is needed."
                     },
                     {
                       "type": "code",
                       "language": "json",
-                      "content": "{\"additionalRetrieveParameters\": null}"
+                      "content": "{\"additionalRetrieveParameters\": \"CreatedDate = TODAY\"}"
+                    },
+                    {
+                      "type": "p",
+                      "content": "`chainNextPipeline` is optional. Set it to `true` to run the configured Next Pipeline after the current pipeline completes, or `false` to skip it. The default value is `false`."
+                    },
+                    {
+                      "type": "code",
+                      "language": "json",
+                      "content": "{\"chainNextPipeline\": true}"
                     }
                   ]
                 },
@@ -98,12 +107,12 @@
                   "children": [
                     {
                       "type": "p",
-                      "content": "`sourceRecordIds` — an array of record IDs from the executable's source object."
+                      "content": "`sourceRecordIds` - an array of record IDs from the executable's source object. **Required for Sync; optional for Batch**"
                     },
                     {
                       "type": "code",
                       "language": "json",
-                      "content": "{\"sourceRecordIds\": [\"006XXXXXXXXXXXX\"]}"
+                      "content": "{\"sourceRecordIds\": [\"001XXXXXXXXXXXX\"]}"
                     }
                   ]
                 }
@@ -127,7 +136,7 @@
             {
               "type": "code",
               "language": "json",
-              "content": "[\n    [\n        {\n            \"targetId\": \"006XXXXXXXXXXXX\",\n            \"success\": true,\n            \"sourceId\": \"006XXXXXXXXXXXX\",\n            \"skipped\": false,\n            \"action\": \"insert\"\n        }\n    ]\n]"
+              "content": "[\n    [\n        {\n            \"targetId\": \"001XXXXXXXXXXXX\",\n            \"success\": true,\n            \"sourceId\": \"001XXXXXXXXXXXX\",\n            \"skipped\": false,\n            \"requestData\": {\n                \"Name\": \"Sunrise West Wave Development Inc\",\n                \"Industry\": \"Insurance\",\n                \"...\": \"...\"\n            },\n            \"action\": \"insert\"\n        }\n    ]\n]"
             }
           ]
         }
