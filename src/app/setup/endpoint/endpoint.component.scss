@@ -1,19 +1,12 @@
 $mono: 'Consolas', 'Monaco', 'Courier New', monospace;
 
-.endpoint-panel {
-  margin: 1.25rem 0;
-  border: 1px solid #e7e7ea;
-  border-radius: 13px;
-  overflow: hidden;
-}
-
+// Standalone method + URL strip (no surrounding panel). The section headings and
+// body content are plain sibling blocks (h2 / p / table / code), not wrapped here.
 .endpoint-header {
   display: flex;
   align-items: center;
   gap: 11px;
-  padding: 12px 16px;
-  background: #fafafb;
-  border-bottom: 1px solid #efeff1;
+  padding: 0px;
 }
 
 .endpoint-method {
@@ -23,16 +16,16 @@ $mono: 'Consolas', 'Monaco', 'Courier New', monospace;
   font-size: 10.5px;
   letter-spacing: 0.04em;
   color: #fff;
-  background: #16a34a;
-  padding: 4px 9px;
-  border-radius: 6px;
+  background: #16a34ac5;
+  padding: 1px 7px;
+  border-radius: 2px;
 }
 
 .endpoint-url {
   flex: 1;
   min-width: 0;
   font-family: $mono;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.4;
   color: #3f3f46;
   overflow-x: auto;
@@ -42,40 +35,4 @@ $mono: 'Consolas', 'Monaco', 'Courier New', monospace;
   .ph {
     color: #2253B2;
   }
-}
-
-.endpoint-body {
-  padding: 18px 20px 20px;
-}
-
-.endpoint-name-row {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-bottom: 6px;
-}
-
-.endpoint-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: #18181b;
-}
-
-.endpoint-tag {
-  font-family: $mono;
-  font-weight: 600;
-  font-size: 10px;
-  letter-spacing: 0.05em;
-  padding: 3px 7px;
-  border-radius: 5px;
-
-  &[data-variant='batch'] { color: #2563a8; background: #eef4fc; }
-  &[data-variant='sync']  { color: #9a5a16; background: #fbf0e3; }
-}
-
-.endpoint-desc {
-  font-size: 14.5px;
-  line-height: 1.7;
-  color: #52525b;
-  margin: 0 0 18px;
 }

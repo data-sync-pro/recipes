@@ -124,7 +124,7 @@ $mono: 'Consolas', 'Monaco', 'Courier New', monospace;
 .block-image {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 2px;
 }
 
 .block-video-container {
@@ -345,19 +345,17 @@ $mono: 'Consolas', 'Monaco', 'Courier New', monospace;
   table-layout: fixed;
   margin: 1.5rem 0;
   border-collapse: collapse;
-  border-radius: 8px;
+  border-radius: 2px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   thead {
     background-color: #f8fafc;
 
     th {
-      padding: 0.75rem 1rem;
+      padding: 0.5rem 1rem;
       font-weight: 500;
       font-size: 0.875rem;
       color: #2C2C2D;
-      border-bottom: 2px solid #e2e8f0;
     }
   }
 
@@ -369,10 +367,9 @@ $mono: 'Consolas', 'Monaco', 'Courier New', monospace;
     }
 
     td {
-      padding: 0.75rem 1rem;
+      padding: 0.5rem 1rem;
       font-size: 0.875rem;
       color: #2C2C2D;
-      border-bottom: 1px solid #e2e8f0;
       line-height: 1.5;
       word-wrap: break-word;
       overflow-wrap: break-word;

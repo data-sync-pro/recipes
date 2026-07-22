@@ -1,0 +1,73 @@
+{
+  "title": "Run an Executable — Sync",
+  "blocks": [
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "The **Sync API** isn't available for org-to-org Apex callouts due to Salesforce's cross-org callout restrictions — use the **Batch API** instead. If synchronous execution is required, route the call through a proxy web service hosted outside Salesforce that relays the request and response to the DSP hosting service."
+    },
+    {
+      "type": "endpoint",
+      "method": "POST",
+      "url": "{orgBaseUrl}/services/apexrest/pushtopics/execution/sync/executable/{executableApiName}"
+    },
+    { "type": "h2", "content": "Path Parameters" },
+    {
+      "type": "table",
+      "columns": [
+        { "key": "parameter", "header": "Parameter", "width": "28%", "mono": true },
+        { "key": "type", "header": "Type", "width": "14%" },
+        { "key": "required", "header": "Required", "width": "12%" },
+        { "key": "description", "header": "Description", "width": "46%" }
+      ],
+      "rows": [
+        { "parameter": "executableApiName", "type": "string", "required": "Yes", "description": "API name of the Executable to run." }
+      ]
+    },
+    { "type": "h2", "content": "Request Body" },
+    {
+      "type": "table",
+      "columns": [
+        { "key": "parameter", "header": "Parameter", "width": "28%", "mono": true },
+        { "key": "type", "header": "Type", "width": "14%" },
+        { "key": "required", "header": "Required", "width": "12%" },
+        { "key": "description", "header": "Description", "width": "46%" }
+      ],
+      "rows": [
+        { "parameter": "sourceRecordIds", "type": "array of strings", "required": "Yes", "description": "IDs of records from the Executable's source object." }
+      ]
+    },
+    { "type": "h2", "content": "Request Example" },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"sourceRecordIds\": [\n    \"001XXXXXXXXXXXX\"\n  ]\n}"
+    },
+    { "type": "h2", "content": "Returns" },
+    {
+      "type": "p",
+      "content": "Returns the processing result for each source record directly in the response body. Sync executions do not create Execution records."
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "[\n    [\n        {\n            \"targetId\": \"001XXXXXXXXXXXX\",\n            \"success\": true,\n            \"sourceId\": \"001XXXXXXXXXXXX\",\n            \"skipped\": false,\n            \"requestData\": {\n                \"Name\": \"Sunrise West Wave Development Inc\",\n                \"Industry\": \"Insurance\",\n                \"...\": \"...\"\n            },\n            \"action\": \"insert\"\n        }\n    ]\n]"
+    },
+    {
+      "type": "table",
+      "columns": [
+        { "key": "field", "header": "Field", "width": "22%", "mono": true },
+        { "key": "type", "header": "Type", "width": "14%" },
+        { "key": "description", "header": "Description", "width": "64%" }
+      ],
+      "rows": [
+        { "field": "sourceId", "type": "string", "description": "ID of the source record." },
+        { "field": "targetId", "type": "string", "description": "ID of the resulting target record." },
+        { "field": "success", "type": "boolean", "description": "Indicates whether the record was processed successfully." },
+        { "field": "skipped", "type": "boolean", "description": "Indicates whether the record was skipped." },
+        { "field": "requestData", "type": "object", "description": "Data submitted for the record operation." },
+        { "field": "action", "type": "string", "description": "Operation performed, such as `insert` or `update`." }
+      ]
+    }
+  ]
+}
