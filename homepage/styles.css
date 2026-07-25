@@ -4183,6 +4183,9 @@ body.sn-hero .cs-divider .arrow-mini {
   background: var(--paper-deep);
   color: var(--ink-on-dark);
 }
+.lf-field select optgroup {
+  background: var(--paper-deep);
+}
 .lf-field input::placeholder,
 .lf-field textarea::placeholder {
   color: rgba(182,189,200,.55);
@@ -4512,6 +4515,9 @@ body.sn-hero .cs-divider .arrow-mini {
   background: var(--card);
   color: var(--ink);
 }
+.pcm-form .lf-field select optgroup {
+  background: var(--card);
+}
 .pcm-form .lf-field [aria-invalid="true"] {
   border-color: var(--signal);
   background-color: var(--signal-soft);
@@ -4628,9 +4634,18 @@ body.sn-hero .cs-divider .arrow-mini {
   flex-wrap: wrap;
 }
 .pcm-submit {
-  
   font-size: 14.5px;
   padding: 12px 22px;
+}
+.pcm-submit:hover {
+  background: oklch(0.50 0.10 195);
+  border-color: oklch(0.50 0.10 195);
+  color: #fff;
+}
+.pcm-submit:active {
+  background: oklch(0.45 0.10 195);
+  border-color: oklch(0.45 0.10 195);
+  color: #fff;
 }
 .pcm-submit:disabled,
 .pcm-submit[disabled] {
