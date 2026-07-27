@@ -873,7 +873,15 @@ export class FaqComponent implements OnInit, OnDestroy, AfterViewInit {
   showFAQDetail(item: FAQItem): void {
     // Mark that user has interacted - this enables TOC highlighting
     this.userHasScrolled = true;
-    
+
+    // A FAQ inside a subcategory is only visible in the sidebar tree while its
+    // parent category's branch is open — keep that branch expanded so the
+    // active subcategory row shows for the FAQ being displayed.
+    if (item.subCategory) {
+      this.expandedCategories.add(item.category);
+    }
+
+
     if (!item.viewCount) {
       item.viewCount = 0;
     }
