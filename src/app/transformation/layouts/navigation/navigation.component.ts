@@ -12,15 +12,37 @@ interface FunctionItem {
   Tags: string[];
 }
 
-// A unique function for the flat search results: name, its tags (for matching)
-// and the route segment of its detail page.
-interface SearchableFunction {
+// One searchable thing in the docs, as emitted by scripts/gen-formulas-index.mjs:
+// every function, global variable, operator and standalone page, each with its
+// prose pre-flattened into `keywords` (already lowercased).
+//
+// `page: true` means the entry lives at /transformation/<route> (an empty route
+// being Home); everything else is a function under /transformation/<cat>/<route>.
+// Link assembly stays here so route.util.ts remains the only owner of slugs.
+interface SearchIndexEntry {
   name: string;
   route: string;
   tags: string[];
+  keywords: string;
+  page?: boolean;
 }
 
-// A single row in the flat search results list (function or special page).
+// An index entry with its match forms precomputed once at load, so a keystroke
+// costs only substring tests.
+interface IndexedEntry extends SearchIndexEntry {
+  rawName: string;
+  looseName: string;
+  looseTags: string;
+  looseKeywords: string;
+}
+
+// The query in both forms, computed once per keystroke.
+interface Query {
+  raw: string;
+  loose: string;
+}
+
+// A single row in the flat search results list.
 interface NavSearchResult {
   name: string;
   link: string[];
@@ -30,10 +52,6 @@ interface FunctionCategory {
   name: string;
   expanded: boolean;
   functions: { name: string; route: string }[];
-  // Extra lowercased text matched by the sidebar filter but never displayed.
-  // Used to make the Home entry findable by the overview content it renders
-  // (the "Elements of a Formula" section), not just its "Home" label.
-  searchText?: string;
 }
 
 const SPECIAL_ROUTES: Record<string, string> = {
@@ -42,13 +60,28 @@ const SPECIAL_ROUTES: Record<string, string> = {
   'Apex Class': 'apex_class',
 };
 
-// Pseudo function entries in tags.json that stand in for the special pages —
-// excluded from the flat function list (they surface as special-page rows).
-const SPECIAL_ITEM_NAMES = new Set(['OPERATORS', 'GLOBAL_VARIABLES', 'APEX_CLASS']);
-
 // Tags that map to special pages rather than a function category; skipped when
 // choosing a function's primary category for its detail-page link.
 const SPECIAL_TAGS = new Set(['Operators', 'Global Variables', 'Apex Class']);
+
+// Users type separators loosely — "org domain" for $ORG_DOMAIN_URL, "date time"
+// for the "Date & Time" tag — so both sides are matched with every run of
+// non-alphanumerics collapsed to a single space. A query made up entirely of
+// symbols ("+", "&&") collapses to nothing and falls back to a raw substring
+// match, which is what keeps the operators findable.
+const loose = (text: string): string =>
+  text.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+// $-prefixed entries sort after plain names so the alphabet isn't interrupted by
+// a block of variables.
+const compareNames = (a: string, b: string): number => {
+  const aName = a.toLowerCase();
+  const bName = b.toLowerCase();
+  const aDollar = aName.startsWith('$');
+  const bDollar = bName.startsWith('$');
+  if (aDollar !== bDollar) return aDollar ? 1 : -1;
+  return aName.localeCompare(bName);
+};
 
 @Component({
   selector: 'app-navigation',
@@ -80,16 +113,18 @@ export class NavigationComponent implements OnInit, OnDestroy {
   // category.expanded, which the user can also toggle manually.
   activeCategoryName = '';
   functionCategories: FunctionCategory[] = [];
-  // Deduped, flat list of every function (each appears once even when it has
-  // multiple tags) — the source for the flat search results.
-  private allFunctions: SearchableFunction[] = [];
+  // Build-time search index (see scripts/gen-formulas-index.mjs) — the single
+  // source for the flat search results.
+  private searchIndex: IndexedEntry[] = [];
+  // Gates the "No matches found" row: typing before the index arrives would
+  // otherwise claim there are no matches when nothing has been searched yet.
+  // Set on failure too, so a load error degrades to the normal empty state
+  // rather than a permanently blank list.
+  searchIndexLoaded = false;
   searchQuery = '';
   // Flat, deduped search results shown in place of the category tree while a
   // query is active, so a multi-tag function appears once instead of per tag.
   searchResults: NavSearchResult[] = [];
-  // Lowercased blob of the Home page's overview content, loaded once and
-  // attached to the Home category so the filter can match against it.
-  private homeSearchText = '';
   routerSubscription!: Subscription;
 
   get isSearching(): boolean {
@@ -125,13 +160,23 @@ export class NavigationComponent implements OnInit, OnDestroy {
       this.updateActiveCategory();
     });
 
-    // The Home page renders the "Elements of a Formula" overview. Index that
-    // text so searching its words surfaces the Home entry in the sidebar.
     this.http
-      .get<any>('assets/transformation/formulas/elements_of_formula.json')
-      .subscribe((data) => {
-        this.homeSearchText = this.buildHomeSearchText(data);
-        this.attachHomeSearchText();
+      .get<SearchIndexEntry[]>('assets/transformation/formulas/_search-index.json')
+      .subscribe({
+        next: (index) => {
+          this.searchIndex = index.map((entry) => ({
+            ...entry,
+            rawName: entry.name.toLowerCase(),
+            looseName: loose(entry.name),
+            looseTags: entry.tags.map(loose).join(' '),
+            looseKeywords: loose(entry.keywords),
+          }));
+          this.searchIndexLoaded = true;
+          this.applyFilter();
+        },
+        error: () => {
+          this.searchIndexLoaded = true;
+        },
       });
 
     this.router.events
@@ -177,51 +222,57 @@ export class NavigationComponent implements OnInit, OnDestroy {
   // shown when the query is empty; while searching, searchResults is shown
   // instead so each function appears once rather than under every tag it has.
   private applyFilter(): void {
-    const query = this.searchQuery.trim().toLowerCase();
-    if (!query) {
+    const raw = this.searchQuery.trim().toLowerCase();
+    if (!raw) {
       this.searchResults = [];
       return;
     }
+    const query: Query = { raw, loose: loose(raw) };
 
-    // Special pages (Home, Operators, …) as single rows when their name or, for
-    // Home, its indexed overview text matches.
-    const specials: NavSearchResult[] = this.functionCategories
-      .filter(
-        (c) => SPECIAL_ROUTES[c.name] && this.categoryMatchesQuery(c, query)
+    this.searchResults = this.searchIndex
+      .map((entry) => ({ entry, rank: this.rankEntry(entry, query) }))
+      .filter((match) => match.rank >= 0)
+      .sort(
+        (a, b) => a.rank - b.rank || compareNames(a.entry.name, b.entry.name)
       )
-      .map((c) => ({ name: c.name, link: ['/transformation', SPECIAL_ROUTES[c.name]] }));
-
-    // Functions matched by their own name or any of their tags. allFunctions is
-    // already unique, so there are no cross-category repeats.
-    const functions: NavSearchResult[] = this.allFunctions
-      .filter(
-        (fn) =>
-          fn.name.toLowerCase().includes(query) ||
-          fn.tags.some((tag) => tag.toLowerCase().includes(query))
-      )
-      .map((fn) => ({ name: fn.name, link: this.functionLink(fn) }));
-
-    this.searchResults = [...specials, ...functions];
+      .map(({ entry }) => ({ name: entry.name, link: this.entryLink(entry) }));
   }
 
-  // A function's detail-page link, routed under its primary (first non-special)
-  // category — any of its categories resolves to the same page.
-  private functionLink(fn: SearchableFunction): string[] {
-    const primaryTag = fn.tags.find((tag) => !SPECIAL_TAGS.has(tag)) ?? fn.tags[0];
-    return ['/transformation', categorySlug(primaryTag), fn.route];
+  // Match strength, lowest first; -1 means no match. Name hits outrank tag hits,
+  // which outrank prose hits, so typing "add" surfaces ADD_DAYS above the dozen
+  // functions whose descriptions merely mention adding.
+  private rankEntry(entry: IndexedEntry, query: Query): number {
+    if (!query.loose) {
+      // Symbol-only query ("+", "&&"): the loose forms have nothing left to
+      // compare, so fall back to the text as authored.
+      if (entry.rawName.includes(query.raw)) return 2;
+      if (entry.keywords.includes(query.raw)) return 4;
+      return -1;
+    }
+    if (entry.looseName === query.loose) return 0;
+    if (entry.looseName.startsWith(query.loose)) return 1;
+    if (entry.looseName.includes(query.loose)) return 2;
+    if (entry.looseTags.includes(query.loose)) return 3;
+    if (entry.looseKeywords.includes(query.loose)) return 4;
+    return -1;
   }
 
-  // A category matches on its own name/tag or, for Home, on its indexed
-  // overview text. (query is already lowercased by applyFilter.)
-  private categoryMatchesQuery(category: FunctionCategory, query: string): boolean {
-    return (
-      category.name.toLowerCase().includes(query) ||
-      (category.searchText?.includes(query) ?? false)
-    );
+  // Pages address themselves directly (Home being the empty route); functions are
+  // routed under their primary (first non-special) category — any of their
+  // categories resolves to the same page.
+  private entryLink(entry: IndexedEntry): string[] {
+    if (entry.page) {
+      return entry.route ? ['/transformation', entry.route] : ['/transformation'];
+    }
+    const primaryTag = entry.tags.find((tag) => !SPECIAL_TAGS.has(tag)) ?? entry.tags[0];
+    if (!primaryTag) return ['/transformation', entry.route];
+    return ['/transformation', categorySlug(primaryTag), entry.route];
   }
 
+  // Several entries share a route (every global variable points at the Global
+  // Variables page), so the name has to be part of the identity.
   trackBySearchResult(_: number, result: NavSearchResult): string {
-    return result.link.join('/');
+    return `${result.name}|${result.link.join('/')}`;
   }
 
   trackByCategoryName(_: number, category: FunctionCategory): string {
@@ -264,25 +315,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   groupFunctionsByTags(functionItems: FunctionItem[]) {
-    // Flat, deduped function list (tags.json lists each function once with all
-    // its tags) for the flat search results, minus the special pseudo entries.
-    this.allFunctions = functionItems
-      .filter((item) => !SPECIAL_ITEM_NAMES.has(item['Item Name']))
-      .map((item) => ({
-        name: item['Item Name'],
-        route: buildRoute(item['Item Name']),
-        tags: item.Tags,
-      }))
-      .sort((a, b) => {
-        const aName = a.name.toLowerCase();
-        const bName = b.name.toLowerCase();
-        const aDollar = aName.startsWith('$');
-        const bDollar = bName.startsWith('$');
-        if (aDollar && !bDollar) return 1;
-        if (!aDollar && bDollar) return -1;
-        return aName.localeCompare(bName);
-      });
-
     const tagMap: { [tag: string]: { name: string; route: string }[] } = {};
 
     functionItems.forEach((item) => {
@@ -300,15 +332,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.functionCategories = Object.keys(tagMap).map((tag) => ({
       name: tag,
       expanded: false,
-      functions: tagMap[tag].sort((a, b) => {
-        const aName = a.name.toLowerCase();
-        const bName = b.name.toLowerCase();
-        const aDollar = aName.startsWith('$');
-        const bDollar = bName.startsWith('$');
-        if (aDollar && !bDollar) return 1;
-        if (!aDollar && bDollar) return -1;
-        return aName.localeCompare(bName);
-      }),
+      functions: tagMap[tag].sort((a, b) => compareNames(a.name, b.name)),
     }));
 
     const TAG_ORDER = [
@@ -330,30 +354,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
       expanded: false,
       functions: [],
     });
-
-    // Attach the Home overview text (if already loaded) and point the view at
-    // the freshly built list, re-applying any active query.
-    this.attachHomeSearchText();
-  }
-
-  // Flatten the elements_of_formula.json into one lowercased searchable blob.
-  private buildHomeSearchText(data: any): string {
-    const parts = ['Formula', data?.title ?? '', data?.description ?? ''];
-    (data?.elements ?? []).forEach((el: any) => {
-      parts.push(el?.element ?? '', el?.description ?? '');
-    });
-    return parts.join(' ').toLowerCase();
-  }
-
-  // Copy the Home overview text onto the Home category and refresh the view.
-  // Called from both the tags load (which rebuilds the Home entry) and the
-  // elements load, since either may complete first.
-  private attachHomeSearchText(): void {
-    const home = this.functionCategories.find((c) => c.name === 'Home');
-    if (home) {
-      home.searchText = this.homeSearchText;
-    }
-    this.applyFilter();
   }
 
   toggleCategory(category: FunctionCategory): void {
