@@ -80,6 +80,11 @@ try {
   // `page: true` marks an entry that lives at /transformation/<route>; the rest
   // are functions, addressed as /transformation/<categorySlug>/<route>. Link
   // assembly stays in the app so route.util.ts remains the single owner of slugs.
+  //
+  // `pageName` is set on entries that only exist as a row on a shared page (every
+  // global variable, every operator): they are indexed individually so the search
+  // can match their name and prose, but the result the user is offered is the page
+  // itself, under this title.
   const index = [];
   const linked = new Set();     // folders reachable from the index
   const missingFolders = [];    // tags.json names whose folder doesn't exist
@@ -105,22 +110,10 @@ try {
     });
   }
 
-  // The three standalone pages, plus Home. Home is the only entry with an empty
-  // route (it lives at the transformation root).
-  const elements = readJson('elements_of_formula.json');
-  add({
-    name: 'Home',
-    route: '',
-    tags: [],
-    page: true,
-    keywords: searchable(
-      'formula',
-      elements?.title,
-      elements?.description,
-      (elements?.elements ?? []).flatMap((el) => [el?.element, el?.description])
-    ),
-  });
-
+  // Home is deliberately absent: it lists every formula on one page, so it
+  // legitimately matches almost any query — which makes it noise in a result
+  // list whose job is to point at one specific thing. It stays reachable as the
+  // first row of the category tree.
   const globalVariables = readJson('global_variables.json');
   add({
     name: 'Global Variables',
@@ -130,15 +123,19 @@ try {
     keywords: '',
   });
 
-  // Each variable as its own row. A few ($JOINER) have a full page of their own;
-  // the rest point at the shared Global Variables table.
+  // Each variable as its own row, so its name and prose are searchable. A few
+  // ($JOINER) have a full page of their own; the rest point at the shared Global
+  // Variables table, and carry `pageName` so the sidebar can collapse a run of
+  // them into the single page they all lead to.
   for (const variable of globalVariables?.globalVariables ?? []) {
     const own = variable.variable.replace(/^\$/, '').toLowerCase();
+    const hasOwnPage = docs.has(own);
     add({
       name: variable.variable,
-      route: docs.has(own) ? own : 'global_variables',
+      route: hasOwnPage ? own : 'global_variables',
       tags: ['Global Variables'],
       page: true,
+      ...(hasOwnPage ? {} : { pageName: 'Global Variables' }),
       keywords: searchable(variable.description),
     });
   }
@@ -152,6 +149,7 @@ try {
         route: 'operators',
         tags: ['Operators'],
         page: true,
+        pageName: 'Operators',
         keywords: searchable(op.operator, op.name, group, op.description),
       });
     }
