@@ -16,15 +16,20 @@ interface FunctionItem {
 // every function, global variable, operator and standalone page, each with its
 // prose pre-flattened into `keywords` (already lowercased).
 //
-// `page: true` means the entry lives at /transformation/<route> (an empty route
-// being Home); everything else is a function under /transformation/<cat>/<route>.
-// Link assembly stays here so route.util.ts remains the only owner of slugs.
+// `page: true` means the entry lives at /transformation/<route>; everything else
+// is a function under /transformation/<cat>/<route>. Link assembly stays here so
+// route.util.ts remains the only owner of slugs.
+//
+// `pageName` is set when the entry is only a row on a shared page (every global
+// variable, every operator): it is indexed on its own so name and prose are
+// searchable, but the result offered is the page, listed under this title.
 interface SearchIndexEntry {
   name: string;
   route: string;
   tags: string[];
   keywords: string;
   page?: boolean;
+  pageName?: string;
 }
 
 // An index entry with its match forms precomputed once at load, so a keystroke
@@ -71,6 +76,15 @@ const SPECIAL_TAGS = new Set(['Operators', 'Global Variables', 'Apex Class']);
 // match, which is what keeps the operators findable.
 const loose = (text: string): string =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+// True when `needle` starts a word in `haystack`. Both sides have been through
+// loose(), so words are separated by exactly one space and this is a plain
+// substring test. Matching at word starts keeps prefix typing working ("valu"
+// still finds "value", "hours" still finds BUSINESS_HOURS_ADD) while dropping
+// the mid-word coincidences that made short function names match everything:
+// SIN hit "bu(sin)ess" and "u(sin)g", TAN "s(tan)dard", DAY "to(day)()".
+const startsWord = (haystack: string, needle: string): boolean =>
+  haystack.startsWith(needle) || haystack.includes(` ${needle}`);
 
 // $-prefixed entries sort after plain names so the alphabet isn't interrupted by
 // a block of variables.
@@ -122,8 +136,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
   // rather than a permanently blank list.
   searchIndexLoaded = false;
   searchQuery = '';
-  // Flat, deduped search results shown in place of the category tree while a
-  // query is active, so a multi-tag function appears once instead of per tag.
+  // Flat search results shown in place of the category tree while a query is
+  // active — one row per destination page; see applyFilter().
   searchResults: NavSearchResult[] = [];
   routerSubscription!: Subscription;
 
@@ -220,7 +234,14 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   // Rebuild the flat search results for the current query. The category tree is
   // shown when the query is empty; while searching, searchResults is shown
-  // instead so each function appears once rather than under every tag it has.
+  // instead.
+  //
+  // Results are one row per destination page, not per index entry: a function
+  // carrying several tags resolves to one page, and so do the dozens of global
+  // variables and operators that are documented as rows of a single table.
+  // Typing "$" used to list every variable separately even though all of them
+  // led to the same place; now that run collapses into one "Global Variables"
+  // row, ranked by its best-matching member.
   private applyFilter(): void {
     const raw = this.searchQuery.trim().toLowerCase();
     if (!raw) {
@@ -229,13 +250,20 @@ export class NavigationComponent implements OnInit, OnDestroy {
     }
     const query: Query = { raw, loose: loose(raw) };
 
-    this.searchResults = this.searchIndex
-      .map((entry) => ({ entry, rank: this.rankEntry(entry, query) }))
-      .filter((match) => match.rank >= 0)
-      .sort(
-        (a, b) => a.rank - b.rank || compareNames(a.entry.name, b.entry.name)
-      )
-      .map(({ entry }) => ({ name: entry.name, link: this.entryLink(entry) }));
+    const byPage = new Map<string, { name: string; link: string[]; rank: number }>();
+    for (const entry of this.searchIndex) {
+      const rank = this.rankEntry(entry, query);
+      if (rank < 0) continue;
+      const link = this.entryLink(entry);
+      const key = link.join('/');
+      const seen = byPage.get(key);
+      if (seen && seen.rank <= rank) continue;
+      byPage.set(key, { name: entry.pageName ?? entry.name, link, rank });
+    }
+
+    this.searchResults = Array.from(byPage.values())
+      .sort((a, b) => a.rank - b.rank || compareNames(a.name, b.name))
+      .map(({ name, link }) => ({ name, link }));
   }
 
   // Match strength, lowest first; -1 means no match. Name hits outrank tag hits,
@@ -244,35 +272,34 @@ export class NavigationComponent implements OnInit, OnDestroy {
   private rankEntry(entry: IndexedEntry, query: Query): number {
     if (!query.loose) {
       // Symbol-only query ("+", "&&"): the loose forms have nothing left to
-      // compare, so fall back to the text as authored.
-      if (entry.rawName.includes(query.raw)) return 2;
-      if (entry.keywords.includes(query.raw)) return 4;
-      return -1;
+      // compare, so fall back to the name as authored. Prose is deliberately
+      // not consulted here — every function's syntax carries parentheses, so
+      // searching "()" would otherwise return most of the catalogue.
+      return entry.rawName.includes(query.raw) ? 2 : -1;
     }
     if (entry.looseName === query.loose) return 0;
     if (entry.looseName.startsWith(query.loose)) return 1;
-    if (entry.looseName.includes(query.loose)) return 2;
-    if (entry.looseTags.includes(query.loose)) return 3;
-    if (entry.looseKeywords.includes(query.loose)) return 4;
+    if (startsWord(entry.looseName, query.loose)) return 2;
+    if (startsWord(entry.looseTags, query.loose)) return 3;
+    if (startsWord(entry.looseKeywords, query.loose)) return 4;
     return -1;
   }
 
-  // Pages address themselves directly (Home being the empty route); functions are
-  // routed under their primary (first non-special) category — any of their
-  // categories resolves to the same page.
+  // Pages address themselves directly; functions are routed under their primary
+  // (first non-special) category — any of their categories resolves to the same
+  // page.
   private entryLink(entry: IndexedEntry): string[] {
     if (entry.page) {
-      return entry.route ? ['/transformation', entry.route] : ['/transformation'];
+      return ['/transformation', entry.route];
     }
     const primaryTag = entry.tags.find((tag) => !SPECIAL_TAGS.has(tag)) ?? entry.tags[0];
     if (!primaryTag) return ['/transformation', entry.route];
     return ['/transformation', categorySlug(primaryTag), entry.route];
   }
 
-  // Several entries share a route (every global variable points at the Global
-  // Variables page), so the name has to be part of the identity.
+  // One row per destination page, so the link identifies the result.
   trackBySearchResult(_: number, result: NavSearchResult): string {
-    return `${result.name}|${result.link.join('/')}`;
+    return result.link.join('/');
   }
 
   trackByCategoryName(_: number, category: FunctionCategory): string {
