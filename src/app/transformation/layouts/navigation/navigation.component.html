@@ -26,7 +26,9 @@
     >
       <a [routerLink]="result.link" (click)="linkClick.emit()">{{ result.name }}</a>
     </li>
-    <li class="nav-empty" *ngIf="searchResults.length === 0">
+    <!-- Held back until the search index has loaded, so a slow connection shows
+         nothing rather than a premature "no matches". -->
+    <li class="nav-empty" *ngIf="searchResults.length === 0 && searchIndexLoaded">
       <mat-icon>search_off</mat-icon>
       <span>No matches found</span>
     </li>
