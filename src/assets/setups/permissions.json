@@ -42,7 +42,7 @@
           "type": "ul",
           "children": [
             { "type": "p", "content": "<strong>DSP: Access Query on Remote Connections</strong>: If a Connection is remote, the Query component operates under the context of the integration user. DSP users need this permission to run queries using the Query component from the Connection record page." },
-            { "type": "p", "content": "<strong>DSP: Download Data in Query</strong>: Enables download functionality within the Query component." }
+            { "type": "p", "content": "<strong>DSP: Download Data</strong>: With this permission, user can download data from DSP components." }
           ]
         },
         {
