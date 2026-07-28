@@ -33,6 +33,14 @@
       "description": "`$SKIP_ASSIGNMENT` is a special keyword used in DSP formulas to conditionally bypass processing based on dynamic logic. Field Mapping: If a formula evaluates to `$SKIP_ASSIGNMENT`, the target field is excluded from the request payload. Scope Filters: If a formula evaluates to `$SKIP_ASSIGNMENT`, the source record is omitted from processing.\nThis enables fine-grained control over field-level assignments and record-level processing."
     },
     {
+      "variable":"$SOURCE_OBJECT_NAME",
+      "description": "Returns the API name of the source object for the currently running Executable."
+    },
+    {
+      "variable":"$TARGET_OBJECT_NAME",
+      "description": "Returns the API name of the target object for the currently running Executable."
+    },
+    {
       "variable": "$User.Email",
       "description": "Returns the email address of the running user."
     },

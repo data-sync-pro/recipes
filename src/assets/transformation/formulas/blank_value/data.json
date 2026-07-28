@@ -1,7 +1,7 @@
 {
   "title": "BLANK_VALUE",
-  "description": "<p>Returns a substitute value if the provided value is blank or empty; otherwise, returns the original value.</p>",
-  "syntax": "BLANK_VALUE(value, substitute_value) -> Object",
+  "description": "<p>If the value is blank, evaluates the substitute values in order and returns the first non-blank value; otherwise, returns the original value. A value is considered blank if it is NULL, empty, contains only whitespace, or evaluates to $SKIP_ASSIGNMENT.</p>",
+  "syntax": "BLANK_VALUE(value, ...substitute_value) -> Object",
   "parameters": [
     {
       "name": "value",
@@ -10,10 +10,10 @@
       "description": "The value to evaluate."
     },
     {
-      "name": "substitute_value",
+      "name": "...substitute_value",
       "type": "Object",
       "required": "Yes",
-      "description": "The substitute value to return if the provided value is blank."
+      "description": "One or more substitute values to fall back on when the provided value is blank; the first one that is not blank is returned."
     }
   ],
   "examples": [

@@ -1,6 +1,6 @@
 {
   "title": "IS_BLANK",
-  "description": "<p>Returns TRUE if the value is blank (NULL, empty, or contains only whitespace); otherwise, returns FALSE.</p>",
+  "description": "<p>Returns TRUE if the value is NULL, empty, contains only whitespace, or evaluates to $SKIP_ASSIGNMENT; otherwise, returns FALSE.</p>",
   "syntax": "IS_BLANK(value) -> Boolean",
   "parameters": [
     {
