@@ -5,6 +5,7 @@ import { SidebarService } from '../../services/sidebar.service';
 import { categoryNameFromSlug, categorySlug } from '../../utils/route.util';
 import { hljs } from 'src/app/shared/highlight';
 import { ClipboardUtil } from 'src/app/recipe/core/utils/clipboard.util';
+import { scrollToTopOnNavigation } from 'src/app/recipe/core/utils/scroll.util';
 import { SeoService } from 'src/app/shared/services/seo.service';
 
 import { map, switchMap } from 'rxjs';
@@ -75,6 +76,11 @@ export class DocViewerComponent implements OnInit {
         switchMap((params) => {
           const docName = params.get('docName');
           const categorySegment = params.get('category');
+          // Land at the top of the new function page. Called here — inside the
+          // param subscription, not the async doc callback — because the
+          // navigation trigger is only readable while the navigation is still
+          // in progress (see scroll.util.ts); back/forward keeps its position.
+          scrollToTopOnNavigation(this.router, docName !== this.currentDocName);
           this.currentDocName = docName;
 
           if (categorySegment) {

@@ -34,11 +34,11 @@
     },
     {
       "variable":"$SOURCE_OBJECT_NAME",
-      "description": "Returns the API name of the source object for the currently running Executable."
+      "description": "Returns the Resolved Input Object Name for the currently running Executable."
     },
     {
       "variable":"$TARGET_OBJECT_NAME",
-      "description": "Returns the API name of the target object for the currently running Executable."
+      "description": "Returns the Target Object Name for the currently running Executable."
     },
     {
       "variable": "$User.Email",

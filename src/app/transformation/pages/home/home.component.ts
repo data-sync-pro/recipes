@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { DocsService, DocData } from '../../services/docs.service';
 import { categorySlug, buildRoute } from '../../utils/route.util';
+import { scrollToTopOnNavigation } from '../../../recipe/core/utils/scroll.util';
 import { SeoService } from '../../../shared/services/seo.service';
 interface FunctionTag {
   "Item Name": string;
@@ -27,11 +28,10 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   globalVariables: { variable: string; description: string; }[] | undefined
   operators: { [category: string]: { operator: string; name: string; description: string }[] } | null = null;
 
-  // The scroll container is <main class="content">, not the window, so
-  // Angular's built-in anchorScrolling (which calls window.scrollTo) is a
-  // no-op here. We also can't scroll on NavigationEnd because the target
-  // sections are populated asynchronously from HTTP loads. Defer the scroll
-  // until the matching element actually appears in the DOM.
+  // Angular's built-in anchorScrolling is disabled app-wide, and we couldn't
+  // use it here anyway: the target sections are populated asynchronously from
+  // HTTP loads, so the anchor does not exist yet when the navigation ends.
+  // Defer the scroll until the matching element actually appears in the DOM.
   private pendingFragment: string | null = null;
 
   constructor(
@@ -49,15 +49,18 @@ export class HomeComponent implements OnInit, AfterViewChecked {
         'Reference for every Data Sync Pro transformation formula — text, date & time, logical, number, type processing and more, with syntax and examples.',
     });
     // In-page sections are addressed by URL fragment, e.g.
-    // /transformation#formula_elements. The scroll container is <main>, not the
-    // window, so Angular's anchorScrolling is a no-op; stash the fragment and
-    // scroll manually once the async-loaded section is in the DOM (see
-    // ngAfterViewChecked).
+    // /transformation#formula_elements. Stash the fragment and scroll manually
+    // once the async-loaded section is in the DOM (see ngAfterViewChecked).
     this.route.fragment.subscribe((fragment) => {
       if (fragment && /^[a-z0-9_]+$/.test(fragment)) {
         this.pendingFragment = fragment;
       }
     });
+
+    // Arriving from a function page keeps the previous window scroll
+    // (scrollPositionRestoration is disabled app-wide), so reset it — unless a
+    // fragment asked for a specific section, which ngAfterViewChecked handles.
+    scrollToTopOnNavigation(this.router, !this.pendingFragment);
 
     this.loadTags();
     this.loadGlobalVariables();

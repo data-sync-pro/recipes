@@ -6,10 +6,8 @@ import { Router } from '@angular/router';
  * navigation so the user lands where they were.
  *
  * Why this is needed: the app sets `scrollPositionRestoration: 'disabled'`
- * globally (see AppRoutingModule) because feature areas use different scroll
- * containers — e.g. the transformation pages scroll an inner
- * `<main class="content">`, not the window. Window-scrolled pages (recipes,
- * setup) therefore have to reset their own scroll on navigation.
+ * globally (see AppRoutingModule), so pages have to reset their own scroll on
+ * navigation. Used by recipes, the user manual and the transformation docs.
  *
  * IMPORTANT: must be called synchronously while the navigation is still in
  * progress (e.g. inside a `paramMap` subscription or a `NavigationEnd`
