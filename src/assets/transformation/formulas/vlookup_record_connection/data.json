@@ -35,8 +35,9 @@
     }
   ],
     "examples": [
-      "VLOOKUP_RECORD_CONNECTION(\"Salesforce_Prod\",\n                          \"Opportunity\",\n                          \"Source_System_Id__c\",\n                           Source_System_Id__c)\n-- Returns the Opportunity record from the \"Salesforce_Prod\" org where Source_System_Id__c matches the current record’s Source_System_Id__c.",
-      "VLOOKUP_RECORD_CONNECTION(\"Salesforce_Prod\", \n                          \"Opportunity\", \n                          \"Source_System_Id__c\", Source_System_Id__c, \n                          \"Amount > 50000\")\n-- Returns the Opportunity record from the \"Salesforce_Prod\" org where:\n-- Source_System_Id__c matches the current record’s Source_System_Id__c,\n-- and Amount > 50,000."
+      "VLOOKUP_RECORD_CONNECTION(\"Salesforce_Prod\",\n                          \"Opportunity\",\n                          \"SourceSystemID__c\",\n                           SourceSystemID__c)\n-- Returns the Opportunity record from the \"Salesforce_Prod\" org where SourceSystemID__c matches the current record's SourceSystemID__c.",
+      "VLOOKUP_RECORD_CONNECTION(\"Salesforce_Prod\", \n                          \"Opportunity\", \n                          \"SourceSystemID__c\", SourceSystemID__c, \n                          \"Amount > 50000\")\n-- Returns the Opportunity record from the \"Salesforce_Prod\" org where:\n-- SourceSystemID__c matches the current record's SourceSystemID__c,\n-- and Amount > 50,000.",
+      "VLOOKUP_RECORD_CONNECTION(\"$Source\",\n                          \"Contact\",\n                          \"Email\",\n                           Email)\n-- Returns the first Contact record from the Source Connection related to the current Executable whose Email matches the current Lead's Email."
 ],
     "tips": [
     {

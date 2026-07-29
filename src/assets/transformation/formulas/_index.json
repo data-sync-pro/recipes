@@ -114,6 +114,8 @@
   "split",
   "starts_with",
   "starts_with_ignore_case",
+  "string_append",
+  "string_append_unique",
   "string_join",
   "substring",
   "substring_after",

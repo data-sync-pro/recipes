@@ -106,6 +106,8 @@
     { "Item Name": "STARTS_WITH", "Tags": ["Logical", "Text"] },
     { "Item Name": "STARTS_WITH_IGNORE_CASE", "Tags": ["Logical", "Text"] },
     { "Item Name": "STRING_JOIN", "Tags": ["Text"] },
+    { "Item Name": "STRING_APPEND", "Tags": ["Text"] },
+    { "Item Name": "STRING_APPEND_UNIQUE", "Tags": ["Text"] },
     { "Item Name": "SUBSTRING", "Tags": ["Text"] },
     { "Item Name": "SUBSTRING_AFTER", "Tags": ["Text"] },
     { "Item Name": "SUBSTRING_AFTER_LAST", "Tags": ["Text"] },

@@ -36,7 +36,8 @@
   ],
   "examples": [
     "VLOOKUP(\"Opportunity\", \"Account.Name\", \"Id\", OpportunityId )\n-- Returns the Account Name from the Opportunity where Id equals OpportunityId.",
-    "VLOOKUP(\"Opportunity\", \n        \"Amount\", \n        \"AccountId\", Id, \n        \"OwnerId\", OwnerId, \n        \"Probability > 50\")\n-- Returns the Amount from the first Opportunity where:\n-- AccountId matches the current record's Id,\n-- OwnerId matches the current record's OwnerId,\n-- and Probability > 50."
+    "VLOOKUP(\"Opportunity\", \n        \"Amount\", \n        \"AccountId\", Id, \n        \"OwnerId\", OwnerId, \n        \"Probability > 50\")\n-- Returns the Amount from the first Opportunity where:\n-- AccountId matches the current record's Id,\n-- OwnerId matches the current record's OwnerId,\n-- and Probability > 50.",
+    "VLOOKUP($TARGET_OBJECT_NAME, \"IsDeleted\", \"Id\", SourceSystemID__c, \"ALL ROWS\")\n-- Returns whether the record in the target object whose Id matches SourceSystemID__c has been deleted."
   ],
   "tips": [],
   "notesRef": "shared/lookup-notes",

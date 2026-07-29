@@ -41,10 +41,11 @@
     }
   ],
   "examples": [
-    "VLOOKUP_CONNECTION(\"Salesforce_Prod\",\n                   \"Opportunity\",\n                   \"Amount\", \n                   \"Account.Source_System_Id__c\",\n                    Source_System_Id__c)\n-- Returns the Amount from the first Opportunity in the \"Salesforce_Prod\" org where Account.Source_System_Id__c matches the current record’s Source_System_Id__c.",
-    "VLOOKUP_CONNECTION(\"Salesforce_Prod\", \n                   \"Opportunity\", \n                   \"Amount\", \n                   \"AccountId\", Id, \n                   \"OwnerId\", $User.Id, \n                   \"FiscalYear = 2024\")\n-- Returns the Amount from the first Opportunity in the \"Salesforce_Prod\" org where:\n-- AccountId matches the current record’s Id,\n-- OwnerId matches the current user’s Id,\n-- and FiscalYear = 2024."
+    "VLOOKUP_CONNECTION(\"SalesforceProd\",\n                   \"Opportunity\",\n                   \"Amount\", \n                   \"Account.SourceSystemID__c\",\n                    SourceSystemID__c)\n-- Returns the Amount from the first Opportunity in the \"SalesforceProd\" org where Account.SourceSystemID__c matches the current record's SourceSystemID__c.",
+    "VLOOKUP_CONNECTION(\"SalesforceProd\", \n                   \"Opportunity\", \n                   \"Amount\", \n                   \"AccountId\", Id, \n                   \"OwnerId\", $User.Id, \n                   \"FiscalYear = 2024\")\n-- Returns the Amount from the first Opportunity in the \"SalesforceProd\" org where:\n-- AccountId matches the current record's Id,\n-- OwnerId matches the current user's Id,\n-- and FiscalYear = 2024.",
+    "VLOOKUP_CONNECTION(\"$Source\",\n                   \"Opportunity\",\n                   \"Amount\", \n                   \"AccountId\",\n                    Id, \n                   \"IsClosed = FALSE ORDER BY CloseDate ASC\")\n-- Returns the Amount of the open Opportunity with the earliest Close Date in the Source Connection related to the current Executable, whose AccountId matches the current Account's Id."
   ],
   "tips": [],
   "notesRef": "shared/lookup-notes",
   "relatedFormulas": []
-}
+}    

@@ -1,0 +1,32 @@
+{
+  "title": "STRING_APPEND",
+  "description": "<p>Appends an item to an existing string, with the separator placed between them.</p>",
+  "syntax": "STRING_APPEND(existing_string, item, separator) -> String",
+  "parameters": [
+    {
+      "name": "existing_string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to append to."
+    },
+    {
+      "name": "item",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to append."
+    },
+    {
+      "name": "separator",
+      "type": "String",
+      "required": "Yes",
+      "description": "The delimiter placed between the existing string and the item."
+    }
+  ],
+  "examples": [
+    "STRING_APPEND(ProductOfInterest__c, \"Analytics\", \";\")\n-- Returns \"CRM;Marketing Automation;Analytics\" when ProductOfInterest__c contains \"CRM;Marketing Automation\"."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "STRING_APPEND_UNIQUE"
+  ]
+}

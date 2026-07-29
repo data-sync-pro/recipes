@@ -1,0 +1,33 @@
+{
+  "title": "STRING_APPEND_UNIQUE",
+  "description": "<p>Appends an item to an existing string using the specified separator unless the item already exists.</p>",
+  "syntax": "STRING_APPEND_UNIQUE(existing_string, item, separator) -> String",
+  "parameters": [
+    {
+      "name": "existing_string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to append to."
+    },
+    {
+      "name": "item",
+      "type": "String",
+      "required": "Yes",
+      "description": "The string to append."
+    },
+    {
+      "name": "separator",
+      "type": "String",
+      "required": "Yes",
+      "description": "The separator used between items."
+    }
+  ],
+  "examples": [
+    "STRING_APPEND_UNIQUE(ProductOfInterest__c, \"Marketing Automation\", \";\")\n-- Returns \"CRM;Marketing Automation\" when ProductOfInterest__c already contains \"Marketing Automation\".",
+    "STRING_APPEND_UNIQUE(ProductOfInterest__c, \"Analytics\", \";\")\n-- Returns \"CRM;Marketing Automation;Analytics\" when ProductOfInterest__c contains \"CRM;Marketing Automation\"."
+  ],
+  "tips": [],
+  "relatedFormulas": [
+    "STRING_APPEND"
+  ]
+}
