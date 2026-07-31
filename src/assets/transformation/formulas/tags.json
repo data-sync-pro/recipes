@@ -99,7 +99,7 @@
     { "Item Name": "ROUND", "Tags": ["Number"] },
     { "Item Name": "SCRAMBLE", "Tags": ["Randomization"] },
     { "Item Name": "SECOND", "Tags": ["Date & Time"] },
-    {"Item Name": "SET_SCALE", "Tags":["Number"]},
+    { "Item Name": "SET_SCALE", "Tags":["Number"]},
     { "Item Name": "SIN", "Tags": ["Number"]},
     { "Item Name": "SKIP_BLANK_VALUE", "Tags": ["Logical", "Text"] },
     { "Item Name": "SPLIT", "Tags": ["Text"]},

@@ -208,6 +208,8 @@
 /transformation/logical/starts_with
 /transformation/logical/starts_with_ignore_case
 /transformation/text/string_join
+/transformation/text/string_append
+/transformation/text/string_append_unique
 /transformation/text/substring
 /transformation/text/substring_after
 /transformation/text/substring_after_last
