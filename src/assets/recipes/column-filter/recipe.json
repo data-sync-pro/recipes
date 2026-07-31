@@ -25,7 +25,7 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-0-image-1776975265774.png",
+          "url": "images/text-field.png",
           "alt": "WechatIMG530"
         }
       ]
@@ -36,7 +36,7 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-1-image-1776973598074.png",
+          "url": "images/picklist-field.png",
           "alt": "Screenshot 2026-04-23 at 3.46.28 PM"
         }
       ]
@@ -47,7 +47,7 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-2-image-1776975578682.png",
+          "url": "images/currency-field.png",
           "alt": "WechatIMG535"
         }
       ]
@@ -58,7 +58,7 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-3-image-1776973724981.png",
+          "url": "images/date-field.png",
           "alt": "Screenshot 2026-04-23 at 3.47.58 PM"
         }
       ]
@@ -69,7 +69,7 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-4-image-1776973755775.png",
+          "url": "images/reference-field.png",
           "alt": "Screenshot 2026-04-23 at 3.49.00 PM"
         }
       ]
