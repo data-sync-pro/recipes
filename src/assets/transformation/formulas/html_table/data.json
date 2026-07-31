@@ -46,5 +46,10 @@
       ]
     }
   ],
+  "notes": [
+    {
+      "content": "<p>In a multi-currency org, include <code>CurrencyIsoCode</code> in <code>display_field_names</code> to display currency fields with each record's currency symbol instead of the current user's default currency. The <code>CurrencyIsoCode</code> field is excluded from the columns in the generated table.</p>"
+    }
+  ],
   "relatedFormulas": []
 }
