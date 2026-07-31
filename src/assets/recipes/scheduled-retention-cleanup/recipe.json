@@ -25,7 +25,7 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-0-image-1776373116793.png",
+          "url": "images/pipeline-data-purge-batches.png",
           "alt": "Screenshot 2026-04-16 at 4.51.07 PM"
         }
       ]
@@ -36,7 +36,7 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-1-image-1776373158512.png",
+          "url": "images/new-executable-closedcases-purge.png",
           "alt": "Screenshot 2026-04-16 at 4.51.25 PM"
         }
       ]
@@ -47,7 +47,7 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-2-image-1776373178236.png",
+          "url": "images/batch-settings.png",
           "alt": "Screenshot 2026-04-16 at 4.51.38 PM"
         }
       ]
@@ -58,7 +58,7 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-3-image-1776373192851.png",
+          "url": "images/retrieve.png",
           "alt": "Screenshot 2026-04-16 at 4.51.51 PM"
         }
       ]
@@ -69,7 +69,7 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-4-image-1776804994656.png",
+          "url": "images/mapping.png",
           "alt": "Screenshot 2026-04-21 at 4.56.22 PM"
         }
       ]
@@ -80,7 +80,7 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-5-image-1776805741689.png",
+          "url": "images/create-schedule-for-pipeline.png",
           "alt": "Screenshot 2026-04-21 at 5.03.32 PM"
         }
       ]

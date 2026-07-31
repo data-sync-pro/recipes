@@ -25,7 +25,7 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-0-image-1777054077346.png",
+          "url": "images/create-schedule-job.png",
           "alt": "WechatIMG587"
         }
       ]
@@ -36,7 +36,7 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-1-image-1777054939418.png",
+          "url": "images/toggle-schedule.png",
           "alt": "Screenshot 2026-04-24 at 2.22.07 PM"
         }
       ]
@@ -47,7 +47,7 @@
       "media": [
         {
           "type": "image",
-          "url": "images/step-2-image-1777057745870.png",
+          "url": "images/run-schedule-job-as-me.png",
           "alt": "WechatIMG595"
         }
       ]
