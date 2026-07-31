@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/pipeline-contact-actionbuttons.png",
-          "alt": "Screenshot 2026-04-20 at 5.03.26 PM"
+          "alt": "pipeline-contact-actionbuttons"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/new-executable-contacts-merge-duplicaterule.png",
-          "alt": "Screenshot 2026-04-20 at 5.10.30 PM"
+          "alt": "new-executable-contacts-merge-duplicaterule"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "type": "image",
           "url": "images/action-button-settings.png",
-          "alt": "Screenshot 2026-04-20 at 5.10.51 PM"
+          "alt": "action-button-settings"
         }
       ]
     },
@@ -59,7 +59,7 @@
         {
           "type": "image",
           "url": "images/scoping.png",
-          "alt": "Screenshot 2026-04-20 at 5.12.55 PM"
+          "alt": "scoping"
         }
       ]
     },
@@ -70,7 +70,7 @@
         {
           "type": "image",
           "url": "images/match.png",
-          "alt": "Screenshot 2026-04-20 at 5.13.47 PM"
+          "alt": "match"
         }
       ]
     },
@@ -81,7 +81,7 @@
         {
           "type": "image",
           "url": "images/action.png",
-          "alt": "Screenshot 2026-04-20 at 5.16.06 PM"
+          "alt": "action"
         }
       ]
     }

@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/configure-row-related-lists.png",
-          "alt": "WechatIMG549"
+          "alt": "configure-row-related-lists"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/data-retrieval-in-a-related-data-list-executable.png",
-          "alt": "Screenshot 2026-04-23 at 5.31.25 PM"
+          "alt": "data-retrieval-in-a-related-data-list-executable"
         }
       ]
     }

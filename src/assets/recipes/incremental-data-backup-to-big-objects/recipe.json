@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/pipeline-data-backup-batches.png",
-          "alt": "Screenshot 2026-04-21 at 1.28.24 PM"
+          "alt": "pipeline-data-backup-batches"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/new-executable-cases-backup.png",
-          "alt": "Screenshot 2026-04-21 at 1.29.03 PM"
+          "alt": "new-executable-cases-backup"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "type": "image",
           "url": "images/batch-settings.png",
-          "alt": "Screenshot 2026-04-21 at 1.29.40 PM"
+          "alt": "batch-settings"
         }
       ]
     },
@@ -59,7 +59,7 @@
         {
           "type": "image",
           "url": "images/retrieve.png",
-          "alt": "Screenshot 2026-04-21 at 1.30.05 PM"
+          "alt": "retrieve"
         }
       ]
     },
@@ -70,7 +70,7 @@
         {
           "type": "image",
           "url": "images/mapping.png",
-          "alt": "Screenshot 2026-04-21 at 1.30.31 PM"
+          "alt": "mapping"
         }
       ]
     },
@@ -81,7 +81,7 @@
         {
           "type": "image",
           "url": "images/action.png",
-          "alt": "Screenshot 2026-04-21 at 1.30.58 PM"
+          "alt": "action"
         }
       ]
     },
@@ -92,7 +92,7 @@
         {
           "type": "image",
           "url": "images/create-schedule-for-executable.png",
-          "alt": "Screenshot 2026-04-21 at 1.32.48 PM"
+          "alt": "create-schedule-for-executable"
         }
       ]
     }

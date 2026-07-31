@@ -29,7 +29,7 @@
             {
               "type": "image",
               "url": "images/new-executable.png",
-              "alt": "f1c73332b52b22ccd374b5e72b119be6"
+              "alt": "new-executable"
             }
           ]
         },
@@ -40,7 +40,7 @@
             {
               "type": "image",
               "url": "images/retrieve.png",
-              "alt": "Screenshot 2026-05-04 172728"
+              "alt": "retrieve"
             }
           ]
         },
@@ -51,7 +51,7 @@
             {
               "type": "image",
               "url": "images/mapping.png",
-              "alt": "Screenshot 2026-05-04 172828"
+              "alt": "mapping"
             }
           ]
         }
@@ -67,7 +67,7 @@
             {
               "type": "image",
               "url": "images/new-executable-2.png",
-              "alt": "6453ad63a321f4aa6d0c50e8491e69b0"
+              "alt": "new-executable-2"
             }
           ]
         },
@@ -78,7 +78,7 @@
             {
               "type": "image",
               "url": "images/retrieve-2.png",
-              "alt": "Screenshot 2026-05-04 181631"
+              "alt": "retrieve-2"
             }
           ]
         },
@@ -89,7 +89,7 @@
             {
               "type": "image",
               "url": "images/mapping-2.png",
-              "alt": "Screenshot 2026-05-04 181655"
+              "alt": "mapping-2"
             }
           ]
         }
@@ -105,7 +105,7 @@
             {
               "type": "image",
               "url": "images/new-executable-3.png",
-              "alt": "a2f51433a030cc8a33fa0edc68a1d91f"
+              "alt": "new-executable-3"
             }
           ]
         },
@@ -116,7 +116,7 @@
             {
               "type": "image",
               "url": "images/retrieve-3.png",
-              "alt": "Screenshot 2026-05-04 181716"
+              "alt": "retrieve-3"
             }
           ]
         },
@@ -127,7 +127,7 @@
             {
               "type": "image",
               "url": "images/scoping.png",
-              "alt": "Screenshot 2026-05-04 181726"
+              "alt": "scoping"
             }
           ]
         },
@@ -138,7 +138,7 @@
             {
               "type": "image",
               "url": "images/mapping-3.png",
-              "alt": "Screenshot 2026-05-04 181740"
+              "alt": "mapping-3"
             }
           ]
         }
@@ -198,7 +198,7 @@
             {
               "type": "image",
               "url": "images/pre-permission.png",
-              "alt": "Screenshot 2026-05-04 181740"
+              "alt": "pre-permission"
             }
           ]
         }

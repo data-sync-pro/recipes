@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/pipeline-opportunity-dataloaders.png",
-          "alt": "Screenshot 2026-04-21 at 5.41.33 PM"
+          "alt": "pipeline-opportunity-dataloaders"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/new-executable-opportunities-dataloader-from-accountpage.png",
-          "alt": "Screenshot 2026-04-23 at 6.27.57 PM"
+          "alt": "new-executable-opportunities-dataloader-from-accountpage"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "type": "image",
           "url": "images/mapping.png",
-          "alt": "Screenshot 2026-04-23 at 6.29.41 PM"
+          "alt": "mapping"
         }
       ]
     },
@@ -59,7 +59,7 @@
         {
           "type": "image",
           "url": "images/add-data-loader-to-data-list.png",
-          "alt": "WechatIMG559"
+          "alt": "add-data-loader-to-data-list"
         }
       ]
     }

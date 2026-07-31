@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/pipeline-account-batches.png",
-          "alt": "Screenshot 2026-04-22 at 6.14.13 PM"
+          "alt": "pipeline-account-batches"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/new-executable-account-blankupdate.png",
-          "alt": "Screenshot 2026-04-22 at 6.14.41 PM"
+          "alt": "new-executable-account-blankupdate"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "type": "image",
           "url": "images/batch-settings.png",
-          "alt": "Screenshot 2026-04-22 at 6.15.15 PM"
+          "alt": "batch-settings"
         }
       ]
     },
@@ -59,7 +59,7 @@
         {
           "type": "image",
           "url": "images/retrieve.png",
-          "alt": "Screenshot 2026-04-22 at 6.15.44 PM"
+          "alt": "retrieve"
         }
       ]
     }

@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/attach-action-buttons-to-data-list.png",
-          "alt": "WechatIMG554"
+          "alt": "attach-action-buttons-to-data-list"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/action-buttons-on-account-record-page.png",
-          "alt": "account-record-page"
+          "alt": "action-buttons-on-account-record-page"
         }
       ]
     }

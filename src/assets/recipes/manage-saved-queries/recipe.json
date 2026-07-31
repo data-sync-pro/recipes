@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/save-query.png",
-          "alt": "Screenshot 2026-04-22 at 3.37.09 PM"
+          "alt": "save-query"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/manage-saved-queries.png",
-          "alt": "WechatIMG460"
+          "alt": "manage-saved-queries"
         }
       ]
     }

@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/record-based-filters.png",
-          "alt": "WechatIMG473"
+          "alt": "record-based-filters"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/user-based-filters.png",
-          "alt": "Screenshot 2026-04-22 at 4.20.40 PM"
+          "alt": "user-based-filters"
         }
       ]
     }

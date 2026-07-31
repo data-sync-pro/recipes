@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/pipeline-contact-batches.png",
-          "alt": "Screenshot 2026-04-20 at 7.53.24 PM"
+          "alt": "pipeline-contact-batches"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/new-executable-duplicaterecordset-duplicaterecorditems-contact-merge.png",
-          "alt": "Screenshot 2026-04-20 at 7.53.43 PM"
+          "alt": "new-executable-duplicaterecordset-duplicaterecorditems-contact-merge"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "type": "image",
           "url": "images/retrieve.png",
-          "alt": "Screenshot 2026-04-20 at 7.54.53 PM"
+          "alt": "retrieve"
         }
       ]
     },
@@ -59,7 +59,7 @@
         {
           "type": "image",
           "url": "images/match.png",
-          "alt": "Screenshot 2026-04-20 at 7.55.18 PM"
+          "alt": "match"
         }
       ]
     },
@@ -70,7 +70,7 @@
         {
           "type": "image",
           "url": "images/mapping.png",
-          "alt": "Screenshot 2026-04-20 at 7.55.39 PM"
+          "alt": "mapping"
         }
       ]
     }
