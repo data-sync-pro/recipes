@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/pipeline-opportunity-related-datalists.png",
-          "alt": "Screenshot 2026-04-22 at 6.28.30 PM"
+          "alt": "pipeline-opportunity-related-datalists"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/new-executable-opportunity-quotes.png",
-          "alt": "Screenshot 2026-04-22 at 6.29.03 PM"
+          "alt": "new-executable-opportunity-quotes"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "type": "image",
           "url": "images/retrieve.png",
-          "alt": "Screenshot 2026-04-22 at 6.29.47 PM"
+          "alt": "retrieve"
         }
       ]
     },
@@ -59,7 +59,7 @@
         {
           "type": "image",
           "url": "images/data-list-settings.png",
-          "alt": "Screenshot 2026-04-22 at 6.30.52 PM"
+          "alt": "data-list-settings"
         }
       ]
     }

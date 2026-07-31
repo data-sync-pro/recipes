@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/mass-edit.png",
-          "alt": "WechatIMG520"
+          "alt": "mass-edit"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/blank-update.png",
-          "alt": "WechatIMG524"
+          "alt": "blank-update"
         }
       ]
     }

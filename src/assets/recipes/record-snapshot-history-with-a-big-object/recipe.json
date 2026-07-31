@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/pipeline-quote-triggers.png",
-          "alt": "Screenshot 2026-04-21 at 2.05.07 PM"
+          "alt": "pipeline-quote-triggers"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/new-executable-quote-snapshot-insert.png",
-          "alt": "Screenshot 2026-04-21 at 2.05.56 PM"
+          "alt": "new-executable-quote-snapshot-insert"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "type": "image",
           "url": "images/trigger-settings.png",
-          "alt": "Screenshot 2026-04-21 at 2.06.12 PM"
+          "alt": "trigger-settings"
         }
       ]
     },
@@ -59,7 +59,7 @@
         {
           "type": "image",
           "url": "images/mapping.png",
-          "alt": "WechatIMG443"
+          "alt": "mapping"
         }
       ]
     },
@@ -70,7 +70,7 @@
         {
           "type": "image",
           "url": "images/action.png",
-          "alt": "Screenshot 2026-04-21 at 2.08.41 PM"
+          "alt": "action"
         }
       ]
     }

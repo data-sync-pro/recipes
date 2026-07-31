@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/pipeline-datamigration-current-orgb.png",
-          "alt": "Screenshot 2026-04-20 at 6.15.17 PM"
+          "alt": "pipeline-datamigration-current-orgb"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/new-executable-contact-migration-current-orgb.png",
-          "alt": "Screenshot 2026-04-20 at 6.15.51 PM"
+          "alt": "new-executable-contact-migration-current-orgb"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "type": "image",
           "url": "images/batch-settings.png",
-          "alt": "Screenshot 2026-04-20 at 6.16.44 PM"
+          "alt": "batch-settings"
         }
       ]
     },
@@ -59,7 +59,7 @@
         {
           "type": "image",
           "url": "images/retrieve.png",
-          "alt": "Screenshot 2026-04-20 at 6.17.09 PM"
+          "alt": "retrieve"
         }
       ]
     },
@@ -70,7 +70,7 @@
         {
           "type": "image",
           "url": "images/mapping.png",
-          "alt": "Screenshot 2026-04-20 at 6.18.24 PM"
+          "alt": "mapping"
         }
       ]
     }

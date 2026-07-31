@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/pipeline-opportunity-triggers.png",
-          "alt": "Screenshot 2026-04-22 at 5.31.08 PM"
+          "alt": "pipeline-opportunity-triggers"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/new-executable-opportunity-selfadaptive-validations.png",
-          "alt": "Screenshot 2026-04-22 at 5.31.53 PM"
+          "alt": "new-executable-opportunity-selfadaptive-validations"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "type": "image",
           "url": "images/trigger-settings.png",
-          "alt": "Screenshot 2026-04-22 at 5.32.35 PM"
+          "alt": "trigger-settings"
         }
       ]
     },
@@ -59,7 +59,7 @@
         {
           "type": "image",
           "url": "images/mapping.png",
-          "alt": "Screenshot 2026-04-22 at 5.33.05 PM"
+          "alt": "mapping"
         }
       ]
     }

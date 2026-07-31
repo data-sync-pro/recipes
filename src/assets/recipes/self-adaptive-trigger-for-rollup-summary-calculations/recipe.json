@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/pipeline-account-triggers.png",
-          "alt": "Screenshot 2026-04-22 at 5.45.26 PM"
+          "alt": "pipeline-account-triggers"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/new-executable-account-selfadaptive-rollups.png",
-          "alt": "Screenshot 2026-04-22 at 5.46.01 PM"
+          "alt": "new-executable-account-selfadaptive-rollups"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "type": "image",
           "url": "images/trigger-settings.png",
-          "alt": "Screenshot 2026-04-22 at 5.46.16 PM"
+          "alt": "trigger-settings"
         }
       ]
     },
@@ -59,7 +59,7 @@
         {
           "type": "image",
           "url": "images/mapping.png",
-          "alt": "Screenshot 2026-04-22 at 5.46.57 PM"
+          "alt": "mapping"
         }
       ]
     }

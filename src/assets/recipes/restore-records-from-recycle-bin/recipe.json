@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/pipeline-data-restore-batches.png",
-          "alt": "Screenshot 2026-04-20 at 5.52.21 PM"
+          "alt": "pipeline-data-restore-batches"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/new-executable-contacts-restore.png",
-          "alt": "Screenshot 2026-04-20 at 5.52.53 PM"
+          "alt": "new-executable-contacts-restore"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "type": "image",
           "url": "images/retrieve.png",
-          "alt": "Screenshot 2026-04-20 at 5.53.41 PM"
+          "alt": "retrieve"
         }
       ]
     },
@@ -59,7 +59,7 @@
         {
           "type": "image",
           "url": "images/mapping.png",
-          "alt": "Screenshot 2026-04-20 at 5.54.08 PM"
+          "alt": "mapping"
         }
       ]
     }

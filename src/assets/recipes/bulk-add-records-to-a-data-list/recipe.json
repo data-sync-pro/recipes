@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/pipeline-quote-related-datalists.png",
-          "alt": "Screenshot 2026-04-22 at 1.15.57 PM"
+          "alt": "pipeline-quote-related-datalists"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/new-executable-quote-pricebook-entries.png",
-          "alt": "Screenshot 2026-04-22 at 1.16.15 PM"
+          "alt": "new-executable-quote-pricebook-entries"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "type": "image",
           "url": "images/retrieve.png",
-          "alt": "Screenshot 2026-04-22 at 1.16.58 PM"
+          "alt": "retrieve"
         }
       ]
     },
@@ -59,7 +59,7 @@
         {
           "type": "image",
           "url": "images/new-executable-quote-lineitems-upsert.png",
-          "alt": "Screenshot 2026-04-22 at 1.18.20 PM"
+          "alt": "new-executable-quote-lineitems-upsert"
         }
       ]
     },
@@ -70,7 +70,7 @@
         {
           "type": "image",
           "url": "images/action-button-settings.png",
-          "alt": "WechatIMG453"
+          "alt": "action-button-settings"
         }
       ]
     },
@@ -81,7 +81,7 @@
         {
           "type": "image",
           "url": "images/mapping.png",
-          "alt": "Screenshot 2026-04-22 at 1.19.49 PM"
+          "alt": "mapping"
         }
       ]
     }

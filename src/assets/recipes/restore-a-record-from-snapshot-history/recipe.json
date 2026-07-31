@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/pipeline-quote-related-datalists.png",
-          "alt": "Screenshot 2026-04-21 at 2.26.22 PM"
+          "alt": "pipeline-quote-related-datalists"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/new-executable-quote-snapshot-restore.png",
-          "alt": "Screenshot 2026-04-21 at 2.27.10 PM"
+          "alt": "new-executable-quote-snapshot-restore"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "type": "image",
           "url": "images/data-list-settings.png",
-          "alt": "Screenshot 2026-04-21 at 2.30.45 PM"
+          "alt": "data-list-settings"
         }
       ]
     },
@@ -59,7 +59,7 @@
         {
           "type": "image",
           "url": "images/retrieve.png",
-          "alt": "Screenshot 2026-04-21 at 2.31.24 PM"
+          "alt": "retrieve"
         }
       ]
     },
@@ -70,7 +70,7 @@
         {
           "type": "image",
           "url": "images/mapping.png",
-          "alt": "Screenshot 2026-04-21 at 2.32.21 PM"
+          "alt": "mapping"
         }
       ]
     }

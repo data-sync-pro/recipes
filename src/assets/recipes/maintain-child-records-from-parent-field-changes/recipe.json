@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/pipeline-account-triggers.png",
-          "alt": "Screenshot 2026-04-20 at 7.58.38 PM"
+          "alt": "pipeline-account-triggers"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/new-executable-accountshare-insert.png",
-          "alt": "Screenshot 2026-04-20 at 7.59.09 PM"
+          "alt": "new-executable-accountshare-insert"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "type": "image",
           "url": "images/trigger-settings.png",
-          "alt": "Screenshot 2026-04-20 at 7.59.36 PM"
+          "alt": "trigger-settings"
         }
       ]
     },
@@ -59,7 +59,7 @@
         {
           "type": "image",
           "url": "images/scoping.png",
-          "alt": "Screenshot 2026-04-20 at 8.00.14 PM"
+          "alt": "scoping"
         }
       ]
     },
@@ -70,7 +70,7 @@
         {
           "type": "image",
           "url": "images/mapping.png",
-          "alt": "Screenshot 2026-04-20 at 8.00.41 PM"
+          "alt": "mapping"
         }
       ]
     },
@@ -81,7 +81,7 @@
         {
           "type": "image",
           "url": "images/new-executable-accountshare-delete.png",
-          "alt": "Screenshot 2026-04-20 at 8.01.12 PM"
+          "alt": "new-executable-accountshare-delete"
         }
       ]
     },
@@ -92,7 +92,7 @@
         {
           "type": "image",
           "url": "images/trigger-settings-2.png",
-          "alt": "Screenshot 2026-04-20 at 8.01.49 PM"
+          "alt": "trigger-settings-2"
         }
       ]
     },
@@ -103,7 +103,7 @@
         {
           "type": "image",
           "url": "images/scoping-2.png",
-          "alt": "Screenshot 2026-04-20 at 8.02.13 PM"
+          "alt": "scoping-2"
         }
       ]
     },
@@ -114,7 +114,7 @@
         {
           "type": "image",
           "url": "images/mapping-2.png",
-          "alt": "Screenshot 2026-04-20 at 8.02.42 PM"
+          "alt": "mapping-2"
         }
       ]
     }

@@ -26,7 +26,7 @@
         {
           "type": "image",
           "url": "images/export-pipeline.png",
-          "alt": "Screenshot 2026-04-22 at 2.39.12 PM"
+          "alt": "export-pipeline"
         }
       ]
     },
@@ -37,7 +37,7 @@
         {
           "type": "image",
           "url": "images/import-pipeline.png",
-          "alt": "Screenshot 2026-04-22 at 2.38.45 PM"
+          "alt": "import-pipeline"
         }
       ]
     }
