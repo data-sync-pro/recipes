@@ -75,11 +75,11 @@
             },
             {
               "name": "Incremental Retrieval Field",
-              "description": "Enter the API name of the date-time field to use for incremental batch executions. If left blank, \"SystemModstamp\" is used by default."
+              "description": "Enter the API name of the date-time field to use for incremental batch executions. If left blank, \"SystemModstamp\" is used by default. This setting only takes effect when \"Incremental Retrieval Since\" is configured."
             },
             {
               "name": "Incremental Retrieval Seed Time",
-              "description": "Timestamp defining the starting point for the initial incremental batch execution. For subsequent runs, DSP recalculates the cut-off using the \"Incremental Retrieval Since\" setting."
+              "description": "Timestamp defining the starting point for the initial incremental batch execution. For subsequent runs, DSP recalculates the cut-off using the \"Incremental Retrieval Since\" setting. Only takes effect when \"Incremental Retrieval Since\" is configured."
             }
           ]
         },
