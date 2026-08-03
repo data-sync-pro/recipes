@@ -2,8 +2,8 @@
   {
     "id": "data-model",
     "label": "Data Model",
+    "slug": "data-model",
     "children": [
-      { "id": "data-model-overview", "label": "Overview", "slug": "data-model" },
       { "id": "objects-relationships",
       "label": "Objects & Relationships",
       "slug": "objects-relationships"
@@ -28,8 +28,8 @@
       {
         "id": "connection",
         "label": "Connection",
+        "slug": "connection",
         "children": [
-          { "id": "connection-overview", "label": "Overview", "slug": "connection" },
           { "id": "current-org", "label": "Current Org", "slug": "current-org" },
           { "id": "oauth", "label": "OAuth 2.0 (Refresh Token Flow)", "slug": "oauth" }
         ]
@@ -112,8 +112,8 @@
   {
     "id": "rest-api",
     "label": "REST API",
+    "slug": "rest-api",
     "children": [
-      { "id": "rest-api-overview", "label": "Overview", "slug": "rest-api" },
       { "id": "rest-api-pipeline-batch", "label": "Run a Pipeline — Batch", "slug": "rest-api-pipeline-batch" },
       { "id": "rest-api-executable-batch", "label": "Run an Executable — Batch", "slug": "rest-api-executable-batch" },
       { "id": "rest-api-executable-sync", "label": "Run an Executable — Sync", "slug": "rest-api-executable-sync" },

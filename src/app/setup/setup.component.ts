@@ -233,8 +233,10 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   private expandParentsOfSlug(slug: string): void {
     const path = this.setupService.getPathToNode(this.navTree, slug);
     if (path) {
-      // Expand all ancestors (except the leaf node itself)
-      path.slice(0, -1).forEach(node => {
+      // Expand every node on the path that has children — including the target
+      // itself when it is a branch page, so its children show up the same way
+      // whether the user clicked the sidebar, a Related link, or pasted a URL.
+      path.forEach(node => {
         if (node.children?.length) {
           this.expandedIds.add(node.id);
         }
@@ -329,8 +331,20 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onNodeClick(node: NavNode): void {
-    // Any node with children toggles expand — including pages, so a branch page
-    // behaves the same whether or not it happens to carry content of its own.
+    if (node.slug) {
+      // A branch page navigates and only ever expands — collapsing is the
+      // chevron's job. Toggling here would hide the children of the very page
+      // the click just opened, leaving the user with no sense of where they are.
+      if (node.children?.length) {
+        this.expandedIds.add(node.id);
+      }
+      this.selectSetup(node.slug);
+      // Navigating to a page closes the mobile drawer (no-op on desktop).
+      this.closeSidebar();
+      this.cdr.markForCheck();
+      return;
+    }
+    // Grouping nodes carry no content of their own, so the click is expand-only.
     if (node.children?.length) {
       if (this.expandedIds.has(node.id)) {
         this.expandedIds.delete(node.id);
@@ -338,13 +352,6 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
         this.expandedIds.add(node.id);
       }
       this.cdr.markForCheck();
-    }
-    // A node with a slug also shows its own content. Grouping nodes have none,
-    // so for them the click is expand-only.
-    if (node.slug) {
-      this.selectSetup(node.slug);
-      // Navigating to a page closes the mobile drawer (no-op on desktop).
-      this.closeSidebar();
     }
   }
 
