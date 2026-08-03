@@ -329,16 +329,18 @@ export class SetupComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onNodeClick(node: NavNode): void {
-    // Grouping node (no slug): click toggles expand
-    if (!node.slug && node.children?.length) {
+    // Any node with children toggles expand — including pages, so a branch page
+    // behaves the same whether or not it happens to carry content of its own.
+    if (node.children?.length) {
       if (this.expandedIds.has(node.id)) {
         this.expandedIds.delete(node.id);
       } else {
         this.expandedIds.add(node.id);
       }
       this.cdr.markForCheck();
-      return;
     }
+    // A node with a slug also shows its own content. Grouping nodes have none,
+    // so for them the click is expand-only.
     if (node.slug) {
       this.selectSetup(node.slug);
       // Navigating to a page closes the mobile drawer (no-op on desktop).
