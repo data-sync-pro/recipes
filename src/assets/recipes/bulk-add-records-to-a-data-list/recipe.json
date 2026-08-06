@@ -53,6 +53,17 @@
       ]
     },
     {
+      "step": "Pipeline - Quote.ActionButtons",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/pipeline-quote-actionbuttons.png",
+          "alt": "pipeline-quote-actionbuttons"
+        }
+      ]
+    },
+    {
       "step": "New Executable - Quote.LineItems.Upsert",
       "config": [],
       "media": [

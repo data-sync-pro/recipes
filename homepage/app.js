@@ -1001,7 +1001,7 @@ const DSP_SECTION_ROUTES = {
     event: 'The trigger event is the input — a list of records from a DML operation.',
     scope: 'Scoping refines the input — filter rows, or join with another data set.',
     match: 'Match identifies the target records to act on — by field, formula, or duplicate rule.',
-    map:   'Mapping transforms field values — pick from 170+ functions, or extend with Apex.',
+    map:   'Mapping transforms field values — pick from 180+ functions, or extend with Apex.',
     action:'Insert, Update, Upsert, Delete, Merge, Lead Convert, Approval, Notify, Publish, and more.'
   };
   const order = ['event','scope','match','map','action'];
