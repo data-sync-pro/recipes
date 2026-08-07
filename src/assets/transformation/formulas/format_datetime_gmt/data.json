@@ -1,0 +1,36 @@
+{
+  "title": "FORMAT_DATETIME_GMT",
+  "description": "<p>Formats a Datetime as a string, based on GMT.</p>",
+  "syntax": "FORMAT_DATETIME_GMT(datetime, format_string) -> String",
+  "parameters": [
+    {
+      "name": "datetime",
+      "type": "Datetime",
+      "required": "Yes",
+      "description": "The Datetime value to format."
+    },
+    {
+      "name": "format_string",
+      "type": "String",
+      "required": "Yes",
+      "description": "The format pattern applied to the Datetime."
+    }
+  ],
+  "examples": [
+    "FORMAT_DATETIME_GMT(NOW(), \"yyyy-MM-dd HH:mm:ss\")\n-- Returns the current Datetime as a string formatted as \"yyyy-MM-dd HH:mm:ss\" in GMT."
+  ],
+  "tips": [
+    {
+      "text": "<p>Format patterns: yyyy for year, MM for month, dd for day, HH for 24-hour, hh for 12-hour, mm for minute, ss for second.</p>",
+      "children": []
+    },
+    {
+      "text": "<p>Use <strong>FORMAT_DATETIME</strong> instead to format in the user's local time zone or in a specific time zone.</p>",
+      "children": []
+    }
+  ],
+  "relatedFormulas": [
+    "FORMAT_DATETIME",
+    "NOW"
+  ]
+}

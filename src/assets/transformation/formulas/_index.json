@@ -42,6 +42,7 @@
   "exp",
   "floor",
   "format_datetime",
+  "format_datetime_gmt",
   "format_dsp_template(obsolete)",
   "format_json_template",
   "format_string_template",

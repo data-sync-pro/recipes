@@ -34,6 +34,7 @@
     { "Item Name": "EVALUATED_FIELD_VALUE", "Tags": ["Advanced"]},
     { "Item Name": "FLOOR", "Tags": ["Number"]},
     { "Item Name": "FORMAT_DATETIME", "Tags": ["Date & Time", "Text"] },
+    { "Item Name": "FORMAT_DATETIME_GMT", "Tags": ["Date & Time", "Text"] },
     { "Item Name": "FORMAT_JSON_TEMPLATE", "Tags": ["Text"] },
     { "Item Name": "FORMAT_STRING_TEMPLATE", "Tags": ["Text"] },
     { "Item Name": "GLOBAL_VARIABLES", "Tags": ["Global Variables"] },
