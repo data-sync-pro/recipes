@@ -60,7 +60,8 @@
 /user-manual/permissions
 /user-manual/connection
 /user-manual/connection/current-org
-/user-manual/connection/oauth
+/user-manual/connection/refresh-token-flow
+/user-manual/connection/client-credential-flow
 /user-manual/new-direction
 /user-manual/new-pipeline
 /user-manual/pipeline-settings

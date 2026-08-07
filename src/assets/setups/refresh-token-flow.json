@@ -1,9 +1,9 @@
 {
-  "title": "OAuth 2.0 (Refresh Token Flow)",
+  "title": "Refresh Token Flow",
   "blocks": [
     {
       "type": "p",
-      "content": "DSP supports OAuth 2.0 authentication using Salesforce security features, including:"
+      "content": "Configure OAuth 2.0 authentication using the Refresh Token Flow with:"
     },
     {
       "type": "ul",
@@ -24,23 +24,19 @@
     },
     {
       "type": "h2",
-      "content": "Configure OAuth 2.0 Refresh Token Flow Authentication"
+      "content": "Configuration"
     },
     {
       "type": "p",
-      "content": "Complete the steps below to configure OAuth 2.0 authentication between the Connected Org and the DSP App Org."
+      "content": "Complete the steps below to configure authentication between the Connected Org and the DSP App Org."
     },
     {
       "type": "h3",
       "content": "1. Create External Client App in Connected Org",
       "children": [
         {
-          "type": "p",
-          "content": "Create an External Client App to generate the Consumer Key and Consumer Secret required for OAuth authentication."
-        },
-        {
           "type": "video",
-          "src": "video/connection/OAuth-2/1.mp4"
+          "src": "video/connection/refresh-token/refresh-token-1.mp4"
         }
       ]
     },
@@ -75,7 +71,7 @@
         },
         {
           "type": "video",
-          "src": "video/connection/OAuth-2/2.mp4"
+          "src": "video/connection/refresh-token/refresh-token-2.mp4"
         },
         {
           "type": "callout",
@@ -84,7 +80,7 @@
           "children": [
             {
               "type": "image",
-              "content": "image/connection/oauth/openId.png",
+              "content": "image/connection/refresh-token/openId.png",
               "alt": "OpenID Connect Auth. Provider settings"
             }
           ]
@@ -96,12 +92,8 @@
       "content": "3. Update Callback URL in Connected Org",
       "children": [
         {
-          "type": "p",
-          "content": "Update the External Client App to use the Callback URL generated in the DSP App Org."
-        },
-        {
           "type": "video",
-          "src": "video/connection/OAuth-2/3.mp4"
+          "src": "video/connection/refresh-token/refresh-token-3.mp4"
         }
       ]
     },
@@ -128,7 +120,7 @@
         },
         {
           "type": "video",
-          "src": "video/connection/OAuth-2/4.mp4"
+          "src": "video/connection/refresh-token/refresh-token-4.mp4"
         }
       ]
     },
@@ -138,7 +130,7 @@
       "children": [
         {
           "type": "video",
-          "src": "video/connection/OAuth-2/5.mp4"
+          "src": "video/connection/refresh-token/refresh-token-5.mp4"
         }
       ]
     }

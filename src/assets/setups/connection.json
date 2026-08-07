@@ -35,7 +35,22 @@
         },
         {
           "type": "p",
-          "content": "<strong>OAuth 2.0 (Refresh Token Flow)</strong>: Authenticates through a Named Credential using an OAuth token issued through the Refresh Token flow."
+          "content": "<strong>OAuth 2.0</strong>: Authenticates through a Named Credential using an OAuth access token. Two flows are supported for obtaining the token:",
+          "children": [
+            {
+              "type": "ul",
+              "children": [
+                {
+                  "type": "p",
+                  "content": "<strong>Refresh Token Flow</strong> — requires a one-time interactive login; the connection runs as the user who authorized it."
+                },
+                {
+                  "type": "p",
+                  "content": "<strong>Client Credentials Flow</strong> — no interactive login; the connection runs as the Run As user specified on the External Client App."
+                }
+              ]
+            }
+          ]
         }
       ]
     }

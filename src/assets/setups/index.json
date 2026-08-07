@@ -31,7 +31,14 @@
         "slug": "connection",
         "children": [
           { "id": "current-org", "label": "Current Org", "slug": "current-org" },
-          { "id": "oauth", "label": "OAuth 2.0 (Refresh Token Flow)", "slug": "oauth" }
+          {
+            "id": "remote-org",
+            "label": "Remote Org",
+            "children": [
+              { "id": "refresh-token-flow", "label": "Refresh Token Flow", "slug": "refresh-token-flow" },
+              { "id": "client-credentials-flow", "label": "Client Credentials Flow", "slug": "client-credentials-flow" }
+            ]
+          }
         ]
       },
       {
