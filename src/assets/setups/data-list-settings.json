@@ -70,10 +70,6 @@
               "description": "If enabled, clicking the Action Button opens a file uploader that lets users select and upload a file from the UI."
             },
             {
-              "name": "Source Object ContentDocument ID Field",
-              "description": "The text field on the Source Object used to store the ContentDocument ID for file uploads. When specified in a #Data List, a row action is automatically added—'Upload File' when the field is blank, or 'Preview File' when the field has a value."
-            },
-            {
               "name": "Pre-Action: Edit Fields",
               "description": "Comma-separated API names of the target object fields that open in edit mode on the pre-action screen when the action button is clicked."
             }
@@ -299,10 +295,6 @@
             {
               "name": "Q: Show Results in Tiles on Small Screen",
               "description": "When enabled, when the screen is small, the Data List will be shown in tiles instead of lightning datatable. The default width of a small screen is '<= 500px'. You may also define the max width of the small screen via the field 'Small Screen Viewport Width'."
-            },
-            {
-              "name": "Source Object ContentDocument ID Field",
-              "description": "The text field on the Source Object used to store the ContentDocument ID for file uploads. When specified in a #Data List, a row action is automatically added—'Upload File' when the field is blank, or 'Preview File' when the field has a value."
             },
             {
               "name": "Q: Small Screen Viewport Width",

@@ -107,6 +107,10 @@
           "description": "Stores the value written back to the source object's field after a successful target operation, including cases where updates are skipped. When configured for 'Target Record ID(s)', this field contains a comma-separated list of matching target record IDs for each source record."
         },
         {
+          "name": "Source Object ContentDocument ID Field",
+          "description": "The Source Object text field storing the ContentDocument ID. If specified, on a ContentVersion Insert, the resulting ContentDocument ID is written back to this field. In a #Data List, it also automatically adds a row action—'Upload File' when blank, or 'Preview File' when set."
+        },
+        {
           "name": "Disable Feed Tracking?",
           "description": "Applies only when the Target is an integrated Connection."
         },
