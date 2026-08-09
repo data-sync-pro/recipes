@@ -61,7 +61,7 @@
 /user-manual/connection
 /user-manual/connection/current-org
 /user-manual/connection/refresh-token-flow
-/user-manual/connection/client-credential-flow
+/user-manual/connection/client-credentials-flow
 /user-manual/new-direction
 /user-manual/new-pipeline
 /user-manual/pipeline-settings
@@ -138,6 +138,7 @@
 /transformation/advanced/evaluated_field_value
 /transformation/number/floor
 /transformation/date_time/format_datetime
+/transformation/date_time/format_datetime_gmt
 /transformation/text/format_json_template
 /transformation/text/format_string_template
 /transformation/advanced/get_picklist_field_options
