@@ -459,13 +459,13 @@
     "$CONTEXT_RECORD_ID": {
       "globalVariableDoc": "global_variables"
     },
+    "$CURRENT_ORG_DOMAIN_URL": {
+      "globalVariableDoc": "global_variables"
+    },
     "$JOINER": {
       "globalVariableDoc": "global_variables"
     },
     "$Joiner.FieldName": {
-      "globalVariableDoc": "global_variables"
-    },
-    "$ORG_DOMAIN_URL": {
       "globalVariableDoc": "global_variables"
     },
     "$SKIP_ASSIGNMENT": {

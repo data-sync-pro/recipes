@@ -69,7 +69,7 @@ const SPECIAL_ROUTES: Record<string, string> = {
 // choosing a function's primary category for its detail-page link.
 const SPECIAL_TAGS = new Set(['Operators', 'Global Variables', 'Apex Class']);
 
-// Users type separators loosely — "org domain" for $ORG_DOMAIN_URL, "date time"
+// Users type separators loosely — "org domain" for $CURRENT_ORG_DOMAIN_URL, "date time"
 // for the "Date & Time" tag — so both sides are matched with every run of
 // non-alphanumerics collapsed to a single space. A query made up entirely of
 // symbols ("+", "&&") collapses to nothing and falls back to a raw substring
