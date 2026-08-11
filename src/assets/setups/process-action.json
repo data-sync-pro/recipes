@@ -116,7 +116,7 @@
         },
         {
           "name": "Action Result Processor",
-          "description": "Apex class name that implements ActionResultProcessor. If set, DSP calls it after the action with the results so you can perform custom logging or trigger follow-up processes."
+          "description": "Apex class name that implements pushtopics.ActionResultProcessor. If set, DSP calls it after the action with the results so you can perform custom logging or trigger follow-up processes."
         }
       ]
     }
