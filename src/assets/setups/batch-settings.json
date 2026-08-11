@@ -42,7 +42,7 @@
             },
             {
               "name": "Execution Finalizer",
-              "description": "Apex class name that implements the ExecutionFinalizer interface and runs after the Execution is completed."
+              "description": "Apex class name that implements the pushtopics.ExecutionFinalizer interface and runs after the Execution is completed."
             },
             {
               "name": "Source Big Object Index Fields",
