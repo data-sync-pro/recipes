@@ -5,8 +5,9 @@
 User-agent: *
 Allow: /
 
-# Note: partnership/* and the Master Subscription Agreement pages are excluded from
-# search via a page-level <meta name="robots" content="noindex"> — intentionally NOT
-# Disallow-ed here, so crawlers can still read the page and honor the noindex.
+# Note: the Master Subscription Agreement pages are excluded from search via a
+# page-level <meta name="robots" content="noindex"> — intentionally NOT Disallow-ed
+# here, so crawlers can still read the page and honor the noindex.
+# partnership/* is not deployed at all (see scripts/assemble-firebase.mjs).
 
 Sitemap: https://www.datasyncpro.io/sitemap.xml

@@ -2,7 +2,7 @@
 //
 // Layout produced in dist/deploy:
 //   /index.html            marketing homepage (root landing page)
-//   /privacy.html, /msa.pdf, /partnership/...   homepage static pages
+//   /privacy.html, /msa.pdf, ...   homepage static pages (internal/ and partnership/ excluded)
 //   /app.html              Angular SPA shell (firebase.json rewrites point app routes here)
 //   /main.<hash>.js, /assets/...                Angular build output at root (baseHref "/")
 //
@@ -22,7 +22,7 @@ const DEPLOY = join(ROOT, 'dist', 'deploy');
 const HOMEPAGE = join(ROOT, 'homepage');
 
 // Homepage entries kept out of the public deploy.
-const HOMEPAGE_EXCLUDE = new Set(['internal']);
+const HOMEPAGE_EXCLUDE = new Set(['internal', 'partnership']);
 
 if (!existsSync(NG_OUT)) {
   console.error(`[assemble] Angular build missing at ${NG_OUT} — run "npm run build:firebase" first.`);
@@ -55,7 +55,9 @@ const listFiles = (dir, base = dir) =>
     return statSync(p).isDirectory() ? listFiles(p, base) : [p.slice(base.length + 1).replace(/\\/g, '/')];
   });
 const deployFiles = new Set(listFiles(DEPLOY));
-const clashes = listFiles(HOMEPAGE).filter((rel) => !rel.startsWith('internal/') && deployFiles.has(rel));
+const clashes = listFiles(HOMEPAGE).filter(
+  (rel) => !HOMEPAGE_EXCLUDE.has(rel.split('/')[0]) && deployFiles.has(rel)
+);
 if (clashes.length) {
   console.warn('[assemble] WARNING: homepage files overwrite Angular build output:\n  ' + clashes.join('\n  '));
 }
