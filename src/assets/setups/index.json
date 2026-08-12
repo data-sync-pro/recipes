@@ -129,9 +129,14 @@
         "label": "Examples",
         "children": [
           { "id": "rest-api-examples-postman", "label": "Postman", "slug": "rest-api-examples-postman" },
-          { "id": "rest-api-examples-apex", "label": "Apex", "slug": "rest-api-examples-apex" }
+          { "id": "rest-api-examples-apex", "label": "Apex Callout", "slug": "rest-api-examples-apex" }
         ]
       }
     ]
+  },
+  {
+    "id": "apex-api",
+    "label": "Apex API",
+    "slug": "apex-api"
   }
 ]
