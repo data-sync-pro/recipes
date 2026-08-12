@@ -79,6 +79,10 @@
           "description": "Additional filter applied to evaluate the scoped records when being executed in the After Undelete trigger of the source object."
         },
         {
+          "name": "Source Grouping Formula",
+          "description": "When specified, this DSP formula is evaluated at runtime to group source records after the Scope Filter(s) step. Records that evaluate to the same value share a single action. When evaluating the target action, if multiple source records fall within the same group, only the first is used to evaluate the target action. When write-back is specified, the write-back value is applied to all records in the group."
+        },
+        {
           "name": "Data List Joiner",
           "description": "Specifies a Data List Executable to act as a joiner. When set, clicking the Action Button opens the Data List for row selection; selected rows are cross-joined with the source data to enrich the scoped dataset."
         },
