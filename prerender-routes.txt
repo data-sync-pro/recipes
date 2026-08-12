@@ -99,6 +99,7 @@
 /user-manual/rest-api/rest-api-executable-sync
 /user-manual/rest-api/rest-api-examples-postman
 /user-manual/rest-api/rest-api-examples-apex
+/user-manual/apex-api
 /transformation
 /transformation/global_variables
 /transformation/joiner
