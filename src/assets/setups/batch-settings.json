@@ -92,11 +92,15 @@
             },
             {
               "name": "Notify Email Addresses",
-              "description": "Comma seperated email addresses."
+              "description": "Comma-separated email addresses to add to the notification recipients. This applies when this Executable runs as a #Batch and its Execution completes (when 'Notify When Execution Completes' is specified), or when it runs as a #Trigger and the Future method fails."
+            },
+            {
+              "name": "Notify Running User?",
+              "description": "When enabled, adds the running user to the email notification recipients. This applies when this Executable runs as a #Batch and its Execution completes (when 'Notify When Execution Completes' is specified), or when it runs as a #Trigger and the Future method fails."
             },
             {
               "name": "Notify Owner?",
-              "description": "When enabled (and 'Notify When Execution Completes' is active), adds the Executable owner to the email notification recipients upon execution completion."
+              "description": "When enabled, adds the Executable owner to the email notification recipients. This applies when this Executable runs as a #Batch and its Execution completes (when 'Notify When Execution Completes' is specified), or when it runs as a #Trigger and the Future method fails."
             }
           ]
         }

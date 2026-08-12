@@ -83,7 +83,11 @@
             },
             {
               "name": "Notify Email Addresses",
-              "description": "Comma separated email addresses."
+              "description": "Comma-separated email addresses to add to the notification recipients. This applies on Pipeline Execution completion (when 'Notify When Execution Completes' is specified) or when a related Trigger Executable running in a Future method fails."
+            },
+            {
+              "name": "Notify Running User?",
+              "description": "When enabled, adds the running user to the email notification recipients. This applies on Pipeline Execution completion (when 'Notify When Execution Completes' is specified) or when a related Trigger Executable running in a Future method fails."
             },
             {
               "name": "Action Button Label",
@@ -91,7 +95,7 @@
             },
             {
               "name": "Notify Owner?",
-              "description": "If selected and \"Notify When Execution Completes\" is enabled, the Pipeline owner will be added to the list of email notification recipients."
+              "description": "When enabled, adds the Pipeline owner to the email notification recipients. This applies on Pipeline Execution completion (when 'Notify When Execution Completes' is specified) or when a related Trigger Executable running in a Future method fails."
             }
           ]
         },
