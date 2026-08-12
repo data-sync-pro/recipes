@@ -1,0 +1,24 @@
+{
+  "title": "Apex API",
+  "blocks": [
+    {
+      "type": "p",
+      "content": "Use the global `pushtopics.ExecutionService` class to start batch executions of Executables and Pipelines directly from Apex. To start executions from an external system or another org, use the [[rest-api]] instead."
+    },
+    {
+      "type": "code",
+      "language": "apex",
+      "content": "global class ExecutionService {\n\n    global static pushtopics__Execution__c executeExecutableByApiName(String apiName)\n    global static pushtopics__Execution__c executeExecutableByApiName(String apiName, List<Id> recordIds)\n\n    global static pushtopics__PipelineExecution__c executePipelineByApiName(String pipelineApiName)\n}"
+    },
+    {
+      "type": "p",
+      "content": "Each method starts a batch execution and returns the execution record created for the run."
+    },
+    { "type": "h2", "content": "Examples" },
+    {
+      "type": "code",
+      "language": "apex",
+      "content": "// Run an Executable\npushtopics.ExecutionService.executeExecutableByApiName('Account.RollupSummaries');\n\n// Run an Executable for specific records only\npushtopics.ExecutionService.executeExecutableByApiName(\n    'Account.RollupSummaries', new List<Id>{ '001xx0000000001AAA' });\n\n// Run a Pipeline\npushtopics__PipelineExecution__c pipelineExecution =\n    pushtopics.ExecutionService.executePipelineByApiName('Opportunity.Batches');"
+    }
+  ]
+}
