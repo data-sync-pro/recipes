@@ -16,6 +16,8 @@
 /recipes/batch/restore-records-from-recycle-bin
 /recipes/batch/mask-sensitive-data-in-sandboxes
 /recipes/batch/schedule-job-management
+/recipes/batch/bulk-field-transformations
+/recipes/batch/snapshot-backups-with-incremental-backup-to-file
 /recipes/trigger/self-adaptive-trigger-for-rollup-summary-calculations
 /recipes/trigger/centralized-validation-rules-with-self-adaptive-trigger
 /recipes/trigger/auto-copy-child-records-from-a-source-reference

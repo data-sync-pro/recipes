@@ -21,6 +21,10 @@
       "active": true
     },
     {
+      "folderId": "bulk-field-transformations",
+      "active": true
+    },
+    {
       "folderId": "bulk-merge-records-from-duplicate-job-results",
       "active": true
     },
@@ -142,6 +146,10 @@
     },
     {
       "folderId": "skip-no-op-updates",
+      "active": true
+    },
+    {
+      "folderId": "snapshot-backups-with-incremental-backup-to-file",
       "active": true
     },
     {

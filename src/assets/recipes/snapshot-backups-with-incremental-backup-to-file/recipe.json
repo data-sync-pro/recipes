@@ -1,0 +1,82 @@
+{
+  "id": "520e03c8-5157-4149-a106-ee9f12ba5450",
+  "title": "Snapshot Backups with Incremental Backup to File",
+  "category": [
+    "Batch"
+  ],
+  "DSPVersions": [],
+  "overview": "Incremental Backup to File turns a Pipeline into a scheduled, file-based backup. The Create Backup Executables quick action builds it for you — one #Batch Executable per selected object, logging each object's data to file without writing changes. Snapshots download as CSV or JSON, and records restore straight from the logs.",
+  "generalUseCase": "Enable Incremental Backup to File on a Pipeline, run the Create Backup Executables quick action to generate one #Batch Executable per object, schedule it for recurring snapshots, and restore records from the logs when needed.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/oq46e7C4WpE",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Enable Incremental Backup to File",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/enable-incremental-backup-to-file.png",
+          "alt": "enable-incremental-backup-to-file"
+        }
+      ]
+    },
+    {
+      "step": "Create Backup Executables",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/create-backup-executables-1.png",
+          "alt": "create-backup-executables-1"
+        },
+        {
+          "type": "image",
+          "url": "images/create-backup-executables-2.png",
+          "alt": "create-backup-executables-2"
+        },
+        {
+          "type": "image",
+          "url": "images/create-backup-executables-3.png",
+          "alt": "create-backup-executables-3"
+        }
+      ]
+    },
+    {
+      "step": "Execute Backup Batches",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/execute-backup-batches.png",
+          "alt": "execute-backup-batches"
+        }
+      ]
+    },
+    {
+      "step": "Download Backup Files",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/download-backup-files.png",
+          "alt": "download-backup-files"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "snapshot-backups-with-incremental-backup-to-file"
+}
