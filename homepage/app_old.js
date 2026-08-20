@@ -1,12 +1,5 @@
-function offsetWithin(el, ancestor) {
-  let left = 0, top = 0, node = el;
-  while (node && node !== ancestor) {
-    left += node.offsetLeft;
-    top += node.offsetTop;
-    node = node.offsetParent;
-  }
-  return { left, top, width: el.offsetWidth, height: el.offsetHeight };
-}
+
+
 const DSP_isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim());
 
 window.SubmissionLimiter = (() => {
@@ -114,7 +107,7 @@ window.DSP_loadRecaptcha = (() => {
   const PLAN_DEFAULTS = {
     Growth:     { conn: 1, exec: 100, batch: '20k' },
     Business:   { conn: 5, exec: 200, batch: '20k' },
-    Enterprise: { conn: 5, exec: 200, batch: '1M'  },
+    Enterprise: { conn: 7, exec: 500, batch: 'Unlimited' },
   };
   const setPlan = (plan) => {
     if (!plan) return;
@@ -901,8 +894,7 @@ const DSP_SECTION_ROUTES = {
     const nav = document.getElementById('nav');
     const navH = nav ? nav.offsetHeight : 0;
     const y = el.getBoundingClientRect().top + window.scrollY - navH - 8;
-    // 'instant' (not 'auto') is required: html has scroll-behavior: smooth in CSS
-    window.scrollTo({ top: Math.max(0, y), behavior: behavior || 'instant' });
+    window.scrollTo({ top: Math.max(0, y), behavior: behavior || 'smooth' });
   };
 
   document.addEventListener('click', (e) => {
@@ -911,25 +903,25 @@ const DSP_SECTION_ROUTES = {
     const path = a.getAttribute('href');
     const id = path && DSP_SECTION_ROUTES[path];
     if (!id) return;
-
+    
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey ||
         e.shiftKey || e.altKey || a.target === '_blank') return;
     e.preventDefault();
-    scrollToId(id, 'instant');
+    scrollToId(id, 'smooth');
     if (history.pushState && location.pathname !== path) {
       history.pushState(null, '', path);
     }
   });
 
   if (DSP_SECTION_ROUTES[location.pathname]) {
-    requestAnimationFrame(() => scrollToId(DSP_SECTION_ROUTES[location.pathname], 'instant'));
+    requestAnimationFrame(() => scrollToId(DSP_SECTION_ROUTES[location.pathname], 'auto'));
   }
 
   window.addEventListener('popstate', () => {
     const id = DSP_SECTION_ROUTES[location.pathname];
-    if (id) scrollToId(id, 'instant');
+    if (id) scrollToId(id, 'smooth');
     else if (location.pathname === '/' || location.pathname === '/index.html') {
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
 })();
@@ -942,9 +934,9 @@ const DSP_SECTION_ROUTES = {
     /^\/surfaces\//.test(location.pathname); 
   document.querySelectorAll('a.brand-mark').forEach(a => {
     a.addEventListener('click', (e) => {
-      if (!onHomepage()) return;
+      if (!onHomepage()) return; 
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       if (history.replaceState) history.replaceState(null, '', '/');
     });
   });
@@ -1303,7 +1295,7 @@ const DSP_SECTION_ROUTES = {
   const TICK_FAST_MS = 40;      
   const TOTAL_RUN_MS = (TICK_SLOW_MS + TICK_FAST_MS) / 2 * N_BATCHES; 
   const REST_MS = 6000;         
-  const MAX_SUBROWS = 7;        
+  const MAX_SUBROWS = 5;        
 
   
   const smoothstep = t => t * t * (3 - 2 * t);
@@ -1844,6 +1836,8 @@ const DSP_SECTION_ROUTES = {
     });
   }
 
+  
+  // All nav dropdowns (Resources, Customers, …) get click/tap toggle behavior.
   document.querySelectorAll('.nav-dd').forEach((dd) => {
     const trigger = dd.querySelector('.nav-dd-trigger');
     const menu = dd.querySelector('.nav-dd-menu');
@@ -1920,8 +1914,7 @@ const DSP_SECTION_ROUTES = {
   rot.addEventListener('mouseenter', () => { paused = true; clearTimers(); });
   rot.addEventListener('mouseleave', () => { paused = false; armScene(); });
 
-  // Start on a random capability each load, then advance as each demo completes.
-  go(Math.floor(Math.random() * scenes.length));
+  go(0);
   armScene();
 })();
 
@@ -1945,7 +1938,6 @@ const DSP_SECTION_ROUTES = {
   const medChk    = card.querySelector('[data-al-med]');
   const lowChk    = card.querySelector('[data-al-low]');
   const acceptBtn = cacts.querySelector('[data-al-accept]');   
-  const cursor   = card.querySelector('[data-al-cursor]');
   const toast    = card.querySelector('[data-al-toast]');
 
   const SEL = [0, 2, 4, 5];        
@@ -1998,7 +1990,6 @@ const DSP_SECTION_ROUTES = {
     filterVal.textContent = 'Filter…';
     filterBox.classList.remove('has');
     if (lastPg) lastPg.textContent = '15';
-    if (cursor) { cursor.classList.remove('show', 'click'); cursor.style.transition = 'none'; }
     toast.classList.remove('on');
   }
 
@@ -2054,24 +2045,8 @@ const DSP_SECTION_ROUTES = {
     at(tSelDone + 760, () => cacts.querySelectorAll('.al-cbtn').forEach(b => b.classList.remove('flash')));
 
     const tAct = tSelDone + 900;
-    at(tAct - 600, () => {
-      if (!cursor || !acceptBtn) return;
-      cursor.style.transition = 'none';
-      cursor.style.left = (card.offsetWidth * 0.74) + 'px';
-      cursor.style.top = (card.offsetHeight * 0.9) + 'px';
-      cursor.classList.add('show');
-      void cursor.offsetWidth;
-      cursor.style.transition = '';
-      requestAnimationFrame(() => {
-        const p = offsetWithin(acceptBtn, card);
-        cursor.style.left = (p.left + p.width / 2) + 'px';
-        cursor.style.top = (p.top + p.height / 2) + 'px';
-      });
-    });
-    at(tAct - 80,  () => { if (cursor) cursor.classList.add('click'); });
     at(tAct,       () => { if (acceptBtn) acceptBtn.classList.add('press'); });
-    at(tAct + 160, () => { if (acceptBtn) acceptBtn.classList.remove('press'); if (cursor) cursor.classList.remove('click'); });
-    at(tAct + 500, () => { if (cursor) cursor.classList.remove('show'); });
+    at(tAct + 160, () => { if (acceptBtn) acceptBtn.classList.remove('press'); });
     SEL.forEach((ri, k) => at(tAct + 280 + k * 110, () => {
       const c = rows[ri].querySelector('[data-al-stat]');
       setStat(c, NEW_STATUS);
@@ -2116,22 +2091,14 @@ const DSP_SECTION_ROUTES = {
   const nameEl  = card.querySelector('[data-qh-name]');
   const saved   = card.querySelector('[data-qh-saved]');
   const sqPick  = card.querySelector('[data-qh-sq]');           
-  const builder = card.querySelector('.qh-builder');
-  const filters = card.querySelector('.qh-filters');
   const c1      = card.querySelector('[data-qh-c1]');
   const c2      = card.querySelector('[data-qh-c2]');
   const addf    = card.querySelector('[data-qh-addf]');
   const runBtn  = card.querySelector('[data-qh-run]');
-  const listhead = card.querySelector('.qh-listhead');
-  const pager   = card.querySelector('.al-pager');
   const rows    = [...card.querySelectorAll('[data-qh-row]')];
   const countEl = card.querySelector('[data-qh-count]');
-  const rateEls = [...card.querySelectorAll('[data-qh-rate]')];
-  const ckEls   = rateEls.map(el => el.closest('[data-qh-row]').querySelector('.al-ck'));
-  const editbar = card.querySelector('[data-qh-editbar]');
+  const rateEl  = card.querySelector('[data-qh-rate]');         
   const toast   = card.querySelector('[data-qh-toast]');
-  const cursor  = card.querySelector('[data-qh-cursor]');
-  const savedBtn = card.querySelector('[data-qh-savedbtn]');
 
   const COUNT = 342;
   const NEW_RATE = 'Negotiation';
@@ -2157,36 +2124,24 @@ const DSP_SECTION_ROUTES = {
     nameEl.textContent = 'New query';
     saved.classList.remove('open');
     sqPick.classList.remove('pick');
-    builder.classList.remove('in');
-    filters.classList.remove('in');
     c1.classList.remove('in');
     c2.classList.remove('in');
     addf.classList.remove('armed');
     runBtn.classList.remove('press');
-    listhead.classList.remove('in');
-    pager.classList.remove('in');
     rows.forEach(r => r.classList.remove('in'));
     countEl.textContent = '0';
-    rateEls.forEach(el => { el.textContent = 'Proposal'; el.classList.remove('editing', 'lit'); });
-    ckEls.forEach(ck => ck.classList.remove('on'));
-    rateEls.forEach(el => el.closest('[data-qh-row]').classList.remove('sel'));
-    editbar.classList.remove('on');
+    rateEl.textContent = 'Proposal';
+    rateEl.classList.remove('editing', 'lit');
     toast.classList.remove('on');
-    if (cursor) { cursor.classList.remove('show', 'click'); cursor.style.transition = 'none'; }
   }
 
   function paintFinal() {
     nameEl.textContent = PICK_NAME;
-    builder.classList.add('in');
-    filters.classList.add('in');
     c1.classList.add('in');
     c2.classList.add('in');
-    listhead.classList.add('in');
     rows.forEach(r => r.classList.add('in'));
-    pager.classList.add('in');
     countEl.textContent = fmt(COUNT);
-    ckEls.forEach(ck => ck.classList.add('on'));
-    rateEls.forEach(el => { el.closest('[data-qh-row]').classList.add('sel'); el.textContent = NEW_RATE; });
+    rateEl.textContent = NEW_RATE;
     toast.classList.add('on');
   }
 
@@ -2194,60 +2149,25 @@ const DSP_SECTION_ROUTES = {
     reset();
     if (reduce) { paintFinal(); setTimeout(fireDone, 1800); return; }
 
-    if (cursor && savedBtn) {
-      cursor.style.transition = 'none';
-      cursor.style.left = (card.offsetWidth * 0.62) + 'px';
-      cursor.style.top = (card.offsetHeight * 0.75) + 'px';
-      cursor.classList.add('show');
-      void cursor.offsetWidth;
-      cursor.style.transition = '';
-      requestAnimationFrame(() => {
-        const pBtn = offsetWithin(savedBtn, card);
-        cursor.style.left = (pBtn.left + pBtn.width / 2) + 'px';
-        cursor.style.top = (pBtn.top + pBtn.height / 2) + 'px';
-      });
-      at(600, () => cursor.classList.add('click'));
-      at(750, () => cursor.classList.remove('click'));
-    }
     at(600,  () => saved.classList.add('open'));
-    if (cursor && sqPick) {
-      at(700, () => {
-        const p = offsetWithin(sqPick, card);
-        cursor.style.left = (p.left + p.width / 2) + 'px';
-        cursor.style.top = (p.top + p.height / 2) + 'px';
-      });
-      at(1350, () => cursor.classList.add('click'));
-      at(1500, () => cursor.classList.remove('click'));
-      at(1900, () => cursor.classList.remove('show'));
-    }
-    at(1500, () => sqPick.classList.add('pick'));
-    at(2400, () => { saved.classList.remove('open'); nameEl.textContent = PICK_NAME; builder.classList.add('in'); });
+    at(1150, () => sqPick.classList.add('pick'));
+    at(1600, () => { saved.classList.remove('open'); nameEl.textContent = PICK_NAME; });
 
-    at(2700, () => { filters.classList.add('in'); addf.classList.add('armed'); });
-    at(2900, () => { c1.classList.add('in'); });
-    at(3400, () => { c2.classList.add('in'); });           
-    at(3650, () => addf.classList.remove('armed'));
+    at(2000, () => addf.classList.add('armed'));
+    at(2250, () => { c1.classList.add('in'); });
+    at(2800, () => { c2.classList.add('in'); });           
+    at(3050, () => addf.classList.remove('armed'));
 
-    at(3800, () => listhead.classList.add('in'));
-    at(4000, () => runBtn.classList.add('press'));
-    at(4150, () => runBtn.classList.remove('press'));
-    rows.forEach((r, k) => at(4300 + k * 130, () => r.classList.add('in')));
-    at(4350, () => countTo(COUNT, 1200));
-    const tPager = 4300 + rows.length * 130 + 250;
-    at(tPager, () => pager.classList.add('in'));
+    at(3350, () => runBtn.classList.add('press'));
+    at(3500, () => runBtn.classList.remove('press'));
+    rows.forEach((r, k) => at(3650 + k * 170, () => r.classList.add('in')));
+    at(3700, () => countTo(COUNT, 1000));
 
-    const tEdit = tPager + 500;
-    at(tEdit - 350,  () => { ckEls.forEach(ck => ck.classList.add('on')); rateEls.forEach(el => el.closest('[data-qh-row]').classList.add('sel')); });
-    at(tEdit,        () => rateEls.forEach(el => el.classList.add('editing')));
-    at(tEdit + 650,  () => { rateEls.forEach(el => { el.textContent = NEW_RATE; }); });
-    at(tEdit + 1400, () => editbar.classList.add('on'));
-    at(tEdit + 2100, () => { editbar.classList.remove('on'); rateEls.forEach(el => { el.classList.remove('editing'); el.classList.add('lit'); }); });
-    at(tEdit + 2300, () => {
-      toast.classList.add('on');
-      ckEls.forEach(ck => ck.classList.remove('on'));
-      rateEls.forEach(el => el.closest('[data-qh-row]').classList.remove('sel'));
-      fireDone();
-    });
+    const tEdit = 3650 + rows.length * 170 + 500;
+    at(tEdit,        () => rateEl.classList.add('editing'));
+    at(tEdit + 650,  () => { rateEl.textContent = NEW_RATE; });
+    at(tEdit + 1050, () => { rateEl.classList.remove('editing'); rateEl.classList.add('lit'); });
+    at(tEdit + 1250, () => { toast.classList.add('on'); fireDone(); });
   }
 
   const fireDone = () => scene.dispatchEvent(new CustomEvent('demodone', { bubbles: true }));
@@ -2275,7 +2195,6 @@ const DSP_SECTION_ROUTES = {
   const progress = card.querySelector('[data-hl-progress]');
   const bar      = card.querySelector('[data-hl-bar]');
   const toast    = card.querySelector('[data-hl-toast]');
-  const cursor   = card.querySelector('[data-hl-cursor]');
 
   const TOTAL = 12481;
   const AUDIT_BASE = audit.innerHTML;
@@ -2299,7 +2218,6 @@ const DSP_SECTION_ROUTES = {
     bar.classList.remove('done');
     bar.style.width = '0%';
     toast.classList.remove('on');
-    if (cursor) { cursor.classList.remove('show', 'click'); cursor.style.transition = 'none'; }
   }
 
   function paintFinal() {
@@ -2329,24 +2247,6 @@ const DSP_SECTION_ROUTES = {
     mrows.forEach((r, k) => at(tApplied + k * 120, () => r.classList.add('applied')));
 
     const tRun = tApplied + mrows.length * 120 + 420;
-    if (cursor) {
-      at(tRun - 500, () => {
-        cursor.style.transition = 'none';
-        cursor.style.left = (card.offsetWidth * 0.7) + 'px';
-        cursor.style.top = (card.offsetHeight * 0.85) + 'px';
-        cursor.classList.add('show');
-        void cursor.offsetWidth;
-        cursor.style.transition = '';
-        requestAnimationFrame(() => {
-          const p = offsetWithin(runBtn, card);
-          cursor.style.left = (p.left + p.width / 2) + 'px';
-          cursor.style.top = (p.top + p.height / 2) + 'px';
-        });
-      });
-      at(tRun - 80, () => cursor.classList.add('click'));
-      at(tRun + 150, () => cursor.classList.remove('click'));
-      at(tRun + 500, () => cursor.classList.remove('show'));
-    }
     at(tRun,        () => runBtn.classList.add('press'));
     at(tRun + 150,  () => runBtn.classList.remove('press'));
     at(tRun + 200,  () => {
@@ -2416,7 +2316,6 @@ const DSP_SECTION_ROUTES = {
     }
   }
 })();
-
 
 (() => {
   document.addEventListener('click', (e) => {
