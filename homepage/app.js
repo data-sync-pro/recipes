@@ -1141,13 +1141,25 @@ const DSP_SECTION_ROUTES = {
     window.scrollTo({ top: Math.max(0, y), behavior: behavior || 'auto' });
   }
   
-  function applyPath(behavior) {
+  function applyPath(behavior, skipScroll) {
     const m = location.pathname.match(PANEL_PATH);
     if (!m) return;
     show(m[1], 'none');
-    requestAnimationFrame(() => scrollToSurfaces(behavior));
+    if (!skipScroll) requestAnimationFrame(() => scrollToSurfaces(behavior));
   }
-  applyPath('auto');
+  // On reload / back-forward the browser restores the previous scroll position;
+  // don't yank the page to the tabs. Only fresh deep-link visits jump there.
+  const navEntry = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+  const restoredNav = navEntry && (navEntry.type === 'reload' || navEntry.type === 'back_forward');
+  if (restoredNav) {
+    // Chromium animates history scroll restoration when CSS scroll-behavior is
+    // smooth; force it instant until the restored position has settled.
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.addEventListener('load', () => {
+      setTimeout(() => { document.documentElement.style.scrollBehavior = ''; }, 600);
+    });
+  }
+  applyPath('instant', restoredNav);
   window.addEventListener('popstate', () => applyPath('smooth'));
 
   
@@ -1199,34 +1211,6 @@ const DSP_SECTION_ROUTES = {
     setTimeout(() => placeFin(activeOrFirst()), 900);
   }
 
-  const surfacesSection = document.getElementById('surfaces');
-  if (surfacesSection && 'IntersectionObserver' in window && !sessionStorage.getItem('dsp-surfaces-cycled')) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          io.disconnect();
-          sessionStorage.setItem('dsp-surfaces-cycled', '1');
-          const originalKey = (tabList.find(t => t.classList.contains('active')) || tabList[0]).dataset.panel;
-          let i = 0;
-          const cycle = () => {
-            if (i >= tabList.length) {
-              show(originalKey);
-              tabList.forEach(t => t.classList.remove('is-cycling'));
-              return;
-            }
-            tabList.forEach(t => t.classList.remove('is-cycling'));
-            const tab = tabList[i];
-            tab.classList.add('is-cycling');
-            show(tab.dataset.panel);
-            i++;
-            setTimeout(cycle, 360);
-          };
-          setTimeout(cycle, 350);
-        }
-      });
-    }, { threshold: 0.35 });
-    io.observe(surfacesSection);
-  }
 
   
   const subbar = document.getElementById('surfaceSubbar');
