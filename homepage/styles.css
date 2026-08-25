@@ -5621,7 +5621,7 @@ footer {
 .hero-dot:hover { color: var(--ink); border-color: var(--rule-2); }
 .hero-dot.on { background: var(--brand-soft); border-color: var(--brand-pure); color: var(--brand-ink); }
 
-.fake-cursor { position: absolute; left: 0; top: 0; width: 16px; height: 16px; margin: -8px 0 0 -8px; opacity: 0; pointer-events: none; z-index: 20; transition: left .5s cubic-bezier(.4,0,.2,1), top .5s cubic-bezier(.4,0,.2,1), opacity .2s ease; }
+.fake-cursor { position: absolute; left: 0; top: 0; width: 16px; height: 16px; margin: -8px 0 0 -8px; opacity: 0; pointer-events: none; z-index: 20; transition: left .32s cubic-bezier(.4,0,.2,1), top .32s cubic-bezier(.4,0,.2,1), opacity .2s ease; }
 .fake-cursor.show { opacity: 1; }
 .fake-cursor .dot { position: absolute; inset: 0; border-radius: 50%; background: var(--ink); box-shadow: 0 1px 3px rgba(11,16,25,.4), 0 0 0 2px #fff; transform: scale(1); transition: transform .12s ease; }
 .fake-cursor.click .dot { transform: scale(.65); }

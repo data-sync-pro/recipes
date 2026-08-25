@@ -1958,6 +1958,38 @@ const DSP_SECTION_ROUTES = {
   armScene();
 })();
 
+function dspFakeCursor(card, sel) {
+  const cur = card.querySelector(sel);
+  if (!cur) return null;
+  const move = (target, dx, dy) => {
+    const el = typeof target === 'string' ? card.querySelector(target) : target;
+    if (!el) return;
+    const cr = card.getBoundingClientRect();
+    if (!cr.width) return;
+    const scale = cr.width / card.offsetWidth || 1;
+    const er = el.getBoundingClientRect();
+    cur.style.left = ((er.left - cr.left + er.width / 2) / scale + (dx || 0)) + 'px';
+    cur.style.top = ((er.top - cr.top + er.height / 2) / scale + (dy || 0)) + 'px';
+  };
+  let clickT = 0;
+  return {
+    show(t, dx, dy) {
+      cur.style.transition = 'none';
+      move(t, dx, dy);
+      void cur.offsetWidth;
+      cur.style.transition = '';
+      cur.classList.add('show');
+    },
+    to: move,
+    click() {
+      cur.classList.add('click');
+      clearTimeout(clickT);
+      clickT = setTimeout(() => cur.classList.remove('click'), 340);
+    },
+    hide() { cur.classList.remove('show', 'click'); },
+  };
+}
+
 (() => {
   const card = document.getElementById('uiListHero');
   if (!card) return;
@@ -1977,7 +2009,9 @@ const DSP_SECTION_ROUTES = {
   const highChk   = card.querySelector('[data-al-high]');
   const medChk    = card.querySelector('[data-al-med]');
   const lowChk    = card.querySelector('[data-al-low]');
-  const acceptBtn = cacts.querySelector('[data-al-accept]');   
+  const acceptBtn = cacts.querySelector('[data-al-accept]');
+  const confirmBtn = card.querySelector('[data-al-confirm]');
+  const cursor   = dspFakeCursor(card, '[data-al-cursor]');
   const toast    = card.querySelector('[data-al-toast]');
 
   const SEL = [0, 2, 4, 5];        
@@ -2030,6 +2064,7 @@ const DSP_SECTION_ROUTES = {
     filterVal.textContent = 'Filter…';
     filterBox.classList.remove('has');
     if (lastPg) lastPg.textContent = '15';
+    if (cursor) cursor.hide();
     toast.classList.remove('on');
   }
 
@@ -2062,25 +2097,25 @@ const DSP_SECTION_ROUTES = {
 
     at(550,  () => filter.classList.add('open'));
     at(1000, () => highChk.classList.add('on'));
-    at(1280, () => medChk.classList.add('on'));
-    at(1700, () => filter.classList.remove('open'));
-    at(1880, () => {
-      applyFilter(rows, true);   
+    at(1420, () => medChk.classList.add('on'));
+    at(1960, () => filter.classList.remove('open'));
+    at(2140, () => {
+      applyFilter(rows, true);
       if (rc) rc.textContent = '112';
       filterVal.textContent = 'High, Medium';
       filterBox.classList.add('has');
       if (lastPg) lastPg.textContent = '12';
     });
 
-    const tSel = 2350;
-    SEL.forEach((ri, k) => at(tSel + k * 230, () => {
+    const tSel = 2550;
+    SEL.forEach((ri, k) => at(tSel + k * 340, () => {
       rows[ri].classList.add('sel');
       rows[ri].querySelector('[data-al-ck]').classList.add('on');
       selnote.textContent = (k + 1) + ' item' + (k ? 's' : '') + ' selected';
       selnote.classList.add('sel');
       ckall.classList.add('some');
     }));
-    const tSelDone = tSel + SEL.length * 230;
+    const tSelDone = tSel + SEL.length * 340;
     at(tSelDone + 60,  () => { cacts.classList.add('on'); cacts.querySelectorAll('.al-cbtn').forEach(b => b.classList.add('flash')); });
     at(tSelDone + 760, () => cacts.querySelectorAll('.al-cbtn').forEach(b => b.classList.remove('flash')));
 
@@ -2096,7 +2131,7 @@ const DSP_SECTION_ROUTES = {
     const tToast = tAct + 280 + SEL.length * 110 + 60;
     at(tToast, () => {
       toast.classList.add('on');
-      
+
       SEL.forEach(ri => {
         rows[ri].classList.remove('sel');
         rows[ri].querySelector('[data-al-ck]').classList.remove('on');
@@ -2107,6 +2142,24 @@ const DSP_SECTION_ROUTES = {
       selnote.textContent = 'Updated just now';
       fireDone();
     });
+
+    if (cursor) {
+      at(300,  () => cursor.show(filterBox));
+      at(530,  () => cursor.click());
+      at(650,  () => cursor.to(highChk));
+      at(1000, () => cursor.click());
+      at(1080, () => cursor.to(medChk));
+      at(1420, () => cursor.click());
+      at(1520, () => cursor.to(confirmBtn));
+      at(1900, () => cursor.click());
+      SEL.forEach((ri, k) => {
+        at(tSel + k * 340 - 340, () => cursor.to(rows[ri].querySelector('[data-al-ck]')));
+        at(tSel + k * 340, () => cursor.click());
+      });
+      at(tAct - 360, () => cursor.to(acceptBtn));
+      at(tAct, () => cursor.click());
+      at(tToast, () => cursor.hide());
+    }
   }
 
   const fireDone = () => scene.dispatchEvent(new CustomEvent('demodone', { bubbles: true }));
@@ -2145,6 +2198,8 @@ const DSP_SECTION_ROUTES = {
   const origRates = rates.map(r => r.textContent);
   const editbar = card.querySelector('[data-qh-editbar]');
   const saveBtn = editbar ? editbar.querySelector('.qh-ebtn.primary') : null;
+  const savedBtn = card.querySelector('[data-qh-savedbtn]');
+  const cursor  = dspFakeCursor(card, '[data-qh-cursor]');
   const toast   = card.querySelector('[data-qh-toast]');
 
   const COUNT = 342;
@@ -2188,6 +2243,7 @@ const DSP_SECTION_ROUTES = {
     rates.forEach((r, i) => { r.textContent = origRates[i]; r.classList.remove('editing', 'lit'); });
     if (editbar) editbar.classList.remove('on');
     if (saveBtn) saveBtn.classList.remove('press');
+    if (cursor) cursor.hide();
     toast.classList.remove('on');
   }
 
@@ -2214,9 +2270,9 @@ const DSP_SECTION_ROUTES = {
     at(1600, () => { saved.classList.remove('open'); nameEl.textContent = PICK_NAME; });
     at(1800, () => { builder.classList.add('in'); filters.classList.add('in'); });
 
-    at(2000, () => addf.classList.add('armed'));
-    at(2250, () => { c1.classList.add('in'); });
-    at(2800, () => { c2.classList.add('in'); });           
+    at(2100, () => addf.classList.add('armed'));
+    at(2350, () => { c1.classList.add('in'); });
+    at(2800, () => { c2.classList.add('in'); });
     at(3050, () => addf.classList.remove('armed'));
 
     at(3350, () => runBtn.classList.add('press'));
@@ -2227,23 +2283,41 @@ const DSP_SECTION_ROUTES = {
 
     const targets = rows.filter(r => r.querySelector('[data-qh-rate]'));
     const tSel = 3650 + rows.length * 170 + 400;
-    targets.forEach((r, k) => at(tSel + k * 160, () => {
+    targets.forEach((r, k) => at(tSel + k * 340, () => {
       r.classList.add('sel');
       const ck = r.querySelector('.al-ck');
       if (ck) ck.classList.add('on');
     }));
-    const tBar = tSel + targets.length * 160 + 250;
+    const tBar = tSel + targets.length * 340 + 250;
     at(tBar, () => { if (editbar) editbar.classList.add('on'); });
     at(tBar + 500,  () => rates.forEach(r => r.classList.add('editing')));
     at(tBar + 1150, () => rates.forEach(r => { r.textContent = NEW_RATE; }));
     at(tBar + 1500, () => rates.forEach(r => { r.classList.remove('editing'); r.classList.add('lit'); }));
-    at(tBar + 1750, () => { if (saveBtn) saveBtn.classList.add('press'); });
-    at(tBar + 1900, () => {
+    at(tBar + 2400, () => { if (saveBtn) saveBtn.classList.add('press'); });
+    at(tBar + 2600, () => {
       if (saveBtn) saveBtn.classList.remove('press');
       if (editbar) editbar.classList.remove('on');
       toast.classList.add('on');
       fireDone();
     });
+
+    if (cursor) {
+      at(380,  () => cursor.show(savedBtn));
+      at(600,  () => cursor.click());
+      at(700,  () => cursor.to(sqPick));
+      at(1150, () => cursor.click());
+      at(1700, () => cursor.to(addf));
+      at(2100, () => cursor.click());
+      at(2950, () => cursor.to(runBtn));
+      at(3350, () => cursor.click());
+      targets.forEach((r, k) => {
+        at(tSel + k * 340 - 340, () => cursor.to(r.querySelector('.al-ck')));
+        at(tSel + k * 340, () => cursor.click());
+      });
+      at(tBar + 1520, () => cursor.to(saveBtn));
+      at(tBar + 2400, () => cursor.click());
+      at(tBar + 2600, () => cursor.hide());
+    }
   }
 
   const fireDone = () => scene.dispatchEvent(new CustomEvent('demodone', { bubbles: true }));
@@ -2274,6 +2348,7 @@ const DSP_SECTION_ROUTES = {
 
   const TOTAL = 12481;
   const AUDIT_BASE = audit.innerHTML;
+  const cursor = dspFakeCursor(card, '[data-hl-cursor]');
 
   let timers = [];
   const at = (ms, fn) => timers.push(setTimeout(fn, ms));
@@ -2293,6 +2368,7 @@ const DSP_SECTION_ROUTES = {
     progress.classList.remove('on');
     bar.classList.remove('done');
     bar.style.width = '0%';
+    if (cursor) cursor.hide();
     toast.classList.remove('on');
   }
 
@@ -2331,6 +2407,13 @@ const DSP_SECTION_ROUTES = {
       statusEl.textContent = 'Running';
       progress.classList.add('on');
     });
+    if (cursor) {
+      at(240, () => cursor.show(drop));
+      at(490, () => cursor.click());
+      at(tRun - 380, () => cursor.to(runBtn));
+      at(tRun + 10, () => cursor.click());
+      at(tRun + 700, () => cursor.hide());
+    }
 
     const fillStart = tRun + 280, fillDur = 2600, steps = 26;
     for (let i = 1; i <= steps; i++) {
