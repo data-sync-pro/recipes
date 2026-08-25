@@ -1169,17 +1169,26 @@ const DSP_SECTION_ROUTES = {
     if (!surfacesEl) return;
     const nav = document.getElementById('nav');
     const navH = nav ? nav.offsetHeight : 0;
-    const y = surfacesEl.getBoundingClientRect().top + window.scrollY - navH - 8;
-    window.scrollTo({ top: Math.max(0, y), behavior: behavior || 'auto' });
+    const y = Math.max(0, surfacesEl.getBoundingClientRect().top + window.scrollY - navH - 8);
+    if (behavior === 'instant') {
+      // Bypass the global `html { scroll-behavior: smooth }` for an immediate jump.
+      const el = document.documentElement;
+      const prevSb = el.style.scrollBehavior;
+      el.style.scrollBehavior = 'auto';
+      window.scrollTo(0, y);
+      el.style.scrollBehavior = prevSb;
+    } else {
+      window.scrollTo({ top: y, behavior: behavior || 'auto' });
+    }
   }
-  
+
   function applyPath(behavior) {
     const m = location.pathname.match(PANEL_PATH);
     if (!m) return;
     show(m[1], 'none');
     requestAnimationFrame(() => scrollToSurfaces(behavior));
   }
-  applyPath('auto');
+  applyPath('instant');
   window.addEventListener('popstate', () => applyPath('smooth'));
 
   
