@@ -1319,7 +1319,7 @@ const DSP_SECTION_ROUTES = {
   const TICK_FAST_MS = 40;      
   const TOTAL_RUN_MS = (TICK_SLOW_MS + TICK_FAST_MS) / 2 * N_BATCHES; 
   const REST_MS = 6000;         
-  const MAX_SUBROWS = 5;        
+  const MAX_SUBROWS = 7;
 
   
   const smoothstep = t => t * t * (3 - 2 * t);
@@ -2114,7 +2114,11 @@ const DSP_SECTION_ROUTES = {
 
   const nameEl  = card.querySelector('[data-qh-name]');
   const saved   = card.querySelector('[data-qh-saved]');
-  const sqPick  = card.querySelector('[data-qh-sq]');           
+  const sqPick  = card.querySelector('[data-qh-sq]');
+  const builder = card.querySelector('.qh-builder');
+  const filters = card.querySelector('[data-qh-filters]');
+  const listhd  = card.querySelector('.qh-listhead');
+  const pager   = card.querySelector('.al-pager');
   const c1      = card.querySelector('[data-qh-c1]');
   const c2      = card.querySelector('[data-qh-c2]');
   const addf    = card.querySelector('[data-qh-addf]');
@@ -2148,6 +2152,10 @@ const DSP_SECTION_ROUTES = {
     nameEl.textContent = 'New query';
     saved.classList.remove('open');
     sqPick.classList.remove('pick');
+    builder.classList.remove('in');
+    filters.classList.remove('in');
+    listhd.classList.remove('in');
+    pager.classList.remove('in');
     c1.classList.remove('in');
     c2.classList.remove('in');
     addf.classList.remove('armed');
@@ -2161,6 +2169,10 @@ const DSP_SECTION_ROUTES = {
 
   function paintFinal() {
     nameEl.textContent = PICK_NAME;
+    builder.classList.add('in');
+    filters.classList.add('in');
+    listhd.classList.add('in');
+    pager.classList.add('in');
     c1.classList.add('in');
     c2.classList.add('in');
     rows.forEach(r => r.classList.add('in'));
@@ -2176,6 +2188,7 @@ const DSP_SECTION_ROUTES = {
     at(600,  () => saved.classList.add('open'));
     at(1150, () => sqPick.classList.add('pick'));
     at(1600, () => { saved.classList.remove('open'); nameEl.textContent = PICK_NAME; });
+    at(1800, () => { builder.classList.add('in'); filters.classList.add('in'); });
 
     at(2000, () => addf.classList.add('armed'));
     at(2250, () => { c1.classList.add('in'); });
@@ -2184,6 +2197,7 @@ const DSP_SECTION_ROUTES = {
 
     at(3350, () => runBtn.classList.add('press'));
     at(3500, () => runBtn.classList.remove('press'));
+    at(3550, () => { listhd.classList.add('in'); pager.classList.add('in'); });
     rows.forEach((r, k) => at(3650 + k * 170, () => r.classList.add('in')));
     at(3700, () => countTo(COUNT, 1000));
 
