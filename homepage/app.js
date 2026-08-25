@@ -1950,7 +1950,18 @@ const DSP_SECTION_ROUTES = {
     armScene();
   }
 
-  dots.forEach((d, k) => d.addEventListener('click', () => { go(k); armScene(); }));
+  dots.forEach((d, k) => d.addEventListener('click', () => {
+    if (k === idx) {
+      // Re-clicking the active dot: bounce is-active off and on so each
+      // demo's MutationObserver sees a change and replays from the start.
+      const s = scenes[idx];
+      s.classList.remove('is-active');
+      setTimeout(() => s.classList.add('is-active'), 40);
+    } else {
+      go(k);
+    }
+    armScene();
+  }));
   rot.addEventListener('mouseenter', () => { paused = true; clearTimers(); });
   rot.addEventListener('mouseleave', () => { paused = false; armScene(); });
 
