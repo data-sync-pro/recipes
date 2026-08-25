@@ -2141,7 +2141,10 @@ const DSP_SECTION_ROUTES = {
   const runBtn  = card.querySelector('[data-qh-run]');
   const rows    = [...card.querySelectorAll('[data-qh-row]')];
   const countEl = card.querySelector('[data-qh-count]');
-  const rateEl  = card.querySelector('[data-qh-rate]');         
+  const rates   = [...card.querySelectorAll('[data-qh-rate]')];
+  const origRates = rates.map(r => r.textContent);
+  const editbar = card.querySelector('[data-qh-editbar]');
+  const saveBtn = editbar ? editbar.querySelector('.qh-ebtn.primary') : null;
   const toast   = card.querySelector('[data-qh-toast]');
 
   const COUNT = 342;
@@ -2176,10 +2179,15 @@ const DSP_SECTION_ROUTES = {
     c2.classList.remove('in');
     addf.classList.remove('armed');
     runBtn.classList.remove('press');
-    rows.forEach(r => r.classList.remove('in'));
+    rows.forEach(r => {
+      r.classList.remove('in', 'sel');
+      const ck = r.querySelector('.al-ck');
+      if (ck) ck.classList.remove('on');
+    });
     countEl.textContent = '0';
-    rateEl.textContent = 'Proposal';
-    rateEl.classList.remove('editing', 'lit');
+    rates.forEach((r, i) => { r.textContent = origRates[i]; r.classList.remove('editing', 'lit'); });
+    if (editbar) editbar.classList.remove('on');
+    if (saveBtn) saveBtn.classList.remove('press');
     toast.classList.remove('on');
   }
 
@@ -2193,7 +2201,7 @@ const DSP_SECTION_ROUTES = {
     c2.classList.add('in');
     rows.forEach(r => r.classList.add('in'));
     countEl.textContent = fmt(COUNT);
-    rateEl.textContent = NEW_RATE;
+    rates.forEach(r => { r.textContent = NEW_RATE; });
     toast.classList.add('on');
   }
 
@@ -2217,11 +2225,25 @@ const DSP_SECTION_ROUTES = {
     rows.forEach((r, k) => at(3650 + k * 170, () => r.classList.add('in')));
     at(3700, () => countTo(COUNT, 1000));
 
-    const tEdit = 3650 + rows.length * 170 + 500;
-    at(tEdit,        () => rateEl.classList.add('editing'));
-    at(tEdit + 650,  () => { rateEl.textContent = NEW_RATE; });
-    at(tEdit + 1050, () => { rateEl.classList.remove('editing'); rateEl.classList.add('lit'); });
-    at(tEdit + 1250, () => { toast.classList.add('on'); fireDone(); });
+    const targets = rows.filter(r => r.querySelector('[data-qh-rate]'));
+    const tSel = 3650 + rows.length * 170 + 400;
+    targets.forEach((r, k) => at(tSel + k * 160, () => {
+      r.classList.add('sel');
+      const ck = r.querySelector('.al-ck');
+      if (ck) ck.classList.add('on');
+    }));
+    const tBar = tSel + targets.length * 160 + 250;
+    at(tBar, () => { if (editbar) editbar.classList.add('on'); });
+    at(tBar + 500,  () => rates.forEach(r => r.classList.add('editing')));
+    at(tBar + 1150, () => rates.forEach(r => { r.textContent = NEW_RATE; }));
+    at(tBar + 1500, () => rates.forEach(r => { r.classList.remove('editing'); r.classList.add('lit'); }));
+    at(tBar + 1750, () => { if (saveBtn) saveBtn.classList.add('press'); });
+    at(tBar + 1900, () => {
+      if (saveBtn) saveBtn.classList.remove('press');
+      if (editbar) editbar.classList.remove('on');
+      toast.classList.add('on');
+      fireDone();
+    });
   }
 
   const fireDone = () => scene.dispatchEvent(new CustomEvent('demodone', { bubbles: true }));

@@ -5800,6 +5800,7 @@ footer {
 .qh-editbar.on { opacity: 1; transform: none; }
 .qh-ebtn { font-family: var(--f-sans); font-size: 12.5px; font-weight: 500; padding: 7px 14px; border-radius: var(--r-sm); border: 1px solid var(--rule-2); background: var(--card); color: var(--ink-2); }
 .qh-ebtn.primary { background: var(--brand-ink); border-color: var(--brand-ink); color: #fff; }
+.qh-ebtn.press { transform: translateY(1px); }
 .qh-ctrls { display: contents; }
 .qh-saved { position: relative; flex: 0 0 auto; }
 .qh-savedbtn { display: inline-flex; align-items: center; gap: 5px; height: 28px; padding: 0 11px; border-radius: var(--r-sm); border: 1px solid var(--rule-2); background: var(--card); color: var(--ink-2); font-size: 12px; cursor: default; transition: border-color .2s ease, box-shadow .2s ease; }
