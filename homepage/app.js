@@ -1052,20 +1052,36 @@ const DSP_SECTION_ROUTES = {
   const cats = document.querySelectorAll('#fnCats .fc');
   const chips = document.querySelectorAll('#fnGrid .chip');
   if (!cats.length) return;
+  const mobile = matchMedia('(max-width: 640px)');
+  const moreLabel = document.querySelector('#fnGrid .chip.more span');
+  const baseMore = moreLabel ? parseInt((moreLabel.textContent.match(/\d+/) || [150])[0], 10) : 150;
+  const featuredTotal = [...chips].filter(ch => ch.dataset.featured === '1').length;
+  let lastCat = 'all';
   function applyFilter(cat) {
+    lastCat = cat;
     const grid = document.getElementById('fnGrid');
     if (grid) grid.classList.toggle('view-all', cat === 'all');
+    const cap = mobile.matches ? 10 : Infinity;
+    let shown = 0;
     chips.forEach(ch => {
+      const isMore = ch.classList.contains('more');
       let show;
       if (cat === 'all') {
-        
-        show = ch.dataset.featured === '1' || ch.classList.contains('more');
+
+        show = ch.dataset.featured === '1' || isMore;
       } else {
-        
-        show = !ch.classList.contains('more') && ch.dataset.cat === cat;
+
+        show = !isMore && ch.dataset.cat === cat;
+      }
+      if (show && !isMore) {
+        if (shown >= cap) show = false;
+        else shown++;
       }
       ch.style.display = show ? '' : 'none';
     });
+    if (cat === 'all' && moreLabel) {
+      moreLabel.textContent = '+ ' + (baseMore + featuredTotal - shown) + ' more →';
+    }
   }
   cats.forEach(c => {
     c.addEventListener('click', () => {
@@ -1074,7 +1090,7 @@ const DSP_SECTION_ROUTES = {
       applyFilter(c.dataset.cat);
     });
   });
-  
+  (mobile.addEventListener ? mobile.addEventListener('change', () => applyFilter(lastCat)) : mobile.addListener(() => applyFilter(lastCat)));
   applyFilter('all');
 })();
 

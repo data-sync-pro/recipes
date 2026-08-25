@@ -187,7 +187,7 @@
                 <span class="al-hcell">Case Number<svg class="cv" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <span class="al-hcell">Subject<svg class="cv" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <span class="al-hcell">Case Type<svg class="cv" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                <span class="al-hcell sorted">Priority<svg class="st" viewBox="0 0 12 12" fill="none"><path d="M6 8.5v-5M3.5 6L6 3.5 8.5 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="al-hcell">Priority<svg class="cv" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <span class="al-hcell">Status<svg class="cv" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <span class="al-hend"></span>
               </div>
@@ -300,8 +300,8 @@
                 <button class="stop">Stop Execution</button>
                 <button>Close</button>
               </span>
+              <div class="bw-toast" id="bwToast">Success! Execution submitted. 1,039,809 records actioned · 7 minutes.</div>
             </div>
-            <div class="bw-toast" id="bwToast">Success! Execution submitted. 1,039,809 records actioned · 7 minutes.</div>
           </article>
           <span class="anno br">0 lines of apex</span>
         </div>
@@ -396,7 +396,7 @@
               <div class="hs-head">
                 <span class="hs-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15V4m0 0L8 8m4-4l4 4M5 15v3a2 2 0 002 2h10a2 2 0 002-2v-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <div class="titles">
-                  <span class="hs-tag">EXECUTABLE · #Data Loader · Contact</span>
+                  <span class="obj-tag">EXECUTABLE · #Data Loader · Contact</span>
                   <span class="hs-name">Contact.Import.NA_Region</span>
                 </div>
                 <span class="spacer"></span>
@@ -445,10 +445,11 @@
               <div class="hs-head">
                 <span class="hs-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M16 16l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
                 <div class="titles">
-                  <span class="hs-tag">QUERY MANAGER · #Query · FREE</span>
+                  <span class="obj-tag">QUERY MANAGER · #Query<span class="hs-tag-free"> · FREE</span></span>
                   <span class="hs-name" data-qh-name>New query</span>
                 </div>
                 <span class="spacer"></span>
+                <div class="qh-ctrls">
                 <div class="qh-saved" data-qh-saved>
                   <button class="qh-savedbtn" type="button" tabindex="-1" data-qh-savedbtn>Saved<svg viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
                   <div class="qh-savedmenu" data-qh-savedmenu>
@@ -458,11 +459,12 @@
                   </div>
                 </div>
                 <button class="qh-run" type="button" tabindex="-1" data-qh-run><svg viewBox="0 0 16 16" fill="none"><path d="M5 3l8 5-8 5V3z" fill="currentColor"/></svg>Query</button>
+                </div>
               </div>
 
               <div class="qh-builder">
                 <span class="qh-tok obj"><i>FROM</i>Opportunity</span>
-                <span class="qh-tok"><i>SELECT</i>Name · Stage · Probability · Amount · CloseDate</span>
+                <span class="qh-tok"><i>SELECT</i><span class="tok-txt">Name · Stage · Probability · Amount · CloseDate</span></span>
               </div>
 
               <div class="qh-filters" data-qh-filters>
@@ -471,10 +473,10 @@
                 <span class="qh-chip dyn" data-qh-c2>AccountId =
 :Id
 <i class="dynb">DYNAMIC</i></span>
-                <span class="qh-addf" data-qh-addf>+ filter</span>
+                <span class="qh-addf" data-qh-addf>+<span class="qh-addf-lbl"> filter</span></span>
               </div>
 
-              <div class="qh-listhead"><span class="al-ck al-ckall"><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Opportunity</span><span>Stage</span><span>Prob.</span><span class="num">Amount</span><span>Close</span></div>
+              <div class="qh-listhead"><span class="al-ck al-ckall"><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Opportunity</span><span>Stage</span><span>Prob<span class="qh-col-full">ability</span><span class="qh-col-abbr">.</span></span><span class="num">Amount</span><span>Close</span></div>
               <div class="qh-rows" data-qh-rows>
                 <div class="qh-row" data-qh-row><span class="al-ck"><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="nm">Acme – Renewal</span><span class="rate" data-qh-rate>Proposal</span><span>70%</span><span class="num">$1.24M</span><span>Jun 30</span></div>
                 <div class="qh-row" data-qh-row><span class="al-ck"><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="nm">Hooli – Expansion</span><span class="rate" data-qh-rate>Negotiation</span><span>90%</span><span class="num">$0.98M</span><span>Jul 12</span></div>
@@ -504,11 +506,11 @@
         </div>
 
         <div class="hero-dots" role="tablist" aria-label="Capability previews">
-          <button class="hero-dot on" type="button" data-go="ui" role="tab" aria-selected="true">#UI</button>
-          <button class="hero-dot" type="button" data-go="batch" role="tab" aria-selected="false">#Batch</button>
-          <button class="hero-dot" type="button" data-go="trigger" role="tab" aria-selected="false">#Trigger</button>
-          <button class="hero-dot" type="button" data-go="loader" role="tab" aria-selected="false">#Data Loader</button>
-          <button class="hero-dot" type="button" data-go="query" role="tab" aria-selected="false">#Query</button>
+          <button class="hero-dot on" type="button" data-go="ui" role="tab" aria-selected="true"># UI</button>
+          <button class="hero-dot" type="button" data-go="batch" role="tab" aria-selected="false"># Batch</button>
+          <button class="hero-dot" type="button" data-go="trigger" role="tab" aria-selected="false"># Trigger</button>
+          <button class="hero-dot" type="button" data-go="loader" role="tab" aria-selected="false"># Data Loader</button>
+          <button class="hero-dot" type="button" data-go="query" role="tab" aria-selected="false"># Query</button>
         </div>
       </div>
     </div>
@@ -554,27 +556,27 @@
 
     <div class="surface-tabs reveal" role="tablist" aria-label="Product surfaces" id="surfaceTabs">
       <button class="surface-tab active" role="tab" aria-selected="true" data-panel="ui" data-num="01">
-        <span class="hash">#UI</span>
+        <span class="hash"># UI</span>
         <span class="label">Data List &amp; Action Button</span>
         <span class="sub">360° Workspaces · Editable Lists · Powerful Action Buttons</span>
       </button>
       <button class="surface-tab" role="tab" aria-selected="false" data-panel="batch" data-num="02">
-        <span class="hash">#Batch</span>
+        <span class="hash"># Batch</span>
         <span class="label">Bulk Data Processing</span>
         <span class="sub">Apex-free Batches · Cross-Org Sync · Chained Execution · Scheduling</span>
       </button>
       <button class="surface-tab" role="tab" aria-selected="false" data-panel="trigger" data-num="03">
-        <span class="hash">#Trigger</span>
+        <span class="hash"># Trigger</span>
         <span class="label">Automation &amp; Validation</span>
         <span class="sub">Field Transformations · Cross-record Actions · Validations</span>
       </button>
       <button class="surface-tab" role="tab" aria-selected="false" data-panel="loader" data-num="04">
-        <span class="hash">#Data Loader</span>
+        <span class="hash"># Data Loader</span>
         <span class="label">Self-Serve Imports</span>
         <span class="sub">In-App CSV Upload · Rich Transformations · Audit Trail</span>
       </button>
       <button class="surface-tab is-free" role="tab" aria-selected="false" data-panel="query" data-num="05">
-        <span class="hash">#Query<span class="free-badge">FREE</span></span>
+        <span class="hash"># Query<span class="free-badge">FREE</span></span>
         <span class="label">Point-and-Click Queries</span>
         <span class="sub">Visual Builder · Full CRUD · Metadata-Aware · Auto Pagination</span>
       </button>
@@ -984,7 +986,7 @@
           <div>
             <span class="hash-big">#Trigger</span>
             <h3>Automation &amp; validation,<br/><span class="it">as records — not code.</span></h3>
-            <p class="panel-lead">Every automation and validation rule lives as a Salesforce record — flat, bulk-safe, and modular by design.</p>
+            <p class="panel-lead">Every automation and validation rule lives as a Salesforce record — flat, bulk-safe, and modular by design.</p><a class="panel-recipe" href="/recipes/trigger">View the #Trigger recipes <svg class="arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
           <div class="panel-aside">
             <b>Replaces</b>
@@ -1168,7 +1170,7 @@
               <div class="hs-head">
                 <span class="hs-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15V4m0 0L8 8m4-4l4 4M5 15v3a2 2 0 002 2h10a2 2 0 002-2v-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <div class="titles">
-                  <span class="hs-tag">EXECUTABLE · #Data Loader · Contact</span>
+                  <span class="obj-tag">EXECUTABLE · #Data Loader · Contact</span>
                   <span class="hs-name">Contact.Import.NA_Region</span>
                 </div>
                 <span class="spacer"></span>
@@ -1531,7 +1533,7 @@
           </div>
           <div class="pr-foot">
             <span class="dot"></span>
-            <span><b>12 Executables</b> · 0 Apex · 0 Flows · touches 1 record for any change</span>
+            <span><b>12 Executables</b> · 0 Apex · 0 Flows<span class="pr-foot-extra"> · touches 1 record for any change</span></span>
           </div>
         </article>
       </div>
@@ -1801,7 +1803,7 @@
       <div class="chip" data-cat="convert"><span>ESCAPE_XML</span><span class="cat">convert</span></div>
       <div class="chip" data-cat="mask"><span>SCRAMBLE</span><span class="cat">mask</span></div>
       <div class="chip" data-cat="mask"><span>RANDOM_ITEM</span><span class="cat">mask</span></div>
-      <a class="chip more" href="/transformation" target="_blank" rel="noopener"><span>+ 140 more →</span></a>
+      <a class="chip more" href="/transformation" target="_blank" rel="noopener"><span>+ 150 more →</span></a>
     </div>
 
     <div class="fx-embed reveal">
@@ -2174,11 +2176,11 @@
       <div class="foot-col">
         <h5>Surfaces</h5>
         <ul>
-          <li><a href="/surfaces/batch">#Batch</a></li>
-          <li><a href="/surfaces/trigger">#Trigger</a></li>
-          <li><a href="/surfaces/loader">#Data Loader</a></li>
-          <li><a href="/surfaces/ui">#UI</a></li>
-          <li><a href="/surfaces/query">#Query</a></li>
+          <li><a href="/surfaces/batch"># Batch</a></li>
+          <li><a href="/surfaces/trigger"># Trigger</a></li>
+          <li><a href="/surfaces/loader"># Data Loader</a></li>
+          <li><a href="/surfaces/ui"># UI</a></li>
+          <li><a href="/surfaces/query"># Query</a></li>
         </ul>
       </div>
       <div class="foot-col">
@@ -2825,7 +2827,7 @@
   </div>
 </div>
 
-<script src="/app.js?v=33"></script>
+<script src="/app.js?v=34"></script>
 
 <script>
 (function(){
