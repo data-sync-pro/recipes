@@ -42,12 +42,13 @@
               "children": [
                 {
                   "type": "p",
-                  "content": "<strong>Refresh Token Flow</strong> — requires a one-time interactive login; the connection runs as the user who authorized it."
+                  "content": "<strong>Client Credentials Flow</strong> — no interactive login; the connection runs as the Run As user specified on the External Client App."
                 },
                 {
                   "type": "p",
-                  "content": "<strong>Client Credentials Flow</strong> — no interactive login; the connection runs as the Run As user specified on the External Client App."
+                  "content": "<strong>Refresh Token Flow</strong> — requires a one-time interactive login; the connection runs as the user who authorized it."
                 }
+                
               ]
             }
           ]
