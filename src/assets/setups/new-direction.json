@@ -10,7 +10,7 @@
           "children": [
             {
               "type": "p",
-              "content": "Ensure both Source and Target Connections exist before proceeding. For setup instructions, see [[current-org]]^ or [[oauth]]^."
+              "content": "Both the Source and Target [[connection|Connections]]^ must exist first — see [[current-org]]^ for the current org, or [[refresh-token-flow|Refresh Token Flow]]^ / [[client-credentials-flow|Client Credentials Flow]]^ for a remote org."
             }
           ]
         }
