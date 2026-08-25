@@ -1231,36 +1231,6 @@ const DSP_SECTION_ROUTES = {
     setTimeout(() => placeFin(activeOrFirst()), 900);
   }
 
-  const surfacesSection = document.getElementById('surfaces');
-  if (surfacesSection && 'IntersectionObserver' in window && !sessionStorage.getItem('dsp-surfaces-cycled')) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          io.disconnect();
-          sessionStorage.setItem('dsp-surfaces-cycled', '1');
-          const originalKey = (tabList.find(t => t.classList.contains('active')) || tabList[0]).dataset.panel;
-          let i = 0;
-          const cycle = () => {
-            if (i >= tabList.length) {
-              show(originalKey);
-              tabList.forEach(t => t.classList.remove('is-cycling'));
-              return;
-            }
-            tabList.forEach(t => t.classList.remove('is-cycling'));
-            const tab = tabList[i];
-            tab.classList.add('is-cycling');
-            show(tab.dataset.panel);
-            i++;
-            setTimeout(cycle, 360);
-          };
-          setTimeout(cycle, 350);
-        }
-      });
-    }, { threshold: 0.35 });
-    io.observe(surfacesSection);
-  }
-
-  
   const subbar = document.getElementById('surfaceSubbar');
   const subSentinel = document.getElementById('subbarSentinel');
   const siteNav = document.getElementById('nav');
@@ -1962,8 +1932,11 @@ const DSP_SECTION_ROUTES = {
     }
     armScene();
   }));
-  rot.addEventListener('mouseenter', () => { paused = true; clearTimers(); });
-  rot.addEventListener('mouseleave', () => { paused = false; armScene(); });
+  // Pause on hover only over the animated card itself (not the dots row),
+  // and only for a real mouse — emulated touch events would pause forever.
+  const stage = rot.querySelector('.hero-stage') || rot;
+  stage.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { paused = true; clearTimers(); } });
+  stage.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { paused = false; armScene(); } });
 
   go(0);
   armScene();
@@ -2165,7 +2138,6 @@ function dspFakeCursor(card, sel) {
       at(1900, () => cursor.click());
       SEL.forEach((ri, k) => {
         at(tSel + k * 340 - 340, () => cursor.to(rows[ri].querySelector('[data-al-ck]')));
-        at(tSel + k * 340, () => cursor.click());
       });
       at(tAct - 360, () => cursor.to(acceptBtn));
       at(tAct, () => cursor.click());
@@ -2317,13 +2289,10 @@ function dspFakeCursor(card, sel) {
       at(600,  () => cursor.click());
       at(700,  () => cursor.to(sqPick));
       at(1150, () => cursor.click());
-      at(1700, () => cursor.to(addf));
-      at(2100, () => cursor.click());
       at(2950, () => cursor.to(runBtn));
       at(3350, () => cursor.click());
       targets.forEach((r, k) => {
         at(tSel + k * 340 - 340, () => cursor.to(r.querySelector('.al-ck')));
-        at(tSel + k * 340, () => cursor.click());
       });
       at(tBar + 1520, () => cursor.to(saveBtn));
       at(tBar + 2400, () => cursor.click());

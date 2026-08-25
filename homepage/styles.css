@@ -5625,9 +5625,9 @@ footer {
 .fake-cursor.show { opacity: 1; }
 .fake-cursor .dot { position: absolute; inset: 0; border-radius: 50%; background: var(--ink); box-shadow: 0 1px 3px rgba(11,16,25,.4), 0 0 0 2px #fff; transform: scale(1); transition: transform .12s ease; }
 .fake-cursor.click .dot { transform: scale(.65); }
-.fake-cursor .ring { position: absolute; inset: -6px; border-radius: 50%; border: 2px solid var(--brand); opacity: 0; }
-.fake-cursor.click .ring { animation: fcRing .5s ease-out; }
-@keyframes fcRing { 0% { opacity: .9; transform: scale(.4); } 100% { opacity: 0; transform: scale(2.4); } }
+.fake-cursor .ring { position: absolute; inset: -6px; border-radius: 50%; border: 1.5px solid var(--brand); opacity: 0; }
+.fake-cursor.click .ring { animation: fcRing .4s ease-out; }
+@keyframes fcRing { 0% { opacity: .5; transform: scale(.5); } 100% { opacity: 0; transform: scale(1.7); } }
 
 .al-card { position: relative; width: 100%; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r-lg); box-shadow: var(--sh-2); overflow: hidden; font-family: var(--f-sans); color: var(--ink-2); }
 .hero-scene.is-active .al-card { animation: hsIn .5s ease both; }
