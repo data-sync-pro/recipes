@@ -1,0 +1,83 @@
+{
+  "id": "05c034ea-9754-4544-a9bf-2f0ddd211d28",
+  "title": "Bulk Field Transformations",
+  "category": [
+    "Batch"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Batch Executable reads each Account's Description and derives a standardized Industry using MAP_VALUE_CONTAINS_IGNORE_CASE, which matches by case-insensitive substring and returns the value of the first match.",
+  "generalUseCase": "Use #Batch to apply field transformations across a large volume of records in a single run.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/q9CwqNmY7tU",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Pipeline - Account.Batches",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/pipeline-account-batches.png",
+          "alt": "pipeline-account-batches"
+        }
+      ]
+    },
+    {
+      "step": "New Executable - Account.ClassifyIndustry",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/new-executable-account-classify-industry.png",
+          "alt": "new-executable-account-classify-industry"
+        }
+      ]
+    },
+    {
+      "step": "Retrieve",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/retrieve.png",
+          "alt": "retrieve"
+        }
+      ]
+    },
+    {
+      "step": "Scoping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/scoping.png",
+          "alt": "scoping"
+        }
+      ]
+    },
+    {
+      "step": "Mapping",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/mapping.png",
+          "alt": "mapping"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "bulk-field-transformations"
+}

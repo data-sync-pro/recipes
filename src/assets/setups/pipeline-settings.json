@@ -104,7 +104,7 @@
           "fields": [
             {
               "name": "Visible Action Buttons",
-              "description": "Maximum number of Action Buttons displayed directly on the Pipeline Action Buttons component. Additional buttons are collapsed as menu items."
+              "description": "Maximum number of Action Buttons displayed directly on the Pipeline Action Buttons component; additional buttons are collapsed into a menu. For a Data List Executable with 'Q: Action Buttons' specified to the current Pipeline, this value defines the number of visible list action buttons on the Data List when the Executable's 'Q: Max Visible List Action Buttons' is not defined."
             }
           ]
         },

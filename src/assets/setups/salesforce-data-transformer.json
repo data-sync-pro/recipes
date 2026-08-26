@@ -20,7 +20,7 @@
     },
     {
       "type": "p",
-      "content": "Implement <code>pushtopics.SalesforceDataTransformer</code>, then reference the class in a target field's mapping with <code>$ClassName</code>."
+      "content": "Implement <code>pushtopics.SalesforceDataTransformer</code>, then reference the class in a target field's mapping with <code>$#ApexClassName</code>."
     },
     {
       "type": "image",

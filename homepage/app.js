@@ -1052,20 +1052,36 @@ const DSP_SECTION_ROUTES = {
   const cats = document.querySelectorAll('#fnCats .fc');
   const chips = document.querySelectorAll('#fnGrid .chip');
   if (!cats.length) return;
+  const mobile = matchMedia('(max-width: 640px)');
+  const moreLabel = document.querySelector('#fnGrid .chip.more span');
+  const baseMore = moreLabel ? parseInt((moreLabel.textContent.match(/\d+/) || [150])[0], 10) : 150;
+  const featuredTotal = [...chips].filter(ch => ch.dataset.featured === '1').length;
+  let lastCat = 'all';
   function applyFilter(cat) {
+    lastCat = cat;
     const grid = document.getElementById('fnGrid');
     if (grid) grid.classList.toggle('view-all', cat === 'all');
+    const cap = mobile.matches ? 10 : Infinity;
+    let shown = 0;
     chips.forEach(ch => {
+      const isMore = ch.classList.contains('more');
       let show;
       if (cat === 'all') {
-        
-        show = ch.dataset.featured === '1' || ch.classList.contains('more');
+
+        show = ch.dataset.featured === '1' || isMore;
       } else {
-        
-        show = !ch.classList.contains('more') && ch.dataset.cat === cat;
+
+        show = !isMore && ch.dataset.cat === cat;
+      }
+      if (show && !isMore) {
+        if (shown >= cap) show = false;
+        else shown++;
       }
       ch.style.display = show ? '' : 'none';
     });
+    if (cat === 'all' && moreLabel) {
+      moreLabel.textContent = '+ ' + (baseMore + featuredTotal - shown) + ' more →';
+    }
   }
   cats.forEach(c => {
     c.addEventListener('click', () => {
@@ -1074,7 +1090,7 @@ const DSP_SECTION_ROUTES = {
       applyFilter(c.dataset.cat);
     });
   });
-  
+  (mobile.addEventListener ? mobile.addEventListener('change', () => applyFilter(lastCat)) : mobile.addListener(() => applyFilter(lastCat)));
   applyFilter('all');
 })();
 
@@ -1153,17 +1169,26 @@ const DSP_SECTION_ROUTES = {
     if (!surfacesEl) return;
     const nav = document.getElementById('nav');
     const navH = nav ? nav.offsetHeight : 0;
-    const y = surfacesEl.getBoundingClientRect().top + window.scrollY - navH - 8;
-    window.scrollTo({ top: Math.max(0, y), behavior: behavior || 'auto' });
+    const y = Math.max(0, surfacesEl.getBoundingClientRect().top + window.scrollY - navH - 8);
+    if (behavior === 'instant') {
+      // Bypass the global `html { scroll-behavior: smooth }` for an immediate jump.
+      const el = document.documentElement;
+      const prevSb = el.style.scrollBehavior;
+      el.style.scrollBehavior = 'auto';
+      window.scrollTo(0, y);
+      el.style.scrollBehavior = prevSb;
+    } else {
+      window.scrollTo({ top: y, behavior: behavior || 'auto' });
+    }
   }
-  
+
   function applyPath(behavior) {
     const m = location.pathname.match(PANEL_PATH);
     if (!m) return;
     show(m[1], 'none');
     requestAnimationFrame(() => scrollToSurfaces(behavior));
   }
-  applyPath('auto');
+  applyPath('instant');
   window.addEventListener('popstate', () => applyPath('smooth'));
 
   
@@ -1215,36 +1240,6 @@ const DSP_SECTION_ROUTES = {
     setTimeout(() => placeFin(activeOrFirst()), 900);
   }
 
-  const surfacesSection = document.getElementById('surfaces');
-  if (surfacesSection && 'IntersectionObserver' in window && !sessionStorage.getItem('dsp-surfaces-cycled')) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          io.disconnect();
-          sessionStorage.setItem('dsp-surfaces-cycled', '1');
-          const originalKey = (tabList.find(t => t.classList.contains('active')) || tabList[0]).dataset.panel;
-          let i = 0;
-          const cycle = () => {
-            if (i >= tabList.length) {
-              show(originalKey);
-              tabList.forEach(t => t.classList.remove('is-cycling'));
-              return;
-            }
-            tabList.forEach(t => t.classList.remove('is-cycling'));
-            const tab = tabList[i];
-            tab.classList.add('is-cycling');
-            show(tab.dataset.panel);
-            i++;
-            setTimeout(cycle, 360);
-          };
-          setTimeout(cycle, 350);
-        }
-      });
-    }, { threshold: 0.35 });
-    io.observe(surfacesSection);
-  }
-
-  
   const subbar = document.getElementById('surfaceSubbar');
   const subSentinel = document.getElementById('subbarSentinel');
   const siteNav = document.getElementById('nav');
@@ -1319,7 +1314,7 @@ const DSP_SECTION_ROUTES = {
   const TICK_FAST_MS = 40;      
   const TOTAL_RUN_MS = (TICK_SLOW_MS + TICK_FAST_MS) / 2 * N_BATCHES; 
   const REST_MS = 6000;         
-  const MAX_SUBROWS = 5;        
+  const MAX_SUBROWS = 7;
 
   
   const smoothstep = t => t * t * (3 - 2 * t);
@@ -1934,13 +1929,59 @@ const DSP_SECTION_ROUTES = {
     armScene();
   }
 
-  dots.forEach((d, k) => d.addEventListener('click', () => { go(k); armScene(); }));
-  rot.addEventListener('mouseenter', () => { paused = true; clearTimers(); });
-  rot.addEventListener('mouseleave', () => { paused = false; armScene(); });
+  dots.forEach((d, k) => d.addEventListener('click', () => {
+    if (k === idx) {
+      // Re-clicking the active dot: bounce is-active off and on so each
+      // demo's MutationObserver sees a change and replays from the start.
+      const s = scenes[idx];
+      s.classList.remove('is-active');
+      setTimeout(() => s.classList.add('is-active'), 40);
+    } else {
+      go(k);
+    }
+    armScene();
+  }));
+  // Pause on hover only over the animated card itself (not the dots row),
+  // and only for a real mouse — emulated touch events would pause forever.
+  const stage = rot.querySelector('.hero-stage') || rot;
+  stage.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { paused = true; clearTimers(); } });
+  stage.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { paused = false; armScene(); } });
 
   go(0);
   armScene();
 })();
+
+function dspFakeCursor(card, sel) {
+  const cur = card.querySelector(sel);
+  if (!cur) return null;
+  const move = (target, dx, dy) => {
+    const el = typeof target === 'string' ? card.querySelector(target) : target;
+    if (!el) return;
+    const cr = card.getBoundingClientRect();
+    if (!cr.width) return;
+    const scale = cr.width / card.offsetWidth || 1;
+    const er = el.getBoundingClientRect();
+    cur.style.left = ((er.left - cr.left + er.width / 2) / scale + (dx || 0)) + 'px';
+    cur.style.top = ((er.top - cr.top + er.height / 2) / scale + (dy || 0)) + 'px';
+  };
+  let clickT = 0;
+  return {
+    show(t, dx, dy) {
+      cur.style.transition = 'none';
+      move(t, dx, dy);
+      void cur.offsetWidth;
+      cur.style.transition = '';
+      cur.classList.add('show');
+    },
+    to: move,
+    click() {
+      cur.classList.add('click');
+      clearTimeout(clickT);
+      clickT = setTimeout(() => cur.classList.remove('click'), 340);
+    },
+    hide() { cur.classList.remove('show', 'click'); },
+  };
+}
 
 (() => {
   const card = document.getElementById('uiListHero');
@@ -1961,7 +2002,9 @@ const DSP_SECTION_ROUTES = {
   const highChk   = card.querySelector('[data-al-high]');
   const medChk    = card.querySelector('[data-al-med]');
   const lowChk    = card.querySelector('[data-al-low]');
-  const acceptBtn = cacts.querySelector('[data-al-accept]');   
+  const acceptBtn = cacts.querySelector('[data-al-accept]');
+  const confirmBtn = card.querySelector('[data-al-confirm]');
+  const cursor   = dspFakeCursor(card, '[data-al-cursor]');
   const toast    = card.querySelector('[data-al-toast]');
 
   const SEL = [0, 2, 4, 5];        
@@ -2014,6 +2057,7 @@ const DSP_SECTION_ROUTES = {
     filterVal.textContent = 'Filter…';
     filterBox.classList.remove('has');
     if (lastPg) lastPg.textContent = '15';
+    if (cursor) cursor.hide();
     toast.classList.remove('on');
   }
 
@@ -2046,25 +2090,25 @@ const DSP_SECTION_ROUTES = {
 
     at(550,  () => filter.classList.add('open'));
     at(1000, () => highChk.classList.add('on'));
-    at(1280, () => medChk.classList.add('on'));
-    at(1700, () => filter.classList.remove('open'));
-    at(1880, () => {
-      applyFilter(rows, true);   
+    at(1420, () => medChk.classList.add('on'));
+    at(1960, () => filter.classList.remove('open'));
+    at(2140, () => {
+      applyFilter(rows, true);
       if (rc) rc.textContent = '112';
       filterVal.textContent = 'High, Medium';
       filterBox.classList.add('has');
       if (lastPg) lastPg.textContent = '12';
     });
 
-    const tSel = 2350;
-    SEL.forEach((ri, k) => at(tSel + k * 230, () => {
+    const tSel = 2550;
+    SEL.forEach((ri, k) => at(tSel + k * 340, () => {
       rows[ri].classList.add('sel');
       rows[ri].querySelector('[data-al-ck]').classList.add('on');
       selnote.textContent = (k + 1) + ' item' + (k ? 's' : '') + ' selected';
       selnote.classList.add('sel');
       ckall.classList.add('some');
     }));
-    const tSelDone = tSel + SEL.length * 230;
+    const tSelDone = tSel + SEL.length * 340;
     at(tSelDone + 60,  () => { cacts.classList.add('on'); cacts.querySelectorAll('.al-cbtn').forEach(b => b.classList.add('flash')); });
     at(tSelDone + 760, () => cacts.querySelectorAll('.al-cbtn').forEach(b => b.classList.remove('flash')));
 
@@ -2080,7 +2124,7 @@ const DSP_SECTION_ROUTES = {
     const tToast = tAct + 280 + SEL.length * 110 + 60;
     at(tToast, () => {
       toast.classList.add('on');
-      
+
       SEL.forEach(ri => {
         rows[ri].classList.remove('sel');
         rows[ri].querySelector('[data-al-ck]').classList.remove('on');
@@ -2091,6 +2135,23 @@ const DSP_SECTION_ROUTES = {
       selnote.textContent = 'Updated just now';
       fireDone();
     });
+
+    if (cursor) {
+      at(300,  () => cursor.show(filterBox));
+      at(530,  () => cursor.click());
+      at(650,  () => cursor.to(highChk));
+      at(1000, () => cursor.click());
+      at(1080, () => cursor.to(medChk));
+      at(1420, () => cursor.click());
+      at(1520, () => cursor.to(confirmBtn));
+      at(1900, () => cursor.click());
+      SEL.forEach((ri, k) => {
+        at(tSel + k * 340 - 340, () => cursor.to(rows[ri].querySelector('[data-al-ck]')));
+      });
+      at(tAct - 360, () => cursor.to(acceptBtn));
+      at(tAct, () => cursor.click());
+      at(tToast, () => cursor.hide());
+    }
   }
 
   const fireDone = () => scene.dispatchEvent(new CustomEvent('demodone', { bubbles: true }));
@@ -2114,14 +2175,23 @@ const DSP_SECTION_ROUTES = {
 
   const nameEl  = card.querySelector('[data-qh-name]');
   const saved   = card.querySelector('[data-qh-saved]');
-  const sqPick  = card.querySelector('[data-qh-sq]');           
+  const sqPick  = card.querySelector('[data-qh-sq]');
+  const builder = card.querySelector('.qh-builder');
+  const filters = card.querySelector('[data-qh-filters]');
+  const listhd  = card.querySelector('.qh-listhead');
+  const pager   = card.querySelector('.al-pager');
   const c1      = card.querySelector('[data-qh-c1]');
   const c2      = card.querySelector('[data-qh-c2]');
   const addf    = card.querySelector('[data-qh-addf]');
   const runBtn  = card.querySelector('[data-qh-run]');
   const rows    = [...card.querySelectorAll('[data-qh-row]')];
   const countEl = card.querySelector('[data-qh-count]');
-  const rateEl  = card.querySelector('[data-qh-rate]');         
+  const rates   = [...card.querySelectorAll('[data-qh-rate]')];
+  const origRates = rates.map(r => r.textContent);
+  const editbar = card.querySelector('[data-qh-editbar]');
+  const saveBtn = editbar ? editbar.querySelector('.qh-ebtn.primary') : null;
+  const savedBtn = card.querySelector('[data-qh-savedbtn]');
+  const cursor  = dspFakeCursor(card, '[data-qh-cursor]');
   const toast   = card.querySelector('[data-qh-toast]');
 
   const COUNT = 342;
@@ -2148,24 +2218,38 @@ const DSP_SECTION_ROUTES = {
     nameEl.textContent = 'New query';
     saved.classList.remove('open');
     sqPick.classList.remove('pick');
+    builder.classList.remove('in');
+    filters.classList.remove('in');
+    listhd.classList.remove('in');
+    pager.classList.remove('in');
     c1.classList.remove('in');
     c2.classList.remove('in');
     addf.classList.remove('armed');
     runBtn.classList.remove('press');
-    rows.forEach(r => r.classList.remove('in'));
+    rows.forEach(r => {
+      r.classList.remove('in', 'sel');
+      const ck = r.querySelector('.al-ck');
+      if (ck) ck.classList.remove('on');
+    });
     countEl.textContent = '0';
-    rateEl.textContent = 'Proposal';
-    rateEl.classList.remove('editing', 'lit');
+    rates.forEach((r, i) => { r.textContent = origRates[i]; r.classList.remove('editing', 'lit'); });
+    if (editbar) editbar.classList.remove('on');
+    if (saveBtn) saveBtn.classList.remove('press');
+    if (cursor) cursor.hide();
     toast.classList.remove('on');
   }
 
   function paintFinal() {
     nameEl.textContent = PICK_NAME;
+    builder.classList.add('in');
+    filters.classList.add('in');
+    listhd.classList.add('in');
+    pager.classList.add('in');
     c1.classList.add('in');
     c2.classList.add('in');
     rows.forEach(r => r.classList.add('in'));
     countEl.textContent = fmt(COUNT);
-    rateEl.textContent = NEW_RATE;
+    rates.forEach(r => { r.textContent = NEW_RATE; });
     toast.classList.add('on');
   }
 
@@ -2176,22 +2260,53 @@ const DSP_SECTION_ROUTES = {
     at(600,  () => saved.classList.add('open'));
     at(1150, () => sqPick.classList.add('pick'));
     at(1600, () => { saved.classList.remove('open'); nameEl.textContent = PICK_NAME; });
+    at(1800, () => { builder.classList.add('in'); filters.classList.add('in'); });
 
-    at(2000, () => addf.classList.add('armed'));
-    at(2250, () => { c1.classList.add('in'); });
-    at(2800, () => { c2.classList.add('in'); });           
+    at(2100, () => addf.classList.add('armed'));
+    at(2350, () => { c1.classList.add('in'); });
+    at(2800, () => { c2.classList.add('in'); });
     at(3050, () => addf.classList.remove('armed'));
 
     at(3350, () => runBtn.classList.add('press'));
     at(3500, () => runBtn.classList.remove('press'));
+    at(3550, () => { listhd.classList.add('in'); pager.classList.add('in'); });
     rows.forEach((r, k) => at(3650 + k * 170, () => r.classList.add('in')));
     at(3700, () => countTo(COUNT, 1000));
 
-    const tEdit = 3650 + rows.length * 170 + 500;
-    at(tEdit,        () => rateEl.classList.add('editing'));
-    at(tEdit + 650,  () => { rateEl.textContent = NEW_RATE; });
-    at(tEdit + 1050, () => { rateEl.classList.remove('editing'); rateEl.classList.add('lit'); });
-    at(tEdit + 1250, () => { toast.classList.add('on'); fireDone(); });
+    const targets = rows.filter(r => r.querySelector('[data-qh-rate]'));
+    const tSel = 3650 + rows.length * 170 + 400;
+    targets.forEach((r, k) => at(tSel + k * 340, () => {
+      r.classList.add('sel');
+      const ck = r.querySelector('.al-ck');
+      if (ck) ck.classList.add('on');
+    }));
+    const tBar = tSel + targets.length * 340 + 250;
+    at(tBar, () => { if (editbar) editbar.classList.add('on'); });
+    at(tBar + 500,  () => rates.forEach(r => r.classList.add('editing')));
+    at(tBar + 1150, () => rates.forEach(r => { r.textContent = NEW_RATE; }));
+    at(tBar + 1500, () => rates.forEach(r => { r.classList.remove('editing'); r.classList.add('lit'); }));
+    at(tBar + 2400, () => { if (saveBtn) saveBtn.classList.add('press'); });
+    at(tBar + 2600, () => {
+      if (saveBtn) saveBtn.classList.remove('press');
+      if (editbar) editbar.classList.remove('on');
+      toast.classList.add('on');
+      fireDone();
+    });
+
+    if (cursor) {
+      at(380,  () => cursor.show(savedBtn));
+      at(600,  () => cursor.click());
+      at(700,  () => cursor.to(sqPick));
+      at(1150, () => cursor.click());
+      at(2950, () => cursor.to(runBtn));
+      at(3350, () => cursor.click());
+      targets.forEach((r, k) => {
+        at(tSel + k * 340 - 340, () => cursor.to(r.querySelector('.al-ck')));
+      });
+      at(tBar + 1520, () => cursor.to(saveBtn));
+      at(tBar + 2400, () => cursor.click());
+      at(tBar + 2600, () => cursor.hide());
+    }
   }
 
   const fireDone = () => scene.dispatchEvent(new CustomEvent('demodone', { bubbles: true }));
@@ -2222,6 +2337,7 @@ const DSP_SECTION_ROUTES = {
 
   const TOTAL = 12481;
   const AUDIT_BASE = audit.innerHTML;
+  const cursor = dspFakeCursor(card, '[data-hl-cursor]');
 
   let timers = [];
   const at = (ms, fn) => timers.push(setTimeout(fn, ms));
@@ -2241,6 +2357,7 @@ const DSP_SECTION_ROUTES = {
     progress.classList.remove('on');
     bar.classList.remove('done');
     bar.style.width = '0%';
+    if (cursor) cursor.hide();
     toast.classList.remove('on');
   }
 
@@ -2279,6 +2396,13 @@ const DSP_SECTION_ROUTES = {
       statusEl.textContent = 'Running';
       progress.classList.add('on');
     });
+    if (cursor) {
+      at(240, () => cursor.show(drop));
+      at(490, () => cursor.click());
+      at(tRun - 380, () => cursor.to(runBtn));
+      at(tRun + 10, () => cursor.click());
+      at(tRun + 700, () => cursor.hide());
+    }
 
     const fillStart = tRun + 280, fillDur = 2600, steps = 26;
     for (let i = 1; i <= steps; i++) {

@@ -7,11 +7,13 @@
 /recipes/query
 /recipes/general
 /recipes/ui
+/recipes/batch/bulk-field-transformations
 /recipes/batch/mass-recalculation-with-batch-blank-updates
 /recipes/batch/bulk-merge-records-from-duplicate-job-results
 /recipes/batch/scheduled-retention-cleanup
 /recipes/batch/cross-org-data-migration
 /recipes/batch/migrate-salesforce-files-between-orgs
+/recipes/batch/snapshot-backups-with-incremental-backup-to-file
 /recipes/batch/incremental-data-backup-to-big-objects
 /recipes/batch/restore-records-from-recycle-bin
 /recipes/batch/mask-sensitive-data-in-sandboxes
@@ -60,8 +62,8 @@
 /user-manual/permissions
 /user-manual/connection
 /user-manual/connection/current-org
-/user-manual/connection/refresh-token-flow
 /user-manual/connection/client-credentials-flow
+/user-manual/connection/refresh-token-flow
 /user-manual/new-direction
 /user-manual/new-pipeline
 /user-manual/pipeline-settings

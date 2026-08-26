@@ -1,7 +1,7 @@
 {
   "pipeline": {
-    "Name": "DataSyncPro.Configuration.Deployment.Template",
-    "pushtopics__ApiName__c": "DataSyncPro.Configuration.Deployment.Template",
+    "Name": "DSP.Configuration.Deployment.Template",
+    "pushtopics__ApiName__c": "DSP.Configuration.Deployment.Template",
     "pushtopics__OriginID__c": "a0DDI000001wzot2AA",
     "pushtopics__NotifyOwner__c": false,
     "pushtopics__RecordBasedConfigurationDeployment__c": false,

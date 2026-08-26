@@ -1,15 +1,16 @@
 {
   "Batch": [
+    "bulk-field-transformations",
     "mass-recalculation-with-batch-blank-updates",
     "bulk-merge-records-from-duplicate-job-results",
     "scheduled-retention-cleanup",
     "cross-org-data-migration",
     "migrate-salesforce-files-between-orgs",
+    "snapshot-backups-with-incremental-backup-to-file",
     "incremental-data-backup-to-big-objects",
     "restore-records-from-recycle-bin",
     "mask-sensitive-data-in-sandboxes",
     "schedule-job-management"
-    
   ],
   "Trigger": [
     "self-adaptive-trigger-for-rollup-summary-calculations",

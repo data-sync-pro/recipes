@@ -286,7 +286,7 @@
             },
             {
               "name": "Q: Max Visiable List Action Buttons",
-              "description": "The maximum number of list action buttons shown on the data list. If blank, 3 buttons are shown by default; any additional actions appear as menu items in the dropdown."
+              "description": "The maximum number of visible list action buttons shown on the Data List; additional actions are collapsed into a dropdown menu. If blank, the Pipeline's 'Max Visible Action Buttons' value is used. If neither is specified, 3 are shown."
             },
             {
               "name": "Context Record ID",

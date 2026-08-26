@@ -35,8 +35,8 @@
             "id": "remote-org",
             "label": "Remote Org",
             "children": [
-              { "id": "refresh-token-flow", "label": "OAuth 2.0 (Refresh Token Flow)", "slug": "refresh-token-flow" },
-              { "id": "client-credentials-flow", "label": "OAuth 2.0 (Client Credentials Flow)", "slug": "client-credentials-flow" }
+              { "id": "client-credentials-flow", "label": "OAuth 2.0 (Client Credentials Flow)", "slug": "client-credentials-flow" },
+              { "id": "refresh-token-flow", "label": "OAuth 2.0 (Refresh Token Flow)", "slug": "refresh-token-flow" }
             ]
           }
         ]

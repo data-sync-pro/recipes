@@ -1,7 +1,7 @@
 {
   "pipeline": {
-    "Name": "DataSyncPro.Configuration.InitialMigration.Template",
-    "pushtopics__ApiName__c": "DataSyncPro.Configuration.InitialMigration.Template",
+    "Name": "DSP.Configuration.InitialMigration.Template",
+    "pushtopics__ApiName__c": "DSP.Configuration.InitialMigration.Template",
     "pushtopics__OriginID__c": "a0DDI000001wzoo2AA",
     "pushtopics__NotifyOwner__c": false,
     "pushtopics__RecordBasedConfigurationDeployment__c": false,
