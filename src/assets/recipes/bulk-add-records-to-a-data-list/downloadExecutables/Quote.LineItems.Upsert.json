@@ -109,7 +109,7 @@
       "pushtopics__SourceObjectName__c": "PricebookEntry",
       "pushtopics__StopExecutionWhenABatchFails__c": false,
       "pushtopics__TargetConnectionName__c": "Current",
-      "pushtopics__TargetMatchingField__c": "Id",
+      "pushtopics__TargetMatchingField__c": "PricebookEntryId",
       "pushtopics__TargetObjectName__c": "QuoteLineItem",
       "pushtopics__Trigger__c": false,
       "pushtopics__TriggerAction__c": false,
@@ -179,21 +179,6 @@
           "pushtopics__Nillable__c": false,
           "pushtopics__Type__c": "double",
           "pushtopics__Updateable__c": true
-        },
-        {
-          "Name": "Id",
-          "pushtopics__Createable__c": false,
-          "pushtopics__Deployable__c": false,
-          "pushtopics__ExternalId__c": false,
-          "pushtopics__IsDefaultMappingField__c": false,
-          "pushtopics__IsHeader__c": false,
-          "pushtopics__IsTargetMatchingField__c": true,
-          "pushtopics__Label__c": "Quote Line Item ID",
-          "pushtopics__Length__c": 18,
-          "pushtopics__Mapping__c": "VLOOKUP(\"QuoteLineItem\", \"Id\", \"Product2Id\", Product2Id, \"QuoteId\",  $CONTEXT_RECORD_ID)",
-          "pushtopics__Nillable__c": false,
-          "pushtopics__Type__c": "id",
-          "pushtopics__Updateable__c": false
         },
         {
           "Name": "PricebookEntryId",
