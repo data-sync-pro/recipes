@@ -1,7 +1,7 @@
 {
   "title": "JSON_GET_FIELD_VALUES",
   "description": "<p>Returns a list containing the value of the specified field from each map in the provided list. Optionally excludes null values from the result.</p>",
-  "syntax": "JSON_GET_FIELD_VALUES(json_array, field_name, exclude_nulls) -> List<ANY>",
+  "syntax": "JSON_GET_FIELD_VALUES(json_array, field_name, exclude_nulls_optional) -> List<ANY>",
   "parameters": [
     {
       "name": "json_array",
@@ -16,10 +16,10 @@
       "description": "The name of the field whose value is extracted from each map."
     },
     {
-      "name": "exclude_nulls",
+      "name": "exclude_nulls_optional",
       "type": "Boolean",
-      "required": "Yes",
-      "description": "If TRUE, maps whose field value is null or missing are omitted from the result. If FALSE, their values are included as null."
+      "required": "No",
+      "description": "Whether maps with a null or missing field value are omitted from the result. Defaults to FALSE."
     }
   ],
   "examples": [

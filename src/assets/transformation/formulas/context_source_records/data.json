@@ -1,0 +1,13 @@
+{
+  "title": "CONTEXT_SOURCE_RECORDS",
+  "description": "<p>Returns the source records currently in scope at this stage of the execution — as retrieved during Scope Filter evaluation, and after each preceding stage that changes the set (Scope Filter, then Joiner if defined) thereafter.</p>",
+  "syntax": "CONTEXT_SOURCE_RECORDS() -> List<Map<String,ANY>>",
+  "parameters": [],
+  "examples": [
+    "CONTEXT_SOURCE_RECORDS()\n-- Returns the records in scope, with the fields loaded at this stage, e.g.\n-- ({Id=003DC00000ZEiTvYAL, FirstName=Ana, LastName=Ruiz, Email=ana@acme.com, AccountId=001DC00000KpQrTYAV},\n--  {Id=003DC00000ZEiTwYAL, FirstName=Ben, LastName=Cole, Email=ben@acme.com, AccountId=001DC00000KpQrUYAV}).",
+    "JSON_GET_FIELD_VALUES(CONTEXT_SOURCE_RECORDS(Phone), \"Phone\")\n-- Pass a field name to load a source field not referenced elsewhere in the Executable,\n-- such as in a Scope Filter or Mapping."
+  ],
+  "relatedFormulas": [
+    "JSON_GET_FIELD_VALUES"
+  ]
+}

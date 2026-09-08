@@ -23,6 +23,7 @@
   "char",
   "contains",
   "contains_ignore_case",
+  "context_source_records",
   "cos",
   "date",
   "day",

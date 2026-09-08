@@ -15,6 +15,7 @@
     { "Item Name": "CHAR", "Tags": ["Text"]},
     { "Item Name": "CONTAINS", "Tags": ["Logical", "Text"] },
     { "Item Name": "CONTAINS_IGNORE_CASE", "Tags": ["Logical", "Text"] },
+    { "Item Name": "CONTEXT_SOURCE_RECORDS", "Tags": ["Advanced"] },
     { "Item Name": "COS", "Tags": ["Number"]},
     { "Item Name": "DATE", "Tags": ["Date & Time"] },
     { "Item Name": "DAY", "Tags": ["Date & Time"] },
