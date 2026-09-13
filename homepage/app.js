@@ -912,13 +912,29 @@ const DSP_SECTION_ROUTES = {
 })();
 
 (() => {
+  // On section/panel routes we position the page ourselves, so stop the
+  // browser from restoring the previous scroll position on refresh first.
+  if ('scrollRestoration' in history &&
+      (DSP_SECTION_ROUTES[location.pathname] || /^\/surfaces\//.test(location.pathname))) {
+    history.scrollRestoration = 'manual';
+  }
+
   const scrollToId = (id, behavior) => {
     const el = document.getElementById(id);
     if (!el) return;
     const nav = document.getElementById('nav');
     const navH = nav ? nav.offsetHeight : 0;
-    const y = el.getBoundingClientRect().top + window.scrollY - navH - 8;
-    window.scrollTo({ top: Math.max(0, y), behavior: behavior || 'smooth' });
+    const y = Math.max(0, el.getBoundingClientRect().top + window.scrollY - navH - 8);
+    if (behavior === 'instant') {
+      // Bypass the global `html { scroll-behavior: smooth }` for an immediate jump.
+      const root = document.documentElement;
+      const prevSb = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo(0, y);
+      root.style.scrollBehavior = prevSb;
+    } else {
+      window.scrollTo({ top: y, behavior: behavior || 'smooth' });
+    }
   };
 
   document.addEventListener('click', (e) => {
@@ -938,7 +954,9 @@ const DSP_SECTION_ROUTES = {
   });
 
   if (DSP_SECTION_ROUTES[location.pathname]) {
-    requestAnimationFrame(() => scrollToId(DSP_SECTION_ROUTES[location.pathname], 'auto'));
+    requestAnimationFrame(() => scrollToId(DSP_SECTION_ROUTES[location.pathname], 'instant'));
+    // Re-anchor once everything (fonts/images) has laid out, still without animation.
+    window.addEventListener('load', () => scrollToId(DSP_SECTION_ROUTES[location.pathname], 'instant'));
   }
 
   window.addEventListener('popstate', () => {
@@ -1189,6 +1207,8 @@ const DSP_SECTION_ROUTES = {
     requestAnimationFrame(() => scrollToSurfaces(behavior));
   }
   applyPath('instant');
+  // Re-anchor once everything has laid out, still without animation.
+  window.addEventListener('load', () => applyPath('instant'));
   window.addEventListener('popstate', () => applyPath('smooth'));
 
   
