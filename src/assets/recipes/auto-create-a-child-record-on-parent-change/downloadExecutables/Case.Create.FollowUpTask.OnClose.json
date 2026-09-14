@@ -28,6 +28,7 @@
       "pushtopics__QRetrieveFields__c": "CaseNumber, Subject, Status, Priority, Origin, Type, Account.Name, TYPEOF Owner WHEN User THEN Name ELSE Name END",
       "pushtopics__QRowAction__c": true,
       "pushtopics__QShowColumnFilter__c": true,
+      "pushtopics__QShowMassEditButton__c": true,
       "pushtopics__QShowPicklistLabels__c": true,
       "pushtopics__QShowResultsInTilesOnSmallScreen__c": true,
       "pushtopics__QShowRowActionClone__c": true,
@@ -63,7 +64,7 @@
           "pushtopics__Length__c": 18,
           "pushtopics__Mapping__c": "Id",
           "pushtopics__Nillable__c": true,
-          "pushtopics__ReferenceToOptions__c": "[\"Account\",\"AdvAccountForecastFact\",\"AdvAcctForecastSetPartner\",\"AdvAcctForecastSetUse\",\"ApprovalSubmission\",\"ApprovalSubmissionDetail\",\"ApprovalWorkItem\",\"AssessmentIndicatorDefinition\",\"AssessmentTask\",\"AssessmentTaskContentDocument\",\"AssessmentTaskDefinition\",\"AssessmentTaskOrder\",\"Asset\",\"AssetRelationship\",\"BusinessProfile\",\"Campaign\",\"Case\",\"CommSubscriptionConsent\",\"ContactRequest\",\"Contract\",\"ContractLineItem\",\"CostBook\",\"CostBookEntry\",\"DeliveryTask\",\"DocumentChecklistItem\",\"Employee\",\"Entitlement\",\"Image\",\"ListEmail\",\"Location\",\"OperatingHoursHoliday\",\"Opportunity\",\"Order\",\"OtherComponentTask\",\"PartyConsent\",\"PianoExciseReflection__c\",\"ProcessException\",\"Product2\",\"ProductItem\",\"ProductTransfer\",\"Quote\",\"QuoteLineItemRelatedObject\",\"ReceivedDocument\",\"ReceivedDocumentType\",\"SOSSession\",\"ServiceContract\",\"ServiceResource\",\"Shipment\",\"ShipmentItem\",\"SignatureTask\",\"SignatureTaskLineItem\",\"Solution\",\"TagCategory\",\"VehicleUserAssignment\",\"Visit\",\"VisitedParty\",\"WorkOrder\",\"WorkOrderLineItem\",\"pushtopics__Execution__c\",\"pushtopics__PipelineExecution__c\",\"pushtopics__Schedule__c\"]",
+          "pushtopics__ReferenceToOptions__c": "[\"Account\",\"AdvAccountForecastFact\",\"AdvAcctForecastSetPartner\",\"AdvAcctForecastSetUse\",\"ApprovalSubmission\",\"ApprovalSubmissionDetail\",\"ApprovalWorkItem\",\"AssessmentIndicatorDefinition\",\"AssessmentTask\",\"AssessmentTaskContentDocument\",\"AssessmentTaskDefinition\",\"AssessmentTaskOrder\",\"Asset\",\"AssetRelationship\",\"BusinessProfile\",\"Campaign\",\"Case\",\"CommSubscriptionConsent\",\"ContactRequest\",\"Contract\",\"ContractLineItem\",\"CostBook\",\"CostBookEntry\",\"DeliveryTask\",\"DocChkItemValidatedTarget\",\"DocumentChecklistItem\",\"Employee\",\"Entitlement\",\"Image\",\"ListEmail\",\"Location\",\"OperatingHoursHoliday\",\"Opportunity\",\"Order\",\"OtherComponentTask\",\"PartyConsent\",\"PianoExciseReflection__c\",\"ProcessException\",\"Product2\",\"ProductItem\",\"ProductTransfer\",\"Quote\",\"QuoteLineItemRelatedObject\",\"ReceivedDocument\",\"ReceivedDocumentType\",\"ServiceContract\",\"ServiceResource\",\"Shipment\",\"ShipmentItem\",\"SignatureTask\",\"SignatureTaskLineItem\",\"Solution\",\"TagCategory\",\"VehicleUserAssignment\",\"Visit\",\"VisitedParty\",\"WorkOrder\",\"WorkOrderLineItem\",\"WorkPlan\",\"WorkPlanTemplate\",\"WorkPlanTemplateEntry\",\"WorkStep\",\"WorkStepTemplate\",\"pushtopics__Execution__c\",\"pushtopics__PipelineExecution__c\",\"pushtopics__Schedule__c\"]",
           "pushtopics__RelationshipName__c": "What",
           "pushtopics__Type__c": "reference",
           "pushtopics__Updateable__c": true
@@ -94,25 +95,13 @@
           "pushtopics__Updateable__c": true
         },
         {
-          "Name": "CallDisposition",
-          "pushtopics__OriginID__c": "a0BDC000008lVHs2AM",
-          "pushtopics__Createable__c": true,
-          "pushtopics__IsDefaultMappingField__c": true,
-          "pushtopics__Label__c": "Call Result",
-          "pushtopics__Length__c": 255,
-          "pushtopics__Mapping__c": "\"Follow up on Case in 7 days - \" & Subject",
-          "pushtopics__Nillable__c": true,
-          "pushtopics__Type__c": "string",
-          "pushtopics__Updateable__c": true
-        },
-        {
           "Name": "Subject",
           "pushtopics__OriginID__c": "a0BDC000008lVHt2AM",
           "pushtopics__Createable__c": true,
           "pushtopics__IsDefaultMappingField__c": true,
           "pushtopics__Label__c": "Subject",
           "pushtopics__Length__c": 255,
-          "pushtopics__Mapping__c": "\"Follow up - \" & Subject",
+          "pushtopics__Mapping__c": "\"Follow up on Case in 7 days - \" & Subject",
           "pushtopics__Nillable__c": true,
           "pushtopics__Type__c": "combobox",
           "pushtopics__Updateable__c": true
