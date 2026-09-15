@@ -122,6 +122,7 @@
 /transformation/text/char
 /transformation/logical/contains
 /transformation/logical/contains_ignore_case
+/transformation/advanced/context_source_records
 /transformation/number/cos
 /transformation/date_time/date
 /transformation/date_time/day
@@ -145,6 +146,7 @@
 /transformation/text/format_json_template
 /transformation/text/format_string_template
 /transformation/advanced/get_picklist_field_options
+/transformation/advanced/grouped_source_records
 /transformation/logical/has_duplicates
 /transformation/logical/has_permission
 /transformation/date_time/hour
@@ -178,6 +180,7 @@
 /transformation/advanced/json_get_field_values
 /transformation/advanced/json_serialize
 /transformation/advanced/json_serialize_pretty
+/transformation/advanced/last_execution_in_scope_source_ids
 /transformation/text/last_index_of
 /transformation/text/last_index_of_ignore_case
 /transformation/text/left

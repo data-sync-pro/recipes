@@ -158,6 +158,185 @@ a.setup-link-external,
   color: #2C2C2D;
 }
 
+// Join example card — the $JOINER before/after record tables authored in
+// joiner/data.json (ExampleItem.description). Injected via [innerHTML] in
+// doc-viewer, so global for the same reason as the Notes rules above; the
+// sanitizer keeps `class` but strips `style`/`<svg>`, hence class hooks and
+// data-URI icons. Card, tag pill and table look follow the setup .block-card /
+// .block-table (src/app/setup/block/block.component.scss). Everything that
+// comes from the Joiner shares one brand tint so the columns' origin reads at a
+// glance: the Joiner Records table (.is-joiner) and the $JOINER.* result
+// columns (.col-joiner).
+$join-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
+$join-tint: #eef3fb;
+$join-tint-cell: #f7f9fd;
+
+.join-example {
+  white-space: normal;
+  margin: 1rem 0 1.5rem;
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  &__type {
+    width: fit-content;
+    padding: 3px 7px;
+    border-radius: 5px;
+    background: $join-tint;
+    color: #2253B2;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  &__meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 16px;
+    align-items: baseline;
+    margin: 0;
+
+    dt {
+      font-size: 1rem;
+      color: #2c2c2d;
+      font-weight: 500;
+    }
+
+    dd {
+      margin: 0;
+      min-width: 0;
+      font-size: 1rem;
+      color: #2C2C2D;
+    }
+
+    code {
+      font-family: $join-mono;
+      font-size: 1rem;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  &__label {
+    margin: 18px 0 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #64748b;
+  }
+
+  // Source records next to the Joiner records; stacks once columns get narrow.
+  &__pair {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    align-items: flex-start;
+  }
+
+  &__panel {
+    flex: 1 1 260px;
+    // Lets the flex item shrink below its content so __table can scroll.
+    min-width: 0;
+  }
+
+  &__caption {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2C2C2D;
+  }
+
+  // Rounded frame lives on the wrapper: a border-collapse table can't clip its
+  // own corners, and the wrapper is also the horizontal scroller.
+  &__table {
+    overflow-x: auto;
+    border: 1px solid #e7e7ea;
+    border-radius: 8px;
+
+    // Fixed layout splits the table width evenly across columns instead of
+    // sizing each column to its content, so long headers wrap in place.
+    table {
+      width: 100%;
+      table-layout: fixed;
+      margin: 0;
+      border-collapse: collapse;
+    }
+
+    th {
+      padding: 7px 12px;
+      border: 0;
+      border-bottom: 1px solid #e7e7ea;
+      background: #f8fafc;
+      color: #2C2C2D;
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: left;
+      overflow-wrap: anywhere;
+    }
+
+    td {
+      padding: 6px 12px;
+      border: 0;
+      border-top: 1px solid #f1f5f9;
+      color: #2C2C2D;
+      font-size: 1rem;
+      line-height: 1.45;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+
+    tbody tr:first-child td {
+      border-top: 0;
+    }
+
+    // Opt out of the global `table` first-column `width: 50%` (further down in
+    // this file); with fixed layout that would lock Id at half the table.
+    th:first-child,
+    td:first-child {
+      width: auto;
+    }
+
+    // Stronger line where a new source record's fan-out starts.
+    tr.group-start td {
+      border-top-color: #e2e8f0;
+    }
+  }
+
+  .is-joiner th,
+  th.col-joiner {
+    background: #f8fafc;
+    color: #2C2C2D;
+  }
+
+  th.col-joiner {
+    font-family: $join-mono;
+    font-weight: 500;
+  }
+
+  td.col-joiner {
+    background: $join-tint-cell;
+  }
+
+  // Boundary where the source columns end and the $JOINER.* columns begin.
+  :not(.col-joiner) + .col-joiner {
+    box-shadow: inset 2px 0 0 rgba(34, 83, 178, 0.35);
+  }
+
+  td.col-id {
+    font-family: $join-mono;
+    font-size: 1rem;
+  }
+
+}
+
 // Inline <code> inside note bodies intentionally has no rule here — it inherits
 // the transformation-wide `.app-transformation code` style (transformation.styles.css),
 // so Notes code matches Tips/description code. One source of truth.
