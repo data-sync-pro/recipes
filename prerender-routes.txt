@@ -361,7 +361,6 @@
 /faqs/processes/scoping/what-does-scoping-do
 /faqs/processes/scoping/what-is-a-scope-filter
 /faqs/processes/scoping/how-can-i-join-the-source-data-with-an-additional-data-set
-/faqs/processes/scoping/how-does-a-joiner-change-the-source-data
 /faqs/processes/match/what-does-match-do
 /faqs/processes/match/what-happens-if-a-source-record-matches-multiple-target-records-in-an-action
 /faqs/processes/match/what-happens-if-a-source-record-matches-existing-target-records-during-an-insert
