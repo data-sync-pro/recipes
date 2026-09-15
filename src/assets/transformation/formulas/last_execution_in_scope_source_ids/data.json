@@ -1,0 +1,17 @@
+{
+  "title": "LAST_EXECUTION_IN_SCOPE_SOURCE_IDS",
+  "description": "<p>Returns the source record IDs that were in scope in the last execution of an Executable.</p>",
+  "syntax": "LAST_EXECUTION_IN_SCOPE_SOURCE_IDS(executable_api_name_optional) -> List<String>",
+  "parameters": [
+    {
+      "name": "executable_api_name_optional",
+      "type": "String",
+      "required": "No",
+      "description": "API name of the Executable to read from. If omitted, uses the current Executable's own last execution."
+    }
+  ],
+  "examples": [
+    "LAST_EXECUTION_IN_SCOPE_SOURCE_IDS()\n-- Returns source IDs in scope in this Executable's last execution, e.g. (003DC00000ZEiTvYAL, 003DC00000ZEiTwYAL).",
+    "LAST_EXECUTION_IN_SCOPE_SOURCE_IDS(\"Account.Sync\")\n-- Returns source IDs in scope in Account.Sync's last execution, e.g. (001DC00000ZEiTvYAL, 001DC00000ZEiTwYAL)."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "title": "GROUPED_SOURCE_RECORDS",
+  "description": "<p>Returns the source records in the current group, as determined by the Source Grouping Formula — evaluated after Scope Filter.</p>",
+  "images": [
+    {
+      "src": "images/figure_1.png",
+      "alt": "Source Grouping Formula on the Scoping tab"
+    }
+  ],
+  "syntax": "GROUPED_SOURCE_RECORDS() -> List<Map<String,ANY>>",
+  "parameters": [],
+  "examples": [
+    "GROUPED_SOURCE_RECORDS()\n-- If Contacts are grouped by email domain, returns only the records in the current group, e.g. \"acme.com\":\n-- ({Id=003DC00000ZEiTvYAL, Name=Ana Ruiz, Email=ana@acme.com},\n--  {Id=003DC00000ZEiTwYAL, Name=Ben Cole, Email=ben@acme.com}).",
+    "JSON_GET_FIELD_VALUES(GROUPED_SOURCE_RECORDS(Phone), \"Phone\")\n-- Pass a field name to load a source field not referenced elsewhere in the Executable,\n-- such as in a Scope Filter or Mapping."
+  ],
+  "relatedFormulas": [
+    "CONTEXT_SOURCE_RECORDS",
+    "JSON_GET_FIELD_VALUES"
+  ]
+}

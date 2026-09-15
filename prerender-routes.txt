@@ -7,17 +7,17 @@
 /recipes/query
 /recipes/general
 /recipes/ui
+/recipes/batch/bulk-field-transformations
 /recipes/batch/mass-recalculation-with-batch-blank-updates
 /recipes/batch/bulk-merge-records-from-duplicate-job-results
 /recipes/batch/scheduled-retention-cleanup
 /recipes/batch/cross-org-data-migration
 /recipes/batch/migrate-salesforce-files-between-orgs
+/recipes/batch/snapshot-backups-with-incremental-backup-to-file
 /recipes/batch/incremental-data-backup-to-big-objects
 /recipes/batch/restore-records-from-recycle-bin
 /recipes/batch/mask-sensitive-data-in-sandboxes
 /recipes/batch/schedule-job-management
-/recipes/batch/bulk-field-transformations
-/recipes/batch/snapshot-backups-with-incremental-backup-to-file
 /recipes/trigger/self-adaptive-trigger-for-rollup-summary-calculations
 /recipes/trigger/centralized-validation-rules-with-self-adaptive-trigger
 /recipes/trigger/auto-copy-child-records-from-a-source-reference
@@ -62,8 +62,8 @@
 /user-manual/permissions
 /user-manual/connection
 /user-manual/connection/current-org
-/user-manual/connection/refresh-token-flow
 /user-manual/connection/client-credentials-flow
+/user-manual/connection/refresh-token-flow
 /user-manual/new-direction
 /user-manual/new-pipeline
 /user-manual/pipeline-settings
@@ -122,6 +122,7 @@
 /transformation/text/char
 /transformation/logical/contains
 /transformation/logical/contains_ignore_case
+/transformation/advanced/context_source_records
 /transformation/number/cos
 /transformation/date_time/date
 /transformation/date_time/day
@@ -145,6 +146,7 @@
 /transformation/text/format_json_template
 /transformation/text/format_string_template
 /transformation/advanced/get_picklist_field_options
+/transformation/advanced/grouped_source_records
 /transformation/logical/has_duplicates
 /transformation/logical/has_permission
 /transformation/date_time/hour
@@ -178,6 +180,7 @@
 /transformation/advanced/json_get_field_values
 /transformation/advanced/json_serialize
 /transformation/advanced/json_serialize_pretty
+/transformation/advanced/last_execution_in_scope_source_ids
 /transformation/text/last_index_of
 /transformation/text/last_index_of_ignore_case
 /transformation/text/left
@@ -358,6 +361,7 @@
 /faqs/processes/scoping/what-does-scoping-do
 /faqs/processes/scoping/what-is-a-scope-filter
 /faqs/processes/scoping/how-can-i-join-the-source-data-with-an-additional-data-set
+/faqs/processes/scoping/how-does-a-joiner-change-the-source-data
 /faqs/processes/match/what-does-match-do
 /faqs/processes/match/what-happens-if-a-source-record-matches-multiple-target-records-in-an-action
 /faqs/processes/match/what-happens-if-a-source-record-matches-existing-target-records-during-an-insert

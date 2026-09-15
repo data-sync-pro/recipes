@@ -115,7 +115,7 @@
   <section class="doc-section" *ngIf="processedExamples.length">
     <h2 *ngIf="processedExamples.length === 1">Example</h2>
     <h2 *ngIf="processedExamples.length > 1">Examples</h2>
-  
+
     <div class="example-item" *ngFor="let example of processedExamples; let i = index">
       <div class="doc-example" *ngIf="example.code"
            [class.collapsible]="example.isLong"
@@ -134,7 +134,7 @@
           {{ expandedExamples.has(i) ? 'Show less' : 'Show more' }}
         </button>
       </div>
-      <p class="example-description" *ngIf="example.description">{{ example.description }}</p>
+      <div class="example-description" *ngIf="example.description" [innerHTML]="example.description"></div>
       <div class="doc-images" *ngIf="example.images?.length">
         <img
           *ngFor="let img of example.images"
