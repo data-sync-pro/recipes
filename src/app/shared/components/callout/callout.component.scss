@@ -1,0 +1,94 @@
+:host {
+  display: block;
+}
+
+.block-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  margin: 1.5rem 0;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--callout-accent) 22%, transparent);
+  border-left: 3px solid var(--callout-accent);
+  background: var(--callout-tint);
+  color: #2C2C2D;
+
+  // Variant palette: --callout-accent drives border/icon/title, --callout-tint the surface
+  &[data-variant='info']    { --callout-accent: #2374c4; --callout-tint: #eaf2fb; }
+  &[data-variant='success'] { --callout-accent: #2e8b57; --callout-tint: #eaf5ef; }
+  &[data-variant='warning'] { --callout-accent: #c98a1b; --callout-tint: #fdf4e3; }
+  &[data-variant='error']   { --callout-accent: #c0392b; --callout-tint: #fbeae7; }
+
+  .callout-title { color: var(--callout-accent); }
+  .callout-icon mat-icon { color: var(--callout-accent); }
+
+  // Compact (no title): single-line glyph + text on a gentle tint fade
+  &:not(.has-title) {
+    align-items: center;
+
+    .callout-icon mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  // Titled: solid badge icon + colored title on top, indented body below
+  &.has-title {
+    display: block;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+
+    .callout-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .callout-icon mat-icon {
+      font-size: 22px;
+      width: 22px;
+      height: 22px;
+    }
+
+    .callout-title {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    // Indent body so content aligns with title text start (icon 22px + gap 0.5rem)
+    .callout-body {
+      padding-left: calc(22px + 0.5rem);
+    }
+  }
+
+  .callout-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .callout-body {
+    flex: 1;
+    min-width: 0;
+
+    > :first-child { margin-top: 0; }
+    > :last-child { margin-bottom: 0; }
+  }
+
+  .callout-title {
+    margin: 0;
+  }
+
+  .callout-content {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #2C2C2D;
+  }
+}

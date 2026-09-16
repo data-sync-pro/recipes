@@ -289,29 +289,33 @@ $toc-width: 320px;
     // loaded globally via angular.json (highlight.js/styles/vs.min.css). Blocks
     // are highlighted at render time in faq.service.ts → highlightCodeBlocks.
     // No custom token colours here on purpose.
+  }
+}
 
-    // Scoped table styles so global `table` rules cannot leak into FAQ display.
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin: 1em 0;
+// Scoped table styles so global `table` rules cannot leak into FAQ display.
+// The ancestors sit in :where() (zero specificity) so this stays a *default*:
+// answers that author their own table component (e.g. .faq-join in
+// _join-example.scss) override it with a single class instead of out-nesting
+// `.faq-detail .faq-answer`. Loaded after styles.scss, so ties still go here.
+:where(.faq-detail .faq-answer) table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
 
-      th {
-        padding: 8px;
-        border: 1px solid #ddd;
-        background-color: #f5f5f5;
-      }
+  th {
+    padding: 8px;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+  }
 
-      td {
-        padding: 8px;
-        border: 1px solid #ddd;
-      }
+  td {
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
 
-      th:first-child,
-      td:first-child {
-        width: 50%;
-      }
-    }
+  th:first-child,
+  td:first-child {
+    width: 50%;
   }
 }
 

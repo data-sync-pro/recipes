@@ -117,13 +117,15 @@ html {
 
 // Single source of truth for inline content links. Both the setup block
 // (a.setup-link[-external], built by renderContent() in block.component.ts) and
-// the recipe detail page (.content-section, overview/use-cases) reach the DOM via
-// [innerHTML], which bypasses Angular's view encapsulation — so a component-scoped
-// rule never matches them. They must be styled globally, same reason as the setup
-// <strong>/<code> rules above. Keep the brand color defined here only.
+// the recipe detail page (.content-section, overview/use-cases) and the shared
+// callout (.callout-content, e.g. hand-written <a> in transformation doc JSON) reach
+// the DOM via [innerHTML], which bypasses Angular's view encapsulation — so a
+// component-scoped rule never matches them. They must be styled globally, same
+// reason as the setup <strong>/<code> rules above. Keep the brand color defined here only.
 a.setup-link,
 a.setup-link-external,
-.content-section a {
+.content-section a,
+.callout-content a {
   color: #2253B2;
   text-decoration: underline;
   text-decoration-color: #2253B2;

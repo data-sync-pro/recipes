@@ -1,6 +1,12 @@
 {
   "title": "JOIN_JSON",
   "description": "<p>Returns a filtered array containing objects from the provided JSON array that match the specified field name and field value criteria.</p>",
+  "descriptionCallouts": [
+    {
+      "type": "info",
+      "content": "New to Joiner? See <a href=\"/faqs/processes/scoping/what-is-a-joiner\">What is a Joiner?</a> for details."
+    }
+  ],
   "syntax": "JOIN_JSON(json_array_string, ...[joining_field_name, joining_field_value])",
   "parameters": [
     {

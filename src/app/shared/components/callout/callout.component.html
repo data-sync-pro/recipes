@@ -1,0 +1,32 @@
+<div class="block-callout" [attr.data-variant]="variant || 'info'" [class.has-title]="!!title">
+  <!-- With title: header (icon + title) on top, body below -->
+  <div *ngIf="title" class="callout-header">
+    <span class="callout-icon">
+      <!-- Filled circular badges (glyph reads white against the accent disc) -->
+      <ng-container [ngSwitch]="variant">
+        <mat-icon *ngSwitchCase="'warning'">error</mat-icon>
+        <mat-icon *ngSwitchCase="'error'">cancel</mat-icon>
+        <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
+        <mat-icon *ngSwitchDefault>info</mat-icon>
+      </ng-container>
+    </span>
+    <div class="callout-title">{{ title }}</div>
+  </div>
+
+  <!-- Without title: icon + content inline -->
+  <span *ngIf="!title" class="callout-icon">
+    <!-- Bare glyphs for the compact (no-title) variant -->
+    <ng-container [ngSwitch]="variant">
+      <mat-icon *ngSwitchCase="'warning'">priority_high</mat-icon>
+      <mat-icon *ngSwitchCase="'error'">close</mat-icon>
+      <mat-icon *ngSwitchCase="'success'">check</mat-icon>
+      <mat-icon *ngSwitchDefault>info_outline</mat-icon>
+    </ng-container>
+  </span>
+
+  <div class="callout-body">
+    <!-- .callout-content is also targeted by global strong/code rules in styles.scss -->
+    <div *ngIf="content" class="callout-content" [innerHTML]="content"></div>
+    <ng-content></ng-content>
+  </div>
+</div>

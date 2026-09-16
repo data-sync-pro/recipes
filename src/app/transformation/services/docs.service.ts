@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, map, shareReplay, switchMap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { CalloutVariant } from '../../shared/components/callout/callout.component';
 
 interface Parameter {
   name: string;
@@ -24,7 +25,7 @@ export interface ExampleItem {
 }
 
 export interface Callout {
-  type: 'info' | 'warning' | 'tip' | 'note';
+  type: CalloutVariant;
   title?: string;
   content: string;
 }

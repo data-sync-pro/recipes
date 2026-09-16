@@ -1,0 +1,166 @@
+// ==================== Join Example (FAQ answer content) ====================
+// Authored in assets/faqs/processes/scoping/what-is-a-joiner/answer.html and
+// injected via [innerHTML]; works here without ::ng-deep because the FAQ
+// component uses ViewEncapsulation.None. Class hooks only — authored answers
+// carry no inline styles.
+//
+// The key-column body tint and the divider before the $Joiner.* columns live
+// on <col> so the markup doesn't repeat a class on every cell. Header cells
+// paint over <col> backgrounds, so tinted headers need their own hook (th.key).
+// The default FAQ table rule is
+// :where()-scoped (_layout.scss), so one class here is enough to override it;
+// the only extra weight is the first-column width, which the global
+// `table th:first-child` rule in styles.scss also sets.
+
+$join-border: #e7e7ea;
+$join-row-line: #eef0f3;
+$join-surface: #f8fafc;
+$join-meta-bg: #f4f6f9;
+$join-key-tint: #eef3fb;
+$join-text-muted: #64748b;
+$join-text-faint: #94a3b8;
+$join-radius: 6px;
+$join-mono: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; // same stack as .faq-answer code
+
+.faq-join {
+  // Size only — margins come from `.faq-answer h3`.
+  h3 {
+    font-size: 1.4rem;
+  }
+
+  // FAQ answers have no hr style, so the browser's inset 2-tone rule shows.
+  // Flat hairline in the table border colour; the h3 below brings its own
+  // top margin, so only a little space is added above the line.
+  hr {
+    height: 0;
+    margin: 8px 0 0;
+    border: 0;
+    border-top: 1px solid $join-border;
+  }
+
+  // ----- Source / Joiner / Matching Key box -----
+  &__meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 20px;
+    align-items: baseline;
+    margin: 0 0 24px;
+    padding: 12px 16px;
+    border-radius: $join-radius;
+    background: $join-meta-bg;
+    font-size: 0.9rem;
+
+    dt {
+      font-weight: 500;
+    }
+
+    dd {
+      margin: 0;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .mono {
+      font-family: $join-mono;
+      font-size: 0.85rem;
+    }
+
+    .fn {
+      color: $primary-color;
+    }
+  }
+
+  // ----- "Before Joiner" / "After Joiner" -----
+  &__stage {
+    margin: 24px 0 8px;
+    font-weight: 500;
+  }
+
+  // ----- Before: source and joiner tables side by side at natural width -----
+  &__pair {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 12px 28px;
+  }
+
+  &__panel {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  &__caption {
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+    color: $join-text-muted;
+  }
+
+  // ----- Tables -----
+  // The wrapper owns the rounded frame (a collapsed table can't clip its own
+  // corners) and is the horizontal scroller on narrow screens.
+  &__table {
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
+    margin-bottom: 12px;
+    border: 1px solid $join-border;
+    border-radius: $join-radius;
+
+    table {
+      width: auto;
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    th,
+    td {
+      padding: 6px 12px;
+      border: 0;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    th {
+      border-bottom: 1px solid $join-border;
+      background: $join-surface;
+      font-weight: 500;
+    }
+
+    td {
+      border-top: 1px solid $join-row-line;
+    }
+
+    tbody tr:first-child td {
+      border-top: 0;
+    }
+
+    // Undo the global/FAQ default `first-child { width: 50% }`.
+    :is(th, td):first-child {
+      width: auto;
+    }
+
+    th.key,
+    col.is-key {
+      background: $join-key-tint;
+    }
+
+    col.is-joiner-start {
+      border-left: 1px solid $join-border;
+    }
+
+    .num {
+      text-align: right;
+    }
+
+    .null {
+      font-style: italic;
+      color: $join-text-faint;
+    }
+
+    .prefix {
+      font-weight: 400;
+      color: $join-text-muted;
+    }
+  }
+}

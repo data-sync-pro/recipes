@@ -1,6 +1,12 @@
 {
   "title": "LAST_EXECUTION_IN_SCOPE_SOURCE_IDS",
   "description": "<p>Returns the source record IDs that were in scope in the last execution of an Executable.</p>",
+    "images": [
+    {
+      "src": "images/figure_1.png",
+      "alt": "inScopeSourceIds in the Batch Execution's Execution Log"
+    }
+  ],
   "syntax": "LAST_EXECUTION_IN_SCOPE_SOURCE_IDS(executable_api_name_optional) -> List<String>",
   "parameters": [
     {
