@@ -70,7 +70,7 @@
                  [innerHTML]="highlightedDescriptionCode"></code></pre>
     </div>
     <app-callout *ngFor="let callout of docContent.descriptionCallouts"
-      [type]="callout.type"
+      [variant]="callout.type"
       [title]="callout.title"
       [content]="callout.content">
     </app-callout>
@@ -80,7 +80,7 @@
     <h2>Syntax</h2>
     <pre class="doc-syntax">{{ docContent.syntax }}</pre>
     <app-callout *ngFor="let callout of docContent.syntaxCallouts"
-      [type]="callout.type"
+      [variant]="callout.type"
       [title]="callout.title"
       [content]="callout.content">
     </app-callout>
@@ -107,7 +107,7 @@
       </tbody>
     </table>
     <app-callout *ngFor="let callout of docContent.parametersCallouts"
-      [type]="callout.type"
+      [variant]="callout.type"
       [title]="callout.title"
       [content]="callout.content">
     </app-callout>
@@ -147,7 +147,7 @@
       </div>
     </div>
     <app-callout *ngFor="let callout of docContent.examplesCallouts"
-      [type]="callout.type"
+      [variant]="callout.type"
       [title]="callout.title"
       [content]="callout.content">
     </app-callout>
@@ -157,7 +157,7 @@
     <h2>Tips</h2>
     <ng-container *ngTemplateOutlet="recursiveList; context: { tips: docContent.tips }"></ng-container>
     <app-callout *ngFor="let callout of docContent.tipsCallouts"
-      [type]="callout.type"
+      [variant]="callout.type"
       [title]="callout.title"
       [content]="callout.content">
     </app-callout>

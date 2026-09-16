@@ -1,6 +1,12 @@
 {
   "title": "JOIN_OBJECT_CONNECTION",
   "description": "<p>Returns records from a specified object through a named connection or a related connection, filtered by joining field-value pairs, with an optional additional filtering clause.</p>",
+  "descriptionCallouts": [
+    {
+      "type": "info",
+      "content": "New to Joiner? See <a href=\"/faqs/processes/scoping/what-is-a-joiner\">What is a Joiner?</a> for details."
+    }
+  ],
   "syntax": "JOIN_OBJECT_CONNECTION(connection_name, object_name, ...[joining_field_name, joining_field_value], additional_clause_optional)",
   "parameters": [
     {

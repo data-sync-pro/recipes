@@ -1,3 +1,6 @@
+import type { CalloutVariant } from '../../shared/components/callout/callout.component';
+export type { CalloutVariant };
+
 // Legacy interface - kept for backward compatibility during migration
 export interface SetupIndexItem {
   slug: string;
@@ -19,8 +22,6 @@ export interface NavNode {
 }
 
 export type BlockType = "h2" | "h3" | "h4" | "p" | "ul" | "ol" | "image" | "video" | "code" | "callout" | "instruction" | "table" | "tabs" | "fields" | "endpoint" | "card" | "label" | "steps" | "keyvalue";
-
-export type CalloutVariant = "info" | "warning" | "error" | "success";
 
 export interface TableColumn {
   key: string;

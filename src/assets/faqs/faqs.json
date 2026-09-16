@@ -970,6 +970,15 @@
                      "category":  "Processes",
                      "subCategory":  "Scoping",
                      "seqNo":  540,
+                     "isActive":  false
+                 },
+                 {
+                     "id":  "ae390d55-935d-4046-a181-1da2b1707572",
+                     "folderId":  "what-is-a-joiner",
+                     "question":  "What is a Joiner?",
+                     "category":  "Processes",
+                     "subCategory":  "Scoping",
+                     "seqNo":  541,
                      "isActive":  true
                  },
                  {

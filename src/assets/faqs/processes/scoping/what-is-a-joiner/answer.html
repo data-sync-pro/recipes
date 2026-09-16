@@ -1,0 +1,152 @@
+<div class="faq-join">
+  <p>
+    In DSP, a <b>Joiner</b> combines each source record with records from an additional dataset.
+    After the Joiner is applied, the combined records become the source data for subsequent processing.
+  </p>
+  <p>How the source data changes depends on the type of join:</p>
+  <ul>
+    <li><b>Left Join</b> (matching key specified): Each source record is paired with matching Joiner records.</li>
+    <li><b>Cross Join</b> (no matching key specified): Each source record is paired with every Joiner record.</li>
+  </ul>
+  <p>The examples below show how the source data changes after each type of join.</p>
+
+  <hr>
+
+  <h3>Left Join Example</h3>
+  <dl class="faq-join__meta">
+    <dt>Source Object</dt>
+    <dd>Account</dd>
+    <dt>Joiner</dt>
+    <dd class="mono"><span class="fn">JOIN_OBJECT_SOURCE</span>("Opportunity", "AccountId", Id, "IsClosed = true")</dd>
+    <dt>Matching Key</dt>
+    <dd class="mono">Opportunity.AccountId = Account.Id</dd>
+  </dl>
+
+  <div class="faq-join__stage">Before Joiner</div>
+  <div class="faq-join__pair">
+    <div class="faq-join__panel">
+      <div class="faq-join__caption">Source Records</div>
+      <div class="faq-join__table">
+        <table>
+          <colgroup><col class="is-key"><col><col></colgroup>
+          <thead>
+            <tr><th class="key">Id</th><th>Name</th><th>Industry</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>A1</td><td>Acme</td><td>Technology</td></tr>
+            <tr><td>A2</td><td>Beta</td><td>Retail</td></tr>
+            <tr><td>A3</td><td>Gamma</td><td>Finance</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="faq-join__panel">
+      <div class="faq-join__caption">Joiner Records</div>
+      <div class="faq-join__table">
+        <table>
+          <colgroup><col><col class="is-key"><col><col></colgroup>
+          <thead>
+            <tr><th>Id</th><th class="key">AccountId</th><th>Name</th><th class="num">Amount</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>O1</td><td>A1</td><td>Acme Renewal</td><td class="num">10,000</td></tr>
+            <tr><td>O2</td><td>A1</td><td>Acme Expansion</td><td class="num">5,000</td></tr>
+            <tr><td>O3</td><td>A1</td><td>Acme Upgrade</td><td class="num">12,000</td></tr>
+            <tr><td>O4</td><td>A2</td><td>Beta Q1 Deal</td><td class="num">8,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-join__stage">After Joiner</div>
+  <div class="faq-join__table">
+    <table>
+      <colgroup><col class="is-key"><col><col><col class="is-joiner-start"><col class="is-key"><col><col></colgroup>
+      <thead>
+        <tr>
+          <th class="key">Id</th><th>Name</th><th>Industry</th>
+          <th><span class="prefix">$Joiner.</span>Id</th>
+          <th class="key"><span class="prefix">$Joiner.</span>AccountId</th>
+          <th><span class="prefix">$Joiner.</span>Name</th>
+          <th class="num"><span class="prefix">$Joiner.</span>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>A1</td><td>Acme</td><td>Technology</td><td>O1</td><td>A1</td><td>Acme Renewal</td><td class="num">10,000</td></tr>
+        <tr><td>A1</td><td>Acme</td><td>Technology</td><td>O2</td><td>A1</td><td>Acme Expansion</td><td class="num">5,000</td></tr>
+        <tr><td>A1</td><td>Acme</td><td>Technology</td><td>O3</td><td>A1</td><td>Acme Upgrade</td><td class="num">12,000</td></tr>
+        <tr><td>A2</td><td>Beta</td><td>Retail</td><td>O4</td><td>A2</td><td>Beta Q1 Deal</td><td class="num">8,000</td></tr>
+        <tr><td>A3</td><td>Gamma</td><td>Finance</td><td class="null">NULL</td><td class="null">NULL</td><td class="null">NULL</td><td class="num null">NULL</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Each source record is paired with its matching Joiner records. One row is produced per match.
+    If no match is found, the source record is retained with <code>NULL</code> values in the <code>$Joiner</code> fields.
+  </p>
+
+  <hr>
+
+  <h3>Cross Join Example</h3>
+  <dl class="faq-join__meta">
+    <dt>Source Object</dt>
+    <dd>Product2</dd>
+    <dt>Joiner</dt>
+    <dd class="mono"><span class="fn">JOIN_JSON</span>('[{"Region":"US"},{"Region":"EU"},{"Region":"APAC"}]')</dd>
+    <dt>Matching Key</dt>
+    <dd>None</dd>
+  </dl>
+
+  <div class="faq-join__stage">Before Joiner</div>
+  <div class="faq-join__pair">
+    <div class="faq-join__panel">
+      <div class="faq-join__caption">Source Records</div>
+      <div class="faq-join__table">
+        <table>
+          <thead>
+            <tr><th>Id</th><th>Name</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>P1</td><td>Widget</td></tr>
+            <tr><td>P2</td><td>Gadget</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="faq-join__panel">
+      <div class="faq-join__caption">Joiner Records</div>
+      <div class="faq-join__table">
+        <table>
+          <thead>
+            <tr><th>Region</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>US</td></tr>
+            <tr><td>EU</td></tr>
+            <tr><td>APAC</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-join__stage">After Joiner</div>
+  <div class="faq-join__table">
+    <table>
+      <colgroup><col><col><col class="is-joiner-start"></colgroup>
+      <thead>
+        <tr><th>Id</th><th>Name</th><th><span class="prefix">$Joiner.</span>Region</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>P1</td><td>Widget</td><td>US</td></tr>
+        <tr><td>P1</td><td>Widget</td><td>EU</td></tr>
+        <tr><td>P1</td><td>Widget</td><td>APAC</td></tr>
+        <tr><td>P2</td><td>Gadget</td><td>US</td></tr>
+        <tr><td>P2</td><td>Gadget</td><td>EU</td></tr>
+        <tr><td>P2</td><td>Gadget</td><td>APAC</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Every source record is paired with every Joiner record.</p>
+</div>

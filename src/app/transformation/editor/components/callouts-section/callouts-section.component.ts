@@ -18,7 +18,7 @@ export class CalloutsSectionComponent implements OnChanges {
   @Input() field!: CalloutField;
   @Input() heading = 'Callouts';
 
-  readonly typeOptions: Callout['type'][] = ['info', 'warning', 'tip', 'note'];
+  readonly typeOptions: Callout['type'][] = ['info', 'warning', 'error', 'success'];
 
   constructor(private state: EditorStateService) {}
 

@@ -118,14 +118,14 @@
   background: #fff8e8;
 }
 
-.editor-shell .callout-card[data-type='tip'] {
-  border-left-color: #1f7a40;
-  background: #f1f9f4;
+.editor-shell .callout-card[data-type='success'] {
+  border-left-color: #2e8b57;
+  background: #eaf5ef;
 }
 
-.editor-shell .callout-card[data-type='note'] {
-  border-left-color: #555;
-  background: #f5f5f5;
+.editor-shell .callout-card[data-type='error'] {
+  border-left-color: #c0392b;
+  background: #fbeae7;
 }
 
 .editor-shell .callout-card-head {

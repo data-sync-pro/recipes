@@ -1,6 +1,12 @@
 {
   "title": "JOIN_OBJECT_SOURCE",
   "description": "<p>Returns records from the specified object via the Source connection that match the provided joining field–value pairs, with an optional additional filtering clause.</p>",
+  "descriptionCallouts": [
+    {
+      "type": "info",
+      "content": "New to Joiner? See <a href=\"/faqs/processes/scoping/what-is-a-joiner\">What is a Joiner?</a> for details."
+    }
+  ],
   "syntax": "JOIN_OBJECT_SOURCE(object_name, ...[joining_field_name, joining_field_value], additional_clause_optional)",
   "parameters": [
     {
