@@ -92,6 +92,7 @@
     { "Item Name": "MONTH", "Tags": ["Date & Time"] },
     { "Item Name": "NOT", "Tags": ["Logical"] },
     { "Item Name": "NOW", "Tags": ["Date & Time"] },
+    { "Item Name": "OBJECT_NAME", "Tags": ["Advanced"] },
     { "Item Name": "OR", "Tags": ["Logical"] },
     { "Item Name": "OPERATORS", "Tags": ["Operators"] },
     { "Item Name": "RANDOMIZE", "Tags": ["Randomization"] },

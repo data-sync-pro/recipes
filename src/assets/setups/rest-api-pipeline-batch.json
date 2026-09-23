@@ -29,7 +29,7 @@
         { "key": "description", "header": "Description", "width": "46%" }
       ],
       "rows": [
-        { "parameter": "additionalRetrieveParameters", "type": "string", "required": "No", "description": "An additional condition used to filter the records retrieved by the Pipeline. Omit it when no additional filter is needed." },
+        { "parameter": "firstExecutionRetrieveParameters", "type": "string", "required": "No", "description": "An additional filter applied to the first Execution of this request. Omit it when no additional filter is needed." },
         { "parameter": "chainNextPipeline", "type": "boolean", "required": "No", "description": "Controls whether the Pipeline's configured Next Pipeline runs after the current Pipeline completes. Defaults to `false`." }
       ]
     },
@@ -38,7 +38,7 @@
     {
       "type": "code",
       "language": "json",
-      "content": "{\n  \"additionalRetrieveParameters\": \"CreatedDate = TODAY\",\n  \"chainNextPipeline\": true\n}"
+      "content": "{\n  \"firstExecutionRetrieveParameters\": \"CreatedDate = TODAY\",\n  \"chainNextPipeline\": true\n}"
     },
     { "type": "h2", "content": "Returns" },
     {

@@ -63,6 +63,10 @@
             {
               "name": "Retrieve Limit",
               "description": "The maximum number of records to be retrieved from the source."
+            },
+            {
+              "name": "Skip Pipeline Retrieve Criteria?",
+              "description": "When checked, this Executable ignores its Pipeline's Additional Retrieve Criteria if defined."
             }
           ]
         },
