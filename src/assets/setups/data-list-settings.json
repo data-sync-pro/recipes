@@ -261,6 +261,10 @@
               "description": "When selected, DSP retrieves and caches the full result set locally in a single request, enabling client-side pagination and reducing server calls during navigation. Recommended for small result sets only. For Salesforce Big Objects—which don't support OFFSET and LIMIT—client-side pagination always applies regardless of this setting."
             },
             {
+              "name": "Skip Pipeline Retrieve Criteria?",
+              "description": "When checked, this Executable ignores its Pipeline's Additional Retrieve Criteria if defined."
+            },
+            {
               "name": "Q: Page Size",
               "description": "The number of records displayed per page in the Data List."
             },

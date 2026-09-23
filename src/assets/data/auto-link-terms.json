@@ -267,6 +267,9 @@
     "NOW": {
       "functionDoc": "NOW"
     },
+    "OBJECT_NAME": {
+      "functionDoc": "OBJECT_NAME"
+    },
     "OR": {
       "functionDoc": "OR"
     },

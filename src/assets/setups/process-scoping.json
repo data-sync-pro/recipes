@@ -47,6 +47,10 @@
           "description": "A concise (255-character) version of the \"Additional Scope Criteria\" specified in the associated Pipeline record."
         },
         {
+          "name": "Skip Pipeline Scope Filter?",
+          "description": "When checked, this Executable ignores its Pipeline's Scope Filter if defined."
+        },
+        {
           "name": "Scope Filter(Post Join)",
           "description": "DSP expression that evaluates each joined record after the Join process; records for which it returns false or $SKIP_ASSIGNMENT are excluded from further processing."
         },

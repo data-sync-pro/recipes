@@ -1,0 +1,19 @@
+{
+  "title": "OBJECT_NAME",
+  "description": "<p>Returns the object API name for the given record ID in the current org.</p>",
+  "syntax": "OBJECT_NAME(id_value) -> String",
+  "parameters": [
+    {
+      "name": "id_value",
+      "type": "ID",
+      "required": "Yes",
+      "description": "The record ID to get the object API name for."
+    }
+  ],
+  "examples": [
+    "OBJECT_NAME(\"001XXXXXXXXXXXXXXX\")\n-- Returns \"Account\".",
+    "OBJECT_NAME(WhatId)\n-- Returns the object API name of the related record."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}
