@@ -198,6 +198,7 @@
 /transformation/date_time/month
 /transformation/logical/not
 /transformation/date_time/now
+/transformation/advanced/object_name
 /transformation/logical/or
 /transformation/operators/operators
 /transformation/randomization/randomize
