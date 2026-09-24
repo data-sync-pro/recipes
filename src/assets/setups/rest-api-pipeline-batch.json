@@ -29,7 +29,7 @@
         { "key": "description", "header": "Description", "width": "46%" }
       ],
       "rows": [
-        { "parameter": "firstExecutionRetrieveParameters", "type": "string", "required": "No", "description": "An additional filter applied to the first Execution of this request. Omit it when no additional filter is needed." },
+        { "parameter": "additionalRetrieveParameters", "type": "string | object", "required": "No", "description": "Additional filters for the Executables in the first Pipeline. As a string, one filter applies to every Executable. As a JSON object, each Executable API name maps to its own filter. Omit it when no additional filter is needed." },
         { "parameter": "chainNextPipeline", "type": "boolean", "required": "No", "description": "Controls whether the Pipeline's configured Next Pipeline runs after the current Pipeline completes. Defaults to `false`." }
       ]
     },
@@ -38,7 +38,13 @@
     {
       "type": "code",
       "language": "json",
-      "content": "{\n  \"firstExecutionRetrieveParameters\": \"CreatedDate = TODAY\",\n  \"chainNextPipeline\": true\n}"
+      "content": "{\n  \"additionalRetrieveParameters\": \"CreatedDate = TODAY\",\n  \"chainNextPipeline\": true\n}"
+    },
+    { "type": "p", "content": "Apply a different filter to each Executable and run the configured Pipeline chain:" },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"additionalRetrieveParameters\": {\n    \"Account_Sync\": \"CreatedDate = TODAY\",\n    \"Contact_Sync\": \"LastModifiedDate = LAST_N_DAYS:7\"\n  },\n  \"chainNextPipeline\": true\n}"
     },
     { "type": "h2", "content": "Returns" },
     {
