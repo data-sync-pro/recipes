@@ -44,6 +44,6 @@
     }
   ],
   "relatedFormulas": [
-    "$JOINER"
+    "$Joiner"
   ]
 }

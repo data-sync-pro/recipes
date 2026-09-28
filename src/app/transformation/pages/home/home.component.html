@@ -60,7 +60,7 @@
             <tbody>
               <tr *ngFor="let variable of globalVariables; trackBy: trackByVariable">
                 <td>
-                  <a *ngIf="variable.variable === '$JOINER'; else plainText"
+                  <a *ngIf="variable.variable === '$Joiner'; else plainText"
                     [routerLink]="['/transformation', 'joiner']">
                     {{ variable.variable }}
                   </a>
