@@ -465,7 +465,7 @@
     "$CURRENT_ORG_DOMAIN_URL": {
       "globalVariableDoc": "global_variables"
     },
-    "$JOINER": {
+    "$Joiner": {
       "globalVariableDoc": "global_variables"
     },
     "$Joiner.FieldName": {

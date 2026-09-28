@@ -160,14 +160,14 @@ a.setup-link-external,
   color: #2C2C2D;
 }
 
-// Join example card — the $JOINER before/after record tables authored in
+// Join example card — the $Joiner before/after record tables authored in
 // joiner/data.json (ExampleItem.description). Injected via [innerHTML] in
 // doc-viewer, so global for the same reason as the Notes rules above; the
 // sanitizer keeps `class` but strips `style`/`<svg>`, hence class hooks and
 // data-URI icons. Card, tag pill and table look follow the setup .block-card /
 // .block-table (src/app/setup/block/block.component.scss). Everything that
 // comes from the Joiner shares one brand tint so the columns' origin reads at a
-// glance: the Joiner Records table (.is-joiner) and the $JOINER.* result
+// glance: the Joiner Records table (.is-joiner) and the $Joiner.* result
 // columns (.col-joiner).
 $join-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
 $join-tint: #eef3fb;
@@ -327,7 +327,7 @@ $join-tint-cell: #f7f9fd;
     background: $join-tint-cell;
   }
 
-  // Boundary where the source columns end and the $JOINER.* columns begin.
+  // Boundary where the source columns end and the $Joiner.* columns begin.
   :not(.col-joiner) + .col-joiner {
     box-shadow: inset 2px 0 0 rgba(34, 83, 178, 0.35);
   }

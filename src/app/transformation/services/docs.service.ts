@@ -18,7 +18,7 @@ export interface DocImage {
 
 export interface ExampleItem {
   code?: string;
-  // Authored HTML, rendered via [innerHTML] (e.g. the $JOINER before/after
+  // Authored HTML, rendered via [innerHTML] (e.g. the $Joiner before/after
   // record tables). Plain text still works; newlines are kept by pre-line.
   description?: string;
   images?: DocImage[];

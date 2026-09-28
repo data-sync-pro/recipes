@@ -4,12 +4,13 @@
 // portable: change this single constant to remount under a different URL.
 export const TRANSFORMATION_BASE = 'transformation';
 
-// $JOINER is the only pseudo-function whose URL slug doesn't fall out of the
+// $Joiner is the only pseudo-function whose URL slug doesn't fall out of the
 // lowercase-and-underscore rule: we strip the leading `$` so the address bar
 // shows /joiner instead of an ugly %24-encoded form. Other special entries
 // like GLOBAL_VARIABLES and APEX_CLASS already produce the right slug
 // (global_variables, apex_class) under the default rule, so they live in the
 // route table as plain identifiers without an explicit override.
+// Keys are uppercase: buildRoute() upper-cases the name before the lookup.
 const SPECIAL_SLUGS: Record<string, string> = {
   '$JOINER': 'joiner',
 };

@@ -1,16 +1,16 @@
 {
-  "title": "$JOINER",
-  "description": "<p>References a field from the Joiner record associated with the current source record. $JOINER is available after a Joiner formula, such as JOIN_OBJECT_SOURCE, JOIN_OBJECT_TARGET, JOIN_OBJECT_CONNECTION, or JOIN_JSON, has been applied.</p>",
+  "title": "$Joiner",
+  "description": "<p>References a field from the Joiner record associated with the current source record. $Joiner is available after a Joiner formula, such as JOIN_OBJECT_SOURCE, JOIN_OBJECT_TARGET, JOIN_OBJECT_CONNECTION, or JOIN_JSON, has been applied.</p>",
   "descriptionCallouts": [
     {
       "type": "info",
       "content": "New to Joiner? See <a href=\"/faqs/processes/scoping/what-is-a-joiner\">What is a Joiner?</a> for details."
     }
   ],
-  "syntax": "$JOINER.FieldName",
+  "syntax": "$Joiner.FieldName",
   "parameters": [],
   "examples": [
-    "$JOINER.Name\n-- Accesses the \"Name\" field from the joined record."
+    "$Joiner.Name\n-- Accesses the \"Name\" field from the joined record."
   ],
   "tips": [],
   "relatedFormulas": [

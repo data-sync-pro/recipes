@@ -92,7 +92,7 @@ export class AutoLinkService {
       
       if (term.startsWith('$')) {
         // Special handling for global variables starting with $
-        // They should follow patterns like: $VARIABLE_NAME, $User.PropertyName, $JOINER, $CONTEXT_RECORD_ID, $Joiner.FieldName
+        // They should follow patterns like: $VARIABLE_NAME, $User.PropertyName, $Joiner, $CONTEXT_RECORD_ID, $Joiner.FieldName
         const globalVarPattern = /^\$([A-Z_][A-Z0-9_]*|[A-Z][a-zA-Z0-9_]*(\.[A-Z][a-zA-Z0-9_]*)*)$/;
         isProperlyCapitalized = globalVarPattern.test(term);
       } else {

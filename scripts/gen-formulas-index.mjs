@@ -124,7 +124,7 @@ try {
   });
 
   // Each variable as its own row, so its name and prose are searchable. A few
-  // ($JOINER) have a full page of their own; the rest point at the shared Global
+  // ($Joiner) have a full page of their own; the rest point at the shared Global
   // Variables table, and carry `pageName` so the sidebar can collapse a run of
   // them into the single page they all lead to.
   for (const variable of globalVariables?.globalVariables ?? []) {

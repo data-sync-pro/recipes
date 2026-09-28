@@ -17,7 +17,7 @@
       "description": "Returns the Id of the currently running Executable."
     },
     {
-      "variable": "$JOINER",
+      "variable": "$Joiner",
       "description": "$Joiner is a prefix used to reference fields from a dataset that has been joined in the Scoping step of an Executable (left-join or cross-join). It allows downstream logic—such as Scope Filter (Post Join) rules and field mappings—to access the joined record’s fields. For example, $Joiner.Parent__r.Status__c references the Status__c field on the joined record’s Parent__r relationship."
     },
     {
