@@ -13,7 +13,7 @@
       "name": "return_field_name",
       "type": "String",
       "required": "Yes",
-      "description": "The API name of the field to return from the matching record(first record if there are multiple matches.)."
+      "description": "The API name of the field to return from the matching record."
     },
     {
       "name": "…matching_field_name",

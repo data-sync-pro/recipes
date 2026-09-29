@@ -153,6 +153,7 @@
     { "Item Name": "VLOOKUP_CONNECTION", "Tags": ["Advanced"] },
     { "Item Name": "VLOOKUP_RECORD", "Tags": ["Advanced"] },
     { "Item Name": "VLOOKUP_RECORD_CONNECTION", "Tags": ["Advanced"] },
+    { "Item Name": "VLOOKUP_SOURCE", "Tags": ["Advanced"] },
     { "Item Name": "YEAR", "Tags": ["Date & Time"] },
     { "Item Name": "YESTERDAY", "Tags": ["Date & Time"] },
     { "Item Name": "AGG_AVG", "Tags": ["Advanced"] },

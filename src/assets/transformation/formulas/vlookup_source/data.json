@@ -1,0 +1,42 @@
+{
+  "title": "VLOOKUP_SOURCE",
+  "description": "<p>Returns the value of the specified field (including relationship fields up to 5 levels) from the first record in the Source Connection that matches all of the given field-value pairs.</p>",
+  "syntax": "VLOOKUP_SOURCE(source_object_name, return_field_name, ...[matching_field_name, matching_field_value], additional_clause_optional) -> Object",
+  "parameters": [
+    {
+      "name": "source_object_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The API name of the object in the Source Connection to query."
+    },
+    {
+      "name": "return_field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The API name of the field to return from the matching record."
+    },
+    {
+      "name": "…matching_field_name",
+      "type": "String",
+      "required": "Yes",
+      "description": "The API name of the field used to match records."
+    },
+    {
+      "name": "…matching_field_value",
+      "type": "Object",
+      "required": "Yes",
+      "description": "The field value used as matching criteria."
+    },
+    {
+      "name": "additional_clause_optional",
+      "type": "String",
+      "required": "No",
+      "description": "Additional SOQL criteria for restricting or ordering the matching results."
+    }
+  ],
+  "examples": [
+    "VLOOKUP_SOURCE(\"Opportunity\", \n               \"Amount\", \n               \"AccountId\", Id, \n               \"StageName = 'Closed Won' ORDER BY CloseDate DESC\")\n-- Returns the Amount of the most recent Closed Won Opportunity in the Source Connection whose AccountId matches the current Account's Id."
+  ],
+  "tips": [],
+  "relatedFormulas": []
+}

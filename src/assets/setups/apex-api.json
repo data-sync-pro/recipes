@@ -8,7 +8,7 @@
     {
       "type": "code",
       "language": "apex",
-      "content": "global class ExecutionService {\n\n    global static pushtopics__Execution__c executeExecutableByApiName(String apiName)\n    global static pushtopics__Execution__c executeExecutableByApiName(String apiName, List<Id> recordIds)\n\n    global static pushtopics__PipelineExecution__c executePipelineByApiName(String pipelineApiName)\n}"
+      "content": "global class ExecutionService {\n\n    global static pushtopics__Execution__c executeExecutableByApiName(String apiName)\n    global static pushtopics__Execution__c executeExecutableByApiName(String apiName, List<Id> recordIds)\n\n    global static pushtopics__PipelineExecution__c executePipelineByApiName(String pipelineApiName)\n    global static pushtopics__PipelineExecution__c executePipelineByApiName(String pipelineApiName, Object additionalRetrieveParameters)\n}"
     },
     {
       "type": "p",
@@ -18,7 +18,7 @@
     {
       "type": "code",
       "language": "apex",
-      "content": "// Run an Executable\npushtopics.ExecutionService.executeExecutableByApiName('Account.RollupSummaries');\n\n// Run an Executable for specific records only\npushtopics.ExecutionService.executeExecutableByApiName(\n    'Account.RollupSummaries', new List<Id>{ '001xx0000000001AAA' });\n\n// Run a Pipeline\npushtopics__PipelineExecution__c pipelineExecution =\n    pushtopics.ExecutionService.executePipelineByApiName('Opportunity.Batches');"
+      "content": "// Run an Executable\npushtopics.ExecutionService.executeExecutableByApiName('Account.RollupSummaries');\n\n// Run an Executable for specific records only\npushtopics.ExecutionService.executeExecutableByApiName(\n    'Account.RollupSummaries', new List<Id>{ '001xx0000000001AAA' });\n\n// Run a Pipeline\npushtopics__PipelineExecution__c pipelineExecution =\n    pushtopics.ExecutionService.executePipelineByApiName('Opportunity.Batches');\n\n// Run a Pipeline with different parameters per Executable\npushtopics.ExecutionService.executePipelineByApiName(\n    'Opportunity.Batches', new Map<String, Object>{\n        'Opportunity.CloseStale'  => 'CloseDate < LAST_N_DAYS:90',\n        'Account.RollupSummaries' => 'Type = \\'Customer\\''\n    });"
     }
   ]
 }
