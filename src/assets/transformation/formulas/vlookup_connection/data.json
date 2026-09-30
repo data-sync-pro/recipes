@@ -7,25 +7,25 @@
       "name": "connection_name",
       "type": "String",
       "required": "Yes",
-      "description": "The name of the connection to use."
+      "description": "The API name of the connection to use."
     },
     {
       "name": "object_name",
       "type": "String",
       "required": "Yes",
-      "description": "The name of the object to look up."
+      "description": "The API name of the object to look up."
     },
     {
       "name": "return_field_name",
       "type": "String",
       "required": "Yes",
-      "description": "The name of the field whose value will be returned."
+      "description": "The API name of the field whose value will be returned."
     },
     {
       "name": "…matching_field_name",
       "type": "String",
       "required": "Yes",
-      "description": "The name of the field used to match records."
+      "description": "The API name of the field used to match records."
     },
     {
       "name": "…matching_field_value",

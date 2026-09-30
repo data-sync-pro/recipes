@@ -423,6 +423,9 @@
     "VLOOKUP_RECORD_CONNECTION": {
       "functionDoc": "VLOOKUP_RECORD_CONNECTION"
     },
+    "VLOOKUP_SOURCE": {
+      "functionDoc": "VLOOKUP_SOURCE"
+    },
     "YEAR": {
       "functionDoc": "YEAR"
     },

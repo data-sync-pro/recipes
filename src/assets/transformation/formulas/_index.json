@@ -162,6 +162,7 @@
   "vlookup_connection",
   "vlookup_record",
   "vlookup_record_connection",
+  "vlookup_source",
   "year",
   "yesterday"
 ]
