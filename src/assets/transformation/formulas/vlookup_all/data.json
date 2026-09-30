@@ -19,7 +19,7 @@
       "name": "…matching_field_name",
       "type": "String",
       "required": "Yes",
-      "description": "The name of the field used to match records."
+      "description": "The API name of the field used to match records."
     },
     {
       "name": "…matching_field_value",
@@ -43,5 +43,6 @@
       "children": []
     }
   ],
+  "notesRef": "shared/lookup-notes",
   "relatedFormulas": []
 }

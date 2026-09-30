@@ -38,5 +38,6 @@
     "VLOOKUP_SOURCE(\"Opportunity\", \n               \"Amount\", \n               \"AccountId\", Id, \n               \"StageName = 'Closed Won' ORDER BY CloseDate DESC\")\n-- Returns the Amount of the most recent Closed Won Opportunity in the Source Connection whose AccountId matches the current Account's Id."
   ],
   "tips": [],
+  "notesRef": "shared/lookup-notes",
   "relatedFormulas": []
 }

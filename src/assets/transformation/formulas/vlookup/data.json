@@ -1,6 +1,6 @@
 {
   "title": "VLOOKUP",
-  "description": "<p>Performs a dynamic lookup on a Salesforce object and returns the specified field value(including relational fields up to 5 levels), from the first matching record.</p>",
+  "description": "<p>Performs a dynamic lookup on a Salesforce object and returns the specified field value (including relational fields up to 5 levels), from the first matching record.</p>",
   "syntax": "VLOOKUP(target_object_name, return_field_name, ...[matching_field_name, matching_field_value], additional_clause_optional) -> Object",
   "parameters": [
     {
@@ -19,7 +19,7 @@
       "name": "…matching_field_name",
       "type": "String",
       "required": "Yes",
-      "description": "The name of the field used to match records."
+      "description": "The API name of the field used to match records."
     },
     {
       "name": "…matching_field_value",
