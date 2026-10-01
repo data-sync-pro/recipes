@@ -259,6 +259,7 @@
 /transformation/advanced/vlookup_connection
 /transformation/advanced/vlookup_record
 /transformation/advanced/vlookup_record_connection
+/transformation/advanced/vlookup_source
 /transformation/date_time/year
 /transformation/date_time/yesterday
 /transformation/advanced/agg_avg
