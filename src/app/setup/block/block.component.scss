@@ -4,13 +4,20 @@ $mono: 'Consolas', 'Monaco', 'Courier New', monospace;
   margin-bottom: 1.5rem;
 }
 
+// Wraps an h2 together with its nested children. Flat h2s (content as
+// siblings) get no extra margin, so they stay close to their own content.
+.block-h2-group.has-children {
+  margin-bottom: 4rem;
+}
+
 .block-h2 {
   font-size: 1.5rem;
   font-weight: 500;
   margin: 2rem 0 1rem;
   color: #2253B2;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #e9ecef;
+  background-color: #F1F6FB; // unified brand tint (sidebar highlight / banner)
+  padding: 0.5rem 0.5rem;
+  border-radius: 6px;
 }
 
 .block-h3 {
@@ -27,6 +34,8 @@ $mono: 'Consolas', 'Monaco', 'Courier New', monospace;
   font-weight: 500;
   margin: 1.5rem 0 0.75rem;
   color: #2253B2;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid #e9ecef
 }
 
 // Collapsible Step

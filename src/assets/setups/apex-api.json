@@ -9,126 +9,152 @@
       "type": "p",
       "content": "To start executions from an external system or another org, use the [[rest-api]] instead."
     },
-    { "type": "h2", "content": "executeExecutableByApiName(String apiName)" },
     {
-      "type": "p",
-      "content": "Starts a Batch execution of the specified Executable using its configured Retrieve Criteria."
-    },
-    { "type": "h4", "content": "Parameter" },
-    {
-      "type": "table",
-      "columns": [
-        { "key": "parameter", "header": "Parameter", "width": "28%", "mono": true },
-        { "key": "type", "header": "Type", "width": "18%" },
-        { "key": "description", "header": "Description", "width": "54%" }
-      ],
-      "rows": [
-        { "parameter": "apiName", "type": "String", "description": "The API Name of the Executable to run." }
+      "type": "h2",
+      "content": "executeExecutableByApiName(String apiName)",
+      "children": [
+        {
+          "type": "p",
+          "content": "Starts a Batch execution of the specified Executable using its configured Retrieve Criteria."
+        },
+        { "type": "h4", "content": "Parameter" },
+        {
+          "type": "table",
+          "columns": [
+            { "key": "parameter", "header": "Parameter", "width": "28%", "mono": true },
+            { "key": "type", "header": "Type", "width": "18%" },
+            { "key": "description", "header": "Description", "width": "54%" }
+          ],
+          "rows": [
+            { "parameter": "apiName", "type": "String", "description": "The API Name of the Executable to run." }
+          ]
+        },
+        { "type": "h4", "content": "Returns" },
+        {
+          "type": "p",
+          "content": "A `pushtopics__Execution__c` record representing the execution created for this request."
+        },
+        { "type": "h4", "content": "Example" },
+        { "type": "p", "content": "Run the `Account.RollupSummaries` Executable:" },
+        {
+          "type": "code",
+          "language": "apex",
+          "content": "pushtopics__Execution__c execution =\n    pushtopics.ExecutionService.executeExecutableByApiName(\n        'Account.RollupSummaries'\n    );"
+        }
       ]
-    },
-    { "type": "h4", "content": "Returns" },
-    {
-      "type": "p",
-      "content": "A `pushtopics__Execution__c` record representing the execution created for this request."
-    },
-    { "type": "h4", "content": "Example" },
-    { "type": "p", "content": "Run the `Account.RollupSummaries` Executable:" },
-    {
-      "type": "code",
-      "language": "apex",
-      "content": "pushtopics__Execution__c execution =\n    pushtopics.ExecutionService.executeExecutableByApiName(\n        'Account.RollupSummaries'\n    );"
     },
 
-    { "type": "h2", "content": "executeExecutableByApiName(String apiName, List<Id> recordIds)" },
     {
-      "type": "p",
-      "content": "Starts a Batch execution of the specified Executable for the provided source record IDs."
-    },
-    { "type": "h4", "content": "Parameter" },
-    {
-      "type": "table",
-      "columns": [
-        { "key": "parameter", "header": "Parameter", "width": "28%", "mono": true },
-        { "key": "type", "header": "Type", "width": "18%" },
-        { "key": "description", "header": "Description", "width": "54%" }
-      ],
-      "rows": [
-        { "parameter": "apiName", "type": "String", "description": "The API Name of the Executable to run." },
-        { "parameter": "recordIds", "type": "List&lt;Id&gt;", "description": "The IDs of the source records to process." }
+      "type": "h2",
+      "content": "executeExecutableByApiName(String apiName, List<Id> recordIds)",
+      "children": [
+        {
+          "type": "p",
+          "content": "Starts a Batch execution of the specified Executable, using the provided record IDs in addition to the Executable's configured Retrieve Criteria."
+        },
+        { "type": "h4", "content": "Parameter" },
+        {
+          "type": "table",
+          "columns": [
+            { "key": "parameter", "header": "Parameter", "width": "28%", "mono": true },
+            { "key": "type", "header": "Type", "width": "18%" },
+            { "key": "description", "header": "Description", "width": "54%" }
+          ],
+          "rows": [
+            { "parameter": "apiName", "type": "String", "description": "The API Name of the Executable to run." },
+            { "parameter": "recordIds", "type": "List&lt;Id&gt;", "description": "The IDs of the source records to include in the retrieval." }
+          ]
+        },
+        { "type": "h4", "content": "Returns" },
+        {
+          "type": "p",
+          "content": "A `pushtopics__Execution__c` record representing the execution created for this request."
+        },
+        { "type": "h4", "content": "Example" },
+        { "type": "p", "content": "Run `Account.RollupSummaries` for a specified Account:" },
+        {
+          "type": "code",
+          "language": "apex",
+          "content": "pushtopics__Execution__c execution =\n    pushtopics.ExecutionService.executeExecutableByApiName(\n        'Account.RollupSummaries',\n        new List<Id>{ '001000000000001AAA' }\n    );"
+        }
       ]
-    },
-    { "type": "h4", "content": "Returns" },
-    {
-      "type": "p",
-      "content": "A `pushtopics__Execution__c` record representing the execution created for this request."
-    },
-    { "type": "h4", "content": "Example" },
-    { "type": "p", "content": "Run `Account.RollupSummaries` for a specified Account:" },
-    {
-      "type": "code",
-      "language": "apex",
-      "content": "pushtopics__Execution__c execution =\n    pushtopics.ExecutionService.executeExecutableByApiName(\n        'Account.RollupSummaries',\n        new List<Id>{ '001000000000001AAA' }\n    );"
     },
 
-    { "type": "h2", "content": "executePipelineByApiName(String pipelineApiName)" },
     {
-      "type": "p",
-      "content": "Executes the Batch Executables in the specified Pipeline and returns the created Pipeline Execution record. Use this overload when no additional Retrieve parameters are needed."
-    },
-    { "type": "h4", "content": "Parameter" },
-    {
-      "type": "table",
-      "columns": [
-        { "key": "parameter", "header": "Parameter", "width": "28%", "mono": true },
-        { "key": "type", "header": "Type", "width": "18%" },
-        { "key": "description", "header": "Description", "width": "54%" }
-      ],
-      "rows": [
-        { "parameter": "pipelineApiName", "type": "String", "description": "The API Name of the Pipeline to run." }
+      "type": "h2",
+      "content": "executePipelineByApiName(String pipelineApiName)",
+      "children": [
+        {
+          "type": "p",
+          "content": "Executes the Batch Executables in the specified Pipeline and returns the created Pipeline Execution record. Use this overload when no additional Retrieve parameters are needed."
+        },
+        { "type": "h4", "content": "Parameter" },
+        {
+          "type": "table",
+          "columns": [
+            { "key": "parameter", "header": "Parameter", "width": "28%", "mono": true },
+            { "key": "type", "header": "Type", "width": "18%" },
+            { "key": "description", "header": "Description", "width": "54%" }
+          ],
+          "rows": [
+            { "parameter": "pipelineApiName", "type": "String", "description": "The API Name of the Pipeline to run." }
+          ]
+        },
+        { "type": "h4", "content": "Returns" },
+        {
+          "type": "p",
+          "content": "A `pushtopics__PipelineExecution__c` record representing the Pipeline Execution created for this request."
+        },
+        { "type": "h4", "content": "Example" },
+        { "type": "p", "content": "Start a Batch run of the Executables in `Opportunity.Batches`:" },
+        {
+          "type": "code",
+          "language": "apex",
+          "content": "pushtopics__PipelineExecution__c pipelineExecution =\n    pushtopics.ExecutionService.executePipelineByApiName(\n        'Opportunity.Batches'\n    );"
+        }
       ]
-    },
-    { "type": "h4", "content": "Returns" },
-    {
-      "type": "p",
-      "content": "A `pushtopics__PipelineExecution__c` record representing the Pipeline Execution created for this request."
-    },
-    { "type": "h4", "content": "Example" },
-    { "type": "p", "content": "Start a Batch run of the Executables in `Opportunity.Batches`:" },
-    {
-      "type": "code",
-      "language": "apex",
-      "content": "pushtopics__PipelineExecution__c pipelineExecution =\n    pushtopics.ExecutionService.executePipelineByApiName(\n        'Opportunity.Batches'\n    );"
     },
 
-    { "type": "h2", "content": "executePipelineByApiName(String pipelineApiName, Object additionalRetrieveParameters)" },
     {
-      "type": "p",
-      "content": "Executes the Batch Executables in the specified Pipeline with additional Retrieve parameters."
-    },
-    { "type": "h4", "content": "Parameter" },
-    {
-      "type": "table",
-      "columns": [
-        { "key": "parameter", "header": "Parameter", "width": "28%", "mono": true },
-        { "key": "type", "header": "Type", "width": "18%" },
-        { "key": "description", "header": "Description", "width": "54%" }
-      ],
-      "rows": [
-        { "parameter": "pipelineApiName", "type": "String", "description": "The API Name of the Pipeline to run." },
-        { "parameter": "additionalRetrieveParameters", "type": "Object", "description": "Parameters applied to all Batch Executables in the Pipeline, or a map of Executable API Names to their individual parameters." }
+      "type": "h2",
+      "content": "executePipelineByApiName(String pipelineApiName, Object additionalRetrieveParameters)",
+      "children": [
+        {
+          "type": "p",
+          "content": "Executes the Batch Executables in the specified Pipeline with additional Retrieve parameters, such as filter conditions and `ORDER BY` clauses, applied to their configured source retrieval queries."
+        },
+        { "type": "h4", "content": "Parameter" },
+        {
+          "type": "table",
+          "columns": [
+            { "key": "parameter", "header": "Parameter", "width": "28%", "mono": true },
+            { "key": "type", "header": "Type", "width": "18%" },
+            { "key": "description", "header": "Description", "width": "54%" }
+          ],
+          "rows": [
+            { "parameter": "pipelineApiName", "type": "String", "description": "The API Name of the Pipeline to run." },
+            { "parameter": "additionalRetrieveParameters", "type": "String | Map&lt;String, Object&gt;", "description": "Additional Retrieve parameters for the Pipeline's Batch Executables. Use a String to apply the same parameters to all Batch Executables, or a Map to specify parameters for individual Executables." }
+          ]
+        },
+        { "type": "h4", "content": "Returns" },
+        {
+          "type": "p",
+          "content": "A `pushtopics__PipelineExecution__c` record representing the Pipeline Execution created for this request."
+        },
+        { "type": "h4", "content": "Example" },
+        { "type": "p", "content": "Run `Opportunity.Batches` with the same additional Retrieve parameters for all Batch Executables:" },
+        {
+          "type": "code",
+          "language": "apex",
+          "content": "pushtopics__PipelineExecution__c pipelineExecution =\n    pushtopics.ExecutionService.executePipelineByApiName(\n        'Opportunity.Batches',\n        'CreatedDate = LAST_N_DAYS:30 ORDER BY CreatedDate DESC'\n    );"
+        },
+        { "type": "p", "content": "Run `Opportunity.Batches` with separate additional Retrieve Filters for two Executables:" },
+        {
+          "type": "code",
+          "language": "apex",
+          "content": "pushtopics__PipelineExecution__c pipelineExecution =\n    pushtopics.ExecutionService.executePipelineByApiName(\n        'Opportunity.Batches',\n        new Map<String, Object>{\n            'Opportunity.CloseStale' =>\n                'CloseDate < LAST_N_DAYS:90',\n            'Account.RollupSummaries' =>\n                'Type = \\'Customer\\''\n        }\n    );"
+        }
       ]
-    },
-    { "type": "h4", "content": "Returns" },
-    {
-      "type": "p",
-      "content": "A `pushtopics__PipelineExecution__c` record representing the Pipeline Execution created for this request."
-    },
-    { "type": "h4", "content": "Example" },
-    { "type": "p", "content": "Run `Opportunity.Batches` with separate additional Retrieve Filters for two Executables:" },
-    {
-      "type": "code",
-      "language": "apex",
-      "content": "pushtopics__PipelineExecution__c pipelineExecution =\n    pushtopics.ExecutionService.executePipelineByApiName(\n        'Opportunity.Batches',\n        new Map<String, Object>{\n            'Opportunity.CloseStale' =>\n                'CloseDate < LAST_N_DAYS:90',\n            'Account.RollupSummaries' =>\n                'Type = \\'Customer\\''\n        }\n    );"
     }
   ]
 }

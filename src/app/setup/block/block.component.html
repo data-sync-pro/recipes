@@ -1,15 +1,18 @@
 <ng-container [ngSwitch]="block.type">
   <!-- Heading 2 -->
-  <section *ngSwitchCase="'h2'" class="block-section" [id]="getBlockId(block.content || '')">
-    <h2 class="block-h2">{{ block.content }}</h2>
-    <ng-container *ngIf="block.children">
-      <app-setup-block
-        *ngFor="let child of block.children"
-        [block]="child"
-        [basePath]="basePath">
-      </app-setup-block>
-    </ng-container>
-  </section>
+  <!-- Wrapper groups the heading with its nested content as one section -->
+  <div *ngSwitchCase="'h2'" class="block-h2-group" [class.has-children]="block.children?.length">
+    <section class="block-section" [id]="getBlockId(block.content || '')">
+      <h2 class="block-h2">{{ block.content }}</h2>
+      <ng-container *ngIf="block.children">
+        <app-setup-block
+          *ngFor="let child of block.children"
+          [block]="child"
+          [basePath]="basePath">
+        </app-setup-block>
+      </ng-container>
+    </section>
+  </div>
  
   <!-- Heading 3 (Collapsible Step) -->
   <section *ngSwitchCase="'h3'" class="block-section block-step" [class.collapsed]="isCollapsed" [id]="getBlockId(block.content || '')">
