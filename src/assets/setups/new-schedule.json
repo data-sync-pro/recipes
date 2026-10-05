@@ -29,7 +29,7 @@
   "related": [
     {
       "label": "Schedule Job Management",
-      "url": "/recipes/general/schedule-job-management",
+      "url": "/recipes/batch/schedule-job-management",
       "newTab": true
     }
   ]
