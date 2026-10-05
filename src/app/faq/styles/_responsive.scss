@@ -228,6 +228,11 @@
         margin: 20px 0 10px;
       }
 
+      // Section titles keep extra space above (see _layout.scss)
+      h1 {
+        margin-top: 36px;
+      }
+
       ul, ol {
         padding-left: 20px;
       }

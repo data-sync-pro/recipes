@@ -147,9 +147,6 @@
     "FORMAT_DATETIME": {
       "functionDoc": "FORMAT_DATETIME"
     },
-    "FORMAT_DSP_TEMPLATE": {
-      "functionDoc": "FORMAT_DSP_TEMPLATE"
-    },
     "GLOBAL_VARIABLES": {
       "functionDoc": "GLOBAL_VARIABLES"
     },
@@ -242,9 +239,6 @@
     },
     "MAP_VALUE_CONTAINS_IGNORE_CASE": {
       "functionDoc": "MAP_VALUE_CONTAINS_IGNORE_CASE"
-    },
-    "MAP_VALUE_EQUALS": {
-      "functionDoc": "MAP_VALUE_EQUALS"
     },
     "MAP_VALUE_STARTS_WITH": {
       "functionDoc": "MAP_VALUE_STARTS_WITH"

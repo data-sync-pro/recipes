@@ -763,6 +763,12 @@ export class FAQService implements OnDestroy {
             }
           }
 
+          // Links into other top-level routes (e.g. See Also → user manual) are
+          // already absolute paths; don't remount them under /faqs.
+          if (/^\/(recipes|user-manual|transformation)(\/|$)/.test(href)) {
+            return match;
+          }
+
           // Normalize hand-authored internal hrefs onto the /faqs mount point.
           const normalizedHref = href.startsWith('/faqs') ? href : `/faqs${href}`;
 

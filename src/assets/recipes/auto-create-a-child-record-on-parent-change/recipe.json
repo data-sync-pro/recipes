@@ -79,7 +79,7 @@
   "downloadableExecutables": [
     {
       "filePath": "downloadExecutables/Case.Create.FollowUpTask.OnClose.json",
-      "url": "assets/recipes/execute-an-action-with-trigger/downloadExecutables/Case.Create.FollowUpTask.OnClose.json"
+      "url": "assets/recipes/auto-create-a-child-record-on-parent-change/downloadExecutables/Case.Create.FollowUpTask.OnClose.json"
     }
   ],
   "relatedRecipes": [],

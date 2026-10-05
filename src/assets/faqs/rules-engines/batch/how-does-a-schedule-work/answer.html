@@ -1,0 +1,110 @@
+<p>
+  In DSP, the <strong>Schedule</strong> object manages Salesforce scheduled jobs
+  through regular Salesforce records rather than code. Creating, changing, or
+  deleting a Schedule record schedules, reschedules, or unschedules the job. All
+  scheduled jobs can be viewed and managed together through a list view or a
+  query.
+</p>
+
+<h1>What You Can Schedule</h1>
+<p>A Schedule record runs one of the following:</p>
+<ul>
+  <li>A <strong>Pipeline</strong></li>
+  <li>An <strong>Executable</strong></li>
+  <li>An <strong>Apex class</strong> declared with the <code>global</code> modifier</li>
+</ul>
+
+<h1>Setting the Frequency</h1>
+<p>
+  Each Schedule defines when its job runs. You can choose a frequency of
+  <strong>One Day</strong>, <strong>Daily</strong>, <strong>Weekly</strong>, or
+  <strong>Monthly</strong>, along with a preferred start time. A Schedule can
+  also be configured to run at an interval instead — every hour, every two
+  hours, and so on.
+</p>
+<p>
+  DSP translates these time-related settings into a cron expression and submits
+  it to Salesforce through the Apex Scheduler. Salesforce creates the scheduled
+  job and records its scheduling information in the <code>CronTrigger</code>
+  object. The user who submits the job becomes the
+  <strong>Scheduled User</strong>.
+</p>
+
+<h1>When the Scheduled Job Is Replaced</h1>
+<p>
+  Changing a Schedule’s time-related settings — its frequency, preferred start
+  time, interval, or any other field that feeds into when the job runs — changes
+  the generated cron expression. When that happens, DSP aborts the existing
+  scheduled job and schedules a new one in its place. The same happens when:
+</p>
+<ul>
+  <li>A Schedule is deactivated and then reactivated</li>
+  <li><strong>Run Scheduled Job as Me</strong> is clicked</li>
+</ul>
+<p>
+  Deleting a Schedule record aborts its scheduled job as well. A scheduled job is
+  never deleted outright — Salesforce aborts it, and its
+  <code>CronTrigger</code> remains with a status reflecting that.
+</p>
+<p>
+  All other changes to the Schedule record leave the existing scheduled job
+  untouched.
+</p>
+
+<h1>Schedule Status and Scheduled Job Status</h1>
+<p>
+  A Schedule’s <strong>Active</strong> setting and the status of its scheduled
+  job are independent. An active Schedule can show a <code>CronTrigger</code>
+  whose status is <code>DELETED</code> or something other than
+  <code>WAITING</code>, and that is expected — the Active
+  setting describes the Schedule’s configuration, not the live state of the job
+  Salesforce is tracking.
+</p>
+
+<h1>The Scheduled Job Tab</h1>
+<p>
+  The Schedule record has a dedicated <strong>Scheduled Job</strong> tab showing
+  the current <code>CronTrigger</code> information, including
+  <strong>Previous Run Time</strong>, <strong>Next Run Time</strong>, and the
+  <strong>Scheduled User</strong>.
+</p>
+<p>
+  DSP refreshes this information automatically whenever the Schedule is viewed
+  inside DSP — on the Schedule record page, or in the
+  Schedules related list of a batch Executable or Pipeline.
+  Because the refresh writes to the record, <strong>Last Modified By</strong>
+  becomes the user who viewed it.
+</p>
+<p>
+  This refresh is informational only. It does not alter the
+  <code>CronTrigger</code> already submitted to Salesforce, and it does not
+  change the Scheduled User or when the job runs.
+</p>
+
+<h1>Time Zones</h1>
+<p>Two time zones are involved, and they work differently.</p>
+<p>
+  <strong>The cron expression</strong> is generated in the Scheduled User’s time zone at the
+  moment the job is submitted. It stays fixed for as long as that
+  <code>CronTrigger</code> remains active — if the Scheduled User later changes
+  their time zone in their user settings, the existing job is unaffected. The
+  time zone in effect is shown in the
+  <strong>Cron Expression Time Zone</strong> field on the Scheduled Job tab.
+</p>
+<p>
+  <strong>Previous Run Time</strong> and <strong>Next Run Time</strong> are
+  displayed in the time zone of whoever is viewing the Schedule, regardless of
+  who created the job. A job running at 9:00 PM Eastern appears as:
+</p>
+<ul>
+  <li>9:00 PM to a user in Eastern Time</li>
+  <li>6:00 PM to a user in Pacific Time</li>
+</ul>
+
+<hr />
+
+<h1>See Also</h1>
+<ul>
+  <li><a href="/user-manual/new-schedule">Creating a Schedule</a></li>
+  <li><a href="/recipes/batch/schedule-job-management">Scheduled Job Management</a></li>
+</ul>

@@ -208,6 +208,15 @@
                      "isActive":  true
                  },
                  {
+                     "id":  "bbbb1267-7c89-4c8c-b491-87de649654c6",
+                     "folderId":  "how-does-a-schedule-work",
+                     "question":  "How does a Schedule work?",
+                     "category":  "Rules Engines",
+                     "subCategory":  "Batch",
+                     "seqNo":  116,
+                     "isActive":  true
+                 },
+                 {
                      "id":  "a0oEc000005JohlIAC",
                      "folderId":  "can-a-pipeline-execution-be-stopped-if-one-of-its-executables-fails",
                      "question":  "Can a Pipeline execution be stopped if one of its Executables fails?",
