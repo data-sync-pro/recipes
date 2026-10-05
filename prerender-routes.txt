@@ -311,6 +311,7 @@
 /faqs/rules-engines/batch/what-is-the-maximum-batch-size-that-can-be-set
 /faqs/rules-engines/batch/how-can-i-chain-multiple-batch-executables-to-run-in-a-specific-sequence
 /faqs/rules-engines/batch/how-can-i-schedule-batch-jobs
+/faqs/rules-engines/batch/how-does-a-schedule-work
 /faqs/rules-engines/batch/can-a-pipeline-execution-be-stopped-if-one-of-its-executables-fails
 /faqs/rules-engines/batch/can-i-apply-a-common-soql-filter-to-all-executables-in-a-pipeline
 /faqs/rules-engines/batch/how-do-i-easily-create-batch-executables-for-parentchild-data-syncs
