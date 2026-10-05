@@ -30,7 +30,7 @@
   ],
   "examples": [
     "MAP_VALUE_STARTS_WITH(\"ca-san francisco\", \"CA\", \"California\", \"NY\", \"New York\", \"Other\") \n-- Returns \"Other\"(case-sensitive).",
-    "MAP_VALUE_STARTS_WITH(Description, \"Platnium\", \"Partner\", \"Individual\", \"Person\")\n-- Returns \"Partner\" if Description starts with \"Platinum\".\n-- Returns \"Person\" if it starts with \"Individual\".\n-- Returns $SKIP_ASSIGNMENT otherwise.\n-- Matching is case-sensitive and stops at the first match."
+    "MAP_VALUE_STARTS_WITH(Description, \"Platinum\", \"Partner\", \"Individual\", \"Person\")\n-- Returns \"Partner\" if Description starts with \"Platinum\".\n-- Returns \"Person\" if it starts with \"Individual\".\n-- Returns $SKIP_ASSIGNMENT otherwise.\n-- Matching is case-sensitive and stops at the first match."
   ],
   "tips": [
     {

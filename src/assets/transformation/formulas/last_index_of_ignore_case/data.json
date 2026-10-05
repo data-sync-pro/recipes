@@ -1,6 +1,6 @@
 {
   "title": "LAST_INDEX_OF_IGNORE_CASE",
-  "description": "<p>Returns the starting position (zero-based index) of the last occurrence of substring within string, ignoring case differences. If end_position_optional is provided, the search considers characters from the start of the string up to the specified end position. Returns -1 if the substring is not found.</p>",
+  "description": "<p>Returns the starting position (zero-based index) of the last occurrence of substring within string, ignoring case differences. If end_position_optional is provided, only matches that start at or before that position are considered; a match may extend beyond it. Returns -1 if the substring is not found.</p>",
   "syntax": "LAST_INDEX_OF_IGNORE_CASE(string, substring, end_position_optional) -> Integer",
   "parameters": [
     {
@@ -24,6 +24,7 @@
   ],
   "examples": [
     "LAST_INDEX_OF_IGNORE_CASE(\"Status_OK|Status_Fail|Status_Pending\", \"STATUS\", 20)\n -- Returns 10. Finds \"Status\" within the first 20 characters (case-insensitive).",
+    "LAST_INDEX_OF_IGNORE_CASE(\"Status_OK|Status_Fail|Status_Pending\", \"STATUS\", 10)\n -- Returns 10. Includes a match starting exactly at position 10.",
     "LAST_INDEX_OF_IGNORE_CASE(\"Error: Info, Error: Warn, Error: Critical\", \"error\")\n --Returns 26. Finds \"Error\" at index 26 (case-insensitive)."
   ],
   "tips": [],

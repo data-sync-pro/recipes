@@ -1,6 +1,6 @@
 {
   "title": "IS_ALL_LOWER_CASE",
-  "description": "<p>Returns TRUE if the string contains only lowercase alphabetical characters; otherwise, returns FALSE.</p>",
+  "description": "<p>Returns TRUE if the string contains only lowercase lowercase letters; otherwise, returns FALSE.</p>",
   "syntax": "IS_ALL_LOWER_CASE(string) -> Boolean",
   "parameters": [
     {
