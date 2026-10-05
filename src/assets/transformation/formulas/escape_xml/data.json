@@ -11,7 +11,7 @@
     }
   ],
   "examples": [
-    "ESCAPE_XML(\"<note priority=\"high\">Review & Approve</note>\")\n-- Returns \"&lt;note priority=&quot;high&quot;&gt;Review &amp; Approve&lt;/note&gt;\""  ],
+    "ESCAPE_XML('<note priority=\"high\">Review & Approve</note>')\n-- Returns \"&lt;note priority=&quot;high&quot;&gt;Review &amp; Approve&lt;/note&gt;\""  ],
   "tips": [],
   "relatedFormulas": []
 }

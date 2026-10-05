@@ -1,6 +1,6 @@
 {
   "title": "IS_ALL_UPPER_CASE",
-  "description": "<p>Returns TRUE if the string contains only uppercase alphabetical characters; otherwise, returns FALSE.</p>",
+  "description": "<p>Returns TRUE if the string contains only uppercase uppercase letters; otherwise, returns FALSE.</p>",
   "syntax": "IS_ALL_UPPER_CASE(string) -> Boolean",
   "parameters": [
     {

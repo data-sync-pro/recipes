@@ -1,6 +1,6 @@
 {
   "title": "RANDOMIZE",
-  "description": "<p>Returns a randomized value of the same data type as the provided input. Supports text, number, date, and boolean values.</p>",
+  "description": "<p>Returns a randomized value of the same data type as the provided input. Supports text, number, date, and boolean values. For text, preserves the case of each character position. For numbers, returns an integer from 0 to the input minus 1.</p>",
   "syntax": "RANDOMIZE(text/number/date/boolean) -> same type as input",
   "parameters": [
     {
@@ -11,8 +11,8 @@
     }
   ],
   "examples": [
-    "RANDOMIZE(\"Hello\") \n-- Possible output: \"kJsdP\".",
-    "RANDOMIZE(42) \n-- Possible output: 87.",
+    "RANDOMIZE(\"Hello\") \n-- Possible output: \"Kqsdp\". Keeps the letter case of each position.",
+    "RANDOMIZE(42) \n-- Possible output: 17. Returns an integer from 0 to 41.",
     "RANDOMIZE(TO_DATE(\"2025-03-01\"))\n-- Possible output: 2024-05-14.",
     "RANDOMIZE(true)\n-- Possible output: false."
   ],
