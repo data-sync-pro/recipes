@@ -31,7 +31,7 @@
       "children": []
     },
     {
-      "text": "<p>When the open and close delimiters are identical, the first occurrence is treated as the opening delimiter, and the next occurrence is treated as the closing delimiter. If only one occurrence exists, the function returns an empty string.</p>",
+      "text": "<p>When the open and close delimiters are identical, the first occurrence is treated as the opening delimiter, and the next occurrence is treated as the closing delimiter. If only one occurrence exists, the function returns NULL.</p>",
       "children": []
     }
   ],
