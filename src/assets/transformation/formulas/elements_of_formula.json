@@ -13,7 +13,7 @@
       
       {
         "element": "Function",
-        "description": "Predefined operations that accept input and return a result. For example, TODAY() returns the current date without needing input, whereas TEXT(value) converts numbers, percents, or currency into text."
+        "description": "Predefined operations that accept input and return a result. For example, TODAY() returns the current date without needing input, whereas TO_STRING(value) converts numbers, percents, or currency into text."
       },
       {
         "element": "Global Variable",
