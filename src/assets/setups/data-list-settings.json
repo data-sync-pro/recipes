@@ -133,7 +133,7 @@
             },
             {
               "name": "Q: Downloadable?",
-              "description": "Specifies whether query results in the Data List can be downloaded. Requires the 'Download Data in Query' custom permission."
+              "description": "Specifies whether query results in the Data List can be downloaded. Requires the 'Download Data' custom permission."
             },
             {
               "name": "Q: Show Mass Edit Button?",
@@ -267,6 +267,10 @@
             {
               "name": "Q: Page Size",
               "description": "The number of records displayed per page in the Data List."
+            },
+            {
+              "name": "Q: Summary Fields",
+              "description": "Fields to summarize below the data list, as Field: Aggregate pairs — Id: COUNT; Amount: SUM, AVG; Quantity: SUM. Supported aggregates: SUM, AVG, MIN, MAX, COUNT, COUNT_DISTINCT. Summarizes selected rows, or the current page when none are selected."
             },
             {
               "name": "Q: Override Columns",
