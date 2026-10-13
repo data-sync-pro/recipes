@@ -274,7 +274,7 @@
             },
             {
               "name": "Q: Override Columns",
-              "description": "Override the default column labels by listing pairs in this format: fieldApiName1: label1, fieldApiName2: label2. Alternatively, supply a JSON array of Lightning Datatable column definition objects to customize additional settings (e.g. [{\"fieldName\":\"AccountSource\",\"label\":\"Source\", \"typeAttributes\": {\"options\": [\"Web\", \"Phone Inquiry\"]}}])."
+              "description": "Rename columns with Field: Label pairs — AccountSource: Source; AnnualRevenue: Revenue. For more control, supply a JSON array of Lightning Datatable column definitions, such as [{\"fieldName\":\"AccountSource\",\"label\":\"Source\",\"initialWidth\":150}]."
             },
             {
               "name": "Q: Min Row Selection",
