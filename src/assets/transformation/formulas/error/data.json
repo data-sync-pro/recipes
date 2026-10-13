@@ -1,7 +1,7 @@
 {
   "title": "ERROR",
   "description": "<p>Throws an exception with a custom message, optionally based on a specified condition. If a condition is provided, an exception is thrown only if the condition evaluates to TRUE.</p>",
-  "syntax": "ERROR(…[message, condition_optional]) -> Error",
+  "syntax": "ERROR(…[message, condition_optional]) -> Error / $SKIP_ASSIGNMENT",
   "parameters": [
     {
       "name": "… message",
