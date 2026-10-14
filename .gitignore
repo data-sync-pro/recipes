@@ -49,5 +49,6 @@ nul
 .claude/settings.local.json
 .claude/settings.local.json
 .sfdx/
+.sf/
 src/assets/data/version.json
 firebase-debug.log
