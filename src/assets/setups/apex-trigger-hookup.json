@@ -4,11 +4,11 @@
   "blocks": [
     {
       "type": "p",
-      "content": "Include <code>pushtopics.TriggerServices.execute()</code> in the triggers of both the source object and any objects involved in aggregations when <strong>AGG functions</strong> are used in field mappings."
+      "content": "Include <code>pushtopics.TriggerService.execute()</code> in the triggers of both the source object and any objects involved in aggregations when <strong>AGG functions</strong> are used in field mappings."
     },
     {
       "type": "code",
-      "content": "trigger TriggerName on SourceObjectApiName (before insert, after insert, before update, after update, before delete, after delete, after undelete) {\n    pushtopics.TriggerServices.execute();\n}",
+      "content": "trigger TriggerName on SourceObjectApiName (before insert, after insert, before update, after update, before delete, after delete, after undelete) {\n    pushtopics.TriggerService.execute();\n}",
       "language": "apex"
     },
     {
@@ -20,7 +20,7 @@
       "children": [
         {
           "type": "p",
-          "content": "<strong>Assign Permission Set:</strong> Ensure all internal users are assigned the <strong>DSP: Data Sync Pro Starter</strong> permission set (providing bare-minimum access to the packaged objects and components)."
+          "content": "<strong>Assign Permission Set:</strong> Ensure all internal users are assigned the <strong>Data Sync Pro: Starter</strong> permission set (providing bare-minimum access to the packaged objects and components)."
         },
         {
           "type": "p",
@@ -37,7 +37,7 @@
       "children": [
         {
           "type": "p",
-          "content": "Add <code>pushtopics.TriggerServices.execute();</code> to the Account trigger." 
+          "content": "Add <code>pushtopics.TriggerService.execute();</code> to the Account trigger." 
         },
         {
           "type": "p",
