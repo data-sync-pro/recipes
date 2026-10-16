@@ -31,6 +31,7 @@
     "restore-a-record-from-snapshot-history",
     "add-multiple-actions-to-a-data-list",
     "row-related-lists",
+    "summarize-records-in-a-data-list",
     "one-file-per-record-file-management",
     "mashup-related-data-from-a-remote-org"
   ],
