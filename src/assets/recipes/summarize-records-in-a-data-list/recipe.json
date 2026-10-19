@@ -1,0 +1,39 @@
+{
+  "id": "5a29d741-b063-4926-8d71-74fc28ad095e",
+  "title": "Summarize Records in a Data List",
+  "category": [
+    "Data List"
+  ],
+  "DSPVersions": [],
+  "overview": "A #Data List is configured to display open Opportunities with Q: Summary Fields calculating the opportunity count alongside the total, average, minimum, and maximum amounts. The summary reflects selected rows, or the current page when no rows are selected.",
+  "generalUseCase": "Use Q: Summary Fields in a #Data List to summarize the overall characteristics of a set of records through aggregate functions, including SUM, AVG, MIN, MAX, and COUNT.",
+  "generalImages": [
+    {
+      "type": "video",
+      "url": "https://youtu.be/lB6shdPnpEk",
+      "alt": ""
+    }
+  ],
+  "prerequisites": [],
+  "pipeline": "",
+  "direction": "",
+  "connection": "",
+  "walkthrough": [
+    {
+      "step": "Set Summary Fields in Data List Settings",
+      "config": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "images/configure-summary-fields.png",
+          "alt": "configure-summary-fields"
+        }
+      ]
+    }
+  ],
+  "verificationGIF": [],
+  "downloadableExecutables": [],
+  "relatedRecipes": [],
+  "keywords": [],
+  "__folderId": "summarize-records-in-a-data-list"
+}
