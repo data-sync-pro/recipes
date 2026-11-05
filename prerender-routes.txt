@@ -34,6 +34,7 @@
 /recipes/data-list/restore-a-record-from-snapshot-history
 /recipes/data-list/add-multiple-actions-to-a-data-list
 /recipes/data-list/row-related-lists
+/recipes/data-list/summarize-records-in-a-data-list
 /recipes/data-list/one-file-per-record-file-management
 /recipes/data-list/mashup-related-data-from-a-remote-org
 /recipes/action-button/record-action-with-pre-action-review

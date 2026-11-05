@@ -1,8 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Router, NavigationEnd } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 
 interface NavItem {
   label: string;
@@ -24,16 +21,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isMobile = false;
   isTablet = false;
   navOpen = false;
-  sectionName = '';
-
-  private readonly sectionLabels: Record<string, string> = {
-    transformation: 'Transformation',
-    recipes: 'Recipes',
-    faqs: 'FAQs',
-    'user-manual': 'User Manual'
-  };
-
-  private routerSubscription?: Subscription;
 
   navItems: NavItem[] = [
     //{ label: 'Home', link: '/home', isOpen: false },
@@ -44,6 +31,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     //{ label: 'Setup', link: '/setup', isOpen: false },
     //{ label: 'Support', link: '/support', hasMegaMenu: true, isOpen: false },
     //{ label: 'Pricing', link: '/pricing', isOpen: false },
+    { label: 'Recipes', link: '/recipes', isOpen: false },
+    { label: 'User Manual', link: '/user-manual', isOpen: false },
+    { label: 'Transformation', link: '/transformation', isOpen: false },
+    { label: 'FAQs', link: '/faqs', isOpen: false },
   ];
 
   private orientationQuery!: MediaQueryList;
@@ -55,7 +46,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
@@ -67,26 +57,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.setupEventHandlers();
       this.attachEventListeners();
     }
-
-    this.updateSectionName(this.router.url);
-    this.routerSubscription = this.router.events
-      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
-      .subscribe(event => {
-        this.updateSectionName(event.urlAfterRedirects);
-        this.cdr.markForCheck();
-      });
   }
 
   ngOnDestroy(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.removeEventListeners();
     }
-    this.routerSubscription?.unsubscribe();
-  }
-
-  private updateSectionName(url: string): void {
-    const firstSegment = url.split('?')[0].split('#')[0].split('/').filter(Boolean)[0] ?? '';
-    this.sectionName = this.sectionLabels[firstSegment] ?? '';
   }
 
   toggleNav(): void {

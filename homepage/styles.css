@@ -28,7 +28,7 @@
 
   --ink-on-dark: #E8EDF3;
   --ink-2-on-dark: #B6BDC8;
-  --ink-3-on-dark: #7C8493;
+  --ink-3-on-dark: #b1bacb;
 
   --r-xs: 2px;
   --r-sm: 4px;
@@ -168,7 +168,7 @@ h1 {
 }
 
 .hero h1 {
-  font-size: clamp(40px, 3.9vw, 60px);
+  font-size: clamp(40px, 3.9vw, 50px);
 }
 
 .hero h1 .slogan+.slogan {
@@ -472,7 +472,7 @@ body.sn-hero .nav-cta .btn:not(.secondary):hover {
 .nav-cta {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
 }
 
 .nav-cta .btn {
