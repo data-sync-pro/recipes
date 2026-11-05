@@ -9,7 +9,6 @@
       <img src="assets/icons/logo.png" alt="Data Sync Pro Logo" class="company-logo" />
       <span class="company-name">Data Sync Pro</span>
     </a>
-    <span class="section-name" *ngIf="sectionName">{{ sectionName }}</span>
   </div>
   <button
     class="mobile-toggle-btn"
@@ -45,6 +44,7 @@
       >
         <a
           [routerLink]="item.link"
+          routerLinkActive="router-link-active"
           class="nav-link"
           role="menuitem"
           [attr.aria-haspopup]="item.hasMegaMenu ? 'true' : null"

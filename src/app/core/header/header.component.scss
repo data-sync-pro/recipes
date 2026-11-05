@@ -13,27 +13,24 @@
 
   // Centered inner track matching the page-content cap (--page-max-width in
   // styles.scss). The bar background stays full-bleed (fixed, 100% wide), but
-  // the absolutely-positioned brand/nav anchor to this centered box so the
-  // logo lines up with the centered page content instead of the viewport edge.
+  // brand + nav flow left-aligned inside this centered box so the logo lines
+  // up with the centered page content instead of the viewport edge.
   .header-inner {
     position: relative;
-    height: 100%;
-    max-width: var(--page-max-width);
-    margin: 0 auto;
-  }
-
-  // Left brand cluster: logo + wordmark + divider + section name flow
-  // naturally in a flex row, so adding/removing the wordmark never requires
-  // re-tuning the absolute offsets the section name used to depend on.
-  .brand {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     gap: 14px;
-    z-index: 2000;
+    height: 100%;
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    padding: 0 12px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
   }
 
   .logo-area {
@@ -58,21 +55,6 @@
       font-weight: 500;
       color: #0b5e60;
       white-space: nowrap;
-    }
-  }
-
-  .section-name {
-    font-size: 14.5px;
-    font-weight: 400;
-    letter-spacing: .005em;
-    color: #5c5c5c;
-    padding-left: 14px;
-    border-left: 1px solid #E3E7EE;
-    line-height: 1;
-    white-space: nowrap;
-
-    @media (max-width: 720px) {
-      display: none;
     }
   }
 
@@ -145,40 +127,49 @@
     }
   }
 
+  // Nav sits right after the wordmark, separated by a short divider. The 2px
+  // gap + the link's 12px padding puts the first label 14px past the divider.
   .nav-links {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: '';
+      width: 1px;
+      height: 15px;
+      margin-right: 2px;
+      background: #E3E7EE;
+    }
 
     .nav-list {
       display: flex;
       list-style: none;
       margin: 0;
       padding: 0;
-      gap: 0.5rem;
+      gap: 4px;
       align-items: center;
-      height: 60px;
     }
 
     .nav-item {
       position: relative;
       margin: 0;
       padding: 0;
-      height: 60px;
       display: flex;
       align-items: center;
 
       .nav-link {
         display: inline-block;
-        height: 60px;
-        line-height: 60px;
-        padding: 0 1rem;
+        height: 36px;
+        line-height: 36px;
+        padding: 0 12px;
         text-decoration: none;
-        color: #333;
+        // Match .company-name in the brand block
+        font-size: 14.5px;
+        letter-spacing: 0.005em;
+        color: #5c5c5c;
         font-weight: 500;
         border-radius: 6px;
-        transition: all 0.3s ease;
+        transition: color 0.2s ease, background-color 0.2s ease;
         white-space: nowrap;
         position: relative;
         vertical-align: top;
@@ -186,9 +177,8 @@
         border: 0;
 
         &:hover {
-          color: #007bff;
-          background-color: rgba(0, 123, 255, 0.08);
-          transform: translateY(-1px);
+          color: #0b5e60;
+          background-color: #e6f1f1;
         }
 
         &:focus {
@@ -197,13 +187,11 @@
         }
 
         &.router-link-active {
-          color: #007bff;
-          font-weight: 600;
+          color: #0b5e60;
           outline: none;
           box-shadow: none;
           border: none;
           background: transparent;
-          padding: 0 1rem;
           margin: 0;
         }
       }
@@ -291,6 +279,10 @@
       max-height: calc(100vh - 60px);
       overflow-y: auto;
 
+      &::before {
+        display: none;
+      }
+
       .nav-list {
         flex-direction: column;
         gap: 0;
@@ -317,12 +309,11 @@
           position: relative;
 
           &:hover {
-            background-color: rgba(0, 123, 255, 0.08);
+            background-color: #e6f1f1;
           }
 
           &.router-link-active {
-            color: #007bff;
-            font-weight: 600;
+            color: #0b5e60;
           }
         }
 
@@ -362,8 +353,8 @@
 
   // Tablet styles
   &.is-tablet:not(.is-mobile) {
-    .brand {
-      left: 1rem;
+    .header-inner {
+      padding: 0 1rem;
     }
 
     .mobile-toggle-btn {
@@ -371,14 +362,8 @@
     }
 
     .nav-links {
-      // Keep centered positioning for tablet
-      .nav-list {
-        gap: 0.25rem;
-      }
-
       .nav-item .nav-link {
-        padding: 0 0.75rem;
-        font-size: 0.95rem;
+        padding: 0 10px;
       }
     }
   }
@@ -414,7 +399,6 @@
   .nav-link {
     &:focus,
     &:active,
-    &:focus-visible,
     &.router-link-active {
       outline: none !important;
       box-shadow: none !important;
@@ -433,6 +417,12 @@
       outline: none !important;
       box-shadow: none !important;
     }
+  }
+
+  // Keep a visible focus ring for keyboard users (declared after the resets above)
+  .nav-link:focus-visible {
+    outline: 2px solid #0b5e60 !important;
+    outline-offset: 2px;
   }
 
   .mobile-toggle-btn:focus-visible,
