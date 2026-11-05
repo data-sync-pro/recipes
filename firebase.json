@@ -27,6 +27,8 @@
       { "source": "/transformation/**", "destination": "/app.html" },
       { "source": "/user-manual", "destination": "/app.html" },
       { "source": "/user-manual/**", "destination": "/app.html" },
+      { "source": "/release-notes", "destination": "/app.html" },
+      { "source": "/release-notes/**", "destination": "/app.html" },
       { "source": "/naming-conventions", "destination": "/naming-conventions.html" }
     ],
     "headers": [
@@ -35,11 +37,11 @@
         "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
       },
       {
-        "source": "/@(recipes|faqs|transformation|user-manual)",
+        "source": "/@(recipes|faqs|transformation|user-manual|release-notes)",
         "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
       },
       {
-        "source": "/@(recipes|faqs|transformation|user-manual)/**",
+        "source": "/@(recipes|faqs|transformation|user-manual|release-notes)/**",
         "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
       },
       {

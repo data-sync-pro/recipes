@@ -1,0 +1,144 @@
+// The Naming Conventions page's typefaces (same request as that page makes).
+// The Angular app only loads Roboto, so this section loads them itself.
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap');
+
+// Release Notes is styled exactly like the standalone Naming Conventions page
+// (homepage/naming-conventions.html + homepage/styles.css) and takes nothing
+// from the app's global styles. Those files are not loaded by the Angular app,
+// so their tokens are mirrored here, once; custom properties inherit through
+// the DOM, so every release-notes component reads these and none hard-codes a
+// value. The source token is named in each comment.
+:host {
+  --rn-paper: #FAFBFC;          // --paper: page background
+  --rn-surface: #F2F4F8;        // --paper-2: table header background
+  --rn-heading: #0B2227;        // --ink-head: headings
+  --rn-strong: #0E141C;         // --ink: base text colour, bold text
+  --rn-text: #2D3340;           // --ink-2: body text
+  --rn-muted: #5E6878;          // --ink-3: dates, table headers, page name
+  --rn-border: #E3E7EE;         // --rule: dividers, table lines
+  --rn-border-strong: #C9D0DA;  // --rule-2: line under table headers
+  --rn-section: #395B58;        // section names ("Fixes"); picked from the supplied design
+  --rn-section-rule: #C9D9D6;   // rule under a section name; picked from the supplied design
+  --rn-item-title: #1D3B38;     // item titles; picked from the supplied design
+  --rn-accent: #0B5E60;         // --brand-ink: links, title accent
+  --rn-accent-hover: #07A6A8;   // --brand
+  --rn-gutter: clamp(20px, 4vw, 56px);  // --gutter: side padding
+  --rn-max: min(95vw, 1880px);          // --max: outer container cap
+  --rn-gap: clamp(40px, 6vw, 72px);     // vertical space between releases
+  --rn-anchor-offset: 88px;             // clears the sticky top bar on #anchor jumps
+  --rn-font-sans: "Geist", "Söhne", -apple-system, "Segoe UI", sans-serif;                    // --f-sans
+  --rn-font-display: "Figtree", "Geist", -apple-system, "Segoe UI", sans-serif;               // --f-display
+  --rn-font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;  // --f-mono
+  --rn-font-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;                     // --f-serif
+
+  // Naming Conventions `html` / `body`.
+  display: block;
+  position: relative;
+  isolation: isolate; // keeps the backdrop below (z-index: -1) inside this page
+  min-height: 100vh;
+  background: var(--rn-paper);
+  color: var(--rn-strong);
+  font-family: var(--rn-font-sans);
+  font-feature-settings: "ss01", "ss02", "cv11";
+  font-size: 17px;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+// Naming Conventions `body::before`: soft glow and dot grid behind the top of
+// the viewport, fading out downwards.
+:host::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(127, 185, 187, 0.14), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(127, 185, 187, 0.08), transparent 60%),
+    radial-gradient(circle at 1px 1px, rgba(11, 16, 25, 0.1) 1px, transparent 1.5px) 0 0 / 22px 22px;
+  -webkit-mask-image: linear-gradient(180deg, black, transparent 70%);
+  mask-image: linear-gradient(180deg, black, transparent 70%);
+}
+
+// .container
+.container {
+  box-sizing: border-box;
+  max-width: var(--rn-max);
+  margin: 0 auto;
+  padding: 0 var(--rn-gutter);
+}
+
+// .legal-wrap
+.wrap {
+  max-width: 1060px;
+  margin-inline: auto;
+}
+
+// .legal-hero
+.hero {
+  padding: clamp(56px, 8vw, 104px) 0 clamp(28px, 4vw, 44px);
+  border-bottom: 1px solid var(--rn-border);
+}
+
+// .legal-hero h1
+.page-title {
+  margin: 0;
+  font-family: var(--rn-font-display);
+  font-size: clamp(34px, 5.2vw, 58px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  color: var(--rn-item-title);
+}
+
+// .legal-hero h1 .it
+.page-title-accent {
+  font-family: var(--rn-font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--rn-accent);
+}
+
+// .legal-body
+.body {
+  padding: clamp(40px, 6vw, 72px) 0 clamp(64px, 9vw, 120px);
+}
+
+// The page only places its children: spacing, dividers, anchor offset.
+.entry {
+  scroll-margin-top: var(--rn-anchor-offset);
+
+  & + & {
+    margin-top: var(--rn-gap);
+    padding-top: var(--rn-gap);
+    border-top: 1px solid var(--rn-border);
+  }
+}
+
+.pager {
+  margin-top: var(--rn-gap);
+  padding-top: 24px;
+  border-top: 1px solid var(--rn-border);
+}
+
+// .legal-lead, and .legal-section a for the link.
+.empty {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--rn-text);
+}
+
+.empty-link {
+  color: var(--rn-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+
+  &:hover {
+    color: var(--rn-accent-hover);
+  }
+}

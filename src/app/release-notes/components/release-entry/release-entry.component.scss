@@ -1,0 +1,29 @@
+:host {
+  display: block;
+}
+
+// Naming Conventions .legal-meta
+.date {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--rn-font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--rn-muted);
+}
+
+// Site h3 (homepage/styles.css)
+.version {
+  margin: 0;
+  font-family: var(--rn-font-display);
+  font-size: clamp(21px, 1.9vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--rn-item-title);
+}
+
+// Naming Conventions .legal-section (52px above each section).
+.section {
+  margin-top: 52px;
+}

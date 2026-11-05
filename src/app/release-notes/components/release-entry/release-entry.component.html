@@ -1,0 +1,11 @@
+<header class="header">
+  <time class="date" [attr.datetime]="release.date">{{ release.date | releaseDate }}</time>
+  <h2 class="version">Version {{ release.version }}</h2>
+</header>
+
+<app-release-section
+  *ngFor="let section of release.sections"
+  class="section"
+  [section]="section"
+  [version]="release.version"
+></app-release-section>

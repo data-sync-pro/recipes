@@ -1,0 +1,7 @@
+<h4 class="title">{{ item.title }}</h4>
+
+<!-- Each block is rendered by the component registered for its type. A type
+     with no registered component (e.g. content newer than the app) is skipped. -->
+<div class="block" *ngFor="let block of item.blocks">
+  <ng-container *ngComponentOutlet="blockComponents[block.type]; inputs: { block: block }"></ng-container>
+</div>

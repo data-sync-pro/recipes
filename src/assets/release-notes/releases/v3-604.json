@@ -1,0 +1,61 @@
+{
+  "sections": [
+    {
+      "name": "Fixes",
+      "items": [
+        {
+          "title": "Batch Executions now complete reliably under heavy async load",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "In orgs running a very large number of concurrent asynchronous jobs, some batch Executions could fail to update their status to Completed because of row-lock contention. Executions now record their final status reliably, even in the most demanding environments."
+            }
+          ]
+        },
+        {
+          "title": "Execution record page auto-refresh is limited to the running user",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "When a user views the record page of an Execution that is still in progress, the page refreshes the Execution’s statistics and status automatically. Previously, this refresh ran for any user viewing the page, which could cause chained batch jobs to run as that user instead of the original running user. It now runs only for the user who is running the Execution, so other users can view the page without affecting the run."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Changes",
+      "items": [
+        {
+          "title": "Column Filter fields renamed, with updated help text",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Six Column Filter fields have new names and API names for better readability and consistency, and their help text has been rewritten for clarity. If you have configured any of these fields, copy their values to the new fields after upgrading."
+            },
+            {
+              "type": "table",
+              "columns": ["Previous API Name", "New API Name"],
+              "rows": [
+                ["QShowColumnFilter__c", "QColumnFilterEnabled__c"],
+                ["QFilterableColumnFieldNames__c", "QColumnFilterFields__c"],
+                ["QPinnedColumnFilterFieldNames__c", "QColumnFilterPinnedFields__c"],
+                ["QPinnedColumnFiltersHeaderLimit__c", "QColumnFilterPinnedLimit__c"],
+                ["QExistingValueFilterFieldNames__c", "QColumnFilterDataOptionFields__c"],
+                ["QColumnFilterDefaultFieldName__c", "QColumnFilterDefaultField__c"]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": [
+                "For the updated field descriptions, see ",
+                { "text": "Data List Settings", "href": "/user-manual/data-list-settings" },
+                "."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

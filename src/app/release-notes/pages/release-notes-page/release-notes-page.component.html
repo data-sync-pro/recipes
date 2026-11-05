@@ -1,0 +1,40 @@
+<app-release-top-bar [label]="title"></app-release-top-bar>
+
+<header class="hero">
+  <div class="container">
+    <div class="wrap">
+      <h1 class="page-title">Release <span class="page-title-accent">Notes</span></h1>
+    </div>
+  </div>
+</header>
+
+<main class="body">
+  <div class="container">
+    <div class="wrap">
+      <ng-container *ngIf="view$ | async as view">
+        <ng-container *ngIf="view.releases.length; else empty">
+          <app-release-entry
+            *ngFor="let release of view.releases; trackBy: trackByVersion"
+            class="entry"
+            [attr.id]="release.version | releaseAnchor"
+            [release]="release"
+          ></app-release-entry>
+
+          <app-release-pager
+            *ngIf="view.newerPage !== null || view.olderPage !== null"
+            class="pager"
+            [newerPage]="view.newerPage"
+            [olderPage]="view.olderPage"
+          ></app-release-pager>
+        </ng-container>
+      </ng-container>
+
+      <ng-template #empty>
+        <p class="empty">
+          There are no release notes on this page.
+          <a class="empty-link" [routerLink]="latestPath">View the latest release notes</a>
+        </p>
+      </ng-template>
+    </div>
+  </div>
+</main>

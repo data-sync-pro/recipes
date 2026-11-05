@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+
+.pager {
+  display: flex;
+  gap: 16px;
+}
+
+// Naming Conventions .legal-section a
+.link {
+  font-size: 16px;
+  color: var(--rn-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+
+  &:hover {
+    color: var(--rn-accent-hover);
+  }
+}
+
+// Stays on the right whether or not the "Newer" link is present.
+.older {
+  margin-left: auto;
+}
