@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+// Same text as a paragraph (Naming Conventions .legal-section p).
+.list {
+  margin: 0;
+  padding-left: 22px;
+  font-size: 16px;
+  line-height: 1.68;
+  color: var(--rn-text);
+}
+
+.list-item + .list-item {
+  margin-top: 6px;
+}

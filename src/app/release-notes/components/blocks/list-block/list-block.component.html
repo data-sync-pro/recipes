@@ -1,0 +1,9 @@
+<ol *ngIf="block.ordered; else unordered" class="list">
+  <li *ngFor="let item of block.items" class="list-item"><app-release-inline-text [text]="item"></app-release-inline-text></li>
+</ol>
+
+<ng-template #unordered>
+  <ul class="list">
+    <li *ngFor="let item of block.items" class="list-item"><app-release-inline-text [text]="item"></app-release-inline-text></li>
+  </ul>
+</ng-template>

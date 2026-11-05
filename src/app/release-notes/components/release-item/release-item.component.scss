@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+// Item title (supplied design): bold, one step smaller than the section name.
+.title {
+  margin: 0 0 8px;
+  font-family: var(--rn-font-display);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--rn-item-title);
+}
+
+// Naming Conventions paragraph rhythm (.legal-section p: 14px below).
+.block + .block {
+  margin-top: 14px;
+}

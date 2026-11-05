@@ -8,6 +8,8 @@
 // - transformation: src/app/transformation/utils/route.util.ts (buildRoute, categorySlug)
 // - faqs:           src/app/faq/services/faq-url.service.ts (buildAnswerUrl)
 // - user-manual:    src/app/setup/setup.component.ts (selectSetup slug-path chain)
+// - release-notes:  src/app/release-notes/release-notes.config.ts (RELEASES_PER_PAGE,
+//                   releaseNotesPagePath), utils/release-format.util.ts (releaseSlug)
 //
 // The internal editors (/recipes editor, /faq-editor, /transformation/editor)
 // are intentionally NOT prerendered.
@@ -173,6 +175,33 @@ function faqRoutes(log) {
   return routes;
 }
 
+// --- release-notes ---------------------------------------------------------------
+
+// release-notes.config.ts RELEASES_PER_PAGE
+const RELEASES_PER_PAGE = 5;
+
+// release-format.util.ts releaseSlug: '3.604' -> 'v3-604'
+const releaseSlug = (version) =>
+  'v' + String(version).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+function releaseNotesRoutes(log) {
+  const routes = ['/release-notes'];
+  const dir = join(ASSETS, 'release-notes');
+  const { releases } = readJson(join(dir, 'index.json'));
+
+  for (const { version } of releases) {
+    const file = `${releaseSlug(version)}.json`;
+    if (!existsSync(join(dir, 'releases', file))) {
+      log.push(`release-notes: index lists version "${version}" but releases/${file} is missing`);
+    }
+  }
+
+  // Page 1 is /release-notes itself; older releases live on /release-notes/page/N.
+  const totalPages = Math.ceil(releases.length / RELEASES_PER_PAGE);
+  for (let page = 2; page <= totalPages; page++) routes.push(`/release-notes/page/${page}`);
+  return routes;
+}
+
 // --- main -----------------------------------------------------------------------
 
 const log = [];
@@ -181,6 +210,7 @@ const routes = [
   ...userManualRoutes(log),
   ...transformationRoutes(log),
   ...faqRoutes(log),
+  ...releaseNotesRoutes(log),
 ];
 
 const unique = [...new Set(routes)];

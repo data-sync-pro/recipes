@@ -42,6 +42,11 @@ const routes: Routes = [
     path: 'faqs',
     loadChildren: () => import('./faq/faq.module').then(m => m.FaqModule)
   },
+  {
+    path: 'release-notes',
+    title: 'Release Notes - Data Sync Pro',
+    loadChildren: () => import('./release-notes/release-notes.module').then(m => m.ReleaseNotesModule)
+  },
   { path: '', redirectTo: 'faqs', pathMatch: 'full' },
   // Exclude assets from Angular routing - let the browser handle them directly
   {

@@ -1,0 +1,7 @@
+<ng-container *ngFor="let span of spans">
+  <a *ngIf="span.routerLink" class="link" [routerLink]="span.routerLink"><ng-container *ngTemplateOutlet="content; context: { $implicit: span }"></ng-container></a>
+  <a *ngIf="span.externalHref" class="link" [href]="span.externalHref" target="_blank" rel="noopener noreferrer"><ng-container *ngTemplateOutlet="content; context: { $implicit: span }"></ng-container></a>
+  <ng-container *ngIf="!span.routerLink && !span.externalHref"><ng-container *ngTemplateOutlet="content; context: { $implicit: span }"></ng-container></ng-container>
+</ng-container>
+
+<ng-template #content let-span><strong *ngIf="span.bold; else plain" class="bold">{{ span.text }}</strong><ng-template #plain>{{ span.text }}</ng-template></ng-template>

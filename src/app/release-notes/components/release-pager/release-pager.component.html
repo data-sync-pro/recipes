@@ -1,0 +1,4 @@
+<nav *ngIf="newerLink || olderLink" class="pager" aria-label="Release notes pages">
+  <a *ngIf="newerLink" class="link" [routerLink]="newerLink">&larr; Newer updates</a>
+  <a *ngIf="olderLink" class="link older" [routerLink]="olderLink">Older updates &rarr;</a>
+</nav>

@@ -1,0 +1,8 @@
+<h3 class="name">{{ section.name }}</h3>
+
+<app-release-item
+  *ngFor="let item of section.items"
+  class="item"
+  [attr.id]="version | releaseAnchor: item.title"
+  [item]="item"
+></app-release-item>

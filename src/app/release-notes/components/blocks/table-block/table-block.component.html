@@ -1,0 +1,14 @@
+<div class="frame">
+  <table class="table">
+    <thead>
+      <tr>
+        <th *ngFor="let column of block.columns" scope="col">{{ column }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of block.rows">
+        <td *ngFor="let cell of row"><app-release-inline-text [text]="cell"></app-release-inline-text></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

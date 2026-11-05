@@ -1,0 +1,17 @@
+// Naming Conventions .legal-section a
+.link {
+  color: var(--rn-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+
+  &:hover {
+    color: var(--rn-accent-hover);
+  }
+}
+
+// Naming Conventions .legal-section strong
+.bold {
+  font-weight: 600;
+  color: var(--rn-strong);
+}

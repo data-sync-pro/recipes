@@ -23,10 +23,12 @@ export class AppComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe((event: NavigationEnd) => {
-        // Hide header and footer on editor pages
+        // Hide header and footer on editor pages, and on Release Notes, which
+        // is a standalone page with its own top bar (like Naming Conventions).
         this.showHeaderFooter = !event.url.includes('/faq-editor')
           && !event.url.includes('/recipe-editor')
-          && !event.url.startsWith('/transformation/editor');
+          && !event.url.startsWith('/transformation/editor')
+          && !event.url.startsWith('/release-notes');
 
         // Show the global (window-scroll) scroll-to-top button on pages that
         // scroll the page itself. Transformation docs now scroll the window
