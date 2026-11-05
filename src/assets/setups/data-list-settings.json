@@ -72,6 +72,10 @@
             {
               "name": "Pre-Action: Edit Fields",
               "description": "Comma-separated API names of the target object fields that open in edit mode on the pre-action screen when the action button is clicked."
+            },
+            {
+              "name": "Pre-Action: Summary Fields",
+              "description": "Fields to summarize below the records on the pre-action screen, as Field: Aggregate pairs or Label = formula — Name: COUNT; Amount: SUM, AVG; Net = SUM(Quantity * UnitPrice * (1 - BLANK_VALUE(Discount, 0) / 100)). Supported aggregates: SUM, AVG, MIN, MAX, COUNT; formulas also support + - * /, ROUND, ABS and BLANK_VALUE. Summarizes selected rows, or all rows when none are selected."
             }
           ]
         },
@@ -173,15 +177,15 @@
               "description": "Sets the title of the Data List query results."
             },
             {
-              "name": "Q: Show Column Filter?",
-              "description": "When enabled, the Column Filter will be available on the Data List for further filtering."
+              "name": "Q: Column Filter Enabled?",
+              "description": "Turns on column filters for this Data List."
             },
             {
               "name": "Q: Results Icon Name",
               "description": "Name of the Lightning Design System icon to display for the query results, in the format category:iconName (e.g. standard:opportunity)."
             },
             {
-              "name": "Q: Pinned Column Filter Field Names",
+              "name": "Q: Column Filter Pinned Fields",
               "description": "Comma-separated list of field API names to show as pinned column filters in the Data List."
             },
             {
@@ -189,15 +193,15 @@
               "description": "Display as help text next to the Q result's title."
             },
             {
-              "name": "Q: Pinned Column Filters Header Limit",
-              "description": "Maximum number of pinned column filters embedded in the query results header. If not set, the default is 3. If the number of pinned column filters exceeds this limit, they are shown in a separate area above the results."
+              "name": "Q: Column Filter Pinned Limit",
+              "description": "Maximum number of pinned column filters shown in the Data List header. If blank, the limit is 3. When the pinned filters exceed the limit, all of them are shown in a separate area above the results instead."
             },
             {
               "name": "Q: Open Links in Record Page?",
               "description": "Applies to Data Lists added to Lightning Pages. When selected, hyperlinks in the Data List will open in the standard Lightning Record Page rather than within Data Sync Pro's Record view."
             },
             {
-              "name": "Q: Column Filter Default Field Name",
+              "name": "Q: Column Filter Default Field",
               "description": "Sets the default Column Filter to the field's API name exactly as it appears in the SELECT clause."
             },
             {
@@ -205,16 +209,16 @@
               "description": "When enabled, record links in the Data List open in the current tab instead of a new one."
             },
             {
-              "name": "Q: Filterable Column Field Names",
-              "description": "Comma-separated list of field API names that can be used as column filters for this Data List."
+              "name": "Q: Column Filter Fields",
+              "description": "Comma-separated field API names whose columns get a column filter — Name, Industry, CreatedDate. If blank, DSP adds a column filter to every displayed column that supports filtering."
             },
             {
               "name": "Q: Use Navigation For New Record?",
               "description": "Indicates whether new record creation should launch the standard Salesforce New Record page. This enables advanced features such as dynamic forms, but users must manually refresh the data list to see the update."
             },
             {
-              "name": "Q: Existing Value Filter Field Names",
-              "description": "Comma-separated field API names whose existing values are used to populate Column Filter options for this Data List."
+              "name": "Q: Column Filter Data Option Fields",
+              "description": "Comma-separated field API names whose column filter options are populated from the values existing in the data — Industry, BillingState."
             },
             {
               "name": "Q: Query Manager Toggleable?",
@@ -269,12 +273,20 @@
               "description": "The number of records displayed per page in the Data List."
             },
             {
+              "name": "Q: Default Row Selection",
+              "description": "Number of rows selected automatically when the Data List loads, starting from the first row — 1. If blank, no rows are selected."
+            },
+            {
               "name": "Q: Summary Fields",
-              "description": "Fields to summarize below the data list, as Field: Aggregate pairs — Id: COUNT; Amount: SUM, AVG; Quantity: SUM. Supported aggregates: SUM, AVG, MIN, MAX, COUNT, COUNT_DISTINCT. Summarizes selected rows, or the current page when none are selected."
+              "description": "Fields to summarize below the data list, as Field: Aggregate pairs or Label = formula — Id: COUNT; Amount: SUM, AVG; Net = SUM(Quantity * UnitPrice * (1 - BLANK_VALUE(Discount, 0) / 100)). Supported aggregates: SUM, AVG, MIN, MAX, COUNT; formulas also support + - * /, ROUND, ABS and BLANK_VALUE. Summarizes selected rows, or the current page when none are selected."
             },
             {
               "name": "Q: Override Columns",
               "description": "Rename columns with Field: Label pairs — AccountSource: Source; AnnualRevenue: Revenue. For more control, supply a JSON array of Lightning Datatable column definitions, such as [{\"fieldName\":\"AccountSource\",\"label\":\"Source\",\"initialWidth\":150}]."
+            },
+            {
+              "name": "Q: Hidden Columns",
+              "description": "Fields from the query to hide as columns, separated by commas — AccountNumber, BillingAddress. Hidden fields are still queried, so summary formulas, row actions and pre-action screens can use them."
             },
             {
               "name": "Q: Min Row Selection",
