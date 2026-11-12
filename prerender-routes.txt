@@ -410,3 +410,4 @@
 /faqs/query-manager/is-the-tooling-api-supported-in-query
 /faqs/query-manager/how-can-i-manage-my-frequently-used-queries
 /faqs/rules-engines/batch/does-splitting-an-apex-batch-class-with-multiple-actions-into-multiple-batch-executables-slow-performance-a-lot
+/release-notes
