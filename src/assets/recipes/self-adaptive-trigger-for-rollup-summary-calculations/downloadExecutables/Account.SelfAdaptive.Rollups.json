@@ -31,7 +31,6 @@
       "pushtopics__QQueryManagerToggleable__c": true,
       "pushtopics__QRetrieveFields__c": "Name, Type, Industry, Rating, AnnualRevenue, AccountNumber, Phone, Website, NumberOfEmployees, BillingCity, BillingState, Owner.Name",
       "pushtopics__QRowAction__c": true,
-      "pushtopics__QShowColumnFilter__c": true,
       "pushtopics__QShowMassEditButton__c": true,
       "pushtopics__QShowPicklistLabels__c": true,
       "pushtopics__QShowResultsInTilesOnSmallScreen__c": true,

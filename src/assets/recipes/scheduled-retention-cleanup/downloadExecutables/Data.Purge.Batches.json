@@ -1,7 +1,7 @@
 {
   "pipeline": {
     "Name": "Data.Purge.Batches",
-    "pushtopics__OriginID__c": "a0DDH000002X1Ah2AK",
+    "pushtopics__OriginID__c": "a0DDC000006zfjI2AQ",
     "pushtopics__ApiName__c": "Data.Purge.Batches"
   },
   "executables": [
@@ -34,7 +34,6 @@
       "pushtopics__QQueryManagerToggleable__c": true,
       "pushtopics__QRetrieveFields__c": "CaseNumber, Subject, Origin, Status, ContactEmail, LastModifiedDate",
       "pushtopics__QRowAction__c": true,
-      "pushtopics__QShowColumnFilter__c": true,
       "pushtopics__QShowMassEditButton__c": true,
       "pushtopics__QShowPicklistLabels__c": true,
       "pushtopics__QShowResultsInTilesOnSmallScreen__c": true,

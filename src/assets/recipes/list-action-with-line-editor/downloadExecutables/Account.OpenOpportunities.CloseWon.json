@@ -10,13 +10,14 @@
       "pushtopics__AllInternalUsersHaveReadAccess__c": true,
       "pushtopics__ApiName__c": "Account.OpenOpportunities.CloseWon",
       "pushtopics__ApplicableForActionButton__c": true,
-      "pushtopics__ApplicableForTriggerAction__c": true,
+      "pushtopics__ApplicableForSelfAdaptiveTrigger__c": true,
       "pushtopics__BatchSize__c": 200,
       "pushtopics__ErrorOutIfSourceAttributesMissing__c": true,
       "pushtopics__InternalType__c": "SalesforceToSalesforce",
       "pushtopics__IsSourceTargetCurrentOrgSameObject__c": true,
       "pushtopics__IsSourceTargetSameConnection__c": true,
       "pushtopics__IsSourceTargetSameOrgSameObject__c": true,
+      "pushtopics__IsTargetMatchingFieldAndMappingSame__c": true,
       "pushtopics__IsTargetObjectQueryable__c": true,
       "pushtopics__OriginID__c": "a09DC000003ops4YAA",
       "pushtopics__PreActionEditFields__c": "StageName, CloseDate, Description",
@@ -34,7 +35,7 @@
       "pushtopics__QQueryManagerToggleable__c": true,
       "pushtopics__QRetrieveFields__c": "Name, Type, StageName, Amount, CloseDate, LastModifiedDate, Owner.Name",
       "pushtopics__QRowAction__c": true,
-      "pushtopics__QShowColumnFilter__c": true,
+      "pushtopics__QShowMassEditButton__c": true,
       "pushtopics__QShowPicklistLabels__c": true,
       "pushtopics__QShowResultsInTilesOnSmallScreen__c": true,
       "pushtopics__QShowRowActionClone__c": true,
@@ -51,11 +52,14 @@
         {
           "Name": "Id",
           "pushtopics__OriginID__c": "a0BDC000008lX2R2AU",
+          "pushtopics__Createable__c": true,
           "pushtopics__IsTargetMatchingField__c": true,
           "pushtopics__Label__c": "Opportunity ID",
           "pushtopics__Length__c": 18,
           "pushtopics__Mapping__c": "Id",
-          "pushtopics__Type__c": "id"
+          "pushtopics__Nillable__c": true,
+          "pushtopics__Type__c": "id",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "StageName",
@@ -65,6 +69,7 @@
           "pushtopics__Label__c": "Stage",
           "pushtopics__Length__c": 255,
           "pushtopics__Mapping__c": "\"Closed Won\"",
+          "pushtopics__Nillable__c": true,
           "pushtopics__Type__c": "picklist",
           "pushtopics__Updateable__c": true
         }
