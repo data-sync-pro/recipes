@@ -14,7 +14,7 @@
         },
         {
           "type": "p",
-          "content": "Auth. Provider"
+          "content": "Auth Provider"
         },
         {
           "type": "p",
@@ -42,11 +42,11 @@
     },
     {
       "type": "h3",
-      "content": "2. Create Auth. Provider in DSP App Org",
+      "content": "2. Create Auth Provider in DSP App Org",
       "children": [
         {
           "type": "p",
-          "content": "Create an Auth. Provider to connect the DSP App Org to the External Client App created in the Connected Org."
+          "content": "Create an Auth Provider to connect the DSP App Org to the External Client App created in the Connected Org."
         },
         {
           "type": "ul",
@@ -81,7 +81,7 @@
             {
               "type": "image",
               "content": "image/connection/refresh-token/openId.png",
-              "alt": "OpenID Connect Auth. Provider settings"
+              "alt": "OpenID Connect Auth Provider settings"
             }
           ]
         }
@@ -99,28 +99,87 @@
     },
     {
       "type": "h3",
-      "content": "4. Create Named Credential in DSP App Org",
+      "content": "4. Set Up Named Credential in DSP App Org",
       "children": [
         {
-          "type": "ul",
-          "children": [
+          "type": "tabs",
+          "items": [
             {
-              "type": "p",
-              "content": "<strong>URL</strong>: Enter the Connected Org domain URL (found in My Domain Settings)."
+              "label": "Named Credential",
+              "children": [
+                {
+                  "type": "h3",
+                  "content": "4.1 Create External Credential and Principal",
+                  "defaultExpanded": true,
+                  "children": [
+                    {
+                      "type": "video",
+                      "src": "video/connection/refresh-token/refresh-token-4.1.mp4"
+                    }
+                  ]
+                },
+                {
+                  "type": "h3",
+                  "content": "4.2 Grant External Credential Principal Access",
+                  "defaultExpanded": true,
+                  "children": [
+                    {
+                      "type": "video",
+                      "src": "video/connection/refresh-token/refresh-token-4.2.mp4"
+                    }
+                  ]
+                },
+                {
+                  "type": "h3",
+                  "content": "4.3 Authenticate the Principal",
+                  "defaultExpanded": true,
+                  "children": [
+                    {
+                      "type": "video",
+                      "src": "video/connection/refresh-token/refresh-token-4.3.mp4"
+                    }
+                  ]
+                },
+                {
+                  "type": "h3",
+                  "content": "4.4 Create Named Credential",
+                  "defaultExpanded": true,
+                  "children": [
+                    {
+                      "type": "video",
+                      "src": "video/connection/refresh-token/refresh-token-4.4.mp4"
+                    }
+                  ]
+                }
+              ]
             },
             {
-              "type": "p",
-              "content": "<strong>Auth. Provider</strong>: Select the Auth. Provider created earlier."
-            },
-            {
-              "type": "p",
-              "content": "<strong>Scope</strong>: Enter required scopes. Separate multiple scopes with spaces."
+              "label": "Legacy Named Credential",
+              "children": [
+                {
+                  "type": "ul",
+                  "children": [
+                    {
+                      "type": "p",
+                      "content": "<strong>URL</strong>: Enter the Connected Org domain URL (found in My Domain Settings)."
+                    },
+                    {
+                      "type": "p",
+                      "content": "<strong>Auth Provider</strong>: Select the Auth Provider created earlier."
+                    },
+                    {
+                      "type": "p",
+                      "content": "<strong>Scope</strong>: Enter required scopes. Separate multiple scopes with spaces."
+                    }
+                  ]
+                },
+                {
+                  "type": "video",
+                  "src": "video/connection/refresh-token/refresh-token-4.mp4"
+                }
+              ]
             }
           ]
-        },
-        {
-          "type": "video",
-          "src": "video/connection/refresh-token/refresh-token-4.mp4"
         }
       ]
     },

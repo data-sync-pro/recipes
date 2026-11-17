@@ -1,5 +1,10 @@
 $mono: 'Consolas', 'Monaco', 'Courier New', monospace;
 
+// Sticky offsets for collapsible steps (see .block-step).
+$sticky-top: 60px;      // site header height
+$step-header-h: 41px;   // 24px icon + 2 × 0.5rem padding + 1px border
+$tabs-header-h: 44px;
+
 .block-section {
   margin-bottom: 1.5rem;
 }
@@ -51,7 +56,7 @@ $mono: 'Consolas', 'Monaco', 'Courier New', monospace;
     cursor: pointer;
     transition: background-color 0.2s ease;
     position: sticky;
-    top: 60px;  // Adjust based on your header height
+    top: $sticky-top;
     z-index: 10;
     background-color: #FAFBFC;
 
@@ -64,6 +69,36 @@ $mono: 'Consolas', 'Monaco', 'Courier New', monospace;
   &.collapsed {
     .step-header {
       background-color: #FAFBFC;
+    }
+  }
+
+  // Sticky stack for a step that contains tabs: step header → tab bar →
+  // nested sub-step header. Each layer pins directly below the one above, so
+  // the step title and tab bar stay visible until the step scrolls out.
+  // Offsets rely on the fixed heights below.
+  .step-header {
+    box-sizing: border-box;
+    min-height: $step-header-h;
+  }
+
+  .block-tabs {
+    .tabs-header {
+      position: sticky;
+      top: $sticky-top + $step-header-h;
+      z-index: 9;
+      box-sizing: border-box;
+      height: $tabs-header-h;
+      background-color: #FAFBFC;
+    }
+
+    .tab-button {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .tabs-panel .block-step .step-header {
+      top: $sticky-top + $step-header-h + $tabs-header-h;
+      z-index: 8;
     }
   }
 }
@@ -219,36 +254,35 @@ app-callout .callout-children {
 
   .tabs-header {
     display: flex;
-    gap: 4px;
-    padding: 4px;
-    background: #f1f5f9;
-    border-radius: 8px;
+    border-bottom: 1px solid #e2e8f0;
     margin-bottom: 1rem;
   }
 
+  // Underline tabs: the active indicator overlaps the header's bottom rule.
   .tab-button {
     flex: 1;
     text-align: center;
     appearance: none;
     background: transparent;
     border: none;
-    padding: 0.5rem 1rem;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    margin-bottom: -1px;
+    padding: 0.75rem 1rem;
     font-size: 0.95rem;
     font-weight: 500;
     color: #64748b;
     cursor: pointer;
-    border-radius: 6px;
-    transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+    transition: color 0.15s ease, border-color 0.15s ease;
 
     &:hover:not(.active) {
-      background: #e2e8f0;
       color: #2253B2;
     }
 
     &.active {
-      background: #ffffff;
       color: #2253B2;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(34, 83, 178, 0.15);
+      border-bottom-color: #2253B2;
+      background-color: #F1F6FB;
     }
   }
 
