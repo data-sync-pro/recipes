@@ -26,7 +26,6 @@
       "pushtopics__QQueryManagerToggleable__c": true,
       "pushtopics__QRetrieveFields__c": "Name, UnitPrice, IsActive",
       "pushtopics__QRowAction__c": true,
-      "pushtopics__QShowColumnFilter__c": true,
       "pushtopics__QShowMassEditButton__c": true,
       "pushtopics__QShowPicklistLabels__c": true,
       "pushtopics__QShowResultsInTilesOnSmallScreen__c": true,

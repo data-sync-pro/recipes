@@ -13,7 +13,6 @@
       "pushtopics__BatchSize__c": 200,
       "pushtopics__ErrorOutIfSourceAttributesMissing__c": true,
       "pushtopics__InternalType__c": "SalesforceToSalesforce",
-      "pushtopics__IsDirectionDifferentThanPipelines__c": true,
       "pushtopics__IsSourceTargetSameConnection__c": true,
       "pushtopics__IsTargetObjectQueryable__c": true,
       "pushtopics__Joiner__c": "JOIN_OBJECT_SOURCE(\"OpportunityLineItem\", \"OpportunityId\", OriginalOpportunity__r.Id)",
@@ -28,7 +27,6 @@
       "pushtopics__QPageSize__c": 10,
       "pushtopics__QQueryManagerToggleable__c": true,
       "pushtopics__QRowAction__c": true,
-      "pushtopics__QShowColumnFilter__c": true,
       "pushtopics__QShowMassEditButton__c": true,
       "pushtopics__QShowPicklistLabels__c": true,
       "pushtopics__QShowResultsInTilesOnSmallScreen__c": true,
@@ -53,9 +51,11 @@
           "pushtopics__Label__c": "Opportunity ID",
           "pushtopics__Length__c": 18,
           "pushtopics__Mapping__c": "Id",
+          "pushtopics__Nillable__c": true,
           "pushtopics__ReferenceToOptions__c": "[\"Opportunity\"]",
           "pushtopics__RelationshipName__c": "Opportunity",
-          "pushtopics__Type__c": "reference"
+          "pushtopics__Type__c": "reference",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "PricebookEntryId",
@@ -67,7 +67,8 @@
           "pushtopics__Nillable__c": true,
           "pushtopics__ReferenceToOptions__c": "[\"PricebookEntry\"]",
           "pushtopics__RelationshipName__c": "PricebookEntry",
-          "pushtopics__Type__c": "reference"
+          "pushtopics__Type__c": "reference",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "Product2Id",
@@ -79,7 +80,8 @@
           "pushtopics__Nillable__c": true,
           "pushtopics__ReferenceToOptions__c": "[\"Product2\"]",
           "pushtopics__RelationshipName__c": "Product2",
-          "pushtopics__Type__c": "reference"
+          "pushtopics__Type__c": "reference",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "Description",
@@ -137,6 +139,7 @@
           "pushtopics__Label__c": "Quantity",
           "pushtopics__Length__c": 0,
           "pushtopics__Mapping__c": "$Joiner.Quantity",
+          "pushtopics__Nillable__c": true,
           "pushtopics__Type__c": "double",
           "pushtopics__Updateable__c": true
         }

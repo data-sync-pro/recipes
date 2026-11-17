@@ -27,7 +27,7 @@
       "pushtopics__QResultsTitle__c": "OrgB Open Opportunities",
       "pushtopics__QRetrieveFields__c": "Name, Amount, StageName, CloseDate, LastModifiedDate, LastModifiedBy.Name",
       "pushtopics__QRowAction__c": true,
-      "pushtopics__QShowColumnFilter__c": true,
+      "pushtopics__QShowMassEditButton__c": true,
       "pushtopics__QShowPicklistLabels__c": true,
       "pushtopics__QShowResultsInTilesOnSmallScreen__c": true,
       "pushtopics__QShowRowActionClone__c": true,
@@ -36,8 +36,8 @@
       "pushtopics__RetrieveParameters__c": "Account.SourceSystemID__c = :SourceSystemID__c AND IsClosed = FALSE",
       "pushtopics__SourceObjectName__c": "Opportunity",
       "pushtopics__Connection__r": {
-        "pushtopics__IsCurrentOrg__c": false,
-        "Id": "a07DC000004hAMGYA2"
+        "pushtopics__IsCurrentOrg__c": true,
+        "Id": "a07DC000004hAELYA2"
       },
       "pushtopics__FieldMappings__r": []
     }

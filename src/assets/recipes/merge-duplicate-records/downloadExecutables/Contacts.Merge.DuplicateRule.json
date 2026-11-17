@@ -35,7 +35,7 @@
       "pushtopics__QQueryManagerToggleable__c": true,
       "pushtopics__QRetrieveFields__c": "Name, Title, LeadSource, Email, Department, Description, Phone, MailingAddress, LastModifiedDate",
       "pushtopics__QRowAction__c": true,
-      "pushtopics__QShowColumnFilter__c": true,
+      "pushtopics__QShowMassEditButton__c": true,
       "pushtopics__QShowPicklistLabels__c": true,
       "pushtopics__QShowResultsInTilesOnSmallScreen__c": true,
       "pushtopics__QShowRowActionClone__c": true,

@@ -34,7 +34,7 @@
       "pushtopics__QQueryManagerToggleable__c": true,
       "pushtopics__QRetrieveFields__c": "Name, TerritoryManager__r.Name, Rating, Owner.Name, LastModifiedDate, LastModifiedBy.Name",
       "pushtopics__QRowAction__c": true,
-      "pushtopics__QShowColumnFilter__c": true,
+      "pushtopics__QShowMassEditButton__c": true,
       "pushtopics__QShowPicklistLabels__c": true,
       "pushtopics__QShowResultsInTilesOnSmallScreen__c": true,
       "pushtopics__QShowRowActionClone__c": true,
@@ -60,9 +60,11 @@
           "pushtopics__Label__c": "Account ID",
           "pushtopics__Length__c": 18,
           "pushtopics__Mapping__c": "Id",
+          "pushtopics__Nillable__c": true,
           "pushtopics__ReferenceToOptions__c": "[\"Account\"]",
           "pushtopics__RelationshipName__c": "Account",
-          "pushtopics__Type__c": "reference"
+          "pushtopics__Type__c": "reference",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "UserOrGroupId",
@@ -72,9 +74,11 @@
           "pushtopics__Label__c": "User/Group ID",
           "pushtopics__Length__c": 18,
           "pushtopics__Mapping__c": "TerritoryManager__c",
+          "pushtopics__Nillable__c": true,
           "pushtopics__ReferenceToOptions__c": "[\"Group\",\"User\"]",
           "pushtopics__RelationshipName__c": "UserOrGroup",
-          "pushtopics__Type__c": "reference"
+          "pushtopics__Type__c": "reference",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "AccountAccessLevel",
@@ -84,6 +88,7 @@
           "pushtopics__Label__c": "Account Access",
           "pushtopics__Length__c": 40,
           "pushtopics__Mapping__c": "\"Edit\"",
+          "pushtopics__Nillable__c": true,
           "pushtopics__Type__c": "picklist",
           "pushtopics__Updateable__c": true
         },
@@ -95,6 +100,7 @@
           "pushtopics__Label__c": "Case Access",
           "pushtopics__Length__c": 40,
           "pushtopics__Mapping__c": "\"Edit\"",
+          "pushtopics__Nillable__c": true,
           "pushtopics__Type__c": "picklist",
           "pushtopics__Updateable__c": true
         },
@@ -106,6 +112,7 @@
           "pushtopics__Label__c": "Opportunity Access",
           "pushtopics__Length__c": 40,
           "pushtopics__Mapping__c": "\"Edit\"",
+          "pushtopics__Nillable__c": true,
           "pushtopics__Type__c": "picklist",
           "pushtopics__Updateable__c": true
         },
@@ -118,16 +125,20 @@
           "pushtopics__Length__c": 40,
           "pushtopics__Mapping__c": "\"Manual\"",
           "pushtopics__Nillable__c": true,
-          "pushtopics__Type__c": "picklist"
+          "pushtopics__Type__c": "picklist",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "Id",
           "pushtopics__OriginID__c": "a0BDC000008lVHm2AM",
+          "pushtopics__Createable__c": true,
           "pushtopics__IsTargetMatchingField__c": true,
           "pushtopics__Label__c": "Account Share ID",
           "pushtopics__Length__c": 18,
           "pushtopics__Mapping__c": "VLOOKUP(\"AccountShare\", \"Id\", \"AccountId\", Id, \"UserOrGroupId\", TerritoryManager__c, \"RowCause\", \"Manual\")",
-          "pushtopics__Type__c": "id"
+          "pushtopics__Nillable__c": true,
+          "pushtopics__Type__c": "id",
+          "pushtopics__Updateable__c": true
         }
       ]
     },
@@ -160,7 +171,7 @@
       "pushtopics__QQueryManagerToggleable__c": true,
       "pushtopics__QRetrieveFields__c": "Name, TerritoryManager__r.Name, Rating, Owner.Name, LastModifiedDate, LastModifiedBy.Name",
       "pushtopics__QRowAction__c": true,
-      "pushtopics__QShowColumnFilter__c": true,
+      "pushtopics__QShowMassEditButton__c": true,
       "pushtopics__QShowPicklistLabels__c": true,
       "pushtopics__QShowResultsInTilesOnSmallScreen__c": true,
       "pushtopics__QShowRowActionClone__c": true,
@@ -180,11 +191,14 @@
         {
           "Name": "Id",
           "pushtopics__OriginID__c": "a0BDC000008lVHn2AM",
+          "pushtopics__Createable__c": true,
           "pushtopics__IsTargetMatchingField__c": true,
           "pushtopics__Label__c": "Account Share ID",
           "pushtopics__Length__c": 18,
           "pushtopics__Mapping__c": "VLOOKUP(\"AccountShare\", \"Id\", \"AccountId\", Id, \"UserOrGroupId\", TRIGGER_OLD_VALUE(\"TerritoryManager__c\"), \"RowCause\", \"Manual\")",
-          "pushtopics__Type__c": "id"
+          "pushtopics__Nillable__c": true,
+          "pushtopics__Type__c": "id",
+          "pushtopics__Updateable__c": true
         }
       ]
     }

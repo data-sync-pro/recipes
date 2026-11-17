@@ -15,6 +15,7 @@
       "pushtopics__IsSourceTargetCurrentOrgSameObject__c": true,
       "pushtopics__IsSourceTargetSameConnection__c": true,
       "pushtopics__IsSourceTargetSameOrgSameObject__c": true,
+      "pushtopics__IsTargetMatchingFieldAndMappingSame__c": true,
       "pushtopics__IsTargetObjectQueryable__c": true,
       "pushtopics__OriginID__c": "a09DC000003p3zOYAQ",
       "pushtopics__QColumnWidthsMode__c": "fixed",
@@ -29,7 +30,6 @@
       "pushtopics__QQueryManagerToggleable__c": true,
       "pushtopics__QRetrieveFields__c": "Name, Title, Birthdate, Email, Account.Name, LastModifiedBy.Name, LastModifiedDate",
       "pushtopics__QRowAction__c": true,
-      "pushtopics__QShowColumnFilter__c": true,
       "pushtopics__QShowMassEditButton__c": true,
       "pushtopics__QShowPicklistLabels__c": true,
       "pushtopics__QShowResultsInTilesOnSmallScreen__c": true,
@@ -50,11 +50,14 @@
         {
           "Name": "Id",
           "pushtopics__OriginID__c": "a0BDC000008lX432AE",
+          "pushtopics__Createable__c": true,
           "pushtopics__IsTargetMatchingField__c": true,
           "pushtopics__Label__c": "Contact ID",
           "pushtopics__Length__c": 18,
           "pushtopics__Mapping__c": "Id",
-          "pushtopics__Type__c": "id"
+          "pushtopics__Nillable__c": true,
+          "pushtopics__Type__c": "id",
+          "pushtopics__Updateable__c": true
         }
       ]
     }

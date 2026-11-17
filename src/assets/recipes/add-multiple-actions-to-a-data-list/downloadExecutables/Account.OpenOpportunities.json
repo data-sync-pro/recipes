@@ -7,7 +7,7 @@
       "pushtopics__AllInternalUsersHaveReadAccess__c": true,
       "pushtopics__ApiName__c": "Account.OpenOpportunities",
       "pushtopics__BatchSize__c": 200,
-      "pushtopics__ContextRecordID__c": "001DH000015m5VfYAI",
+      "pushtopics__ContextRecordID__c": "001DC00000zmnCNYAY",
       "pushtopics__DataList__c": true,
       "pushtopics__ErrorOutIfSourceAttributesMissing__c": true,
       "pushtopics__InternalType__c": "SalesforceQuery",
@@ -27,7 +27,6 @@
       "pushtopics__QResultsTitle__c": "Open Opportunities",
       "pushtopics__QRetrieveFields__c": "Name, StageName, Amount, Type, CloseDate, Owner.Name, LastModifiedDate",
       "pushtopics__QRowAction__c": true,
-      "pushtopics__QShowColumnFilter__c": true,
       "pushtopics__QShowMassEditButton__c": true,
       "pushtopics__QShowPicklistLabels__c": true,
       "pushtopics__QShowResultsInTilesOnSmallScreen__c": true,
@@ -40,11 +39,11 @@
       "pushtopics__SourceObjectName__c": "Opportunity",
       "pushtopics__QActionButtons__r": {
         "pushtopics__ApiName__c": "Account.OpenOpportunities.ActionButtons",
-        "Id": "a0DDH000002X18r2AC"
+        "Id": "a0DDC0000074jwp2AA"
       },
       "pushtopics__Connection__r": {
         "pushtopics__IsCurrentOrg__c": true,
-        "Id": "a07DH000005RcOcYAK"
+        "Id": "a07DC000004hAELYA2"
       },
       "pushtopics__FieldMappings__r": []
     }

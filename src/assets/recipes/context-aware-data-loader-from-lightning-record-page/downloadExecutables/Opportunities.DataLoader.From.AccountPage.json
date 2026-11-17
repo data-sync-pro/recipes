@@ -29,7 +29,7 @@
       "pushtopics__QPageSize__c": 10,
       "pushtopics__QQueryManagerToggleable__c": true,
       "pushtopics__QRowAction__c": true,
-      "pushtopics__QShowColumnFilter__c": true,
+      "pushtopics__QShowMassEditButton__c": true,
       "pushtopics__QShowPicklistLabels__c": true,
       "pushtopics__QShowResultsInTilesOnSmallScreen__c": true,
       "pushtopics__QShowRowActionClone__c": true,
@@ -49,6 +49,7 @@
           "pushtopics__Label__c": "Name",
           "pushtopics__Length__c": 120,
           "pushtopics__Mapping__c": "Name",
+          "pushtopics__Nillable__c": true,
           "pushtopics__Type__c": "string",
           "pushtopics__Updateable__c": true
         },
@@ -72,6 +73,7 @@
           "pushtopics__Label__c": "Close Date",
           "pushtopics__Length__c": 0,
           "pushtopics__Mapping__c": "CloseDate",
+          "pushtopics__Nillable__c": true,
           "pushtopics__Type__c": "date",
           "pushtopics__Updateable__c": true
         },
@@ -83,6 +85,7 @@
           "pushtopics__Label__c": "Stage",
           "pushtopics__Length__c": 255,
           "pushtopics__Mapping__c": "StageName",
+          "pushtopics__Nillable__c": true,
           "pushtopics__Type__c": "picklist",
           "pushtopics__Updateable__c": true
         },

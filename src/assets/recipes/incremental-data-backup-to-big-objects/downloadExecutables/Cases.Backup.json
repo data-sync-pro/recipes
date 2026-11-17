@@ -28,7 +28,7 @@
       "pushtopics__QQueryManagerToggleable__c": true,
       "pushtopics__QRetrieveFields__c": "Subject, TYPEOF Owner WHEN User THEN Name ELSE Name END, Priority, Status, LastModifiedDate, LastModifiedBy.Name",
       "pushtopics__QRowAction__c": true,
-      "pushtopics__QShowColumnFilter__c": true,
+      "pushtopics__QShowMassEditButton__c": true,
       "pushtopics__QShowPicklistLabels__c": true,
       "pushtopics__QShowResultsInTilesOnSmallScreen__c": true,
       "pushtopics__QShowRowActionClone__c": true,
@@ -52,7 +52,8 @@
           "pushtopics__Length__c": 255,
           "pushtopics__Mapping__c": "CaseNumber",
           "pushtopics__Nillable__c": true,
-          "pushtopics__Type__c": "string"
+          "pushtopics__Type__c": "string",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "ClosedDate__c",
@@ -63,7 +64,8 @@
           "pushtopics__Length__c": 0,
           "pushtopics__Mapping__c": "ClosedDate",
           "pushtopics__Nillable__c": true,
-          "pushtopics__Type__c": "datetime"
+          "pushtopics__Type__c": "datetime",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "ContactEmail__c",
@@ -74,7 +76,8 @@
           "pushtopics__Length__c": 80,
           "pushtopics__Mapping__c": "ContactEmail",
           "pushtopics__Nillable__c": true,
-          "pushtopics__Type__c": "email"
+          "pushtopics__Type__c": "email",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "CreatedDate__c",
@@ -85,7 +88,8 @@
           "pushtopics__Length__c": 0,
           "pushtopics__Mapping__c": "CreatedDate",
           "pushtopics__Nillable__c": true,
-          "pushtopics__Type__c": "datetime"
+          "pushtopics__Type__c": "datetime",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "Priority__c",
@@ -96,7 +100,8 @@
           "pushtopics__Length__c": 100,
           "pushtopics__Mapping__c": "Priority",
           "pushtopics__Nillable__c": true,
-          "pushtopics__Type__c": "string"
+          "pushtopics__Type__c": "string",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "Status__c",
@@ -107,7 +112,8 @@
           "pushtopics__Length__c": 100,
           "pushtopics__Mapping__c": "Status",
           "pushtopics__Nillable__c": true,
-          "pushtopics__Type__c": "string"
+          "pushtopics__Type__c": "string",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "Subject__c",
@@ -118,7 +124,8 @@
           "pushtopics__Length__c": 100,
           "pushtopics__Mapping__c": "Subject",
           "pushtopics__Nillable__c": true,
-          "pushtopics__Type__c": "string"
+          "pushtopics__Type__c": "string",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "Description__c",
@@ -129,7 +136,8 @@
           "pushtopics__Length__c": 32768,
           "pushtopics__Mapping__c": "Description",
           "pushtopics__Nillable__c": true,
-          "pushtopics__Type__c": "textarea"
+          "pushtopics__Type__c": "textarea",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "AccountID__c",
@@ -140,7 +148,8 @@
           "pushtopics__Length__c": 100,
           "pushtopics__Mapping__c": "AccountId",
           "pushtopics__Nillable__c": true,
-          "pushtopics__Type__c": "string"
+          "pushtopics__Type__c": "string",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "ContactID__c",
@@ -151,7 +160,8 @@
           "pushtopics__Length__c": 100,
           "pushtopics__Mapping__c": "ContactId",
           "pushtopics__Nillable__c": true,
-          "pushtopics__Type__c": "string"
+          "pushtopics__Type__c": "string",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "OwnerID__c",
@@ -162,7 +172,8 @@
           "pushtopics__Length__c": 100,
           "pushtopics__Mapping__c": "OwnerId",
           "pushtopics__Nillable__c": true,
-          "pushtopics__Type__c": "string"
+          "pushtopics__Type__c": "string",
+          "pushtopics__Updateable__c": true
         },
         {
           "Name": "RecordID__c",
@@ -172,7 +183,9 @@
           "pushtopics__Label__c": "RecordID",
           "pushtopics__Length__c": 100,
           "pushtopics__Mapping__c": "Id",
-          "pushtopics__Type__c": "string"
+          "pushtopics__Nillable__c": true,
+          "pushtopics__Type__c": "string",
+          "pushtopics__Updateable__c": true
         }
       ]
     }
