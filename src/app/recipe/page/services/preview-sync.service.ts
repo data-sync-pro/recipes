@@ -84,6 +84,7 @@ export class PreviewSyncService {
       category: normalizeCategory(sourceRecipe.category),
       DSPVersions: sourceRecipe.DSPVersions,
       overview: sourceRecipe.overview,
+      overviewImage: sourceRecipe.overviewImage,
       generalUseCase: sourceRecipe.generalUseCase,
       generalImages: sourceRecipe.generalImages,
       prerequisites: sourceRecipe.prerequisites,

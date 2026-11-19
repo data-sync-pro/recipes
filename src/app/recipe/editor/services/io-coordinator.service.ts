@@ -265,6 +265,7 @@ export class IOCoordinatorService {
           category: originalRecipe.category,
           DSPVersions: originalRecipe.DSPVersions,
           overview: originalRecipe.overview,
+          overviewImage: originalRecipe.overviewImage,
           generalUseCase: originalRecipe.generalUseCase,
           generalImages: originalRecipe.generalImages,
           prerequisites: originalRecipe.prerequisites,

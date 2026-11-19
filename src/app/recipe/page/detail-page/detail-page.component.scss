@@ -79,6 +79,18 @@
         }
       }
 
+      // Optional image under the overview text (e.g. a results table):
+      // centered, capped so a small table image isn't blown up.
+      .overview-image {
+        margin: 0 12px 20px 12px;
+        text-align: center;
+
+        img {
+          max-width: min(100%);
+          height: auto;
+        }
+      }
+
       .section-content {
         font-size: 1rem;
         color: #2C2C2D;

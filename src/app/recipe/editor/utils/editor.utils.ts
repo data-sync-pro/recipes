@@ -53,6 +53,7 @@ export class EditorUtils {
       category: recipe.category,
       DSPVersions: recipe.DSPVersions,
       overview: recipe.overview,
+      overviewImage: recipe.overviewImage,
       generalUseCase: recipe.generalUseCase,
       generalImages: recipe.generalImages,
       prerequisites: recipe.prerequisites,
