@@ -6,6 +6,7 @@ import {
   WalkthroughStep,
   WalkthroughTab,
   DownloadFileCallout,
+  OverviewImage,
   normalizeCategory,
   normalizeWalkthrough
 } from '../models/recipe.model';
@@ -36,6 +37,7 @@ export class TransformService {
       DSPVersions: record.DSPVersions || [],
 
       overview: record.overview || '',
+      overviewImage: this.processOverviewImage(record.overviewImage, folderId),
       generalUseCase: record.generalUseCase || '',
       direction: record.direction || '',
       connection: record.connection || '',
@@ -86,6 +88,16 @@ export class TransformService {
       tab: tab.tab,
       steps: (tab.steps || []).map(step => this.processStepImagePaths(step, folderId))
     }));
+  }
+
+  private processOverviewImage(
+    image: OverviewImage | undefined,
+    folderId: string
+  ): OverviewImage | undefined {
+    if (image?.url && image.url.startsWith('images/')) {
+      return { ...image, url: `${RECIPE_PATHS.RECIPE_FOLDERS_BASE}${folderId}/${image.url}` };
+    }
+    return image;
   }
 
   private processStepImagePaths(step: WalkthroughStep, folderId: string): WalkthroughStep {

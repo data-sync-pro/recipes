@@ -9,6 +9,7 @@ export interface RecipeData {
   category: string | string[];  // Support both old (string) and new (string[]) format
   DSPVersions: string[];
   overview: string;
+  overviewImage?: OverviewImage;
   generalUseCase?: string;
   generalImages: GeneralImage[];
   prerequisites: PrerequisiteRecipe[];
@@ -35,6 +36,7 @@ export interface Recipe {
   category: string[];  // Always array at runtime
   DSPVersions: string[];
   overview: string;
+  overviewImage?: OverviewImage;
   generalUseCase?: string;
   generalImages: GeneralImage[];
   prerequisites: PrerequisiteRecipe[];
@@ -75,6 +77,15 @@ export interface GeneralImage {
   alt: string;
   imageId?: string;
   displayUrl?: string;
+}
+
+/**
+ * Optional image shown under the Overview text (e.g. a results table).
+ * `url` is relative to the recipe folder ("images/x.png") in source data.
+ */
+export interface OverviewImage {
+  url: string;
+  alt: string;
 }
 
 /**

@@ -84,6 +84,7 @@ export class CacheService {
         category: item.category,
         DSPVersions: item.DSPVersions,
         overview: item.overview,
+        overviewImage: item.overviewImage,
         generalUseCase: item.generalUseCase,
         generalImages: item.generalImages,
         prerequisites: item.prerequisites,

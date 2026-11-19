@@ -23,6 +23,9 @@
                 <div class="section-content">
                   <div [innerHTML]="currentRecipe.overview | codeBlock"></div>
                 </div>
+                <div class="overview-image" *ngIf="currentRecipe.overviewImage as image">
+                  <img [src]="image.url" [alt]="image.alt" loading="lazy" decoding="async">
+                </div>
               </ng-container>
 
               <ng-container *ngSwitchCase="'useCase'">
