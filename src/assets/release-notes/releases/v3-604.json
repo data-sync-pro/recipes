@@ -4,7 +4,7 @@
       "name": "Fixes",
       "items": [
         {
-          "title": "Batch Executions now complete reliably under heavy async load",
+          "title": "Batch Executions not completing under heavy async load",
           "blocks": [
             {
               "type": "paragraph",
@@ -13,7 +13,7 @@
           ]
         },
         {
-          "title": "Execution record page auto-refresh is limited to the running user",
+          "title": "Auto-refresh running jobs as the viewing user",
           "blocks": [
             {
               "type": "paragraph",
