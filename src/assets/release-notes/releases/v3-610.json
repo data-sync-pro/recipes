@@ -1,0 +1,27 @@
+{
+  "sections": [
+    {
+      "name": "Fixes",
+      "items": [
+        {
+          "title": "Executions not marked as completed",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Fixed an issue where an Execution could remain incomplete when several of its batches finished at nearly the same time. The completion check now runs under a record lock, so the last batch to finish always marks the Execution as completed."
+            }
+          ]
+        },
+        {
+          "title": "Lock timeouts during completion",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "If the Execution record is locked when a batch finishes, the completion check is now retried automatically instead of being skipped."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
