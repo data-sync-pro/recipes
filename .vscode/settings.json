@@ -1,0 +1,5 @@
+{
+  // Live Preview serves the static marketing site from homepage/,
+  // so absolute asset paths like /styles.css and /app.js resolve.
+  "livePreview.serverRoot": "homepage"
+}

@@ -11189,6 +11189,69 @@ body.sn-hero #shift .pipeline-records .pr-foot b {
   color: var(--ink);
 }
 
+/* =========================================================
+   Homepage pixel background (opt-in via body.sn-grid)
+   2px mint squares on a 32px lattice behind the hero and the
+   closing CTA, the same lattice at lower strength behind the
+   middle sections, plus a brand-green seam on top of each section.
+   ========================================================= */
+body.sn-grid {
+  --grid-seam: rgba(40, 224, 122, .55); /* section top seam */
+}
+
+body.sn-grid .hero::before,
+body.sn-grid .closing {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><rect x='15' y='15' width='2' height='2' fill='rgb(190,240,225)' fill-opacity='.22'/></svg>");
+  background-size: 32px 32px;
+  background-position: center top;   /* symmetric around the page center */
+  background-repeat: repeat;
+}
+
+/* Middle sections: same lattice at lower strength, so it reads
+   behind their cards and rules without competing. */
+body.sn-grid section.section {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><rect x='15' y='15' width='2' height='2' fill='rgb(190,240,225)' fill-opacity='.10'/></svg>");
+  background-size: 32px 32px;
+  background-position: center top;
+  background-repeat: repeat;
+}
+
+/* Wider, softer fade than the old dot mask */
+body.sn-grid .hero::before {
+  -webkit-mask-image: radial-gradient(ellipse 130% 110% at 30% 15%, #000 35%, transparent 92%);
+  mask-image: radial-gradient(ellipse 130% 110% at 30% 15%, #000 35%, transparent 92%);
+}
+
+/* Ribbon lives inside .hero and is not positioned; keep it above the grid layer */
+body.sn-grid .hero > .ribbon {
+  position: relative;
+  z-index: 1;
+}
+
+/* Old dot overlay on the Functions sections is superseded by the shared dot layer */
+body.sn-grid .functions::before {
+  display: none;
+}
+
+/* Seam replaces the old 1px white rules between sections */
+body.sn-grid section.section,
+body.sn-grid .closing {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
+
+body.sn-grid section.section::after,
+body.sn-grid .closing::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--grid-seam) 50%, transparent);
+  pointer-events: none;
+}
+
 @media (min-width: 941px) {
   .hero-scene[data-surface="ui"] .al-card {
     display: flex;
