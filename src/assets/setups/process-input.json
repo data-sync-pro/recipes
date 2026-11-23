@@ -15,7 +15,7 @@
       "fields": [
         {
           "name": "Input Data Key Field",
-          "description": "The the unique identifier field of a source record(case sensitive), used by DSP in its internal processing including the logging. It is used in connection-based Executables, where the source data is from the CSV upload. For SalesforceToSalesforce Executables, 'Id' is used regardless whether this field is defined."
+          "description": "The unique identifier field of a source record (case-sensitive), used by DSP in its internal processing including the logging. It is used in connection-based Executables, where the source data is from the CSV upload. For SalesforceToSalesforce Executables, 'Id' is used regardless of whether this field is defined."
         }
       ]
     }

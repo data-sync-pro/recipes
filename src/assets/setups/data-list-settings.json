@@ -18,7 +18,7 @@
             },
             {
               "name": "Q: List Action?",
-              "description": "When enabled, the Action Button appears as a list action(top right of the Data List), allowing the action to be applied to selected records."
+              "description": "When enabled, the Action Button appears as a list action (top right of the Data List), allowing the action to be applied to selected records."
             },
             {
               "name": "Action Button Icon Name",
@@ -45,7 +45,7 @@
               "description": "When enabled, an action button is added to each row, allowing the action to be executed on that individual record."
             },
             {
-              "name": "Success Message(UI)",
+              "name": "Success Message (UI)",
               "description": "Custom toast notification message displayed upon successful execution. If left undefined, the system default message is used."
             }
           ]
@@ -75,7 +75,7 @@
             },
             {
               "name": "Pre-Action: Summary Fields",
-              "description": "Fields to summarize below the records on the pre-action screen, as Field: Aggregate pairs or Label = formula — Name: COUNT; Amount: SUM, AVG; Net = SUM(Quantity * UnitPrice * (1 - BLANK_VALUE(Discount, 0) / 100)). Supported aggregates: SUM, AVG, MIN, MAX, COUNT; formulas also support + - * /, ROUND, ABS and BLANK_VALUE. Summarizes selected rows, or all rows when none are selected."
+              "description": "Fields to summarize below the records on the pre-action screen, as Field: Aggregate pairs or Label = formula, e.g. Name: COUNT; Amount: SUM, AVG; Net = SUM(Quantity * UnitPrice * (1 - BLANK_VALUE(Discount, 0) / 100)). Supported aggregates: SUM, AVG, MIN, MAX, COUNT; formulas also support + - * /, ROUND, ABS and BLANK_VALUE. Summarizes selected rows, or all rows when none are selected."
             }
           ]
         },
@@ -125,7 +125,7 @@
           "fields": [
             {
               "name": "Q: Createable?",
-              "description": "When enabled, a standard New Record icon button is shown on the Data List for users with Create access to create new records. Note: Remote Connections do not support the standard New Record action; Use a custom Action Button if needed."
+              "description": "When enabled, a standard New Record icon button is shown on the Data List for users with Create access to create new records. Note: Remote Connections do not support the standard New Record action; use a custom Action Button if needed."
             },
             {
               "name": "Q: Deletable?",
@@ -161,7 +161,7 @@
             },
             {
               "name": "Access Permissions",
-              "description": "Comma separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
+              "description": "Comma-separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
             },
             {
               "name": "Visibility Criteria",
@@ -190,7 +190,7 @@
             },
             {
               "name": "Q: Help Text",
-              "description": "Display as help text next to the Q result's title."
+              "description": "Help text displayed next to the title of the Data List results."
             },
             {
               "name": "Q: Column Filter Pinned Limit",
@@ -218,7 +218,7 @@
             },
             {
               "name": "Q: Column Filter Data Option Fields",
-              "description": "Comma-separated field API names whose column filter options are populated from the values existing in the data — Industry, BillingState."
+              "description": "Comma-separated field API names whose column filter options are populated from the values existing in the data, e.g. Industry, BillingState."
             },
             {
               "name": "Q: Query Manager Toggleable?",
@@ -246,7 +246,7 @@
             },
             {
               "name": "Q: Sorted By",
-              "description": "Defines the initial sort field on the Data List user interface. If 'Q Retrieval All' is selected, this field will also be used to sort the results in-memory."
+              "description": "Defines the initial sort field on the Data List user interface. If 'Q: Retrieve All?' is selected, this field will also be used to sort the results in-memory."
             },
             {
               "name": "Q: Min Column Width",
@@ -254,7 +254,7 @@
             },
             {
               "name": "Q: Sorted Direction",
-              "description": "Used in conjunction with 'Q Sorted By'. The available values are 'asc', 'desc'."
+              "description": "Used in conjunction with 'Q: Sorted By'. The available values are 'asc', 'desc'."
             },
             {
               "name": "Q: Max Column Width",
@@ -274,19 +274,19 @@
             },
             {
               "name": "Q: Default Row Selection",
-              "description": "Number of rows selected automatically when the Data List loads, starting from the first row — 1. If blank, no rows are selected."
+              "description": "Number of rows selected automatically when the Data List loads, starting from the first row, e.g. 1. If blank, no rows are selected."
             },
             {
               "name": "Q: Summary Fields",
-              "description": "Fields to summarize below the data list, as Field: Aggregate pairs or Label = formula — Id: COUNT; Amount: SUM, AVG; Net = SUM(Quantity * UnitPrice * (1 - BLANK_VALUE(Discount, 0) / 100)). Supported aggregates: SUM, AVG, MIN, MAX, COUNT; formulas also support + - * /, ROUND, ABS and BLANK_VALUE. Summarizes selected rows, or the current page when none are selected."
+              "description": "Fields to summarize below the data list, as Field: Aggregate pairs or Label = formula, e.g. Id: COUNT; Amount: SUM, AVG; Net = SUM(Quantity * UnitPrice * (1 - BLANK_VALUE(Discount, 0) / 100)). Supported aggregates: SUM, AVG, MIN, MAX, COUNT; formulas also support + - * /, ROUND, ABS and BLANK_VALUE. Summarizes selected rows, or the current page when none are selected."
             },
             {
               "name": "Q: Override Columns",
-              "description": "Rename columns with Field: Label pairs — AccountSource: Source; AnnualRevenue: Revenue. For more control, supply a JSON array of Lightning Datatable column definitions, such as [{\"fieldName\":\"AccountSource\",\"label\":\"Source\",\"initialWidth\":150}]."
+              "description": "Rename columns with Field: Label pairs, e.g. AccountSource: Source; AnnualRevenue: Revenue. For more control, supply a JSON array of Lightning Datatable column definitions, such as [{\"fieldName\":\"AccountSource\",\"label\":\"Source\",\"initialWidth\":150}]."
             },
             {
               "name": "Q: Hidden Columns",
-              "description": "Fields from the query to hide as columns, separated by commas — AccountNumber, BillingAddress. Hidden fields are still queried, so summary formulas, row actions and pre-action screens can use them."
+              "description": "Fields from the query to hide as columns, separated by commas, e.g. AccountNumber, BillingAddress. Hidden fields are still queried, so summary formulas, row actions and pre-action screens can use them."
             },
             {
               "name": "Q: Min Row Selection",
@@ -305,20 +305,20 @@
               "description": "The name of the group used to organize Pipeline components. If not specified, the Source Object Name is used for grouping."
             },
             {
-              "name": "Q: Max Visiable List Action Buttons",
-              "description": "The maximum number of visible list action buttons shown on the Data List; additional actions are collapsed into a dropdown menu. If blank, the Pipeline's 'Max Visible Action Buttons' value is used. If neither is specified, 3 are shown."
+              "name": "Q: Max Visible List Action Buttons",
+              "description": "The maximum number of visible list action buttons shown on the Data List; additional actions are collapsed into a dropdown menu. If blank, the Pipeline's 'Visible Action Buttons' value is used. If neither is specified, 3 are shown."
             },
             {
               "name": "Context Record ID",
               "description": "Used to simulate a record context and reference related field values (up to 5 levels deep) in SOQL filters when compiling the Retrieve query or evaluating Visibility Criteria expressions. If a DSP UI component that uses this setting (such as a Data List or Action Button) is placed on a Lightning Record Page, this Record ID automatically adapts to the ID of the record being viewed."
             },
             {
-              "name": "Q: Show Results in Tiles on Small Screen",
-              "description": "When enabled, when the screen is small, the Data List will be shown in tiles instead of lightning datatable. The default width of a small screen is '<= 500px'. You may also define the max width of the small screen via the field 'Small Screen Viewport Width'."
+              "name": "Q: Show Tiles on Small Screen?",
+              "description": "When enabled, when the screen is small, the Data List will be shown in tiles instead of Lightning datatable. The default width of a small screen is '<= 500px'. You may also define the max width of the small screen via the field 'Small Screen Viewport Width'."
             },
             {
               "name": "Q: Small Screen Viewport Width",
-              "description": "Used to define the max width(in pixels) of a small screen so that if 'Show Results in Tiles on Small Screen' is checked, the Data List will be displayed in tiles instead of lightning datatable when the screen viewport is 'small'. If not defined, screen width '<= 500px' is considered as a 'small' screen."
+              "description": "Used to define the max width (in pixels) of a small screen so that if 'Q: Show Tiles on Small Screen?' is checked, the Data List will be displayed in tiles instead of Lightning datatable when the screen viewport is 'small'. If not defined, screen width '<= 500px' is considered as a 'small' screen."
             },
             {
               "name": "Source Big Object Index Fields",

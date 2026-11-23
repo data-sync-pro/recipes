@@ -38,7 +38,7 @@
             },
             {
               "name": "Error Out if Source Attributes Missing?",
-              "description": "When enabled, during execution, if there is any source attribute part of the field mappings that is missing from the payload, DSP will error out. Otherwise, DSP will treat it as NULL."
+              "description": "When enabled, DSP errors out during execution if any source attribute referenced in the field mappings is missing from the payload. Otherwise, DSP treats the missing attribute as NULL."
             },
             {
               "name": "Relax Field Mapping's Type Check?",
@@ -50,7 +50,7 @@
             },
             {
               "name": "Access Permissions",
-              "description": "Comma separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
+              "description": "Comma-separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
             }
           ]
         }

@@ -44,7 +44,7 @@
         },
         {
           "name": "Target Matching Field",
-          "description": "API name of the target field(case-sensitive) used to identify matching target records. If multiple matches are found for a source record and the Principal Selection Rule is defined, only the principal record is selected—otherwise, all matches are used. Actions then execute based on these results (e.g. Insert is skipped when matches exist, Update runs only for matched records, and Merge consolidates secondary matches into the principal record)."
+          "description": "API name of the target field (case-sensitive) used to identify matching target records. If multiple matches are found for a source record and the 'Principal Matched Record Selection Rule' is defined, only the principal record is selected—otherwise, all matches are used. Actions then execute based on these results (e.g. Insert is skipped when matches exist, Update runs only for matched records, and Merge consolidates secondary matches into the principal record)."
         },
         {
           "name": "Target Connection Name",
@@ -60,7 +60,7 @@
         },
         {
           "name": "Matched Records Sorting Components",
-          "description": "Semicolon-separated DSP expressions specifying the sort order when multiple matches are found. Components are evaluated in sequence; prefix an expression with '-' to sort it in descending order. Boolean values are sorted with TRUE before FALSE. Example: '-$FIELDS_COUNT;-LEN(Description);CreatedDate' sorts first by Fields Count (descending), Description length (descending), and then CreatedDate (ascending). (Note: $FIELDS_COUNT is a special variable representing the number of populated fields.)"
+          "description": "Semicolon-separated DSP expressions specifying the sort order when multiple matches are found. Components are evaluated in sequence; prefix an expression with \"-\" to sort it in descending order. Boolean values are sorted with TRUE before FALSE. Example: \"-$FIELDS_COUNT;-LEN(Description);CreatedDate\" sorts first by Fields Count (descending), Description length (descending), and then CreatedDate (ascending). (Note: $FIELDS_COUNT is a special variable representing the number of populated fields.)"
         },
         {
           "name": "Principal Matched Record Selection Rule",
@@ -68,7 +68,7 @@
         },
         {
           "name": "Principal Selection Child Relationship",
-          "description": "The Child Relationship API Name used when 'Most Child Records' is selected in the 'Principal Record Selection Rule'."
+          "description": "The Child Relationship API Name used when \"Most Child Records\" is selected in the \"Principal Matched Record Selection Rule\"."
         },
         {
           "name": "Principal Selection on Duplicate Object?",

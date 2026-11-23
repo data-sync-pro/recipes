@@ -34,7 +34,7 @@
             },
             {
               "name": "Use Salesforce Upsert API?",
-              "description": "When enabled and the Action is Upsert, DSP will utilize the standard Salesforce Upsert API to execute the action in a single DML operation, without attempting to match the target and treating the Insert and Update as separate processes."
+              "description": "When enabled and the Action is Upsert, DSP calls the standard Salesforce Upsert API to run the action in a single DML operation. When disabled, DSP matches the target records itself and runs the Insert and Update as separate operations."
             },
             {
               "name": "Serial Mode?",
@@ -58,7 +58,7 @@
             },
             {
               "name": "Access Permissions",
-              "description": "Comma separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
+              "description": "Comma-separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
             },
             {
               "name": "Retrieve Limit",
@@ -92,7 +92,7 @@
           "fields": [
             {
               "name": "Notify When Execution Completes",
-              "description": "If enabled, DSP sends an email notification when an Execution(batch) is completed. This also depends on the Email Deliverability setting if running in Sandbox."
+              "description": "Sends an email notification when an Execution (batch) completes: 'Always', or only when it 'Failed'. In a sandbox, delivery also depends on the Email Deliverability setting."
             },
             {
               "name": "Notify Email Addresses",

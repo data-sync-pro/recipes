@@ -29,12 +29,12 @@
               "description": "Specifies the confirmation message displayed to the user when 'Confirm Before Action?' is selected and before the action runs."
             },
             {
-              "name": "Success Message(UI)",
+              "name": "Success Message (UI)",
               "description": "Custom toast notification message displayed upon successful execution. If left undefined, the system default message is used."
             },
             {
               "name": "Access Permissions",
-              "description": "Comma separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
+              "description": "Comma-separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
             },
             {
               "name": "Visibility Criteria",
@@ -67,7 +67,7 @@
             },
             {
               "name": "Pre-Action: Summary Fields",
-              "description": "Fields to summarize below the records on the pre-action screen, as Field: Aggregate pairs or Label = formula — Name: COUNT; Amount: SUM, AVG; Net = SUM(Quantity * UnitPrice * (1 - BLANK_VALUE(Discount, 0) / 100)). Supported aggregates: SUM, AVG, MIN, MAX, COUNT; formulas also support + - * /, ROUND, ABS and BLANK_VALUE. Summarizes selected rows, or all rows when none are selected."
+              "description": "Fields to summarize below the records on the pre-action screen, as Field: Aggregate pairs or Label = formula, e.g. Name: COUNT; Amount: SUM, AVG; Net = SUM(Quantity * UnitPrice * (1 - BLANK_VALUE(Discount, 0) / 100)). Supported aggregates: SUM, AVG, MIN, MAX, COUNT; formulas also support + - * /, ROUND, ABS and BLANK_VALUE. Summarizes selected rows, or all rows when none are selected."
             }
           ]
         },
@@ -76,7 +76,7 @@
           "fields": [
             {
               "name": "Q: List Action?",
-              "description": "When enabled, the Action Button appears as a list action(top right of the Data List), allowing the action to be applied to selected records."
+              "description": "When enabled, the Action Button appears as a list action (top right of the Data List), allowing the action to be applied to selected records."
             },
             {
               "name": "Q: Row Action?",
@@ -105,7 +105,7 @@
             },
             {
               "name": "Last Chained Data List",
-              "description": "Read-only field automatically calculated to identify the last Data List in the Action Button’s chained flow."
+              "description": "Read-only field automatically calculated to identify the last Data List in the Action Button's chained flow."
             },
             {
               "name": "Chained Data Lists",

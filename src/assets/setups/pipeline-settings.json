@@ -50,7 +50,7 @@
             },
             {
               "name": "Access Permissions",
-              "description": "Comma separated custom permission names. If set, Pipeline components/execution are accessible only to users who have at least one listed permission."
+              "description": "Comma-separated custom permission names. If set, Pipeline components/execution are accessible only to users who have at least one listed permission."
             },
             {
               "name": "Additional Retrieve Criteria",
@@ -75,11 +75,11 @@
             },
             {
               "name": "Stop Remaining When an Executable Fails?",
-              "description": "If checked, when one of the Pipeline's Executables completes and fails the execution, the Pipeline Execution stops without executing the remaining Executables."
+              "description": "When enabled, if an Executable in the Pipeline fails, the Pipeline Execution stops and the remaining Executables are not run."
             },
             {
               "name": "Notify When Execution Completes",
-              "description": "DSP sends a notification to the provided email addresses when the Pipeline Execution is completed. This also depends on the Email Deliverability setting if running in Sandbox."
+              "description": "Sends an email notification when a Pipeline Execution (batch) completes: 'Always', or only when it 'Failed'. In a sandbox, delivery also depends on the Email Deliverability setting."
             },
             {
               "name": "Notify Email Addresses",
@@ -113,7 +113,7 @@
           "fields": [
             {
               "name": "Variant",
-              "description": "Specifies how Pipeline components are displayed. If not specified, ‘stack’ is used by default."
+              "description": "Specifies how Pipeline components are displayed. If not specified, 'stack' is used by default."
             },
             {
               "name": "Tabset Variant",
