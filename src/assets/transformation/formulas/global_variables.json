@@ -1,10 +1,6 @@
 {
   "globalVariables": [
     {
-      "variable": "$CONTEXT_RECORD_ID",
-      "description": "$CONTEXT_RECORD_ID is used in UI-based rules engines—such as Data Loader, Data List, and Action Button—to dynamically reference the current record ID from the Lightning Record Page. When used in transformations, it is automatically replaced with the record’s ID at runtime."
-    },
-    {
       "variable": "$CURRENT_ORG_DOMAIN_URL",
       "description": "Returns current org's domain URL."
     },
@@ -27,6 +23,10 @@
     {
       "variable": "$LAST_SUCCESSFUL_EXECUTION",
       "description": "References the most recent successful Execution record for the current Executable, allowing formulas to read fields from that Execution."
+    },
+    {
+      "variable": "$PAGE_RECORD_ID",
+      "description": "$PAGE_RECORD_ID is used in UI-based rules engines—such as Data Loader, Data List, and Action Button—to dynamically reference the current record ID from the Lightning Record Page. When used in transformations, it is automatically replaced with the record’s ID at runtime."
     },
     {
       "variable": "$SKIP_ASSIGNMENT",

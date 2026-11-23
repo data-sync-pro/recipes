@@ -456,9 +456,6 @@
     "Apex Class": {
       "functionDoc": "apex_class"
     },
-    "$CONTEXT_RECORD_ID": {
-      "globalVariableDoc": "global_variables"
-    },
     "$CURRENT_ORG_DOMAIN_URL": {
       "globalVariableDoc": "global_variables"
     },
@@ -466,6 +463,9 @@
       "globalVariableDoc": "global_variables"
     },
     "$Joiner.FieldName": {
+      "globalVariableDoc": "global_variables"
+    },
+    "$PAGE_RECORD_ID": {
       "globalVariableDoc": "global_variables"
     },
     "$SKIP_ASSIGNMENT": {
