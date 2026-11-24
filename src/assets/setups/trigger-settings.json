@@ -71,11 +71,11 @@
             },
             {
               "name": "Access Permissions",
-              "description": "Comma separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
+              "description": "Comma-separated custom permission names. If set, access is restricted to users who possess at least one of the listed permissions."
             },
             {
               "name": "Bypass Triggers Custom Permissions",
-              "description": "Comma separated custom permission names. If set, users with any of the custom permissions will bypass the trigger execution."
+              "description": "Comma-separated custom permission names. If set, users with any of the custom permissions will bypass the trigger execution."
             }
           ]
         }
